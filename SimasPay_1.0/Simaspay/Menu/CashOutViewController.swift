@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class CashOutViewController: UIViewController
+class CashOutViewController: UIViewController,UITextFieldDelegate
 {
     var cashinScrollview: UIScrollView!
     var contentView:UIView!
@@ -101,6 +101,7 @@ class CashOutViewController: UIViewController
             
             if( i == 3)
             {
+                step1TextField.delegate = self
                 step1TextField.secureTextEntry = true
             }
             if( i == 2)
@@ -227,6 +228,12 @@ class CashOutViewController: UIViewController
                         }
                         if(currentTextField.tag == 13)
                         {
+                            if(currentTextField.text?.length < 6)
+                            {
+                                SimasPayAlert.showSimasPayAlert("mPIN yang Anda masukkan harus 6 angka.", viewController: self)
+                                return
+                            }
+                            
                             cashInFormDictonary["mPIN"] = currentTextField.text
                         }
                     }
@@ -254,7 +261,7 @@ class CashOutViewController: UIViewController
         dict[MFATRANSACTION] = INQUIRY
         
         dict[SOURCEPOCKETCODE] = "6"
-        dict[DESTPOCKETCODE] = "1"
+        dict[DESTPOCKETCODE] = "6" //"1"
         
         print("Inquery Params : ",dict)
         
@@ -337,7 +344,7 @@ class CashOutViewController: UIViewController
                         }else{
                             confirmationViewController.showOTPAlert = false
                         }
-                        confirmationViewController.simasPayOptionType = SimasPayOptionType.SIMASPAY_SETOR_TUNAI
+                        confirmationViewController.simasPayOptionType = SimasPayOptionType.SIMASPAY_TARIK_TUNAI
                         confirmationViewController.confirmationTitlesArray = confirmationTitlesArray as Array<AnyObject>
                         confirmationViewController.confirmationValuesArray = confirmationValuesArray as Array<AnyObject>
                         confirmationViewController.confirmationRequestDictonary = dict
@@ -385,5 +392,16 @@ class CashOutViewController: UIViewController
         let errorTag = 100+currentTextField.tag-10
         let errorLabel = contentView.viewWithTag(errorTag)
         errorLabel!.hidden = true
+    }
+    
+    // MARK: UITextField Delegate Methods
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,replacementString string: String) -> Bool
+    {
+        let maxLength = 6
+        let currentString: NSString = textField.text!
+        let newString: NSString =
+            currentString.stringByReplacingCharactersInRange(range, withString: string)
+        return  newString.length <= maxLength
+        
     }
 }

@@ -273,14 +273,8 @@ class ReloginViewController: UIViewController,UITextFieldDelegate{
         replacementString string: String) -> Bool
     {
         
-        let maxLength = 4
-        //let currentString: NSString = textField.text!
-        //let newString: NSString =
-        //currentString.stringByReplacingCharactersInRange(range, withString: string)
-        
-        
+        let maxLength = 6
         let  newLength : Int = (textField.text?.length)!+string.length - range.length
-        
         if (newLength > maxLength) {
             return false
         }

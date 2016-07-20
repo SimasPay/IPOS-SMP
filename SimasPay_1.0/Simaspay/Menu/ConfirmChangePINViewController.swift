@@ -28,6 +28,8 @@ class ConfirmChangePINViewController: UIViewController,UITextFieldDelegate,CZPic
     
     var  mfaOTPPicker:CZPickerView!
     
+    var showOTPAlert:Bool!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -231,11 +233,27 @@ class ConfirmChangePINViewController: UIViewController,UITextFieldDelegate,CZPic
     
     @IBAction func cashInAcceptClicked(sender: UIButton)
     {
+    
+        if (!self.showOTPAlert)
+        {
+            self.confirmationServiceRequest()
+        }else{
+            czpickerViewResendOTP(nil)
+        }
+    }
+    
+    func showOTPPopUP()
+    {
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ConfirmationViewController.readOTPNotification(_:)), name:OTPNotificationKey, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("readOTPNotification:"), name:OTPNotificationKey, object: nil)
+        var sourceMDN = ""
         
-        let sourceMDN = SimasPayPlistUtility.getDataFromPlistForKey(SOURCEMDN)
+        if(self.simasPayOptionType == SimasPayOptionType.SIMASPAY_TUTUP_REKENING){
+            sourceMDN = self.confirmationRequestDictonary[DESTMDN] as! String
+        }else{
+            sourceMDN = SimasPayPlistUtility.getDataFromPlistForKey(SOURCEMDN) as! String
+        }
         
         mfaOTPPicker = CZPickerView.init(headerTitle: "Masukkan Kode OTP", messageText: "Kode OTP dan link telah dikirimkan ke \n nomor \(sourceMDN). Masukkan kode \n tersebut atau akses link yang tersedia.", viewController: self)
         
@@ -243,45 +261,6 @@ class ConfirmChangePINViewController: UIViewController,UITextFieldDelegate,CZPic
         mfaOTPPicker.needFooterView = true
         mfaOTPPicker.tapBackgroundToDismiss = false;
         mfaOTPPicker.show()
-        
-        /*
-        let sourceMDN = SimasPayPlistUtility.getDataFromPlistForKey(SOURCEMDN)
-        
-        let alertTitle = "Masukkan Kode OTP"
-        let message = "Kode OTP dan link telah dikirimkan ke \n nomor \(sourceMDN). Masukkan kode \n tersebut atau akses link yang tersedia."
-        
-        if #available(iOS 8.0, *) {
-            let alertController = UIAlertController(title: alertTitle, message: message, preferredStyle: .Alert)
-            alertController.addTextFieldWithConfigurationHandler(configurationTextField)
-            alertController.addAction(UIAlertAction(title: "Batal", style: UIAlertActionStyle.Cancel, handler:handleCancel))
-            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:{ (UIAlertAction)in
-                print("Done !!")
-                print("Item : \(self.tField.text)")
-                if(self.tField.text?.length > 0)
-                {
-                    self.confirmationRequestDictonary[MFAOTP] = SimaspayUtility.simasPayRSAencryption(self.tField.text!)
-                    self.confirmationServiceRequest()
-                }else{
-                    SimasPayAlert.showSimasPayAlert("Please Enter OTP.",viewController: self)
-                }
-                
-            }))
-            self.presentViewController(alertController, animated: true, completion: {
-                print("completion block")
-            })
-            
-        } else {
-            // Fallback on earlier versions
-            let alert = UIAlertView()
-            alert.title = alertTitle
-            alert.message = message
-            alert.addButtonWithTitle("OK")
-            alert.addButtonWithTitle("Batal")
-            alert.show()
-        };*/
-        
-        
-
     }
     
     
@@ -299,6 +278,7 @@ class ConfirmChangePINViewController: UIViewController,UITextFieldDelegate,CZPic
     
     func czpickerViewDidClickCancelButton(pickerView: CZPickerView!) {
         
+        popToMainViewController()
     }
     
     func czpickerViewResendOTP(pickerView: CZPickerView!) {
@@ -339,8 +319,12 @@ class ConfirmChangePINViewController: UIViewController,UITextFieldDelegate,CZPic
                     
                     if( messagecode == SIMASPAY_RESEND_OTP_SUCESS)
                     {
-                        self.mfaOTPPicker.reSendOTPSuccess()
-                        
+                        if((pickerView) != nil)
+                        {
+                            self.mfaOTPPicker.reSendOTPSuccess()
+                        }else{
+                            self.showOTPPopUP()
+                        }
                     }else if( messagecode == SIMASPAY_RESEND_OTP_FAILED)
                     {
                         
@@ -397,8 +381,7 @@ class ConfirmChangePINViewController: UIViewController,UITextFieldDelegate,CZPic
                     let responseDict = response as NSDictionary
                     let messagecode  = responseDict.valueForKeyPath("response.message.code") as! String
                     let messageText  = responseDict.valueForKeyPath("response.message.text") as! String
-                    
-                    
+                
                     print("Confirmation Response : ",response)
                     
                     if( messagecode == SIMAPAY_SUCCESS_CHANGEPIN_CODE )
@@ -425,17 +408,34 @@ class ConfirmChangePINViewController: UIViewController,UITextFieldDelegate,CZPic
                             self.navigationController?.popToRootViewControllerAnimated(true)
                         }
                     }
-                    
-                    
                 }
-                
             }, failureBlock: { (error: NSError!) -> Void in
-                
                 dispatch_async(dispatch_get_main_queue()) {
                     EZLoadingActivity.hide()
                     SimasPayAlert.showSimasPayAlert(error.localizedDescription,viewController:self)
                 }
                 
         })
+    }
+    
+    func popToMainViewController() {
+        
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
+        for viewController:UIViewController in viewControllers{
+            if(viewController.isKindOfClass(SubMenuViewController) == true) {
+                self.navigationController?.navigationBarHidden = true
+                self.navigationController?.popToViewController(viewController as! SubMenuViewController, animated: true)
+                break;
+            }
+        }
+        
+        for viewController:UIViewController in viewControllers{
+            if(viewController.isKindOfClass(MainMenuViewController) == true) {
+                self.navigationController?.navigationBarHidden = true
+                self.navigationController?.popToViewController(viewController as! MainMenuViewController, animated: true)
+                break;
+            }
+        }
+        
     }
 }

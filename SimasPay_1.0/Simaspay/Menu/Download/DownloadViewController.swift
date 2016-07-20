@@ -551,7 +551,7 @@ class DownloadViewController: UIViewController
             dict[SERVICE] = SERVICE_WALLET
         }
         if (self.simasPayUserType == SimasPayUserType.SIMASPAY_AGENT_ACCOUNT){
-            dict[SOURCEPOCKETCODE] = "1"
+            dict[SOURCEPOCKETCODE] = "6"//"1"
             dict[SERVICE] = SERVICE_WALLET
         }
         

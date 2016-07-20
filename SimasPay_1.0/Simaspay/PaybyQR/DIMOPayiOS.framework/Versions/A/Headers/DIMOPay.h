@@ -7,12 +7,19 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "DIMOInvoiceModel.h"
+#import "DIMOFidelitizModel.h"
 
 typedef enum {
     ServerURLUat,
     ServerURLDev,
     ServerURLLive
 } ServerURL;
+
+
+typedef enum {
+    SDKLocaleEnglish,
+    SDKLocaleIndonesian,
+} SDKLocale;
 
 typedef enum {
     PaymentStatusSuccess,
@@ -76,12 +83,15 @@ typedef enum {
 + (BOOL)isUsingCustomDialog;
 
 /// Send Notification for payment status, to open success or error page in SDK.
-+ (void)notifyTransaction:(PaymentStatus)paymentStatus withMessage:(NSString *)message;
++ (void)notifyTransaction:(PaymentStatus)paymentStatus withMessage:(NSString *)message isDefaultLayout:(BOOL)isDefaultLayout;
 
 /// Create EULA from URL
 + (UIViewController *)EULAWithURL:(NSString *)URL;
 /// Create EULA with HTML Code
 + (UIViewController *)EULAWithStringHTML:(NSString *)content;
+
+/// This function to change SDK language
++ (void)setSDKLocale:(SDKLocale)locale;
 
 @property (nonatomic, weak) id<DIMOPayDelegate> delegate;
 @end
@@ -107,7 +117,7 @@ typedef enum {
 - (void)callbackPayInvoice:(DIMOInvoiceModel *)invoice;
 
 /// This function will be called when isUsingCustomDialog is Yes, and host-app need to show their own dialog
-- (void)callbackShowDialog:(PaymentStatus)paymentStatus withMessage:(NSString *)message;
+- (void)callbackShowDialog:(PaymentStatus)paymentStatus withMessage:(NSString *)message andLoyaltyModel:(DIMOFidelitizModel *)fidelitiz;
 
 /// This function will be called when the sdk has been closed
 - (void)callbackSDKClosed;

@@ -85,7 +85,6 @@ class ChangePINViewController: UIViewController,UITextFieldDelegate
             initialScrollViews["step1Label_\(i)"] = step1Label
             initialScrollViews["step1ErrorLabel_\(i)"] = step1ErrorLabel
             
-            
             contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-\(topMargin)-[step1Label_\(i)]-0-[step1ErrorLabel_\(i)(\(errorLabelWidth))]-\(topMargin)-|", options: NSLayoutFormatOptions.AlignAllLastBaseline, metrics: nil, views: initialScrollViews))
             
             let step1TextField = UITextField(frame: CGRect.zero)
@@ -105,6 +104,7 @@ class ChangePINViewController: UIViewController,UITextFieldDelegate
             initialScrollViews["step1TextField_\(i)"] = step1TextField
  
             step1TextField.keyboardType = .NumberPad
+            step1TextField.delegate = self
             step1TextField.secureTextEntry = true
             
             contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-\(topMargin)-[step1TextField_\(i)]-\(topMargin)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: initialScrollViews))
@@ -201,6 +201,13 @@ class ChangePINViewController: UIViewController,UITextFieldDelegate
                         }else{
                             
                             self.disableRequiredMessage(currentTextField)
+                            
+                            if(currentTextField.text?.length < 6)
+                            {
+                                SimasPayAlert.showSimasPayAlert("mPIN yang Anda masukkan harus 6 angka.", viewController: self)
+                                return
+                            }
+                            
                             
                             if(currentTextField.tag == 11)
                             {
@@ -303,16 +310,9 @@ class ChangePINViewController: UIViewController,UITextFieldDelegate
                     }else if (messagecode == SIMAPAY_SUCCESS_CHANGEPIN_INQUERY_CODE)
                     {
                         let sctlID = responseDict.valueForKeyPath("response.sctlID.text") as! String
-                        
-                        /*if(mfaModeStatus == "OTP")
-                        {
-                            confirmationViewController.showOTPAlert = true
-                        }else{
-                            confirmationViewController.showOTPAlert = false
-                        }*/
-                        
                         //let transferID  = responseDict.valueForKeyPath("response.transferID.text") as! String
                         let parentTxnID = responseDict.valueForKeyPath("response.sctlID.text") as! String
+                        let mfaModeStatus = responseDict.valueForKeyPath("response.mfaMode.text") as! String
                         
                         dict[MFATRANSACTION] = CONFIRM
                         //dict[CONFIRMED] = "true"
@@ -320,6 +320,14 @@ class ChangePINViewController: UIViewController,UITextFieldDelegate
                         dict[SCTL_ID] = sctlID
                         
                         let confirmationViewController = ConfirmChangePINViewController()
+                        
+                        if(mfaModeStatus == "OTP")
+                         {
+                           confirmationViewController.showOTPAlert = true
+                         }else{
+                           confirmationViewController.showOTPAlert = false
+                         }
+                        
                         confirmationViewController.confirmationRequestDictonary = dict
                         self.navigationController!.pushViewController(confirmationViewController, animated: true)
                     }else{
@@ -359,5 +367,16 @@ class ChangePINViewController: UIViewController,UITextFieldDelegate
         let errorTag = 100+currentTextField.tag-10
         let errorLabel = contentView.viewWithTag(errorTag)
         errorLabel!.hidden = true
+    }
+    
+    // MARK: UITextField Delegate Methods
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,replacementString string: String) -> Bool
+    {
+        let maxLength = 6
+        let currentString: NSString = textField.text!
+        let newString: NSString =
+            currentString.stringByReplacingCharactersInRange(range, withString: string)
+        return  newString.length <= maxLength
+        
     }
 }

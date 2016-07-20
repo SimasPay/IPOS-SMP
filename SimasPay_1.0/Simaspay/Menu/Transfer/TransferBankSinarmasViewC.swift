@@ -118,6 +118,7 @@ class TransferBankSinarmasViewC: UIViewController, UITextFieldDelegate
             }
             if(i == 3)
             {
+              step1TextField.delegate = self
               step1TextField.secureTextEntry = true
             }
 
@@ -248,6 +249,12 @@ class TransferBankSinarmasViewC: UIViewController, UITextFieldDelegate
                         }
                         if(currentTextField.tag == 13)
                         {
+                            if(currentTextField.text?.length < 6)
+                            {
+                                SimasPayAlert.showSimasPayAlert("mPIN yang Anda masukkan harus 6 angka.", viewController: self)
+                                return
+                            }
+                            
                             cashInFormDictonary["mPIN"] = currentTextField.text
                         }
                     }
@@ -282,7 +289,7 @@ class TransferBankSinarmasViewC: UIViewController, UITextFieldDelegate
             if(self.simasPayUserType == SimasPayUserType.SIMASPAY_AGENT_ACCOUNT)
             {
                 
-                dict[SOURCEPOCKETCODE] = "1"
+                dict[SOURCEPOCKETCODE] = "6" //"1"
                 dict[DESTPOCKETCODE] = "2"
                 dict[SERVICE] = SERVICE_AGENT
             }
@@ -324,7 +331,7 @@ class TransferBankSinarmasViewC: UIViewController, UITextFieldDelegate
             
             if(self.simasPayUserType == SimasPayUserType.SIMASPAY_AGENT_ACCOUNT)
             {
-                dict[SOURCEPOCKETCODE] = "1"
+                dict[SOURCEPOCKETCODE] = "6" //"1"
                 dict[DESTPOCKETCODE] = ""
                 dict[SERVICE] = SERVICE_AGENT
             }
@@ -531,19 +538,34 @@ class TransferBankSinarmasViewC: UIViewController, UITextFieldDelegate
         errorLabel!.hidden = true
     }
 
+    // MARK: UITextField Delegate Methods
+    
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
         replacementString string: String) -> Bool
     {
+        var returnStatus = true
+        
         if (self.simasPayOptionType == SimasPayOptionType.SIMASPAY_TRANSFER_LAKU_PANDAI || self.simasPayOptionType == SimasPayOptionType.SIMASPAY_TRANSFER_UANGKU)
         {
             let maxLength = 14
             let currentString: NSString = textField.text!
             let newString: NSString =
             currentString.stringByReplacingCharactersInRange(range, withString: string)
-            return newString.length <= maxLength
-        }else{
-            return true
+            returnStatus =  newString.length <= maxLength
+            
         }
+        
+        if  textField.tag == 13 {
+            let maxLength = 6
+            let currentString: NSString = textField.text!
+            let newString: NSString =
+                currentString.stringByReplacingCharactersInRange(range, withString: string)
+            returnStatus =  newString.length <= maxLength
+        }
+        
+        
+        
+        return returnStatus
         
     }
     

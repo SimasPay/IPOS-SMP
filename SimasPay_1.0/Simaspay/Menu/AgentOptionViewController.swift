@@ -68,7 +68,7 @@ class AgentOptionViewController: UIViewController,UITableViewDelegate,UITableVie
         
         if indexPath.row == 1
         {
-            cell.textLabel!.text = "Akun Agent"
+            cell.textLabel!.text = "Akun Agen"
             cell.detailTextLabel!.text = SimasPayPlistUtility.getDataFromPlistForKey(SOURCEMDN) as? String
         }
         return cell

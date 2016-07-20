@@ -72,6 +72,9 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
     
     
     var pickerViewData:NSArray!
+    
+    var workListViewData:NSArray!
+    
     var provienceViewData:NSArray!
     var regionData:NSArray!
     var stateViewData:NSArray!
@@ -84,6 +87,7 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
     
     var step1FormDictonary:NSMutableDictionary!
     var step2FormDictonary:NSMutableDictionary!
+    var step2OtherFormDictonary:NSMutableDictionary!
     var step3FormDictonary:NSMutableDictionary!
     
 
@@ -107,6 +111,7 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
     
     var tempVertical_constraintsStep2 = ""
     
+    let domicilAddresPlaceholder = "Jl./Gg./Perum./Komp./Ged. \n beserta nomor"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -355,7 +360,8 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
             
             let step1TextField = UITextField(frame: CGRect.zero)
             if(i==1)
-            { step1TextField.placeholder = "Sesuai KTP"
+            {
+                step1TextField.placeholder = "Sesuai KTP"
                 step1TextField.keyboardType = .NamePhonePad
             }
             else if(i==3)
@@ -380,7 +386,6 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
             step1TextField.clearButtonMode = UITextFieldViewMode.WhileEditing;
             step1ContentView.addSubview(step1TextField)
             step1TextField.tag = 10+i
-            //step1TextField.delegate = self
             
             let mobileNumberView = UIView(frame: CGRectMake(0, 0, 10, step1TextField.frame.height))
             step1TextField.leftView = mobileNumberView;
@@ -595,32 +600,27 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
         let nextFieldMArgin = 20
         let textFieldHeight = 38
         let errorLabelWidth = 50
-        let extraEndSpace = 30
+        //let extraEndSpace = 30
         
         
         vertical_constraintsStep2 = "V:|-\(20)-"
-
+        
         var vertical_constraintsFieldStep2_81 = "V:"
         var vertical_constraintsFieldStep2_82 = "V:"
         var vertical_constraintsFieldStep2_91 = "V:"
         var vertical_constraintsFieldStep2_92 = "V:"
-        
-        
-        if step2ContentView == nil{
-            
-            
-        }
-        
+    
         step2ContentView = UIView()
         agentRegistrationStep2Scrollview.addSubview(step2ContentView)
         step2ContentView.translatesAutoresizingMaskIntoConstraints = false
         
-    
-        let initialViews = ["agentRegistrationStep2Scrollview":agentRegistrationStep2Scrollview,"step2ContentView":step2ContentView]
-        agentRegistrationStep2Scrollview.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[step2ContentView(==agentRegistrationStep2Scrollview)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: initialViews))
-        agentRegistrationStep2Scrollview.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[step2ContentView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: initialViews))
         
-
+        let initialViews = ["agentRegistrationStep2Scrollview":agentRegistrationStep2Scrollview,"step2ContentView":step2ContentView]
+        
+        agentRegistrationStep2Scrollview.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[step2ContentView(==agentRegistrationStep2Scrollview)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: initialViews))
+        
+        agentRegistrationStep2Scrollview.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[step2ContentView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: initialViews))
+    
         viewsDictStep2["step2ContentView"] = step2ContentView
         
         let fieldNamesArray : [NSString] = ["Nama Lengkap Ibu Kandung*","Tempat Lahir*","Alamat Sesuai KTP*","Provinsi*","Kota/Kabupaten*","Kecamatan*","Desa/Kelurahan*","RT","Alamat Domisili"]
@@ -645,7 +645,7 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
             viewsDictStep2["step2ErrorLabel_\(i)"] = step2ErrorLabel
             
             
-    
+            
             if( i == 3)
             {
                 let step2TextField = UITextView(frame: CGRect.zero)
@@ -894,7 +894,7 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
         step2ContentView.addConstraints(view_constraint_2_91 as! [NSLayoutConstraint])
         step2ContentView.addConstraints(view_constraint_2_92 as! [NSLayoutConstraint])
         
-
+        
         
     }
     
@@ -917,6 +917,7 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
     @IBAction func otherAddressClicked(sender: UIButton)
     {
         isDomesticIdentity = false
+        self.step2OtherFormDictonary = NSMutableDictionary()
         
         step2FormAcceptBtn.hidden = true
         
@@ -938,7 +939,7 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
         
         vertical_constraintsStep2 = vertical_constraintsStep2.stringByReplacingOccurrencesOfString("[step2FormAcceptBtn(50)]-15-", withString: "")
         
-        var vertical_constraintsStep22 = "V:[step2Field9CheckBox2]-\(15)-"
+        // var vertical_constraintsStep22 = "V:[step2Field9CheckBox2]-\(15)-"
         var vertical_constraintsFieldStep22_811 = "V:"
         var vertical_constraintsField_Step22_821 = "V:"
     
@@ -946,12 +947,32 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
         
         //vertical_constraintsStep2 += "[step2Field9CheckBox2]-\(15)-"
         
+    
+        
+        
         for i in 1...4 {
+
+            if ( i == 1 )
+            {
+                let step2TextField = UITextView(frame: CGRect.zero)
+                step2TextField.font =  UIFont(name:"HelveticaNeue-Light", size:12)
+                step2TextField.translatesAutoresizingMaskIntoConstraints = false
+                step2TextField.textColor = UIColor.lightGrayColor()
+                step2TextField.layer.cornerRadius = 5
+                step2TextField.delegate = self
+                step2TextField.text = domicilAddresPlaceholder
+                step2TextField.tag = 99
+                step2ContentView.addSubview(step2TextField)
+                viewsDictStep2["step2TextView2"] = step2TextField
+                
+                step2ContentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-\(topMargin)-[step2TextView2]-\(topMargin)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictStep2))
+                
+                vertical_constraintsStep2  += "[step2TextView2(100)]-\(nextFieldMArgin)-"
+                
+            }
             
             
-            
-            
-            if ( i == 1 || i == 2 || i == 3 || i == 4){
+            if ( i == 1 || i == 2 || i == 3 || i == 4) {
                 
                 let step22Label = UILabel()
                 step22Label.text = "\(fieldNamesArray[i-1])"
@@ -964,7 +985,7 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
                 step22ErrorLabel.textColor = UIColor(red: 204.0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
                 step22ErrorLabel.font = UIFont(name:"HelveticaNeue-Light", size:11)
                 step22ErrorLabel.translatesAutoresizingMaskIntoConstraints = false
-                step22ErrorLabel.hidden = false
+                step22ErrorLabel.hidden = true
                 step22ErrorLabel.tag = 100+i
                 step2ContentView.addSubview(step22ErrorLabel)
                 
@@ -974,7 +995,6 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
                 
                 let step22TextField = UITextField(frame: CGRect.zero)
                 step22TextField.backgroundColor = UIColor.whiteColor()
-                step22TextField.delegate = self
                 step22TextField.placeholder = "Pilih"
                 step22TextField.font =  UIFont(name:"HelveticaNeue-Light", size:12)
                 step22TextField.translatesAutoresizingMaskIntoConstraints = false
@@ -982,7 +1002,7 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
                 step22TextField.layer.cornerRadius = 5
                 step22TextField.clearButtonMode = UITextFieldViewMode.WhileEditing;
                 step2ContentView.addSubview(step22TextField)
-                step22TextField.tag = 201+i
+                step22TextField.tag = 200+i
                 
                 let mobileNumberView = UIView(frame: CGRectMake(0, 0, 10, step22TextField.frame.height))
                 step22TextField.leftView = mobileNumberView;
@@ -1005,12 +1025,14 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
                 
                 step2ContentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-\(topMargin)-[step22TextField_\(i)]-\(topMargin)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictStep2))
                 
-                
                 vertical_constraintsStep2  += "[step22Label_\(i)]-\(labelFieldMArgin)-[step22TextField_\(i)(\(textFieldHeight))]-\(nextFieldMArgin)-"
+                
+                
                 
                 if ( i == 1)
                 {
                     step22TextField.enabled = true
+                    
                 }else{
                     step22TextField.enabled = false
                 }
@@ -1045,18 +1067,23 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
                 step2ContentView.addSubview(step2Field8Label3)
                 viewsDictStep2["step22Field8Label33"] = step2Field8Label3
                 
-                
-        
+            
                 let step2Text8Field1 = UITextField(frame: CGRect.zero)
                 step2Text8Field1.backgroundColor = UIColor.whiteColor()
                 step2Text8Field1.enabled = true
                 step2Text8Field1.font =  UIFont(name:"HelveticaNeue-Light", size:12)
                 step2Text8Field1.translatesAutoresizingMaskIntoConstraints = false
                 step2Text8Field1.borderStyle = .None
+                step2Text8Field1.tag = 205
                 step2Text8Field1.layer.cornerRadius = 5
                 step2Text8Field1.clearButtonMode = UITextFieldViewMode.WhileEditing;
                 step2ContentView.addSubview(step2Text8Field1)
                 viewsDictStep2["step22Text8Field11"] = step2Text8Field1
+                
+                let mobileNumberView = UIView(frame: CGRectMake(0, 0, 10, step2Text8Field1.frame.height))
+                step2Text8Field1.leftView = mobileNumberView;
+                step2Text8Field1.leftViewMode = UITextFieldViewMode.Always
+                
                 
                 let step2Text8Field2 = UITextField(frame: CGRect.zero)
                 step2Text8Field2.backgroundColor = UIColor.whiteColor()
@@ -1064,10 +1091,15 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
                 step2Text8Field2.font =  UIFont(name:"HelveticaNeue-Light", size:12)
                 step2Text8Field2.translatesAutoresizingMaskIntoConstraints = false
                 step2Text8Field2.borderStyle = .None
+                step2Text8Field2.tag = 206
                 step2Text8Field2.layer.cornerRadius = 5
                 step2Text8Field2.clearButtonMode = UITextFieldViewMode.WhileEditing;
                 step2ContentView.addSubview(step2Text8Field2)
                 viewsDictStep2["step22Text8Field22"] = step2Text8Field2
+                
+                let mobileNumberView1 = UIView(frame: CGRectMake(0, 0, 10, step2Text8Field2.frame.height))
+                step2Text8Field2.leftView = mobileNumberView1;
+                step2Text8Field2.leftViewMode = UITextFieldViewMode.Always
                 
                 let step2Text8Field3 = UITextField(frame: CGRect.zero)
                 step2Text8Field3.backgroundColor = UIColor.whiteColor()
@@ -1075,32 +1107,53 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
                 step2Text8Field3.font =  UIFont(name:"HelveticaNeue-Light", size:12)
                 step2Text8Field3.translatesAutoresizingMaskIntoConstraints = false
                 step2Text8Field3.borderStyle = .None
+                step2Text8Field3.tag = 207
                 step2Text8Field3.layer.cornerRadius = 5
                 step2Text8Field3.clearButtonMode = UITextFieldViewMode.WhileEditing;
                 step2ContentView.addSubview(step2Text8Field3)
                 viewsDictStep2["step22Text8Field33"] = step2Text8Field3
                 
-                step2ContentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-\(topMargin)-[step22Field8Label11(50)]-20-[step22Field8Label22(50)]-20-[step22Field8Label33]-\(topMargin)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictStep2))
                 
-                step2ContentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-\(topMargin)-[step22Text8Field11(50)]-20-[step22Text8Field22(50)]-20-[step22Text8Field33]-\(topMargin)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictStep2))
+                let mobileNumberView2 = UIView(frame: CGRectMake(0, 0, 10, step2Text8Field3.frame.height))
+                step2Text8Field3.leftView = mobileNumberView2;
+                step2Text8Field3.leftViewMode = UITextFieldViewMode.Always
+                
+                let step22ErrorLabel1 = UILabel()
+                step22ErrorLabel1.text = "wajib diisi"
+                step22ErrorLabel1.textColor = UIColor(red: 204.0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
+                step22ErrorLabel1.font = UIFont(name:"HelveticaNeue-Light", size:11)
+                step22ErrorLabel1.translatesAutoresizingMaskIntoConstraints = false
+                //step22ErrorLabel1.hidden = false
+                step22ErrorLabel1.tag = 105
+                step2ContentView.addSubview(step22ErrorLabel1)
+                viewsDictStep2["step22ErrorLabel1"] = step22ErrorLabel1
+                
+                
+                step2ContentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-\(topMargin)-[step22Field8Label11(80)]-20-[step22Field8Label22(80)]-20-[step22Field8Label33]-\(topMargin)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictStep2))
+                
+                step2ContentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:[step22ErrorLabel1]-\(topMargin)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictStep2))
+                
+                
+                
+                step2ContentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-\(topMargin)-[step22Text8Field11(80)]-20-[step22Text8Field22(80)]-20-[step22Text8Field33]-\(topMargin)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictStep2))
                 
                 
                 vertical_constraintsStep2   += "[step22Field8Label11]-\(labelFieldMArgin)-[step22Text8Field11(\(textFieldHeight))]-\(nextFieldMArgin)-"
                 
-                vertical_constraintsFieldStep22_811        += "[step22Field8Label22]-\(labelFieldMArgin)-[step22Text8Field22(\(textFieldHeight))]"
-                vertical_constraintsField_Step22_821       += "[step22Field8Label33]-\(labelFieldMArgin)-[step22Text8Field33(\(textFieldHeight))]"
+                vertical_constraintsFieldStep22_811        += "[step22TextField_4]-\(nextFieldMArgin)-[step22Field8Label22]-\(labelFieldMArgin)-[step22Text8Field22(\(textFieldHeight))]"
+                vertical_constraintsField_Step22_821       += "[step22TextField_4]-\(nextFieldMArgin)-[step22Field8Label33]-\(labelFieldMArgin)-[step22Text8Field33(\(textFieldHeight))]"
                 
             }
  
             if(i == 4 )
             {
-                
                 let step2FormAcceptBtn:UIButton = UIButton()
                 step2FormAcceptBtn.backgroundColor = UIColor(netHex:0xCC0000)
                 step2FormAcceptBtn.setTitle("Lanjut", forState: UIControlState.Normal)
                 step2FormAcceptBtn.translatesAutoresizingMaskIntoConstraints = false
                 step2FormAcceptBtn.titleLabel?.font = UIFont(name:"HelveticaNeue-Medium", size:20)
                 step2FormAcceptBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+                step2FormAcceptBtn.addTarget(self, action: #selector(AgentRegistrationViewC.step2OtherAcceptButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
                 step2ContentView.addSubview(step2FormAcceptBtn)
                 viewsDictStep2["step22FormAcceptBtn"] = step2FormAcceptBtn
                 
@@ -1196,7 +1249,6 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
     func addAgentRegistrationStep3()
     {
         
-        
         let topMargin = 20
         let labelFieldMArgin = 10
         let nextFieldMArgin = 20
@@ -1267,7 +1319,6 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
                     step1TextField.rightView = dropDownView
                     step1TextField.rightViewMode = UITextFieldViewMode.Always
                     
-                    //step1TextField.delegate = self
                     step1TextField.addTarget(self, action: #selector(AgentRegistrationViewC.pickerTextFieldEditing(_:)), forControlEvents: .EditingDidBegin)
                     
                 }
@@ -1308,10 +1359,12 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
                 if(i==3)
                 {
                     step1TextField.tag  = 34
+                    step1TextField.keyboardType = .NamePhonePad
                 }
                 if(i==4)
                 {
                     step1TextField.tag  = 35
+                    step1TextField.keyboardType = .NamePhonePad
                 }
                 if(i==5)
                 {
@@ -1337,7 +1390,7 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
                 step1TextField.layer.cornerRadius = 5
                 step1TextField.clearButtonMode = UITextFieldViewMode.WhileEditing;
                 step3ContentView.addSubview(step1TextField)
-                
+                step1TextField.keyboardType = .NamePhonePad
                 step1TextField.tag  = 32
                 
                 let mobileNumberView = UIView(frame: CGRectMake(0, 0, 10, step1TextField.frame.height))
@@ -1484,7 +1537,7 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
                 EZLoadingActivity.hide()
                 print("Work List : ",response)
                 let responseDict = response as! NSDictionary
-                self.pickerViewData = responseDict.valueForKey("work_list") as! NSArray
+                self.workListViewData = responseDict.valueForKey("work_list") as! NSArray
             }
             
             }, failureBlock: { (error: NSError!) -> Void in
@@ -1509,19 +1562,19 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
             currentPickerView.tag = 1000
         }
         
-        if sender.tag == 202  {
+        if sender.tag == 201  {
             currentPickerView.tag = 1001
             makeProvinsiServiceCall(subTextField, pickerView: currentPickerView)
         }
-        if sender.tag == 203 {
+        if sender.tag == 202 {
             currentPickerView.tag = 1002
             makeProvinsiServiceCall(subTextField, pickerView: currentPickerView)
         }
-        if sender.tag == 204 {
+        if sender.tag == 203 {
             currentPickerView.tag = 1003
             makeProvinsiServiceCall(subTextField, pickerView: currentPickerView)
         }
-        if sender.tag == 205 {
+        if sender.tag == 204 {
             currentPickerView.tag = 1004
             makeProvinsiServiceCall(subTextField, pickerView: currentPickerView)
         }
@@ -1535,7 +1588,13 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
     
     // returns the # of rows in each component..
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return self.pickerViewData.count
+        if (self.pickerViewData != nil) {
+        
+            return self.pickerViewData.count
+        }else{
+            return 0
+        }
+        
         //return 6
     }
     
@@ -1591,13 +1650,13 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
             let provienceObj = self.pickerViewData[row] as! NSDictionary
             self.step1DatePickerTextField.text = provienceObj.valueForKey("province_name") as? String
             
-            let stateTextField = self.step2ContentView.viewWithTag(203) as! UITextField
+            let stateTextField = self.step2ContentView.viewWithTag(202) as! UITextField
             stateTextField.enabled = true
             stateTextField.text = ""
-            let regionTextField = self.step2ContentView.viewWithTag(204) as! UITextField
+            let regionTextField = self.step2ContentView.viewWithTag(203) as! UITextField
             regionTextField.enabled = false
             regionTextField.text = ""
-            let cityTextField = self.step2ContentView.viewWithTag(205) as! UITextField
+            let cityTextField = self.step2ContentView.viewWithTag(204) as! UITextField
             cityTextField.enabled = false
             cityTextField.text = ""
         }
@@ -1607,12 +1666,12 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
             let regionObj = self.pickerViewData[row] as! NSDictionary
             self.step1DatePickerTextField.text =  regionObj.valueForKey("region_name") as? String
             
-            let stateTextField = self.step2ContentView.viewWithTag(203) as! UITextField
+            let stateTextField = self.step2ContentView.viewWithTag(202) as! UITextField
             stateTextField.enabled = true
-            let regionTextField = self.step2ContentView.viewWithTag(204) as! UITextField
+            let regionTextField = self.step2ContentView.viewWithTag(203) as! UITextField
             regionTextField.enabled = true
             regionTextField.text = ""
-            let cityTextField = self.step2ContentView.viewWithTag(205) as! UITextField
+            let cityTextField = self.step2ContentView.viewWithTag(204) as! UITextField
             cityTextField.enabled = false
             cityTextField.text = ""
         }
@@ -1621,11 +1680,11 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
             let regionObj = self.pickerViewData[row] as! NSDictionary
             self.step1DatePickerTextField.text =  regionObj.valueForKey("district_name") as? String
             
-            let stateTextField = self.step2ContentView.viewWithTag(203) as! UITextField
+            let stateTextField = self.step2ContentView.viewWithTag(202) as! UITextField
             stateTextField.enabled = true
-            let regionTextField = self.step2ContentView.viewWithTag(204) as! UITextField
+            let regionTextField = self.step2ContentView.viewWithTag(203) as! UITextField
             regionTextField.enabled = true
-            let cityTextField = self.step2ContentView.viewWithTag(205) as! UITextField
+            let cityTextField = self.step2ContentView.viewWithTag(204) as! UITextField
             cityTextField.enabled = true
             cityTextField.text = ""
         }
@@ -1990,8 +2049,9 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
                         self.regiterStep1Button.enabled = true
                         
                         //SimasPayPlistUtility.saveDataToPlist(responseDict, key: AGENT_KTP_VALIDATION_RESPONSE)
-                        self.fillKTPValidationdata(responseDict)
                         self.ktpValidationData = responseDict
+                        self.fillKTPValidationdata(responseDict)
+                        
                         print("KTP Validation Response : ",response)
                     }else{
                         SimasPayAlert.showSimasPayAlert(messageText,viewController: self)
@@ -2115,6 +2175,7 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
             regiterStep3Button.enabled = false
             
         }else{
+            
             isStep2Activated = true
             agentRegistrationScrollview.setContentOffset(CGPoint(x:agentRegistrationStep1Scrollview.frame.size.width*2,y: 0), animated: true)
             regiterStep1Button.setTitleColor(UIColor.simasPayRedColor(), forState: .Normal)
@@ -2124,16 +2185,170 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
             regiterStep1Button.enabled = true
             regiterStep2Button.enabled = true
             
-            if(self.pickerViewData.count > 0)
+            if(self.workListViewData.count > 0)
             {
                 let firstTextField = step3ContentView.viewWithTag(31) as! UITextField
                 let subTextField = step3ContentView.viewWithTag(32) as! UITextField
                 
-                let workObj = self.pickerViewData[0] as! NSDictionary
+                let workObj = self.workListViewData[0] as! NSDictionary
                 firstTextField.text = workObj.valueForKey("workName") as? String
                 subTextField.enabled = false
             }
+            
+            self.pickerViewData = self.workListViewData
         }
+        
+        
+    }
+    
+    
+    func step2OtherAcceptButtonClicked()
+    {
+    
+        for  subView in step2ContentView.subviews
+        {
+            if (subView.isKindOfClass(UITextField))
+            {
+                let currentTextField = subView as! UITextField
+                
+                if(currentTextField.tag == 201)
+                {
+                    let errorLabel = step2ContentView.viewWithTag(101)
+                    
+                    if(!currentTextField.isValid())
+                    {
+                        showErrorTextField(currentTextField)
+                        errorLabel!.hidden = false
+                        return
+                    }else{
+                        self.step2OtherFormDictonary["province"] = currentTextField.text
+                        clearErrorTextField(currentTextField)
+                        errorLabel!.hidden = true
+                    }
+                }
+                
+                if(currentTextField.tag == 202)
+                {
+                    let errorLabel = step2ContentView.viewWithTag(102)
+                    if(!currentTextField.isValid())
+                    {
+                        showErrorTextField(currentTextField)
+                        errorLabel!.hidden = false
+                        return
+                    }else{
+                        
+                        self.step2OtherFormDictonary["city"] = currentTextField.text
+                        clearErrorTextField(currentTextField)
+                        errorLabel!.hidden = true
+                    }
+                }
+                
+                if(currentTextField.tag == 203)
+                {
+                    let errorLabel = step2ContentView.viewWithTag(103)
+                    if(!currentTextField.isValid())
+                    {
+                        showErrorTextField(currentTextField)
+                        errorLabel!.hidden = false
+                        return
+                    }else{
+                        self.step2OtherFormDictonary["district"] = currentTextField.text
+                        clearErrorTextField(currentTextField)
+                        
+                        errorLabel!.hidden = true
+                    }
+                }
+                
+                if(currentTextField.tag == 204)
+                {
+                    let errorLabel = step2ContentView.viewWithTag(104)
+                    
+                    if(!currentTextField.isValid())
+                    {
+                        showErrorTextField(currentTextField)
+                        errorLabel!.hidden = false
+                        return
+                    }else{
+                        self.step2OtherFormDictonary["subDistrict"] = currentTextField.text
+                        clearErrorTextField(currentTextField)
+                        errorLabel!.hidden = true
+                    }
+                }
+                
+                if(currentTextField.tag == 205 || currentTextField.tag == 206 || currentTextField.tag == 206)
+                {
+                    let errorLabel = step2ContentView.viewWithTag(105)
+                    
+                    if(!currentTextField.isValid())
+                    {
+                        showErrorTextField(currentTextField)
+                        errorLabel!.hidden = false
+                        return
+                    }else{
+                        
+                        if(currentTextField.tag == 205)
+                        {
+                            self.step2OtherFormDictonary["rt"] = currentTextField.text
+                        }
+                        if(currentTextField.tag == 206)
+                        {
+                            self.step2OtherFormDictonary["rw"] = currentTextField.text
+                        }
+                        if(currentTextField.tag == 206)
+                        {
+                           self.step2OtherFormDictonary["postalCode"] = currentTextField.text
+                        }
+                        
+                        clearErrorTextField(currentTextField)
+                        errorLabel!.hidden = true
+                    }
+                }
+            }
+            
+            if (subView.isKindOfClass(UITextView))
+            {
+                
+                
+                let currentTextView = step2ContentView.viewWithTag(99) as! UITextView
+                
+                if(currentTextView.text == domicilAddresPlaceholder)
+                {
+                    
+                    currentTextView.layer.borderWidth = 1
+                    currentTextView.layer.borderColor = UIColor(red: 204.0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0).CGColor
+                    
+                    //let errorLabel = step2ContentView.viewWithTag(301)
+                    //errorLabel!.hidden = false
+                    return
+                    
+                }else{
+                    
+                    self.step2OtherFormDictonary["domicilAddressLine"] = currentTextView.text
+                    
+                    currentTextView.layer.borderWidth = 0
+                    currentTextView.layer.borderColor = UIColor.clearColor().CGColor
+                    //let errorLabel = step2ContentView.viewWithTag(301)
+                    //errorLabel!.hidden = true
+                }
+                
+            }
+            
+        }
+        
+        step2AcceptButtonClicked()
+    }
+    
+    
+    func showErrorTextField(currentTextField:UITextField)
+    {
+        currentTextField.layer.borderWidth = 1
+        currentTextField.layer.borderColor = UIColor(red: 204.0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0).CGColor
+    }
+    
+    func clearErrorTextField(currentTextField:UITextField)
+    {
+        currentTextField.layer.borderWidth = 0
+        currentTextField.layer.borderColor = UIColor.clearColor().CGColor
     }
     
     // MARK: Step3 Validation Methods
@@ -2233,99 +2448,121 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
         
         
         let fullName = self.step1FormDictonary["fullName"] as! NSString
+        var fieldCount = 0
         
         if(fullName.length > 0)
         {
-            confirmationTitlesArray[0] = "Nama Lengkap"
-            confirmationValuesArray[0] = fullName
+            confirmationTitlesArray[fieldCount] = "Nama Lengkap"
+            confirmationValuesArray[fieldCount] = fullName
+            fieldCount = fieldCount + 1
+            
         }
         
         let dobString = self.step1FormDictonary["dob"] as! NSString
         if(dobString.length > 0)
         {
-            confirmationTitlesArray[1] = "Tanggal Lahir"
-            confirmationValuesArray[1] = dobString
-            
+            confirmationTitlesArray[fieldCount] = "Tanggal Lahir"
+            confirmationValuesArray[fieldCount] = dobString
+            fieldCount = fieldCount + 1
         }
         let ktpNumber = self.step1FormDictonary["ktp"] as! NSString
         if(ktpNumber.length > 0)
         {
-            confirmationTitlesArray[2] = "Nomor KTP"
-            confirmationValuesArray[2] = ktpNumber
+            confirmationTitlesArray[fieldCount] = "Nomor KTP"
+            confirmationValuesArray[fieldCount] = ktpNumber
+            fieldCount = fieldCount + 1
         }
         let ktpValidity = self.step1FormDictonary["ktpValidity"] as! NSString
         if(ktpValidity.length > 0)
         {
-            confirmationTitlesArray[3] = "KTP Berlaku Hingga"
-            confirmationValuesArray[3] = ktpValidity
+            confirmationTitlesArray[fieldCount] = "KTP Berlaku Hingga"
+            confirmationValuesArray[fieldCount] = ktpValidity
+            fieldCount = fieldCount + 1
         }
         
         let mobilePhoneNumber = self.step1FormDictonary["mobilePhoneNumber"] as! NSString
         if(mobilePhoneNumber.length > 0)
         {
-            confirmationTitlesArray[4] = "Nomor HP"
-            confirmationValuesArray[4] = mobilePhoneNumber
+            confirmationTitlesArray[fieldCount] = "Nomor HP"
+            confirmationValuesArray[fieldCount] = mobilePhoneNumber
+            fieldCount = fieldCount + 1
         }
         
+
         // Read Step2 Form data
-        
         let fullNameMotherSibLing = self.step2FormDictonary["fullNameMotherSibling"] as! NSString
         if(fullNameMotherSibLing.length > 0)
         {
-            confirmationTitlesArray[5] = "Nama Lengkap Ibu Kandung"
-            confirmationValuesArray[5] = fullNameMotherSibLing
+            confirmationTitlesArray[fieldCount] = "Nama Lengkap Ibu Kandung"
+            confirmationValuesArray[fieldCount] = fullNameMotherSibLing
+            fieldCount = fieldCount + 1
         }
         
         let placeOfBirth = self.step2FormDictonary["birthPlace"] as! NSString
         if(placeOfBirth.length > 0)
         {
-            confirmationTitlesArray[6] = "Tempat Lahir"
-            confirmationValuesArray[6] = placeOfBirth
+            confirmationTitlesArray[fieldCount] = "Tempat Lahir"
+            confirmationValuesArray[fieldCount] = placeOfBirth
+            fieldCount = fieldCount + 1
             
         }
         
         let addresMatchKTP = self.step2FormDictonary["ktpaddressLine"] as! NSString
         if(addresMatchKTP.length > 0)
         {
-            confirmationTitlesArray[7] = "Alamat Sesuai KTP"
-            confirmationValuesArray[7] = addresMatchKTP
+            confirmationTitlesArray[fieldCount] = "Alamat Sesuai KTP"
+            confirmationValuesArray[fieldCount] = addresMatchKTP
+            fieldCount = fieldCount + 1
             
         }
-        let domicileAddress = self.step2FormDictonary["ktpaddressLine"] as! NSString
+        
+        var domicileAddress = ""
+        if(isDomesticIdentity)
+        {
+            domicileAddress = self.step2FormDictonary["ktpaddressLine"]  as! String
+        }else{
+            domicileAddress = self.step2OtherFormDictonary["domicilAddressLine"] as! String
+        }
+        
         if(domicileAddress.length > 0)
         {
-            confirmationTitlesArray[8] = "Alamat Domisili"
-            confirmationValuesArray[8] = domicileAddress
+            confirmationTitlesArray[fieldCount] = "Alamat Domisili"
+            confirmationValuesArray[fieldCount] = domicileAddress
+            fieldCount = fieldCount + 1
             
         }
         
         let workString = self.step3FormDictonary["work"] as! NSString
         if(workString.length > 0)
         {
-            confirmationTitlesArray[9] = "Pekerjaan"
-            confirmationValuesArray[9] = workString
+            confirmationTitlesArray[fieldCount] = "Pekerjaan"
+            confirmationValuesArray[fieldCount] = workString
+            fieldCount = fieldCount + 1
             
         }
         let incomePM = self.step3FormDictonary["revenuePM"] as! NSString
         if(incomePM.length > 0)
         {
-            confirmationTitlesArray[10] = "Pendapatan per Bulan"
-            confirmationValuesArray[10] = "Rp \(incomePM)"
+            confirmationTitlesArray[fieldCount] = "Pendapatan per Bulan"
+            confirmationValuesArray[fieldCount] = "Rp \(incomePM)"
+            fieldCount = fieldCount + 1
             
         }
         
         let acccountOpenIntrst = self.step3FormDictonary["acccountOpenIntrst"] as! NSString
         if(acccountOpenIntrst.length > 0)
         {
-            confirmationTitlesArray[11] = "Tujuan Pembukaan Rekening"
-            confirmationValuesArray[11] = acccountOpenIntrst
+            confirmationTitlesArray[fieldCount] = "Tujuan Pembukaan Rekening"
+            confirmationValuesArray[fieldCount] = acccountOpenIntrst
+            fieldCount = fieldCount + 1
         }
         
         let emailID = self.step3FormDictonary["emailID"] as! NSString
         if(emailID.length > 0)
         {
-            confirmationTitlesArray[12] = "Tujuan Pembukaan Rekening"
-            confirmationValuesArray[12] = emailID
+            confirmationTitlesArray[fieldCount] = "Tujuan Pembukaan Rekening"
+            confirmationValuesArray[fieldCount] = emailID
+            fieldCount = fieldCount + 1
         }
         
         
@@ -2346,13 +2583,15 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
         
         dict[KTPID] = self.step1FormDictonary["ktp"]
         
-        dict[KTP_LINE1] = self.step1FormDictonary["ktpaddressLine"]
-        dict[KTP_RT] = self.step2FormDictonary["ktpRT"] as! NSString
-        dict[KTP_RW] = self.step2FormDictonary["ktpRW"] as! NSString
+        dict[KTP_LINE1] = self.step2FormDictonary["ktpaddressLine"]  as! String
         dict[KTP_City] = self.step2FormDictonary["ktpCity"] as! NSString
-        dict[KTP_Zipcode] = self.step2FormDictonary["ktpPostalCode"] as! NSString
         dict[KTP_State] = self.step2FormDictonary["ktpProvince"] as! NSString
         dict[KTP_District] = self.step2FormDictonary["ktpDistrict"] as! NSString
+        dict[KTP_Sub_District] = self.step2FormDictonary["ktpSubDistrict"] as! NSString
+        
+        dict[KTP_RT] = self.step2FormDictonary["ktpRT"] as! NSString
+        dict[KTP_RW] = self.step2FormDictonary["ktpRW"] as! NSString
+        dict[KTP_Zipcode] = self.step2FormDictonary["ktpPostalCode"] as! NSString
         
         if(isKTPLifeValiditySelected)
         {
@@ -2367,20 +2606,21 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
         
         if(isDomesticIdentity)
         {
-            dict[Domestic_Identity] = "1"
+          dict[Domestic_Identity] = "1"
         }else{
             
             dict[Domestic_Identity] = "2"
             
-            dict[LINE1] = self.step1FormDictonary["addressLine"]
-            dict[RT] = self.step2FormDictonary["rt"] as! NSString
-            dict[RW] = self.step2FormDictonary["rw"] as! NSString
-            dict[CITY] = self.step2FormDictonary["city"] as! NSString
-            dict[ZIPCODE] = self.step2FormDictonary["postalCode"] as! NSString
-            dict[STATE] = self.step2FormDictonary["province"] as! NSString
-            dict[REGION_NAME] = self.step2FormDictonary["district"] as! NSString
+            dict[LINE1] = self.step2OtherFormDictonary["domicilAddressLine"] as! String
+            dict[REGION_NAME] = self.step2OtherFormDictonary["province"] as! NSString
+            dict[CITY] = self.step2OtherFormDictonary["city"] as! NSString
+            dict[STATE] = self.step2OtherFormDictonary["district"] as! NSString
+            dict[SUB_STATE] = self.step2OtherFormDictonary["subDistrict"] as! NSString
+            
+            dict[RT] = self.step2OtherFormDictonary["rt"] as! NSString
+            dict[RW] = self.step2OtherFormDictonary["rw"] as! NSString
+            dict[ZIPCODE] = self.step2OtherFormDictonary["postalCode"] as! NSString
         }
-        
         
         dict[WORK] = self.step3FormDictonary["work"] as! NSString
         dict[INCOME] = self.step3FormDictonary["revenuePM"] as! NSString
@@ -2426,87 +2666,11 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
         confirmationViewController.confirmationRequestDictonary = dict
         self.navigationController!.pushViewController(confirmationViewController, animated: true)
         
-        /*
         
-        subFirstName=Sun&
-        dob=22011979&
-        destMDN=6212345109&
-        subMothersMaidenName=mother&
-        
-        ktpId=12345678&
-        
-        ktpLine1=ktpline1&
-        ktpRW=ktprw&
-        ktpRT=ktprt&
-        ktpZipCode=ktpzipcode&
-        ktpCity=ktpcity&
-        ktpState=ktpstate&
-        ktpRegionName=ktpregionname&  /// District
-        
-        ktpLifetime=false&
-        ktpValidUntil=22011979&
-        
-        transactionId=68&   //// KTP validation transaction id
-        
-        domesticIdentity=2&
-        
-        RT=rt&
-        RW=rt&
-        line1=line1&
-        state=state&
-        city=city&
-        zipCode=zipcode&
-        regionName=regionname&
-        
-        institutionID=simobi&
-        channelID=7&
-        sourceMDN=6212345678&
-        sourcePIN=xxxx&
-        txnName=SubscriberRegistration&
-        service=AgentServices&
-        
-        work=work&
-        income=12345&
-        goalOfOpeningAccount=goal&
-        sourceOfFunds=source&
-        email=sunilkumar.manchala@rand-ind.com&
-        
-        ktpDocument=&               // 3 Form firt doc
-        subscriberFormDocument=&
-        supportingDocument=&
-        
-        
-        
-        //    country=country&   Ignored
-        //    ktpCountry=ktpcountry&  Ignored
-        
-        */
     }
     
     func getImageString(targetImage:UIImage )->NSString
     {
-        
-        
-        /* let compressedImage = self.RBSquareImageTo(targetImage, size: step3SelectProof2.frame.size)
-        step3SelectProof2.setBackgroundImage(compressedImage, forState: .Normal)
-        
-        let  imageData:NSData = UIImagePNGRepresentation(targetImage)!
-        let imageSize: Int = imageData.length
-        
-        print("size of image in KB 1 : %f ", Double(imageSize) / 1024.0)
-        
-        let  imageData1:NSData = targetImage.lowQualityJPEGNSData
-        let imageSize1: Int = imageData1.length
-        
-        print("size of image in KB 2 : %f ", Double(imageSize1) / 1024.0)
-        
-        step3SelectProof2.setBackgroundImage(UIImage(data: imageData1), forState: .Normal)
-        
-        let  imageData2:NSData = targetImage.lowestQualityJPEGNSData
-        let imageSize2: Int = imageData2.length
-        print("size of image in KB 3 : %f ", Double(imageSize2) / 1024.0)
-        step3SelectProof3.setBackgroundImage(UIImage(data: imageData2), forState: .Normal) */
-        
         
         let newImageData = UIImagePNGRepresentation(targetImage)
         let newImage = UIImage(data: newImageData!)
@@ -2626,23 +2790,21 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool
     {
-        if textField.tag == 202 || textField.tag == 203 || textField.tag == 204 || textField.tag == 205
+        if textField.tag == 201 || textField.tag == 202 || textField.tag == 203 || textField.tag == 204
         {
             return true
         }
         
         return true
     }
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
-        replacementString string: String) -> Bool
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool
     {
         
         let maxLength = 16
         let currentString: NSString = textField.text!
-        let newString: NSString =
-        currentString.stringByReplacingCharactersInRange(range, withString: string)
-        return newString.length <= maxLength
-        
+        let newString: NSString = currentString.stringByReplacingCharactersInRange(range, withString: string)
+        return  newString.length <= maxLength
         
     }
     
@@ -2650,8 +2812,7 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
     
     func textViewDidBeginEditing(textView: UITextView) {
         
-        if textView.tag == 201 {
-        
+        if textView.tag == 99 {
           if textView.textColor == UIColor.lightGrayColor()
           {
             textView.text = nil
@@ -2663,10 +2824,10 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
     
     func textViewDidEndEditing(textView: UITextView) {
         
-        if textView.tag == 201 {
+        if textView.tag == 99 {
             
             if textView.text.isEmpty {
-                textView.text = "Jl./Gg./Perum./Komp./Ged. \n beserta nomor"
+                textView.text = domicilAddresPlaceholder
                 textView.textColor = UIColor.lightGrayColor()
             }
         }
@@ -2706,29 +2867,29 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
         dict[VERSION] = "0"
         
         
-        if sender.tag == 202  {
+        if sender.tag == 201  {
          dict[TXNNAME] = TXN_GetThirdPartyData
         }
-        if sender.tag == 203 {
-            let stateTextField = step2ContentView.viewWithTag(202) as! UITextField
+        if sender.tag == 202 {
+            let stateTextField = step2ContentView.viewWithTag(201) as! UITextField
             dict[TXNNAME] = TXN_GetThirdPartyDataLocation
             dict[STATE] = stateTextField.text
             dict[REGIONAME] = ""
             dict[CITY] = ""
         }
-        if sender.tag == 204 {
-            let stateTextField = step2ContentView.viewWithTag(202) as! UITextField
-            let regionTextField = step2ContentView.viewWithTag(203) as! UITextField
+        if sender.tag == 203 {
+            let stateTextField = step2ContentView.viewWithTag(201) as! UITextField
+            let regionTextField = step2ContentView.viewWithTag(202) as! UITextField
             dict[TXNNAME] = TXN_GetThirdPartyDataLocation
             dict[STATE] = stateTextField.text
             dict[REGIONAME] = regionTextField.text
             dict[CITY] = ""
         }
-        if sender.tag == 205 {
+        if sender.tag == 204 {
             
-            let stateTextField = step2ContentView.viewWithTag(202) as! UITextField
-            let regionTextField = step2ContentView.viewWithTag(203) as! UITextField
-            let cityTextField = step2ContentView.viewWithTag(204) as! UITextField
+            let stateTextField = step2ContentView.viewWithTag(201) as! UITextField
+            let regionTextField = step2ContentView.viewWithTag(202) as! UITextField
+            let cityTextField = step2ContentView.viewWithTag(203) as! UITextField
             
             dict[TXNNAME] = TXN_GetThirdPartyDataLocation
             dict[STATE] = stateTextField.text
@@ -2754,20 +2915,27 @@ class AgentRegistrationViewC: UIViewController,UIScrollViewDelegate,UIActionShee
                 print("Provience Data : ",response)
                 let responseDict = response as! NSDictionary
                 
-                if sender.tag == 202  {
+                if sender.tag == 201  {
                     self.provienceViewData = responseDict.valueForKeyPath("indonesia.province") as! NSArray
                     self.pickerViewData = responseDict.valueForKeyPath("indonesia.province") as! NSArray
                     
+                    let currentTextField = self.step2ContentView.viewWithTag(202) as! UITextField
+                    currentTextField.enabled = true
+                    
                 }
-                if sender.tag == 203 {
+                if sender.tag == 202 {
                     self.regionData = responseDict.valueForKey("region") as! NSArray
                     self.pickerViewData = responseDict.valueForKey("region") as! NSArray
+                    let currentTextField = self.step2ContentView.viewWithTag(203) as! UITextField
+                    currentTextField.enabled = true
                 }
-                if sender.tag == 204 {
+                if sender.tag == 203 {
                     self.stateViewData = responseDict.valueForKey("district") as! NSArray
                     self.pickerViewData = responseDict.valueForKey("district") as! NSArray
+                    let currentTextField = self.step2ContentView.viewWithTag(204) as! UITextField
+                    currentTextField.enabled = true
                 }
-                if sender.tag == 205 {
+                if sender.tag == 204 {
                     self.cityViewData = responseDict.valueForKey("village") as! NSArray
                     self.pickerViewData = responseDict.valueForKey("village") as! NSArray
                 }

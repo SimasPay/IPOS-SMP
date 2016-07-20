@@ -23,6 +23,8 @@ class RegistrationStep2: UIViewController,UITextFieldDelegate{
         // Do any additional setup after loading the view, typically from a nib.
         
         mobileNumberTextField.delegate = self
+        kodeOTPTextField.delegate = self
+        kodeOTPTextField.tag = 100
         SimaspayUtility.setMobileNumberTextFieldImage(mobileNumberTextField)
         SimaspayUtility.setOTPTextFieldImage(kodeOTPTextField)
         
@@ -68,6 +70,12 @@ class RegistrationStep2: UIViewController,UITextFieldDelegate{
         if(!kodeOTPTextField.isValid())
         {
             SimasPayAlert.showSimasPayAlert("Masukkan mPIN Anda", viewController: self)
+            return
+        }
+        
+        if(kodeOTPTextField.text?.length < 6)
+        {
+            SimasPayAlert.showSimasPayAlert("mPIN yang Anda masukkan harus 6 angka.", viewController: self)
             return
         }
         
@@ -231,13 +239,17 @@ class RegistrationStep2: UIViewController,UITextFieldDelegate{
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
-        replacementString string: String) -> Bool
+                   replacementString string: String) -> Bool
     {
+        var maxLength = 15
         
-        let maxLength = 15
+        if textField.tag == 100 {
+            maxLength = 6
+        }
+        
         let currentString: NSString = textField.text!
         let newString: NSString =
-        currentString.stringByReplacingCharactersInRange(range, withString: string)
+            currentString.stringByReplacingCharactersInRange(range, withString: string)
         return newString.length <= maxLength
         
         

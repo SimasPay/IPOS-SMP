@@ -62,6 +62,8 @@
 /** whether to show footer (including confirm and cancel buttons), default NO */
 @property BOOL needFooterView;
 
+@property BOOL isFlashizView;
+
 /** whether allow tap background to dismiss the picker, default YES */
 @property BOOL tapBackgroundToDismiss;
 

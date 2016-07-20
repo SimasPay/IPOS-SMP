@@ -156,7 +156,9 @@ class ReferralViewController: UIViewController,UITextFieldDelegate,UIPickerViewD
                 step2TextField.font =  UIFont(name:"HelveticaNeue-Light", size:12)
                 step2TextField.translatesAutoresizingMaskIntoConstraints = false
                 step2TextField.layer.cornerRadius = 5
+                step2TextField.editable = false
                 step2TextField.delegate = self
+                step2TextField.keyboardType = .NamePhonePad
                 step2TextField.textColor = UIColor.lightGrayColor()
                 contentView.addSubview(step2TextField)
                 step2TextField.tag = 10+i+1
@@ -342,7 +344,7 @@ class ReferralViewController: UIViewController,UITextFieldDelegate,UIPickerViewD
                         
                         self.disableRequiredTextViewMessage(currentTextView)
                            cashInFormDictonary["others"] = currentTextView.text
-                           cashInFormDictonary["productDesired"] = "Others"
+                           cashInFormDictonary["productDesired"] = productDesiredTextField.text
                     }
                 }
             }
@@ -527,7 +529,8 @@ class ReferralViewController: UIViewController,UITextFieldDelegate,UIPickerViewD
                     {
                         currentTextView.editable = true
                     }else{
-                        
+                        currentTextView.text = "Sebutkan…"
+                        currentTextView.textColor = UIColor.lightGrayColor()
                         currentTextView.editable = false
                     }
                 }

@@ -18,6 +18,7 @@
 		412621B01CC91A0100975C48 /* CZPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 412621AF1CC91A0100975C48 /* CZPickerView.m */; };
 		412CF4401C3A57DA008AF067 /* SubMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412CF43F1C3A57DA008AF067 /* SubMenuViewController.swift */; };
 		412CF4421C3A9C47008AF067 /* AgentOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412CF4411C3A9C47008AF067 /* AgentOptionViewController.swift */; };
+		41351EEC1D38F28700EAB33C /* FlahsizPINView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41351EEB1D38F28700EAB33C /* FlahsizPINView.m */; };
 		413BBD6A1CD398690029D9A2 /* ReloginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413BBD691CD398690029D9A2 /* ReloginViewController.swift */; };
 		414647841C880EE0000E6DD6 /* NetworkWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 414647831C880EE0000E6DD6 /* NetworkWrapper.m */; };
 		414647891C880EF0000E6DD6 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 414647871C880EF0000E6DD6 /* ServiceModel.m */; };
@@ -54,6 +55,8 @@
 		417E812C1C6B40E800869BEB /* CashinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417E812B1C6B40E800869BEB /* CashinViewController.swift */; };
 		417E812E1C6B4FD100869BEB /* CloseAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417E812D1C6B4FD100869BEB /* CloseAccountViewController.swift */; };
 		417E81301C6B515300869BEB /* ReferralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417E812F1C6B515300869BEB /* ReferralViewController.swift */; };
+		4182E4561D23BFE9004C5F0E /* DIMOPayiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4182E4541D23BFE9004C5F0E /* DIMOPayiOS.framework */; };
+		4182E4571D23BFE9004C5F0E /* DIMOPayiOSResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4182E4551D23BFE9004C5F0E /* DIMOPayiOSResources.bundle */; };
 		41A796A91CD0C8F9000E0005 /* AUISelectiveBordersLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 41A796A61CD0C8F9000E0005 /* AUISelectiveBordersLayer.m */; };
 		41A796AA1CD0C8F9000E0005 /* UIView+AUISelectiveBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 41A796A81CD0C8F9000E0005 /* UIView+AUISelectiveBorder.m */; };
 		41AC37131C53E958005DD839 /* IQNSArray+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AC36FE1C53E958005DD839 /* IQNSArray+Sort.swift */; };
@@ -74,8 +77,6 @@
 		41AC37221C53E958005DD839 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41AC37111C53E958005DD839 /* Info.plist */; };
 		41AC37231C53E958005DD839 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 41AC37121C53E958005DD839 /* IQKeyboardManager.bundle */; };
 		41B581F81C4E425400BF6F5E /* AgentRegistrationViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B581F71C4E425400BF6F5E /* AgentRegistrationViewC.swift */; };
-		41C029601CAE64B30048A3CF /* DIMOPayiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41C0295E1CAE64B30048A3CF /* DIMOPayiOS.framework */; };
-		41C029611CAE64B30048A3CF /* DIMOPayiOSResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 41C0295F1CAE64B30048A3CF /* DIMOPayiOSResources.bundle */; };
 		41C029671CAEAEB10048A3CF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41C029661CAEAEB10048A3CF /* AVFoundation.framework */; };
 		41C029691CAEAEBA0048A3CF /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41C029681CAEAEBA0048A3CF /* CoreVideo.framework */; };
 		41C0296B1CAEAED50048A3CF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41C0296A1CAEAED50048A3CF /* AudioToolbox.framework */; };
@@ -112,6 +113,8 @@
 		412621AF1CC91A0100975C48 /* CZPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZPickerView.m; sourceTree = "<group>"; };
 		412CF43F1C3A57DA008AF067 /* SubMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubMenuViewController.swift; sourceTree = "<group>"; };
 		412CF4411C3A9C47008AF067 /* AgentOptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AgentOptionViewController.swift; path = ../Menu/AgentOptionViewController.swift; sourceTree = "<group>"; };
+		41351EEA1D38F28700EAB33C /* FlahsizPINView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlahsizPINView.h; sourceTree = "<group>"; };
+		41351EEB1D38F28700EAB33C /* FlahsizPINView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlahsizPINView.m; sourceTree = "<group>"; };
 		413BBD691CD398690029D9A2 /* ReloginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReloginViewController.swift; sourceTree = "<group>"; };
 		414647821C880EDF000E6DD6 /* Simaspay-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Simaspay-Bridging-Header.h"; path = "Network/Simaspay-Bridging-Header.h"; sourceTree = "<group>"; };
 		414647831C880EE0000E6DD6 /* NetworkWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkWrapper.m; sourceTree = "<group>"; };
@@ -169,6 +172,8 @@
 		417E812B1C6B40E800869BEB /* CashinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CashinViewController.swift; sourceTree = "<group>"; };
 		417E812D1C6B4FD100869BEB /* CloseAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseAccountViewController.swift; sourceTree = "<group>"; };
 		417E812F1C6B515300869BEB /* ReferralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferralViewController.swift; sourceTree = "<group>"; };
+		4182E4541D23BFE9004C5F0E /* DIMOPayiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DIMOPayiOS.framework; sourceTree = "<group>"; };
+		4182E4551D23BFE9004C5F0E /* DIMOPayiOSResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DIMOPayiOSResources.bundle; sourceTree = "<group>"; };
 		41A796A51CD0C8F9000E0005 /* AUISelectiveBordersLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUISelectiveBordersLayer.h; sourceTree = "<group>"; };
 		41A796A61CD0C8F9000E0005 /* AUISelectiveBordersLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUISelectiveBordersLayer.m; sourceTree = "<group>"; };
 		41A796A71CD0C8F9000E0005 /* UIView+AUISelectiveBorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AUISelectiveBorder.h"; sourceTree = "<group>"; };
@@ -191,8 +196,6 @@
 		41AC37111C53E958005DD839 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41AC37121C53E958005DD839 /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
 		41B581F71C4E425400BF6F5E /* AgentRegistrationViewC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentRegistrationViewC.swift; sourceTree = "<group>"; };
-		41C0295E1CAE64B30048A3CF /* DIMOPayiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DIMOPayiOS.framework; sourceTree = "<group>"; };
-		41C0295F1CAE64B30048A3CF /* DIMOPayiOSResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DIMOPayiOSResources.bundle; sourceTree = "<group>"; };
 		41C029661CAEAEB10048A3CF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		41C029681CAEAEBA0048A3CF /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		41C0296A1CAEAED50048A3CF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -221,13 +224,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4182E4561D23BFE9004C5F0E /* DIMOPayiOS.framework in Frameworks */,
 				4173FABD1CEEFD6F00F82974 /* CoreGraphics.framework in Frameworks */,
 				41C0297F1CAEAFA30048A3CF /* MobileCoreServices.framework in Frameworks */,
 				41C0296D1CAEAEFA0048A3CF /* AssetsLibrary.framework in Frameworks */,
 				41C0296B1CAEAED50048A3CF /* AudioToolbox.framework in Frameworks */,
 				41C029691CAEAEBA0048A3CF /* CoreVideo.framework in Frameworks */,
 				41C029671CAEAEB10048A3CF /* AVFoundation.framework in Frameworks */,
-				41C029601CAE64B30048A3CF /* DIMOPayiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +301,8 @@
 				414647831C880EE0000E6DD6 /* NetworkWrapper.m */,
 				414647861C880EF0000E6DD6 /* ServiceModel.h */,
 				414647871C880EF0000E6DD6 /* ServiceModel.m */,
+				41351EEA1D38F28700EAB33C /* FlahsizPINView.h */,
+				41351EEB1D38F28700EAB33C /* FlahsizPINView.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -454,8 +459,8 @@
 		41C0295D1CAE64B30048A3CF /* PaybyQR */ = {
 			isa = PBXGroup;
 			children = (
-				41C0295E1CAE64B30048A3CF /* DIMOPayiOS.framework */,
-				41C0295F1CAE64B30048A3CF /* DIMOPayiOSResources.bundle */,
+				4182E4541D23BFE9004C5F0E /* DIMOPayiOS.framework */,
+				4182E4551D23BFE9004C5F0E /* DIMOPayiOSResources.bundle */,
 			);
 			path = PaybyQR;
 			sourceTree = "<group>";
@@ -586,7 +591,7 @@
 				415E50921C17FC270075AE5C /* LaunchScreen.storyboard in Resources */,
 				415E508F1C17FC270075AE5C /* Assets.xcassets in Resources */,
 				415E508D1C17FC270075AE5C /* Main.storyboard in Resources */,
-				41C029611CAE64B30048A3CF /* DIMOPayiOSResources.bundle in Resources */,
+				4182E4571D23BFE9004C5F0E /* DIMOPayiOSResources.bundle in Resources */,
 				41F3FDF21C721FD200A5C2C2 /* TransactionHistoryCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -672,6 +677,7 @@
 				414B2B981CA309FF00CEED75 /* UILoadControl.swift in Sources */,
 				4146479E1C880FDE000E6DD6 /* NSObject+SBJSON.m in Sources */,
 				413BBD6A1CD398690029D9A2 /* ReloginViewController.swift in Sources */,
+				41351EEC1D38F28700EAB33C /* FlahsizPINView.m in Sources */,
 				41A796A91CD0C8F9000E0005 /* AUISelectiveBordersLayer.m in Sources */,
 				417E812A1C6A4B7100869BEB /* StatusViewController.swift in Sources */,
 			);
@@ -789,9 +795,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Prasad Kolachana (9HMVT6DN4C)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bandana Mushunuri (7QG4UF4A45)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/",
 					"$(PROJECT_DIR)/Simaspay/PaybyQR",
 				);
 				INFOPLIST_FILE = Simaspay/Info.plist;
@@ -800,7 +807,7 @@
 				OTHER_CFLAGS = "-fembed-bitcode ";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rand.Simaspay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "78b2e2ec-99ff-4d26-bacd-00224d13060f";
+				PROVISIONING_PROFILE = "c2e060f2-b220-429f-9533-81a90fc59bdc";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simaspay/Network/Simaspay-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -811,9 +818,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Prasad Kolachana (9HMVT6DN4C)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bandana Mushunuri (7QG4UF4A45)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/",
 					"$(PROJECT_DIR)/Simaspay/PaybyQR",
 				);
 				INFOPLIST_FILE = Simaspay/Info.plist;
@@ -822,7 +830,7 @@
 				OTHER_CFLAGS = "-fembed-bitcode ";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rand.Simaspay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "78b2e2ec-99ff-4d26-bacd-00224d13060f";
+				PROVISIONING_PROFILE = "c2e060f2-b220-429f-9533-81a90fc59bdc";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simaspay/Network/Simaspay-Bridging-Header.h";
 			};
 			name = Release;

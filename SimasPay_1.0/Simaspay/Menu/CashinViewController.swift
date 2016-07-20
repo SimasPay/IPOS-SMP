@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class CashinViewController: UIViewController
+class CashinViewController: UIViewController,UITextFieldDelegate
 {
     var cashinScrollview: UIScrollView!
     var contentView:UIView!
@@ -123,6 +123,7 @@ class CashinViewController: UIViewController
             }
             if( i == 3)
             {
+                step1TextField.delegate = self
                 step1TextField.secureTextEntry = true
             }
             
@@ -239,6 +240,12 @@ class CashinViewController: UIViewController
                         }
                         if(currentTextField.tag == 13)
                         {
+                            if(currentTextField.text?.length < 6)
+                            {
+                                SimasPayAlert.showSimasPayAlert("mPIN yang Anda masukkan harus 6 angka.", viewController: self)
+                                return
+                            }
+                            
                             cashInFormDictonary["mPIN"] = currentTextField.text
                         }
                     }
@@ -247,6 +254,7 @@ class CashinViewController: UIViewController
             }
         }
 
+        
         self.inqueryServiceRequest()
     }
 
@@ -312,7 +320,7 @@ class CashinViewController: UIViewController
                             dict[PARENTTXNID] = parentTxnID
                             dict[MFATRANSACTION] = SIMASPAY_CONFIRM
                             dict[TXNNAME] = AGENT_CASHIN_CONFIRMATION
-                            dict[SOURCEPOCKETCODE] = "1"
+                            dict[SOURCEPOCKETCODE] = "6" //"1"
                             dict[DESTPOCKETCODE] = "6"
                             
                             let confirmationTitlesArray = NSMutableArray()
@@ -397,6 +405,17 @@ class CashinViewController: UIViewController
         let errorTag = 100+currentTextField.tag-10
         let errorLabel = contentView.viewWithTag(errorTag)
         errorLabel!.hidden = true
+    }
+    
+    // MARK: UITextField Delegate Methods
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,replacementString string: String) -> Bool
+    {
+        let maxLength = 6
+        let currentString: NSString = textField.text!
+        let newString: NSString =
+            currentString.stringByReplacingCharactersInRange(range, withString: string)
+        return  newString.length <= maxLength
+        
     }
     
 }

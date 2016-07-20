@@ -7,4 +7,5 @@
 #import "DimoConstants.h"
 #import "SimasPayPlistUtility.h"
 #import "CZPickerView.h"
+#import "FlahsizPINView.h"
 #import <DIMOPayiOS/DIMOPayiOS.h>

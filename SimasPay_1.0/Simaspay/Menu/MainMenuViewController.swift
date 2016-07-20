@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDelegate
+class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDelegate,FlahsizPINViewDelegate
 {
     @IBOutlet weak var customMainMenuView: UIView!
     @IBOutlet weak var agentLabel: UILabel!
@@ -32,6 +32,7 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
     var isFlashizInitialized:Bool = false
     var  mfaOTPPicker:CZPickerView!
     var flashizInqueryDict = NSMutableDictionary() as [NSObject : AnyObject]
+    var flashizInvoiceDict = NSMutableDictionary() as [NSObject : AnyObject]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,7 +155,7 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
         blueView.setBackgroundImage(image3, forState: .Normal)
         blueView.setTitle(menuoption2["title"] as! NSString as String, forState: UIControlState.Normal)
         blueView.titleEdgeInsets = UIEdgeInsetsMake(titleYposition,0,0,0)
-        blueView.addTarget(self, action: "menuButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+        blueView.addTarget(self, action: #selector(MainMenuViewController.menuButtonTapped(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         blueView.titleLabel?.font = UIFont(name: "Arial", size: 13)
         blueView.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
         customMainMenuView.addSubview(blueView)
@@ -172,7 +173,7 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
         redView1.setBackgroundImage(image4, forState: .Normal)
         redView1.setTitle(menuoption3["title"] as! NSString as String, forState: UIControlState.Normal)
         redView1.titleEdgeInsets = UIEdgeInsetsMake(titleYposition,0,0,0)
-        redView1.addTarget(self, action: "menuButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+        redView1.addTarget(self, action: #selector(MainMenuViewController.menuButtonTapped(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         redView1.titleLabel?.font = UIFont(name: "Arial", size: 13)
         redView1.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
         customMainMenuView.addSubview(redView1)
@@ -190,7 +191,7 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
         greenView1.setBackgroundImage(image5, forState: .Normal)
         greenView1.setTitle(menuoption4["title"] as! NSString as String, forState: UIControlState.Normal)
         greenView1.titleEdgeInsets = UIEdgeInsetsMake(titleYposition,0,0,0)
-        greenView1.addTarget(self, action: "menuButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+        greenView1.addTarget(self, action: #selector(MainMenuViewController.menuButtonTapped(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         greenView1.titleLabel?.font = UIFont(name: "Arial", size: 13)
         greenView1.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
         customMainMenuView.addSubview(greenView1)
@@ -211,7 +212,7 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
         blueView1.setBackgroundImage(image6, forState: .Normal)
         blueView1.setTitle(menuoption5["title"] as! NSString as String, forState: UIControlState.Normal)
         blueView1.titleEdgeInsets = UIEdgeInsetsMake(titleYposition,0,0,0)
-        blueView1.addTarget(self, action: "menuButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+        blueView1.addTarget(self, action: #selector(MainMenuViewController.menuButtonTapped(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         blueView1.titleLabel?.font = UIFont(name: "Arial", size: 13)
         blueView1.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
         customMainMenuView.addSubview(blueView1)
@@ -312,7 +313,7 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
         redView.setBackgroundImage(image1, forState: .Normal)
         redView.setTitle(menuoption0["title"] as! NSString as String, forState: UIControlState.Normal)
         redView.titleEdgeInsets = UIEdgeInsetsMake(titleYposition,0,0,0)
-        redView.addTarget(self, action: "menuButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+        redView.addTarget(self, action: #selector(MainMenuViewController.menuButtonTapped(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         redView.titleLabel?.font = UIFont(name: "Arial", size: 13)
         redView.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
         customMainMenuView.addSubview(redView)
@@ -329,7 +330,7 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
         greenView.setBackgroundImage(image2, forState: .Normal)
         greenView.setTitle(menuoption1["title"] as! NSString as String, forState: UIControlState.Normal)
         greenView.titleEdgeInsets = UIEdgeInsetsMake(titleYposition,0,0,0)
-        greenView.addTarget(self, action: "menuButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+        greenView.addTarget(self, action: #selector(MainMenuViewController.menuButtonTapped(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         greenView.titleLabel?.font = UIFont(name: "Arial", size: 13)
         greenView.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
         customMainMenuView.addSubview(greenView)
@@ -345,7 +346,7 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
         blueView.setBackgroundImage(image3, forState: .Normal)
         blueView.setTitle(menuoption2["title"] as! NSString as String, forState: UIControlState.Normal)
         blueView.titleEdgeInsets = UIEdgeInsetsMake(titleYposition,0,0,0)
-        blueView.addTarget(self, action: "menuButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+        blueView.addTarget(self, action: #selector(MainMenuViewController.menuButtonTapped(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         blueView.titleLabel?.font = UIFont(name: "Arial", size: 13)
         blueView.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
         customMainMenuView.addSubview(blueView)
@@ -361,7 +362,7 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
         redView1.setBackgroundImage(image4, forState: .Normal)
         redView1.setTitle(menuoption3["title"] as! NSString as String, forState: UIControlState.Normal)
         redView1.titleEdgeInsets = UIEdgeInsetsMake(titleYposition,0,0,0)
-        redView1.addTarget(self, action: "menuButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+        redView1.addTarget(self, action: #selector(MainMenuViewController.menuButtonTapped(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         redView1.titleLabel?.font = UIFont(name: "Arial", size: 13)
         redView1.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
         customMainMenuView.addSubview(redView1)
@@ -382,7 +383,7 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
         greenView1.setBackgroundImage(image5, forState: .Normal)
         greenView1.setTitle(menuoption4["title"] as! NSString as String, forState: UIControlState.Normal)
         greenView1.titleEdgeInsets = UIEdgeInsetsMake(titleYposition,0,0,0)
-        greenView1.addTarget(self, action: "menuButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+        greenView1.addTarget(self, action: #selector(MainMenuViewController.menuButtonTapped(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         greenView1.titleLabel?.font = UIFont(name: "Arial", size: 13)
         greenView1.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
         customMainMenuView.addSubview(greenView1)
@@ -745,8 +746,130 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
         })
     }
     
+
     
-    // MARK: PAY By QR Implementation 
+    
+    
+     // MARK: MFA OTP Reading
+    
+    
+    var tField: UITextField!
+    
+    func configurationTextField(textField: UITextField!)
+    {
+        print("generating the TextField")
+        textField.placeholder = "6 digit kode OTP"
+        tField = textField
+        tField.secureTextEntry = true
+        tField.keyboardType = .NumberPad
+    }
+    
+    
+    @available(iOS 8.0, *)
+    func handleCancel(alertView: UIAlertAction!)
+    {
+        print("Cancelled !!")
+    }
+    
+    
+    func showOTPPopUP()
+    {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ConfirmationViewController.readOTPNotification(_:)), name:OTPNotificationKey, object: nil)
+        
+        let sourceMDN = SimasPayPlistUtility.getDataFromPlistForKey(SOURCEMDN) as! String
+        mfaOTPPicker = CZPickerView.init(headerTitle: "Masukkan Kode OTP", messageText: "Kode OTP dan link telah dikirimkan ke \n nomor \(sourceMDN). Masukkan kode \n tersebut atau akses link yang tersedia.", viewController: self)
+        
+        mfaOTPPicker.delegate = self
+        mfaOTPPicker.needFooterView = true
+        mfaOTPPicker.isFlashizView = true
+        mfaOTPPicker.tapBackgroundToDismiss = false;
+        mfaOTPPicker.show()
+    }
+    
+    
+    func czpickerViewDidClickOKButton(pickerView: CZPickerView!, otpText: String!) {
+        
+       if(otpText.length > 0)
+        {
+            flashizInqueryDict[MFAOTP] = SimaspayUtility.simasPayRSAencryption(otpText)
+            confirmationServiceRequest()
+        }else{
+            SimasPayAlert.showSimasPayAlert("Masukkan Kode OTP.",viewController: self)
+        }
+        
+    }
+    
+    func czpickerViewDidClickCancelButton(pickerView: CZPickerView!) {
+        
+    }
+    
+    func czpickerViewResendOTP(pickerView: CZPickerView!) {
+        
+        if(!SimaspayUtility.isConnectedToNetwork())
+        {
+            SimasPayAlert.showSimasPayAlert(SHOW_INTERNET_MSG, viewController: self)
+            return
+        }
+        
+        var dict = NSMutableDictionary() as [NSObject : AnyObject]
+        dict[SERVICE] = SERVICE_WALLET
+        dict[TXNNAME] = TXN_RESEND_MFAOTP
+        dict[SOURCEMDN] = SimasPayPlistUtility.getDataFromPlistForKey(SOURCEMDN)
+        dict[SOURCEPIN] = SimaspayUtility.simasPayRSAencryption(SimasPayPlistUtility.getDataFromPlistForKey(SOURCEPIN) as! String)
+        dict[SCTL_ID] = flashizInqueryDict[SCTL_ID]
+        
+        EZLoadingActivity.show("Loading...", disableUI: true)
+        
+        print("Confirmation Params : ",dict)
+        
+        ServiceModel.connectPOSTURL(SIMASPAY_URL, postData:
+            dict, successBlock: { (response) -> Void in
+                // Handle success response
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    EZLoadingActivity.hide()
+                    if(response == nil)
+                    {
+                        DIMOPay.notifyTransaction(PaymentStatusFailed, withMessage: REQUEST_FALIED, isDefaultLayout: true)
+                        return
+                    }
+                    let responseDict = response as NSDictionary
+                    let messagecode  = responseDict.valueForKeyPath("response.message.code") as! String
+                    let messageText  = responseDict.valueForKeyPath("response.message.text") as! String
+                    
+                    print("Confirmation Response : ",response)
+                    
+                    if( messagecode == SIMASPAY_RESEND_OTP_SUCESS)
+                    {
+                        if((pickerView) != nil)
+                        {
+                            self.mfaOTPPicker.reSendOTPSuccess()
+                        }else{
+                            self.showOTPPopUP()
+                        }
+                        
+                        
+                    }else if( messagecode == SIMASPAY_RESEND_OTP_FAILED)
+                    {
+                        
+                    }else if( messagecode == SIMASPAY_RESEND_OTP_LIMIT_REACHED)
+                    {
+                        self.mfaOTPPicker.hide()
+                        DIMOPay.notifyTransaction(PaymentStatusFailed, withMessage: messageText, isDefaultLayout: true)
+                    }else{
+                        DIMOPay.notifyTransaction(PaymentStatusFailed, withMessage: messageText, isDefaultLayout: true)
+                    }
+                }
+                
+            }, failureBlock: { (error: NSError!) -> Void in
+                dispatch_async(dispatch_get_main_queue()) {
+                    EZLoadingActivity.hide()
+                    DIMOPay.notifyTransaction(PaymentStatusFailed, withMessage: error.localizedDescription, isDefaultLayout: true)
+                }
+        })
+    }
+    
+    // MARK: PAY By QR Implementation
     
     func payBYQRBtnClicked() {
         
@@ -804,15 +927,12 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
     {
         payInvoice(invoice.invoiceId, amount: invoice.originalAmount, discountedAmount: invoice.paidAmount, merchantName: invoice.merchantName, nbOfCoupons: invoice.numberOfCoupons, discountType: invoice.discountType, loyaltyProgramName: invoice.loyaltyProgramName, amountOfDiscount: invoice.amountOfDiscount, tippingAmount: invoice.tipAmount, pointsRedeemed: 0, amountRedeemed: 0)
     }
-
+    
     /// This function will be called when isUsingCustomDialog is Yes, and host-app need to show their own dialog
-    
-    func callbackShowDialog(paymentStatus: PaymentStatus, withMessage message: String!) {
+    func callbackShowDialog(paymentStatus: PaymentStatus, withMessage message: String!, andLoyaltyModel fidelitiz: DIMOFidelitizModel) {
+        
     }
-    
-    
-    
-    
+
     /// This function will be called when the sdk has been closed
     
     func callbackSDKClosed()
@@ -831,9 +951,9 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
     /// This function will be called when invalid qr code error page appear
     func callbackInvalidQRCode()->Bool
     {
-         return false
+        return false
     }
-
+    
     /// Return true to close sdk
     /// This function will be called when payment failed error page appear
     
@@ -841,8 +961,8 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
         
         return false
     }
-
-
+    
+    
     /// Return true to close sdk
     /// This function will be called when unknown error page appear
     func callbackUnknowError()->Bool
@@ -859,127 +979,29 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
     
     func payInvoice(invoiceId:NSString, amount:Double, discountedAmount:Double,merchantName:NSString,nbOfCoupons:Int32,discountType:NSString,loyaltyProgramName:NSString,amountOfDiscount:Double,tippingAmount:Double,pointsRedeemed:Int,amountRedeemed:Int)
     {
-        if(amount == 0)
-        {
-            EZLoadingActivity.show("Loading...", disableUI: true)
-            return
-        }
+        let number1: Int32 = nbOfCoupons
+        let numberOfCoupons = Int(number1)
         
-        /* 
-        channelID=7&
-           amountRedeemed=0&
-           discountType=&
-           discountAmount=0& 
-           numberOfCoupons=0& 
-           amount=500&
-           pointsRedeemed=0&
-            loyalityName=&
-            tippingAmount=0&
-            merchantData=Pawon+Mobile+POS&
+        flashizInvoiceDict["invoiceId"] = invoiceId
+        flashizInvoiceDict["amount"] = amount
+        flashizInvoiceDict["discountedAmount"] = discountedAmount
+        flashizInvoiceDict["merchantName"] = merchantName
+        flashizInvoiceDict["nbOfCoupons"] = numberOfCoupons
+        flashizInvoiceDict["discountType"] = discountType
+        flashizInvoiceDict["loyaltyProgramName"] = loyaltyProgramName
+        flashizInvoiceDict["amountOfDiscount"] = amountOfDiscount
+        flashizInvoiceDict["tippingAmount"] = tippingAmount
+        flashizInvoiceDict["pointsRedeemed"] = pointsRedeemed
+        flashizInvoiceDict["amountRedeemed"] = amountRedeemed
         
-           service=Payment& 
-          sourcePocketCode=2&
-        paymentMode=QRPayment&
-        sourceMDN=629550555560&
-        txnName=QRPaymentInquiry&
-        userAPIKey=3146a6f1680ba40878b26805635a56ab542f565d&
-        billNo=QANhrLY3GlVx&
-        
-        institutionID=&
-        
-        billerCode=QRFLASHIZ& sourcePIN=8499911894479C416076EDE5&
-        institutionID=&mspID=1&accountType=
-        
-        */
-        
-        flashizInqueryDict["amount"] = "\(amount)"
-        flashizInqueryDict["invoiceId"] = "\(invoiceId)"
-        flashizInqueryDict["merchantData"] = "\(merchantName)"
-        flashizInqueryDict["nbOfCoupons"] = "\(nbOfCoupons)"
-        flashizInqueryDict["discountedAmount"] = "\(discountedAmount)"
-        flashizInqueryDict["amountOfDiscount"] = "\(amountOfDiscount)"
-        flashizInqueryDict["discountType"] = "\(discountType)"
-        flashizInqueryDict["tippingAmount"] = "\(tippingAmount)"
-        flashizInqueryDict["pointsRedeemed"] = "\(pointsRedeemed)"
-        flashizInqueryDict["amountRedeemed"] = "\(amountRedeemed)"
-        flashizInqueryDict["loyalityName"] = "\(loyaltyProgramName)"
-        
-        flashizInqueryDict[BILLNO] = "\(invoiceId)"
-        flashizInqueryDict[BILLERCODE] = "QRFLASHIZ"
-        
-        flashizInqueryDict[SERVICE] = SERVICE_PAYMENT
-        flashizInqueryDict[PAYMENT_MODE] = QR_PAYMENT
-        flashizInqueryDict[SOURCEMDN] = SimasPayPlistUtility.getDataFromPlistForKey(SOURCEMDN)
-        flashizInqueryDict[SOURCEPIN] = SimaspayUtility.simasPayRSAencryption(SimasPayPlistUtility.getDataFromPlistForKey(SOURCEPIN) as! String)
-        flashizInqueryDict[TXNNAME] =  TXN_FlashIz_BillPay_Inquiry
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        flashizInqueryDict[TXNNAME] =  TXN_FlashIz_BillPay_Inquiry
-        flashizInqueryDict[TXN_GetUserKey] = defaults.objectForKey("GetUserAPIKey") as! String
     
-        if(self.simasPayUserType == SimasPayUserType.SIMASPAY_AGENT_ACCOUNT)
-        {
-            flashizInqueryDict[SOURCEPOCKETCODE] = "1"
-        }
+        let flahsizPINview = FlahsizPINView.init(flahsizView:())
+        flahsizPINview.delegate = self
+        flahsizPINview.show()
         
-        if(self.simasPayUserType == SimasPayUserType.SIMASPAY_AGENT_REGULAR || self.simasPayUserType == SimasPayUserType.SIMASPAY_REGULAR_BANK_CUSTOMER)
-        {
-            flashizInqueryDict[SOURCEPOCKETCODE] = "2"
-        }
-    
-        if(self.simasPayUserType == SimasPayUserType.SIMASPAY_LAKU_PANDAI)
-        {
-            flashizInqueryDict[SOURCEPOCKETCODE] = "6"
-        }
-        
-        
-        if(!SimaspayUtility.isConnectedToNetwork())
-        {
-            SimasPayAlert.showSimasPayAlert(SHOW_INTERNET_MSG, viewController: self)
-            return
-        }
-        
-        EZLoadingActivity.show("Loading...", disableUI: true)
-        
-        ServiceModel.connectPOSTURL(SIMASPAY_URL, postData:
-            flashizInqueryDict, successBlock: { (response) -> Void in
-                // Handle success response
-                dispatch_async(dispatch_get_main_queue()) {
-                    
-                    EZLoadingActivity.hide()
-                    
-                    if(response == nil)
-                    {
-                        SimasPayAlert.showSimasPayAlert(REQUEST_FALIED,viewController: self)
-                        return
-                    }
-                    
-                    print("Flashiz Inquery Response : ",response)
-                    
-                    let responseDict = response as NSDictionary
-                    let messagecode  = responseDict.valueForKeyPath("response.message.code") as! String
-                    let messageText  = responseDict.valueForKeyPath("response.message.text") as! String
-                    
-                    if( messagecode == FlashIS_Inquery_SuccessCode )
-                    {
-                        
-                    }else{
-                        SimasPayAlert.showSimasPayAlert(messageText,viewController: self)
-                        if( messagecode == SIMASPAY_LOGIN_EXPIRE_CODE)
-                        {
-                            self.navigationController?.popToRootViewControllerAnimated(true)
-                        }
-                    }
-                }
-            }, failureBlock: { (error: NSError!) -> Void in
-                //SimasPayAlert.showSimasPayAlert(error.localizedDescription,viewController: (self.window?.rootViewController)!)
-                dispatch_async(dispatch_get_main_queue()) {
-                    EZLoadingActivity.hide()
-                }
-        })
     }
     
-
+    
     func generateUserkey()
     {
         
@@ -991,7 +1013,7 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
         
         
         let defaults = NSUserDefaults.standardUserDefaults()
-
+        
         if((defaults.objectForKey("GetUserAPIKey")) != nil)
         {
             DIMOPay.setUserAPIKey(defaults.objectForKey("GetUserAPIKey") as! String)
@@ -1006,7 +1028,7 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
             dict[SOURCE_APP_TYPE_KEY] = "subapp"
             dict[SOURCE_APP_VERSION_KEY] = version
             dict[SOURCE_APP_OSVERSION_KEY] = "\(UIDevice.currentDevice().modelName)  \(UIDevice.currentDevice().systemVersion)"
-
+            
             EZLoadingActivity.show("Loading...", disableUI: true)
             
             ServiceModel.connectPOSTURL(SIMASPAY_URL, postData:
@@ -1031,10 +1053,11 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
                         if( messagecode == FlashIS_User_Key_SuccessCode )
                         {
                             let userAPIKeyText  = responseDict.valueForKeyPath("response.userAPIKey.text") as! String
-                             defaults.setObject(userAPIKeyText, forKey: "GetUserAPIKey")
+                            defaults.setObject(userAPIKeyText, forKey: "GetUserAPIKey")
                             DIMOPay.setUserAPIKey(userAPIKeyText)
                         }else{
-                            SimasPayAlert.showSimasPayAlert(messageText,viewController: self)
+                            
+                            DIMOPay.notifyTransaction(PaymentStatusFailed, withMessage: messageText, isDefaultLayout: true)
                             if( messagecode == SIMASPAY_LOGIN_EXPIRE_CODE)
                             {
                                 self.navigationController?.popToRootViewControllerAnimated(true)
@@ -1042,7 +1065,7 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
                         }
                     }
                 }, failureBlock: { (error: NSError!) -> Void in
-                    //SimasPayAlert.showSimasPayAlert(error.localizedDescription,viewController: (self.window?.rootViewController)!)
+                    DIMOPay.notifyTransaction(PaymentStatusFailed, withMessage: error.localizedDescription, isDefaultLayout: true)
                     dispatch_async(dispatch_get_main_queue()) {
                         EZLoadingActivity.hide()
                     }
@@ -1050,7 +1073,7 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
         }
     }
     
-
+    
     func timeBetweenEachPollCall()->Double
     {
         return 500
@@ -1078,106 +1101,55 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
         
     }
     
-     // MARK: MFA OTP Reading
     
-    
-    var tField: UITextField!
-    
-    func configurationTextField(textField: UITextField!)
-    {
-        print("generating the TextField")
-        textField.placeholder = "6 digit kode OTP"
-        tField = textField
-        tField.secureTextEntry = true
-        tField.keyboardType = .NumberPad
-    }
-    
-    
-    @available(iOS 8.0, *)
-    func handleCancel(alertView: UIAlertAction!)
-    {
-        print("Cancelled !!")
-    }
-    
-    
-    
-    @IBAction func senfOTPClicked(sender: AnyObject) {
+    func flashizPINViewDidClickOKButton(pickerView: FlahsizPINView!, withMPIN mPINText: String!) {
+        
+        let amount  = flashizInvoiceDict["amount"] as! Double
         
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "readOTPNotification:", name:OTPNotificationKey, object: nil)
-        
-        let sourceMDN = SimasPayPlistUtility.getDataFromPlistForKey(SOURCEMDN)
-        
-        mfaOTPPicker = CZPickerView.init(headerTitle: "Masukkan Kode OTP", messageText: "Kode OTP dan link telah dikirimkan ke \n nomor \(sourceMDN). Masukkan kode \n tersebut atau akses link yang tersedia.", viewController: self)
-        
-        mfaOTPPicker.delegate = self
-        mfaOTPPicker.needFooterView = true
-        mfaOTPPicker.tapBackgroundToDismiss = false;
-        mfaOTPPicker.show()
-        
-        /*
-            let sourceMDN = SimasPayPlistUtility.getDataFromPlistForKey(SOURCEMDN)
-            
-            let alertTitle = "Masukkan Kode OTP"
-            let message = "Kode OTP dan link telah dikirimkan ke \n nomor \(sourceMDN). Masukkan kode \n tersebut atau akses link yang tersedia."
-            
-            if #available(iOS 8.0, *) {
-                let alertController = UIAlertController(title: alertTitle, message: message, preferredStyle: .Alert)
-                alertController.addTextFieldWithConfigurationHandler(configurationTextField)
-                alertController.addAction(UIAlertAction(title: "Batal", style: UIAlertActionStyle.Cancel, handler:handleCancel))
-                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:{ (UIAlertAction)in
-                    print("Done !!")
-                    print("Item : \(self.tField.text)")
-                    if(self.tField.text?.length > 0)
-                    {
-                        
-                        
-                    }else{
-                        SimasPayAlert.showSimasPayAlert("Please Enter OTP.",viewController: self)
-                    }
-                    
-                }))
-                self.presentViewController(alertController, animated: true, completion: {
-                    print("completion block")
-                })
-                
-            } else {
-                // Fallback on earlier versions
-                let alert = UIAlertView()
-                alert.title = alertTitle
-                alert.message = message
-                alert.addButtonWithTitle("OK")
-                alert.addButtonWithTitle("Batal")
-                alert.show()
-            };
-
-        */
-        
-    }
-    
-    func czpickerViewDidClickOKButton(pickerView: CZPickerView!, otpText: String!) {
-        
-      /*  if(otpText.length > 0)
+        if(amount == 0)
         {
-            if(self.simasPayOptionType == SimasPayOptionType.SIMASPAY_TUTUP_REKENING)
-            {
-                self.confirmationRequestDictonary[OTP] = SimaspayUtility.simasPayRSAencryption(otpText)
-            }else{
-                self.confirmationRequestDictonary[MFAOTP] = SimaspayUtility.simasPayRSAencryption(otpText)
-            }
-            
-            self.confirmationServiceRequest()
-        }else{
-            SimasPayAlert.showSimasPayAlert("Masukkan Kode OTP.",viewController: self)
+            EZLoadingActivity.show("Loading...", disableUI: true)
+            return
         }
-        */
-    }
-    
-    func czpickerViewDidClickCancelButton(pickerView: CZPickerView!) {
         
-    }
-    
-    func czpickerViewResendOTP(pickerView: CZPickerView!) {
+
+        flashizInqueryDict[SOURCEMDN] = SimasPayPlistUtility.getDataFromPlistForKey(SOURCEMDN)
+        flashizInqueryDict[SOURCEPIN] = SimaspayUtility.simasPayRSAencryption(mPINText)
+        flashizInqueryDict[SERVICE] = SERVICE_PAYMENT
+        flashizInqueryDict[TXNNAME] =  TXN_FlashIz_BillPay_Inquiry
+        flashizInqueryDict[BILLERCODE] = "QRFLASHIZ"
+        flashizInqueryDict[PAYMENT_MODE] = QR_PAYMENT
+        flashizInqueryDict[BILLNO] = flashizInvoiceDict["invoiceId"] as! String
+        flashizInqueryDict["merchantData"] = flashizInvoiceDict["merchantName"] as! String
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        flashizInqueryDict["userAPIKey"] = defaults.objectForKey("GetUserAPIKey") as! String
+        flashizInqueryDict["loyalityName"] = "\(flashizInvoiceDict["loyaltyProgramName"] as! String)"
+        flashizInqueryDict["numberOfCoupons"] =  "\(flashizInvoiceDict["nbOfCoupons"] as! Int )"
+        flashizInqueryDict["amount"] = "\(flashizInvoiceDict["discountedAmount"] as! Double)"
+        flashizInqueryDict["discountAmount"] = "\(flashizInvoiceDict["amountOfDiscount"] as! Double )"
+        flashizInqueryDict["tippingAmount"] = "\(flashizInvoiceDict["tippingAmount"] as! Double )"
+        flashizInqueryDict["pointsRedeemed"] = "\(flashizInvoiceDict["pointsRedeemed"] as! Int )"
+        flashizInqueryDict["amountRedeemed"] = "\(flashizInvoiceDict["amountRedeemed"] as! Int )"
+        flashizInqueryDict["discountType"] = "\(flashizInvoiceDict["discountType"] as! String )"
+        
+        
+        if(self.simasPayUserType == SimasPayUserType.SIMASPAY_AGENT_ACCOUNT)
+        {
+            flashizInqueryDict[SOURCEPOCKETCODE] = "6"//"1"
+        }
+        
+        if(self.simasPayUserType == SimasPayUserType.SIMASPAY_AGENT_REGULAR || self.simasPayUserType == SimasPayUserType.SIMASPAY_REGULAR_BANK_CUSTOMER)
+        {
+            flashizInqueryDict[SOURCEPOCKETCODE] = "2"
+        }
+        
+        if(self.simasPayUserType == SimasPayUserType.SIMASPAY_LAKU_PANDAI)
+        {
+            flashizInqueryDict[SOURCEPOCKETCODE] = "6"
+        }
+        
         
         if(!SimaspayUtility.isConnectedToNetwork())
         {
@@ -1185,59 +1157,110 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
             return
         }
         
-        var dict = NSMutableDictionary() as [NSObject : AnyObject]
-        dict[SERVICE] = SERVICE_WALLET
-        dict[TXNNAME] = TXN_RESEND_MFAOTP
-        dict[SOURCEMDN] = SimasPayPlistUtility.getDataFromPlistForKey(SOURCEMDN)
-        dict[SOURCEPIN] = SimaspayUtility.simasPayRSAencryption(SimasPayPlistUtility.getDataFromPlistForKey(SOURCEPIN) as! String)
-        //dict[SCTL_ID] = self.confirmationRequestDictonary[SCTL_ID]
-        
-        EZLoadingActivity.show("Loading...", disableUI: true)
-        
-        print("Confirmation Params : ",dict)
+        print("Flashiz Inquery Request : ",flashizInqueryDict)
         
         ServiceModel.connectPOSTURL(SIMASPAY_URL, postData:
-            dict, successBlock: { (response) -> Void in
+            flashizInqueryDict, successBlock: { (response) -> Void in
                 // Handle success response
-                
                 dispatch_async(dispatch_get_main_queue()) {
-                    EZLoadingActivity.hide()
+                    
                     if(response == nil)
                     {
-                        SimasPayAlert.showSimasPayAlert(REQUEST_FALIED,viewController: self)
+                        DIMOPay.notifyTransaction(PaymentStatusFailed, withMessage: REQUEST_FALIED, isDefaultLayout: true)
                         return
                     }
+                    
+                    print("Flashiz Inquery Response : ",response)
+                    
                     let responseDict = response as NSDictionary
                     let messagecode  = responseDict.valueForKeyPath("response.message.code") as! String
                     let messageText  = responseDict.valueForKeyPath("response.message.text") as! String
                     
-                    print("Confirmation Response : ",response)
-                    
-                    if( messagecode == SIMASPAY_RESEND_OTP_SUCESS)
+                    if( messagecode == FlashIS_Inquery_SuccessCode )
                     {
-                        self.mfaOTPPicker.reSendOTPSuccess()
+                        let mfaModeStatus = responseDict.valueForKeyPath("response.mfaMode.text") as! String
+                        let transferID  = responseDict.valueForKeyPath("response.transferID.text") as! String
+                        let sctlID = responseDict.valueForKeyPath("response.sctlID.text") as! String
                         
-                    }else if( messagecode == SIMASPAY_RESEND_OTP_FAILED)
-                    {
+                        let parentTxncode  = responseDict.valueForKeyPath("response.parentTxnID.text") as! String
+                        self.flashizInqueryDict["parentTxnID"] = "\(parentTxncode)"
+                        self.flashizInqueryDict["transferID"] = "\(transferID)"
+                        self.flashizInqueryDict["confirmed"] = "true"
+                        self.flashizInqueryDict[SCTL_ID] = "\(sctlID)"
                         
-                    }else if( messagecode == SIMASPAY_RESEND_OTP_LIMIT_REACHED)
-                    {
-                        self.mfaOTPPicker.hide()
-                        SimasPayAlert.showSimasPayAlert(messageText,viewController: self)
+                        if(mfaModeStatus == "OTP")
+                        {
+                            self.czpickerViewResendOTP(nil)
+                        }else{
+                            self.confirmationServiceRequest()
+                        }
                         
                     }else{
-                        SimasPayAlert.showSimasPayAlert(messageText,viewController: self)
                         
+                        DIMOPay.notifyTransaction(PaymentStatusFailed, withMessage: messageText, isDefaultLayout: true)
+                        if( messagecode == SIMASPAY_LOGIN_EXPIRE_CODE)
+                        {
+                            self.navigationController?.popToRootViewControllerAnimated(true)
+                        }
                     }
                 }
-                
             }, failureBlock: { (error: NSError!) -> Void in
-                
+                DIMOPay.notifyTransaction(PaymentStatusFailed, withMessage: error.localizedDescription, isDefaultLayout: true)
                 dispatch_async(dispatch_get_main_queue()) {
-                    EZLoadingActivity.hide()
-                    SimasPayAlert.showSimasPayAlert(error.localizedDescription,viewController:self)
                 }
         })
+
+        
+        
     }
     
+    
+    func flashizPINViewDidClickCancleButton(pickerView: FlahsizPINView!) {
+        
+        DIMOPay.notifyTransaction(PaymentStatusFailed, withMessage: REQUEST_FALIED, isDefaultLayout: true)
+    }
+    func confirmationServiceRequest()
+    {
+        
+        flashizInqueryDict[TXNNAME] =  TXN_FlashIz_BillPay_Confirmation
+        
+        ServiceModel.connectPOSTURL(SIMASPAY_URL, postData:
+            flashizInqueryDict, successBlock: { (response) -> Void in
+                // Handle success response
+                dispatch_async(dispatch_get_main_queue()) {
+                    
+                    EZLoadingActivity.hide()
+                    
+                    if(response == nil)
+                    {
+                        DIMOPay.notifyTransaction(PaymentStatusFailed, withMessage: REQUEST_FALIED, isDefaultLayout: true)
+                        return
+                    }
+                    
+                    print("Flashiz Inquery Response : ",response)
+                    let responseDict = response as NSDictionary
+                    let messagecode  = responseDict.valueForKeyPath("response.message.code") as! String
+                    let messageText  = responseDict.valueForKeyPath("response.message.text") as! String
+                    
+                    if( messagecode == FlashIS_Confirmation_SuccessCode )
+                    {
+                        DIMOPay.notifyTransaction(PaymentStatusSuccess, withMessage: messageText, isDefaultLayout: true)
+                        
+                    }else{
+                        
+                        DIMOPay.notifyTransaction(PaymentStatusFailed, withMessage: messageText, isDefaultLayout: true)
+                        if( messagecode == SIMASPAY_LOGIN_EXPIRE_CODE)
+                        {
+                            self.navigationController?.popToRootViewControllerAnimated(true)
+                        }
+                    }
+                }
+            }, failureBlock: { (error: NSError!) -> Void in
+                //SimasPayAlert.showSimasPayAlert(error.localizedDescription,viewController: (self.window?.rootViewController)!)
+                dispatch_async(dispatch_get_main_queue()) {
+                    EZLoadingActivity.hide()
+                }
+        })
+
+    }
 }

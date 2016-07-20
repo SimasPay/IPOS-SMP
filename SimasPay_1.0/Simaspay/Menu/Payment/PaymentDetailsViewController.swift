@@ -65,7 +65,7 @@ class PaymentDetailsViewController: UIViewController,UITextFieldDelegate,UIPicke
         let extraEndSpace = 30
         
         var vertical_constraints = "V:|-\(topMargin)-"
-        
+        let paymentMethod = selectedProduct.valueForKey("paymentMode") as! NSString
         var fieldNamesArray : [NSString] = []
         
         if (self.simasPayOptionType == SimasPayOptionType.SIMASPAY_PEMBAYARAN)
@@ -75,7 +75,15 @@ class PaymentDetailsViewController: UIViewController,UITextFieldDelegate,UIPicke
             let invoiceType = selectedProduct.valueForKey("invoiceType") as! NSString
             let invoiceTypeAray = invoiceType.componentsSeparatedByString("|")
             
-            fieldNamesArray = ["Nama Produk",invoiceTypeAray[1],"mPIN"]
+            
+            if( paymentMethod == PAYMENT_FULLAMOUNT)
+            {
+                fieldNamesArray = ["Nama Produk",invoiceTypeAray[1],"Jumlah","mPIN"]
+            }else{
+                fieldNamesArray = ["Nama Produk",invoiceTypeAray[1],"mPIN"]
+            }
+            
+            
         }
         
         
@@ -139,11 +147,33 @@ class PaymentDetailsViewController: UIViewController,UITextFieldDelegate,UIPicke
             
             if (self.simasPayOptionType == SimasPayOptionType.SIMASPAY_PEMBAYARAN)
             {
-                if( i == 2 || i == 3){
-                    step1TextField.keyboardType = .NumberPad
-                    if( i == 3)
-                    {step1TextField.secureTextEntry = true}
+                if( paymentMethod == PAYMENT_FULLAMOUNT)
+                {
+                    if( i == 2 || i == 3 || i == 4){
+                        step1TextField.keyboardType = .NumberPad
+                        
+                        if( i == 3)
+                        {setRupeecharToTextField(step1TextField)}
+                        
+                        if( i == 4)
+                        {
+                            step1TextField.delegate = self
+                            step1TextField.secureTextEntry = true
+                        }
+                    }
+                    
+                }else{
+                    if( i == 2 || i == 3){
+                        step1TextField.keyboardType = .NumberPad
+                        if( i == 3)
+                        {
+                            step1TextField.delegate = self
+                            step1TextField.secureTextEntry = true
+                        }
+                    }
                 }
+                
+                
             }
             
             
@@ -153,7 +183,10 @@ class PaymentDetailsViewController: UIViewController,UITextFieldDelegate,UIPicke
                     step1TextField.keyboardType = .NumberPad
                 
                     if( i == 4)
-                    {step1TextField.secureTextEntry = true}
+                    {
+                        step1TextField.delegate = self
+                        step1TextField.secureTextEntry = true
+                    }
                 }
                 
                 if( i == 2)
@@ -162,16 +195,8 @@ class PaymentDetailsViewController: UIViewController,UITextFieldDelegate,UIPicke
                     if(self.selectedProduct.valueForKey("isPLNPrepaid") != nil && self.selectedProduct.valueForKey("isPLNPrepaid") as! String == "true")
                     {
                         step1TextField.keyboardType = .NumberPad
-                        let rupeeLabel = UILabel()
-                        rupeeLabel.frame = CGRect(x: 10, y: (step1TextField.frame.height-20)/2, width: 15, height: 20)
-                        rupeeLabel.text = "Rp"
-                        rupeeLabel.textColor = UIColor.blackColor()
-                        rupeeLabel.font = UIFont(name:"HelveticaNeue", size:11)
                         
-                        let mobileNumberView2 = UIView(frame: CGRectMake(0, 0, 15+15, step1TextField.frame.height))
-                        mobileNumberView2.addSubview(rupeeLabel);
-                        step1TextField.leftView = mobileNumberView2
-                        step1TextField.leftViewMode = UITextFieldViewMode.Always
+                        setRupeecharToTextField(step1TextField)
                         
                     }else{
                      
@@ -226,6 +251,21 @@ class PaymentDetailsViewController: UIViewController,UITextFieldDelegate,UIPicke
         contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(vertical_constraints, options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: initialScrollViews))
     }
     
+    
+    func setRupeecharToTextField (step1TextField:UITextField)
+    {
+        let rupeeLabel = UILabel()
+        rupeeLabel.frame = CGRect(x: 10, y: (step1TextField.frame.height-20)/2, width: 15, height: 20)
+        rupeeLabel.text = "Rp"
+        rupeeLabel.textColor = UIColor.blackColor()
+        rupeeLabel.font = UIFont(name:"HelveticaNeue", size:11)
+        
+        let mobileNumberView2 = UIView(frame: CGRectMake(0, 0, 15+15, step1TextField.frame.height))
+        mobileNumberView2.addSubview(rupeeLabel);
+        step1TextField.leftView = mobileNumberView2
+        step1TextField.leftViewMode = UITextFieldViewMode.Always
+        
+    }
 
     override func viewDidLayoutSubviews()
     {
@@ -310,6 +350,12 @@ class PaymentDetailsViewController: UIViewController,UITextFieldDelegate,UIPicke
                             }
                             if(currentTextField.tag == 14)
                             {
+                                if(currentTextField.text?.length < 6)
+                                {
+                                    SimasPayAlert.showSimasPayAlert("mPIN yang Anda masukkan harus 6 angka.", viewController: self)
+                                    return
+                                }
+                                
                                 cashInFormDictonary["mPIN"] = currentTextField.text
                             }
                         }
@@ -319,7 +365,10 @@ class PaymentDetailsViewController: UIViewController,UITextFieldDelegate,UIPicke
 
                 if (self.simasPayOptionType == SimasPayOptionType.SIMASPAY_PEMBAYARAN)
                 {
-                    if(currentTextField.tag == 11  || currentTextField.tag == 12  || currentTextField.tag == 13)
+                    
+                    let paymentMethod = selectedProduct.valueForKey("paymentMode") as! NSString
+                    
+                    if(currentTextField.tag == 11  || currentTextField.tag == 12  || currentTextField.tag == 13 || currentTextField.tag == 14)
                     {
                         if(!currentTextField.isValid())
                         {
@@ -337,10 +386,41 @@ class PaymentDetailsViewController: UIViewController,UITextFieldDelegate,UIPicke
                             {
                                 cashInFormDictonary["mobileNumber"] = currentTextField.text
                             }
-                            if(currentTextField.tag == 13)
+                            
+                            if( paymentMethod == PAYMENT_FULLAMOUNT)
                             {
-                                cashInFormDictonary["mPIN"] = currentTextField.text
+                                if(currentTextField.tag == 13)
+                                {
+                                    cashInFormDictonary["amount"] = currentTextField.text
+                                }
+                                
+                                if(currentTextField.tag == 14)
+                                {
+                                    if(currentTextField.text?.length < 6)
+                                    {
+                                        SimasPayAlert.showSimasPayAlert("mPIN yang Anda masukkan harus 6 angka.", viewController: self)
+                                        return
+                                    }
+                                    
+                                    cashInFormDictonary["mPIN"] = currentTextField.text
+                                }
+                                
+                            }else{
+                                
+                                if(currentTextField.tag == 13)
+                                {
+                                    if(currentTextField.text?.length < 6)
+                                    {
+                                        SimasPayAlert.showSimasPayAlert("mPIN yang Anda masukkan harus 6 angka.", viewController: self)
+                                        return
+                                    }
+                                    
+                                    
+                                    cashInFormDictonary["mPIN"] = currentTextField.text
+                                }
                             }
+                            
+                            
                         }
                         
                     }
@@ -363,6 +443,8 @@ class PaymentDetailsViewController: UIViewController,UITextFieldDelegate,UIPicke
         
         var dict = NSMutableDictionary() as [NSObject : AnyObject]
         
+        let paymentMethod = selectedProduct.valueForKey("paymentMode") as! NSString
+        
         dict[SOURCEMDN] = SimasPayPlistUtility.getDataFromPlistForKey(SOURCEMDN)
         
         dict[SOURCEPIN] = SimaspayUtility.simasPayRSAencryption(cashInFormDictonary["mPIN"] as! String)
@@ -378,7 +460,7 @@ class PaymentDetailsViewController: UIViewController,UITextFieldDelegate,UIPicke
             dict[SOURCEPOCKETCODE] = "6"
         }
         if (self.simasPayUserType == SimasPayUserType.SIMASPAY_AGENT_ACCOUNT){
-            dict[SOURCEPOCKETCODE] = "1"
+            dict[SOURCEPOCKETCODE] = "6" //"1"
         }
         
         if (self.simasPayOptionType == SimasPayOptionType.SIMASPAY_PEMBAYARAN)
@@ -391,6 +473,12 @@ class PaymentDetailsViewController: UIViewController,UITextFieldDelegate,UIPicke
             }
             
             dict[TXNNAME] = TXN_INQUIRY_PAYMENT
+            
+            if( paymentMethod == PAYMENT_FULLAMOUNT)
+            {
+                dict[AMOUNT] = cashInFormDictonary["amount"]  as! NSString
+            }
+            
         }
         if (self.simasPayOptionType == SimasPayOptionType.SIMASPAY_PEMBELIAN)
         {
@@ -554,11 +642,6 @@ class PaymentDetailsViewController: UIViewController,UITextFieldDelegate,UIPicke
                             self.navigationController?.popToRootViewControllerAnimated(true)
                         }
                     }
-                    
-                    
-                    
-                    
-                    
                 }
                 
             }, failureBlock: { (error: NSError!) -> Void in
@@ -617,4 +700,18 @@ class PaymentDetailsViewController: UIViewController,UITextFieldDelegate,UIPicke
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
         self.step1PickerTextField.text = pickerViewData[row] as? String}
+    
+    // MARK: UITextField Delegate Methods
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
+                   replacementString string: String) -> Bool
+    {
+        let maxLength = 6
+        let currentString: NSString = textField.text!
+        let newString: NSString =
+            currentString.stringByReplacingCharactersInRange(range, withString: string)
+        return newString.length <= maxLength
+        
+        
+    }
 }

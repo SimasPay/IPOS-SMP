@@ -29,6 +29,10 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         activationButton.layer.masksToBounds = true;
 
         mobilenumberField.delegate = self
+        
+        passwordField.delegate = self
+        passwordField.tag = 100
+        
         SimaspayUtility.setMobileNumberTextFieldImage(mobilenumberField)
         SimaspayUtility.setMPINTextFieldImage(passwordField)
         
@@ -52,7 +56,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         if(SimasPayPlistUtility.getDataFromPlistForKey(IS_LOGIN) != nil)
         {
             let isLogin = SimasPayPlistUtility.getDataFromPlistForKey(IS_LOGIN) as! String
-            
             if isLogin == "YES"
             {
                 //let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -97,6 +100,12 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         if(!passwordField.isValid())
         {
             SimasPayAlert.showSimasPayAlert("Masukkan mPIN Anda", viewController: self)
+            return
+        }
+        
+        if(passwordField.text?.length < 6)
+        {
+            SimasPayAlert.showSimasPayAlert("mPIN yang Anda masukkan harus 6 angka.", viewController: self)
             return
         }
         
@@ -330,11 +339,19 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         })
     }
     
+    
+    
+    
+    
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
         replacementString string: String) -> Bool
     {
+            var maxLength = 15
         
-            let maxLength = 15
+            if textField.tag == 100 {
+                maxLength = 6
+            }
+        
             let currentString: NSString = textField.text!
             let newString: NSString =
             currentString.stringByReplacingCharactersInRange(range, withString: string)

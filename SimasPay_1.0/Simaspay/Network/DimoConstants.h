@@ -18,7 +18,7 @@
 
 /** A macro that uses conditional logic to log messages.
  */
-#define DEBUG_MODE 1
+#define DEBUG_MODE 0
 
 #ifdef DEBUG
 #define CONDITIONLOG(condition, xx, ...) { if ((condition)) { \
@@ -158,6 +158,8 @@ NSLog(xx, ##__VA_ARGS__); \
 #define POCKETCODE @"2"
 #define CARDPAN @"cardPan"
 
+#define PAYMENT_FULLAMOUNT @"FullAmount"
+
 #define IS_LOGIN @"isLogIN"
 
 #define KTP_Validation_Until @"ktpValidUntil"
@@ -170,13 +172,15 @@ NSLog(xx, ##__VA_ARGS__); \
 #define KTP_City @"ktpCity"
 #define KTP_State @"ktpState"
 #define KTP_District @"ktpRegionName"
+#define KTP_Sub_District @"ktpSubState"
 #define KTP_LifeTime @"ktpLifetime"
 
 #define Domestic_Identity @"domesticIdentity"
-#define LINE1 @"line1"
+#define LINE1 @"addressLine1"
 #define RT @"RT"
 #define RW @"RW"
 #define STATE @"state"
+#define SUB_STATE @"subState"
 #define CITY @"city"
 #define ZIPCODE @"zipCode"
 #define REGION_NAME @"regionName"
@@ -266,6 +270,7 @@ NSLog(xx, ##__VA_ARGS__); \
 #define SIMOBI_LAKU_IBT_TRANSFER_CONFIRM_SUCCESSCODE @"81"
 #define SIMOBI_LAKU_LAKU_TRANSFER_CONFIRM_SUCCESSCODE @"293"
 #define SIMOBI_TRANSFER_LAKU_CONFIRM_SUCCESSCODE @"305"
+#define SIMOBI_TRANSFER_UANGKU_CONFIRM_SUCCESSCODE @"2176"
 
 #define SIMOBI_OTHERBANK_TRANSFER_SUCCESSCODE @"72"
 #define SIMOBI_PAYMENT_SUCCESSCODE @"713"
@@ -569,6 +574,7 @@ NSLog(xx, ##__VA_ARGS__); \
 #define EULAMESSAGE @"Term and condition M-Bank Sinarmas Services\nArticle 1: Definition\nUnless defined otherwise, by:\n1.1. M-Bank Sinarmas shall mean e-banking service to carry out the financial and non-financial transactions with clearer menu display where the application shall be downloaded firstly by using cellular phone handset/tablet computer as well as 3G/GPRS/WIFI technology.\n1.2 Bank shall mean PT. Sinarmas (Persero) Tbk, having its domicile and head office in Jakarta\n1.3 3G/GPRS/WIFI Technology shall mean the data package delivery and receive technology made available by the cellular network/telecommunication service provider.\n1.4 Customer shall mean individual owner of Bank Sinarmas ATM card.\n1.5 M-Bank Sinarmas service can be linked to Bank Sinarmas saving account or Bank Sinarmas current account with currency IDR.\nArticle 2: Terms of Simobi Bank Sinarmas registration\n2.1. Already having Bank Sinarmas giro account or Bank Sinarmas savings account.\n2.2. Customer must do Simobi Bank Sinarmas Registration from Bank Sinarmas office or ATM Bank Sinarmas. Once registration successful, customer will received sms with 8 digit OTP (one time password) to be used for activation.\n2.3. Simobi Bank Sinarmas application service can be downloaded from www.banksinarmas.com\n2.4. Have read and accepting the Terms and Conditions of Simobi Bank Sinarmas.\nArticle 3: Conditions of Simobi Bank Sinarmas Use\n3.1  Customer must do activation prior to be able using the Simobi Bank Sinarmas services.\n3.2  The Customer may use Simobi Bank Sinarmas service to obtain information or carry out banking transaction already determined.\n3.3  Simobi Bank Sinarmas service can be used by registering all cellular telephone available in Indonesia.\n3.4  Simobi Bank Sinarmas service can only be used in 1 cellular telephone number (MSISDN) for one account.\n3.5  For all financial transaction from Simobi Bank Sinarmas will be challenged and authenticated by mPIN.\n3.6  Simobi Bank Sinarmas mPIN is created while activation process by customer.\n3.7  When implementing the transaction, the Customer shall:\n• Ensure the completeness and correctness of data on transaction mentioned. All consequences arising from the default, incompleteness and or error by the Customer shall fully become the Customer’s responsibility.\n• Enter Simobi Bank Sinarmas mPIN while making transaction.\n3.8  Every instruction provided by the Customer through Simobi Bank Sinarmas service cannot be canceled.\n3.9  Every instruction already provided by the Customer according to the Terms & Conditions of this service shall be valid proof, unless proven otherwise and the Bank has no obligation to examine such validity.\n3.10  The Bank shall be entitled to neglect the Customer's instruction, if:\na. Balance in Customer's account is insufficient.\nb. There is indication of crime.\n3.11  All consequences arising as the consequence of the abuse of Simobi Bank Sinarmas shall become full responsibility of the Customer and the Customer hereby keeps harmless the Bank from all claims potentially arising in any terms and from any parties.\n3.12 As the proof of transaction implementation, the Customer will obtain the transaction number proof at every end of transaction via SMS, as long as the Customer's cellular phone message box still allows or there is no communication network interference. \n3.13 At its own consideration, the Bank shall be entitled to change the transaction limit. Such change shall bind the Customer sufficiently by the notification according to the prevailing provisions.\nArticle 4: Simobi Bank Sinarmas password\n4.1  The Customer shall secure his mPIN. In this respect, the Customer shall not:\na. Notify the mPIN to the others;\nb. Save mPIN in the cellular telephone memory or other saving facilities allowing the other parties to know it;\nThe Customer shall also replace the mPIN periodically.\n4.2  All consequences arising due to the abuse of mPIN shall fully become the Customer’s responsibility and the Customer hereby keeps harmless the Bank from all claims potentially arising in any terms and from any parties.\n4.3  If the Customer wrongly enters the mPIN for 3 (three) times consecutively, then the application will be automatically blocked. To reactivate such application, the Customer shall visit the provided Bank Sinarmas office or ATM to do mPIN reset.\nArticle 5: Cessation of Access to Simobi Bank Sinarmas service\n5.1  Simobi Bank Sinarmas service will be ceased by the Bank if:\na. There is written request from the Customer.\nb. The customer closes all accounts accessible via Simobi Bank Sinarmas service.\nc. Obliged by the prevailing legislation and or court’s judgment.\nArticle 6: Miscellany\nFor the problem relating to cellular phone number, GPRS/3G network, invoice for use of GPRS/3G, SMS charge, and value added service of GPRS/3G, the Customer shall directly contact the operator of the relevant GPRS/3G cellular mobile network/ telecommunication service. While for the problem on service, the Customer may contact the Bank Sinarmas CARE 500 153.\nThe Bank may change these Terms and Conditions according to the need. The change will be binding to the Customer sufficiently by notification according to the provisions applicable to the Bank.\nThe Customer shall comply with the terms applicable to the Bank including but not limited to the General Conditions of Account Opening, Special Conditions of Giro Account Opening, or Special Conditions of Savings Account Opening.\nThe powers of attorney granted relating to this service shall be a valid power of attorney that will not expire as long as the Customer still uses Simobi Bank Sinarmas service or there is still other obligation of the Customer to the bank.\nThe Customer shall keep harmless the Bank from all claims, in case the Bank fails to implement the Customer’s instruction partly or entirely due to any events or causes beyond the control or capability of the Bank such as computer virus interference, web browser, dysfunction system or transmission, electricity failure, telecommunication failure or government policy, as well as any other events or causes beyond the control or capability of the Bank."
 
 /****************************************************************************************/
+
 //115.112.108.203:8443
 //simobi.banksinarmas.com
 //dev.simobi.banksinarmas.com
@@ -578,53 +584,45 @@ NSLog(xx, ##__VA_ARGS__); \
 #define TERMS_CONDITIONS @"https://www.banksinarmas.com/PersonalBanking/IB.do?action=terms"
 
 
-/*  ##########################      DEV   ##########################*/
-
+//  ##########################      DEV   ##########################
+/*
  #define SIMASPAY_URL @"https://175.101.5.72:8444/webapi/sdynamic?channelID=7&mspID=1"
  #define FLASHiZ_SERVER  ServerURLDev
  #define DOWNLOAD_PDF_URL @"https://175.101.5.72:8444/webapi/"
+*/
+//  ##########################      DEV   ##########################
 
-/*  ##########################      DEV   ##########################*/
-
-
-/*  ##########################      QA   ##########################*/
+//  ##########################      QA   ##########################
 /*
   #define SIMASPAY_URL @"https://175.101.5.72:8444/webapi/sdynamic?channelID=7&"
   #define FLASHiZ_SERVER  ServerURLDev
   #define DOWNLOAD_PDF_URL @"https://175.101.5.72:8444/webapi/"
 */
-/*  ##########################      QA   ##########################*/
+//  ##########################      QA   ##########################
 
-/*  ##########################      UAT   ##########################*/
+//  ##########################      UAT   ##########################
 /*
 #define SIMASPAY_URL @"https://simaspaydev.banksinarmas.com/webapi/sdynamic?channelID=7&mspID=1"
 #define FLASHiZ_SERVER  ServerURLUat
 #define DOWNLOAD_PDF_URL @"https://simaspaydev.banksinarmas.com/webapi/"
-
 */
-/*  ##########################      UAT   ##########################*/
+//  ##########################      UAT   ##########################
 
+//  ##########################      AWS   ##########################
 
-/*  ##########################      AWS   ##########################*/
-/*
  #define SIMASPAY_URL @"https://54.255.194.95:8443/webapi/sdynamic?channelID=7&mspID=1"
 //#define SIMOBI_URL @"https://staging.dimo.co.id:8470/webapi/sdynamic?channelID=7&"
  #define FLASHiZ_SERVER  ServerURLUat
  #define DOWNLOAD_PDF_URL @"https://54.255.194.95:8443/webapi/"
-*/
-/*  ##########################      AWS   ##########################*/
 
+// ##########################      AWS   ##########################
 
-
-
-/*  ##########################      PROD   ##########################*/
+//  ##########################      PROD   ##########################*/
 /*
    #define SIMOBI_URL @"https://simobi.banksinarmas.com/webapi/sdynamic?channelID=7&"
- 
    #define FLASHiZ_SERVER @"https://my.flashiz.co.id"
- 
    #define FLASHiZ_SERVER  ServerURLLive
- */
-/*  ##########################      PROD   ##########################*/
+*/
+//  ##########################      PROD   ##########################
 
 #endif

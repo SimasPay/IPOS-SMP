@@ -196,10 +196,7 @@ class ConfirmationViewController: UIViewController,CZPickerViewDelegate
         self.navigationController?.navigationBarHidden = false
         let backButtonItem = UIBarButtonItem(customView: SimaspayUtility.getSimasPayBackButton(self))
         self.navigationItem.leftBarButtonItem = backButtonItem
-        
-        
-        
-        
+
     }
 
 
@@ -208,13 +205,10 @@ class ConfirmationViewController: UIViewController,CZPickerViewDelegate
         self.navigationController!.popViewControllerAnimated(true)
     }
     
-    
-    
     var tField: UITextField!
     
     func configurationTextField(textField: UITextField!)
     {
-        print("generating the TextField")
         textField.placeholder = "6 digit kode OTP"
         tField = textField
         tField.secureTextEntry = true
@@ -222,12 +216,7 @@ class ConfirmationViewController: UIViewController,CZPickerViewDelegate
     }
     
     
-    @available(iOS 8.0, *)
-    func handleCancel(alertView: UIAlertAction!)
-    {
-        print("Cancelled !!")
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: OTPNotificationKey, object: nil)
-    }
+    
     
     
     func readOTPNotification(notification: NSNotification) {
@@ -249,74 +238,29 @@ class ConfirmationViewController: UIViewController,CZPickerViewDelegate
         {
             self.confirmationServiceRequest()
         }else{
-            
-            
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ConfirmationViewController.readOTPNotification(_:)), name:OTPNotificationKey, object: nil)
-            
-            var sourceMDN = ""
-
-            if(self.simasPayOptionType == SimasPayOptionType.SIMASPAY_TUTUP_REKENING){
-                sourceMDN = self.confirmationRequestDictonary[DESTMDN] as! String
-            }else{
-                sourceMDN = SimasPayPlistUtility.getDataFromPlistForKey(SOURCEMDN) as! String
-            }
-            
-            mfaOTPPicker = CZPickerView.init(headerTitle: "Masukkan Kode OTP", messageText: "Kode OTP dan link telah dikirimkan ke \n nomor \(sourceMDN). Masukkan kode \n tersebut atau akses link yang tersedia.", viewController: self)
-            
-            mfaOTPPicker.delegate = self
-            mfaOTPPicker.needFooterView = true
-            mfaOTPPicker.tapBackgroundToDismiss = false;
-            mfaOTPPicker.show()
-            
-            /*
-          
-            let alertTitle = "Masukkan Kode OTP"
-            let message = "Kode OTP dan link telah dikirimkan ke \n nomor \(sourceMDN). Masukkan kode \n tersebut atau akses link yang tersedia."
-            
-            if #available(iOS 8.0, *) {
-                let alertController = UIAlertController(title: alertTitle, message: message, preferredStyle: .Alert)
-                alertController.addTextFieldWithConfigurationHandler(configurationTextField)
-                alertController.addAction(UIAlertAction(title: "Batal", style: UIAlertActionStyle.Cancel, handler:handleCancel))
-                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:{ (UIAlertAction)in
-                    print("Done !!")
-                    print("Item : \(self.tField.text)")
-                    
-                    if(self.tField.text?.length > 0)
-                    {
-                        if(self.simasPayOptionType == SimasPayOptionType.SIMASPAY_TUTUP_REKENING)
-                        {
-                            self.confirmationRequestDictonary[OTP] = SimaspayUtility.simasPayRSAencryption(self.tField.text!)
-                        }else{
-                            self.confirmationRequestDictonary[MFAOTP] = SimaspayUtility.simasPayRSAencryption(self.tField.text!)    
-                        }
-                        
-                        self.confirmationServiceRequest()
-                    }else{
-                        SimasPayAlert.showSimasPayAlert("Please Enter OTP.",viewController: self)
-                    }
-                    
-                }))
-                self.presentViewController(alertController, animated: true, completion: {
-                    print("completion block")
-                })
-                
-            } else {
-                // Fallback on earlier versions
-                let alert = UIAlertView()
-                alert.title = alertTitle
-                alert.message = message
-                alert.addButtonWithTitle("OK")
-                alert.addButtonWithTitle("Batal")
-                alert.show()
-            };
-            */
-            
-            
-            
+            czpickerViewResendOTP(nil)
         }
-        
     }
     
+    func showOTPPopUP()
+    {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ConfirmationViewController.readOTPNotification(_:)), name:OTPNotificationKey, object: nil)
+        
+        var sourceMDN = ""
+        
+        if(self.simasPayOptionType == SimasPayOptionType.SIMASPAY_TUTUP_REKENING){
+            sourceMDN = self.confirmationRequestDictonary[DESTMDN] as! String
+        }else{
+            sourceMDN = SimasPayPlistUtility.getDataFromPlistForKey(SOURCEMDN) as! String
+        }
+        
+        mfaOTPPicker = CZPickerView.init(headerTitle: "Masukkan Kode OTP", messageText: "Kode OTP dan link telah dikirimkan ke \n nomor \(sourceMDN). Masukkan kode \n tersebut atau akses link yang tersedia.", viewController: self)
+        
+        mfaOTPPicker.delegate = self
+        mfaOTPPicker.needFooterView = true
+        mfaOTPPicker.tapBackgroundToDismiss = false;
+        mfaOTPPicker.show()
+    }
     
     func czpickerViewDidClickOKButton(pickerView: CZPickerView!, otpText: String!) {
         
@@ -337,6 +281,8 @@ class ConfirmationViewController: UIViewController,CZPickerViewDelegate
     }
     
     func czpickerViewDidClickCancelButton(pickerView: CZPickerView!) {
+        
+        popToMainViewController()
         
     }
     
@@ -378,7 +324,13 @@ class ConfirmationViewController: UIViewController,CZPickerViewDelegate
                     
                     if( messagecode == SIMASPAY_RESEND_OTP_SUCESS)
                     {
-                        self.mfaOTPPicker.reSendOTPSuccess()
+                        if((pickerView) != nil)
+                        {
+                            self.mfaOTPPicker.reSendOTPSuccess()
+                        }else{
+                            self.showOTPPopUP()
+                        }
+                        
 
                     }else if( messagecode == SIMASPAY_RESEND_OTP_FAILED)
                     {
@@ -441,7 +393,7 @@ class ConfirmationViewController: UIViewController,CZPickerViewDelegate
                     print("Confirmation Response : ",response)
                     
                     if( messagecode == SIMASPAY_AGENT_REGISTRATION_SUCESS || messagecode == SIMOBI_SELFBANK_TRANSFER_CONFIRM_SUCCESSCODE || messagecode == SIMOBI_LAKU_IBT_TRANSFER_CONFIRM_SUCCESSCODE || messagecode == SIMOBI_LAKU_LAKU_TRANSFER_CONFIRM_SUCCESSCODE || messagecode ==
-                        SIMOBI_TRANSFER_LAKU_CONFIRM_SUCCESSCODE ||  messagecode == SUBCRIBER_CLOSING_CONFIRMATION_SUCCESS || messagecode == SIMASPAY_CAHSIN_CONFIRMATION_SUCCESS || messagecode == SIMASPAY_CAHSOUT_CONFIRMATION_SUCCESS || messagecode == SIMAPAY_SUCCESS_PURCHASE_CODE  || messagecode == SIMAPAY_SUCCESS_PAYMENT_CODE || messagecode == SIMAPAY_SUCCESS_REFERRAL_CODE)
+                        SIMOBI_TRANSFER_LAKU_CONFIRM_SUCCESSCODE ||  messagecode == SUBCRIBER_CLOSING_CONFIRMATION_SUCCESS || messagecode == SIMASPAY_CAHSIN_CONFIRMATION_SUCCESS || messagecode == SIMASPAY_CAHSOUT_CONFIRMATION_SUCCESS || messagecode == SIMAPAY_SUCCESS_PURCHASE_CODE  || messagecode == SIMAPAY_SUCCESS_PAYMENT_CODE || messagecode == SIMAPAY_SUCCESS_REFERRAL_CODE  || messagecode == SIMOBI_TRANSFER_UANGKU_CONFIRM_SUCCESSCODE)
                     {
                         
                         var tansactionID = ""
@@ -480,6 +432,7 @@ class ConfirmationViewController: UIViewController,CZPickerViewDelegate
         //var confirmationValuesArray : [NSString] = NSArray() as! [NSString]
         
         let confirmationViewController = StatusViewController()
+        
         if (self.simasPayOptionType == SimasPayOptionType.SIMASPAY_SETOR_TUNAI)
         {
             
@@ -561,5 +514,26 @@ class ConfirmationViewController: UIViewController,CZPickerViewDelegate
         confirmationViewController.transactionID = transactionID
         confirmationViewController.simasPayOptionType = self.simasPayOptionType
         self.navigationController!.pushViewController(confirmationViewController, animated: true)
+    }
+    
+     func popToMainViewController() {
+        
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
+        for viewController:UIViewController in viewControllers{
+            if(viewController.isKindOfClass(SubMenuViewController) == true) {
+                self.navigationController?.navigationBarHidden = true
+                self.navigationController?.popToViewController(viewController as! SubMenuViewController, animated: true)
+                break;
+            }
+        }
+        
+        for viewController:UIViewController in viewControllers{
+            if(viewController.isKindOfClass(MainMenuViewController) == true) {
+                self.navigationController?.navigationBarHidden = true
+                self.navigationController?.popToViewController(viewController as! MainMenuViewController, animated: true)
+                break;
+            }
+        }
+        
     }
 }

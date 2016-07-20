@@ -7,6 +7,8 @@
 
 #import "CZPickerView.h"
 #import "SimasPayPlistUtility.h"
+#import "DimoConstants.h"
+
 
 #define CZP_FOOTER_HEIGHT 34.0
 #define CZP_HEADER_HEIGHT 34.0
@@ -61,8 +63,7 @@ typedef void (^CZDismissCompletionCallback)(void);
         self.parentViewController = viewController;
         
         self.messateText = messageText;
-        //self.confirmButtonTitle = confirmButtonTitle;
-        //self.cancelButtonTitle = cancelButtonTitle;
+        
         
         self.headerTitle = headerTitle ? headerTitle : @"";
         self.headerTitleColor = [UIColor blackColor];
@@ -107,6 +108,7 @@ typedef void (^CZDismissCompletionCallback)(void);
                                           frame.origin.y,
                                           frame.size.width,
                                           self.headerView.frame.size.height + self.contentView.frame.size.height + self.footerview.frame.size.height);
+    
     self.containerView.center = CGPointMake(self.center.x, self.center.y + self.frame.size.height);
     
     [self reSendOTPSuccess];
@@ -126,7 +128,13 @@ typedef void (^CZDismissCompletionCallback)(void);
     
     UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
     self.frame = mainWindow.frame;
-    [self.parentViewController.view addSubview:self];
+    
+    if (self.isFlashizView)
+        [mainWindow addSubview:self];
+    else
+        [self.parentViewController.view addSubview:self];
+    
+    
     [self setupSubviews];
     [self performContainerAnimation];
     
@@ -167,32 +175,14 @@ typedef void (^CZDismissCompletionCallback)(void);
 }
 
 - (UIView *)buildContainerView{
-    CGAffineTransform transform = CGAffineTransformMake(0.7, 0, 0, 0.7, 0, 0);
+    CGAffineTransform transform = CGAffineTransformMake(0.8, 0, 0, 0.8, 0, 0);
     CGRect newRect = CGRectApplyAffineTransform(self.frame, transform);
     UIView *cv = [[UIView alloc] initWithFrame:newRect];
     cv.layer.cornerRadius = 9.0f;
     cv.clipsToBounds = YES;
+    
     cv.center = CGPointMake(self.center.x, self.center.y + self.frame.size.height);
     return cv;
-}
-
-- (UIView *)buildMessageView{
-    
-    CGAffineTransform transform = CGAffineTransformMake(0.7, 0, 0, 0.7, 0, 0);
-    CGRect newRect = CGRectApplyAffineTransform(self.frame, transform);
-
-    CGRect tableRect;
-    float heightOffset = CZP_HEADER_HEIGHT + CZP_FOOTER_HEIGHT;
-    
-    float height = 3 * CZP_HEADER_HEIGHT;
-    height = height > newRect.size.height - heightOffset ? newRect.size.height -heightOffset : height;
-    tableRect = CGRectMake(0, CZP_HEADER_HEIGHT, newRect.size.width, height);
-    
-    self.messageView = [[UIView alloc] initWithFrame:tableRect];
-
-    
-    
-    return self.messageView;
 }
 
 - (UIView *)buildBackgroundDimmingView{
@@ -249,8 +239,17 @@ typedef void (^CZDismissCompletionCallback)(void);
     confirmButton.selectiveBordersColor = [UIColor lightGrayColor];
     confirmButton.selectiveBordersWidth = 0.3;
     
-    cancelButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:13.0f];
-    confirmButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:13.0f];
+    if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5)
+    {
+        cancelButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
+        confirmButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
+        
+    }else{
+        
+        cancelButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:16.0f];
+        confirmButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:16.0f];
+    }
+    
     
     [view addSubview:confirmButton];
     
@@ -264,6 +263,7 @@ typedef void (^CZDismissCompletionCallback)(void);
                            NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:15.0f]
                            };
     NSAttributedString *at = [[NSAttributedString alloc] initWithString:self.headerTitle attributes:dict];
+    
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, (CZP_HEADER_HEIGHT-21)/2, self.contentView.frame.size.width-20, 21)];
     label.attributedText = at;
     label.adjustsFontSizeToFitWidth = YES;
@@ -290,6 +290,7 @@ typedef void (^CZDismissCompletionCallback)(void);
     
     self.resendTimerLabel.text = [NSString stringWithFormat:@"0:%02d",self.resendTimer];
     self.resendOTPTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTime) userInfo:nil repeats:YES];
+    
 }
 -(void)updateTime
 {
@@ -344,20 +345,31 @@ typedef void (^CZDismissCompletionCallback)(void);
 {
     // Header change
     
-    CGAffineTransform transform = CGAffineTransformMake(0.7, 0, 0, 0.7, 0, 0);
+    CGAffineTransform transform = CGAffineTransformMake(0.8, 0, 0, 0.8, 0, 0);
     CGRect newRect = CGRectApplyAffineTransform(self.frame, transform);
     CGRect tableRect;
     //float heightOffset = CZP_HEADER_HEIGHT + CZP_FOOTER_HEIGHT;
     float height = 3 * CZP_HEADER_HEIGHT;
     //height = height > newRect.size.height - heightOffset ? newRect.size.height -heightOffset : height;
-    tableRect = CGRectMake(0, CZP_HEADER_HEIGHT, newRect.size.width, height);
+    
+    if (self.isFlashizView)
+        tableRect = CGRectMake(0, CZP_HEADER_HEIGHT, newRect.size.width, height);
+    else
+        tableRect = CGRectMake(0, CZP_HEADER_HEIGHT, newRect.size.width, height);
+    
+    
     
     UIView *contentView  = [[UIView alloc] initWithFrame:tableRect];
     contentView.backgroundColor = [UIColor whiteColor];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, newRect.size.width-20, 21)];
     label.numberOfLines = 0;
-    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0f];
+    if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5)
+        label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0f];
+    else
+        label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0f];
+    
+    
     //label.minimumScaleFactor = 10;
     label.textAlignment = NSTextAlignmentCenter;
     label.text = self.messateText;
@@ -370,7 +382,12 @@ typedef void (^CZDismissCompletionCallback)(void);
     [contentView addSubview:label];
     
     self.resendTimerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, label.frame.origin.y+label.frame.size.height+5, newRect.size.width, 21)];
-    self.resendTimerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0f];
+    if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5)
+        self.resendTimerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0f];
+    else
+        self.resendTimerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0f];
+    
+    
     self.resendTimerLabel.hidden = YES;
     self.resendTimerLabel.textColor = [SimasPayPlistUtility colorFromHexString:@"#6E6E6E"];
     self.resendTimerLabel.textAlignment = NSTextAlignmentCenter;
@@ -384,20 +401,32 @@ typedef void (^CZDismissCompletionCallback)(void);
     self.resendButton.backgroundColor = [UIColor whiteColor];
     [self.resendButton addTarget:self action:@selector(resendButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:self.resendButton];
-    self.resendButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:11.0f];
+    if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5)
+        self.resendButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0f];
+    else
+        self.resendButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
     
     
     self.createNewTextField = [[UITextField alloc] init];
-    self.createNewTextField.frame = CGRectMake(10, self.resendButton.frame.origin.y+self.resendButton.frame.size.height+5, newRect.size.width-20, 25);
     self.createNewTextField.borderStyle = UITextBorderStyleNone;
-    self.createNewTextField.font = [UIFont fontWithName:@"HelveticaNeue" size:11.0f];
+    if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5){
+        self.createNewTextField.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0f];
+        self.createNewTextField.frame = CGRectMake(10, self.resendButton.frame.origin.y+self.resendButton.frame.size.height+5, newRect.size.width-20, 35);
+    }else{
+        self.createNewTextField.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
+        self.createNewTextField.frame = CGRectMake(10, self.resendButton.frame.origin.y+self.resendButton.frame.size.height+5, newRect.size.width-20, 40);
+    }
+    
+    
+        
+    
     self.createNewTextField.placeholder = @"6 digit kode OTP.";
     self.createNewTextField.delegate = self;
     self.createNewTextField.secureTextEntry = YES;
     self.createNewTextField.keyboardType = UIKeyboardTypeNumberPad;
     [contentView addSubview:self.createNewTextField];
     
-    UIView *pwdLeftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 25)];
+    UIView *pwdLeftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, self.createNewTextField.frame.size.height)];
     self.createNewTextField.leftView = pwdLeftView;
     self.createNewTextField.leftViewMode = UITextFieldViewModeAlways;
     
@@ -420,6 +449,34 @@ typedef void (^CZDismissCompletionCallback)(void);
 }
 
 #pragma mark - UITextFieldDelegate
+
+
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (self.isFlashizView) {
+        [UIView animateWithDuration:0.3f animations:^{
+            CGRect newFrame = self.containerView.frame;
+            newFrame.origin.y -= 50;
+            self.containerView.frame = newFrame;
+        }];
+    }
+    
+}
+
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (self.isFlashizView) {
+        
+        [UIView animateWithDuration:0.3f animations:^{
+            CGRect newFrame = self.containerView.frame;
+            newFrame.origin.y += 50;
+            self.containerView.frame = newFrame;
+        }];
+    }
+    
+}
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
     self.headerTitle1 = textField.text;

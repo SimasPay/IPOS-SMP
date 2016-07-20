@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TransferBankLainViewC: UIViewController
+class TransferBankLainViewC: UIViewController,UITextFieldDelegate
 {
     var cashinScrollview: UIScrollView!
     var simasPayUserType:SimasPayUserType!
@@ -131,6 +131,7 @@ class TransferBankLainViewC: UIViewController
             }
             
             if( i == 4){
+                step1TextField.delegate = self
                 step1TextField.secureTextEntry = true
             }
             
@@ -247,6 +248,12 @@ class TransferBankLainViewC: UIViewController
                         }
                         if(currentTextField.tag == 14)
                         {
+                            if(currentTextField.text?.length < 6)
+                            {
+                                SimasPayAlert.showSimasPayAlert("mPIN yang Anda masukkan harus 6 angka.", viewController: self)
+                                return
+                            }
+                            
                             cashInFormDictonary["mPIN"] = currentTextField.text
                         }
                     }
@@ -287,7 +294,7 @@ class TransferBankLainViewC: UIViewController
             if(self.simasPayUserType == SimasPayUserType.SIMASPAY_AGENT_ACCOUNT)
             {
                 
-                dict[SOURCEPOCKETCODE] = "1"
+                dict[SOURCEPOCKETCODE] =  "6" //"1"
                 dict[DESTPOCKETCODE] = "2"
                 dict[SERVICE] = SERVICE_WALLET
                 dict[TXNNAME] = TXN_INQUIRY_OTHERBANK
@@ -458,5 +465,18 @@ class TransferBankLainViewC: UIViewController
         let errorLabel = contentView.viewWithTag(errorTag)
         errorLabel!.hidden = true
     }
+    
+    // MARK: UITextField Delegate Methods
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,replacementString string: String) -> Bool
+    {
+        let maxLength = 6
+        let currentString: NSString = textField.text!
+        let newString: NSString =
+            currentString.stringByReplacingCharactersInRange(range, withString: string)
+        return  newString.length <= maxLength
+        
+    }
+
 
 }

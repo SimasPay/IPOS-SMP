@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class RegistrationStep3: UIViewController,CZPickerViewDelegate{
+class RegistrationStep3: UIViewController,CZPickerViewDelegate,UITextFieldDelegate{
     
     @IBOutlet weak var pinFieldsView: UIView!
     @IBOutlet weak var mPINTextField: UITextField!
@@ -29,6 +29,8 @@ class RegistrationStep3: UIViewController,CZPickerViewDelegate{
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        mPINTextField.delegate = self
+        confirmasimPINTextField.delegate = self
         SimaspayUtility.setMPINTextFieldImage(mPINTextField)
         SimaspayUtility.setMPINTextFieldImage(confirmasimPINTextField)
         
@@ -97,6 +99,13 @@ class RegistrationStep3: UIViewController,CZPickerViewDelegate{
             return
         }
         
+        if(mPINTextField.text?.length < 6 || confirmasimPINTextField.text?.length < 6 )
+        {
+            SimasPayAlert.showSimasPayAlert("mPIN yang Anda masukkan harus 6 angka.", viewController: self)
+            return
+        }
+        
+        
         if(mPINTextField.text != confirmasimPINTextField.text)
         {
             SimasPayAlert.showSimasPayAlert("Mohon pastikan input konfirmasi mPIN sama dengan mPIN", viewController: self)
@@ -121,38 +130,7 @@ class RegistrationStep3: UIViewController,CZPickerViewDelegate{
         mfaOTPPicker.delegate = self
         mfaOTPPicker.needFooterView = true
         mfaOTPPicker.tapBackgroundToDismiss = false;
-        mfaOTPPicker.show()
-        
-        /*
-        let alertTitle = "Masukkan Kode OTP"
-        let message = "Kode OTP dan link telah dikirimkan ke \n nomor \(activationSourceMDN). Masukkan kode \n tersebut atau akses link yang tersedia."
-        
-        if #available(iOS 8.0, *) {
-            let alertController = UIAlertController(title: alertTitle, message: message, preferredStyle: .Alert)
-            alertController.addTextFieldWithConfigurationHandler(configurationTextField)
-            alertController.addAction(UIAlertAction(title: "Batal", style: UIAlertActionStyle.Cancel, handler:handleCancel))
-            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:{ (UIAlertAction)in
-                print("Done !!")
-                print("Item : \(self.tField.text)")
-                
-                self.confirmationRequest(self.tField.text!)
-               
-            }))
-            self.presentViewController(alertController, animated: true, completion: {
-                print("completion block")
-            })
-            
-        } else {
-            // Fallback on earlier versions
-            let alert = UIAlertView()
-            alert.title = alertTitle
-            alert.message = message
-            alert.addButtonWithTitle("OK")
-            alert.addButtonWithTitle("Batal")
-            alert.show()
-        }
-    */
-        
+        mfaOTPPicker.show()    
     }
     
     
@@ -301,6 +279,18 @@ class RegistrationStep3: UIViewController,CZPickerViewDelegate{
                 }
                 
         })
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
+                   replacementString string: String) -> Bool
+    {
+        let maxLength = 6
+        let currentString: NSString = textField.text!
+        let newString: NSString =
+            currentString.stringByReplacingCharactersInRange(range, withString: string)
+        return newString.length <= maxLength
+        
+        
     }
     
 }
