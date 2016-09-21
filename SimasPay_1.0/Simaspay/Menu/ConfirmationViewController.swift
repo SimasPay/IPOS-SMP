@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-
-
 class ConfirmationViewController: UIViewController,CZPickerViewDelegate
 {
     
@@ -51,9 +49,6 @@ class ConfirmationViewController: UIViewController,CZPickerViewDelegate
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[confirmationScrollview]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: initialScrollViews))
         
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-64-[confirmationScrollview]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: initialScrollViews))
-        
-        
-        
         
         let confirmationView = UIView()
         confirmationView.backgroundColor = UIColor.whiteColor()

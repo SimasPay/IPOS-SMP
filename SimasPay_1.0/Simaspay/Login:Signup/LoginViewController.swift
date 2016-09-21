@@ -93,7 +93,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     
         if(!mobilenumberField.isValid())
         {
-            SimasPayAlert.showSimasPayAlert("Masukkan nomor handphone", viewController: self)
+            SimasPayAlert.showSimasPayAlert("Harap masukkan nomor handphone Anda.", viewController: self)
             return
         }
         

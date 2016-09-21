@@ -279,7 +279,8 @@ class CloseAccountViewController: UIViewController
                     if( messagecode == SUBCRIBER_CLOSING_INQUERY_SUCCESS || messagecode == SUBCRIBER_CLOSING_INQUERY_FAILED)
                     {
                         
-                    
+                        let mfaModeStatus = responseDict.valueForKeyPath("response.mfaMode.text") as! String
+                        
                         if((responseDictObject.objectForKey("sctlID")) != nil)
                         {
                             let sctlID = responseDict.valueForKeyPath("response.sctlID.text") as! String
@@ -313,7 +314,12 @@ class CloseAccountViewController: UIViewController
                         }
 
                         let confirmationViewController = ConfirmationViewController()
-                        confirmationViewController.showOTPAlert = true
+                        if(mfaModeStatus == "OTP")
+                        {
+                            confirmationViewController.showOTPAlert = true
+                        }else{
+                            confirmationViewController.showOTPAlert = false
+                        }
                         confirmationViewController.simasPayOptionType = SimasPayOptionType.SIMASPAY_TUTUP_REKENING
                         confirmationViewController.confirmationTitlesArray = confirmationTitlesArray as Array<AnyObject>
                         confirmationViewController.confirmationValuesArray = confirmationValuesArray as Array<AnyObject>

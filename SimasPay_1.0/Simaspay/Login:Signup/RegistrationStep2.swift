@@ -63,7 +63,7 @@ class RegistrationStep2: UIViewController,UITextFieldDelegate{
         
         if(!mobileNumberTextField.isValid())
         {
-            SimasPayAlert.showSimasPayAlert("Masukkan nomor handphone", viewController: self)
+            SimasPayAlert.showSimasPayAlert("Harap masukkan nomor handphone Anda.", viewController: self)
             return
         }
         
@@ -75,7 +75,7 @@ class RegistrationStep2: UIViewController,UITextFieldDelegate{
         
         if(kodeOTPTextField.text?.length < 6)
         {
-            SimasPayAlert.showSimasPayAlert("mPIN yang Anda masukkan harus 6 angka.", viewController: self)
+            SimasPayAlert.showSimasPayAlert("Kode Aktivasi yang anda masukkan harus 6 angka.", viewController: self)
             return
         }
         
@@ -181,7 +181,7 @@ class RegistrationStep2: UIViewController,UITextFieldDelegate{
     {
         if(!mobileNumberTextField.isValid())
         {
-            SimasPayAlert.showSimasPayAlert("Masukkan nomor handphone", viewController: self)
+            SimasPayAlert.showSimasPayAlert("Harap masukkan nomor handphone Anda.", viewController: self)
             return
         }
         
