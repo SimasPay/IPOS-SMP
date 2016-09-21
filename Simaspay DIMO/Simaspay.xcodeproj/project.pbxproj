@@ -1,0 +1,509 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BE1772881D92859B00A27E06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1772871D92859B00A27E06 /* AppDelegate.swift */; };
+		BE17728F1D92859B00A27E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE17728E1D92859B00A27E06 /* Assets.xcassets */; };
+		BE1772921D92859B00A27E06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE1772901D92859B00A27E06 /* LaunchScreen.storyboard */; };
+		BE1773001D9285DE00A27E06 /* DAFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772C21D9285DE00A27E06 /* DAFHTTPRequestOperation.m */; };
+		BE1773011D9285DE00A27E06 /* DAFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772C41D9285DE00A27E06 /* DAFHTTPRequestOperationManager.m */; };
+		BE1773021D9285DE00A27E06 /* DAFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772C61D9285DE00A27E06 /* DAFHTTPSessionManager.m */; };
+		BE1773031D9285DE00A27E06 /* DAFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772C91D9285DE00A27E06 /* DAFNetworkReachabilityManager.m */; };
+		BE1773041D9285DE00A27E06 /* DAFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772CB1D9285DE00A27E06 /* DAFSecurityPolicy.m */; };
+		BE1773051D9285DE00A27E06 /* DAFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772CD1D9285DE00A27E06 /* DAFURLConnectionOperation.m */; };
+		BE1773061D9285DE00A27E06 /* DAFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772CF1D9285DE00A27E06 /* DAFURLRequestSerialization.m */; };
+		BE1773071D9285DE00A27E06 /* DAFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772D11D9285DE00A27E06 /* DAFURLResponseSerialization.m */; };
+		BE1773081D9285DE00A27E06 /* DAFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772D31D9285DE00A27E06 /* DAFURLSessionManager.m */; };
+		BE1773091D9285DE00A27E06 /* DReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772D51D9285DE00A27E06 /* DReachability.m */; };
+		BE17730A1D9285DE00A27E06 /* DMBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772D81D9285DE00A27E06 /* DMBProgressHUD.m */; };
+		BE17730B1D9285DE00A27E06 /* DIMOAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772DB1D9285DE00A27E06 /* DIMOAlertView.m */; };
+		BE17730C1D9285DE00A27E06 /* DIMOAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772DD1D9285DE00A27E06 /* DIMOAPIManager.m */; };
+		BE17730D1D9285DE00A27E06 /* DIMOColorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772DF1D9285DE00A27E06 /* DIMOColorManager.m */; };
+		BE17730E1D9285DE00A27E06 /* DIMOLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772E21D9285DE00A27E06 /* DIMOLocationManager.m */; };
+		BE17730F1D9285DE00A27E06 /* DIMOPreloader.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772E41D9285DE00A27E06 /* DIMOPreloader.m */; };
+		BE1773101D9285DE00A27E06 /* DIMOUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772E61D9285DE00A27E06 /* DIMOUtility.m */; };
+		BE1773111D9285DE00A27E06 /* ENGLISH.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE1772E81D9285DE00A27E06 /* ENGLISH.strings */; };
+		BE1773121D9285DE00A27E06 /* INDONESIAN.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE1772EA1D9285DE00A27E06 /* INDONESIAN.strings */; };
+		BE1773131D9285DE00A27E06 /* UserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772EE1D9285DE00A27E06 /* UserDefault.m */; };
+		BEC415DE1D928E18000C3CF4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415DC1D928E18000C3CF4 /* LoginViewController.swift */; };
+		BEC415DF1D928E18000C3CF4 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC415DD1D928E18000C3CF4 /* LoginViewController.xib */; };
+		BEC415E11D928E84000C3CF4 /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415E01D928E84000C3CF4 /* BaseLabel.swift */; };
+		BEC415E41D928E92000C3CF4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415E21D928E92000C3CF4 /* BaseViewController.swift */; };
+		BEC415E71D929544000C3CF4 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415E61D929544000C3CF4 /* BaseButton.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BE1772841D92859B00A27E06 /* Simaspay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Simaspay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE1772871D92859B00A27E06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BE17728E1D92859B00A27E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BE1772911D92859B00A27E06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BE1772931D92859B00A27E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE1772C11D9285DE00A27E06 /* DAFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		BE1772C21D9285DE00A27E06 /* DAFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		BE1772C31D9285DE00A27E06 /* DAFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
+		BE1772C41D9285DE00A27E06 /* DAFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
+		BE1772C51D9285DE00A27E06 /* DAFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAFHTTPSessionManager.h; sourceTree = "<group>"; };
+		BE1772C61D9285DE00A27E06 /* DAFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAFHTTPSessionManager.m; sourceTree = "<group>"; };
+		BE1772C71D9285DE00A27E06 /* DAFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAFNetworking.h; sourceTree = "<group>"; };
+		BE1772C81D9285DE00A27E06 /* DAFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		BE1772C91D9285DE00A27E06 /* DAFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		BE1772CA1D9285DE00A27E06 /* DAFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAFSecurityPolicy.h; sourceTree = "<group>"; };
+		BE1772CB1D9285DE00A27E06 /* DAFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAFSecurityPolicy.m; sourceTree = "<group>"; };
+		BE1772CC1D9285DE00A27E06 /* DAFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAFURLConnectionOperation.h; sourceTree = "<group>"; };
+		BE1772CD1D9285DE00A27E06 /* DAFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAFURLConnectionOperation.m; sourceTree = "<group>"; };
+		BE1772CE1D9285DE00A27E06 /* DAFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAFURLRequestSerialization.h; sourceTree = "<group>"; };
+		BE1772CF1D9285DE00A27E06 /* DAFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAFURLRequestSerialization.m; sourceTree = "<group>"; };
+		BE1772D01D9285DE00A27E06 /* DAFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAFURLResponseSerialization.h; sourceTree = "<group>"; };
+		BE1772D11D9285DE00A27E06 /* DAFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAFURLResponseSerialization.m; sourceTree = "<group>"; };
+		BE1772D21D9285DE00A27E06 /* DAFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAFURLSessionManager.h; sourceTree = "<group>"; };
+		BE1772D31D9285DE00A27E06 /* DAFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAFURLSessionManager.m; sourceTree = "<group>"; };
+		BE1772D41D9285DE00A27E06 /* DReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DReachability.h; sourceTree = "<group>"; };
+		BE1772D51D9285DE00A27E06 /* DReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DReachability.m; sourceTree = "<group>"; };
+		BE1772D71D9285DE00A27E06 /* DMBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMBProgressHUD.h; sourceTree = "<group>"; };
+		BE1772D81D9285DE00A27E06 /* DMBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMBProgressHUD.m; sourceTree = "<group>"; };
+		BE1772DA1D9285DE00A27E06 /* DIMOAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMOAlertView.h; sourceTree = "<group>"; };
+		BE1772DB1D9285DE00A27E06 /* DIMOAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIMOAlertView.m; sourceTree = "<group>"; };
+		BE1772DC1D9285DE00A27E06 /* DIMOAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMOAPIManager.h; sourceTree = "<group>"; };
+		BE1772DD1D9285DE00A27E06 /* DIMOAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIMOAPIManager.m; sourceTree = "<group>"; };
+		BE1772DE1D9285DE00A27E06 /* DIMOColorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMOColorManager.h; sourceTree = "<group>"; };
+		BE1772DF1D9285DE00A27E06 /* DIMOColorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIMOColorManager.m; sourceTree = "<group>"; };
+		BE1772E11D9285DE00A27E06 /* DIMOLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMOLocationManager.h; sourceTree = "<group>"; };
+		BE1772E21D9285DE00A27E06 /* DIMOLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIMOLocationManager.m; sourceTree = "<group>"; };
+		BE1772E31D9285DE00A27E06 /* DIMOPreloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMOPreloader.h; sourceTree = "<group>"; };
+		BE1772E41D9285DE00A27E06 /* DIMOPreloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIMOPreloader.m; sourceTree = "<group>"; };
+		BE1772E51D9285DE00A27E06 /* DIMOUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMOUtility.h; sourceTree = "<group>"; };
+		BE1772E61D9285DE00A27E06 /* DIMOUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIMOUtility.m; sourceTree = "<group>"; };
+		BE1772E91D9285DE00A27E06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/ENGLISH.strings; sourceTree = "<group>"; };
+		BE1772EB1D9285DE00A27E06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/INDONESIAN.strings; sourceTree = "<group>"; };
+		BE1772EC1D9285DE00A27E06 /* DIMOFontConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMOFontConstant.h; sourceTree = "<group>"; };
+		BE1772ED1D9285DE00A27E06 /* UserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefault.h; sourceTree = "<group>"; };
+		BE1772EE1D9285DE00A27E06 /* UserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefault.m; sourceTree = "<group>"; };
+		BE1773211D9286EE00A27E06 /* Dimo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dimo-Bridging-Header.h"; sourceTree = "<group>"; };
+		BEC415DC1D928E18000C3CF4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BEC415DD1D928E18000C3CF4 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		BEC415E01D928E84000C3CF4 /* BaseLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseLabel.swift; path = "Base Objects/BaseLabel.swift"; sourceTree = "<group>"; };
+		BEC415E21D928E92000C3CF4 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = "Base Objects/BaseViewController.swift"; sourceTree = "<group>"; };
+		BEC415E61D929544000C3CF4 /* BaseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseButton.swift; path = "Base Objects/BaseButton.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BE1772811D92859B00A27E06 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BE17727B1D92859B00A27E06 = {
+			isa = PBXGroup;
+			children = (
+				BE1773211D9286EE00A27E06 /* Dimo-Bridging-Header.h */,
+				BE1772BF1D9285DE00A27E06 /* Thirdparties */,
+				BE1772D91D9285DE00A27E06 /* Managers */,
+				BE1772861D92859B00A27E06 /* Simaspay */,
+				BE1772851D92859B00A27E06 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BE1772851D92859B00A27E06 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BE1772841D92859B00A27E06 /* Simaspay.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BE1772861D92859B00A27E06 /* Simaspay */ = {
+			isa = PBXGroup;
+			children = (
+				BEC415D71D928D72000C3CF4 /* Base Objects */,
+				BE17731A1D92864800A27E06 /* Controllers */,
+				BE1772871D92859B00A27E06 /* AppDelegate.swift */,
+				BE17728E1D92859B00A27E06 /* Assets.xcassets */,
+				BE1772901D92859B00A27E06 /* LaunchScreen.storyboard */,
+				BE1772931D92859B00A27E06 /* Info.plist */,
+			);
+			path = Simaspay;
+			sourceTree = "<group>";
+		};
+		BE1772BF1D9285DE00A27E06 /* Thirdparties */ = {
+			isa = PBXGroup;
+			children = (
+				BE1772C01D9285DE00A27E06 /* AFNetworking */,
+				BE1772D41D9285DE00A27E06 /* DReachability.h */,
+				BE1772D51D9285DE00A27E06 /* DReachability.m */,
+				BE1772D61D9285DE00A27E06 /* ProgressHUD */,
+			);
+			name = Thirdparties;
+			path = Simaspay/Thirdparties;
+			sourceTree = "<group>";
+		};
+		BE1772C01D9285DE00A27E06 /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				BE1772C11D9285DE00A27E06 /* DAFHTTPRequestOperation.h */,
+				BE1772C21D9285DE00A27E06 /* DAFHTTPRequestOperation.m */,
+				BE1772C31D9285DE00A27E06 /* DAFHTTPRequestOperationManager.h */,
+				BE1772C41D9285DE00A27E06 /* DAFHTTPRequestOperationManager.m */,
+				BE1772C51D9285DE00A27E06 /* DAFHTTPSessionManager.h */,
+				BE1772C61D9285DE00A27E06 /* DAFHTTPSessionManager.m */,
+				BE1772C71D9285DE00A27E06 /* DAFNetworking.h */,
+				BE1772C81D9285DE00A27E06 /* DAFNetworkReachabilityManager.h */,
+				BE1772C91D9285DE00A27E06 /* DAFNetworkReachabilityManager.m */,
+				BE1772CA1D9285DE00A27E06 /* DAFSecurityPolicy.h */,
+				BE1772CB1D9285DE00A27E06 /* DAFSecurityPolicy.m */,
+				BE1772CC1D9285DE00A27E06 /* DAFURLConnectionOperation.h */,
+				BE1772CD1D9285DE00A27E06 /* DAFURLConnectionOperation.m */,
+				BE1772CE1D9285DE00A27E06 /* DAFURLRequestSerialization.h */,
+				BE1772CF1D9285DE00A27E06 /* DAFURLRequestSerialization.m */,
+				BE1772D01D9285DE00A27E06 /* DAFURLResponseSerialization.h */,
+				BE1772D11D9285DE00A27E06 /* DAFURLResponseSerialization.m */,
+				BE1772D21D9285DE00A27E06 /* DAFURLSessionManager.h */,
+				BE1772D31D9285DE00A27E06 /* DAFURLSessionManager.m */,
+			);
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		BE1772D61D9285DE00A27E06 /* ProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				BE1772D71D9285DE00A27E06 /* DMBProgressHUD.h */,
+				BE1772D81D9285DE00A27E06 /* DMBProgressHUD.m */,
+			);
+			path = ProgressHUD;
+			sourceTree = "<group>";
+		};
+		BE1772D91D9285DE00A27E06 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				BE1772E71D9285DE00A27E06 /* Strings */,
+				BE1772DA1D9285DE00A27E06 /* DIMOAlertView.h */,
+				BE1772DB1D9285DE00A27E06 /* DIMOAlertView.m */,
+				BE1772DC1D9285DE00A27E06 /* DIMOAPIManager.h */,
+				BE1772DD1D9285DE00A27E06 /* DIMOAPIManager.m */,
+				BE1772DE1D9285DE00A27E06 /* DIMOColorManager.h */,
+				BE1772DF1D9285DE00A27E06 /* DIMOColorManager.m */,
+				BE1772E11D9285DE00A27E06 /* DIMOLocationManager.h */,
+				BE1772E21D9285DE00A27E06 /* DIMOLocationManager.m */,
+				BE1772E31D9285DE00A27E06 /* DIMOPreloader.h */,
+				BE1772E41D9285DE00A27E06 /* DIMOPreloader.m */,
+				BE1772E51D9285DE00A27E06 /* DIMOUtility.h */,
+				BE1772E61D9285DE00A27E06 /* DIMOUtility.m */,
+				BE1772ED1D9285DE00A27E06 /* UserDefault.h */,
+				BE1772EE1D9285DE00A27E06 /* UserDefault.m */,
+			);
+			name = Managers;
+			path = Simaspay/Managers;
+			sourceTree = "<group>";
+		};
+		BE1772E71D9285DE00A27E06 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				BE1772E81D9285DE00A27E06 /* ENGLISH.strings */,
+				BE1772EA1D9285DE00A27E06 /* INDONESIAN.strings */,
+				BE1772EC1D9285DE00A27E06 /* DIMOFontConstant.h */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
+		BE17731A1D92864800A27E06 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BE17731C1D92867900A27E06 /* Login and activation */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		BE17731C1D92867900A27E06 /* Login and activation */ = {
+			isa = PBXGroup;
+			children = (
+				BEC415DC1D928E18000C3CF4 /* LoginViewController.swift */,
+				BEC415DD1D928E18000C3CF4 /* LoginViewController.xib */,
+			);
+			name = "Login and activation";
+			path = "Controllers/Login and activation";
+			sourceTree = "<group>";
+		};
+		BEC415D71D928D72000C3CF4 /* Base Objects */ = {
+			isa = PBXGroup;
+			children = (
+				BEC415E21D928E92000C3CF4 /* BaseViewController.swift */,
+				BEC415E01D928E84000C3CF4 /* BaseLabel.swift */,
+				BEC415E61D929544000C3CF4 /* BaseButton.swift */,
+			);
+			name = "Base Objects";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BE1772831D92859B00A27E06 /* Simaspay */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE1772961D92859B00A27E06 /* Build configuration list for PBXNativeTarget "Simaspay" */;
+			buildPhases = (
+				BE1772801D92859B00A27E06 /* Sources */,
+				BE1772811D92859B00A27E06 /* Frameworks */,
+				BE1772821D92859B00A27E06 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Simaspay;
+			productName = Simaspay;
+			productReference = BE1772841D92859B00A27E06 /* Simaspay.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BE17727C1D92859B00A27E06 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Kendy Susantho";
+				TargetAttributes = {
+					BE1772831D92859B00A27E06 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = BE17727F1D92859B00A27E06 /* Build configuration list for PBXProject "Simaspay" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BE17727B1D92859B00A27E06;
+			productRefGroup = BE1772851D92859B00A27E06 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BE1772831D92859B00A27E06 /* Simaspay */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BE1772821D92859B00A27E06 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE1773111D9285DE00A27E06 /* ENGLISH.strings in Resources */,
+				BEC415DF1D928E18000C3CF4 /* LoginViewController.xib in Resources */,
+				BE1772921D92859B00A27E06 /* LaunchScreen.storyboard in Resources */,
+				BE17728F1D92859B00A27E06 /* Assets.xcassets in Resources */,
+				BE1773121D9285DE00A27E06 /* INDONESIAN.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BE1772801D92859B00A27E06 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEC415DE1D928E18000C3CF4 /* LoginViewController.swift in Sources */,
+				BE1773131D9285DE00A27E06 /* UserDefault.m in Sources */,
+				BE1773011D9285DE00A27E06 /* DAFHTTPRequestOperationManager.m in Sources */,
+				BEC415E41D928E92000C3CF4 /* BaseViewController.swift in Sources */,
+				BE1773041D9285DE00A27E06 /* DAFSecurityPolicy.m in Sources */,
+				BE17730F1D9285DE00A27E06 /* DIMOPreloader.m in Sources */,
+				BE1773091D9285DE00A27E06 /* DReachability.m in Sources */,
+				BE17730C1D9285DE00A27E06 /* DIMOAPIManager.m in Sources */,
+				BE1773081D9285DE00A27E06 /* DAFURLSessionManager.m in Sources */,
+				BEC415E71D929544000C3CF4 /* BaseButton.swift in Sources */,
+				BE17730E1D9285DE00A27E06 /* DIMOLocationManager.m in Sources */,
+				BE1773021D9285DE00A27E06 /* DAFHTTPSessionManager.m in Sources */,
+				BE1772881D92859B00A27E06 /* AppDelegate.swift in Sources */,
+				BE17730D1D9285DE00A27E06 /* DIMOColorManager.m in Sources */,
+				BE1773001D9285DE00A27E06 /* DAFHTTPRequestOperation.m in Sources */,
+				BE1773101D9285DE00A27E06 /* DIMOUtility.m in Sources */,
+				BE1773071D9285DE00A27E06 /* DAFURLResponseSerialization.m in Sources */,
+				BE17730B1D9285DE00A27E06 /* DIMOAlertView.m in Sources */,
+				BE1773051D9285DE00A27E06 /* DAFURLConnectionOperation.m in Sources */,
+				BE1773061D9285DE00A27E06 /* DAFURLRequestSerialization.m in Sources */,
+				BEC415E11D928E84000C3CF4 /* BaseLabel.swift in Sources */,
+				BE1773031D9285DE00A27E06 /* DAFNetworkReachabilityManager.m in Sources */,
+				BE17730A1D9285DE00A27E06 /* DMBProgressHUD.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BE1772901D92859B00A27E06 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE1772911D92859B00A27E06 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		BE1772E81D9285DE00A27E06 /* ENGLISH.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE1772E91D9285DE00A27E06 /* Base */,
+			);
+			name = ENGLISH.strings;
+			sourceTree = "<group>";
+		};
+		BE1772EA1D9285DE00A27E06 /* INDONESIAN.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE1772EB1D9285DE00A27E06 /* Base */,
+			);
+			name = INDONESIAN.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BE1772941D92859B00A27E06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BE1772951D92859B00A27E06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BE1772971D92859B00A27E06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				INFOPLIST_FILE = Simaspay/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.id.dimo.Simaspay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Dimo-Bridging-Header.h";
+			};
+			name = Debug;
+		};
+		BE1772981D92859B00A27E06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				INFOPLIST_FILE = Simaspay/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.id.dimo.Simaspay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Dimo-Bridging-Header.h";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BE17727F1D92859B00A27E06 /* Build configuration list for PBXProject "Simaspay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE1772941D92859B00A27E06 /* Debug */,
+				BE1772951D92859B00A27E06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE1772961D92859B00A27E06 /* Build configuration list for PBXNativeTarget "Simaspay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE1772971D92859B00A27E06 /* Debug */,
+				BE1772981D92859B00A27E06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BE17727C1D92859B00A27E06 /* Project object */;
+}
