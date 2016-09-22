@@ -1,1 +1,12 @@
 "LoginTitle" = "LoginTitleIndo";
+
+//Splash
+"SplashLableWelcome" = "Selamat Datang di Layanan";
+
+//Login
+"LoginPlaceholderNoHandphone" = "No. Handphone";
+"LoginPlaceholderMpin" = "mPIN";
+"LoginButtonLogin" = "Login";
+"LoginButtonActivation" = "Aktivasi Akun";
+"LoginButtonContactUs" = "Hubungi Kami";
+

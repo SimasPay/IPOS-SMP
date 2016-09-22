@@ -21,7 +21,7 @@ class SplashScreenViewController: BaseViewController {
         timer = NSTimer.scheduledTimerWithTimeInterval(0.8, target: self, selector: #selector(SplashScreenViewController.firstPage), userInfo: nil, repeats: false)
     
         lblWelcome.textAlignment = .Center
-        lblWelcome.text = "Selamat Datang di Layanan"
+        lblWelcome.text = getString("SplashLableWelcome")
         
         imgLogo.image = UIImage(named: "logo_Image")
         imgLogoSinarmas.image = UIImage(named: "logo_SinarmasBank_Image")
