@@ -8,8 +8,6 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "UserDefault.h"
-#import "DIMOFontConstant.h"
-#import "DIMOColorManager.h"
 
 #define DateFormat @"dd MMMM yyyy"
 #define DateShortFormat @"dd/MM/yyyy"
@@ -33,16 +31,9 @@ typedef enum :NSInteger {
 void DLog(NSString *message);
 NSBundle *mainBundle();
 NSString *String(NSString *key);
-NSString *StringWithMoney(NSString *key, int amount);
-NSString *StringWithPoint(NSString *key, int poin);
 
 
 @interface DIMOUtility : NSObject
-+ (NSAttributedString *)setLabelWithPreCurrency:(int)n currencySymbolSize:(int)curSize amountSize:(int)amSize;
-+ (UIImage *)imageNamedInFramework:(NSString *)name extension:(NSString *)ext;
-+ (UIImage *)imageFromBinaryArray:(NSArray *)binaryArray fileName:(NSString *)fileName;
-+ (NSData *)dataFromBase64EncodedString:(NSString *)string;
-+ (NSString *)numberFormat:(NSNumber *)string;
 + (void)setSDKLocale:(SDKLocale)locale;
 + (CGSize)screenSize;
 @end

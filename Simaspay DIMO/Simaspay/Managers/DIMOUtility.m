@@ -22,141 +22,14 @@ void DLog(NSString *message) {
         NSLog(@"%@ - %@ %@", [array objectAtIndex:3], [array objectAtIndex:4], message);
     }
 }
-
-NSBundle *mainBundle() {
-    static NSBundle* frameworkBundle = nil;
-    static dispatch_once_t predicate;
-    dispatch_once(&predicate, ^{
-        NSString* mainBundlePath = [[NSBundle mainBundle] resourcePath];
-        NSString* frameworkBundlePath = [mainBundlePath stringByAppendingPathComponent:@"DIMOPayiOSResources.bundle"];
-        frameworkBundle = [NSBundle bundleWithPath:frameworkBundlePath];
-    });
-    return frameworkBundle;
-    /*
-    NSString *pathBundle = [[NSBundle mainBundle] pathForResource:@"DIMOPayiOSResources" ofType:@"bundle"];
-    NSBundle *bundle = [NSBundle bundleWithPath:pathBundle];
-    return bundle;
-     */
-}
-
 NSString *String(NSString *key) {
-    NSString *result = NSLocalizedStringFromTableInBundle(key, strLocale, mainBundle(), nil);
+    NSString *result = NSLocalizedStringFromTableInBundle(key, strLocale, [NSBundle mainBundle], nil);
     if ([result isEqualToString:key]) {
-        result = NSLocalizedStringFromTableInBundle(key, @"INDONESIAN", mainBundle(), nil);
+        result = NSLocalizedStringFromTableInBundle(key, @"INDONESIAN", [NSBundle mainBundle], nil);
     }
     if (!result || result.length == 0) result = @"";
     return result;
 }
-
-NSString *StringWithMoney(NSString *key, int amount) {
-    NSString *message = String(key);
-    message = [message stringByReplacingOccurrencesOfString:String(@"DIMORenderMoney") withString:[NSString stringWithFormat:@"%@ %@", String(@"DIMORupiah"), [NSString setCurrencyFormatter:amount]]];
-    return message;
-}
-
-NSString *StringWithPoint(NSString *key, int point) {
-    NSString *message = String(key);
-    message = [message stringByReplacingOccurrencesOfString:String(@"DIMORenderPoint") withString:[NSString stringWithFormat:@"%@ %@", [NSString setCurrencyFormatter:point], String(@"DIMOPoin")]];
-    return message;
-}
-
-+ (NSAttributedString *)setLabelWithPreCurrency:(int)n currencySymbolSize:(int)curSize amountSize:(int)amSize{
-    //currency
-    UIFont *pre = [UIFont dimoFontWithName:DIMO_FONT_BASE_FAMILY_NAME_BOLD size:curSize];
-    NSDictionary *preDict = [NSDictionary dictionaryWithObject:pre forKey:NSFontAttributeName];
-    
-    NSMutableAttributedString *aAttrString = [[NSMutableAttributedString alloc] initWithString:String(@"DIMORupiah") attributes: preDict];
-    
-    //the amount
-    UIFont *a = [UIFont dimoFontWithName:DIMO_FONT_BASE_FAMILY_NAME_BOLD size:amSize];
-    NSDictionary *aDict = [NSDictionary dictionaryWithObject:a forKey:NSFontAttributeName];
-    
-    NSAttributedString *s = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@", [NSString setCurrencyFormatter:n]] attributes:aDict];
-    [aAttrString appendAttributedString:s];
-    return aAttrString;
-}
-
-+ (UIImage *)imageNamedInFramework:(NSString *)name extension:(NSString *)ext{
-    NSString *filePath =[[NSBundle mainBundle] pathForResource:name ofType:ext inDirectory:@"DIMOPayiOSResources.bundle"];
-    UIImage *image = [UIImage imageWithContentsOfFile:filePath];
-    if (image) return image;
-    
-    return [UIImage imageNamed:filePath];
-}
-
-+ (NSString *)applicationDocumentsDirectory {
-    //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-    return basePath;
-}
-+ (UIImage *)imageFromBinaryArray:(NSArray *)binaryArray fileName:(NSString *)fileName {
-    // currently is being used only for promo
-    if (!binaryArray || binaryArray.count == 0) return nil;
-    //[DIMOUtility imageNamedInFramework:@"ico-no-promo-image" extension:@"png"];
-    
-    NSString *filePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:fileName];
-    
-    //check if a local copy exist
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        return [UIImage imageWithContentsOfFile:filePath];
-    } else {
-        if (!binaryArray) return nil;
-        
-        unsigned char *buffer = (unsigned char*)malloc([binaryArray count]);
-        int j = 0;
-        
-        for (NSDecimalNumber *num in binaryArray) {
-            buffer[j++] = [num intValue];
-        }
-        
-        NSData *data = [NSData dataWithBytes:buffer length:[binaryArray count]];
-        
-        
-        // Create byte array of unsigned chars
-        unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
-        
-        // Create 16 byte MD5 hash value, store in buffer
-        CC_MD5([data bytes], (int)[data length], md5Buffer);
-        
-        // Convert unsigned char buffer to NSString of hex values
-        NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-        for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++){
-            [output appendFormat:@"%02x",md5Buffer[i]];
-        }
-        
-        //NSString *fileName = [NSString stringWithFormat:@"%@.png",output];
-        
-        free(buffer);
-        
-        NSData *dataImage = UIImagePNGRepresentation([UIImage imageWithData:data]);
-        
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        [fileManager createFileAtPath:filePath contents:dataImage attributes:nil];
-        
-        if ([UIImage imageWithData:dataImage] == nil) {
-            return [DIMOUtility imageNamedInFramework:@"ico-no-image" extension:@"png"];
-        } else {
-            return [UIImage imageWithData:dataImage];
-        }
-    }
-}
-
-+ (NSData *)dataFromBase64EncodedString:(NSString *)string {
-    if (string.length > 0) {
-        //the iPhone has base 64 decoding built in but not obviously. The trick is to
-        //create a data url that's base 64 encoded and ask an NSData to load it.
-        NSString *data64URLString = [NSString stringWithFormat:@"data:;base64,%@", string];
-        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:data64URLString]];
-        return data;
-    }
-    return nil;
-}
-
-+ (NSString *)numberFormat:(NSNumber *)input {
-    return [NSString stringWithFormat:@"%@ %@", String(@"DIMORupiah"), [NSString setCurrencyFormatter:[input intValue]]];
-}
-
 + (void)setSDKLocale:(SDKLocale)locale {
     if (locale == SDKLocaleEnglish) {
         strLocale = @"ENGLISH";
@@ -556,7 +429,7 @@ static NSSearchPathDirectory directorySave = NSLibraryDirectory;
     }
     
     if (imageURL && imageURL.length > 0 && ![imageURL isKindOfClass:[NSNull class]]) {
-        self.image = [DIMOUtility imageNamedInFramework:@"loading-image" extension:@"png"];
+//        self.image = [DIMOUtility imageNamedInFramework:@"loading-image" extension:@"png"];
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
             if (imageData && imageData.length > 0) {
@@ -567,7 +440,7 @@ static NSSearchPathDirectory directorySave = NSLibraryDirectory;
                 });
             } else {
                 dispatch_async(dispatch_get_main_queue(), ^(void){
-                    self.image = [DIMOUtility imageNamedInFramework:@"ico-no-image" extension:@"png"];
+//                    self.image = [DIMOUtility imageNamedInFramework:@"ico-no-image" extension:@"png"];
                 });
             }
         });

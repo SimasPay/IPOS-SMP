@@ -4,9 +4,7 @@
 //
 //
 #import <CoreText/CoreText.h>
-
 #import "DIMOPreloader.h"
-#import "DIMOFontConstant.h"
 #import "DIMOUtility.h"
 //This preloader loads all needed asset and resources before executing SDK
 
@@ -37,9 +35,9 @@ static NSString *const DIMO_FILE_OTF_TYPE = @"otf";
     //*already included in iOS Font Family
     //[[DIMOPreloader instance] loadCustomFont:DIMOHELVETICANEUE ofType:DIMO_FILE_OTF_TYPE];
     
-    [DIMOPreloader loadCustomFont:DIMO_FONT_BASE_FAMILY_NAME_REGULER ofType:DIMO_FILE_OTF_TYPE];
-    [DIMOPreloader loadCustomFont:DIMO_FONT_BASE_FAMILY_NAME_LIGHT ofType:DIMO_FILE_OTF_TYPE];
-    [DIMOPreloader loadCustomFont:DIMO_FONT_BASE_FAMILY_NAME_BOLD ofType:DIMO_FILE_OTF_TYPE];
+//    [DIMOPreloader loadCustomFont:DIMO_FONT_BASE_FAMILY_NAME_REGULER ofType:DIMO_FILE_OTF_TYPE];
+//    [DIMOPreloader loadCustomFont:DIMO_FONT_BASE_FAMILY_NAME_LIGHT ofType:DIMO_FILE_OTF_TYPE];
+//    [DIMOPreloader loadCustomFont:DIMO_FONT_BASE_FAMILY_NAME_BOLD ofType:DIMO_FILE_OTF_TYPE];
 }
 
 @end

@@ -9,7 +9,19 @@
 import UIKit
 
 class BaseLabel: UILabel {
-
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        self.updateForDefaultLabel()
+        
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.updateForDefaultLabel()
+    }
+    func updateForDefaultLabel() {
+        self.font = UIFont.systemFontOfSize(16)
+        self.textColor = UIColor.init(hexString: color_text_default)
+    }
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

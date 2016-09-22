@@ -23,7 +23,6 @@
 		BE17730A1D9285DE00A27E06 /* DMBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772D81D9285DE00A27E06 /* DMBProgressHUD.m */; };
 		BE17730B1D9285DE00A27E06 /* DIMOAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772DB1D9285DE00A27E06 /* DIMOAlertView.m */; };
 		BE17730C1D9285DE00A27E06 /* DIMOAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772DD1D9285DE00A27E06 /* DIMOAPIManager.m */; };
-		BE17730D1D9285DE00A27E06 /* DIMOColorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772DF1D9285DE00A27E06 /* DIMOColorManager.m */; };
 		BE17730E1D9285DE00A27E06 /* DIMOLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772E21D9285DE00A27E06 /* DIMOLocationManager.m */; };
 		BE17730F1D9285DE00A27E06 /* DIMOPreloader.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772E41D9285DE00A27E06 /* DIMOPreloader.m */; };
 		BE1773101D9285DE00A27E06 /* DIMOUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772E61D9285DE00A27E06 /* DIMOUtility.m */; };
@@ -35,6 +34,7 @@
 		BEC415E11D928E84000C3CF4 /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415E01D928E84000C3CF4 /* BaseLabel.swift */; };
 		BEC415E41D928E92000C3CF4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415E21D928E92000C3CF4 /* BaseViewController.swift */; };
 		BEC415E71D929544000C3CF4 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415E61D929544000C3CF4 /* BaseButton.swift */; };
+		BEC415EB1D938201000C3CF4 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415EA1D938201000C3CF4 /* ColorManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,8 +70,6 @@
 		BE1772DB1D9285DE00A27E06 /* DIMOAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIMOAlertView.m; sourceTree = "<group>"; };
 		BE1772DC1D9285DE00A27E06 /* DIMOAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMOAPIManager.h; sourceTree = "<group>"; };
 		BE1772DD1D9285DE00A27E06 /* DIMOAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIMOAPIManager.m; sourceTree = "<group>"; };
-		BE1772DE1D9285DE00A27E06 /* DIMOColorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMOColorManager.h; sourceTree = "<group>"; };
-		BE1772DF1D9285DE00A27E06 /* DIMOColorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIMOColorManager.m; sourceTree = "<group>"; };
 		BE1772E11D9285DE00A27E06 /* DIMOLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMOLocationManager.h; sourceTree = "<group>"; };
 		BE1772E21D9285DE00A27E06 /* DIMOLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIMOLocationManager.m; sourceTree = "<group>"; };
 		BE1772E31D9285DE00A27E06 /* DIMOPreloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMOPreloader.h; sourceTree = "<group>"; };
@@ -80,7 +78,6 @@
 		BE1772E61D9285DE00A27E06 /* DIMOUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIMOUtility.m; sourceTree = "<group>"; };
 		BE1772E91D9285DE00A27E06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/ENGLISH.strings; sourceTree = "<group>"; };
 		BE1772EB1D9285DE00A27E06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/INDONESIAN.strings; sourceTree = "<group>"; };
-		BE1772EC1D9285DE00A27E06 /* DIMOFontConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMOFontConstant.h; sourceTree = "<group>"; };
 		BE1772ED1D9285DE00A27E06 /* UserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefault.h; sourceTree = "<group>"; };
 		BE1772EE1D9285DE00A27E06 /* UserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefault.m; sourceTree = "<group>"; };
 		BE1773211D9286EE00A27E06 /* Dimo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dimo-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -89,6 +86,7 @@
 		BEC415E01D928E84000C3CF4 /* BaseLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseLabel.swift; path = "Base Objects/BaseLabel.swift"; sourceTree = "<group>"; };
 		BEC415E21D928E92000C3CF4 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = "Base Objects/BaseViewController.swift"; sourceTree = "<group>"; };
 		BEC415E61D929544000C3CF4 /* BaseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseButton.swift; path = "Base Objects/BaseButton.swift"; sourceTree = "<group>"; };
+		BEC415EA1D938201000C3CF4 /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorManager.swift; path = Manager/ColorManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +122,7 @@
 		BE1772861D92859B00A27E06 /* Simaspay */ = {
 			isa = PBXGroup;
 			children = (
+				BEC415E81D938173000C3CF4 /* Manager */,
 				BEC415D71D928D72000C3CF4 /* Base Objects */,
 				BE17731A1D92864800A27E06 /* Controllers */,
 				BE1772871D92859B00A27E06 /* AppDelegate.swift */,
@@ -189,8 +188,6 @@
 				BE1772DB1D9285DE00A27E06 /* DIMOAlertView.m */,
 				BE1772DC1D9285DE00A27E06 /* DIMOAPIManager.h */,
 				BE1772DD1D9285DE00A27E06 /* DIMOAPIManager.m */,
-				BE1772DE1D9285DE00A27E06 /* DIMOColorManager.h */,
-				BE1772DF1D9285DE00A27E06 /* DIMOColorManager.m */,
 				BE1772E11D9285DE00A27E06 /* DIMOLocationManager.h */,
 				BE1772E21D9285DE00A27E06 /* DIMOLocationManager.m */,
 				BE1772E31D9285DE00A27E06 /* DIMOPreloader.h */,
@@ -209,7 +206,6 @@
 			children = (
 				BE1772E81D9285DE00A27E06 /* ENGLISH.strings */,
 				BE1772EA1D9285DE00A27E06 /* INDONESIAN.strings */,
-				BE1772EC1D9285DE00A27E06 /* DIMOFontConstant.h */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -240,6 +236,14 @@
 				BEC415E61D929544000C3CF4 /* BaseButton.swift */,
 			);
 			name = "Base Objects";
+			sourceTree = "<group>";
+		};
+		BEC415E81D938173000C3CF4 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				BEC415EA1D938201000C3CF4 /* ColorManager.swift */,
+			);
+			name = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,8 +332,8 @@
 				BE17730E1D9285DE00A27E06 /* DIMOLocationManager.m in Sources */,
 				BE1773021D9285DE00A27E06 /* DAFHTTPSessionManager.m in Sources */,
 				BE1772881D92859B00A27E06 /* AppDelegate.swift in Sources */,
-				BE17730D1D9285DE00A27E06 /* DIMOColorManager.m in Sources */,
 				BE1773001D9285DE00A27E06 /* DAFHTTPRequestOperation.m in Sources */,
+				BEC415EB1D938201000C3CF4 /* ColorManager.swift in Sources */,
 				BE1773101D9285DE00A27E06 /* DIMOUtility.m in Sources */,
 				BE1773071D9285DE00A27E06 /* DAFURLResponseSerialization.m in Sources */,
 				BE17730B1D9285DE00A27E06 /* DIMOAlertView.m in Sources */,
