@@ -22,4 +22,12 @@ extension UIView {
         layer.shadowOffset = CGSizeMake(2, 2);
         layer.shadowRadius = 0.5;
     }
+    
+    func addUnderline() {
+        //buttonUnderline
+        let line = CALayer()
+        line.frame = CGRectMake(0, self.frame.size.height - 1 , self.frame.size.width, 1)
+        line.backgroundColor = UIColor.init(hexString: color_btn_gray).CGColor
+        self.layer.addSublayer(line)
+    }
 }

@@ -19,25 +19,20 @@ class BaseButton: UIButton {
         self.updateUI()
     }
     func updateUI() {
-        layer.cornerRadius = 5;
-        layer.masksToBounds = true;
+        self.layer.cornerRadius = 4;
+        self.clipsToBounds = true;
+        self.titleLabel?.font = UIFont.systemFontOfSize(20)
     }
     
     func updateButtonType1() {
         // background red with text white
         self.backgroundColor = UIColor.init(hexString: color_btn_red)
-        self.layer.cornerRadius = 4;
-        self.clipsToBounds = true;
-        self.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 20)
         self.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
     }
     
     func updateButtonType2() {
-        // background red with text white
+        // background gray with text white
         self.backgroundColor = UIColor.init(hexString: color_btn_gray)
-        self.layer.cornerRadius = 4;
-        self.clipsToBounds = true;
-        self.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 20)
         self.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
     }
 

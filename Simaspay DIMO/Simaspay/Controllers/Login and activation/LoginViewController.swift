@@ -10,8 +10,8 @@ import UIKit
 
 class LoginViewController: BaseViewController {
     @IBOutlet var viewLoginTextField: UIView!
-    @IBOutlet var textFieldHpNumber: UITextField!
-    @IBOutlet var textFieldMPin: UITextField!
+    @IBOutlet var textFieldHpNumber: BaseTextField!
+    @IBOutlet var textFieldMPin: BaseTextField!
     @IBOutlet var btnLogin: BaseButton!
     @IBOutlet var btnActivation: BaseButton!
     @IBOutlet var btnContactUs: UIButton!
@@ -23,41 +23,19 @@ class LoginViewController: BaseViewController {
         viewLoginTextField.updateViewRoundedWithShadow()
         
         //icon text field
-        textFieldHpNumber.leftViewMode = UITextFieldViewMode.Always
-        let imageViewHp = UIImageView(frame: CGRect(x: 0, y: 0, width: 28, height: 28))
-        imageViewHp.image = UIImage(named: "icon_Mobile")
-        textFieldHpNumber.leftView = imageViewHp
-        
-        textFieldMPin.leftViewMode = UITextFieldViewMode.Always
-        let imageViewMpin = UIImageView(frame: CGRect(x: 0, y: 0, width: 28, height: 28))
-        imageViewMpin.image = UIImage(named: "icon_Mpin")
-        textFieldMPin.leftView = imageViewMpin
-        
-        //texfield font
-        let fontTextField = UIFont(name: "HelveticaNeue-Light", size: 16)
-        textFieldHpNumber.font = fontTextField
-        textFieldMPin.font = fontTextField
-        
-        //Placeholder
-        textFieldHpNumber.attributedPlaceholder = NSAttributedString(string:getString("LoginPlaceholderNoHandphone"),
-                                                               attributes:[NSForegroundColorAttributeName: UIColor.grayColor()])
-        textFieldMPin.attributedPlaceholder = NSAttributedString(string:getString("LoginPlaceholderMpin"),
-                                                                     attributes:[NSForegroundColorAttributeName: UIColor.grayColor()])
+        textFieldHpNumber .updateTextFieldWithImageNamed("icon_Mobile")
+        textFieldHpNumber.placeholder = getString("LoginPlaceholderNoHandphone")
+        textFieldMPin.updateTextFieldWithImageNamed("icon_Mpin")
+        textFieldMPin.placeholder = getString("LoginPlaceholderMpin")
         
         btnLogin.setTitle(getString("LoginButtonLogin"), forState: .Normal)
         btnLogin.updateButtonType1()
+        
         btnActivation.setTitle(getString("LoginButtonActivation"), forState: .Normal)
         btnActivation.updateButtonType2()
+        
         btnContactUs.setTitle(getString("LoginButtonContactUs"), forState: .Normal)
-    
-        //buttonUnderline
-        let line = CALayer()
-        line.frame = CGRectMake(0, btnContactUs.frame.size.height - 1 , btnContactUs.frame.size.width, 1)
-        line.backgroundColor = UIColor.init(hexString: color_btn_gray).CGColor
-        btnContactUs.layer.addSublayer(line)
-        
-        
-
+        btnContactUs .addUnderline()
     }
 
     override func didReceiveMemoryWarning() {
