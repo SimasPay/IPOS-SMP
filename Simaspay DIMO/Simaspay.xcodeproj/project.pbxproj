@@ -23,6 +23,7 @@
 		BE1773081D9285DE00A27E06 /* DAFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772D31D9285DE00A27E06 /* DAFURLSessionManager.m */; };
 		BE1773091D9285DE00A27E06 /* DReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772D51D9285DE00A27E06 /* DReachability.m */; };
 		BE17730A1D9285DE00A27E06 /* DMBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772D81D9285DE00A27E06 /* DMBProgressHUD.m */; };
+		BE204A731D9396510013A483 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE204A721D9396510013A483 /* Utilities.swift */; };
 		BEC415DE1D928E18000C3CF4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415DC1D928E18000C3CF4 /* LoginViewController.swift */; };
 		BEC415DF1D928E18000C3CF4 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC415DD1D928E18000C3CF4 /* LoginViewController.xib */; };
 		BEC415E11D928E84000C3CF4 /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415E01D928E84000C3CF4 /* BaseLabel.swift */; };
@@ -72,6 +73,7 @@
 		BE1772D71D9285DE00A27E06 /* DMBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMBProgressHUD.h; sourceTree = "<group>"; };
 		BE1772D81D9285DE00A27E06 /* DMBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMBProgressHUD.m; sourceTree = "<group>"; };
 		BE1773211D9286EE00A27E06 /* Dimo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dimo-Bridging-Header.h"; sourceTree = "<group>"; };
+		BE204A721D9396510013A483 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = "Base Objects/Utilities.swift"; sourceTree = "<group>"; };
 		BEC415DC1D928E18000C3CF4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BEC415DD1D928E18000C3CF4 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		BEC415E01D928E84000C3CF4 /* BaseLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseLabel.swift; path = "Base Objects/BaseLabel.swift"; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 		BEC415D71D928D72000C3CF4 /* Base Objects */ = {
 			isa = PBXGroup;
 			children = (
+				BE204A721D9396510013A483 /* Utilities.swift */,
 				BEC415E21D928E92000C3CF4 /* BaseViewController.swift */,
 				BEC415E01D928E84000C3CF4 /* BaseLabel.swift */,
 				BEC415E61D929544000C3CF4 /* BaseButton.swift */,
@@ -334,6 +337,7 @@
 				BE1773011D9285DE00A27E06 /* DAFHTTPRequestOperationManager.m in Sources */,
 				BEC415E41D928E92000C3CF4 /* BaseViewController.swift in Sources */,
 				35F93ABF1D93870D00FF803A /* SplashScreenViewController.swift in Sources */,
+				BE204A731D9396510013A483 /* Utilities.swift in Sources */,
 				BE1773041D9285DE00A27E06 /* DAFSecurityPolicy.m in Sources */,
 				BEC416031D9385B9000C3CF4 /* DIMOLocationManager.m in Sources */,
 				BE1773091D9285DE00A27E06 /* DReachability.m in Sources */,
