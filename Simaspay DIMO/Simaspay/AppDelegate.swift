@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         window = UIWindow(frame: UIScreen.mainScreen().bounds);
         
-        let view = SplashScreenViewController()
+//        let view = SplashScreenViewController(nibName: "SplashScreenViewController", bundle: nil)
+        let view = SplashScreenViewController.initWithOwnNib()
         let navController = UINavigationController(rootViewController: view)
         navController.navigationBar.hidden = true;
         window!.rootViewController = navController;

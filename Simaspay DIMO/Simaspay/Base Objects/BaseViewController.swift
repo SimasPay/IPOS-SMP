@@ -13,6 +13,11 @@ class BaseViewController: UIViewController {
     var btnBack: BaseButton!
     var ivBackground : UIImageView!
     
+    static func initWithOwnNib() -> BaseViewController {
+        let obj:UIViewController = super.init(nibName: String(self), bundle: nil)
+        return obj as! BaseViewController;
+    }
+    
     func showBackgroundImage() {
         if (ivBackground == nil) {
             ivBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: DIMOUtility.screenSize().width, height: DIMOUtility.screenSize().height))
@@ -23,6 +28,7 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNeedsStatusBarAppearanceUpdate()
         showBackgroundImage()
         // Do any additional setup after loading the view.
     }
@@ -50,11 +56,22 @@ class BaseViewController: UIViewController {
         navigationController?.popViewControllerAnimated(true)
     }
 
+    func animatedFadeIn() {
+        let transition:CATransition = CATransition()
+        transition.duration = 0.3;
+        transition.type = kCATransitionFade;
+        transition.subtype = kCATransitionFromTop;
+        navigationController!.view.layer.addAnimation(transition, forKey: kCATransition)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent;
+    }
 
     /*
     // MARK: - Navigation

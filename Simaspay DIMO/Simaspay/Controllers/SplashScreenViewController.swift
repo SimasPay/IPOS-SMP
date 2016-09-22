@@ -14,16 +14,17 @@ class SplashScreenViewController: BaseViewController {
     @IBOutlet var imgLogoSinarmas: UIImageView!
     
     var timer = NSTimer()
-    override func viewDidLoad() {
+    
+    override func viewDidLoad() {   
         super.viewDidLoad()
         
         timer = NSTimer.scheduledTimerWithTimeInterval(0.8, target: self, selector: #selector(SplashScreenViewController.firstPage), userInfo: nil, repeats: false)
+    
         lblWelcome.textAlignment = .Center
         lblWelcome.text = "Selamat Datang di Layanan"
         
         imgLogo.image = UIImage(named: "logo_Image")
         imgLogoSinarmas.image = UIImage(named: "logo_SinarmasBank_Image")
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,7 +33,9 @@ class SplashScreenViewController: BaseViewController {
     }
     
     func firstPage() {
-        self.navigationController?.pushViewController(LoginViewController(), animated: false)
+        let vc = LoginViewController.initWithOwnNib()
+        self.navigationController?.pushViewController(vc, animated: false)
+        vc.animatedFadeIn()
     }
     /*
     // MARK: - Navigation
