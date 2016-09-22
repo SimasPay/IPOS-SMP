@@ -24,6 +24,11 @@
 		BE1773091D9285DE00A27E06 /* DReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772D51D9285DE00A27E06 /* DReachability.m */; };
 		BE17730A1D9285DE00A27E06 /* DMBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772D81D9285DE00A27E06 /* DMBProgressHUD.m */; };
 		BE204A731D9396510013A483 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE204A721D9396510013A483 /* Utilities.swift */; };
+		BE204A781D93CBFB0013A483 /* BaseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE204A771D93CBFB0013A483 /* BaseTextField.swift */; };
+		BE204A7D1D93CC9C0013A483 /* EULAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE204A7B1D93CC9C0013A483 /* EULAViewController.swift */; };
+		BE204A7E1D93CC9C0013A483 /* EULAViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE204A7C1D93CC9C0013A483 /* EULAViewController.xib */; };
+		BE204A811D93CCAE0013A483 /* ActivationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE204A7F1D93CCAE0013A483 /* ActivationViewController.swift */; };
+		BE204A821D93CCAE0013A483 /* ActivationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE204A801D93CCAE0013A483 /* ActivationViewController.xib */; };
 		BEC415DE1D928E18000C3CF4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415DC1D928E18000C3CF4 /* LoginViewController.swift */; };
 		BEC415DF1D928E18000C3CF4 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC415DD1D928E18000C3CF4 /* LoginViewController.xib */; };
 		BEC415E11D928E84000C3CF4 /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415E01D928E84000C3CF4 /* BaseLabel.swift */; };
@@ -74,6 +79,11 @@
 		BE1772D81D9285DE00A27E06 /* DMBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMBProgressHUD.m; sourceTree = "<group>"; };
 		BE1773211D9286EE00A27E06 /* Dimo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dimo-Bridging-Header.h"; sourceTree = "<group>"; };
 		BE204A721D9396510013A483 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = "Base Objects/Utilities.swift"; sourceTree = "<group>"; };
+		BE204A771D93CBFB0013A483 /* BaseTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseTextField.swift; path = "Base Objects/BaseTextField.swift"; sourceTree = "<group>"; };
+		BE204A7B1D93CC9C0013A483 /* EULAViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EULAViewController.swift; sourceTree = "<group>"; };
+		BE204A7C1D93CC9C0013A483 /* EULAViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EULAViewController.xib; sourceTree = "<group>"; };
+		BE204A7F1D93CCAE0013A483 /* ActivationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivationViewController.swift; sourceTree = "<group>"; };
+		BE204A801D93CCAE0013A483 /* ActivationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivationViewController.xib; sourceTree = "<group>"; };
 		BEC415DC1D928E18000C3CF4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BEC415DD1D928E18000C3CF4 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		BEC415E01D928E84000C3CF4 /* BaseLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseLabel.swift; path = "Base Objects/BaseLabel.swift"; sourceTree = "<group>"; };
@@ -224,6 +234,10 @@
 			children = (
 				BEC415DC1D928E18000C3CF4 /* LoginViewController.swift */,
 				BEC415DD1D928E18000C3CF4 /* LoginViewController.xib */,
+				BE204A7B1D93CC9C0013A483 /* EULAViewController.swift */,
+				BE204A7C1D93CC9C0013A483 /* EULAViewController.xib */,
+				BE204A7F1D93CCAE0013A483 /* ActivationViewController.swift */,
+				BE204A801D93CCAE0013A483 /* ActivationViewController.xib */,
 			);
 			name = "Login and activation";
 			path = "Controllers/Login and activation";
@@ -236,6 +250,7 @@
 				BEC415E21D928E92000C3CF4 /* BaseViewController.swift */,
 				BEC415E01D928E84000C3CF4 /* BaseLabel.swift */,
 				BEC415E61D929544000C3CF4 /* BaseButton.swift */,
+				BE204A771D93CBFB0013A483 /* BaseTextField.swift */,
 			);
 			name = "Base Objects";
 			sourceTree = "<group>";
@@ -321,7 +336,9 @@
 				BEC416061D9385B9000C3CF4 /* ENGLISH.strings in Resources */,
 				BE1772921D92859B00A27E06 /* LaunchScreen.storyboard in Resources */,
 				35F93AC01D93870D00FF803A /* SplashScreenViewController.xib in Resources */,
+				BE204A7E1D93CC9C0013A483 /* EULAViewController.xib in Resources */,
 				BEC416071D9385B9000C3CF4 /* INDONESIAN.strings in Resources */,
+				BE204A821D93CCAE0013A483 /* ActivationViewController.xib in Resources */,
 				BE17728F1D92859B00A27E06 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,6 +355,7 @@
 				BEC415E41D928E92000C3CF4 /* BaseViewController.swift in Sources */,
 				35F93ABF1D93870D00FF803A /* SplashScreenViewController.swift in Sources */,
 				BE204A731D9396510013A483 /* Utilities.swift in Sources */,
+				BE204A7D1D93CC9C0013A483 /* EULAViewController.swift in Sources */,
 				BE1773041D9285DE00A27E06 /* DAFSecurityPolicy.m in Sources */,
 				BEC416031D9385B9000C3CF4 /* DIMOLocationManager.m in Sources */,
 				BE1773091D9285DE00A27E06 /* DReachability.m in Sources */,
@@ -348,12 +366,14 @@
 				BE1773001D9285DE00A27E06 /* DAFHTTPRequestOperation.m in Sources */,
 				BEC4160A1D9385D2000C3CF4 /* CategoriesManager.swift in Sources */,
 				BEC416051D9385B9000C3CF4 /* DIMOUtility.m in Sources */,
+				BE204A811D93CCAE0013A483 /* ActivationViewController.swift in Sources */,
 				BEC416081D9385B9000C3CF4 /* UserDefault.m in Sources */,
 				BEC415EB1D938201000C3CF4 /* ColorManager.swift in Sources */,
 				BE1773071D9285DE00A27E06 /* DAFURLResponseSerialization.m in Sources */,
 				BEC416011D9385B9000C3CF4 /* DIMOAlertView.m in Sources */,
 				BEC416041D9385B9000C3CF4 /* DIMOPreloader.m in Sources */,
 				BE1773051D9285DE00A27E06 /* DAFURLConnectionOperation.m in Sources */,
+				BE204A781D93CBFB0013A483 /* BaseTextField.swift in Sources */,
 				BE1773061D9285DE00A27E06 /* DAFURLRequestSerialization.m in Sources */,
 				BEC415E11D928E84000C3CF4 /* BaseLabel.swift in Sources */,
 				BEC416021D9385B9000C3CF4 /* DIMOAPIManager.m in Sources */,
