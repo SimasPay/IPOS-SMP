@@ -21,20 +21,21 @@
 		BE1773081D9285DE00A27E06 /* DAFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772D31D9285DE00A27E06 /* DAFURLSessionManager.m */; };
 		BE1773091D9285DE00A27E06 /* DReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772D51D9285DE00A27E06 /* DReachability.m */; };
 		BE17730A1D9285DE00A27E06 /* DMBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772D81D9285DE00A27E06 /* DMBProgressHUD.m */; };
-		BE17730B1D9285DE00A27E06 /* DIMOAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772DB1D9285DE00A27E06 /* DIMOAlertView.m */; };
-		BE17730C1D9285DE00A27E06 /* DIMOAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772DD1D9285DE00A27E06 /* DIMOAPIManager.m */; };
-		BE17730E1D9285DE00A27E06 /* DIMOLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772E21D9285DE00A27E06 /* DIMOLocationManager.m */; };
-		BE17730F1D9285DE00A27E06 /* DIMOPreloader.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772E41D9285DE00A27E06 /* DIMOPreloader.m */; };
-		BE1773101D9285DE00A27E06 /* DIMOUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772E61D9285DE00A27E06 /* DIMOUtility.m */; };
-		BE1773111D9285DE00A27E06 /* ENGLISH.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE1772E81D9285DE00A27E06 /* ENGLISH.strings */; };
-		BE1773121D9285DE00A27E06 /* INDONESIAN.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE1772EA1D9285DE00A27E06 /* INDONESIAN.strings */; };
-		BE1773131D9285DE00A27E06 /* UserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1772EE1D9285DE00A27E06 /* UserDefault.m */; };
 		BEC415DE1D928E18000C3CF4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415DC1D928E18000C3CF4 /* LoginViewController.swift */; };
 		BEC415DF1D928E18000C3CF4 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC415DD1D928E18000C3CF4 /* LoginViewController.xib */; };
 		BEC415E11D928E84000C3CF4 /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415E01D928E84000C3CF4 /* BaseLabel.swift */; };
 		BEC415E41D928E92000C3CF4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415E21D928E92000C3CF4 /* BaseViewController.swift */; };
 		BEC415E71D929544000C3CF4 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415E61D929544000C3CF4 /* BaseButton.swift */; };
 		BEC415EB1D938201000C3CF4 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415EA1D938201000C3CF4 /* ColorManager.swift */; };
+		BEC416011D9385B9000C3CF4 /* DIMOAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC415F11D9385B9000C3CF4 /* DIMOAlertView.m */; };
+		BEC416021D9385B9000C3CF4 /* DIMOAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC415F31D9385B9000C3CF4 /* DIMOAPIManager.m */; };
+		BEC416031D9385B9000C3CF4 /* DIMOLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC415F51D9385B9000C3CF4 /* DIMOLocationManager.m */; };
+		BEC416041D9385B9000C3CF4 /* DIMOPreloader.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC415F71D9385B9000C3CF4 /* DIMOPreloader.m */; };
+		BEC416051D9385B9000C3CF4 /* DIMOUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC415F91D9385B9000C3CF4 /* DIMOUtility.m */; };
+		BEC416061D9385B9000C3CF4 /* ENGLISH.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEC415FB1D9385B9000C3CF4 /* ENGLISH.strings */; };
+		BEC416071D9385B9000C3CF4 /* INDONESIAN.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEC415FD1D9385B9000C3CF4 /* INDONESIAN.strings */; };
+		BEC416081D9385B9000C3CF4 /* UserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC416001D9385B9000C3CF4 /* UserDefault.m */; };
+		BEC4160A1D9385D2000C3CF4 /* CategoriesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC416091D9385D2000C3CF4 /* CategoriesManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,20 +67,6 @@
 		BE1772D51D9285DE00A27E06 /* DReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DReachability.m; sourceTree = "<group>"; };
 		BE1772D71D9285DE00A27E06 /* DMBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMBProgressHUD.h; sourceTree = "<group>"; };
 		BE1772D81D9285DE00A27E06 /* DMBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMBProgressHUD.m; sourceTree = "<group>"; };
-		BE1772DA1D9285DE00A27E06 /* DIMOAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMOAlertView.h; sourceTree = "<group>"; };
-		BE1772DB1D9285DE00A27E06 /* DIMOAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIMOAlertView.m; sourceTree = "<group>"; };
-		BE1772DC1D9285DE00A27E06 /* DIMOAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMOAPIManager.h; sourceTree = "<group>"; };
-		BE1772DD1D9285DE00A27E06 /* DIMOAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIMOAPIManager.m; sourceTree = "<group>"; };
-		BE1772E11D9285DE00A27E06 /* DIMOLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMOLocationManager.h; sourceTree = "<group>"; };
-		BE1772E21D9285DE00A27E06 /* DIMOLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIMOLocationManager.m; sourceTree = "<group>"; };
-		BE1772E31D9285DE00A27E06 /* DIMOPreloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMOPreloader.h; sourceTree = "<group>"; };
-		BE1772E41D9285DE00A27E06 /* DIMOPreloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIMOPreloader.m; sourceTree = "<group>"; };
-		BE1772E51D9285DE00A27E06 /* DIMOUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIMOUtility.h; sourceTree = "<group>"; };
-		BE1772E61D9285DE00A27E06 /* DIMOUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIMOUtility.m; sourceTree = "<group>"; };
-		BE1772E91D9285DE00A27E06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/ENGLISH.strings; sourceTree = "<group>"; };
-		BE1772EB1D9285DE00A27E06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/INDONESIAN.strings; sourceTree = "<group>"; };
-		BE1772ED1D9285DE00A27E06 /* UserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefault.h; sourceTree = "<group>"; };
-		BE1772EE1D9285DE00A27E06 /* UserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefault.m; sourceTree = "<group>"; };
 		BE1773211D9286EE00A27E06 /* Dimo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dimo-Bridging-Header.h"; sourceTree = "<group>"; };
 		BEC415DC1D928E18000C3CF4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BEC415DD1D928E18000C3CF4 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -87,6 +74,21 @@
 		BEC415E21D928E92000C3CF4 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = "Base Objects/BaseViewController.swift"; sourceTree = "<group>"; };
 		BEC415E61D929544000C3CF4 /* BaseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseButton.swift; path = "Base Objects/BaseButton.swift"; sourceTree = "<group>"; };
 		BEC415EA1D938201000C3CF4 /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorManager.swift; path = Manager/ColorManager.swift; sourceTree = "<group>"; };
+		BEC415F01D9385B9000C3CF4 /* DIMOAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DIMOAlertView.h; path = "Simaspay/Managers-DIMO/DIMOAlertView.h"; sourceTree = SOURCE_ROOT; };
+		BEC415F11D9385B9000C3CF4 /* DIMOAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DIMOAlertView.m; path = "Simaspay/Managers-DIMO/DIMOAlertView.m"; sourceTree = SOURCE_ROOT; };
+		BEC415F21D9385B9000C3CF4 /* DIMOAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DIMOAPIManager.h; path = "Simaspay/Managers-DIMO/DIMOAPIManager.h"; sourceTree = SOURCE_ROOT; };
+		BEC415F31D9385B9000C3CF4 /* DIMOAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DIMOAPIManager.m; path = "Simaspay/Managers-DIMO/DIMOAPIManager.m"; sourceTree = SOURCE_ROOT; };
+		BEC415F41D9385B9000C3CF4 /* DIMOLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DIMOLocationManager.h; path = "Simaspay/Managers-DIMO/DIMOLocationManager.h"; sourceTree = SOURCE_ROOT; };
+		BEC415F51D9385B9000C3CF4 /* DIMOLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DIMOLocationManager.m; path = "Simaspay/Managers-DIMO/DIMOLocationManager.m"; sourceTree = SOURCE_ROOT; };
+		BEC415F61D9385B9000C3CF4 /* DIMOPreloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DIMOPreloader.h; path = "Simaspay/Managers-DIMO/DIMOPreloader.h"; sourceTree = SOURCE_ROOT; };
+		BEC415F71D9385B9000C3CF4 /* DIMOPreloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DIMOPreloader.m; path = "Simaspay/Managers-DIMO/DIMOPreloader.m"; sourceTree = SOURCE_ROOT; };
+		BEC415F81D9385B9000C3CF4 /* DIMOUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DIMOUtility.h; path = "Simaspay/Managers-DIMO/DIMOUtility.h"; sourceTree = SOURCE_ROOT; };
+		BEC415F91D9385B9000C3CF4 /* DIMOUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DIMOUtility.m; path = "Simaspay/Managers-DIMO/DIMOUtility.m"; sourceTree = SOURCE_ROOT; };
+		BEC415FC1D9385B9000C3CF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/ENGLISH.strings; sourceTree = "<group>"; };
+		BEC415FE1D9385B9000C3CF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/INDONESIAN.strings; sourceTree = "<group>"; };
+		BEC415FF1D9385B9000C3CF4 /* UserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserDefault.h; path = "Simaspay/Managers-DIMO/UserDefault.h"; sourceTree = SOURCE_ROOT; };
+		BEC416001D9385B9000C3CF4 /* UserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserDefault.m; path = "Simaspay/Managers-DIMO/UserDefault.m"; sourceTree = SOURCE_ROOT; };
+		BEC416091D9385D2000C3CF4 /* CategoriesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoriesManager.swift; path = Manager/CategoriesManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +107,7 @@
 			children = (
 				BE1773211D9286EE00A27E06 /* Dimo-Bridging-Header.h */,
 				BE1772BF1D9285DE00A27E06 /* Thirdparties */,
-				BE1772D91D9285DE00A27E06 /* Managers */,
+				BE1772D91D9285DE00A27E06 /* Managers-DIMO */,
 				BE1772861D92859B00A27E06 /* Simaspay */,
 				BE1772851D92859B00A27E06 /* Products */,
 			);
@@ -180,34 +182,25 @@
 			path = ProgressHUD;
 			sourceTree = "<group>";
 		};
-		BE1772D91D9285DE00A27E06 /* Managers */ = {
+		BE1772D91D9285DE00A27E06 /* Managers-DIMO */ = {
 			isa = PBXGroup;
 			children = (
-				BE1772E71D9285DE00A27E06 /* Strings */,
-				BE1772DA1D9285DE00A27E06 /* DIMOAlertView.h */,
-				BE1772DB1D9285DE00A27E06 /* DIMOAlertView.m */,
-				BE1772DC1D9285DE00A27E06 /* DIMOAPIManager.h */,
-				BE1772DD1D9285DE00A27E06 /* DIMOAPIManager.m */,
-				BE1772E11D9285DE00A27E06 /* DIMOLocationManager.h */,
-				BE1772E21D9285DE00A27E06 /* DIMOLocationManager.m */,
-				BE1772E31D9285DE00A27E06 /* DIMOPreloader.h */,
-				BE1772E41D9285DE00A27E06 /* DIMOPreloader.m */,
-				BE1772E51D9285DE00A27E06 /* DIMOUtility.h */,
-				BE1772E61D9285DE00A27E06 /* DIMOUtility.m */,
-				BE1772ED1D9285DE00A27E06 /* UserDefault.h */,
-				BE1772EE1D9285DE00A27E06 /* UserDefault.m */,
+				BEC415FA1D9385B9000C3CF4 /* Strings */,
+				BEC415F01D9385B9000C3CF4 /* DIMOAlertView.h */,
+				BEC415F11D9385B9000C3CF4 /* DIMOAlertView.m */,
+				BEC415F21D9385B9000C3CF4 /* DIMOAPIManager.h */,
+				BEC415F31D9385B9000C3CF4 /* DIMOAPIManager.m */,
+				BEC415F41D9385B9000C3CF4 /* DIMOLocationManager.h */,
+				BEC415F51D9385B9000C3CF4 /* DIMOLocationManager.m */,
+				BEC415F61D9385B9000C3CF4 /* DIMOPreloader.h */,
+				BEC415F71D9385B9000C3CF4 /* DIMOPreloader.m */,
+				BEC415F81D9385B9000C3CF4 /* DIMOUtility.h */,
+				BEC415F91D9385B9000C3CF4 /* DIMOUtility.m */,
+				BEC415FF1D9385B9000C3CF4 /* UserDefault.h */,
+				BEC416001D9385B9000C3CF4 /* UserDefault.m */,
 			);
-			name = Managers;
+			name = "Managers-DIMO";
 			path = Simaspay/Managers;
-			sourceTree = "<group>";
-		};
-		BE1772E71D9285DE00A27E06 /* Strings */ = {
-			isa = PBXGroup;
-			children = (
-				BE1772E81D9285DE00A27E06 /* ENGLISH.strings */,
-				BE1772EA1D9285DE00A27E06 /* INDONESIAN.strings */,
-			);
-			path = Strings;
 			sourceTree = "<group>";
 		};
 		BE17731A1D92864800A27E06 /* Controllers */ = {
@@ -241,10 +234,21 @@
 		BEC415E81D938173000C3CF4 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				BEC416091D9385D2000C3CF4 /* CategoriesManager.swift */,
 				BEC415EA1D938201000C3CF4 /* ColorManager.swift */,
 			);
 			name = Manager;
 			sourceTree = "<group>";
+		};
+		BEC415FA1D9385B9000C3CF4 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				BEC415FB1D9385B9000C3CF4 /* ENGLISH.strings */,
+				BEC415FD1D9385B9000C3CF4 /* INDONESIAN.strings */,
+			);
+			name = Strings;
+			path = "Simaspay/Managers-DIMO/Strings";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -304,11 +308,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE1773111D9285DE00A27E06 /* ENGLISH.strings in Resources */,
 				BEC415DF1D928E18000C3CF4 /* LoginViewController.xib in Resources */,
+				BEC416061D9385B9000C3CF4 /* ENGLISH.strings in Resources */,
 				BE1772921D92859B00A27E06 /* LaunchScreen.storyboard in Resources */,
+				BEC416071D9385B9000C3CF4 /* INDONESIAN.strings in Resources */,
 				BE17728F1D92859B00A27E06 /* Assets.xcassets in Resources */,
-				BE1773121D9285DE00A27E06 /* INDONESIAN.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,26 +324,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEC415DE1D928E18000C3CF4 /* LoginViewController.swift in Sources */,
-				BE1773131D9285DE00A27E06 /* UserDefault.m in Sources */,
 				BE1773011D9285DE00A27E06 /* DAFHTTPRequestOperationManager.m in Sources */,
 				BEC415E41D928E92000C3CF4 /* BaseViewController.swift in Sources */,
 				BE1773041D9285DE00A27E06 /* DAFSecurityPolicy.m in Sources */,
-				BE17730F1D9285DE00A27E06 /* DIMOPreloader.m in Sources */,
+				BEC416031D9385B9000C3CF4 /* DIMOLocationManager.m in Sources */,
 				BE1773091D9285DE00A27E06 /* DReachability.m in Sources */,
-				BE17730C1D9285DE00A27E06 /* DIMOAPIManager.m in Sources */,
 				BE1773081D9285DE00A27E06 /* DAFURLSessionManager.m in Sources */,
 				BEC415E71D929544000C3CF4 /* BaseButton.swift in Sources */,
-				BE17730E1D9285DE00A27E06 /* DIMOLocationManager.m in Sources */,
 				BE1773021D9285DE00A27E06 /* DAFHTTPSessionManager.m in Sources */,
 				BE1772881D92859B00A27E06 /* AppDelegate.swift in Sources */,
 				BE1773001D9285DE00A27E06 /* DAFHTTPRequestOperation.m in Sources */,
+				BEC4160A1D9385D2000C3CF4 /* CategoriesManager.swift in Sources */,
+				BEC416051D9385B9000C3CF4 /* DIMOUtility.m in Sources */,
+				BEC416081D9385B9000C3CF4 /* UserDefault.m in Sources */,
 				BEC415EB1D938201000C3CF4 /* ColorManager.swift in Sources */,
-				BE1773101D9285DE00A27E06 /* DIMOUtility.m in Sources */,
 				BE1773071D9285DE00A27E06 /* DAFURLResponseSerialization.m in Sources */,
-				BE17730B1D9285DE00A27E06 /* DIMOAlertView.m in Sources */,
+				BEC416011D9385B9000C3CF4 /* DIMOAlertView.m in Sources */,
+				BEC416041D9385B9000C3CF4 /* DIMOPreloader.m in Sources */,
 				BE1773051D9285DE00A27E06 /* DAFURLConnectionOperation.m in Sources */,
 				BE1773061D9285DE00A27E06 /* DAFURLRequestSerialization.m in Sources */,
 				BEC415E11D928E84000C3CF4 /* BaseLabel.swift in Sources */,
+				BEC416021D9385B9000C3CF4 /* DIMOAPIManager.m in Sources */,
 				BE1773031D9285DE00A27E06 /* DAFNetworkReachabilityManager.m in Sources */,
 				BE17730A1D9285DE00A27E06 /* DMBProgressHUD.m in Sources */,
 			);
@@ -356,18 +361,18 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		BE1772E81D9285DE00A27E06 /* ENGLISH.strings */ = {
+		BEC415FB1D9385B9000C3CF4 /* ENGLISH.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				BE1772E91D9285DE00A27E06 /* Base */,
+				BEC415FC1D9385B9000C3CF4 /* Base */,
 			);
 			name = ENGLISH.strings;
 			sourceTree = "<group>";
 		};
-		BE1772EA1D9285DE00A27E06 /* INDONESIAN.strings */ = {
+		BEC415FD1D9385B9000C3CF4 /* INDONESIAN.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				BE1772EB1D9285DE00A27E06 /* Base */,
+				BEC415FE1D9385B9000C3CF4 /* Base */,
 			);
 			name = INDONESIAN.strings;
 			sourceTree = "<group>";

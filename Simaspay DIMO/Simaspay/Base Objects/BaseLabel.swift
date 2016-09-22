@@ -19,6 +19,7 @@ class BaseLabel: UILabel {
         self.updateForDefaultLabel()
     }
     func updateForDefaultLabel() {
+        // system font with size 16
         self.font = UIFont.systemFontOfSize(16)
         self.textColor = UIColor.init(hexString: color_text_default)
     }
