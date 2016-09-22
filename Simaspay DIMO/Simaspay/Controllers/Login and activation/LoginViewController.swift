@@ -13,8 +13,6 @@ class LoginViewController: BaseViewController {
         super.viewDidLoad()
         // make background become white
         view.backgroundColor = UIColor.init(hexString: "ffffff")
-        showTitle("login");
-        showBackButton();
         // Do any additional setup after loading the view.
     }
 

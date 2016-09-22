@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35F93ABF1D93870D00FF803A /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F93ABD1D93870D00FF803A /* SplashScreenViewController.swift */; };
+		35F93AC01D93870D00FF803A /* SplashScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35F93ABE1D93870D00FF803A /* SplashScreenViewController.xib */; };
 		BE1772881D92859B00A27E06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1772871D92859B00A27E06 /* AppDelegate.swift */; };
 		BE17728F1D92859B00A27E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE17728E1D92859B00A27E06 /* Assets.xcassets */; };
 		BE1772921D92859B00A27E06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE1772901D92859B00A27E06 /* LaunchScreen.storyboard */; };
@@ -39,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35F93ABD1D93870D00FF803A /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SplashScreenViewController.swift; path = Controllers/SplashScreenViewController.swift; sourceTree = "<group>"; };
+		35F93ABE1D93870D00FF803A /* SplashScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SplashScreenViewController.xib; path = Controllers/SplashScreenViewController.xib; sourceTree = "<group>"; };
 		BE1772841D92859B00A27E06 /* Simaspay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Simaspay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1772871D92859B00A27E06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE17728E1D92859B00A27E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -206,6 +210,8 @@
 		BE17731A1D92864800A27E06 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				35F93ABD1D93870D00FF803A /* SplashScreenViewController.swift */,
+				35F93ABE1D93870D00FF803A /* SplashScreenViewController.xib */,
 				BE17731C1D92867900A27E06 /* Login and activation */,
 			);
 			name = Controllers;
@@ -311,6 +317,7 @@
 				BEC415DF1D928E18000C3CF4 /* LoginViewController.xib in Resources */,
 				BEC416061D9385B9000C3CF4 /* ENGLISH.strings in Resources */,
 				BE1772921D92859B00A27E06 /* LaunchScreen.storyboard in Resources */,
+				35F93AC01D93870D00FF803A /* SplashScreenViewController.xib in Resources */,
 				BEC416071D9385B9000C3CF4 /* INDONESIAN.strings in Resources */,
 				BE17728F1D92859B00A27E06 /* Assets.xcassets in Resources */,
 			);
@@ -326,6 +333,7 @@
 				BEC415DE1D928E18000C3CF4 /* LoginViewController.swift in Sources */,
 				BE1773011D9285DE00A27E06 /* DAFHTTPRequestOperationManager.m in Sources */,
 				BEC415E41D928E92000C3CF4 /* BaseViewController.swift in Sources */,
+				35F93ABF1D93870D00FF803A /* SplashScreenViewController.swift in Sources */,
 				BE1773041D9285DE00A27E06 /* DAFSecurityPolicy.m in Sources */,
 				BEC416031D9385B9000C3CF4 /* DIMOLocationManager.m in Sources */,
 				BE1773091D9285DE00A27E06 /* DReachability.m in Sources */,
