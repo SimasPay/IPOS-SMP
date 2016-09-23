@@ -84,6 +84,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
                 if (responseDict.keys.count == 0) {
                     DIMOAlertView.showAlertWithTitle(nil, message: "Request Failed.", cancelButtonTitle: "OK")
                 } else {
+                    // success
                     if (responseDict.keys.count > 0) {
                         // set public keys
                         publicKeys = responseDict;
@@ -119,7 +120,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             DMBProgressHUD .hideAllHUDsForView(self.view, animated: true)
             DLog("\(dictionary)")
             
-            if (error != nil || dictionary.keys.count == 0) {
+            if (error != nil) {
                 DIMOAlertView.showAlertWithTitle(nil, message: error.localizedDescription, cancelButtonTitle: "OK")
                 return
             }
@@ -142,7 +143,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
                     let isUserType  = responseDict.valueForKeyPath("type.text") as! String
                     
                     
-                    if(isUserType == SIMASPAY_LOGIN_AGENT_TYPE) {
+                    if (isUserType == SIMASPAY_LOGIN_AGENT_TYPE) {
                         // AGENT LOGIN FlOW
                         // AGENT FLOW
                         // WARNING: NEED TO IMPLEMENT AGENT FLOW
