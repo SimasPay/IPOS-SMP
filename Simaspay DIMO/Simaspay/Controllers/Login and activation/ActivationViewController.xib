@@ -1,19 +1,183 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ActivationViewController" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ActivationViewController" customModule="Simaspay" customModuleProvider="target">
             <connections>
+                <outlet property="btnLogin" destination="eRk-iR-1uX" id="9tX-ep-J2M"/>
+                <outlet property="btnNext" destination="bu8-Te-U48" id="bIw-Nx-0YO"/>
+                <outlet property="btnResendOTP" destination="jUr-oY-tWh" id="zyB-Se-d0a"/>
+                <outlet property="lblInfoActivation" destination="nEF-WM-91R" id="Yxj-me-hBD"/>
+                <outlet property="lblQuestionLogin" destination="H5C-EB-IOp" id="dBR-Cf-TNw"/>
+                <outlet property="lblQuestionNoOTP" destination="eCY-jH-dAh" id="6NM-yx-SVz"/>
+                <outlet property="tfActivationCode" destination="PYH-PX-jN0" id="hUy-F7-7ck"/>
+                <outlet property="tfHpNumber" destination="hPe-rG-0aT" id="SLT-t0-J19"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewTextField" destination="Xrr-XF-1oW" id="Www-dn-F2L"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_Image" translatesAutoresizingMaskIntoConstraints="NO" id="mqP-Uu-lEn">
+                    <rect key="frame" x="48" y="47" width="224" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Jyp-gA-mDN"/>
+                        <constraint firstAttribute="width" constant="224" id="m1k-kn-9d3"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEF-WM-91R" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                    <rect key="frame" x="40" y="129" width="240" height="66"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="240" id="hXJ-IY-3lG"/>
+                        <constraint firstAttribute="height" constant="66" id="lwf-xT-fqD"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bu8-Te-U48" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                    <rect key="frame" x="40" y="381" width="240" height="48"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="Uk3-Hd-Cos"/>
+                        <constraint firstAttribute="width" constant="240" id="azb-SZ-Qzh"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="actionNextButton:" destination="-1" eventType="touchUpInside" id="BF8-Co-Lrt"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K3J-Sf-b5d">
+                    <rect key="frame" x="40" y="461" width="240" height="1"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="dbf-2P-nXw"/>
+                        <constraint firstAttribute="width" constant="240" id="e3m-Vh-b9m"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V5S-5p-dLe">
+                    <rect key="frame" x="45" y="340" width="230" height="17"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jUr-oY-tWh">
+                            <rect key="frame" x="155" y="0.0" width="75" height="17"/>
+                            <state key="normal" title="button">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eCY-jH-dAh" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="155" height="17"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="155" id="kgG-65-2K0"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="jUr-oY-tWh" firstAttribute="leading" secondItem="eCY-jH-dAh" secondAttribute="trailing" id="40f-nV-270"/>
+                        <constraint firstAttribute="width" constant="230" id="5KQ-lD-dOS"/>
+                        <constraint firstItem="jUr-oY-tWh" firstAttribute="top" secondItem="V5S-5p-dLe" secondAttribute="top" id="7AI-OH-vGR"/>
+                        <constraint firstAttribute="bottom" secondItem="eCY-jH-dAh" secondAttribute="bottom" id="M36-Ip-xyJ"/>
+                        <constraint firstAttribute="bottom" secondItem="jUr-oY-tWh" secondAttribute="bottom" id="WOB-ku-rNY"/>
+                        <constraint firstItem="eCY-jH-dAh" firstAttribute="top" secondItem="V5S-5p-dLe" secondAttribute="top" id="fqB-hN-h7C"/>
+                        <constraint firstAttribute="height" constant="17" id="tef-T3-Gg9"/>
+                        <constraint firstAttribute="trailing" secondItem="jUr-oY-tWh" secondAttribute="trailing" id="xBe-Qs-7UF"/>
+                        <constraint firstItem="eCY-jH-dAh" firstAttribute="leading" secondItem="V5S-5p-dLe" secondAttribute="leading" id="yoH-6s-9fi"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xrr-XF-1oW">
+                    <rect key="frame" x="40" y="235" width="240" height="97"/>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hPe-rG-0aT" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="48.5"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PYH-PX-jN0" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="49" width="240" height="48"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="hPe-rG-0aT" secondAttribute="trailing" id="6A7-sW-v3O"/>
+                        <constraint firstAttribute="height" constant="97" id="A57-Ed-o5v"/>
+                        <constraint firstItem="hPe-rG-0aT" firstAttribute="top" secondItem="Xrr-XF-1oW" secondAttribute="top" id="IT4-Df-EYc"/>
+                        <constraint firstAttribute="width" constant="240" id="Lxv-F0-81w"/>
+                        <constraint firstItem="hPe-rG-0aT" firstAttribute="leading" secondItem="Xrr-XF-1oW" secondAttribute="leading" id="RRT-Ga-gll"/>
+                        <constraint firstAttribute="bottom" secondItem="PYH-PX-jN0" secondAttribute="bottom" id="XIY-J3-BHS"/>
+                        <constraint firstAttribute="bottom" secondItem="hPe-rG-0aT" secondAttribute="bottom" multiplier="2:1" id="ild-VG-HaL"/>
+                        <constraint firstItem="PYH-PX-jN0" firstAttribute="top" secondItem="hPe-rG-0aT" secondAttribute="bottom" id="jLg-Tn-HAW"/>
+                        <constraint firstItem="PYH-PX-jN0" firstAttribute="leading" secondItem="Xrr-XF-1oW" secondAttribute="leading" id="m4t-hg-Eqd"/>
+                        <constraint firstAttribute="trailing" secondItem="PYH-PX-jN0" secondAttribute="trailing" id="xri-np-Bgu"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9c-Ao-YJF">
+                    <rect key="frame" x="54.5" y="494" width="211" height="17"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5C-EB-IOp" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="170" height="17"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="170" id="8Ru-D2-q1p"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRk-iR-1uX">
+                            <rect key="frame" x="170" y="0.0" width="41" height="17"/>
+                            <state key="normal" title="button">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="eRk-iR-1uX" firstAttribute="leading" secondItem="H5C-EB-IOp" secondAttribute="trailing" id="0N8-PY-6I9"/>
+                        <constraint firstAttribute="trailing" secondItem="eRk-iR-1uX" secondAttribute="trailing" id="533-NH-o20"/>
+                        <constraint firstAttribute="width" constant="211" id="9RD-iY-IjG"/>
+                        <constraint firstItem="H5C-EB-IOp" firstAttribute="leading" secondItem="P9c-Ao-YJF" secondAttribute="leading" id="OFG-g7-Pnb"/>
+                        <constraint firstAttribute="height" constant="17" id="Zgf-jq-4md"/>
+                        <constraint firstItem="eRk-iR-1uX" firstAttribute="top" secondItem="P9c-Ao-YJF" secondAttribute="top" id="afG-IW-mv2"/>
+                        <constraint firstAttribute="bottom" secondItem="eRk-iR-1uX" secondAttribute="bottom" id="lvx-av-kJV"/>
+                        <constraint firstAttribute="bottom" secondItem="H5C-EB-IOp" secondAttribute="bottom" id="nGm-MF-yKR"/>
+                        <constraint firstItem="H5C-EB-IOp" firstAttribute="top" secondItem="P9c-Ao-YJF" secondAttribute="top" id="zOg-Q4-0UN"/>
+                    </constraints>
+                </view>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="nEF-WM-91R" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="1P1-qa-x2U"/>
+                <constraint firstItem="bu8-Te-U48" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="8AR-Te-54b"/>
+                <constraint firstItem="V5S-5p-dLe" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="8ke-ZI-gWg"/>
+                <constraint firstItem="P9c-Ao-YJF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Hrv-uU-MXz"/>
+                <constraint firstItem="nEF-WM-91R" firstAttribute="top" secondItem="mqP-Uu-lEn" secondAttribute="bottom" constant="32" id="IrO-Lv-BE0"/>
+                <constraint firstItem="Xrr-XF-1oW" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Lw8-DC-LTR"/>
+                <constraint firstItem="bu8-Te-U48" firstAttribute="top" secondItem="V5S-5p-dLe" secondAttribute="bottom" constant="24" id="MMH-RO-dtr"/>
+                <constraint firstItem="K3J-Sf-b5d" firstAttribute="top" secondItem="bu8-Te-U48" secondAttribute="bottom" constant="32" id="cFa-IN-T1h"/>
+                <constraint firstItem="K3J-Sf-b5d" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="clM-zA-slQ"/>
+                <constraint firstItem="Xrr-XF-1oW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="fJg-f4-p0J"/>
+                <constraint firstItem="V5S-5p-dLe" firstAttribute="top" secondItem="Xrr-XF-1oW" secondAttribute="bottom" constant="8" id="gUz-tX-0jh"/>
+                <constraint firstItem="mqP-Uu-lEn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="jVW-77-ySH"/>
+                <constraint firstItem="P9c-Ao-YJF" firstAttribute="top" secondItem="K3J-Sf-b5d" secondAttribute="bottom" constant="32" id="ntJ-iR-dst"/>
+                <constraint firstItem="Xrr-XF-1oW" firstAttribute="top" secondItem="nEF-WM-91R" secondAttribute="bottom" constant="40" id="oOW-Wj-mJG"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="logo_Image" width="225" height="50"/>
+    </resources>
 </document>

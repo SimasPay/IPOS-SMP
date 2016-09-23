@@ -1,19 +1,81 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EULAViewController" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EULAViewController" customModule="Simaspay" customModuleProvider="target">
             <connections>
+                <outlet property="btnAgree" destination="Xvh-xh-O81" id="yEL-R4-YSd"/>
+                <outlet property="btnDisagree" destination="v25-99-aDK" id="8cf-eQ-4US"/>
+                <outlet property="labelTitle" destination="BQr-qj-wGX" id="QMS-4u-l7Q"/>
+                <outlet property="lblTitle" destination="BQr-qj-wGX" id="og2-kT-B0O"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewFrame" destination="9ia-3u-bAG" id="VY4-5R-TVx"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQr-qj-wGX" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                    <rect key="frame" x="31" y="66" width="256" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="5Tj-in-clv"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v25-99-aDK" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                    <rect key="frame" x="25" y="473" width="129" height="48"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="129" id="3k6-Vx-Snq"/>
+                        <constraint firstAttribute="height" constant="48" id="hPN-DC-YTx"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xvh-xh-O81" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                    <rect key="frame" x="165" y="473" width="129" height="48"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="NlS-7x-3xc"/>
+                        <constraint firstAttribute="width" constant="129" id="wWT-Xv-Fxu"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ia-3u-bAG">
+                    <rect key="frame" x="25" y="114" width="269" height="339"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="339" id="5IO-i2-Teg"/>
+                    </constraints>
+                </view>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="v25-99-aDK" firstAttribute="top" secondItem="9ia-3u-bAG" secondAttribute="bottom" constant="20" id="7Gb-rT-WOZ"/>
+                <constraint firstItem="Xvh-xh-O81" firstAttribute="top" secondItem="9ia-3u-bAG" secondAttribute="bottom" constant="20" id="ALA-Rv-eGU"/>
+                <constraint firstItem="v25-99-aDK" firstAttribute="leading" secondItem="9ia-3u-bAG" secondAttribute="leading" id="V7J-DC-2Aj"/>
+                <constraint firstItem="Xvh-xh-O81" firstAttribute="trailing" secondItem="9ia-3u-bAG" secondAttribute="trailing" id="VKx-aG-knW"/>
+                <constraint firstItem="9ia-3u-bAG" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="4.2:5" id="Vnt-8d-kRX"/>
+                <constraint firstItem="BQr-qj-wGX" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="4:5" id="bXH-hX-vqA"/>
+                <constraint firstItem="9ia-3u-bAG" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="jR5-VL-ZKr"/>
+                <constraint firstItem="9ia-3u-bAG" firstAttribute="top" secondItem="BQr-qj-wGX" secondAttribute="bottom" constant="24" id="lgY-zi-1HK"/>
+                <constraint firstItem="BQr-qj-wGX" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vTY-W7-jtJ"/>
+                <constraint firstItem="BQr-qj-wGX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="53" id="vxi-g8-Xgy"/>
+                <constraint firstItem="9ia-3u-bAG" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="xLi-oU-Acl"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="vxi-g8-Xgy"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>
