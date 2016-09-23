@@ -36,6 +36,12 @@
 		BE9D02FD1D94DA1D0070894E /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE9D02FB1D94DA1D0070894E /* HomeViewController.xib */; };
 		BE9D03021D94DA7F0070894E /* BasicEncodingRules.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9D02FF1D94DA7F0070894E /* BasicEncodingRules.m */; };
 		BE9D03031D94DA7F0070894E /* NSData+Base64Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9D03001D94DA7F0070894E /* NSData+Base64Extention.m */; };
+		BE9D03061D94E14C0070894E /* ContactUSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D03041D94E14C0070894E /* ContactUSViewController.swift */; };
+		BE9D03071D94E14C0070894E /* ContactUSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE9D03051D94E14C0070894E /* ContactUSViewController.xib */; };
+		BE9D030A1D94E16B0070894E /* ActivationPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D03081D94E16B0070894E /* ActivationPinViewController.swift */; };
+		BE9D030B1D94E16B0070894E /* ActivationPinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE9D03091D94E16B0070894E /* ActivationPinViewController.xib */; };
+		BE9D030E1D94E18D0070894E /* ActivationSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D030C1D94E18D0070894E /* ActivationSuccessViewController.swift */; };
+		BE9D030F1D94E18D0070894E /* ActivationSuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE9D030D1D94E18D0070894E /* ActivationSuccessViewController.xib */; };
 		BEC415DE1D928E18000C3CF4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415DC1D928E18000C3CF4 /* LoginViewController.swift */; };
 		BEC415DF1D928E18000C3CF4 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC415DD1D928E18000C3CF4 /* LoginViewController.xib */; };
 		BEC415E11D928E84000C3CF4 /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415E01D928E84000C3CF4 /* BaseLabel.swift */; };
@@ -102,6 +108,12 @@
 		BE9D02FF1D94DA7F0070894E /* BasicEncodingRules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicEncodingRules.m; sourceTree = "<group>"; };
 		BE9D03001D94DA7F0070894E /* NSData+Base64Extention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64Extention.m"; sourceTree = "<group>"; };
 		BE9D03011D94DA7F0070894E /* NSData+Base64Extention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64Extention.h"; sourceTree = "<group>"; };
+		BE9D03041D94E14C0070894E /* ContactUSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUSViewController.swift; sourceTree = "<group>"; };
+		BE9D03051D94E14C0070894E /* ContactUSViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactUSViewController.xib; sourceTree = "<group>"; };
+		BE9D03081D94E16B0070894E /* ActivationPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivationPinViewController.swift; sourceTree = "<group>"; };
+		BE9D03091D94E16B0070894E /* ActivationPinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivationPinViewController.xib; sourceTree = "<group>"; };
+		BE9D030C1D94E18D0070894E /* ActivationSuccessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivationSuccessViewController.swift; sourceTree = "<group>"; };
+		BE9D030D1D94E18D0070894E /* ActivationSuccessViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivationSuccessViewController.xib; sourceTree = "<group>"; };
 		BEC415DC1D928E18000C3CF4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BEC415DD1D928E18000C3CF4 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		BEC415E01D928E84000C3CF4 /* BaseLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseLabel.swift; path = "Base Objects/BaseLabel.swift"; sourceTree = "<group>"; };
@@ -265,6 +277,12 @@
 				BE204A7C1D93CC9C0013A483 /* EULAViewController.xib */,
 				BE204A7F1D93CCAE0013A483 /* ActivationViewController.swift */,
 				BE204A801D93CCAE0013A483 /* ActivationViewController.xib */,
+				BE9D03081D94E16B0070894E /* ActivationPinViewController.swift */,
+				BE9D03091D94E16B0070894E /* ActivationPinViewController.xib */,
+				BE9D030C1D94E18D0070894E /* ActivationSuccessViewController.swift */,
+				BE9D030D1D94E18D0070894E /* ActivationSuccessViewController.xib */,
+				BE9D03041D94E14C0070894E /* ContactUSViewController.swift */,
+				BE9D03051D94E14C0070894E /* ContactUSViewController.xib */,
 			);
 			name = "Login and activation";
 			path = "Controllers/Login and activation";
@@ -370,14 +388,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEC415DF1D928E18000C3CF4 /* LoginViewController.xib in Resources */,
+				BE9D03071D94E14C0070894E /* ContactUSViewController.xib in Resources */,
 				BEC416061D9385B9000C3CF4 /* ENGLISH.strings in Resources */,
 				BE1772921D92859B00A27E06 /* LaunchScreen.storyboard in Resources */,
 				35F93AC01D93870D00FF803A /* SplashScreenViewController.xib in Resources */,
 				BE204A7E1D93CC9C0013A483 /* EULAViewController.xib in Resources */,
+				BE9D030F1D94E18D0070894E /* ActivationSuccessViewController.xib in Resources */,
 				BEC416071D9385B9000C3CF4 /* INDONESIAN.strings in Resources */,
 				BE204A821D93CCAE0013A483 /* ActivationViewController.xib in Resources */,
 				BE17728F1D92859B00A27E06 /* Assets.xcassets in Resources */,
 				BE9D02FD1D94DA1D0070894E /* HomeViewController.xib in Resources */,
+				BE9D030B1D94E16B0070894E /* ActivationPinViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +413,7 @@
 				BE1773011D9285DE00A27E06 /* DAFHTTPRequestOperationManager.m in Sources */,
 				BEC415E41D928E92000C3CF4 /* BaseViewController.swift in Sources */,
 				35F93ABF1D93870D00FF803A /* SplashScreenViewController.swift in Sources */,
+				BE9D030E1D94E18D0070894E /* ActivationSuccessViewController.swift in Sources */,
 				BE204A731D9396510013A483 /* Utilities.swift in Sources */,
 				BE9D03021D94DA7F0070894E /* BasicEncodingRules.m in Sources */,
 				BE204A7D1D93CC9C0013A483 /* EULAViewController.swift in Sources */,
@@ -403,10 +425,12 @@
 				BEC415E71D929544000C3CF4 /* BaseButton.swift in Sources */,
 				BE1773021D9285DE00A27E06 /* DAFHTTPSessionManager.m in Sources */,
 				BE1772881D92859B00A27E06 /* AppDelegate.swift in Sources */,
+				BE9D03061D94E14C0070894E /* ContactUSViewController.swift in Sources */,
 				BE1773001D9285DE00A27E06 /* DAFHTTPRequestOperation.m in Sources */,
 				BEC4160A1D9385D2000C3CF4 /* CategoriesManager.swift in Sources */,
 				BEC416051D9385B9000C3CF4 /* DIMOUtility.m in Sources */,
 				BE204A811D93CCAE0013A483 /* ActivationViewController.swift in Sources */,
+				BE9D030A1D94E16B0070894E /* ActivationPinViewController.swift in Sources */,
 				BEC416081D9385B9000C3CF4 /* UserDefault.m in Sources */,
 				BEC415EB1D938201000C3CF4 /* ColorManager.swift in Sources */,
 				BE1773071D9285DE00A27E06 /* DAFURLResponseSerialization.m in Sources */,
