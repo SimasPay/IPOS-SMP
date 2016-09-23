@@ -12,5 +12,7 @@ let color_text_default:String = "404041"
 
 let color_btn_red:String = "cc0000"
 let color_btn_gray:String = color_text_default
+let color_btn_gray2 = "dbdbdb"
+
 
 

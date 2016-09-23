@@ -8,3 +8,15 @@
 "LoginButtonActivation" = "Aktivasi Akun";
 "LoginButtonContactUs" = "Hubungi Kami";
 
+//Activation
+"ActivationLabelInfo" = "Silakan masukkan nomor handphone Anda diikuti dengan kode aktivasi dari Simaspay";
+"ActivationPlaceholderOTP" = "6 digit kode aktivasi";
+"ActivationQuestionNoOTP" = "Tidak Menerima SMS?";
+"ActivationQuestionForLogin" = "Sudah memiliki Akun?";
+"ActivationButtonResend" = "Kirim Ulang";
+"ActivationButtonNext" = "Lanjut";
+
+//EULA
+"EulaButtonAgree" = "Setuju";
+"EulaButtonDisagree" = "Tolak";
+"EulaContent" = "dummy content";
