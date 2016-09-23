@@ -12,9 +12,8 @@
 #define kNotif_SIMASPAY_UNKNOWN_ERROR               @"kNotif_SIMASPAY_UNKNOWN_ERROR"
 
 //payment
-#define kDIMO_RESULT_SUCCESS                    @"success"
-#define kDIMO_RESULT_NOK                        @"NOK"
-#define kDIMO_ERROR_MESSAGE                     @"errorMessage"
+#define kDIMO_RESULT_SUCCESS                    @"Success"
+#define kDIMO_RESULT_NOK                        @"false"
 
 typedef enum {
     ConnectionManagerHTTPMethodGET = 0,
@@ -23,8 +22,10 @@ typedef enum {
 
 @interface DIMOAPIManager : NSObject
 + (instancetype)sharedInstance;
-+ (void)setEnvironment:(NSString *)environment;
 + (BOOL)isInternetConnectionExist;
 //+ (void)checkInternetConnection;
-+ (NSString *)errorMessageFrom:(NSError *)error;
+
+#pragma mark - API
++ (void)callAPIWithParameters:(NSDictionary *)dict
+        andComplete:(void(^)( NSDictionary *response, NSError *err))completion;
 @end

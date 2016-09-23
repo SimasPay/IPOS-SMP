@@ -9,4 +9,5 @@
 #ifndef Dimo_Bridging_Header_h
 #define Dimo_Bridging_Header_h
 #import "DIMOUtility.h"
+#import "XRSA.h"
 #endif /* Dimo_Bridging_Header_h */

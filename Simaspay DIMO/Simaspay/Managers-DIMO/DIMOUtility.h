@@ -8,6 +8,9 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "UserDefault.h"
+#import "DIMOAlertView.h"
+#import "DIMOAPIManager.h"
+#import "DMBProgressHUD.h"
 
 #define DateFormat @"dd MMMM yyyy"
 #define DateShortFormat @"dd/MM/yyyy"
@@ -22,7 +25,7 @@
 #define SYSTEM_VERSION_GREATER_THAN_8               SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")
 #define ScreenSize  [UIScreen mainScreen].bounds.size
 
-static BOOL const DIMO_IS_DEBUG = 0;
+static BOOL const DIMO_IS_DEBUG = 1;
 typedef enum :NSInteger {
     SDKLocaleEnglish,
     SDKLocaleIndonesia,
@@ -36,6 +39,7 @@ NSString *String(NSString *key);
 @interface DIMOUtility : NSObject
 + (void)setSDKLocale:(SDKLocale)locale;
 + (CGSize)screenSize;
++ (void)DIMOLog:(NSString *)string;
 @end
 
 @interface UIFont(extention)

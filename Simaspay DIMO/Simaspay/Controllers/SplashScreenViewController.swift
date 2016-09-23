@@ -17,8 +17,6 @@ class SplashScreenViewController: BaseViewController {
     
     override func viewDidLoad() {   
         super.viewDidLoad()
-        
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.8, target: self, selector: #selector(SplashScreenViewController.firstPage), userInfo: nil, repeats: false)
     
         lblWelcome.textAlignment = .Center
         lblWelcome.text = getString("SplashLableWelcome")
@@ -30,6 +28,11 @@ class SplashScreenViewController: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.8, target: self, selector: #selector(SplashScreenViewController.firstPage), userInfo: nil, repeats: false)
     }
     
     func firstPage() {

@@ -40,6 +40,9 @@ NSString *String(NSString *key) {
 + (CGSize)screenSize {
     return ScreenSize;
 }
++ (void)DIMOLog:(NSString *)string {
+    DLog(string);
+}
 @end
 
 @implementation UIFont(extention)

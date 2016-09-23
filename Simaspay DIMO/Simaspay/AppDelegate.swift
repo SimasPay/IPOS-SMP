@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         window = UIWindow(frame: UIScreen.mainScreen().bounds);
-    
+        
         let view = SplashScreenViewController.initWithOwnNib()
         let navController = UINavigationController(rootViewController: view)
         navController.navigationBar.hidden = true;

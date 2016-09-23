@@ -29,6 +29,13 @@
 		BE204A7E1D93CC9C0013A483 /* EULAViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE204A7C1D93CC9C0013A483 /* EULAViewController.xib */; };
 		BE204A811D93CCAE0013A483 /* ActivationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE204A7F1D93CCAE0013A483 /* ActivationViewController.swift */; };
 		BE204A821D93CCAE0013A483 /* ActivationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE204A801D93CCAE0013A483 /* ActivationViewController.xib */; };
+		BE204A861D93D5A00013A483 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE204A851D93D5A00013A483 /* Constants.swift */; };
+		BE204A891D94C9CD0013A483 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = BE204A881D94C9CD0013A483 /* XMLReader.m */; };
+		BE204A8C1D94CEEC0013A483 /* XRSA.m in Sources */ = {isa = PBXBuildFile; fileRef = BE204A8B1D94CEEC0013A483 /* XRSA.m */; };
+		BE9D02FC1D94DA1D0070894E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D02FA1D94DA1D0070894E /* HomeViewController.swift */; };
+		BE9D02FD1D94DA1D0070894E /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE9D02FB1D94DA1D0070894E /* HomeViewController.xib */; };
+		BE9D03021D94DA7F0070894E /* BasicEncodingRules.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9D02FF1D94DA7F0070894E /* BasicEncodingRules.m */; };
+		BE9D03031D94DA7F0070894E /* NSData+Base64Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9D03001D94DA7F0070894E /* NSData+Base64Extention.m */; };
 		BEC415DE1D928E18000C3CF4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415DC1D928E18000C3CF4 /* LoginViewController.swift */; };
 		BEC415DF1D928E18000C3CF4 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC415DD1D928E18000C3CF4 /* LoginViewController.xib */; };
 		BEC415E11D928E84000C3CF4 /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC415E01D928E84000C3CF4 /* BaseLabel.swift */; };
@@ -84,6 +91,17 @@
 		BE204A7C1D93CC9C0013A483 /* EULAViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EULAViewController.xib; sourceTree = "<group>"; };
 		BE204A7F1D93CCAE0013A483 /* ActivationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivationViewController.swift; sourceTree = "<group>"; };
 		BE204A801D93CCAE0013A483 /* ActivationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivationViewController.xib; sourceTree = "<group>"; };
+		BE204A851D93D5A00013A483 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Manager/Constants.swift; sourceTree = "<group>"; };
+		BE204A871D94C9CD0013A483 /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
+		BE204A881D94C9CD0013A483 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
+		BE204A8A1D94CEEC0013A483 /* XRSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRSA.h; sourceTree = "<group>"; };
+		BE204A8B1D94CEEC0013A483 /* XRSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRSA.m; sourceTree = "<group>"; };
+		BE9D02FA1D94DA1D0070894E /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = "Controllers/HOME & MENU/HomeViewController.swift"; sourceTree = "<group>"; };
+		BE9D02FB1D94DA1D0070894E /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeViewController.xib; path = "Controllers/HOME & MENU/HomeViewController.xib"; sourceTree = "<group>"; };
+		BE9D02FE1D94DA7F0070894E /* BasicEncodingRules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicEncodingRules.h; sourceTree = "<group>"; };
+		BE9D02FF1D94DA7F0070894E /* BasicEncodingRules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicEncodingRules.m; sourceTree = "<group>"; };
+		BE9D03001D94DA7F0070894E /* NSData+Base64Extention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64Extention.m"; sourceTree = "<group>"; };
+		BE9D03011D94DA7F0070894E /* NSData+Base64Extention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64Extention.h"; sourceTree = "<group>"; };
 		BEC415DC1D928E18000C3CF4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BEC415DD1D928E18000C3CF4 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		BEC415E01D928E84000C3CF4 /* BaseLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseLabel.swift; path = "Base Objects/BaseLabel.swift"; sourceTree = "<group>"; };
@@ -157,6 +175,14 @@
 				BE1772C01D9285DE00A27E06 /* AFNetworking */,
 				BE1772D41D9285DE00A27E06 /* DReachability.h */,
 				BE1772D51D9285DE00A27E06 /* DReachability.m */,
+				BE204A871D94C9CD0013A483 /* XMLReader.h */,
+				BE204A881D94C9CD0013A483 /* XMLReader.m */,
+				BE204A8A1D94CEEC0013A483 /* XRSA.h */,
+				BE204A8B1D94CEEC0013A483 /* XRSA.m */,
+				BE9D02FE1D94DA7F0070894E /* BasicEncodingRules.h */,
+				BE9D02FF1D94DA7F0070894E /* BasicEncodingRules.m */,
+				BE9D03001D94DA7F0070894E /* NSData+Base64Extention.m */,
+				BE9D03011D94DA7F0070894E /* NSData+Base64Extention.h */,
 				BE1772D61D9285DE00A27E06 /* ProgressHUD */,
 			);
 			name = Thirdparties;
@@ -225,6 +251,7 @@
 				35F93ABD1D93870D00FF803A /* SplashScreenViewController.swift */,
 				35F93ABE1D93870D00FF803A /* SplashScreenViewController.xib */,
 				BE17731C1D92867900A27E06 /* Login and activation */,
+				BE204A911D94D7CA0013A483 /* HOME & MENU */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -241,6 +268,15 @@
 			);
 			name = "Login and activation";
 			path = "Controllers/Login and activation";
+			sourceTree = "<group>";
+		};
+		BE204A911D94D7CA0013A483 /* HOME & MENU */ = {
+			isa = PBXGroup;
+			children = (
+				BE9D02FA1D94DA1D0070894E /* HomeViewController.swift */,
+				BE9D02FB1D94DA1D0070894E /* HomeViewController.xib */,
+			);
+			name = "HOME & MENU";
 			sourceTree = "<group>";
 		};
 		BEC415D71D928D72000C3CF4 /* Base Objects */ = {
@@ -260,6 +296,7 @@
 			children = (
 				BEC416091D9385D2000C3CF4 /* CategoriesManager.swift */,
 				BEC415EA1D938201000C3CF4 /* ColorManager.swift */,
+				BE204A851D93D5A00013A483 /* Constants.swift */,
 			);
 			name = Manager;
 			sourceTree = "<group>";
@@ -340,6 +377,7 @@
 				BEC416071D9385B9000C3CF4 /* INDONESIAN.strings in Resources */,
 				BE204A821D93CCAE0013A483 /* ActivationViewController.xib in Resources */,
 				BE17728F1D92859B00A27E06 /* Assets.xcassets in Resources */,
+				BE9D02FD1D94DA1D0070894E /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,9 +393,11 @@
 				BEC415E41D928E92000C3CF4 /* BaseViewController.swift in Sources */,
 				35F93ABF1D93870D00FF803A /* SplashScreenViewController.swift in Sources */,
 				BE204A731D9396510013A483 /* Utilities.swift in Sources */,
+				BE9D03021D94DA7F0070894E /* BasicEncodingRules.m in Sources */,
 				BE204A7D1D93CC9C0013A483 /* EULAViewController.swift in Sources */,
 				BE1773041D9285DE00A27E06 /* DAFSecurityPolicy.m in Sources */,
 				BEC416031D9385B9000C3CF4 /* DIMOLocationManager.m in Sources */,
+				BE204A861D93D5A00013A483 /* Constants.swift in Sources */,
 				BE1773091D9285DE00A27E06 /* DReachability.m in Sources */,
 				BE1773081D9285DE00A27E06 /* DAFURLSessionManager.m in Sources */,
 				BEC415E71D929544000C3CF4 /* BaseButton.swift in Sources */,
@@ -378,7 +418,11 @@
 				BEC415E11D928E84000C3CF4 /* BaseLabel.swift in Sources */,
 				BEC416021D9385B9000C3CF4 /* DIMOAPIManager.m in Sources */,
 				BE1773031D9285DE00A27E06 /* DAFNetworkReachabilityManager.m in Sources */,
+				BE9D02FC1D94DA1D0070894E /* HomeViewController.swift in Sources */,
 				BE17730A1D9285DE00A27E06 /* DMBProgressHUD.m in Sources */,
+				BE9D03031D94DA7F0070894E /* NSData+Base64Extention.m in Sources */,
+				BE204A891D94C9CD0013A483 /* XMLReader.m in Sources */,
+				BE204A8C1D94CEEC0013A483 /* XRSA.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
