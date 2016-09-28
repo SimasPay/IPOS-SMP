@@ -27,6 +27,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         textFieldHpNumber.placeholder = getString("LoginPlaceholderNoHandphone")
         textFieldMPin.updateTextFieldWithImageNamed("icon_Mpin")
         textFieldMPin.placeholder = getString("LoginPlaceholderMpin")
+        textFieldHpNumber.addUnderline()
         textFieldHpNumber.delegate = self
         textFieldMPin.delegate = self
         

@@ -25,9 +25,12 @@ class BaseTextField: UITextField {
     
     func updateTextFieldWithImageNamed(strImg: String) {
         self.leftViewMode = UITextFieldViewMode.Always
-        let imageViewHp = UIImageView(frame: CGRect(x: 0, y: 0, width: 28, height: 28))
-        imageViewHp.image = UIImage(named: strImg)
-        self.leftView = imageViewHp
+        let container = UIView()
+        container.frame = CGRectMake(0, 0, 34, 28)
+        let imageView = UIImageView(frame: CGRect(x: 2, y: 0, width: 28, height: 28))
+        imageView.image = UIImage(named: strImg)
+        container.addSubview(imageView)
+        self.leftView = container
     }
     
     /*
