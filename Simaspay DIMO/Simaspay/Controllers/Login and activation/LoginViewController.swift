@@ -77,7 +77,11 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
                 DLog("\(responseDict)")
                 
                 if (error != nil) {
-                    DIMOAlertView.showAlertWithTitle("", message: error.localizedDescription, cancelButtonTitle: "OK")
+                    if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                        DIMOAlertView.showAlertWithTitle("", message: error.userInfo["error"] as! String, cancelButtonTitle: "OK")
+                    } else {
+                        DIMOAlertView.showAlertWithTitle("", message: error.localizedDescription, cancelButtonTitle: "OK")
+                    }
                     return
                 }
                 

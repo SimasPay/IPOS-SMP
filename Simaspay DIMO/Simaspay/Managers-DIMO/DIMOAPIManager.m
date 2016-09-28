@@ -104,11 +104,13 @@ static int const errorCode401 = 401;
     urlString = [urlString stringByReplacingOccurrencesOfString:@" " withString:@""];
     if (![self checkConnectionAndUrlCompatible:urlString]) return;
     
-    /*
-    for (NSString* key in params.allKeys) {
-        NSString*value = params[key];
-        urlString = [urlString stringByAppendingString:[NSString stringWithFormat:@"&%@=%@", key, value]];
-    }*/
+    if (![self isInternetConnectionExist]) {
+        NSError *err = [NSError errorWithDomain:@"No internet connection"
+                                           code:0
+                                       userInfo:@{@"error" : @"Tidak dapat terhubung dengan server SimasPay. Harap periksa koneksi internet Anda dan coba kembali setelah beberapa saat."}];
+        completion(nil, nil, err);
+        return;
+    }
     
     // Logging url called
     DLog([NSString stringWithFormat:@"Try to call : %@\nwith params %@", urlString, params]);
