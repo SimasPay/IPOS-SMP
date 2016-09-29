@@ -20,17 +20,16 @@ class EULAViewController: BaseViewController {
         super.viewDidLoad()
 
         labelTitle.text = "Syarat dan Ketentuan"
-        lblTitle.font = UIFont.boldSystemFontOfSize(20)
+        lblTitle.font = UIFont.boldSystemFontOfSize(19)
         
         btnAgree.updateButtonType1()
         btnAgree.setTitle(getString("EulaButtonAgree"), forState: .Normal)
-        btnDisagree.updateButtonType1()
-        btnDisagree.backgroundColor = UIColor.init(hexString:color_btn_gray2)
-        btnDisagree.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        btnDisagree.updateButtonType3()
         btnDisagree.setTitle(getString("EulaButtonDisagree"), forState: .Normal)
+        
+        
         viewFrame.backgroundColor = UIColor.whiteColor()
         viewFrame.updateViewRoundedWithShadow()
-        
         let padding:CGFloat = 12.0
         let textView = UITextView()
         textView.frame = CGRectMake(padding, 0 , viewFrame.bounds.width - (2 * padding) , viewFrame.bounds.height)
@@ -38,16 +37,27 @@ class EULAViewController: BaseViewController {
         textView.editable = false
         viewFrame.addSubview(textView)
         
-        
-        
-        
+        btnAgree.addTarget(self, action:,#selector(EULAViewController.buttonClick) , forControlEvents: .TouchUpInside)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    func buttonClick()  {
+        let vc = ActivationViewController.initWithOwnNib()
+        self.navigationController?.pushViewController(vc, animated: false)
+        self.animatedFadeIn()
+//        self.navigationController?.popViewControllerAnimated(false)
+    }
 
     /*
     // MARK: - Navigation

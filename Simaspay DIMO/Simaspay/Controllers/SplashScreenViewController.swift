@@ -32,7 +32,7 @@ class SplashScreenViewController: BaseViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.8, target: self, selector: #selector(SplashScreenViewController.firstPage), userInfo: nil, repeats: false)
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.8, target: self, selector:, #selector(SplashScreenViewController.firstPage), userInfo: nil, repeats: false)
     }
     
     func firstPage() {

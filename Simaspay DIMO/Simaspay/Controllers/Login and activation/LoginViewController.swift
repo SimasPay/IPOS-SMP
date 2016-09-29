@@ -36,10 +36,17 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         
         btnActivation.setTitle(getString("LoginButtonActivation"), forState: .Normal)
         btnActivation.updateButtonType2()
+        btnActivation.addTarget(self, action:,#selector(EULAViewController.buttonClick) , forControlEvents: .TouchUpInside)
         
         btnContactUs.setTitle(getString("LoginButtonContactUs"), forState: .Normal)
         btnContactUs .addUnderline()
+        
     }
+    func buttonClick()  {
+           let vc = EULAViewController.initWithOwnNib()
+          self.animatedFadeIn()
+          self.navigationController?.pushViewController(vc, animated: false)
+       }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

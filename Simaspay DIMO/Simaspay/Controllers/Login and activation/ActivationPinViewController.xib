@@ -1,19 +1,101 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ActivationPinViewController" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ActivationPinViewController" customModule="Simaspay" customModuleProvider="target">
             <connections>
+                <outlet property="btnSaveMpin" destination="15p-cI-7c4" id="JAZ-Zo-PRi"/>
+                <outlet property="lblInfoUser" destination="Qon-hx-Wrc" id="4Jl-Dg-0yW"/>
+                <outlet property="tfConfirmMpin" destination="eHc-Bz-Deq" id="t3E-8P-715"/>
+                <outlet property="tfMpin" destination="DJf-f8-UWJ" id="eTZ-OH-cV9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewTextField" destination="wOq-zt-hoL" id="PcA-wf-txu"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_Image" translatesAutoresizingMaskIntoConstraints="NO" id="nJ7-Qc-d9L">
+                    <rect key="frame" x="47" y="18" width="225" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="225" id="1R1-Eb-1td"/>
+                        <constraint firstAttribute="height" constant="50" id="gaF-Yu-oN8"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qon-hx-Wrc" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                    <rect key="frame" x="40" y="100" width="240" height="66"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="66" id="M65-Kx-bwV"/>
+                        <constraint firstAttribute="width" constant="240" id="QIx-JS-Mq6"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wOq-zt-hoL">
+                    <rect key="frame" x="40" y="191" width="240" height="97"/>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DJf-f8-UWJ" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="48.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eHc-Bz-Deq" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="48" width="240" height="48.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="97" id="1Jz-UB-VZg"/>
+                        <constraint firstAttribute="trailing" secondItem="eHc-Bz-Deq" secondAttribute="trailing" id="4H0-lb-2GI"/>
+                        <constraint firstItem="DJf-f8-UWJ" firstAttribute="leading" secondItem="wOq-zt-hoL" secondAttribute="leading" id="Fjk-aq-7bR"/>
+                        <constraint firstItem="eHc-Bz-Deq" firstAttribute="leading" secondItem="wOq-zt-hoL" secondAttribute="leading" id="GUh-nx-Bqc"/>
+                        <constraint firstAttribute="width" constant="240" id="NED-bF-keL"/>
+                        <constraint firstAttribute="trailing" secondItem="DJf-f8-UWJ" secondAttribute="trailing" id="Ywu-mX-mzQ"/>
+                        <constraint firstAttribute="bottom" secondItem="eHc-Bz-Deq" secondAttribute="bottom" id="d6w-ZD-2Bi"/>
+                        <constraint firstItem="DJf-f8-UWJ" firstAttribute="top" secondItem="wOq-zt-hoL" secondAttribute="top" id="eLv-mz-xPQ"/>
+                        <constraint firstAttribute="bottom" secondItem="DJf-f8-UWJ" secondAttribute="bottom" multiplier="2:1" id="exn-9y-6ZT"/>
+                        <constraint firstItem="eHc-Bz-Deq" firstAttribute="top" secondItem="DJf-f8-UWJ" secondAttribute="bottom" id="pUL-1T-qyz"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="15p-cI-7c4" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                    <rect key="frame" x="40" y="312" width="240" height="48"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="240" id="2JK-rW-ave"/>
+                        <constraint firstAttribute="height" constant="48" id="TYt-np-LFZ"/>
+                    </constraints>
+                </button>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="wOq-zt-hoL" firstAttribute="top" secondItem="Qon-hx-Wrc" secondAttribute="bottom" constant="25" id="7xM-64-m47"/>
+                <constraint firstItem="Qon-hx-Wrc" firstAttribute="top" secondItem="nJ7-Qc-d9L" secondAttribute="bottom" constant="32" id="FYl-kZ-d67"/>
+                <constraint firstItem="wOq-zt-hoL" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Hlg-E6-vDy"/>
+                <constraint firstItem="15p-cI-7c4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="TjH-f6-8tQ"/>
+                <constraint firstItem="nJ7-Qc-d9L" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="g49-OW-s6f"/>
+                <constraint firstItem="wOq-zt-hoL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="jKv-tb-59X"/>
+                <constraint firstItem="Qon-hx-Wrc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="r79-6W-ETa"/>
+                <constraint firstItem="15p-cI-7c4" firstAttribute="top" secondItem="wOq-zt-hoL" secondAttribute="bottom" constant="24" id="sbw-tB-zgp"/>
+                <constraint firstItem="nJ7-Qc-d9L" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="69" id="tQR-4O-ZIJ"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="tQR-4O-ZIJ"/>
+                </mask>
+            </variation>
         </view>
     </objects>
+    <resources>
+        <image name="logo_Image" width="225" height="50"/>
+    </resources>
 </document>

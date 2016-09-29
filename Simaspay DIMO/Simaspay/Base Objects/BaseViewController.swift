@@ -73,7 +73,7 @@ class BaseViewController: UIViewController {
 
     func animatedFadeIn() {
         let transition:CATransition = CATransition()
-        transition.duration = 0.3;
+        transition.duration = 0.1;
         transition.type = kCATransitionFade;
         transition.subtype = kCATransitionFromTop;
         navigationController!.view.layer.addAnimation(transition, forKey: kCATransition)

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -49,9 +49,8 @@
                         <constraint firstAttribute="height" constant="48" id="Uk3-Hd-Cos"/>
                         <constraint firstAttribute="width" constant="240" id="azb-SZ-Qzh"/>
                     </constraints>
-                    <state key="normal" title="Button"/>
                     <connections>
-                        <action selector="actionNextButton:" destination="-1" eventType="touchUpInside" id="BF8-Co-Lrt"/>
+                        <action selector="actionNextButton:" destination="-1" eventType="touchUpInside" id="wGH-IQ-YcD"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K3J-Sf-b5d">
@@ -157,7 +156,6 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="nEF-WM-91R" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="1P1-qa-x2U"/>
                 <constraint firstItem="bu8-Te-U48" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="8AR-Te-54b"/>

@@ -60,8 +60,8 @@ class ActivationViewController: BaseViewController {
 
     }
     @IBAction func actionNextButton(sender: AnyObject) {
-        let vc = EULAViewController.initWithOwnNib()
-        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = ActivationPinViewController.initWithOwnNib()
+        self.navigationController?.pushViewController(vc, animated: false)
     }
 
     override func didReceiveMemoryWarning() {

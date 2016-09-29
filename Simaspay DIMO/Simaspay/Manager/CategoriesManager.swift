@@ -27,7 +27,7 @@ extension UIView {
         //buttonUnderline
         let line = CALayer()
         line.frame = CGRectMake(0, self.frame.size.height - 1 , self.frame.size.width, 1)
-        line.backgroundColor = UIColor.init(hexString: color_btn_gray).CGColor
+        line.backgroundColor = UIColor.init(hexString: color_line_gray).CGColor
         self.layer.addSublayer(line)
     }
 }

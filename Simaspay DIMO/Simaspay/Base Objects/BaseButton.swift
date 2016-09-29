@@ -35,6 +35,12 @@ class BaseButton: UIButton {
         self.backgroundColor = UIColor.init(hexString: color_btn_gray)
         self.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
     }
+    
+    func updateButtonType3() {
+        // background light grey with color black   
+        self.backgroundColor = UIColor.init(hexString:color_btn_gray2)
+        self.setTitleColor(UIColor.blackColor(), forState: .Normal)
+    }
 
     /*
     // Only override drawRect: if you perform custom drawing.

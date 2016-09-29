@@ -9,16 +9,51 @@
 import UIKit
 
 class ActivationPinViewController: BaseViewController {
-
+    
+    @IBOutlet var lblInfoUser: BaseLabel!
+    
+    @IBOutlet var tfMpin: BaseTextField!
+    @IBOutlet var tfConfirmMpin: BaseTextField!
+    
+    @IBOutlet var viewTextField: UIView!
+    @IBOutlet var btnSaveMpin: BaseButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let infoString = NSString(format: String("ActivationLabelInfoInputMpin"), "Bayu")
 
-        // Do any additional setup after loading the view.
+        
+        lblInfoUser.text = infoString as String
+        lblInfoUser.textAlignment = .Center
+        lblInfoUser.numberOfLines = 3
+        
+        viewTextField.backgroundColor = UIColor.whiteColor()
+        viewTextField.updateViewRoundedWithShadow()
+        tfMpin.updateTextFieldWithImageNamed("icon_Mpin")
+        tfMpin.placeholder = getString("ActivationPlaceholderMpin")
+        tfMpin.addUnderline()
+        tfConfirmMpin.updateTextFieldWithImageNamed("icon_Mpin")
+        tfConfirmMpin.placeholder = getString("ActivationPlaceholderConfirmMpin")
+        
+        btnSaveMpin.updateButtonType1()
+        btnSaveMpin.setTitle(getString("ActivationButtonSaveMpin"), forState: .Normal)
+        btnSaveMpin.addTarget(self, action:,#selector(EULAViewController.buttonClick) , forControlEvents: .TouchUpInside)
+
+        
     }
 
+    func buttonClick()  {
+        let vc = ActivationSuccessViewController.initWithOwnNib()
+        self.navigationController?.pushViewController(vc, animated: false)
+        self.animatedFadeIn()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
+        
     }
     
 

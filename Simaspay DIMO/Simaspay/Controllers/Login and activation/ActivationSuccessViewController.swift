@@ -10,10 +10,20 @@ import UIKit
 
 class ActivationSuccessViewController: BaseViewController {
 
+    @IBOutlet var btnOK: BaseButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        btnOK.updateButtonType1()
+        btnOK.setTitle(getString("ActivationButtonOk"), forState: .Normal)
+
+    }
+
+    func buttonClick()  {
+        let vc = ActivationSuccessViewController.initWithOwnNib()
+        self.navigationController?.pushViewController(vc, animated: false)
+        self.animatedFadeIn()
     }
 
     override func didReceiveMemoryWarning() {
