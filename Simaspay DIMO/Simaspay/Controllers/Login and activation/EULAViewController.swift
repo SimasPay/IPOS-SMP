@@ -14,7 +14,9 @@ class EULAViewController: BaseViewController {
     @IBOutlet var btnDisagree: BaseButton!
     @IBOutlet var btnAgree: BaseButton!
     @IBOutlet var viewFrame: UIView!
- 
+    var textView: UITextView!
+    let padding:CGFloat = 12.0
+    
     static func initWithOwnNib() -> EULAViewController {
         let obj:EULAViewController = EULAViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
@@ -34,8 +36,8 @@ class EULAViewController: BaseViewController {
         
         viewFrame.backgroundColor = UIColor.white
         viewFrame.updateViewRoundedWithShadow()
-        let padding:CGFloat = 12.0
-        let textView = UITextView()
+        
+        textView = UITextView()
         textView.frame = CGRect(x: padding, y: 0 , width: viewFrame.bounds.width - (2 * padding) , height: viewFrame.bounds.height)
         textView.text = getString("EulaContent")
         textView.isEditable = false
@@ -50,6 +52,10 @@ class EULAViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        textView.frame = CGRect(x: padding, y: 0 , width: viewFrame.bounds.width - (2 * padding) , height: viewFrame.bounds.height)
     }
 
     override func didReceiveMemoryWarning() {
