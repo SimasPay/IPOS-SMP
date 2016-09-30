@@ -25,10 +25,17 @@ class ActivationPinViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let infoString = String(format: String("ActivationLabelInfoInputMpin"), "Bayu")
+        let name = "Bayu !"
+        let infoString = String(format: String("ActivationLabelInfoInputMpin"), name)
         lblInfoUser.text = infoString as String
         lblInfoUser.textAlignment = .center
         lblInfoUser.numberOfLines = 3
+        
+        let range = (infoString as NSString).range(of: name)
+        let attributedString = NSMutableAttributedString(string:infoString)
+        attributedString.addAttributes([NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15)], range: range)
+        self.lblInfoUser.attributedText = attributedString
+        
         
         viewTextField.backgroundColor = UIColor.white
         viewTextField.updateViewRoundedWithShadow()

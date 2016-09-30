@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ActivationSuccessViewController" customModule="Simaspay" customModuleProvider="target">
             <connections>
                 <outlet property="btnOK" destination="aAB-c7-epY" id="a6d-qn-mOQ"/>
+                <outlet property="lblInfoSuccess" destination="W1W-Pc-KxQ" id="ch2-91-p6K"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,30 +19,38 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_check" translatesAutoresizingMaskIntoConstraints="NO" id="B1f-6L-wiA" customClass="ico">
-                    <rect key="frame" x="120" y="134.5" width="80" height="80"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="80" id="60U-o0-OUp"/>
                         <constraint firstAttribute="width" constant="80" id="FWs-U0-YSt"/>
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wo9-Sa-Ddn">
-                    <rect key="frame" x="40" y="238.5" width="240" height="91"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W1W-Pc-KxQ" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="W1W-Pc-KxQ" secondAttribute="bottom" id="7ii-2A-iB4"/>
+                        <constraint firstAttribute="trailing" secondItem="W1W-Pc-KxQ" secondAttribute="trailing" id="DL4-Uc-L0A"/>
+                        <constraint firstItem="W1W-Pc-KxQ" firstAttribute="leading" secondItem="Wo9-Sa-Ddn" secondAttribute="leading" id="Yii-Ty-2Hq"/>
                         <constraint firstAttribute="width" constant="240" id="ecy-bR-xKu"/>
+                        <constraint firstItem="W1W-Pc-KxQ" firstAttribute="top" secondItem="Wo9-Sa-Ddn" secondAttribute="top" id="hR1-TJ-mee"/>
                         <constraint firstAttribute="height" constant="91" id="no3-IS-Rri"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAB-c7-epY" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
-                    <rect key="frame" x="40" y="354" width="240" height="48"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="240" id="Asf-Ge-zHv"/>
                         <constraint firstAttribute="height" constant="48" id="NKg-Xb-glz"/>
                     </constraints>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="B1f-6L-wiA" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="5Nb-lf-VWy"/>
                 <constraint firstItem="Wo9-Sa-Ddn" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="FUw-ii-Itw"/>
@@ -50,7 +60,6 @@
                 <constraint firstItem="B1f-6L-wiA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="150" id="kZL-ye-Oex"/>
                 <constraint firstItem="Wo9-Sa-Ddn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="o0f-Bw-6hU"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="kZL-ye-Oex"/>

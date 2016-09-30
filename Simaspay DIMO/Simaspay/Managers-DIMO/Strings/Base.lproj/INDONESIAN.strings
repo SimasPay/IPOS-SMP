@@ -8,7 +8,9 @@
 "LoginButtonActivation" = "Aktivasi Akun";
 "LoginButtonContactUs" = "Hubungi Kami";
 "LoginMessageFillHpNumber" = "Harap masukkan nomor handphone Anda.";
-
+"LoginMessageFillMpin" = "Masukkan mPIN Anda.";
+"LoginMessageSixMpin" = "mPIN yang Anda masukkan harus 6 angka.";
+"LoginMessageNotConnectServer" = "Tidak dapat terhubung dengan server SimasPay. Harap periksa koneksi internet Anda dan coba kembali setelah beberapa saat.";
 //Activation
 "ActivationLabelInfo" = "Silakan masukkan nomor handphone Anda diikuti dengan kode aktivasi dari Simaspay";
 "ActivationPlaceholderOTP" = "6 digit kode aktivasi";
@@ -21,7 +23,7 @@
 "ActivationButtonSaveMpin" = "Simpan";
 "ActivationButtonOk" = "OK";
 "ActivationLabelInfoInputMpin" = "HI %@\n Silakan tentukan 6 digit mPIN untuk akun Simaspay Anda";
-
+"ActivationLabelInfoSuccess" = "Aktivasi Berhasil! \n\n Selamat, akun Anda telah berhasil diaktifkan";
 //EULA
 "EulaButtonAgree" = "Setuju";
 "EulaButtonDisagree" = "Tolak";

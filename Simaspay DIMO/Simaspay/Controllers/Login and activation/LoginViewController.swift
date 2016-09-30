@@ -65,13 +65,13 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         
         var message = "";
         if (!textFieldHpNumber.isValid()) {
-            message = "Harap masukkan nomor handphone Anda."
+            message = getString("LoginMessageFillHpNumber")
         } else if (!textFieldMPin.isValid()) {
-            message = "Masukkan mPIN Anda"
+            message = getString("LoginMessageFillMpin")
         } else if (textFieldMPin.length() < 6) {
-            message = "mPIN yang Anda masukkan harus 6 angka."
+            message = getString("LoginMessageSixMpin")
         } else if (!DIMOAPIManager.isInternetConnectionExist()) {
-            message = "Tidak dapat terhubung dengan server SimasPay. Harap periksa koneksi internet Anda dan coba kembali setelah beberapa saat."
+            message = getString("LoginMessageNotConnectServer")
         }
         
         if (message.characters.count > 0) {

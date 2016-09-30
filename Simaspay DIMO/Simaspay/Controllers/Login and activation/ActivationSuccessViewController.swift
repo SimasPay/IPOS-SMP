@@ -11,6 +11,7 @@ import UIKit
 class ActivationSuccessViewController: BaseViewController {
 
     @IBOutlet var btnOK: BaseButton!
+    @IBOutlet var lblInfoSuccess: BaseLabel!
     
     static func initWithOwnNib() -> ActivationSuccessViewController {
         let obj:ActivationSuccessViewController = ActivationSuccessViewController.init(nibName: String(describing: self), bundle: nil)
@@ -19,8 +20,17 @@ class ActivationSuccessViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        let infoString = getString("ActivationLabelInfoSuccess")
+        lblInfoSuccess.text = infoString as String
+        lblInfoSuccess.textAlignment = .center
+        lblInfoSuccess.numberOfLines = 4
+        
+        let range = (infoString as NSString).range(of: "Aktivasi Berhasil!")
+        let attributedString = NSMutableAttributedString(string:infoString)
+        attributedString.addAttributes([NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15)], range: range)
+        self.lblInfoSuccess.attributedText = attributedString
+        
         btnOK.updateButtonType1()
         btnOK.setTitle(getString("ActivationButtonOk"), for: UIControlState())
 
