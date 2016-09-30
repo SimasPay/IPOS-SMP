@@ -8,27 +8,32 @@
 
 import UIKit
 enum AccountType: Int {
-    case AccountTypeRegular = 0
-    case AccountTypeLakuPandai
-    case AccountTypeEMoney
+    case accountTypeRegular = 0
+    case accountTypeLakuPandai
+    case accountTypeEMoney
     
-    case AccountTypeAccount = 10
-    case AccountTypeTransfer
-    case AccountTypePayment
-    case AccountTypePurchase
+    case accountTypeAccount = 10
+    case accountTypeTransfer
+    case accountTypePayment
+    case accountTypePurchase
 }
 
 class HomeViewController: BaseViewController {
     var accountType : AccountType!
     var arrayMenu: NSArray!
     
-    static func initWithAccountType(type: AccountType) -> HomeViewController {
+    static func initWithOwnNib() -> HomeViewController {
+        let obj:HomeViewController = HomeViewController.init(nibName: String(describing: self), bundle: nil)
+        return obj
+    }
+    
+    static func initWithAccountType(_ type: AccountType) -> HomeViewController {
         let vc = HomeViewController.initWithOwnNib() as! HomeViewController
         vc.accountType = type
         return vc
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // Do any additional setup after loading the view.
         
@@ -36,27 +41,27 @@ class HomeViewController: BaseViewController {
             [
                 "title" : "title button 1",
                 "icon" : "icon_1",
-                "action" : HomeViewController.initWithAccountType(AccountType.AccountTypeAccount)
+                "action" : HomeViewController.initWithAccountType(AccountType.accountTypeAccount)
             ],
             [
                 "title" : "title button 2",
                 "icon" : "icon_2",
-                "action" : HomeViewController.initWithAccountType(AccountType.AccountTypeTransfer)
+                "action" : HomeViewController.initWithAccountType(AccountType.accountTypeTransfer)
             ],
             [
                 "title" : "title button 2",
                 "icon" : "icon_2",
-                "action" : HomeViewController.initWithAccountType(AccountType.AccountTypeTransfer)
+                "action" : HomeViewController.initWithAccountType(AccountType.accountTypeTransfer)
             ],
             [
                 "title" : "title button 2",
                 "icon" : "icon_2",
-                "action" : HomeViewController.initWithAccountType(AccountType.AccountTypeTransfer)
+                "action" : HomeViewController.initWithAccountType(AccountType.accountTypeTransfer)
             ],
             [
                 "title" : "title button 2",
                 "icon" : "icon_2",
-                "action" : HomeViewController.initWithAccountType(AccountType.AccountTypeTransfer)
+                "action" : HomeViewController.initWithAccountType(AccountType.accountTypeTransfer)
             ]
         ]
         
@@ -104,7 +109,7 @@ class HomeViewController: BaseViewController {
                     }
                     
                     let temp = UIView(frame: CGRect(x: x, y: y, width: size, height: height))
-                    temp.backgroundColor = UIColor.blackColor()
+                    temp.backgroundColor = UIColor.black
                     
                     container.addSubview(temp)
                 }
@@ -112,7 +117,7 @@ class HomeViewController: BaseViewController {
         }
         y += height
         container.frame = CGRect(x: 0, y: 0, width: width, height: y)
-        container.backgroundColor = UIColor.yellowColor()
+        container.backgroundColor = UIColor.yellow
         container.center = view.center
         view.addSubview(container)
     }

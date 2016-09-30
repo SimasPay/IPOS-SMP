@@ -21,25 +21,25 @@ class BaseButton: UIButton {
     func updateUI() {
         self.layer.cornerRadius = 4;
         self.clipsToBounds = true;
-        self.titleLabel?.font = UIFont.systemFontOfSize(20)
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 20)
     }
     
     func updateButtonType1() {
         // background red with text white
         self.backgroundColor = UIColor.init(hexString: color_btn_red)
-        self.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        self.setTitleColor(UIColor.white, for: UIControlState())
     }
     
     func updateButtonType2() {
         // background gray with text white
         self.backgroundColor = UIColor.init(hexString: color_btn_gray)
-        self.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        self.setTitleColor(UIColor.white, for: UIControlState())
     }
     
     func updateButtonType3() {
         // background light grey with color black   
         self.backgroundColor = UIColor.init(hexString:color_btn_gray2)
-        self.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        self.setTitleColor(UIColor.black, for: UIControlState())
     }
 
     /*

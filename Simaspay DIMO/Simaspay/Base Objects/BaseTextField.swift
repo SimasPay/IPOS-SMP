@@ -19,14 +19,14 @@ class BaseTextField: UITextField {
         self.updateUI()
     }
     func updateUI() {
-        let fontTextField = UIFont.systemFontOfSize(16)
+        let fontTextField = UIFont.systemFont(ofSize: 16)
         self.font = fontTextField
     }
     
-    func updateTextFieldWithImageNamed(strImg: String) {
-        self.leftViewMode = UITextFieldViewMode.Always
+    func updateTextFieldWithImageNamed(_ strImg: String) {
+        self.leftViewMode = UITextFieldViewMode.always
         let container = UIView()
-        container.frame = CGRectMake(0, 0, 36, 28)
+        container.frame = CGRect(x: 0, y: 0, width: 36, height: 28)
         let imageView = UIImageView(frame: CGRect(x: 4, y: 0, width: 28, height: 28))
         imageView.image = UIImage(named: strImg)
         container.addSubview(imageView)

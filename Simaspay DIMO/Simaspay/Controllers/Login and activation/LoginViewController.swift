@@ -16,10 +16,15 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet var btnActivation: BaseButton!
     @IBOutlet var btnContactUs: UIButton!
     
+    static func initWithOwnNib() -> LoginViewController {
+        let obj:LoginViewController = LoginViewController.init(nibName: String(describing: self), bundle: nil)
+        return obj
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewLoginTextField.backgroundColor = UIColor.whiteColor()
+        viewLoginTextField.backgroundColor = UIColor.white
         viewLoginTextField.updateViewRoundedWithShadow()
         
         //icon text field
@@ -31,22 +36,22 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         textFieldHpNumber.delegate = self
         textFieldMPin.delegate = self
         
-        btnLogin.setTitle(getString("LoginButtonLogin"), forState: .Normal)
+        btnLogin.setTitle(getString("LoginButtonLogin"), for: UIControlState())
         btnLogin.updateButtonType1()
         
-        btnActivation.setTitle(getString("LoginButtonActivation"), forState: .Normal)
+        btnActivation.setTitle(getString("LoginButtonActivation"), for: UIControlState())
         btnActivation.updateButtonType2()
-        btnActivation.addTarget(self, action:,#selector(EULAViewController.buttonClick) , forControlEvents: .TouchUpInside)
+        btnActivation.addTarget(self, action: #selector(EULAViewController.buttonClick) , for: .touchUpInside)
         
-        btnContactUs.setTitle(getString("LoginButtonContactUs"), forState: .Normal)
+        btnContactUs.setTitle(getString("LoginButtonContactUs"), for: UIControlState())
         btnContactUs .addUnderline()
         
     }
     func buttonClick()  {
-           let vc = EULAViewController.initWithOwnNib()
-          self.animatedFadeIn()
-          self.navigationController?.pushViewController(vc, animated: false)
-       }
+        let vc = EULAViewController.initWithOwnNib()
+        self.animatedFadeIn()
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -55,7 +60,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     
 // MARK: - button action
-    @IBAction func btnLoginAction(sender: AnyObject) {
+    @IBAction func btnLoginAction(_ sender: AnyObject) {
         self.dismissKeyboard()
         
         var message = "";
@@ -70,34 +75,37 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlertWithTitle("", message: message, cancelButtonTitle: "OK")
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: "OK")
             return
         }
         
-        DMBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        if (publicKeys == nil || publicKeys.keys.count == 0) {
-            var dict = NSMutableDictionary() as [NSObject : AnyObject]
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
+        if (publicKeys == nil || publicKeys.allKeys.count == 0) {
+            let dict = NSMutableDictionary()
             dict[TXNNAME] = TXN_GETPUBLC_KEY
             dict[SERVICE] = SERVICE_ACCOUNT
             
-            DIMOAPIManager .callAPIWithParameters(dict) { (responseDict, error) in
-                DMBProgressHUD .hideAllHUDsForView(self.view, animated: true)
+            let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+            DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+                DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+                let responseDict = NSDictionary(dictionary: dict!)
                 DLog("\(responseDict)")
                 
-                if (error != nil) {
+                if (err != nil) {
+                    let error = err as! NSError
                     if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                        DIMOAlertView.showAlertWithTitle("", message: error.userInfo["error"] as! String, cancelButtonTitle: "OK")
+                        DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: "OK")
                     } else {
-                        DIMOAlertView.showAlertWithTitle("", message: error.localizedDescription, cancelButtonTitle: "OK")
+                        DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: "OK")
                     }
                     return
                 }
                 
-                if (responseDict.keys.count == 0) {
-                    DIMOAlertView.showAlertWithTitle(nil, message: "Request Failed.", cancelButtonTitle: "OK")
+                if (responseDict.allKeys.count == 0) {
+                    DIMOAlertView.showAlert(withTitle: nil, message: "Request Failed.", cancelButtonTitle: "OK")
                 } else {
                     // success
-                    if (responseDict.keys.count > 0) {
+                    if (responseDict.allKeys.count > 0) {
                         // set public keys
                         publicKeys = responseDict;
                     }
@@ -113,71 +121,78 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     
     func doLoginRequest() {
-        DMBProgressHUD .hideAllHUDsForView(self.view, animated: true)
-        DMBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
         
-        let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String
-        var dict = NSMutableDictionary() as [NSObject : AnyObject]
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        let dict = NSMutableDictionary()
         dict[TXNNAME] = TXN_LOGIN_KEY
         dict[SERVICE] = SERVICE_ACCOUNT
-        dict[SOURCEMDN] = getNormalisedMDN(textFieldHpNumber.text!)
+        dict[SOURCEMDN] = getNormalisedMDN(textFieldHpNumber.text! as NSString)
         dict[mPIN_STRING] = simasPayRSAencryption(textFieldMPin.text!)
         dict[SIMASPAY_ACTIVITY] = ACTIVITY_STATUS
         
         dict[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
         dict[SOURCE_APP_VERSION_KEY] = version
-        dict[SOURCE_APP_OSVERSION_KEY] = "\(UIDevice.currentDevice().modelName)  \(UIDevice.currentDevice().systemVersion)"
+        dict[SOURCE_APP_OSVERSION_KEY] = "\(UIDevice.current.modelName)  \(UIDevice.current.systemVersion)"
         
-        DIMOAPIManager .callAPIWithParameters(dict) { (dictionary, error) in
-            DMBProgressHUD .hideAllHUDsForView(self.view, animated: true)
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+            let dictionary = NSDictionary(dictionary: dict!)
             DLog("\(dictionary)")
             
-            if (error != nil) {
-                DIMOAlertView.showAlertWithTitle(nil, message: error.localizedDescription, cancelButtonTitle: "OK")
+            if (err != nil) {
+                let error = err as! NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: "OK")
+                } else {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: "OK")
+                }
                 return
             }
             
-            if (dictionary.keys.count == 0) {
-                DIMOAlertView.showAlertWithTitle(nil, message: "Request Failed.", cancelButtonTitle: "OK")
+            if (dictionary.allKeys.count == 0) {
+                DIMOAlertView.showAlert(withTitle: nil, message: "Request Failed.", cancelButtonTitle: "OK")
             } else {
                 let responseDict = dictionary as NSDictionary
-                let messagecode  = responseDict.valueForKeyPath("message.code") as! String
-                let messageText  = responseDict.valueForKeyPath("message.text") as! String
+                let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
+                let messageText  = responseDict.value(forKeyPath: "message.text") as! String
                 
                 if( messagecode == SIMASPAY_LOGIN_SUCCESS_CODE) {
                     _isLogin = true;
-                    _MDNNumber = getNormalisedMDN(self.textFieldHpNumber.text!) as String
+                    _MDNNumber = getNormalisedMDN(self.textFieldHpNumber.text! as NSString) as String
                     _mPINCode = self.textFieldMPin.text
-                    let userKey = dictionary["userAPIKey"]!["text"]
+                    let userKey = dictionary.value(forKeyPath: "userAPIKey.text")
                     _userApiKey = userKey as! String
                     loginResult = dictionary
                     
-                    let isUserType  = responseDict.valueForKeyPath("type.text") as! String
+                    let isUserType  = responseDict.value(forKeyPath: "type.text") as! String
                     
                     
                     if (isUserType == SIMASPAY_LOGIN_AGENT_TYPE) {
                         // AGENT LOGIN FlOW
                         // AGENT FLOW
                         // WARNING: NEED TO IMPLEMENT AGENT FLOW
-                        DIMOAlertView.showAlertWithTitle("Not implemented", message: "AGENT", cancelButtonTitle: "OK")
+                        DIMOAlertView.showAlert(withTitle: "Not implemented", message: "AGENT", cancelButtonTitle: "OK")
                     } else {
-                        let isBank  = responseDict.valueForKeyPath("isBank.text") as! String
+                        let isBank  = responseDict.value(forKeyPath: "isBank.text") as! String
                         let vc = HomeViewController.initWithOwnNib() as! HomeViewController
                         
                         if (isBank == SIMASPAY_LOGIN_REGULAR_TYPE) {
                             _SOURCEPOCKETCODE = "2"
                             _DESTPOCKETCODE = "2"
-                            vc.accountType = .AccountTypeRegular
+                            vc.accountType = .accountTypeRegular
                         } else {
                             _SOURCEPOCKETCODE = "6"
                             _DESTPOCKETCODE = "2"
-                            vc.accountType = .AccountTypeLakuPandai
+                            vc.accountType = .accountTypeLakuPandai
                         }
                         
                         self.navigationController?.pushViewController(vc, animated: true)
                     }
                 } else {
-                    DIMOAlertView.showAlertWithTitle("", message: messageText, cancelButtonTitle: "OK")
+                    DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: "OK")
                 }
                 
                 self.textFieldMPin.text! = ""
@@ -185,16 +200,16 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         }
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
         var maxLength = 6
         if (textFieldHpNumber == textField) {
             maxLength = 15
         }
         
-        let currentString: NSString = textField.text!
+        let currentString: NSString = textField.text! as NSString
         let newString: NSString =
-            currentString.stringByReplacingCharactersInRange(range, withString: string)
+            currentString.replacingCharacters(in: range, with: string) as NSString
         return newString.length <= maxLength
         
         

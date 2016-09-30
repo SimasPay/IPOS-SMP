@@ -361,6 +361,7 @@
 				TargetAttributes = {
 					BE1772831D92859B00A27E06 = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -574,6 +575,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.id.dimo.Simaspay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dimo-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -588,6 +590,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.id.dimo.Simaspay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dimo-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

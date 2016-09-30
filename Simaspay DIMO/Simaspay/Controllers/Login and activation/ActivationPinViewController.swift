@@ -18,17 +18,19 @@ class ActivationPinViewController: BaseViewController {
     @IBOutlet var viewTextField: UIView!
     @IBOutlet var btnSaveMpin: BaseButton!
     
+    static func initWithOwnNib() -> ActivationPinViewController {
+        let obj:ActivationPinViewController = ActivationPinViewController.init(nibName: String(describing: self), bundle: nil)
+        return obj
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let infoString = NSString(format: String("ActivationLabelInfoInputMpin"), "Bayu")
-
-        
+        let infoString = String(format: String("ActivationLabelInfoInputMpin"), "Bayu")
         lblInfoUser.text = infoString as String
-        lblInfoUser.textAlignment = .Center
+        lblInfoUser.textAlignment = .center
         lblInfoUser.numberOfLines = 3
         
-        viewTextField.backgroundColor = UIColor.whiteColor()
+        viewTextField.backgroundColor = UIColor.white
         viewTextField.updateViewRoundedWithShadow()
         tfMpin.updateTextFieldWithImageNamed("icon_Mpin")
         tfMpin.placeholder = getString("ActivationPlaceholderMpin")
@@ -37,8 +39,8 @@ class ActivationPinViewController: BaseViewController {
         tfConfirmMpin.placeholder = getString("ActivationPlaceholderConfirmMpin")
         
         btnSaveMpin.updateButtonType1()
-        btnSaveMpin.setTitle(getString("ActivationButtonSaveMpin"), forState: .Normal)
-        btnSaveMpin.addTarget(self, action:,#selector(EULAViewController.buttonClick) , forControlEvents: .TouchUpInside)
+        btnSaveMpin.setTitle(getString("ActivationButtonSaveMpin"), for: UIControlState())
+        btnSaveMpin.addTarget(self, action: #selector(EULAViewController.buttonClick) , for: .touchUpInside)
 
         
     }

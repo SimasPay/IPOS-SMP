@@ -11,12 +11,18 @@ import UIKit
 class ActivationSuccessViewController: BaseViewController {
 
     @IBOutlet var btnOK: BaseButton!
+    
+    static func initWithOwnNib() -> ActivationSuccessViewController {
+        let obj:ActivationSuccessViewController = ActivationSuccessViewController.init(nibName: String(describing: self), bundle: nil)
+        return obj
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         btnOK.updateButtonType1()
-        btnOK.setTitle(getString("ActivationButtonOk"), forState: .Normal)
+        btnOK.setTitle(getString("ActivationButtonOk"), for: UIControlState())
 
     }
 

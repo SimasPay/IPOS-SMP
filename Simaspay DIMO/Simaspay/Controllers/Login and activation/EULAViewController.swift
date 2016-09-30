@@ -15,36 +15,40 @@ class EULAViewController: BaseViewController {
     @IBOutlet var btnAgree: BaseButton!
     @IBOutlet var viewFrame: UIView!
  
+    static func initWithOwnNib() -> EULAViewController {
+        let obj:EULAViewController = EULAViewController.init(nibName: String(describing: self), bundle: nil)
+        return obj
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         labelTitle.text = "Syarat dan Ketentuan"
-        lblTitle.font = UIFont.boldSystemFontOfSize(19)
+        lblTitle.font = UIFont.boldSystemFont(ofSize: 19)
         
         btnAgree.updateButtonType1()
-        btnAgree.setTitle(getString("EulaButtonAgree"), forState: .Normal)
+        btnAgree.setTitle(getString("EulaButtonAgree"), for: UIControlState())
         btnDisagree.updateButtonType3()
-        btnDisagree.setTitle(getString("EulaButtonDisagree"), forState: .Normal)
+        btnDisagree.setTitle(getString("EulaButtonDisagree"), for: UIControlState())
         
         
-        viewFrame.backgroundColor = UIColor.whiteColor()
+        viewFrame.backgroundColor = UIColor.white
         viewFrame.updateViewRoundedWithShadow()
         let padding:CGFloat = 12.0
         let textView = UITextView()
-        textView.frame = CGRectMake(padding, 0 , viewFrame.bounds.width - (2 * padding) , viewFrame.bounds.height)
+        textView.frame = CGRect(x: padding, y: 0 , width: viewFrame.bounds.width - (2 * padding) , height: viewFrame.bounds.height)
         textView.text = getString("EulaContent")
-        textView.editable = false
+        textView.isEditable = false
         viewFrame.addSubview(textView)
         
-        btnAgree.addTarget(self, action:,#selector(EULAViewController.buttonClick) , forControlEvents: .TouchUpInside)
+        btnAgree.addTarget(self, action: #selector(EULAViewController.buttonClick) , for: .touchUpInside)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
 

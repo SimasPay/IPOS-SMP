@@ -13,12 +13,17 @@ class SplashScreenViewController: BaseViewController {
     @IBOutlet var imgLogo: UIImageView!
     @IBOutlet var imgLogoSinarmas: UIImageView!
     
-    var timer = NSTimer()
+    var timer = Timer()
+    
+    static func initWithOwnNib() -> SplashScreenViewController {
+        let obj:SplashScreenViewController = SplashScreenViewController.init(nibName: String(describing: self), bundle: nil)
+        return obj
+    }
     
     override func viewDidLoad() {   
         super.viewDidLoad()
     
-        lblWelcome.textAlignment = .Center
+        lblWelcome.textAlignment = .center
         lblWelcome.text = getString("SplashLableWelcome")
         
         imgLogo.image = UIImage(named: "logo_Image")
@@ -30,9 +35,9 @@ class SplashScreenViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.8, target: self, selector:, #selector(SplashScreenViewController.firstPage), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(SplashScreenViewController.firstPage), userInfo: nil, repeats: false)
     }
     
     func firstPage() {

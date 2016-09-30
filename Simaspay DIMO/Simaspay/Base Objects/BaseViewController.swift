@@ -13,17 +13,12 @@ class BaseViewController: UIViewController {
     var btnBack: BaseButton!
     var ivBackground : UIImageView!
     
-    static func initWithOwnNib() -> BaseViewController {
-        let obj:UIViewController = super.init(nibName: String(self), bundle: nil)
-        return obj as! BaseViewController;
-    }
-    
     func showBackgroundImage() {
         if (ivBackground == nil) {
             ivBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: DIMOUtility.screenSize().width, height: DIMOUtility.screenSize().height))
             ivBackground.image = UIImage(named: "background-image")
         }
-        view.insertSubview(ivBackground, atIndex: 0)
+        view.insertSubview(ivBackground, at: 0)
     }
     
     override func viewDidLoad() {
@@ -37,7 +32,7 @@ class BaseViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.dismissKeyboard()
     }
@@ -48,11 +43,11 @@ class BaseViewController: UIViewController {
         view.endEditing(true)
     }
     
-    func showTitle(stringTitle : String) {
+    func showTitle(_ stringTitle : String) {
         if (lblTitle == nil) {
             lblTitle = BaseLabel();
             lblTitle.frame = CGRect(x: 0, y: 20, width:DIMOUtility.screenSize().width, height: 44)
-            lblTitle.textAlignment = .Center
+            lblTitle.textAlignment = .center
         }
         lblTitle.text = stringTitle;
         view.addSubview(lblTitle)
@@ -61,14 +56,14 @@ class BaseViewController: UIViewController {
     func showBackButton() {
         if (btnBack == nil) {
             btnBack = BaseButton(frame: CGRect(x: 0, y: 20, width: 44, height: 44))
-            btnBack.addTarget(self, action: #selector(BaseViewController.btnBackAction), forControlEvents: UIControlEvents.TouchUpInside)
-            btnBack.setImage(UIImage(named: "btnBack"), forState: UIControlState.Normal)
+            btnBack.addTarget(self, action: #selector(BaseViewController.btnBackAction), for: UIControlEvents.touchUpInside)
+            btnBack.setImage(UIImage(named: "btnBack"), for: UIControlState())
         }
         view.addSubview(btnBack)
     }
     
     func btnBackAction() {
-        navigationController?.popViewControllerAnimated(true)
+        navigationController?.popViewController(animated: true)
     }
 
     func animatedFadeIn() {
@@ -76,7 +71,7 @@ class BaseViewController: UIViewController {
         transition.duration = 0.1;
         transition.type = kCATransitionFade;
         transition.subtype = kCATransitionFromTop;
-        navigationController!.view.layer.addAnimation(transition, forKey: kCATransition)
+        navigationController!.view.layer.add(transition, forKey: kCATransition)
     }
     
     override func didReceiveMemoryWarning() {
@@ -84,8 +79,8 @@ class BaseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent;
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent;
     }
 
     /*

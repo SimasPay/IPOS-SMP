@@ -21,15 +21,20 @@ class ActivationViewController: BaseViewController {
     @IBOutlet var btnNext: BaseButton!
     @IBOutlet var btnResendOTP: UIButton!
     @IBOutlet var btnLogin: UIButton!
+    
+    static func initWithOwnNib() -> ActivationViewController {
+        let obj:ActivationViewController = ActivationViewController.init(nibName: String(describing: self), bundle: nil)
+        return obj
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         lblInfoActivation.text = getString("ActivationLabelInfo")
-        lblInfoActivation.textAlignment = .Center
+        lblInfoActivation.textAlignment = .center
         lblInfoActivation.numberOfLines = 3
         
-        viewTextField.backgroundColor = UIColor.whiteColor()
+        viewTextField.backgroundColor = UIColor.white
         viewTextField.updateViewRoundedWithShadow()
         tfHpNumber.updateTextFieldWithImageNamed("icon_Mobile")
         tfHpNumber.placeholder = getString("LoginPlaceholderNoHandphone")
@@ -38,28 +43,28 @@ class ActivationViewController: BaseViewController {
         tfActivationCode.placeholder = getString("ActivationPlaceholderOTP")
         
         lblQuestionNoOTP.text = getString("ActivationQuestionNoOTP")
-        lblQuestionNoOTP.font = UIFont.systemFontOfSize(14)
-        lblQuestionNoOTP.textAlignment = .Right
+        lblQuestionNoOTP.font = UIFont.systemFont(ofSize: 14)
+        lblQuestionNoOTP.textAlignment = .right
         
         lblQuestionLogin.text = getString("ActivationQuestionForLogin")
-        lblQuestionLogin.font = UIFont.systemFontOfSize(16)
-        lblQuestionLogin.textAlignment = .Right
+        lblQuestionLogin.font = UIFont.systemFont(ofSize: 16)
+        lblQuestionLogin.textAlignment = .right
         
-        btnResendOTP.setTitle(getString("ActivationButtonResend"), forState: .Normal)
-        btnResendOTP.setTitleColor(UIColor.init(hexString: color_text_default), forState: .Normal)
-        btnResendOTP.titleLabel?.font = UIFont.systemFontOfSize(14)
+        btnResendOTP.setTitle(getString("ActivationButtonResend"), for: UIControlState())
+        btnResendOTP.setTitleColor(UIColor.init(hexString: color_text_default), for: UIControlState())
+        btnResendOTP.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btnResendOTP.addUnderline()
         
-        btnLogin.setTitle(getString("LoginButtonLogin"), forState: .Normal)
-        btnLogin.setTitleColor(UIColor.init(hexString: color_text_default), forState: .Normal)
-        btnLogin.titleLabel?.font = UIFont.systemFontOfSize(16)
+        btnLogin.setTitle(getString("LoginButtonLogin"), for: UIControlState())
+        btnLogin.setTitleColor(UIColor.init(hexString: color_text_default), for: UIControlState())
+        btnLogin.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         btnLogin.addUnderline()
         
         btnNext.updateButtonType1()
-        btnNext.setTitle(getString("ActivationButtonNext"), forState: .Normal)
+        btnNext.setTitle(getString("ActivationButtonNext"), for: UIControlState())
 
     }
-    @IBAction func actionNextButton(sender: AnyObject) {
+    @IBAction func actionNextButton(_ sender: AnyObject) {
         let vc = ActivationPinViewController.initWithOwnNib()
         self.navigationController?.pushViewController(vc, animated: false)
     }

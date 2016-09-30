@@ -20,7 +20,7 @@ class BaseLabel: UILabel {
     }
     func updateForDefaultLabel() {
         // system font with size 16
-        self.font = UIFont.systemFontOfSize(16)
+        self.font = UIFont.systemFont(ofSize: 16)
         self.textColor = UIColor.init(hexString: color_text_default)
     }
     /*

@@ -9,8 +9,8 @@
 import Foundation
 
 var strLocale: String!
-var publicKeys: [NSObject : AnyObject]!
-var loginResult: [NSObject : AnyObject]!
+var publicKeys: NSDictionary!
+var loginResult: NSDictionary!
 var _isLogin = false
 var _MDNNumber: String!
 var _mPINCode: String!
@@ -20,27 +20,27 @@ var _SOURCEPOCKETCODE: String!
 var _DESTPOCKETCODE: String!
 
 enum AppLocale: Int {
-    case AppLocaleEnglish = 1, AppLocaleIndonesia
+    case appLocaleEnglish = 1, appLocaleIndonesia
 }
 
-func DLog(str: String) {
-    DIMOUtility.DIMOLog(str)
+func DLog(_ str: String) {
+    DIMOUtility.dimoLog(str)
 }
 
-func setLocale(appLocale: AppLocale) {
-    if (appLocale == .AppLocaleEnglish) {
+func setLocale(_ appLocale: AppLocale) {
+    if (appLocale == .appLocaleEnglish) {
         strLocale = "ENGLISH"
     } else {
         strLocale = "INDONESIAN"
     }
 }
 
-func getString(key: String) -> String{
+func getString(_ key: String) -> String{
     var result: NSString =
-        NSLocalizedString(key, tableName: strLocale, bundle: NSBundle.mainBundle(), value: "", comment: "")
-    if (result.isEqualToString(key)) {
+        NSLocalizedString(key, tableName: strLocale, bundle: Bundle.main, value: "", comment: "") as NSString
+    if (result.isEqual(to: key)) {
         result =
-            NSLocalizedString(key, tableName: "INDONESIAN", bundle: NSBundle.mainBundle(), value: "", comment: "")
+            NSLocalizedString(key, tableName: "INDONESIAN", bundle: Bundle.main, value: "", comment: "") as NSString
     }
     
     if (result.length == 0) {
@@ -49,26 +49,26 @@ func getString(key: String) -> String{
     return result as String;
 }
 
-func getNormalisedMDN(sourceMDN:NSString)->NSString {
+func getNormalisedMDN(_ sourceMDN:NSString)->NSString {
     var newSourceMdn = sourceMDN
     if(newSourceMdn.length > 1 &&  newSourceMdn.hasPrefix("0"))
     {
-        newSourceMdn = newSourceMdn.substringFromIndex(1)
-        return "62\(newSourceMdn)"
+        newSourceMdn = newSourceMdn.substring(from: 1) as NSString
+        return "62\(newSourceMdn)" as NSString
     }
     if(!(newSourceMdn.hasPrefix("62")))
     {
-        return "62\(newSourceMdn)"
+        return "62\(newSourceMdn)" as NSString
     }
     return newSourceMdn
 }
 
-func simasPayRSAencryption( inputString: String)->NSString {
+func simasPayRSAencryption( _ inputString: String)-> String {
     let publickKeyResponse = publicKeys as NSDictionary
-    let publicKey = publickKeyResponse.valueForKeyPath("PublicKeyModulus.text") as! String
-    let exponentKey = publickKeyResponse.valueForKeyPath("PublicKeyExponent.text") as! String
+    let publicKey = publickKeyResponse.value(forKeyPath: "PublicKeyModulus.text") as! String
+    let exponentKey = publickKeyResponse.value(forKeyPath: "PublicKeyExponent.text") as! String
     
     let rsa = XRSA.init(publicKeyModulus: publicKey, withPublicKeyExponent: exponentKey)
-    let encryptedString = rsa.encryptToString(inputString)
-    return encryptedString
+    let encryptedString = rsa?.encrypt(to: inputString)
+    return encryptedString!
 }

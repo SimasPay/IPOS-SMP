@@ -10,24 +10,24 @@ import Foundation
 
 extension UIView {
     func updateViewRoundedWithShadow() {
-        let temp = UIView(frame: CGRect(origin: CGPointZero, size: frame.size))
+        let temp = UIView(frame: CGRect(origin: CGPoint.zero, size: frame.size))
         temp.backgroundColor = backgroundColor
         temp.layer.cornerRadius = 5
         temp.clipsToBounds = true
-        insertSubview(temp, atIndex: 0)
+        insertSubview(temp, at: 0)
         
-        self.backgroundColor = UIColor.clearColor()
-        layer.shadowColor = UIColor.blackColor().colorWithAlphaComponent(0.23).CGColor
+        self.backgroundColor = UIColor.clear
+        layer.shadowColor = UIColor.black.withAlphaComponent(0.23).cgColor
         layer.shadowOpacity = 0.5;
-        layer.shadowOffset = CGSizeMake(2, 2);
+        layer.shadowOffset = CGSize(width: 2, height: 2);
         layer.shadowRadius = 0.5;
     }
     
     func addUnderline() {
         //buttonUnderline
         let line = CALayer()
-        line.frame = CGRectMake(0, self.frame.size.height - 1 , self.frame.size.width, 1)
-        line.backgroundColor = UIColor.init(hexString: color_line_gray).CGColor
+        line.frame = CGRect(x: 0, y: self.frame.size.height - 1 , width: self.frame.size.width, height: 1)
+        line.backgroundColor = UIColor.init(hexString: color_line_gray).cgColor
         self.layer.addSublayer(line)
     }
 }
@@ -47,7 +47,7 @@ public extension UIDevice {
         uname(&systemInfo)
         let machineMirror = Mirror(reflecting: systemInfo.machine)
         let identifier = machineMirror.children.reduce("") { identifier, element in
-            guard let value = element.value as? Int8 where value != 0 else { return identifier }
+            guard let value = element.value as? Int8 , value != 0 else { return identifier }
             return identifier + String(UnicodeScalar(UInt8(value)))
         }
         
