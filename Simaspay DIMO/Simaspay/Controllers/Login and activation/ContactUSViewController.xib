@@ -1,19 +1,173 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactUSViewController" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactUSViewController" customModule="Simaspay" customModuleProvider="target">
             <connections>
+                <outlet property="lblEmail" destination="VcP-ig-OoP" id="wSM-SZ-oIc"/>
+                <outlet property="lblFirstTlp" destination="atR-Sp-2eT" id="zyl-um-vIg"/>
+                <outlet property="lblSecondTlp" destination="M8q-S3-CIB" id="7AV-7i-QaH"/>
+                <outlet property="lblTitleEmail" destination="nTA-TK-X5P" id="RDQ-8O-dnW"/>
+                <outlet property="lblTitleTlp" destination="XkI-El-fID" id="Scm-qB-Zvs"/>
+                <outlet property="lblTitleWeb" destination="hHz-nd-1Nm" id="HTs-wV-Vc1"/>
+                <outlet property="lblWeb" destination="Xpj-Wg-wD2" id="DZw-8u-vOK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewMainFrame" destination="p46-6t-u4f" id="Ub9-4i-RIl"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_SinarmasBank_Image" translatesAutoresizingMaskIntoConstraints="NO" id="KJd-gP-vE4">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="167" id="YuP-6Y-Q2c"/>
+                        <constraint firstAttribute="height" constant="40" id="byZ-cz-hqb"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zmj-zv-hDO">
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p46-6t-u4f">
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XkI-El-fID" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="45" id="gBc-BZ-zqu"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NCQ-qw-wYc">
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atR-Sp-2eT" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_Phone" translatesAutoresizingMaskIntoConstraints="NO" id="cqr-v4-bub">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="22" id="7Zf-t2-Zn6"/>
+                                                <constraint firstAttribute="height" constant="22" id="a6A-DM-lKc"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="atR-Sp-2eT" firstAttribute="leading" secondItem="NCQ-qw-wYc" secondAttribute="leading" id="6mk-hD-Ub2"/>
+                                        <constraint firstAttribute="bottom" secondItem="atR-Sp-2eT" secondAttribute="bottom" id="F4j-6a-y96"/>
+                                        <constraint firstAttribute="trailing" secondItem="atR-Sp-2eT" secondAttribute="trailing" constant="45" id="I5E-jb-m1X"/>
+                                        <constraint firstItem="cqr-v4-bub" firstAttribute="centerY" secondItem="NCQ-qw-wYc" secondAttribute="centerY" id="cDA-eM-TJg"/>
+                                        <constraint firstItem="atR-Sp-2eT" firstAttribute="top" secondItem="NCQ-qw-wYc" secondAttribute="top" id="jQw-1C-h9X"/>
+                                        <constraint firstItem="cqr-v4-bub" firstAttribute="leading" secondItem="atR-Sp-2eT" secondAttribute="trailing" id="m2h-E3-rkk"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lhG-kS-9GP">
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M8q-S3-CIB" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_Phone" translatesAutoresizingMaskIntoConstraints="NO" id="vcJ-bA-594">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="22" id="5eA-bn-Cd1"/>
+                                                <constraint firstAttribute="width" constant="22" id="wvo-Xt-WGY"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="M8q-S3-CIB" firstAttribute="leading" secondItem="lhG-kS-9GP" secondAttribute="leading" id="ACP-r7-15Y"/>
+                                        <constraint firstAttribute="trailing" secondItem="M8q-S3-CIB" secondAttribute="trailing" constant="45" id="Ac8-i9-xHq"/>
+                                        <constraint firstAttribute="bottom" secondItem="M8q-S3-CIB" secondAttribute="bottom" id="Cud-7Q-soe"/>
+                                        <constraint firstItem="vcJ-bA-594" firstAttribute="centerY" secondItem="lhG-kS-9GP" secondAttribute="centerY" id="JBC-7A-xkK"/>
+                                        <constraint firstItem="vcJ-bA-594" firstAttribute="leading" secondItem="M8q-S3-CIB" secondAttribute="trailing" constant="1" id="QYK-5v-Vmf"/>
+                                        <constraint firstItem="M8q-S3-CIB" firstAttribute="top" secondItem="lhG-kS-9GP" secondAttribute="top" id="iPC-ga-ly1"/>
+                                    </constraints>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTA-TK-X5P" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcP-ig-OoP" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHz-nd-1Nm" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xpj-Wg-wD2" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="lhG-kS-9GP" firstAttribute="leading" secondItem="NCQ-qw-wYc" secondAttribute="leading" id="1KQ-4a-ghC"/>
+                                <constraint firstAttribute="height" constant="315" id="31Y-kc-Imz"/>
+                                <constraint firstItem="Xpj-Wg-wD2" firstAttribute="width" secondItem="hHz-nd-1Nm" secondAttribute="width" id="3qw-hb-cc2"/>
+                                <constraint firstItem="nTA-TK-X5P" firstAttribute="height" secondItem="lhG-kS-9GP" secondAttribute="height" id="ArO-fP-jgc"/>
+                                <constraint firstItem="hHz-nd-1Nm" firstAttribute="width" secondItem="VcP-ig-OoP" secondAttribute="width" id="CPY-vV-syS"/>
+                                <constraint firstItem="hHz-nd-1Nm" firstAttribute="top" secondItem="VcP-ig-OoP" secondAttribute="bottom" id="GfJ-ib-s1t"/>
+                                <constraint firstItem="Xpj-Wg-wD2" firstAttribute="top" secondItem="hHz-nd-1Nm" secondAttribute="bottom" id="Kh6-4y-VVN"/>
+                                <constraint firstItem="VcP-ig-OoP" firstAttribute="leading" secondItem="nTA-TK-X5P" secondAttribute="leading" id="LK2-6d-ECv"/>
+                                <constraint firstItem="XkI-El-fID" firstAttribute="top" secondItem="p46-6t-u4f" secondAttribute="top" id="NJq-vF-q5T"/>
+                                <constraint firstItem="nTA-TK-X5P" firstAttribute="leading" secondItem="lhG-kS-9GP" secondAttribute="leading" id="QcS-Zc-dsr"/>
+                                <constraint firstItem="NCQ-qw-wYc" firstAttribute="top" secondItem="XkI-El-fID" secondAttribute="bottom" id="S7c-Ac-z1y"/>
+                                <constraint firstAttribute="width" constant="270" id="WOf-Qq-XBR"/>
+                                <constraint firstItem="lhG-kS-9GP" firstAttribute="height" secondItem="NCQ-qw-wYc" secondAttribute="height" id="Xf9-gu-Vw5"/>
+                                <constraint firstItem="XkI-El-fID" firstAttribute="leading" secondItem="p46-6t-u4f" secondAttribute="leading" constant="16" id="Xz0-fo-aUT"/>
+                                <constraint firstItem="nTA-TK-X5P" firstAttribute="width" secondItem="lhG-kS-9GP" secondAttribute="width" id="YNw-yT-8E1"/>
+                                <constraint firstItem="NCQ-qw-wYc" firstAttribute="leading" secondItem="XkI-El-fID" secondAttribute="leading" id="Yr5-gK-orO"/>
+                                <constraint firstItem="NCQ-qw-wYc" firstAttribute="height" secondItem="XkI-El-fID" secondAttribute="height" id="b4r-5s-4yc"/>
+                                <constraint firstItem="VcP-ig-OoP" firstAttribute="top" secondItem="nTA-TK-X5P" secondAttribute="bottom" id="cSi-tn-smw"/>
+                                <constraint firstItem="VcP-ig-OoP" firstAttribute="width" secondItem="nTA-TK-X5P" secondAttribute="width" id="dX6-cU-1ba"/>
+                                <constraint firstItem="lhG-kS-9GP" firstAttribute="top" secondItem="NCQ-qw-wYc" secondAttribute="bottom" id="djH-Zw-vjy"/>
+                                <constraint firstItem="Xpj-Wg-wD2" firstAttribute="height" secondItem="hHz-nd-1Nm" secondAttribute="height" id="eB6-KL-8gf"/>
+                                <constraint firstItem="lhG-kS-9GP" firstAttribute="width" secondItem="NCQ-qw-wYc" secondAttribute="width" id="eoF-Lg-G6R"/>
+                                <constraint firstItem="NCQ-qw-wYc" firstAttribute="width" secondItem="XkI-El-fID" secondAttribute="width" id="j4f-8S-eEg"/>
+                                <constraint firstItem="nTA-TK-X5P" firstAttribute="top" secondItem="lhG-kS-9GP" secondAttribute="bottom" id="jis-RT-FFL"/>
+                                <constraint firstItem="hHz-nd-1Nm" firstAttribute="height" secondItem="VcP-ig-OoP" secondAttribute="height" id="l9x-tp-VIe"/>
+                                <constraint firstItem="hHz-nd-1Nm" firstAttribute="leading" secondItem="VcP-ig-OoP" secondAttribute="leading" id="mQW-Q5-tiA"/>
+                                <constraint firstItem="Xpj-Wg-wD2" firstAttribute="leading" secondItem="hHz-nd-1Nm" secondAttribute="leading" id="trc-xu-cm5"/>
+                                <constraint firstAttribute="trailing" secondItem="XkI-El-fID" secondAttribute="trailing" id="wvs-Pe-ilf"/>
+                                <constraint firstItem="VcP-ig-OoP" firstAttribute="height" secondItem="nTA-TK-X5P" secondAttribute="height" id="xbg-4u-zdo"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="p46-6t-u4f" firstAttribute="centerX" secondItem="zmj-zv-hDO" secondAttribute="centerX" id="IL4-r2-iJL"/>
+                        <constraint firstItem="p46-6t-u4f" firstAttribute="centerY" secondItem="zmj-zv-hDO" secondAttribute="centerY" id="WPg-x3-IJd"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="KJd-gP-vE4" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.35" id="4fa-bX-bj0"/>
+                <constraint firstItem="KJd-gP-vE4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="6aW-T2-bDE"/>
+                <constraint firstItem="zmj-zv-hDO" firstAttribute="top" secondItem="KJd-gP-vE4" secondAttribute="bottom" constant="35" id="C6d-YQ-bqZ"/>
+                <constraint firstAttribute="trailing" secondItem="zmj-zv-hDO" secondAttribute="trailing" id="LtY-g6-izb"/>
+                <constraint firstAttribute="bottom" secondItem="zmj-zv-hDO" secondAttribute="bottom" id="ddv-8Y-JlP"/>
+                <constraint firstItem="zmj-zv-hDO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sNN-fN-7Dw"/>
+            </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="icon_Phone" width="23" height="23"/>
+        <image name="logo_SinarmasBank_Image" width="168" height="40"/>
+    </resources>
 </document>

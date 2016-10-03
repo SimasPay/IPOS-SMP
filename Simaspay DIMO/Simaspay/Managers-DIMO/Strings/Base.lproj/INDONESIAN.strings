@@ -28,3 +28,6 @@
 "EulaButtonAgree" = "Setuju";
 "EulaButtonDisagree" = "Tolak";
 "EulaContent" = "dummy content";
+
+//Contact
+"ContactUsTitle" = "Hubungi Kami";
