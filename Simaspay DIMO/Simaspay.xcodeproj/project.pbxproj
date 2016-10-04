@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35904FD01DA3AC9B00BDD3AE /* StatusTransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35904FCE1DA3AC9B00BDD3AE /* StatusTransferViewController.swift */; };
+		35904FD11DA3AC9B00BDD3AE /* StatusTransferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35904FCF1DA3AC9B00BDD3AE /* StatusTransferViewController.xib */; };
+		35904FD41DA3ACCA00BDD3AE /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35904FD21DA3ACCA00BDD3AE /* ConfirmationViewController.swift */; };
+		35904FD51DA3ACCA00BDD3AE /* ConfirmationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35904FD31DA3ACCA00BDD3AE /* ConfirmationViewController.xib */; };
+		35E8527B1DA26E73002C10CD /* TransferBankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E852791DA26E73002C10CD /* TransferBankViewController.swift */; };
+		35E8527C1DA26E73002C10CD /* TransferBankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35E8527A1DA26E73002C10CD /* TransferBankViewController.xib */; };
 		35F93ABF1D93870D00FF803A /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F93ABD1D93870D00FF803A /* SplashScreenViewController.swift */; };
 		35F93AC01D93870D00FF803A /* SplashScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35F93ABE1D93870D00FF803A /* SplashScreenViewController.xib */; };
 		BE1772881D92859B00A27E06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1772871D92859B00A27E06 /* AppDelegate.swift */; };
@@ -60,6 +66,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35904FCE1DA3AC9B00BDD3AE /* StatusTransferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusTransferViewController.swift; path = Controllers/StatusTransferViewController.swift; sourceTree = "<group>"; };
+		35904FCF1DA3AC9B00BDD3AE /* StatusTransferViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StatusTransferViewController.xib; path = Controllers/StatusTransferViewController.xib; sourceTree = "<group>"; };
+		35904FD21DA3ACCA00BDD3AE /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmationViewController.swift; path = Controllers/ConfirmationViewController.swift; sourceTree = "<group>"; };
+		35904FD31DA3ACCA00BDD3AE /* ConfirmationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConfirmationViewController.xib; path = Controllers/ConfirmationViewController.xib; sourceTree = "<group>"; };
+		35E852791DA26E73002C10CD /* TransferBankViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransferBankViewController.swift; path = Controllers/TransferBankViewController.swift; sourceTree = "<group>"; };
+		35E8527A1DA26E73002C10CD /* TransferBankViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TransferBankViewController.xib; path = Controllers/TransferBankViewController.xib; sourceTree = "<group>"; };
 		35F93ABD1D93870D00FF803A /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SplashScreenViewController.swift; path = Controllers/SplashScreenViewController.swift; sourceTree = "<group>"; };
 		35F93ABE1D93870D00FF803A /* SplashScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SplashScreenViewController.xib; path = Controllers/SplashScreenViewController.xib; sourceTree = "<group>"; };
 		BE1772841D92859B00A27E06 /* Simaspay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Simaspay.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,6 +276,12 @@
 				35F93ABE1D93870D00FF803A /* SplashScreenViewController.xib */,
 				BE17731C1D92867900A27E06 /* Login and activation */,
 				BE204A911D94D7CA0013A483 /* HOME & MENU */,
+				35E852791DA26E73002C10CD /* TransferBankViewController.swift */,
+				35E8527A1DA26E73002C10CD /* TransferBankViewController.xib */,
+				35904FD21DA3ACCA00BDD3AE /* ConfirmationViewController.swift */,
+				35904FD31DA3ACCA00BDD3AE /* ConfirmationViewController.xib */,
+				35904FCE1DA3AC9B00BDD3AE /* StatusTransferViewController.swift */,
+				35904FCF1DA3AC9B00BDD3AE /* StatusTransferViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -394,8 +412,11 @@
 				BE1772921D92859B00A27E06 /* LaunchScreen.storyboard in Resources */,
 				35F93AC01D93870D00FF803A /* SplashScreenViewController.xib in Resources */,
 				BE204A7E1D93CC9C0013A483 /* EULAViewController.xib in Resources */,
+				35904FD51DA3ACCA00BDD3AE /* ConfirmationViewController.xib in Resources */,
 				BE9D030F1D94E18D0070894E /* ActivationSuccessViewController.xib in Resources */,
+				35E8527C1DA26E73002C10CD /* TransferBankViewController.xib in Resources */,
 				BEC416071D9385B9000C3CF4 /* INDONESIAN.strings in Resources */,
+				35904FD11DA3AC9B00BDD3AE /* StatusTransferViewController.xib in Resources */,
 				BE204A821D93CCAE0013A483 /* ActivationViewController.xib in Resources */,
 				BE17728F1D92859B00A27E06 /* Assets.xcassets in Resources */,
 				BE9D02FD1D94DA1D0070894E /* HomeViewController.xib in Resources */,
@@ -410,14 +431,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35904FD41DA3ACCA00BDD3AE /* ConfirmationViewController.swift in Sources */,
 				BEC415DE1D928E18000C3CF4 /* LoginViewController.swift in Sources */,
 				BE1773011D9285DE00A27E06 /* DAFHTTPRequestOperationManager.m in Sources */,
 				BEC415E41D928E92000C3CF4 /* BaseViewController.swift in Sources */,
+				35E8527B1DA26E73002C10CD /* TransferBankViewController.swift in Sources */,
 				35F93ABF1D93870D00FF803A /* SplashScreenViewController.swift in Sources */,
 				BE9D030E1D94E18D0070894E /* ActivationSuccessViewController.swift in Sources */,
 				BE204A731D9396510013A483 /* Utilities.swift in Sources */,
 				BE9D03021D94DA7F0070894E /* BasicEncodingRules.m in Sources */,
 				BE204A7D1D93CC9C0013A483 /* EULAViewController.swift in Sources */,
+				35904FD01DA3AC9B00BDD3AE /* StatusTransferViewController.swift in Sources */,
 				BE1773041D9285DE00A27E06 /* DAFSecurityPolicy.m in Sources */,
 				BEC416031D9385B9000C3CF4 /* DIMOLocationManager.m in Sources */,
 				BE204A861D93D5A00013A483 /* Constants.swift in Sources */,

@@ -31,7 +31,7 @@ class ContactUSViewController: BaseViewController {
         self.showBackButton()
         
         self.viewMainFrame.layer.cornerRadius = 5.0;
-        self.viewMainFrame.layer.borderColor = UIColor.init(hexString: "D1D1D1").cgColor
+        self.viewMainFrame.layer.borderColor = UIColor.init(hexString: color_border).cgColor
         self.viewMainFrame.layer.borderWidth = 0.5
         self.viewMainFrame.clipsToBounds = true;
         
@@ -51,10 +51,6 @@ class ContactUSViewController: BaseViewController {
         self.lblSecondTlp.text = "021 501 88888"
         self.lblEmail.text = "care@banksinarmas.com"
         self.lblWeb.text = "www.banksinarmas.com"
-        
-        
-        
-        
 
     }
     

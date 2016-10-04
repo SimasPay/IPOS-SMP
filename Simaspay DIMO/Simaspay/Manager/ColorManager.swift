@@ -15,6 +15,11 @@ let color_btn_gray:String = color_text_default
 let color_btn_gray2 = "dbdbdb"
 let color_line_gray = "969696"
 
+let color_background = "F3F3F3"
+let color_border  = "D1D1D1"
+
+
+
 
 
 

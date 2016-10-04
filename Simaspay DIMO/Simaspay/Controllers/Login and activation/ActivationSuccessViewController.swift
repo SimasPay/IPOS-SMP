@@ -33,7 +33,7 @@ class ActivationSuccessViewController: BaseViewController {
         
         btnOK.updateButtonType1()
         btnOK.setTitle(getString("ActivationButtonOk"), for: UIControlState())
-
+        btnOK.addTarget(self, action: #selector(ActivationSuccessViewController.buttonTransfer) , for: .touchUpInside)
     }
 
     func buttonClick()  {
@@ -46,7 +46,12 @@ class ActivationSuccessViewController: BaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    func buttonTransfer()  {
+        let vc = TransferBankViewController.initWithOwnNib()
+        self.navigationController?.pushViewController(vc, animated: false)
+        self.animatedFadeIn()
+    }
+
 
     /*
     // MARK: - Navigation

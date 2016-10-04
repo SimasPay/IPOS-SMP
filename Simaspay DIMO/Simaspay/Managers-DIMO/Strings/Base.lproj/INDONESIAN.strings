@@ -31,3 +31,10 @@
 
 //Contact
 "ContactUsTitle" = "Hubungi Kami";
+
+//Transfer
+"TransferLebelBankName" = "Bank Tujuan";
+"TransferLebelAccountNumber" = "Nomor Rekening Tujuann";
+"TransferLebelAmount" = "Jumlah";
+"TransferLebelMPIN" = "mPIN";
+"TransferButtonNext" = "Lanjut";

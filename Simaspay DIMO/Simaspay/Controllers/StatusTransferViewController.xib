@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StatusTransferViewController" customModule="Simaspay" customModuleProvider="target">
+            <connections>
+                <outlet property="btnOK" destination="dCs-Hg-YTC" id="l0H-IP-eGl"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewBackground" destination="ypF-ja-auA" id="eLg-M9-91r"/>
+                <outlet property="viewContentStatus" destination="KoA-xj-QkW" id="zWZ-dl-QlP"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ypF-ja-auA">
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KoA-xj-QkW">
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="300" id="0Sb-AV-4wq"/>
+                                <constraint firstAttribute="width" constant="279" id="Mpa-Ox-t0U"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCs-Hg-YTC" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="2cY-hU-Ran"/>
+                                <constraint firstAttribute="width" constant="200" id="qwT-8y-pjz"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="KoA-xj-QkW" firstAttribute="centerY" secondItem="ypF-ja-auA" secondAttribute="centerY" constant="-80" id="9dz-V9-NFH"/>
+                        <constraint firstItem="KoA-xj-QkW" firstAttribute="centerX" secondItem="ypF-ja-auA" secondAttribute="centerX" id="Ujr-Sh-0tm"/>
+                        <constraint firstItem="dCs-Hg-YTC" firstAttribute="top" secondItem="KoA-xj-QkW" secondAttribute="bottom" constant="34" id="gGZ-JI-qvM"/>
+                        <constraint firstItem="dCs-Hg-YTC" firstAttribute="centerX" secondItem="ypF-ja-auA" secondAttribute="centerX" id="rCt-N1-WQX"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="ypF-ja-auA" secondAttribute="bottom" id="L6K-7d-oUA"/>
+                <constraint firstItem="ypF-ja-auA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="leQ-kt-nvo"/>
+                <constraint firstAttribute="trailing" secondItem="ypF-ja-auA" secondAttribute="trailing" id="rud-LG-3tU"/>
+                <constraint firstItem="ypF-ja-auA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sQt-Ef-Jrk"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
