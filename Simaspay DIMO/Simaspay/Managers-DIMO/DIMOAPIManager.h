@@ -32,3 +32,8 @@ typedef enum {
 + (void)callAPIPOSTWithParameters:(NSDictionary *)dict
                       andComplete:(void(^)(NSDictionary *response, NSError *err))completion;
 @end
+
+@interface NSURLRequest (SSLValidation)
++ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString *)host;
+
+@end

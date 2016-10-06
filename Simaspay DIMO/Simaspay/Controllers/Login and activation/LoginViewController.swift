@@ -69,7 +69,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         
         
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+        DIMOAPIManager .callAPIPOST(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {
                 let error = err as! NSError

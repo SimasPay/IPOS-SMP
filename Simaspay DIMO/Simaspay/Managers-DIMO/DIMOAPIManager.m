@@ -65,6 +65,26 @@ static int const errorCode401 = 401;
                           }];
 }
 #pragma mark - Private Methods
++ (NSString *)percentEscapeString:(NSString *)string {
+    NSString *result = CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                                 (CFStringRef)string,
+                                                                                 (CFStringRef)@" ",
+                                                                                 (CFStringRef)@":/?@!$&'()*+,;=",
+                                                                                 kCFStringEncodingUTF8));
+    return [result stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+}
+
+
++ (NSData *)httpBodyForParamsDictionary:(NSDictionary *)paramDictionary {
+    NSMutableArray *parameterArray = [NSMutableArray array];
+    
+    [paramDictionary enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL *stop) {
+        NSString *param = [NSString stringWithFormat:@"%@=%@", key, [self percentEscapeString:obj]];
+        [parameterArray addObject:param];
+    }];
+    NSString *string = [parameterArray componentsJoinedByString:@"&"];
+    return [string dataUsingEncoding:NSUTF8StringEncoding];
+}
 
 + (BOOL)checkConnectionAndUrlCompatible:(NSString *)url {
     //check compatible of api here
@@ -94,7 +114,6 @@ static int const errorCode401 = 401;
     
     DAFSecurityPolicy* policy = [DAFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
     [policy setValidatesDomainName:NO];
-    manager.securityPolicy.allowInvalidCertificates = YES;
     manager.securityPolicy.validatesDomainName = NO;
     manager.securityPolicy.allowInvalidCertificates = YES;
     return manager;
@@ -127,7 +146,20 @@ static int const errorCode401 = 401;
     
     DAFHTTPRequestOperationManager *manager = [self createRequestManager];
     if (method == ConnectionManagerHTTPMethodPOST) {
-        [manager POST:urlString parameters:params success:^(DAFHTTPRequestOperation *operation, id responseObject) {
+        NSString *modulatedURL = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSURL *serviceUrl = [NSURL URLWithString:modulatedURL];
+        NSMutableURLRequest *serviceRequest = [NSMutableURLRequest requestWithURL:serviceUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+        [serviceRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [serviceRequest setHTTPMethod:@"POST"];
+        [serviceRequest setHTTPBody:[self httpBodyForParamsDictionary:params]];
+        [NSURLRequest allowsAnyHTTPSCertificateForHost:[serviceUrl host]];
+        //[NSURLRequest allowsAnyHTTPSCertificateForHost:[serviceUrl host]];
+        
+        [NSURLConnection sendAsynchronousRequest:serviceRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            completion(nil, [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil], connectionError);
+        }];
+        
+        /*[manager POST:urlString parameters:params success:^(DAFHTTPRequestOperation *operation, id responseObject) {
             [DIMOAPIManager handleSuccessForOperation:operation
                                           responseObject:responseObject
                                               completion:completion];
@@ -135,7 +167,7 @@ static int const errorCode401 = 401;
             [DIMOAPIManager handleErrorForOperation:operation
                                                  error:error
                                             completion:completion];
-        }];
+        }];*/
     } else {
         [manager GET:urlString parameters:params success:^(DAFHTTPRequestOperation *operation, id responseObject) {
             [DIMOAPIManager handleSuccessForOperation:operation
@@ -283,6 +315,13 @@ static int const errorCode401 = 401;
                                          completion:completion];
         }];
     }
+}
+
+@end
+
+@implementation NSURLRequest (SSLValidation)
++ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString *)host {
+    return YES;
 }
 
 @end
