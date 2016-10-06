@@ -8,13 +8,20 @@ let SOURCE_APP_TYPE_KEY = "apptype"
 let SOURCE_APP_TYPE_VALUE = "iOS"
 let SOURCE_APP_VERSION_KEY = "appversion"
 let SOURCE_APP_OSVERSION_KEY = "appos"
+let VERSION = "version"
+let CATEGORY = "category"
+
+// MARK: Category
+let CATEGORY_CONTACTUS = "category.ContactUsfile"
 
 // MARK: TXNName Type
 let TXN_GETPUBLC_KEY = "GetPublicKey"
 let TXN_LOGIN_KEY = "Login"
+let TXN_GetThirdPartyData = "GetThirdPartyData"
 
 // MARK: Service
 let SERVICE_ACCOUNT = "Account"
+let SERVICE_PAYMENT = "Payment"
 
 // MARK: UserDefault
 let SIMASPAY_PUBLIC_KEY = "simasPayPublicKey"
@@ -71,7 +78,6 @@ let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
 #define SCTL_ID @"sctlId"
 #define PARTNETCODE @"partnerCode"
 #define CONFIRMED @"confirmed"
-#define VERSION @"version"
 #define OTP @"otp"
 #define INQUIRY @"Inquiry"
 #define DESTMDN @"destMDN"
@@ -209,10 +215,9 @@ let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
 #define SERVICE_WALLET @"Wallet"
 #define SERVICE_BANK @"Bank"
 #define SERVICE_ACCOUNT @"Account"
-#define SERVICE_PAYMENT @"Payment"
+
 #define SERVICE_PURCHASE @"Shopping"
 #define SERVICE_PURCHASE_AIRTIME @"Buy"
-#define SERVICE_PAYMENT @"Payment"
 #define SERVICE_AGENT "AgentServices"
 
 
@@ -257,14 +262,14 @@ let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
 #define TXN_BILLINQUIRY @"BillInquiry"
 
 #define TXN_DownLoad_History_PDF @"DownloadHistoryAsPDF"
-#define TXN_GetThirdPartyData @"GetThirdPartyData"
+
 #define TXN_GetThirdPartyDataLocation @"GetThirdPartyLocation"
 #define TXN_GetUserKey @"GetUserAPIKey"
 #define TXN_FlashIz_BillPay_Inquiry @"QRPaymentInquiry"
 #define TXN_FlashIz_BillPay_Confirmation @"QRPayment"
 
 #define CATEGORY_BANK_CODES @"category.bankCodes"
-#define CATEGORY_CONTACTUS @"category.ContactUsfile"
+
 #define CATEGORY_REFRRRAL @"category.product_referral"
 #define CATEGORY_PURCHASE @"category.purchase"
 #define CATEGORY_PAYMENTS @"category.payments"
@@ -350,7 +355,7 @@ let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
 
 #define OKBUTTON @"ok"
 #define CONTACTUS @"contactus"
-#define CATEGORY @"category"
+
 #define PAYMENTCATEGORY @"paymentcategory"
 #define BILLER @"biller"
 #define PAYMENTPRODUCT @"paymnetproduct"

@@ -27,5 +27,8 @@ typedef enum {
 
 #pragma mark - API
 + (void)callAPIWithParameters:(NSDictionary *)dict
-        andComplete:(void(^)( NSDictionary *response, NSError *err))completion;
+        andComplete:(void(^)(NSDictionary *response, NSError *err))completion;
+
++ (void)callAPIPOSTWithParameters:(NSDictionary *)dict
+                      andComplete:(void(^)(NSDictionary *response, NSError *err))completion;
 @end

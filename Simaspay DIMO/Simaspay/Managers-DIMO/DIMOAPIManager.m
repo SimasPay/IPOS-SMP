@@ -55,6 +55,15 @@ static int const errorCode401 = 401;
                           }];
 }
 
++ (void)callAPIPOSTWithParameters:(NSDictionary *)dict
+                      andComplete:(void(^)(NSDictionary *response, NSError *err))completion {
+    [self startHTTPRequestWithMethod:ConnectionManagerHTTPMethodPOST
+                           urlString:BASE_URL
+                              params:dict
+                          completion:^(DAFHTTPRequestOperation *operation, id responseObject, NSError *err) {
+                              completion(responseObject, err);
+                          }];
+}
 #pragma mark - Private Methods
 
 + (BOOL)checkConnectionAndUrlCompatible:(NSString *)url {

@@ -60,7 +60,41 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     
 // MARK: - button action
+    func btnContactUsAction () {
+        let dict = NSMutableDictionary()
+        dict[TXNNAME] = TXN_GetThirdPartyData
+        dict[SERVICE] = SERVICE_PAYMENT
+        dict[CATEGORY] = CATEGORY_CONTACTUS
+        dict[VERSION] = "0"
+        
+        
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+            if (err != nil) {
+                let error = err as! NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: "OK")
+                } else {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: "OK")
+                }
+                return
+            }
+            
+            let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
+            DLog("\(responseDict)")
+            if (responseDict.allKeys.count == 0) {
+                DIMOAlertView.showAlert(withTitle: nil, message: "Request Failed.", cancelButtonTitle: "OK")
+            } else {
+                // success
+            }
+        }
+    }
+    
     @IBAction func btnLoginAction(_ sender: AnyObject) {
+        btnContactUsAction()
+        return
+            
         self.dismissKeyboard()
         
         var message = "";
@@ -88,9 +122,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
             DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
                 DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
-                let responseDict = NSDictionary(dictionary: dict!)
-                DLog("\(responseDict)")
-                
                 if (err != nil) {
                     let error = err as! NSError
                     if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
@@ -101,6 +132,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
                     return
                 }
                 
+                let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
+                DLog("\(responseDict)")
                 if (responseDict.allKeys.count == 0) {
                     DIMOAlertView.showAlert(withTitle: nil, message: "Request Failed.", cancelButtonTitle: "OK")
                 } else {
