@@ -146,28 +146,15 @@ static int const errorCode401 = 401;
     
     DAFHTTPRequestOperationManager *manager = [self createRequestManager];
     if (method == ConnectionManagerHTTPMethodPOST) {
-        NSString *modulatedURL = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSURL *serviceUrl = [NSURL URLWithString:modulatedURL];
-        NSMutableURLRequest *serviceRequest = [NSMutableURLRequest requestWithURL:serviceUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-        [serviceRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-        [serviceRequest setHTTPMethod:@"POST"];
-        [serviceRequest setHTTPBody:[self httpBodyForParamsDictionary:params]];
-        [NSURLRequest allowsAnyHTTPSCertificateForHost:[serviceUrl host]];
-        //[NSURLRequest allowsAnyHTTPSCertificateForHost:[serviceUrl host]];
-        
-        [NSURLConnection sendAsynchronousRequest:serviceRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-            completion(nil, [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil], connectionError);
-        }];
-        
-        /*[manager POST:urlString parameters:params success:^(DAFHTTPRequestOperation *operation, id responseObject) {
+        [manager POST:urlString parameters:params success:^(DAFHTTPRequestOperation *operation, id responseObject) {
             [DIMOAPIManager handleSuccessForOperation:operation
-                                          responseObject:responseObject
-                                              completion:completion];
+                                       responseObject:responseObject
+                                           completion:completion];
         } failure:^(DAFHTTPRequestOperation *operation, NSError *error) {
             [DIMOAPIManager handleErrorForOperation:operation
-                                                 error:error
-                                            completion:completion];
-        }];*/
+                                              error:error
+                                         completion:completion];
+        }];        
     } else {
         [manager GET:urlString parameters:params success:^(DAFHTTPRequestOperation *operation, id responseObject) {
             [DIMOAPIManager handleSuccessForOperation:operation
@@ -194,7 +181,10 @@ static int const errorCode401 = 401;
         NSError *error = nil;
         result = (NSDictionary *)[XMLReader dictionaryForXMLData:data error:&error];
         result = result[@"response"];
-        //result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        
+        if (!result) {
+            result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        }
     }
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
