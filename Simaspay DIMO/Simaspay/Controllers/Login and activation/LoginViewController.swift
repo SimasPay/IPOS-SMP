@@ -60,7 +60,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     
 // MARK: - button action
-    func btnContactUsAction () {
+    @IBAction func btnContactUsAction(_ sender: AnyObject) {
+        self.dismissKeyboard()
         let dict = NSMutableDictionary()
         dict[TXNNAME] = TXN_GetThirdPartyData
         dict[SERVICE] = SERVICE_PAYMENT
@@ -91,9 +92,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func btnLoginAction(_ sender: AnyObject) {
-        btnContactUsAction()
-        return
-            
         self.dismissKeyboard()
         
         var message = "";

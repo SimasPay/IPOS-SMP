@@ -10,6 +10,7 @@ import Foundation
 
 extension UIView {
     func updateViewRoundedWithShadow() {
+        /*
         let temp = UIView(frame: CGRect(origin: CGPoint.zero, size: frame.size))
         temp.backgroundColor = backgroundColor
         temp.layer.cornerRadius = 5
@@ -21,6 +22,14 @@ extension UIView {
         layer.shadowOpacity = 0.5;
         layer.shadowOffset = CGSize(width: 2, height: 2);
         layer.shadowRadius = 0.5;
+ */
+        let layer = self.layer
+        layer.cornerRadius = 5
+        layer.shadowColor = UIColor.black.withAlphaComponent(0.23).cgColor
+        layer.shadowOpacity = 0.7
+        layer.shadowOffset = CGSize(width: 2, height: 2);
+        layer.shadowRadius = 4
+        // corner radius
     }
     
     func addUnderline() {
