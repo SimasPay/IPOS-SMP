@@ -19,6 +19,9 @@ class ContactUSViewController: BaseViewController {
     @IBOutlet var lblSecondTlp: BaseLabel!
     @IBOutlet var lblEmail: BaseLabel!
     @IBOutlet var lblWeb: BaseLabel!
+     var contactUsInfo = NSDictionary()
+    
+    
     static func initWithOwnNib() -> ContactUSViewController {
         let obj:ContactUSViewController = ContactUSViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
@@ -47,17 +50,25 @@ class ContactUSViewController: BaseViewController {
         self.lblSecondTlp.font = self.lblFirstTlp.font
         self.lblEmail.font = self.lblFirstTlp.font
         self.lblWeb.font = self.lblFirstTlp.font
-        self.lblFirstTlp.text = "1500 153"
-        self.lblSecondTlp.text = "021 501 88888"
-        self.lblEmail.text = "care@banksinarmas.com"
-        self.lblWeb.text = "www.banksinarmas.com"
+        
+        DLog( "\(contactUsInfo)")
+        let contactUsDic = contactUsInfo.value(forKey: "contactus") as! NSDictionary
+        
+        self.lblFirstTlp.text = contactUsDic.value(forKey: "mobilenumber_1") as? String
+        self.lblSecondTlp.text = contactUsDic.value(forKey: "mobilenumber_2") as? String
+        self.lblEmail.text = contactUsDic.value(forKey: "emailid") as? String
+        self.lblWeb.text = contactUsDic.value(forKey: "website") as? String
 
     }
-    
     override func viewDidLayoutSubviews() {
-        // adjust view main frame
+        super.viewDidLayoutSubviews()
+        
+        self.lblEmail.addUnderline()
+        self.lblWeb.addUnderline()
+        
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

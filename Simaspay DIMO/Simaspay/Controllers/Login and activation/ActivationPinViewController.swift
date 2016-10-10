@@ -51,6 +51,11 @@ class ActivationPinViewController: BaseViewController {
 
         
     }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tfMpin.addUnderline()
+    }
+
 
     func buttonClick()  {
         let vc = ActivationSuccessViewController.initWithOwnNib()

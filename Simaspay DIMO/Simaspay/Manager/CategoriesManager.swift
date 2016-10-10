@@ -34,8 +34,12 @@ extension UIView {
     
     func addUnderline() {
         //buttonUnderline
+        let size = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height) as CGFloat
+//        if (self.frame.size.width >= max || self.frame.size.height >= max) {
+//            return
+//        }
         let line = CALayer()
-        line.frame = CGRect(x: 0, y: self.frame.size.height - 1 , width: self.frame.size.width, height: 1)
+        line.frame = CGRect(x: 0, y: self.bounds.size.height - 1 , width: self.frame.size.width, height: 1)
         line.backgroundColor = UIColor.init(hexString: color_line_gray).cgColor
         self.layer.addSublayer(line)
     }

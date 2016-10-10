@@ -38,7 +38,6 @@ class ActivationViewController: BaseViewController {
         viewTextField.updateViewRoundedWithShadow()
         tfHpNumber.updateTextFieldWithImageNamed("icon_Mobile")
         tfHpNumber.placeholder = getString("LoginPlaceholderNoHandphone")
-        tfHpNumber.addUnderline()
         tfActivationCode.updateTextFieldWithImageNamed("icon_Otp")
         tfActivationCode.placeholder = getString("ActivationPlaceholderOTP")
         
@@ -53,17 +52,22 @@ class ActivationViewController: BaseViewController {
         btnResendOTP.setTitle(getString("ActivationButtonResend"), for: UIControlState())
         btnResendOTP.setTitleColor(UIColor.init(hexString: color_text_default), for: UIControlState())
         btnResendOTP.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        btnResendOTP.addUnderline()
         
         btnLogin.setTitle(getString("LoginButtonLogin"), for: UIControlState())
         btnLogin.setTitleColor(UIColor.init(hexString: color_text_default), for: UIControlState())
         btnLogin.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        btnLogin.addUnderline()
         
         btnNext.updateButtonType1()
         btnNext.setTitle(getString("ActivationButtonNext"), for: UIControlState())
 
     }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tfHpNumber.addUnderline()
+        btnResendOTP.addUnderline()
+        btnLogin.addUnderline()
+    }
+
     @IBAction func actionNextButton(_ sender: AnyObject) {
         let vc = ActivationPinViewController.initWithOwnNib()
         self.navigationController?.pushViewController(vc, animated: false)

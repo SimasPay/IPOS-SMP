@@ -44,7 +44,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         btnActivation.addTarget(self, action: #selector(EULAViewController.buttonClick) , for: .touchUpInside)
         
         btnContactUs.setTitle(getString("LoginButtonContactUs"), for: UIControlState())
-        btnContactUs .addUnderline()
+        btnContactUs.addUnderline()
         
     }
     func buttonClick()  {
@@ -56,6 +56,12 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        textFieldHpNumber.addUnderline()
+        btnContactUs.addUnderline()
     }
     
     
@@ -82,11 +88,14 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             }
             
             let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
-            DLog("\(responseDict)")
             if (responseDict.allKeys.count == 0) {
                 DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
             } else {
-                // success
+                let vc = ContactUSViewController.initWithOwnNib()
+                self.navigationController?.pushViewController(vc, animated: false)
+                vc.contactUsInfo = responseDict
+
+                
             }
         }
     }
