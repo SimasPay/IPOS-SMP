@@ -8,18 +8,10 @@
 
 import UIKit
 
-class ContactUSViewController: BaseViewController {
-    @IBOutlet var viewMainFrame: UIView!
-
-    @IBOutlet var lblTitleTlp: BaseLabel!
-    @IBOutlet var lblTitleEmail: BaseLabel!
-    @IBOutlet var lblTitleWeb: BaseLabel!
-    
-    @IBOutlet var lblFirstTlp: BaseLabel!
-    @IBOutlet var lblSecondTlp: BaseLabel!
-    @IBOutlet var lblEmail: BaseLabel!
-    @IBOutlet var lblWeb: BaseLabel!
-     var contactUsInfo = NSDictionary()
+class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var tableView: UITableView!
+    var contactUsInfo = NSDictionary()
     
     
     static func initWithOwnNib() -> ContactUSViewController {
@@ -33,45 +25,33 @@ class ContactUSViewController: BaseViewController {
         self.showTitle(getString("ContactUsTitle"))
         self.showBackButton()
         
-        self.viewMainFrame.layer.cornerRadius = 5.0;
-        self.viewMainFrame.layer.borderColor = UIColor.init(hexString: color_border).cgColor
-        self.viewMainFrame.layer.borderWidth = 0.5
-        self.viewMainFrame.clipsToBounds = true;
-        
-        
-        self.lblTitleTlp.text = "Bank Sinarmas Care"
-        self.lblTitleTlp.font = UIFont .boldSystemFont(ofSize: 13)
-        self.lblTitleEmail.text = "E-mail"
-        self.lblTitleEmail.font = self.lblTitleTlp.font
-        self.lblTitleWeb.text = "Website"
-        self.lblTitleWeb.font = self.lblTitleTlp.font
-        
-        self.lblFirstTlp.font = UIFont.boldSystemFont(ofSize: 16)
-        self.lblSecondTlp.font = self.lblFirstTlp.font
-        self.lblEmail.font = self.lblFirstTlp.font
-        self.lblWeb.font = self.lblFirstTlp.font
-        
-        DLog( "\(contactUsInfo)")
-        let contactUsDic = contactUsInfo.value(forKey: "contactus") as! NSDictionary
-        
-        self.lblFirstTlp.text = contactUsDic.value(forKey: "mobilenumber_1") as? String
-        self.lblSecondTlp.text = contactUsDic.value(forKey: "mobilenumber_2") as? String
-        self.lblEmail.text = contactUsDic.value(forKey: "emailid") as? String
-        self.lblWeb.text = contactUsDic.value(forKey: "website") as? String
-
+        tableView.backgroundColor = UIColor.white
+        tableView.layer.cornerRadius = 5
+        tableView.layer.borderWidth = 1
+        tableView.layer.borderColor = UIColor.init(hexString: color_border).cgColor
+        tableView.clipsToBounds = true;
+        scrollView.backgroundColor = UIColor.init(hexString: color_background)
     }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        self.lblEmail.addUnderline()
-        self.lblWeb.addUnderline()
-        
-    }
-
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @available(iOS 2.0, *)
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    
+    // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+    // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+    
+    @available(iOS 2.0, *)
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let temp = UITableViewCell()
+        temp.backgroundColor = UIColor.black
+        return temp
     }
     
 
