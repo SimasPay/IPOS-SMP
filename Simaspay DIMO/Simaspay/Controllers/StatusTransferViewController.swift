@@ -15,6 +15,8 @@ class StatusTransferViewController: BaseViewController {
     @IBOutlet var viewBackground: UIView!
     @IBOutlet var viewContentStatus: UIView!
     @IBOutlet var btnOK: BaseButton!
+    @IBOutlet var lblStatus: BaseLabel!
+    @IBOutlet var lblIdStatus: BaseLabel!
     
     static func initWithOwnNib() -> StatusTransferViewController {
         let obj:StatusTransferViewController = StatusTransferViewController.init(nibName: String(describing: self), bundle: nil)
@@ -30,6 +32,10 @@ class StatusTransferViewController: BaseViewController {
         self.viewContentStatus.layer.borderColor = UIColor.init(hexString: color_border).cgColor
         self.viewContentStatus.layer.borderWidth = 0.5
         self.viewContentStatus.clipsToBounds = true;
+        self.lblStatus.font = UIFont.boldSystemFont(ofSize: 16)
+        self.lblIdStatus.font = UIFont.boldSystemFont(ofSize: 13)
+        self.lblStatus.text = "Transfer Berhasil!"
+        self.lblIdStatus.text = "ID Transaksi: 123958"
         
         btnOK.updateButtonType1()
         btnOK.setTitle("OK", for: .normal)

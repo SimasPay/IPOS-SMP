@@ -10,12 +10,10 @@ import UIKit
 
 class TransferBankViewController: BaseViewController {
     @IBOutlet var lblBankName: BaseLabel!
-    @IBOutlet var lblAccountNumber: BaseLabel!
-    @IBOutlet var lblAmount: BaseLabel!
+    @IBOutlet var lblFirstTitleTf: BaseLabel!
+    @IBOutlet var lblSecondTitleTf: BaseLabel!
     @IBOutlet var lblMPin: BaseLabel!
     @IBOutlet var viewBackground: UIView!
-   
-    @IBOutlet var constraintCenterYView: NSLayoutConstraint!
     
     @IBOutlet var btnNext: BaseButton!
     
@@ -35,11 +33,11 @@ class TransferBankViewController: BaseViewController {
         self.lblBankName.font = UIFont .boldSystemFont(ofSize: 13)
         self.lblBankName.text = getString("TransferLebelBankName")
         
-        self.lblAccountNumber.font = self.lblBankName.font
-        self.lblAccountNumber.text = getString("TransferLebelAccountNumber")
+        self.lblFirstTitleTf.font = self.lblBankName.font
+        self.lblFirstTitleTf.text = getString("TransferLebelAccountNumber")
         
-        self.lblAmount.font = self.lblBankName.font
-        self.lblAmount.text = getString("TransferLebelAmount")
+        self.lblSecondTitleTf.font = self.lblBankName.font
+        self.lblSecondTitleTf.text = getString("TransferLebelAmount")
         
         self.lblMPin.font = self.lblBankName.font
         self.lblMPin.text = getString("TransferLebelMPIN")
@@ -47,10 +45,6 @@ class TransferBankViewController: BaseViewController {
         btnNext.updateButtonType1()
         btnNext.setTitle(getString("TransferButtonNext"), for: .normal)
         btnNext.addTarget(self, action: #selector(TransferBankViewController.buttonConfirmation) , for: .touchUpInside)
-        
-        if UIScreen.main.bounds.height == 480{
-            self.constraintCenterYView.constant = -160;
-        }
         
     }
     

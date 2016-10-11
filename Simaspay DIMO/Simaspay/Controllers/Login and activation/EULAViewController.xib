@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EULAViewController" customModule="Simaspay" customModuleProvider="target">
             <connections>
-                <outlet property="btnAgree" destination="Xvh-xh-O81" id="yEL-R4-YSd"/>
+                <outlet property="btnAgree" destination="Fia-HM-zvG" id="n0l-Kw-Www"/>
                 <outlet property="btnDisagree" destination="v25-99-aDK" id="8cf-eQ-4US"/>
                 <outlet property="labelTitle" destination="BQr-qj-wGX" id="QMS-4u-l7Q"/>
                 <outlet property="lblTitle" destination="BQr-qj-wGX" id="og2-kT-B0O"/>
@@ -19,7 +19,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQr-qj-wGX" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
@@ -30,32 +30,39 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v25-99-aDK" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
-                    <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="129" id="3k6-Vx-Snq"/>
-                        <constraint firstAttribute="height" constant="48" id="hPN-DC-YTx"/>
-                    </constraints>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xvh-xh-O81" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
-                    <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="48" id="NlS-7x-3xc"/>
-                        <constraint firstAttribute="width" constant="129" id="wWT-Xv-Fxu"/>
-                    </constraints>
-                </button>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ia-3u-bAG">
                     <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tqj-F5-Nz3">
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v25-99-aDK" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                            <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fia-HM-zvG" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                            <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Fia-HM-zvG" firstAttribute="top" secondItem="tqj-F5-Nz3" secondAttribute="top" id="9a1-Q5-KLS"/>
+                        <constraint firstAttribute="bottom" secondItem="v25-99-aDK" secondAttribute="bottom" id="JGK-bF-06V"/>
+                        <constraint firstAttribute="bottom" secondItem="Fia-HM-zvG" secondAttribute="bottom" id="Mkk-nk-dKF"/>
+                        <constraint firstAttribute="height" constant="48" id="SAx-RU-sNf"/>
+                        <constraint firstItem="v25-99-aDK" firstAttribute="top" secondItem="tqj-F5-Nz3" secondAttribute="top" id="m6z-U5-buH"/>
+                        <constraint firstItem="v25-99-aDK" firstAttribute="leading" secondItem="tqj-F5-Nz3" secondAttribute="leading" id="pX1-dP-M3Y"/>
+                        <constraint firstItem="Fia-HM-zvG" firstAttribute="width" secondItem="v25-99-aDK" secondAttribute="width" id="sY1-NL-aQp"/>
+                        <constraint firstAttribute="trailing" secondItem="Fia-HM-zvG" secondAttribute="trailing" id="yhZ-dq-ZUT"/>
+                        <constraint firstItem="v25-99-aDK" firstAttribute="width" secondItem="tqj-F5-Nz3" secondAttribute="width" multiplier="0.9:2" id="zOr-yg-gUc"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="9ia-3u-bAG" secondAttribute="trailing" constant="25" id="6rI-dW-jqz"/>
-                <constraint firstItem="v25-99-aDK" firstAttribute="top" secondItem="9ia-3u-bAG" secondAttribute="bottom" constant="20" id="7Gb-rT-WOZ"/>
-                <constraint firstItem="Xvh-xh-O81" firstAttribute="top" secondItem="9ia-3u-bAG" secondAttribute="bottom" constant="20" id="ALA-Rv-eGU"/>
+                <constraint firstItem="tqj-F5-Nz3" firstAttribute="trailing" secondItem="9ia-3u-bAG" secondAttribute="trailing" id="Cih-XA-PZE"/>
                 <constraint firstItem="9ia-3u-bAG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="McR-aO-rhz"/>
-                <constraint firstItem="v25-99-aDK" firstAttribute="leading" secondItem="9ia-3u-bAG" secondAttribute="leading" id="V7J-DC-2Aj"/>
-                <constraint firstItem="Xvh-xh-O81" firstAttribute="trailing" secondItem="9ia-3u-bAG" secondAttribute="trailing" id="VKx-aG-knW"/>
+                <constraint firstItem="tqj-F5-Nz3" firstAttribute="top" secondItem="9ia-3u-bAG" secondAttribute="bottom" constant="20" id="WLz-sH-MNi"/>
+                <constraint firstItem="tqj-F5-Nz3" firstAttribute="leading" secondItem="9ia-3u-bAG" secondAttribute="leading" id="agL-RX-Iy9"/>
                 <constraint firstItem="BQr-qj-wGX" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="4:5" id="bXH-hX-vqA"/>
                 <constraint firstItem="9ia-3u-bAG" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="340:568" id="igc-Of-zZr"/>
                 <constraint firstItem="9ia-3u-bAG" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="jR5-VL-ZKr"/>
