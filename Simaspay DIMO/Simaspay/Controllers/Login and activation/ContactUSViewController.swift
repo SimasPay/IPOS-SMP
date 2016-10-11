@@ -8,6 +8,30 @@
 
 import UIKit
 
+class ContactUsCell: UITableViewCell {
+    var urlAction : String = ""
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        if (highlighted) {
+            DLog("selected : \(urlAction)")
+            if let url = NSURL(string: urlAction) {
+                var string = urlAction
+                var strOkBtn = "Call"
+                string = string.replacingOccurrences(of: "://", with: " : ")
+                if (!string.contains("tel://")) {
+                    strOkBtn = "OK"
+                }
+                
+                DIMOAlertView.showPrompt(withMessage: string, okTitle: strOkBtn, complete: { (index, alertview) in
+                    if index != 0 {
+                        UIApplication.shared.openURL(url as URL)
+                    }
+                })
+            }
+        }
+    }
+}
+
 class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
@@ -31,9 +55,9 @@ class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableV
         tableView.layer.borderWidth = 1
         tableView.layer.borderColor = UIColor.init(hexString: color_border).cgColor
         tableView.clipsToBounds = true;
+        tableView.isScrollEnabled = false;
         scrollView.backgroundColor = UIColor.init(hexString: color_background)
     }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -61,7 +85,7 @@ class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableV
     }
  
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let temp = UITableViewCell(style: .default, reuseIdentifier: "contactus")
+        let temp = ContactUsCell(style: .default, reuseIdentifier: "contactus")
         temp.selectionStyle = .gray
         
         let lblcontent = UILabel(frame: CGRect(x: padding, y: 0, width: tableView.frame.size.width - padding * 2, height: heightForCell))
@@ -78,10 +102,13 @@ class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableV
             }
             imgPhone.image = UIImage.init(named: "icon_Phone")
             temp.addSubview(imgPhone)
+            temp.urlAction = "tel://\(NSString(string: (lblcontent.text?.replacingOccurrences(of: " ", with: ""))!))"
         } else if indexPath.section == 1 {
-                lblcontent.text = contactInfoSting.value(forKey: "emailid") as! String?
+            lblcontent.text = contactInfoSting.value(forKey: "emailid") as! String?
+            temp.urlAction = "message://\(NSString(string: lblcontent.text!))"
         } else {
-                lblcontent.text = contactInfoSting.value(forKey: "website") as! String?
+            lblcontent.text = contactInfoSting.value(forKey: "website") as! String?
+            temp.urlAction = "\(NSString(string: lblcontent.text!))"
         }
         temp.addUnderline(color: UIColor.init(hexString: color_border), coordinateX: padding)
         

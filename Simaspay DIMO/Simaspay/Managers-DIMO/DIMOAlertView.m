@@ -96,6 +96,11 @@ clickedButtonAtIndexCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert)
     [obj.alertCallBackDictionary removeAllObjects];
 }
 
++ (void)showPromptWithMessage:(NSString *) message
+                      okTitle:(NSString *) stringOkBtn
+                     complete:(void(^)(NSInteger buttonIndex, UIAlertView *alert))callback {
+    [self showAlertWithTitle:nil message:message alertStyle:UIAlertViewStyleDefault clickedButtonAtIndexCallback:callback cancelButtonTitle:@"Cancel" otherButtonTitles:stringOkBtn, nil];
+}
 + (void)showUnknownErrorCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert))callback {
     NSString *title = String(@"DIMOError");
     NSString *message = String(@"DIMOUnknownError");

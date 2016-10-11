@@ -27,5 +27,8 @@ clickedButtonAtIndexCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert)
 
 + (void)hideAllAlert;
 
++ (void)showPromptWithMessage:(NSString *) message
+                      okTitle:(NSString *) stringOkBtn
+                     complete:(void(^)(NSInteger buttonIndex, UIAlertView *alert))callback;
 + (void)showUnknownErrorCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert))callback;
 @end
