@@ -12,6 +12,7 @@ class BaseViewController: UIViewController {
     var lblTitle: BaseLabel!
     var btnBack: BaseButton!
     var ivBackground : UIImageView!
+    var lastObjectForKeyboardDetector : UIView!
     
     func showBackgroundImage() {
         if (ivBackground == nil) {
@@ -30,12 +31,41 @@ class BaseViewController: UIViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BaseViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(ActivationViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ActivationViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.dismissKeyboard()
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if lastObjectForKeyboardDetector != nil {
+            if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+                let lastView = lastObjectForKeyboardDetector.frame.origin.y + lastObjectForKeyboardDetector.frame.size.height + 20
+                let diff = UIScreen.main.bounds.size.height - lastView
+                
+                if self.view.frame.origin.y == 0 && diff < keyboardSize.size.height {
+                    self.view.frame.origin.y -= (keyboardSize.size.height - diff)
+                }
+            }
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+
     
     //Calls this function when the tap is recognized.
     func dismissKeyboard() {

@@ -63,36 +63,15 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
         
         btnNext.updateButtonType1()
         btnNext.setTitle(getString("ActivationButtonNext"), for: UIControlState())
+        
+        lastObjectForKeyboardDetector = self.btnNext
 
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.dismissKeyboard()
         return true
     }
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        NotificationCenter.default.addObserver(self, selector: #selector(ActivationViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ActivationViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-
-    }
-    func keyboardWillShow(notification: NSNotification) {
-        
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            let lastView = self.btnNext.frame.origin.y + self.btnNext.frame.size.height + 20
-            let diff = UIScreen.main.bounds.size.height - lastView
-            
-            if self.view.frame.origin.y == 0 && diff < keyboardSize.size.height {
-                self.view.frame.origin.y -= (keyboardSize.size.height - diff)
-            }
-        }
-        
-    }
     
-    func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
-    }
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tfHpNumber.addUnderline()

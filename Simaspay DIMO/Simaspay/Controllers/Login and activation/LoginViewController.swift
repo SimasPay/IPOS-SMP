@@ -46,6 +46,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         btnContactUs.setTitle(getString("LoginButtonContactUs"), for: UIControlState())
         btnContactUs.addUnderline()
         
+        lastObjectForKeyboardDetector = self.btnLogin
+        
     }
     func buttonClick()  {
         let vc = EULAViewController.initWithOwnNib()
