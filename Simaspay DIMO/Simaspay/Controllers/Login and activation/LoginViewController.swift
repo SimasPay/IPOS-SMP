@@ -63,7 +63,10 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         textFieldHpNumber.addUnderline()
         btnContactUs.addUnderline()
     }
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.dismissKeyboard()
+        return true
+    }
     
 // MARK: - button action
     @IBAction func btnContactUsAction(_ sender: AnyObject) {

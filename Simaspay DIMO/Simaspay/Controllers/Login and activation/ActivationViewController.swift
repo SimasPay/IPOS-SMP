@@ -8,15 +8,14 @@
 
 import UIKit
 
-class ActivationViewController: BaseViewController {
+class ActivationViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet var lblInfoActivation: BaseLabel!
     @IBOutlet var viewTextField: UIView!
-
-    @IBOutlet var tfHpNumber: BaseTextField!
     
     @IBOutlet var lblQuestionNoOTP: BaseLabel!
     @IBOutlet var lblQuestionLogin: BaseLabel!
     @IBOutlet var tfActivationCode: BaseTextField!
+    @IBOutlet var tfHpNumber: BaseTextField!
     
     @IBOutlet var btnNext: BaseButton!
     @IBOutlet var btnResendOTP: UIButton!
@@ -30,6 +29,9 @@ class ActivationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tfHpNumber.delegate = self
+        tfActivationCode.delegate = self
+        
         lblInfoActivation.text = getString("ActivationLabelInfo")
         lblInfoActivation.textAlignment = .center
         lblInfoActivation.numberOfLines = 3
@@ -40,6 +42,8 @@ class ActivationViewController: BaseViewController {
         tfHpNumber.placeholder = getString("LoginPlaceholderNoHandphone")
         tfActivationCode.updateTextFieldWithImageNamed("icon_Otp")
         tfActivationCode.placeholder = getString("ActivationPlaceholderOTP")
+        tfHpNumber.autocorrectionType = .no
+        tfActivationCode.autocorrectionType = .no
         
         lblQuestionNoOTP.text = getString("ActivationQuestionNoOTP")
         lblQuestionNoOTP.font = UIFont.systemFont(ofSize: 14)
@@ -61,11 +65,43 @@ class ActivationViewController: BaseViewController {
         btnNext.setTitle(getString("ActivationButtonNext"), for: UIControlState())
 
     }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.dismissKeyboard()
+        return true
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        NotificationCenter.default.addObserver(self, selector: #selector(ActivationViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ActivationViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
+    }
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            let lastView = self.btnNext.frame.origin.y + self.btnNext.frame.size.height + 20
+            let diff = UIScreen.main.bounds.size.height - lastView
+            
+            if self.view.frame.origin.y == 0 && diff < keyboardSize.size.height {
+                self.view.frame.origin.y -= (keyboardSize.size.height - diff)
+            }
+        }
+        
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tfHpNumber.addUnderline()
         btnResendOTP.addUnderline()
-        btnLogin.addUnderline()
+        
+        let line = CALayer()
+        line.frame = CGRect(x: 0, y: self.btnLogin.bounds.size.height - 10 , width: self.btnLogin.frame.size.width, height: 1)
+        line.backgroundColor = UIColor.init(hexString: color_line_gray).cgColor
+        btnLogin.layer.addSublayer(line)
     }
 
     @IBAction func actionNextButton(_ sender: AnyObject) {

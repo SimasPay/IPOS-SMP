@@ -19,18 +19,16 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="logo_Image" translatesAutoresizingMaskIntoConstraints="NO" id="nJ7-Qc-d9L">
-                    <frame key="frameInset" minX="47" minY="18" width="225" height="50"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_Image" translatesAutoresizingMaskIntoConstraints="NO" id="nJ7-Qc-d9L">
                     <constraints>
                         <constraint firstAttribute="width" constant="225" id="1R1-Eb-1td"/>
                         <constraint firstAttribute="height" constant="50" id="gaF-Yu-oN8"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qon-hx-Wrc" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
-                    <frame key="frameInset" minX="40" minY="100" width="240" height="66"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qon-hx-Wrc" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
                     <constraints>
                         <constraint firstAttribute="height" constant="66" id="M65-Kx-bwV"/>
                         <constraint firstAttribute="width" constant="240" id="QIx-JS-Mq6"/>
@@ -39,8 +37,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wOq-zt-hoL">
-                    <frame key="frameInset" minX="40" minY="191" width="240" height="97"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wOq-zt-hoL">
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DJf-f8-UWJ" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -65,8 +62,7 @@
                         <constraint firstItem="eHc-Bz-Deq" firstAttribute="top" secondItem="DJf-f8-UWJ" secondAttribute="bottom" id="pUL-1T-qyz"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="15p-cI-7c4" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
-                    <frame key="frameInset" minX="40" minY="312" width="240" height="48"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="15p-cI-7c4" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
                     <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="240" id="2JK-rW-ave"/>
@@ -77,7 +73,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="wOq-zt-hoL" firstAttribute="top" secondItem="Qon-hx-Wrc" secondAttribute="bottom" constant="25" id="7xM-64-m47"/>
-                <constraint firstItem="Qon-hx-Wrc" firstAttribute="top" secondItem="nJ7-Qc-d9L" secondAttribute="bottom" constant="32" id="FYl-kZ-d67"/>
+                <constraint firstItem="Qon-hx-Wrc" firstAttribute="top" secondItem="nJ7-Qc-d9L" secondAttribute="top" multiplier="2:1" constant="32" id="FYl-kZ-d67"/>
                 <constraint firstItem="wOq-zt-hoL" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Hlg-E6-vDy"/>
                 <constraint firstItem="15p-cI-7c4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="TjH-f6-8tQ"/>
                 <constraint firstItem="nJ7-Qc-d9L" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="g49-OW-s6f"/>
