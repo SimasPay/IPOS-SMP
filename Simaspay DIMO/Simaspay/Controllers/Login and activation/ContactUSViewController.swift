@@ -12,7 +12,8 @@ class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
     var contactUsInfo = NSDictionary()
-    
+    var heightForCell = 45 as CGFloat
+    let padding : CGFloat = 20
     
     static func initWithOwnNib() -> ContactUSViewController {
         let obj:ContactUSViewController = ContactUSViewController.init(nibName: String(describing: self), bundle: nil)
@@ -38,31 +39,71 @@ class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableV
         // Dispose of any resources that can be recreated.
     }
     
-    @available(iOS 2.0, *)
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if section == 0 {
+            return 2
+        } else {
+            return 1
+        }
     }
     
+    public func numberOfSections(in tableView: UITableView) -> Int{
+        return 3
+        
+    }
     
-    // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-    // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
+       return heightForCell
+    }
     
-    @available(iOS 2.0, *)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return heightForCell
+    }
+ 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let temp = UITableViewCell()
-        temp.backgroundColor = UIColor.black
+        let temp = UITableViewCell(style: .default, reuseIdentifier: "contactus")
+        temp.selectionStyle = .gray
+        
+        let lblcontent = UILabel(frame: CGRect(x: padding, y: 0, width: tableView.frame.size.width - padding * 2, height: heightForCell))
+        lblcontent.font = UIFont.boldSystemFont(ofSize: 16)
+        DLog("\(contactUsInfo)")
+        let contactInfoSting = contactUsInfo.value(forKey: "contactus") as! NSDictionary
+        if indexPath.section == 0 {
+            let size = 22 as CGFloat
+            let imgPhone = UIImageView(frame: CGRect(x: lblcontent.frame.size.width , y: (heightForCell - size) / 2 , width: size, height: size))
+            if indexPath.row == 0 {
+                lblcontent.text = contactInfoSting.value(forKey: "mobilenumber_1") as! String?
+            } else {
+                lblcontent.text = contactInfoSting.value(forKey: "mobilenumber_2") as! String?
+            }
+            imgPhone.image = UIImage.init(named: "icon_Phone")
+            temp.addSubview(imgPhone)
+        } else if indexPath.section == 1 {
+                lblcontent.text = contactInfoSting.value(forKey: "emailid") as! String?
+        } else {
+                lblcontent.text = contactInfoSting.value(forKey: "website") as! String?
+        }
+        temp.addUnderline(color: UIColor.init(hexString: color_border), coordinateX: padding)
+        
+        temp.contentView.insertSubview(lblcontent, at: 0)
+        
         return temp
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
+        let headerLabel = UILabel(frame: CGRect(x: padding, y: 0, width: tableView.frame.size.width, height: heightForCell))
+       headerLabel.font = UIFont.boldSystemFont(ofSize: 13)
+        if section == 0 {
+            headerLabel.text = "Bank Sinarmas Care"
+        } else if section == 1{
+            headerLabel.text = "E-mail"
+        } else {
+            headerLabel.text = "Website"
+        }
+        
+        let headerView = UIView()
+        headerView.addSubview(headerLabel)
+        return headerView
     }
-    */
-
+    
 }

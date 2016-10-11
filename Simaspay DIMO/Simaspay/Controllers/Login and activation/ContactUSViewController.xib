@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,7 +15,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_SinarmasBank_Image" translatesAutoresizingMaskIntoConstraints="NO" id="KJd-gP-vE4">
@@ -27,7 +26,7 @@
                 </imageView>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7eM-h2-00T">
                     <subviews>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DW7-Rt-7Yl">
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DW7-Rt-7Yl">
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="330" id="aBJ-BX-vfI"/>
@@ -49,12 +48,12 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="KJd-gP-vE4" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.35" id="4fa-bX-bj0"/>
                 <constraint firstItem="KJd-gP-vE4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="6aW-T2-bDE"/>
                 <constraint firstItem="7eM-h2-00T" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="DbP-57-OdA"/>
+                <constraint firstItem="KJd-gP-vE4" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="102" id="HLW-WZ-t24"/>
                 <constraint firstAttribute="trailing" secondItem="7eM-h2-00T" secondAttribute="trailing" id="IOk-fo-m8L"/>
                 <constraint firstAttribute="bottom" secondItem="7eM-h2-00T" secondAttribute="bottom" id="rGb-wV-jDs"/>
-                <constraint firstItem="7eM-h2-00T" firstAttribute="top" secondItem="KJd-gP-vE4" secondAttribute="bottom" constant="35" id="syM-AQ-5J4"/>
+                <constraint firstItem="7eM-h2-00T" firstAttribute="top" secondItem="KJd-gP-vE4" secondAttribute="bottom" constant="37.799999999999997" id="syM-AQ-5J4"/>
             </constraints>
         </view>
     </objects>

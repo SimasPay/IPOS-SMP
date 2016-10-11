@@ -75,6 +75,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         dict[VERSION] = "0"
         
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
         DIMOAPIManager .callAPIPOST(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {

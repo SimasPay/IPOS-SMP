@@ -33,14 +33,19 @@ extension UIView {
     }
     
     func addUnderline() {
+        addUnderline(color: UIColor.init(hexString: color_line_gray))
+    }
+    
+    func addUnderline(color : UIColor) {
         //buttonUnderline
-        let size = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height) as CGFloat
-//        if (self.frame.size.width >= max || self.frame.size.height >= max) {
-//            return
-//        }
+        addUnderline(color: color, coordinateX: 0)
+    }
+    
+    func addUnderline(color : UIColor, coordinateX : CGFloat) {
+        //buttonUnderline
         let line = CALayer()
-        line.frame = CGRect(x: 0, y: self.bounds.size.height - 1 , width: self.frame.size.width, height: 1)
-        line.backgroundColor = UIColor.init(hexString: color_line_gray).cgColor
+        line.frame = CGRect(x: coordinateX, y: self.bounds.size.height - 1 , width: self.frame.size.width, height: 1)
+        line.backgroundColor = color.cgColor
         self.layer.addSublayer(line)
     }
 }
