@@ -84,8 +84,9 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
     }
 
     @IBAction func actionNextButton(_ sender: AnyObject) {
-        let vc = ActivationPinViewController.initWithOwnNib()
-        self.navigationController?.pushViewController(vc, animated: false)
+        self.activation()
+//        let vc = ActivationPinViewController.initWithOwnNib()
+//        self.navigationController?.pushViewController(vc, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -93,15 +94,69 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func actionBackLogin(_ sender: AnyObject) {
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
+        self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: false);
     }
-    */
+    func activation() {
+        var message = "";
+        if (!tfHpNumber.isValid()) {
+            message = getString("LoginMessageFillHpNumber")
+        } else if (!tfActivationCode.isValid()) {
+            message = getString("LoginMessageFillMpin")
+        } else if (tfActivationCode.length() < 6) {
+            message = getString("LoginMessageSixMpin")
+        } else if (!DIMOAPIManager.isInternetConnectionExist()) {
+            message = getString("LoginMessageNotConnectServer")
+        }
+        
+        if (message.characters.count > 0) {
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            return
+        }
+        
+        let dict = NSMutableDictionary()
+        dict[TXNNAME] = TXN_INQUIRY_ACTIVATION
+        dict[SERVICE] = SERVICE_ACCOUNT
+        dict[SOURCEMDN] = getNormalisedMDN(self.tfHpNumber.text! as NSString)
+        dict[ACTIVATION_OTP] =  simasPayRSAencryption(tfActivationCode.text!)
+        dict[SIMASPAY_ACTIVITY] = ACTIVITY_STATUS
+        dict[MFATRANSACTION] = INQUIRY
+        
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DIMOAPIManager.callAPI(withParameters: param) { (dict, err) in
+            if (err != nil) {
+                let error = err as! NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                } else {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                }
+                return
+            }
+            
+            let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
+            DLog("\(responseDict)")
+        }
+    }
+    
+    func resendOTP() {
+        
+        let dict = NSMutableDictionary()
+        dict[TXNNAME] = TXN_RESENDOTP
+        dict[SERVICE] = SERVICE_ACCOUNT
+        dict[SOURCEMDN] = getNormalisedMDN(self.tfHpNumber.text! as NSString)
+        
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DIMOAPIManager.callAPIPOST(withParameters: param) { (dict, err) in
+            
+            
+        }
+        
+        
+        
+        
+    }
 
+   
 }

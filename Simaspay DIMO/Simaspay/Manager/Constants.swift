@@ -10,6 +10,9 @@ let SOURCE_APP_VERSION_KEY = "appversion"
 let SOURCE_APP_OSVERSION_KEY = "appos"
 let VERSION = "version"
 let CATEGORY = "category"
+let ACTIVATION_OTP = "otp"
+let MFATRANSACTION = "mfaTransaction"
+
 
 // MARK: Category
 let CATEGORY_CONTACTUS = "category.ContactUsfile"
@@ -18,6 +21,8 @@ let CATEGORY_CONTACTUS = "category.ContactUsfile"
 let TXN_GETPUBLC_KEY = "GetPublicKey"
 let TXN_LOGIN_KEY = "Login"
 let TXN_GetThirdPartyData = "GetThirdPartyData"
+let TXN_INQUIRY_ACTIVATION = "Activation"
+let TXN_RESENDOTP = "ResendOtp"
 
 // MARK: Service
 let SERVICE_ACCOUNT = "Account"
@@ -28,6 +33,7 @@ let SIMASPAY_PUBLIC_KEY = "simasPayPublicKey"
 
 // MARK: others
 let ACTIVITY_STATUS = "true"
+let INQUIRY  = "Inquiry"
 
 // MARK: RESPONSE CODE
 let SIMASPAY_LOGIN_FAILED_CODE = "11"
@@ -69,7 +75,6 @@ let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
 #define ACTIVATION_NEWPIN @"activationNewPin"
 #define ACTIVATION_CONFORMPIN @"activationConfirmPin"
 #define ACTIVATION_OTP @"otp"
-#define MFATRANSACTION @"mfaTransaction"
 #define CHANGEPIN_NEWPIN @"newPIN"
 #define CHANGEPIN_NEWPIN_TEXT @"newPINText"
 #define CHANGEPIN_CONFIRMPIN @"confirmPIN"
@@ -79,7 +84,6 @@ let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
 #define PARTNETCODE @"partnerCode"
 #define CONFIRMED @"confirmed"
 #define OTP @"otp"
-#define INQUIRY @"Inquiry"
 #define DESTMDN @"destMDN"
 #define FULL_NAME @"fullName"
 #define COMPANYID @"companyID"
@@ -256,7 +260,6 @@ let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
 #define TXN_ACCOUNT_BALANCE @"CheckBalance"
 #define TXN_ACCOUNT_HISTORY @"History"
 #define TXN_REGISTRATION @"GetRegistrationMedium"
-#define TXN_RESENDOTP @"ResendOtp"
 #define TXN_RESETPIN @"ResetPinByOTP"
 #define TXN_REACTIVATION @"Reactivation" //SubscriberReactivation Reactivation
 #define TXN_BILLINQUIRY @"BillInquiry"

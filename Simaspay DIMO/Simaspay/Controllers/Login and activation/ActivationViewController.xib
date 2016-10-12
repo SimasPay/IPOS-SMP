@@ -124,17 +124,20 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRk-iR-1uX">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRk-iR-1uX">
                             <state key="normal" title="button">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
+                            <connections>
+                                <action selector="actionBackLogin:" destination="-1" eventType="touchUpInside" id="FCv-Rf-rDA"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="eRk-iR-1uX" firstAttribute="leading" secondItem="H5C-EB-IOp" secondAttribute="trailing" id="0N8-PY-6I9"/>
+                        <constraint firstItem="eRk-iR-1uX" firstAttribute="leading" secondItem="H5C-EB-IOp" secondAttribute="trailing" constant="4" id="0N8-PY-6I9"/>
                         <constraint firstAttribute="trailing" secondItem="eRk-iR-1uX" secondAttribute="trailing" id="533-NH-o20"/>
-                        <constraint firstAttribute="width" constant="211" id="9RD-iY-IjG"/>
+                        <constraint firstAttribute="width" constant="215" id="9RD-iY-IjG"/>
                         <constraint firstItem="H5C-EB-IOp" firstAttribute="leading" secondItem="P9c-Ao-YJF" secondAttribute="leading" id="OFG-g7-Pnb"/>
                         <constraint firstAttribute="height" constant="40" id="Zgf-jq-4md"/>
                         <constraint firstItem="eRk-iR-1uX" firstAttribute="top" secondItem="P9c-Ao-YJF" secondAttribute="top" id="afG-IW-mv2"/>
