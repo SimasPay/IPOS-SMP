@@ -50,9 +50,11 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         
     }
     func buttonClick()  {
-        let vc = EULAViewController.initWithOwnNib()
-        self.animatedFadeIn()
-        self.navigationController?.pushViewController(vc, animated: false)
+        getPublicKey {
+            let vc = EULAViewController.initWithOwnNib()
+            self.animatedFadeIn()
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,6 +67,44 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         textFieldHpNumber.addUnderline()
         btnContactUs.addUnderline()
     }
+    
+//    typealias CompletionBlock = () -> Void
+    func getPublicKey(complete : @escaping () -> Void) {
+        if (publicKeys == nil || publicKeys.allKeys.count == 0) {
+            let dict = NSMutableDictionary()
+            dict[TXNNAME] = TXN_GETPUBLC_KEY
+            dict[SERVICE] = SERVICE_ACCOUNT
+            
+            let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+            DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+                if (err != nil) {
+                    let error = err as! NSError
+                    if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                        DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                    } else {
+                        DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                    }
+                    return
+                }
+                
+                let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
+                DLog("\(responseDict)")
+                if (responseDict.allKeys.count == 0) {
+                    DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+                } else {
+                    // success
+                    if (responseDict.allKeys.count > 0) {
+                        // set public keys
+                        publicKeys = responseDict;
+                    }
+                    complete()
+                }
+            }
+        } else {
+            complete()
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.dismissKeyboard()
         return true
@@ -94,13 +134,14 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             }
             
             let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
+            DLog("\(responseDict)")
             if (responseDict.allKeys.count == 0) {
                 DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
             } else {
                 let vc = ContactUSViewController.initWithOwnNib()
                 self.navigationController?.pushViewController(vc, animated: false)
                 vc.contactUsInfo = responseDict
-
+                
                 
             }
         }
@@ -125,40 +166,11 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             return
         }
         
-        DMBProgressHUD.showAdded(to: self.view, animated: true)
-        if (publicKeys == nil || publicKeys.allKeys.count == 0) {
-            let dict = NSMutableDictionary()
-            dict[TXNNAME] = TXN_GETPUBLC_KEY
-            dict[SERVICE] = SERVICE_ACCOUNT
-            
-            let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-            DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
-                DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
-                if (err != nil) {
-                    let error = err as! NSError
-                    if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                        DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
-                    } else {
-                        DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
-                    }
-                    return
-                }
-                
-                let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
-                DLog("\(responseDict)")
-                if (responseDict.allKeys.count == 0) {
-                    DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
-                } else {
-                    // success
-                    if (responseDict.allKeys.count > 0) {
-                        // set public keys
-                        publicKeys = responseDict;
-                    }
-                    self.doLoginRequest()
-                }
-            }
-        } else {
+        getPublicKey {
+            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+            DMBProgressHUD.showAdded(to: self.view, animated: true)
             self.doLoginRequest()
+            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
         }
     }
     
@@ -166,9 +178,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     
     func doLoginRequest() {
-        DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
-        DMBProgressHUD.showAdded(to: self.view, animated: true)
-        
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         let dict = NSMutableDictionary()
         dict[TXNNAME] = TXN_LOGIN_KEY
@@ -183,7 +192,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
         DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
-            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             let dictionary = NSDictionary(dictionary: dict!)
             DLog("\(dictionary)")
             

@@ -90,7 +90,6 @@ class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableV
         
         let lblcontent = UILabel(frame: CGRect(x: padding, y: 0, width: tableView.frame.size.width - padding * 2, height: heightForCell))
         lblcontent.font = UIFont.boldSystemFont(ofSize: 16)
-        DLog("\(contactUsInfo)")
         let contactInfoSting = contactUsInfo.value(forKey: "contactus") as! NSDictionary
         if indexPath.section == 0 {
             let size = 22 as CGFloat
