@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ActivationPinViewController: BaseViewController {
+class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAlertViewDelegate{
     
     @IBOutlet var lblInfoUser: BaseLabel!
     
@@ -41,15 +41,17 @@ class ActivationPinViewController: BaseViewController {
         viewTextField.updateViewRoundedWithShadow()
         tfMpin.updateTextFieldWithImageNamed("icon_Mpin")
         tfMpin.placeholder = getString("ActivationPlaceholderMpin")
-        tfMpin.addUnderline()
         tfConfirmMpin.updateTextFieldWithImageNamed("icon_Mpin")
         tfConfirmMpin.placeholder = getString("ActivationPlaceholderConfirmMpin")
         
+        tfMpin.delegate = self
+        tfConfirmMpin.delegate = self
+        
         btnSaveMpin.updateButtonType1()
         btnSaveMpin.setTitle(getString("ActivationButtonSaveMpin"), for: UIControlState())
-        btnSaveMpin.addTarget(self, action: #selector(EULAViewController.buttonClick) , for: .touchUpInside)
+        btnSaveMpin.addTarget(self, action: #selector(ActivationPinViewController.buttonClick) , for: .touchUpInside)
+        self.showOTP()
 
-        BaseViewController.lastObjectForKeyboardDetector = self.btnSaveMpin
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -69,16 +71,52 @@ class ActivationPinViewController: BaseViewController {
         
         
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        BaseViewController.lastObjectForKeyboardDetector = self.btnSaveMpin
+        updateUIWhenKeyboardShow()
+        return true
     }
-    */
+    
+    func showOTP()  {
+        let alert = UIAlertView()
+        alert.title = "Masukkan Kode OTP"
+        alert.delegate = self
+        alert.addButton(withTitle: "Batal")
+        alert.alertViewStyle = UIAlertViewStyle.default
+        alert.addButton(withTitle: "OK")
+        
 
+        let temp = UIView(frame: CGRect(x: 0, y: 0, width: 240, height: 100))
+        let button = UIButton(frame: CGRect(x: 20, y: 20, width: 30, height: 30))
+        button.setTitle("title", for: .normal)
+        button.addTarget(self, action: #selector(ActivationPinViewController.trybutton) , for: .touchUpInside)
+        
+        let textfield = UITextField(frame: CGRect(x: 20, y: 50, width: temp.bounds.size.width - (2 * 40) , height: 30))
+        textfield.placeholder = "Input"
+        
+        temp.addSubview(textfield)
+        temp.addSubview(button)
+        
+        
+        alert.setValue(temp, forKey: "accessoryView")
+        alert.show()
+        
+    }
+    func trybutton()  {
+        DLog("try it")
+    }
+    func alertView(_ View: UIAlertView, clickedButtonAt buttonIndex: Int){
+        
+        switch buttonIndex{
+        case 0:
+
+        break
+        case 1:
+            
+        break
+        default: print("Is this part even possible?")
+        }
+    }
+    
 }
