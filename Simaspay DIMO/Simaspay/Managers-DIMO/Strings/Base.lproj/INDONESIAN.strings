@@ -25,6 +25,9 @@
 "ActivationButtonOk" = "OK";
 "ActivationLabelInfoInputMpin" = "HI %@\n Silakan tentukan 6 digit mPIN untuk akun Simaspay Anda";
 "ActivationLabelInfoSuccess" = "Aktivasi Berhasil! \n\n Selamat, akun Anda telah berhasil diaktifkan";
+"ActivationAlertTitleResendOTP" = "Mohon Tunggu";
+"ActivationAlertResendOTP" = "Kami sudah mengirimkan SMS \n kode OTP yang baru untuk Anda.\nApabila SMS belum diterima,\nsilakan cek koneksi atau hubungi \nmobile service provider Anda.";
+
 
 //EULA
 "EulaButtonAgree" = "Setuju";

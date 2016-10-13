@@ -76,17 +76,17 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLayoutSubviews()
         tfHpNumber.addUnderline()
         btnResendOTP.addUnderline()
-        
         let line = CALayer()
         line.frame = CGRect(x: 0, y: self.btnLogin.bounds.size.height - 10 , width: self.btnLogin.frame.size.width, height: 1)
         line.backgroundColor = UIColor.init(hexString: color_line_gray).cgColor
         btnLogin.layer.addSublayer(line)
     }
 
+    @IBAction func actionResendOTP(_ sender: AnyObject) {
+        self.resendOTP()
+    }
     @IBAction func actionNextButton(_ sender: AnyObject) {
         self.activation()
-//        let vc = ActivationPinViewController.initWithOwnNib()
-//        self.navigationController?.pushViewController(vc, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -137,10 +137,29 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
             
             let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
             DLog("\(responseDict)")
+            let messagecode  = responseDict.value(forKeyPath:"message.code") as! String
+            let messageText  = responseDict.value(forKeyPath:"message.text") as! String
+            if messagecode == SIMASPAY_ACTIVATION__INQUERY_SUCCESS_CODE {
+                
+                let mfaModeStatus = responseDict.value(forKeyPath:"mfaMode.text") as! String
+                if mfaModeStatus == "OTP" {
+                    
+                }
+                
+                let userName = responseDict.value(forKeyPath:"name.text") as! String
+                let sctlID = responseDict.value(forKeyPath:"sctlID.text") as! String
+            } else {
+                DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: String("AlertCloseButtonText"))
+            }
         }
     }
     
     func resendOTP() {
+        
+        if (!tfHpNumber.isValid()) {
+            DIMOAlertView.showAlert(withTitle: "", message: getString("LoginMessageFillHpNumber"), cancelButtonTitle: String("AlertCloseButtonText"))
+            return
+        }
         
         let dict = NSMutableDictionary()
         dict[TXNNAME] = TXN_RESENDOTP
@@ -149,14 +168,43 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
         
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
         DIMOAPIManager.callAPIPOST(withParameters: param) { (dict, err) in
+            if (err != nil) {
+                let error = err as! NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                } else {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                }
+                return
+            }
+            let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
+            DLog("\(responseDict)")
             
-            
+            let messageText  = responseDict.value(forKeyPath: "message.text") as! String
+            if((responseDict.object(forKey: "OneTimePin")) != nil)
+            {
+                DIMOAlertView.showAlert(withTitle: getString("ActivationAlertTitleResendOTP"), message: getString("ActivationAlertResendOTP"), cancelButtonTitle: String("AlertCloseButtonText"))
+            }else{
+                DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: String("AlertCloseButtonText"))
+            }
+
+        }
+       
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        var maxLength = 6
+        if (tfHpNumber == textField) {
+            maxLength = 15
         }
         
-        
+        let currentString: NSString = textField.text! as NSString
+        let newString: NSString =
+            currentString.replacingCharacters(in: range, with: string) as NSString
+        return newString.length <= maxLength
         
         
     }
 
-   
 }
