@@ -46,8 +46,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         btnContactUs.setTitle(getString("LoginButtonContactUs"), for: UIControlState())
         btnContactUs.addUnderline()
         
-        lastObjectForKeyboardDetector = self.btnLogin
-        
     }
     func buttonClick()  {
         getPublicKey {
@@ -103,11 +101,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         } else {
             complete()
         }
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.dismissKeyboard()
-        return true
     }
     
 // MARK: - button action
@@ -230,7 +223,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
                         DIMOAlertView.showAlert(withTitle: "Not implemented", message: "AGENT", cancelButtonTitle: String("AlertCloseButtonText"))
                     } else {
                         let isBank  = responseDict.value(forKeyPath: "isBank.text") as! String
-                        let vc = HomeViewController.initWithOwnNib() as! HomeViewController
+                        let vc = HomeViewController.initWithOwnNib()
                         
                         if (isBank == SIMASPAY_LOGIN_REGULAR_TYPE) {
                             _SOURCEPOCKETCODE = "2"
@@ -253,6 +246,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         }
     }
     
+    // MARK: textfield
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
         var maxLength = 6
@@ -266,5 +260,16 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         return newString.length <= maxLength
         
         
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.dismissKeyboard()
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        BaseViewController.lastObjectForKeyboardDetector = self.btnLogin
+        updateUIWhenKeyboardShow()
+        return true
     }
 }

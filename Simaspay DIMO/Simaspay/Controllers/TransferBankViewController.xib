@@ -9,17 +9,19 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TransferBankViewController" customModule="Simaspay" customModuleProvider="target">
             <connections>
                 <outlet property="btnNext" destination="7II-gP-gzH" id="2hS-u1-hML"/>
+                <outlet property="constraintScrollViewHeight" destination="DgU-a6-WnT" id="82p-08-Q8g"/>
                 <outlet property="lblBankName" destination="NQX-6s-Am2" id="7tE-64-ZQu"/>
                 <outlet property="lblFirstTitleTf" destination="TXW-5l-b3W" id="ydF-DR-HII"/>
                 <outlet property="lblMPin" destination="2Wt-Kt-MlG" id="f45-m6-KCn"/>
                 <outlet property="lblSecondTitleTf" destination="0lZ-Xs-al0" id="sjE-Ji-171"/>
+                <outlet property="scrollView" destination="KyR-HO-64L" id="uLR-Yh-DEC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewBackground" destination="UIT-Vl-YZ1" id="xzH-P2-Uqc"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KyR-HO-64L">
@@ -36,7 +38,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YoS-CO-hyu">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YoS-CO-hyu">
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="NIb-i8-5CI"/>
@@ -148,7 +150,7 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="KyR-HO-64L" secondAttribute="bottom" id="1Hk-bs-F1D"/>
+                <constraint firstItem="KyR-HO-64L" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" constant="-64" id="DgU-a6-WnT"/>
                 <constraint firstItem="KyR-HO-64L" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="XBL-BN-Oo6"/>
                 <constraint firstAttribute="trailing" secondItem="KyR-HO-64L" secondAttribute="trailing" id="coM-qO-0Pm"/>
                 <constraint firstItem="KyR-HO-64L" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="iUS-HH-3RR"/>

@@ -28,7 +28,7 @@ class HomeViewController: BaseViewController {
     }
     
     static func initWithAccountType(_ type: AccountType) -> HomeViewController {
-        let vc = HomeViewController.initWithOwnNib() as! HomeViewController
+        let vc = HomeViewController.initWithOwnNib()
         vc.accountType = type
         return vc
     }

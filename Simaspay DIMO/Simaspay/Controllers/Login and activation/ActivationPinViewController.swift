@@ -49,7 +49,7 @@ class ActivationPinViewController: BaseViewController {
         btnSaveMpin.setTitle(getString("ActivationButtonSaveMpin"), for: UIControlState())
         btnSaveMpin.addTarget(self, action: #selector(EULAViewController.buttonClick) , for: .touchUpInside)
 
-        lastObjectForKeyboardDetector = self.btnSaveMpin
+        BaseViewController.lastObjectForKeyboardDetector = self.btnSaveMpin
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

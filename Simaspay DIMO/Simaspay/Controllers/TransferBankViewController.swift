@@ -17,6 +17,10 @@ class TransferBankViewController: BaseViewController {
     
     @IBOutlet var btnNext: BaseButton!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var constraintScrollViewHeight: NSLayoutConstraint!
+    static var scrollViewHeight : CGFloat = 0
+    
     
     static func initWithOwnNib() -> TransferBankViewController {
         let obj:TransferBankViewController = TransferBankViewController.init(nibName: String(describing: self), bundle: nil)
@@ -58,6 +62,23 @@ class TransferBankViewController: BaseViewController {
         let vc = ConfirmationViewController.initWithOwnNib()
         self.navigationController?.pushViewController(vc, animated: false)
         self.animatedFadeIn()
+    }
+    
+    override func keyboardWillShow(notification: NSNotification) {
+        super.keyboardWillShow(notification: notification)
+        TransferBankViewController.scrollViewHeight = constraintScrollViewHeight.constant
+        
+        if let keyboardSize = BaseViewController.keyboardSize {
+            let keyboardHeight : CGFloat = keyboardSize.height
+            constraintScrollViewHeight.constant = TransferBankViewController.scrollViewHeight - keyboardHeight
+        }
+        self.view.layoutIfNeeded()
+    }
+    
+    override func keyboardWillHide(notification: NSNotification) {
+        super.keyboardWillHide(notification: notification)
+        constraintScrollViewHeight.constant = TransferBankViewController.scrollViewHeight
+        self.view.layoutIfNeeded()
     }
 
     /*

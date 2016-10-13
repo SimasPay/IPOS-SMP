@@ -12,7 +12,10 @@ class BaseViewController: UIViewController {
     var lblTitle: BaseLabel!
     var btnBack: BaseButton!
     var ivBackground : UIImageView!
-    var lastObjectForKeyboardDetector : UIView!
+    static var lastObjectForKeyboardDetector : UIView!
+    static var arrayTextFields : NSMutableArray!
+    static var toolbar : UIToolbar!
+    static var keyboardSize : CGSize!
     
     func showBackgroundImage() {
         if (ivBackground == nil) {
@@ -31,13 +34,75 @@ class BaseViewController: UIViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BaseViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
-        
+    }
+    
+    func btnPrevAction() {
+        var last : UITextField!
+        for item in BaseViewController.arrayTextFields {
+            if (item as! UITextField).isFirstResponder && last != nil {
+                (last as UITextField).becomeFirstResponder()
+                break
+            }
+            last = item as! UITextField
+        }
+    }
+    
+    func btnNextAction() {
+        var isFirstResponder = false
+        for item in BaseViewController.arrayTextFields {
+            if isFirstResponder {
+                (item as! UITextField).becomeFirstResponder()
+                break
+            }
+            if (item as! UITextField).isFirstResponder {
+                isFirstResponder = true
+            }
+        }
+    }
+    
+    func btnDoneAction() {
+        dismissKeyboard()
+        view.endEditing(true)
+        for item in BaseViewController.arrayTextFields {
+            (item as! UITextField).resignFirstResponder()
+        }
+    }
+    
+    func getAllFields(obj : UIView) {
+        for item in obj.subviews {
+            if (item.subviews.count > 0) {
+                getAllFields(obj: item)
+            } else {
+                if item.isKind(of: UITextField.self) {
+                    let tf = item as! UITextField
+                    if tf.isEnabled {
+                        BaseViewController.arrayTextFields.add(item)
+                        (item as! UITextField).inputAccessoryView = BaseViewController.toolbar
+                        (item as! UITextField).autocorrectionType = .no
+                    }
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(ActivationViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ActivationViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(BaseViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(BaseViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        BaseViewController.arrayTextFields = []
+        getAllFields(obj: self.view)
+        if (BaseViewController.toolbar == nil) {
+            let numberToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 50))
+            numberToolbar.barStyle = UIBarStyle.default
+            numberToolbar.items = [
+                UIBarButtonItem(title: " Prev ", style: UIBarButtonItemStyle.plain, target: self, action: #selector(BaseViewController.btnPrevAction)),
+                UIBarButtonItem(title: " Next ", style: UIBarButtonItemStyle.plain, target: self, action: #selector(BaseViewController.btnNextAction)),
+                UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil),
+                UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(BaseViewController.btnDoneAction))]
+            numberToolbar.sizeToFit()
+            BaseViewController.toolbar = numberToolbar
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -45,24 +110,38 @@ class BaseViewController: UIViewController {
         self.dismissKeyboard()
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+//        BaseViewController.arrayTextFields = []
+        BaseViewController.lastObjectForKeyboardDetector = nil
     }
     
     func keyboardWillShow(notification: NSNotification) {
-        if lastObjectForKeyboardDetector != nil {
+        if (BaseViewController.keyboardSize == nil) {
             if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-                let lastView = lastObjectForKeyboardDetector.frame.origin.y + lastObjectForKeyboardDetector.frame.size.height + 20
-                let diff = UIScreen.main.bounds.size.height - lastView
-                
-                if self.view.frame.origin.y == 0 && diff < keyboardSize.size.height {
-                    self.view.frame.origin.y -= (keyboardSize.size.height - diff)
-                }
+                BaseViewController.keyboardSize = keyboardSize.size
             }
+        }
+        
+        if BaseViewController.lastObjectForKeyboardDetector != nil {
+            updateUIWhenKeyboardShow()
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
+        }
+    }
+    
+    func updateUIWhenKeyboardShow() {
+        if let keyboardSize = BaseViewController.keyboardSize {
+            let lastView = BaseViewController.lastObjectForKeyboardDetector.frame.origin.y + BaseViewController.lastObjectForKeyboardDetector.frame.size.height + 20
+            let diff = UIScreen.main.bounds.size.height - lastView
+            if diff < (keyboardSize.height) {
+                self.view.frame.origin.y = -((keyboardSize.height) - diff)
+            } else {
+                self.view.frame.origin.y = 0
+            }
         }
     }
 
@@ -93,7 +172,9 @@ class BaseViewController: UIViewController {
     }
     
     func btnBackAction() {
-        navigationController?.popViewController(animated: true)
+        if let vc = navigationController?.popViewController(animated: true) {
+            DLog("\(vc)")
+        }
     }
 
     func animatedFadeIn() {
