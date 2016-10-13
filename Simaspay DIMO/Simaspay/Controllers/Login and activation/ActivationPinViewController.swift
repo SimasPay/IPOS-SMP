@@ -18,6 +18,8 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
     @IBOutlet var viewTextField: UIView!
     @IBOutlet var btnSaveMpin: BaseButton!
     
+    var activationDict:NSDictionary!
+    
     static func initWithOwnNib() -> ActivationPinViewController {
         let obj:ActivationPinViewController = ActivationPinViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
@@ -50,6 +52,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         btnSaveMpin.updateButtonType1()
         btnSaveMpin.setTitle(getString("ActivationButtonSaveMpin"), for: UIControlState())
         btnSaveMpin.addTarget(self, action: #selector(ActivationPinViewController.buttonClick) , for: .touchUpInside)
+        DLog("\(activationDict)")
         self.showOTP()
 
     }

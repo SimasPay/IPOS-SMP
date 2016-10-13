@@ -63,8 +63,7 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
         
         btnNext.updateButtonType1()
         btnNext.setTitle(getString("ActivationButtonNext"), for: UIControlState())
-        
-        lastObjectForKeyboardDetector = self.btnNext
+       
 
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -135,19 +134,17 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
                 return
             }
             
-            let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
+            let responseDict = dict != nil ? NSMutableDictionary(dictionary: dict!) : [:]
             DLog("\(responseDict)")
             let messagecode  = responseDict.value(forKeyPath:"message.code") as! String
             let messageText  = responseDict.value(forKeyPath:"message.text") as! String
             if messagecode == SIMASPAY_ACTIVATION__INQUERY_SUCCESS_CODE {
-                
-                let mfaModeStatus = responseDict.value(forKeyPath:"mfaMode.text") as! String
-                if mfaModeStatus == "OTP" {
-                    
-                }
-                
-                let userName = responseDict.value(forKeyPath:"name.text") as! String
-                let sctlID = responseDict.value(forKeyPath:"sctlID.text") as! String
+                let vc = ActivationPinViewController.initWithOwnNib()
+                responseDict ["MDN"] = getNormalisedMDN(self.tfHpNumber.text! as NSString ) as String!
+                responseDict ["ActivationCode"] = simasPayRSAencryption(self.tfActivationCode.text!)
+                vc.activationDict = responseDict
+                self.animatedFadeIn()
+                self.navigationController?.pushViewController(vc, animated: false)
             } else {
                 DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: String("AlertCloseButtonText"))
             }
@@ -206,5 +203,15 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
         
         
     }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == tfHpNumber{
+            BaseViewController.lastObjectForKeyboardDetector = self.btnResendOTP.superview
+        } else {
+            BaseViewController.lastObjectForKeyboardDetector = self.btnNext
+        }
+        updateUIWhenKeyboardShow()
+        return true
+    }
+
 
 }

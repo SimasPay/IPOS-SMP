@@ -80,13 +80,7 @@
                 <constraint firstItem="wOq-zt-hoL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="jKv-tb-59X"/>
                 <constraint firstItem="Qon-hx-Wrc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="r79-6W-ETa"/>
                 <constraint firstItem="15p-cI-7c4" firstAttribute="top" secondItem="wOq-zt-hoL" secondAttribute="bottom" constant="24" id="sbw-tB-zgp"/>
-                <constraint firstItem="nJ7-Qc-d9L" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="69" id="tQR-4O-ZIJ"/>
             </constraints>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="tQR-4O-ZIJ"/>
-                </mask>
-            </variation>
         </view>
     </objects>
     <resources>
