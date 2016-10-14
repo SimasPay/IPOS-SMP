@@ -55,6 +55,20 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         
 
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ActivationPinViewController.didOTPCancel), name: NSNotification.Name(rawValue: "didOTPCancel"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ActivationPinViewController.didOTPOK), name: NSNotification.Name(rawValue: "didOTPOK"), object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didOTPCancel"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didOTPOK"), object: nil)
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tfMpin.addUnderline()
@@ -127,15 +141,16 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
 
     }
     
-    func showOTPAlert()  {
-        let alert = UIAlertView()
-        alert.title = "Masukkan Kode OTP"
-        alert.delegate = self
-        alert.addButton(withTitle: "Batal")
-        alert.alertViewStyle = UIAlertViewStyle.default
-        alert.addButton(withTitle: "OK")
-        
-
+    // MARK: OTP
+    func didOTPCancel() {
+        DLog("cancel");
+    }
+    
+    func didOTPOK() {
+        DLog("OK");
+    }
+    
+    func showOTP()  {
         let temp = UIView(frame: CGRect(x: 0, y: 0, width: 240, height: 100))
         let button = UIButton(frame: CGRect(x: 20, y: 20, width: 30, height: 30))
         button.setTitle("title", for: .normal)
@@ -146,25 +161,10 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         
         temp.addSubview(textfield)
         temp.addSubview(button)
-        
-        
-        alert.setValue(temp, forKey: "accessoryView")
-        alert.show()
-        
+        showOTPWith(view: temp)
     }
     
     func trybutton()  {
         DLog("try it")
     }
-    func alertView(_ View: UIAlertView, clickedButtonAt buttonIndex: Int){
-        
-        switch buttonIndex{
-        case 0:
-        break
-        case 1:
-        break
-        default: print("Is this part even possible?")
-        }
-    }
-    
 }
