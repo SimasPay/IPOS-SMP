@@ -63,6 +63,17 @@ func getNormalisedMDN(_ sourceMDN:NSString)->NSString {
     return newSourceMdn
 }
 
+
+func showOTPWith(view : UIView) {
+    DIMOAlertView.showPrompt(with: view, okTitle: "OK") { (index, alertView) in
+        if index == 0 {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didOTPCancel"), object: nil)
+        } else {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didOTPOK"), object: nil)
+        }
+    }
+}
+
 func simasPayRSAencryption( _ inputString: String)-> String {
     let publickKeyResponse = publicKeys as NSDictionary
     let publicKey = publickKeyResponse.value(forKeyPath: "PublicKeyModulus.text") as! String
