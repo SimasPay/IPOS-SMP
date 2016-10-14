@@ -41,18 +41,10 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         
         btnActivation.setTitle(getString("LoginButtonActivation"), for: UIControlState())
         btnActivation.updateButtonType2()
-        btnActivation.addTarget(self, action: #selector(EULAViewController.buttonClick) , for: .touchUpInside)
         
         btnContactUs.setTitle(getString("LoginButtonContactUs"), for: UIControlState())
         btnContactUs.addUnderline()
         
-    }
-    func buttonClick()  {
-        getPublicKey {
-            let vc = EULAViewController.initWithOwnNib()
-            self.animatedFadeIn()
-            self.navigationController?.pushViewController(vc, animated: false)
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -103,7 +95,17 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         }
     }
     
-// MARK: - button action
+    // MARK: - button action
+    @IBAction func btnActivationAction(_ sender: AnyObject) {
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
+        getPublicKey {
+            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+            let vc = EULAViewController.initWithOwnNib()
+            self.animatedFadeIn()
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
+    }
+    
     @IBAction func btnContactUsAction(_ sender: AnyObject) {
         self.dismissKeyboard()
         let dict = NSMutableDictionary()
@@ -163,7 +165,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             DMBProgressHUD.showAdded(to: self.view, animated: true)
             self.doLoginRequest()
-            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
         }
     }
     
@@ -185,6 +186,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
         DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             let dictionary = NSDictionary(dictionary: dict!)
             DLog("\(dictionary)")
             
