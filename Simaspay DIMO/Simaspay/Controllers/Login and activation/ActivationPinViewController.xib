@@ -68,6 +68,9 @@
                         <constraint firstAttribute="width" constant="240" id="2JK-rW-ave"/>
                         <constraint firstAttribute="height" constant="48" id="TYt-np-LFZ"/>
                     </constraints>
+                    <connections>
+                        <action selector="actionSaveMpin:" destination="-1" eventType="touchUpInside" id="Hts-Ku-esd"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

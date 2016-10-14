@@ -51,21 +51,45 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         
         btnSaveMpin.updateButtonType1()
         btnSaveMpin.setTitle(getString("ActivationButtonSaveMpin"), for: UIControlState())
-        btnSaveMpin.addTarget(self, action: #selector(ActivationPinViewController.buttonClick) , for: .touchUpInside)
         DLog("\(activationDict)")
-        self.showOTP()
+        
 
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tfMpin.addUnderline()
     }
-
-
-    func buttonClick()  {
+    @IBAction func actionSaveMpin(_ sender: AnyObject) {
         let vc = ActivationSuccessViewController.initWithOwnNib()
         self.navigationController?.pushViewController(vc, animated: false)
         self.animatedFadeIn()
+        self.submitMpin()
+    }
+    func submitMpin () {
+        
+        var message = ""
+        if (!tfMpin.isValid()) {
+            message =  getString("ActivationMessageFillMpin")
+        } else if (!tfConfirmMpin.isValid()) {
+            message =  getString("ActivationMessageFillConfirmMpin")
+        } else if (tfMpin.length() < 6 || tfConfirmMpin.length() < 6) {
+           message =  getString("ActivationMessageSixMpin")
+        } else if (tfMpin.text != tfConfirmMpin.text) {
+            message =  getString("ActivationMessageFillSameMpin")
+        } else if (!DIMOAPIManager.isInternetConnectionExist()){
+          message = getString("LoginMessageNotConnectServer")
+        }
+        if (message.characters.count > 0) {
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            return
+        }
+        
+        let mfaModeStatus = activationDict.value(forKeyPath:"mfaMode.text") as! String
+        if (mfaModeStatus == "OTP") {
+            self.showOTPAlert()
+        } else {
+            self.confirmationRequest(otpText: "")
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -81,7 +105,29 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         return true
     }
     
-    func showOTP()  {
+    func confirmationRequest(otpText:String) {
+        
+        let activationSourceMDN = activationDict.value(forKeyPath:"mfaMode.text") as! String
+        let activationInquerySctlId = activationDict.value(forKeyPath:"mfaMode.text") as! String
+        let activationInqueryOTP = activationDict.value(forKeyPath:"mfaMode.text") as! String
+//        let activationInqueryOTP = activationDict.value(forKeyPath:"mfaMode.text") as! String
+        var dict = NSMutableDictionary()
+        dict[TXNNAME] = TXN_INQUIRY_ACTIVATION
+        dict[SERVICE] = SERVICE_ACCOUNT
+//        dict[SOURCEMDN] = SimaspayUtility.getNormalisedMDN(activationSourceMDN)
+//        dict[ACTIVATION_NEWPIN] = SimaspayUtility.simasPayRSAencryption(mPINTextField.text!)
+//        dict[ACTIVATION_CONFORMPIN] = SimaspayUtility.simasPayRSAencryption(confirmasimPINTextField.text!)
+//        if(otpText.length > 0)
+//        {
+//            dict[MFAOTP] = SimaspayUtility.simasPayRSAencryption(otpText)
+//        }
+//        dict[MFATRANSACTION] = SIMASPAY_CONFIRM
+//        dict[PARENTTXNID] = activationInquerySctlId
+//        dict[ACTIVATION_OTP] = activationInqueryOTP
+
+    }
+    
+    func showOTPAlert()  {
         let alert = UIAlertView()
         alert.title = "Masukkan Kode OTP"
         alert.delegate = self
@@ -106,6 +152,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         alert.show()
         
     }
+    
     func trybutton()  {
         DLog("try it")
     }
@@ -113,10 +160,8 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         
         switch buttonIndex{
         case 0:
-
         break
         case 1:
-            
         break
         default: print("Is this part even possible?")
         }
