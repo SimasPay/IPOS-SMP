@@ -82,12 +82,16 @@ clickedButtonAtIndexCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert)
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:obj cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, nil];
     alert.alertViewStyle = alertStyle;
+    if (!title) {
+        alert.title = @" ";
+    }
+//    alert.message = @"message";
     while ([obj.alertCallBackDictionary objectForKey:@(alert.tag)]) {
         alert.tag = rand()%1000;
     }
     
     if (view) {
-        UIView *temp = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 240, 100)];
+        UIView *temp = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 240, MAX(100, view.frame.size.height))];
         [temp addSubview:view];
         [alert setValue:temp forKey:@"accessoryView"];
     }
@@ -117,10 +121,11 @@ clickedButtonAtIndexCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert)
     [self showAlertWithTitle:nil message:message alertStyle:UIAlertViewStyleDefault clickedButtonAtIndexCallback:callback cancelButtonTitle:@"Cancel" otherButtonTitles:stringOkBtn, nil];
 }
 
-+ (void)showPromptWithView:(UIView *)view
++ (void)showPromptWithTitle:(NSString *)title
+                       view:(UIView *)view
                       okTitle:(NSString *) stringOkBtn
                      complete:(void(^)(NSInteger buttonIndex, UIAlertView *alert))callback {
-    [self showAlertWithTitle:nil message:nil view:view alertStyle:UIAlertViewStyleDefault clickedButtonAtIndexCallback:callback cancelButtonTitle:@"Cancel" otherButtonTitles:stringOkBtn, nil];
+    [self showAlertWithTitle:title message:nil view:view alertStyle:UIAlertViewStyleDefault clickedButtonAtIndexCallback:callback cancelButtonTitle:@"Cancel" otherButtonTitles:stringOkBtn, nil];
 }
 + (void)showUnknownErrorCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert))callback {
     NSString *title = String(@"DIMOError");

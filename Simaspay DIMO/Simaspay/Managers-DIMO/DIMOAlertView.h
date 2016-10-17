@@ -31,9 +31,10 @@ clickedButtonAtIndexCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert)
                       okTitle:(NSString *) stringOkBtn
                      complete:(void(^)(NSInteger buttonIndex, UIAlertView *alert))callback;
 
-+ (void)showPromptWithView:(UIView *)view
-                   okTitle:(NSString *) stringOkBtn
-                  complete:(void(^)(NSInteger buttonIndex, UIAlertView *alert))callback;
++ (void)showPromptWithTitle:(NSString *)title
+                       view:(UIView *)view
+                    okTitle:(NSString *) stringOkBtn
+                   complete:(void(^)(NSInteger buttonIndex, UIAlertView *alert))callback;
 
 + (void)showUnknownErrorCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert))callback;
 @end
