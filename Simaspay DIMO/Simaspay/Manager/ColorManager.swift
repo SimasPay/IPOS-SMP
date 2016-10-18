@@ -18,6 +18,8 @@ let color_line_gray = "969696"
 let color_background = "F3F3F3"
 let color_border  = "D1D1D1"
 
+let color_btn_alert = "037AFF"
+
 
 
 

@@ -64,8 +64,8 @@ func getNormalisedMDN(_ sourceMDN:NSString)->NSString {
 }
 
 
-func showOTPWith(view : UIView) {
-    DIMOAlertView.showPrompt(withTitle: "title", view: view, okTitle: "OK") { (index, alertView) in
+func showOTPWith(title: String, view : UIView) {
+    DIMOAlertView.showPrompt(withTitle: title, view: view, okTitle: "OK") { (index, alertView) in
         if index == 0 {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didOTPCancel"), object: nil)
         } else {

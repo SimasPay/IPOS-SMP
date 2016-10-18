@@ -85,12 +85,14 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
         self.resendOTP()
     }
     @IBAction func actionNextButton(_ sender: AnyObject) {
+//        let vc = ActivationPinViewController.initWithOwnNib()
+//        self.animatedFadeIn()
+//        self.navigationController?.pushViewController(vc, animated: false)
         self.activation()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func actionBackLogin(_ sender: AnyObject) {
@@ -100,11 +102,11 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
     func activation() {
         var message = "";
         if (!tfHpNumber.isValid()) {
-            message = getString("LoginMessageFillHpNumber")
+            message = getString("ActivationMessageFillHpNumber")
         } else if (!tfActivationCode.isValid()) {
-            message = getString("LoginMessageFillMpin")
+            message = getString("ActivationMessageFillActivation")
         } else if (tfActivationCode.length() < 6) {
-            message = getString("LoginMessageSixMpin")
+            message = getString("ActivationMessageSixActivation")
         } else if (!DIMOAPIManager.isInternetConnectionExist()) {
             message = getString("LoginMessageNotConnectServer")
         }

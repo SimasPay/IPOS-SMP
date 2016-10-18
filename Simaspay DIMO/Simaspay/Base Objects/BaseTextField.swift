@@ -9,6 +9,7 @@
 import UIKit
 
 class BaseTextField: UITextField {
+    let inset: CGFloat = 10
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         self.updateUI()
@@ -33,12 +34,12 @@ class BaseTextField: UITextField {
         self.leftView = container
     }
     
-    /*
-     // Only override drawRect: if you perform custom drawing.
-     // An empty implementation adversely affects performance during animation.
-     override func drawRect(rect: CGRect) {
-     // Drawing code
-     }
-     */
+    func addInset() {
+        self.leftViewMode = UITextFieldViewMode.always
+        let container = UIView()
+        container.frame = CGRect(x: 0, y: 0, width: 10, height: self.bounds.size.height)
+        self.leftView = container
+    }
+  
     
 }

@@ -2,6 +2,7 @@
 let TXNNAME = "txnName"
 let SERVICE = "service"
 let SOURCEMDN = "sourceMDN"
+let SOURCEPIN = "sourcePIN"
 let mPIN_STRING = "authenticationString"
 let SIMASPAY_ACTIVITY = "isSimaspayActivity"
 let SOURCE_APP_TYPE_KEY = "apptype"
@@ -12,8 +13,14 @@ let VERSION = "version"
 let CATEGORY = "category"
 let ACTIVATION_OTP = "otp"
 let MFATRANSACTION = "mfaTransaction"
+let ACTIVATION_NEWPIN = "activationNewPin"
+let ACTIVATION_CONFORMPIN = "activationConfirmPin"
+let MFAOTP = "mfaOtp"
+let PARENTTXNID = "parentTxnID"
+let SCTL_ID = "sctlId"
 
-
+//MARK: Image key
+let SIMASPAY_CONFIRM = "Confirm"
 // MARK: Category
 let CATEGORY_CONTACTUS = "category.ContactUsfile"
 
@@ -39,11 +46,16 @@ let INQUIRY  = "Inquiry"
 let SIMASPAY_LOGIN_FAILED_CODE = "11"
 let SIMASPAY_LOGIN_SUCCESS_CODE = "630"
 let SIMASPAY_ACTIVATION__INQUERY_SUCCESS_CODE = "2040"
+let SIMASPAY_ACTIVATION__CONFIRMATION_SUCCESS_CODE = "52"
+let SIMASPAY_ACTIVATION__CONFIRMATION_SUCCESS_CODE1 = "2032"
 
 // MARK: Account Roles
 let SIMASPAY_LOGIN_AGENT_TYPE = "2"
 let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
 
+//MARK: opration
+let SERVICE_WALLET = "Wallet"
+let TXN_RESEND_MFAOTP = "ResendMFAOTP"
 
 /*
 #define SIMASPAY_ACTIVITY @"isSimaspayActivity"
@@ -58,7 +70,7 @@ let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
 #define PAGENUMBER @"pageNumber"
 #define mPIN_STRING @"authenticationString"
 
-#define SOURCEPIN @"sourcePIN"
+
 #define SOURCEPINTEXT @"sourcePINText"
 #define SOURCENAME @"sourceName"
 #define SOURCEPOCKETCODE @"sourcePocketCode"
@@ -66,14 +78,14 @@ let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
 #define MFAOTP @"mfaOtp"
 #define DESTPOCKETCODE @"destPocketCode"
 #define TRANSFERID @"transferID"
-#define PARENTTXNID @"parentTxnID"
+
 #define DESTACCOUNTNUMBER @"destAccountNo"
 #define DESTBANKACCOUNT @"destBankAccount"
 #define BILLNO @"billNo"
 #define DENOM_CODE @"denomCode"
 #define BILLERCODE @"billerCode"
 #define PAYMENT_MODE @"paymentMode"
-#define ACTIVATION_NEWPIN @"activationNewPin"
+
 #define ACTIVATION_CONFORMPIN @"activationConfirmPin"
 #define ACTIVATION_OTP @"otp"
 #define CHANGEPIN_NEWPIN @"newPIN"
@@ -81,7 +93,7 @@ let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
 #define CHANGEPIN_CONFIRMPIN @"confirmPIN"
 #define CHANGEPIN_CONFIRMPIN_Text @"confirmPINText"
 #define TRANSFERID @"transferID"
-#define SCTL_ID @"sctlId"
+
 #define PARTNETCODE @"partnerCode"
 #define CONFIRMED @"confirmed"
 #define OTP @"otp"
@@ -160,8 +172,7 @@ let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
 
 #define SIMASPAY_ACTIVATION_RESEND_OTP_SUCCESS_CODE @""
 #define SIMASPAY_ACTIVATION__INQUERY_SUCCESS_CODE @"2040"
-#define SIMASPAY_ACTIVATION__CONFIRMATION_SUCCESS_CODE @"52"
-#define SIMASPAY_ACTIVATION__CONFIRMATION_SUCCESS_CODE1 @"2032"
+
 
 #define SIMASPAY_KTP_VALIDATION_SUCESS @"2126"
 #define SIMASPAY_AGENT_REGISTRATION_SUCESS @"624"
@@ -217,7 +228,7 @@ let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
 
 /*  ##########################      SIMASPAY OPERATIONS   ##########################*/
 
-#define SERVICE_WALLET @"Wallet"
+
 #define SERVICE_BANK @"Bank"
 #define SERVICE_ACCOUNT @"Account"
 
@@ -318,7 +329,7 @@ let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
 #define TRANSFER_BANKSINARMAS @"Transfer_BankSinarmas"
 #define TRANSFER_OTHERBANK @"Transfer_OtherBank"
 
-#define SIMASPAY_CONFIRM @"Confirm"
+
 #define SIMOBI_CANCEL @"Cancel"
 #define SIMOBI_OK @"Ok"
 

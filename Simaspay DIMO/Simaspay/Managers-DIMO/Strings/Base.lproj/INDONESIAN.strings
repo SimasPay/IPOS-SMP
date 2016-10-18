@@ -27,8 +27,13 @@
 "ActivationLabelInfoSuccess" = "Aktivasi Berhasil! \n\n Selamat, akun Anda telah berhasil diaktifkan";
 "ActivationAlertTitleResendOTP" = "Mohon Tunggu";
 "ActivationAlertResendOTP" = "Kami sudah mengirimkan SMS \n kode OTP yang baru untuk Anda.\nApabila SMS belum diterima,\nsilakan cek koneksi atau hubungi \nmobile service provider Anda.";
-
-
+"ActivationMessageFillHpNumber" = "Harap masukkan nomor handphone Anda.";
+"ActivationMessageFillActivation" = "Masukkan kode aktivasi Anda.";
+"ActivationMessageSixActivation" = "Kode Aktivasi yang anda masukkan harus 6 angka.";
+"ActivationMessageFillMpin" = "Masukkan mPIN Anda.";
+"ActivationMessageFillConfirmMpin" = "Masukkan Konfirmasi mPIN Anda.";
+"ActivationMessageSixMpin" = "mPIN yang Anda masukkan harus 6 angka.";
+"ActivationMessageFillSameMpin" = "Mohon pastikan input konfirmasi mPIN sama dengan mPIN.";
 //EULA
 "EulaButtonAgree" = "Setuju";
 "EulaButtonDisagree" = "Tolak";

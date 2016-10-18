@@ -20,6 +20,14 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
     
     var activationDict:NSDictionary!
     
+    var timerCount = 60
+    var clock:Timer!
+    var lblTimer: BaseLabel!
+    var btnResandOTP: BaseButton!
+    var tfOTP: BaseTextField!
+    
+    
+    
     static func initWithOwnNib() -> ActivationPinViewController {
         let obj:ActivationPinViewController = ActivationPinViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
@@ -27,7 +35,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let name = "Bayu !"
+        let name = ("\(activationDict.value(forKeyPath:"name.text") as! String)!")
         let infoString = String(format: String("ActivationLabelInfoInputMpin"), name)
         lblInfoUser.text = infoString as String
         lblInfoUser.textAlignment = .center
@@ -52,6 +60,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         btnSaveMpin.updateButtonType1()
         btnSaveMpin.setTitle(getString("ActivationButtonSaveMpin"), for: UIControlState())
         DLog("\(activationDict)")
+//       self.showOTP()
         
 
     }
@@ -65,22 +74,17 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
+
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didOTPCancel"), object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didOTPOK"), object: nil)
+
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tfMpin.addUnderline()
     }
     @IBAction func actionSaveMpin(_ sender: AnyObject) {
-        let vc = ActivationSuccessViewController.initWithOwnNib()
-        self.navigationController?.pushViewController(vc, animated: false)
-        self.animatedFadeIn()
-        self.submitMpin()
-    }
-    func submitMpin () {
-        
+    
         var message = ""
         if (!tfMpin.isValid()) {
             message =  getString("ActivationMessageFillMpin")
@@ -100,7 +104,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         
         let mfaModeStatus = activationDict.value(forKeyPath:"mfaMode.text") as! String
         if (mfaModeStatus == "OTP") {
-            self.showOTPAlert()
+            self.showOTP()
         } else {
             self.confirmationRequest(otpText: "")
         }
@@ -119,52 +123,150 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         return true
     }
     
-    func confirmationRequest(otpText:String) {
+    func confirmationRequest(otpText:NSString) {
+                
+        let activationInquerySctlId = activationDict.value(forKeyPath:"sctlID.text") as! String
+        let activationInqueryOTP = activationDict.value(forKeyPath:"ActivationCode") as! String
+        let MDNString = activationDict.value(forKey: "MDN") as! String
         
-        let activationSourceMDN = activationDict.value(forKeyPath:"mfaMode.text") as! String
-        let activationInquerySctlId = activationDict.value(forKeyPath:"mfaMode.text") as! String
-        let activationInqueryOTP = activationDict.value(forKeyPath:"mfaMode.text") as! String
-//        let activationInqueryOTP = activationDict.value(forKeyPath:"mfaMode.text") as! String
-        var dict = NSMutableDictionary()
+        let dict = NSMutableDictionary()
         dict[TXNNAME] = TXN_INQUIRY_ACTIVATION
         dict[SERVICE] = SERVICE_ACCOUNT
-//        dict[SOURCEMDN] = SimaspayUtility.getNormalisedMDN(activationSourceMDN)
-//        dict[ACTIVATION_NEWPIN] = SimaspayUtility.simasPayRSAencryption(mPINTextField.text!)
-//        dict[ACTIVATION_CONFORMPIN] = SimaspayUtility.simasPayRSAencryption(confirmasimPINTextField.text!)
-//        if(otpText.length > 0)
-//        {
-//            dict[MFAOTP] = SimaspayUtility.simasPayRSAencryption(otpText)
-//        }
-//        dict[MFATRANSACTION] = SIMASPAY_CONFIRM
-//        dict[PARENTTXNID] = activationInquerySctlId
-//        dict[ACTIVATION_OTP] = activationInqueryOTP
+        dict[SOURCEMDN] = getNormalisedMDN(MDNString as NSString)
+        dict[ACTIVATION_NEWPIN] = simasPayRSAencryption(tfMpin.text!)
+        dict[ACTIVATION_CONFORMPIN] = simasPayRSAencryption(tfConfirmMpin.text!)
+        if(otpText.length > 0)
+        {
+            dict[MFAOTP] = simasPayRSAencryption(otpText as String)
+        }
+        dict[MFATRANSACTION] = SIMASPAY_CONFIRM
+        dict[PARENTTXNID] = activationInquerySctlId
+        dict[ACTIVATION_OTP] = activationInqueryOTP
+        
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DIMOAPIManager.callAPI(withParameters: param) { (dict, err) in
+            if (err != nil) {
+                let error = err as! NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                } else {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                }
+                return
+            }
+            let responseDict = dict != nil ? NSMutableDictionary(dictionary: dict!) : [:]
+            DLog("\(responseDict)")
+            let messagecode  = responseDict.value(forKeyPath:"message.code") as! String
+            let messageText  = responseDict.value(forKeyPath:"message.text") as! String
+            if (messagecode == SIMASPAY_ACTIVATION__CONFIRMATION_SUCCESS_CODE || messagecode == SIMASPAY_ACTIVATION__CONFIRMATION_SUCCESS_CODE1) {
+                let vc = ActivationSuccessViewController.initWithOwnNib()
+                self.animatedFadeIn()
+                self.navigationController?.pushViewController(vc, animated: false)
+            } else {
+                DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: String("AlertCloseButtonText"))
+            }
+ 
+            
+        }
 
     }
     
     // MARK: OTP
     func didOTPCancel() {
         DLog("cancel");
+        clock.invalidate()
+
     }
     
     func didOTPOK() {
         DLog("OK");
+        clock.invalidate()
+        confirmationRequest(otpText: (tfOTP.text as! NSString))
     }
     
     func showOTP()  {
-        let temp = UIView(frame: CGRect(x: 0, y: 0, width: 240, height: 100))
-        let button = UIButton(frame: CGRect(x: 20, y: 20, width: 30, height: 30))
-        button.setTitle("title", for: .normal)
-        button.addTarget(self, action: #selector(ActivationPinViewController.trybutton) , for: .touchUpInside)
+        let temp = UIView(frame: CGRect(x: 0, y: 0, width: 240, height: 400))
+        let messageAlert = UILabel(frame: CGRect(x: 10, y: 0, width: temp.frame.size.width, height: 60))
+        messageAlert.font = UIFont.systemFont(ofSize: 13)
+        messageAlert.textAlignment = .center
+        messageAlert.numberOfLines = 4
+        messageAlert.text = "Kode OTP dan link telah dikirimkan ke nomor 08881234567. Masukkan kode tersebut atau akses link yang tersedia."
         
-        let textfield = UITextField(frame: CGRect(x: 20, y: 50, width: temp.bounds.size.width - (2 * 40) , height: 30))
-        textfield.placeholder = "Input"
+        clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ActivationPinViewController.countDown), userInfo: nil, repeats: true)
         
-        temp.addSubview(textfield)
-        temp.addSubview(button)
-        showOTPWith(view: temp)
+        btnResandOTP = BaseButton(frame: CGRect(x: 10, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 3, width: temp.frame.size.width, height: 15))
+        btnResandOTP.setTitle("Kirim Ulang", for: .normal)
+        btnResandOTP.setTitleColor(UIColor.init(hexString: color_btn_alert), for: .normal)
+        btnResandOTP.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
+        btnResandOTP.titleLabel?.textAlignment = .center
+        btnResandOTP.addTarget(self, action: #selector(ActivationPinViewController.resendOTP), for: .touchUpInside)
+        btnResandOTP.isHidden = true
+        
+        lblTimer = BaseLabel(frame: CGRect(x: 10, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 3, width: temp.frame.size.width, height: 15))
+        lblTimer.textAlignment = .center
+        lblTimer.font = UIFont.systemFont(ofSize: 12)
+        lblTimer.text = "01:00"
+        
+        
+        tfOTP = BaseTextField(frame: CGRect(x: 10, y: lblTimer.frame.origin.y + lblTimer.frame.size.height + 3, width: temp.frame.size.width, height: 30))
+        tfOTP.borderStyle = .line
+        tfOTP.layer.borderColor = UIColor.init(hexString: color_border).cgColor
+        tfOTP.layer.borderWidth = 1;
+        tfOTP.placeholder = "6 digit kode OTP"
+        tfOTP.addInset()
+        
+        temp.addSubview(btnResandOTP)
+        temp.addSubview(lblTimer)
+        temp.addSubview(messageAlert)
+        temp.addSubview(tfOTP)
+        
+        showOTPWith(title: "Masukkan Kode OTP", view: temp)
     }
-    
-    func trybutton()  {
-        DLog("try it")
+    func countDown(){
+        if (timerCount > 0) {
+            timerCount -= 1
+            lblTimer.text = "00:\(timerCount)"
+        } else {
+            lblTimer.isHidden = true
+            btnResandOTP.isHidden = false
+        }
+    }
+
+    func resendOTP()  {
+       if (!DIMOAPIManager.isInternetConnectionExist()){
+        DIMOAlertView.showAlert(withTitle: "", message: getString("LoginMessageNotConnectServer"), cancelButtonTitle: String("AlertCloseButtonText"))
+        }
+        
+        let MDNString = activationDict.value(forKey: "MDN") as! String
+        let activationSctlID = activationDict.value(forKey: "sctlID.text")
+//        responseDict.valueForKeyPath("response.sctlID.text") as! String
+        let dict = NSMutableDictionary()
+        dict[SERVICE] = SERVICE_WALLET
+        dict[TXNNAME] = TXN_RESEND_MFAOTP
+        dict[SOURCEMDN] = getNormalisedMDN(MDNString as NSString)
+        dict[SOURCEPIN] = simasPayRSAencryption( tfMpin.text! as String)
+        dict[SCTL_ID] = activationSctlID
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DIMOAPIManager.callAPI(withParameters: param) { (dict, err) in
+            if (err != nil) {
+                let error = err as! NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                } else {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                }
+                return
+            }
+            let responseDict = dict != nil ? NSMutableDictionary(dictionary: dict!) : [:]
+            DLog("\(responseDict)")
+            let messageCode = responseDict.value(forKey: "") as! String
+            let messageText = responseDict.value(forKey: "") as! String
+            if (messageCode == "608") {
+                
+            } else {
+                DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: String("AlertCloseButtonText"))
+            }
+
+        }
     }
 }
