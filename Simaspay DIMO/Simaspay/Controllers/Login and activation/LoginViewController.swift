@@ -143,6 +143,11 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func btnLoginAction(_ sender: AnyObject) {
+        let vc = PaymentPurchaseViewController.initWithOwnNib(isPurchased: true)
+        navigationController?.pushViewController(vc, animated: false)
+        return
+        
+        
         self.dismissKeyboard()
         
         var message = "";

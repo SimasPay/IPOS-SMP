@@ -8,16 +8,29 @@
 
 import UIKit
 
+enum PaymentLevel : Int {
+    case PaymentLevelProductCategory
+    case PaymentLevelProvider
+    case PaymentLevelProduct
+}
+
 class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet var tableView: UITableView!
-    var billersListArray : NSArray!
+    var paymentLevel : PaymentLevel!
     static var isPurchase = false
     
-    var data:NSDictionary!
+    var data:NSArray!
     
-    static func initWithOwnNib() -> PaymentPurchaseViewController {
+    static func initWithOwnNib(isPurchased : Bool) -> PaymentPurchaseViewController {
+        PaymentPurchaseViewController.isPurchase = isPurchased
         let obj:PaymentPurchaseViewController = PaymentPurchaseViewController.init(nibName: String(describing: self), bundle: nil)
+        obj.paymentLevel = PaymentLevel.PaymentLevelProductCategory
+        return obj
+    }
+    static func initWithOwnNib(isPurchased : Bool, type : PaymentLevel) -> PaymentPurchaseViewController {
+        let obj = self.initWithOwnNib(isPurchased: isPurchased)
+        obj.paymentLevel = type
         return obj
     }
 
@@ -25,13 +38,17 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
         super.viewDidLoad()
         self.showTitle("Payment")
         self.showBackButton()
-        if (data == nil) {
-            self.loadProductCategories()
-        }
         self.tableView.delegate = self
         self.tableView.dataSource = self
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if (data == nil) {
+            self.loadProductCategories()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,8 +61,7 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
         let dict = NSMutableDictionary()
         dict[TXNNAME] = TXN_GetThirdPartyData
         dict[SERVICE] = SERVICE_PAYMENT
-//        dict[CATEGORY] = PaymentPurchaseViewController.isPurchase ? CATEGORY_PURCHASE : payment
-        dict[CATEGORY] = CATEGORY_PAYMENTS
+        dict[CATEGORY] = PaymentPurchaseViewController.isPurchase ? CATEGORY_PURCHASE : CATEGORY_PAYMENTS
         dict[VERSION] = "0"
         
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
@@ -64,11 +80,20 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
             
             let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
             DLog("\(responseDict)")
+            if (responseDict.allKeys.count == 0) {
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+            } else {
+                // success
+                let key = PaymentPurchaseViewController.isPurchase ? "purchaseData" : "paymentData"
+                self.data = responseDict.object(forKey: key) as! NSArray!
+                DLog("\(self.data)")
+                self.tableView.reloadData()
+            }
         }
         
     }
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.data != nil ? self.data.count : 0
     }
     
     public func numberOfSections(in tableView: UITableView) -> Int{
@@ -79,14 +104,48 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "ElementCell")
         cell.accessoryType = .disclosureIndicator;
-        cell.textLabel?.text = "coba"
+        var string = ""
+        switch self.paymentLevel.rawValue {
+        case PaymentLevel.PaymentLevelProductCategory.rawValue:
+            string = (self.data[indexPath.row] as! NSDictionary).object(forKey: "productCategory") as! String
+            break;
+        case PaymentLevel.PaymentLevelProvider.rawValue:
+            string = (self.data[indexPath.row] as! NSDictionary).object(forKey: "providerName") as! String
+            break;
+        case PaymentLevel.PaymentLevelProduct.rawValue:
+            string = (self.data[indexPath.row] as! NSDictionary).object(forKey: "productName") as! String
+            break;
+        default:
+            break;
+        }
+        cell.textLabel?.text = string
         return cell
     }
     
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        tableView.deselectRow(at: indexPath, animated: false)
-        
-        
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if (self.paymentLevel == PaymentLevel.PaymentLevelProduct) {
+            // input VC
+        } else {
+            var dict:NSArray
+            var vc: PaymentPurchaseViewController
+            switch self.paymentLevel.rawValue {
+            case PaymentLevel.PaymentLevelProductCategory.rawValue:
+                vc = PaymentPurchaseViewController.initWithOwnNib(isPurchased: PaymentPurchaseViewController.isPurchase, type: .PaymentLevelProvider)
+                dict = (self.data[indexPath.row] as! NSDictionary).object(forKey: "providers") as! NSArray
+                break;
+            case PaymentLevel.PaymentLevelProvider.rawValue:
+                vc = PaymentPurchaseViewController.initWithOwnNib(isPurchased: PaymentPurchaseViewController.isPurchase, type: .PaymentLevelProduct)
+                dict = (self.data[indexPath.row] as! NSDictionary).object(forKey: "products") as! NSArray
+                break;
+            default:
+                vc = PaymentPurchaseViewController.initWithOwnNib(isPurchased: PaymentPurchaseViewController.isPurchase, type: .PaymentLevelProvider)
+                dict = (self.data[indexPath.row] as! NSDictionary).object(forKey: "providers") as! NSArray
+                break;
+            }
+            vc.data = dict
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 
     
