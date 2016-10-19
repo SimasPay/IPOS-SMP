@@ -30,6 +30,7 @@ let TXN_LOGIN_KEY = "Login"
 let TXN_GetThirdPartyData = "GetThirdPartyData"
 let TXN_INQUIRY_ACTIVATION = "Activation"
 let TXN_RESENDOTP = "ResendOtp"
+let CATEGORY_BANK_CODES = "category.bankCodes"
 
 // MARK: Service
 let SERVICE_ACCOUNT = "Account"
