@@ -31,8 +31,13 @@ class BaseViewController: UIViewController {
         showBackgroundImage()
         
         // tap to dismiss
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BaseViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
+        
+        BaseViewController.arrayTextFields = []
+        getAllFields(obj: self.view)
+        if (BaseViewController.arrayTextFields.count > 0) {
+            let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BaseViewController.dismissKeyboard))
+            view.addGestureRecognizer(tap)
+        }
         // Do any additional setup after loading the view.
     }
     
