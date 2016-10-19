@@ -31,6 +31,8 @@ let TXN_GetThirdPartyData = "GetThirdPartyData"
 let TXN_INQUIRY_ACTIVATION = "Activation"
 let TXN_RESENDOTP = "ResendOtp"
 let CATEGORY_BANK_CODES = "category.bankCodes"
+let CATEGORY_PURCHASE = "category.purchase"
+let CATEGORY_PAYMENTS = "category.payments"
 
 // MARK: Service
 let SERVICE_ACCOUNT = "Account"
@@ -287,7 +289,7 @@ let TXN_RESEND_MFAOTP = "ResendMFAOTP"
 #define CATEGORY_BANK_CODES @"category.bankCodes"
 
 #define CATEGORY_REFRRRAL @"category.product_referral"
-#define CATEGORY_PURCHASE @"category.purchase"
+
 #define CATEGORY_PAYMENTS @"category.payments"
 #define CATEGORY_PROVIENCE @"category.province"
 #define CATEGORY_WORK @"category.work"
