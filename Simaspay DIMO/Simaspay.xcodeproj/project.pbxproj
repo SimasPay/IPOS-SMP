@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3535692D1DB74CE000F85A72 /* PaymentPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535692B1DB74CE000F85A72 /* PaymentPurchaseViewController.swift */; };
+		3535692E1DB74CE000F85A72 /* PaymentPurchaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3535692C1DB74CE000F85A72 /* PaymentPurchaseViewController.xib */; };
 		3566B9B51DB5E08E00486A61 /* TransferOtherBankListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566B9B31DB5E08E00486A61 /* TransferOtherBankListViewController.swift */; };
 		3566B9B61DB5E08E00486A61 /* TransferOtherBankListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3566B9B41DB5E08E00486A61 /* TransferOtherBankListViewController.xib */; };
 		35904FD01DA3AC9B00BDD3AE /* StatusTransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35904FCE1DA3AC9B00BDD3AE /* StatusTransferViewController.swift */; };
@@ -68,6 +70,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3535692B1DB74CE000F85A72 /* PaymentPurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaymentPurchaseViewController.swift; path = Controllers/PaymentPurchaseViewController.swift; sourceTree = "<group>"; };
+		3535692C1DB74CE000F85A72 /* PaymentPurchaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PaymentPurchaseViewController.xib; path = Controllers/PaymentPurchaseViewController.xib; sourceTree = "<group>"; };
 		3566B9B31DB5E08E00486A61 /* TransferOtherBankListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransferOtherBankListViewController.swift; path = Controllers/TransferOtherBankListViewController.swift; sourceTree = "<group>"; };
 		3566B9B41DB5E08E00486A61 /* TransferOtherBankListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TransferOtherBankListViewController.xib; path = Controllers/TransferOtherBankListViewController.xib; sourceTree = "<group>"; };
 		35904FCE1DA3AC9B00BDD3AE /* StatusTransferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusTransferViewController.swift; path = Controllers/StatusTransferViewController.swift; sourceTree = "<group>"; };
@@ -288,6 +292,8 @@
 				35904FCF1DA3AC9B00BDD3AE /* StatusTransferViewController.xib */,
 				3566B9B31DB5E08E00486A61 /* TransferOtherBankListViewController.swift */,
 				3566B9B41DB5E08E00486A61 /* TransferOtherBankListViewController.xib */,
+				3535692B1DB74CE000F85A72 /* PaymentPurchaseViewController.swift */,
+				3535692C1DB74CE000F85A72 /* PaymentPurchaseViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -428,6 +434,7 @@
 				BE204A821D93CCAE0013A483 /* ActivationViewController.xib in Resources */,
 				BE17728F1D92859B00A27E06 /* Assets.xcassets in Resources */,
 				BE9D02FD1D94DA1D0070894E /* HomeViewController.xib in Resources */,
+				3535692E1DB74CE000F85A72 /* PaymentPurchaseViewController.xib in Resources */,
 				BE9D030B1D94E16B0070894E /* ActivationPinViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,6 +453,7 @@
 				35E8527B1DA26E73002C10CD /* TransferBankViewController.swift in Sources */,
 				35F93ABF1D93870D00FF803A /* SplashScreenViewController.swift in Sources */,
 				BE9D030E1D94E18D0070894E /* ActivationSuccessViewController.swift in Sources */,
+				3535692D1DB74CE000F85A72 /* PaymentPurchaseViewController.swift in Sources */,
 				BE204A731D9396510013A483 /* Utilities.swift in Sources */,
 				BE9D03021D94DA7F0070894E /* BasicEncodingRules.m in Sources */,
 				BE204A7D1D93CC9C0013A483 /* EULAViewController.swift in Sources */,
