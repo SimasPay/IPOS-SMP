@@ -33,6 +33,17 @@ class BaseTextField: UITextField {
         container.addSubview(imageView)
         self.leftView = container
     }
+    func updateTextFieldWithRightImageNamed(_ strImg: String)  {
+        let container = UIView()
+        container.frame = CGRect(x: 0, y: 0, width: 35, height: 40)
+        var image = UIImageView()
+        image.contentMode = .center
+        image = UIImageView(image: UIImage(named: strImg))
+        image.frame = CGRect(x: 0, y: 10, width: 20, height: 20)
+        container.addSubview(image)
+        self.rightView = container
+    }
+   
     
     func addInset() {
         self.leftViewMode = UITextFieldViewMode.always

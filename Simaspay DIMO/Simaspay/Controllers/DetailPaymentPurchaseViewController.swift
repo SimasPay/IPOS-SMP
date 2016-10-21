@@ -32,7 +32,10 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
     }
 
     var pickOption = ["one", "two", "three", "seven", "fifteen"]
-    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var constraintScrollViewHeight: NSLayoutConstraint!
+    static var scrollViewHeight : CGFloat = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.showTitle(DetailPaymentPurchaseViewController.isPurchase ? "Pembelian" : "Pembayaran")
@@ -55,6 +58,10 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         tfNomTransaction.addInset()
         tfNoAccount.addInset()
         tfMpin.addInset()
+        
+        tfNomTransaction.rightViewMode =  UITextFieldViewMode.always
+        tfNomTransaction.updateTextFieldWithRightImageNamed("icon_arrow_down")
+
         
         btnNext.updateButtonType1()
         btnNext.setTitle("Lanjut", for: .normal)
@@ -93,7 +100,21 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
         self.tfNomTransaction.text = pickOption[row]
     }
+    override func keyboardWillShow(notification: NSNotification) {
+        super.keyboardWillShow(notification: notification)
+        if (DetailPaymentPurchaseViewController.scrollViewHeight == 0) {
+            DetailPaymentPurchaseViewController.scrollViewHeight = constraintScrollViewHeight.constant
+            constraintScrollViewHeight.constant = DetailPaymentPurchaseViewController.scrollViewHeight - BaseViewController.keyboardSize.height
+            self.view.layoutIfNeeded()
+        }
+    }
     
+    override func keyboardWillHide(notification: NSNotification) {
+        super.keyboardWillHide(notification: notification)
+        constraintScrollViewHeight.constant = DetailPaymentPurchaseViewController.scrollViewHeight
+        DetailPaymentPurchaseViewController.scrollViewHeight = 0
+        self.view.layoutIfNeeded()
+    }
     
     
 }

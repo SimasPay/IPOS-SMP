@@ -10,11 +10,13 @@
             <connections>
                 <outlet property="btnNext" destination="qkd-Qf-cZs" id="S5x-IT-EoB"/>
                 <outlet property="constraintHightNoTransaction" destination="ceN-Qb-zVK" id="Eg9-ya-Kkh"/>
+                <outlet property="constraintScrollViewHeight" destination="Mav-dr-cF5" id="Zwt-ve-RFl"/>
                 <outlet property="lblMpin" destination="0MW-Pg-mv4" id="6Bh-iS-etI"/>
                 <outlet property="lblNameProduct" destination="6rJ-4u-SFX" id="gd6-kh-mjx"/>
                 <outlet property="lblNoAccount" destination="PEW-vs-PQm" id="0Rt-7H-3DP"/>
                 <outlet property="lblNomTransaction" destination="2Oo-Ae-Fpn" id="eNN-uN-S3c"/>
                 <outlet property="lblTitleNameProduct" destination="ENi-Mj-fAa" id="Tnm-Hu-NOW"/>
+                <outlet property="scrollView" destination="xKR-fq-n6C" id="vfl-ch-2kJ"/>
                 <outlet property="tfMpin" destination="EHo-px-56z" id="gVQ-Sg-0IZ"/>
                 <outlet property="tfNoAccount" destination="a51-Ax-6vJ" id="iEA-Fr-mud"/>
                 <outlet property="tfNomTransaction" destination="Gq7-Iv-YRp" id="UDy-es-FfL"/>
@@ -26,8 +28,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xKR-fq-n6C">
-                    <frame key="frameInset" minY="64" width="320" height="504"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xKR-fq-n6C">
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JmZ-2m-X7i">
                             <subviews>
@@ -153,7 +154,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="xKR-fq-n6C" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="LXp-dg-laP"/>
-                <constraint firstItem="xKR-fq-n6C" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="Mav-dr-cF5"/>
+                <constraint firstItem="xKR-fq-n6C" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" constant="-64" id="Mav-dr-cF5"/>
                 <constraint firstAttribute="trailing" secondItem="xKR-fq-n6C" secondAttribute="trailing" id="abV-8k-P7o"/>
                 <constraint firstItem="xKR-fq-n6C" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jxU-F2-MIn"/>
             </constraints>

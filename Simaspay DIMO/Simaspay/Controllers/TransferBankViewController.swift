@@ -67,11 +67,7 @@ class TransferBankViewController: BaseViewController {
     override func keyboardWillShow(notification: NSNotification) {
         super.keyboardWillShow(notification: notification)
         TransferBankViewController.scrollViewHeight = constraintScrollViewHeight.constant
-        
-        if let keyboardSize = BaseViewController.keyboardSize {
-            let keyboardHeight : CGFloat = keyboardSize.height
-            constraintScrollViewHeight.constant = TransferBankViewController.scrollViewHeight - keyboardHeight
-        }
+        constraintScrollViewHeight.constant = TransferBankViewController.scrollViewHeight - BaseViewController.keyboardSize.height
         self.view.layoutIfNeeded()
     }
     
