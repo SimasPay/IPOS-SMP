@@ -23,6 +23,7 @@ class BaseLabel: UILabel {
         self.font = UIFont.systemFont(ofSize: 16)
         self.textColor = UIColor.init(hexString: color_text_default)
     }
+    
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

@@ -36,7 +36,8 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showTitle("Payment")
+        self.showTitle(PaymentPurchaseViewController.isPurchase ? "Pembelian" : "Pembayaran")
+        
         self.showBackButton()
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -126,6 +127,8 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
         tableView.deselectRow(at: indexPath, animated: true)
         if (self.paymentLevel == PaymentLevel.PaymentLevelProduct) {
             // input VC
+            let vc = DetailPaymentPurchaseViewController.initWithOwnNib(isPurchased: true)
+            navigationController?.pushViewController(vc, animated: true)
         } else {
             var dict:NSArray
             var vc: PaymentPurchaseViewController
