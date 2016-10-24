@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BalanceInfoViewController" customModule="Simaspay" customModuleProvider="target">
+            <connections>
+                <outlet property="lblBalanceInfo" destination="x39-6D-PVr" id="Ia6-QX-JKl"/>
+                <outlet property="lblDate" destination="Alf-CK-KQd" id="O3a-Gx-EFY"/>
+                <outlet property="lblTime" destination="SuO-CC-Kk3" id="Fku-aQ-jOW"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewContent" destination="Jwq-K3-tVB" id="HZx-ZP-raQ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g22-3O-TzP">
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Alf-CK-KQd" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="18" id="65F-BP-Fn8"/>
+                                <constraint firstAttribute="width" constant="120" id="Und-RS-mXj"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SuO-CC-Kk3" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="18" id="Aa7-kX-EDh"/>
+                                <constraint firstAttribute="width" constant="111" id="AfG-Ly-AWI"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jwq-K3-tVB">
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x39-6D-PVr" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="80" id="Rpx-Ve-Kar"/>
+                                        <constraint firstAttribute="width" constant="200" id="kW8-gq-VLk"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="82" id="C2i-cR-8yX"/>
+                                <constraint firstItem="x39-6D-PVr" firstAttribute="centerX" secondItem="Jwq-K3-tVB" secondAttribute="centerX" id="i01-dC-0uE"/>
+                                <constraint firstItem="x39-6D-PVr" firstAttribute="centerY" secondItem="Jwq-K3-tVB" secondAttribute="centerY" id="q94-yS-t7l"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="Alf-CK-KQd" firstAttribute="leading" secondItem="g22-3O-TzP" secondAttribute="leading" constant="25" id="KTV-t6-G65"/>
+                        <constraint firstItem="Jwq-K3-tVB" firstAttribute="top" secondItem="Alf-CK-KQd" secondAttribute="bottom" constant="24" id="NJd-et-lqn"/>
+                        <constraint firstItem="Alf-CK-KQd" firstAttribute="top" secondItem="g22-3O-TzP" secondAttribute="top" constant="25" id="NPf-8O-fca"/>
+                        <constraint firstItem="Jwq-K3-tVB" firstAttribute="leading" secondItem="g22-3O-TzP" secondAttribute="leading" constant="25" id="QmN-6m-45U"/>
+                        <constraint firstAttribute="trailing" secondItem="SuO-CC-Kk3" secondAttribute="trailing" constant="25" id="YR4-l7-Ozl"/>
+                        <constraint firstItem="SuO-CC-Kk3" firstAttribute="top" secondItem="g22-3O-TzP" secondAttribute="top" constant="25" id="kFm-Bl-o4S"/>
+                        <constraint firstAttribute="trailing" secondItem="Jwq-K3-tVB" secondAttribute="trailing" constant="25" id="wAN-J0-8SV"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="g22-3O-TzP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2El-T1-mur"/>
+                <constraint firstItem="g22-3O-TzP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="65" id="gwb-Gs-SyK"/>
+                <constraint firstAttribute="trailing" secondItem="g22-3O-TzP" secondAttribute="trailing" id="qih-rX-Pmv"/>
+                <constraint firstAttribute="bottom" secondItem="g22-3O-TzP" secondAttribute="bottom" id="uSH-g2-sxE"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
