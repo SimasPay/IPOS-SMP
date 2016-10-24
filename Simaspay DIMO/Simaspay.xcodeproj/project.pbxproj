@@ -21,6 +21,8 @@
 		35A1A6221DB8C83C002E737D /* DetailPaymentPurchaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35A1A6201DB8C83C002E737D /* DetailPaymentPurchaseViewController.xib */; };
 		35A7AD021DBDDE8F000EDD39 /* TransactionHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A7AD001DBDDE8F000EDD39 /* TransactionHistoryViewController.swift */; };
 		35A7AD031DBDDE8F000EDD39 /* TransactionHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35A7AD011DBDDE8F000EDD39 /* TransactionHistoryViewController.xib */; };
+		35A7AD081DBE0710000EDD39 /* ChangeMpinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A7AD061DBE0710000EDD39 /* ChangeMpinViewController.swift */; };
+		35A7AD091DBE0710000EDD39 /* ChangeMpinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35A7AD071DBE0710000EDD39 /* ChangeMpinViewController.xib */; };
 		35E8527B1DA26E73002C10CD /* TransferBankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E852791DA26E73002C10CD /* TransferBankViewController.swift */; };
 		35E8527C1DA26E73002C10CD /* TransferBankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35E8527A1DA26E73002C10CD /* TransferBankViewController.xib */; };
 		35F93ABF1D93870D00FF803A /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F93ABD1D93870D00FF803A /* SplashScreenViewController.swift */; };
@@ -90,6 +92,8 @@
 		35A1A6201DB8C83C002E737D /* DetailPaymentPurchaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailPaymentPurchaseViewController.xib; path = Controllers/DetailPaymentPurchaseViewController.xib; sourceTree = "<group>"; };
 		35A7AD001DBDDE8F000EDD39 /* TransactionHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransactionHistoryViewController.swift; path = Controllers/TransactionHistoryViewController.swift; sourceTree = "<group>"; };
 		35A7AD011DBDDE8F000EDD39 /* TransactionHistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TransactionHistoryViewController.xib; path = Controllers/TransactionHistoryViewController.xib; sourceTree = "<group>"; };
+		35A7AD061DBE0710000EDD39 /* ChangeMpinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangeMpinViewController.swift; path = Controllers/ChangeMpinViewController.swift; sourceTree = "<group>"; };
+		35A7AD071DBE0710000EDD39 /* ChangeMpinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChangeMpinViewController.xib; path = Controllers/ChangeMpinViewController.xib; sourceTree = "<group>"; };
 		35E852791DA26E73002C10CD /* TransferBankViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransferBankViewController.swift; path = Controllers/TransferBankViewController.swift; sourceTree = "<group>"; };
 		35E8527A1DA26E73002C10CD /* TransferBankViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TransferBankViewController.xib; path = Controllers/TransferBankViewController.xib; sourceTree = "<group>"; };
 		35F93ABD1D93870D00FF803A /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SplashScreenViewController.swift; path = Controllers/SplashScreenViewController.swift; sourceTree = "<group>"; };
@@ -312,6 +316,8 @@
 				35865FD71DBDAEB80019F0FE /* BalanceInfoViewController.xib */,
 				35A7AD001DBDDE8F000EDD39 /* TransactionHistoryViewController.swift */,
 				35A7AD011DBDDE8F000EDD39 /* TransactionHistoryViewController.xib */,
+				35A7AD061DBE0710000EDD39 /* ChangeMpinViewController.swift */,
+				35A7AD071DBE0710000EDD39 /* ChangeMpinViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -451,6 +457,7 @@
 				BE9D030F1D94E18D0070894E /* ActivationSuccessViewController.xib in Resources */,
 				35E8527C1DA26E73002C10CD /* TransferBankViewController.xib in Resources */,
 				BEC416071D9385B9000C3CF4 /* INDONESIAN.strings in Resources */,
+				35A7AD091DBE0710000EDD39 /* ChangeMpinViewController.xib in Resources */,
 				35904FD11DA3AC9B00BDD3AE /* StatusTransferViewController.xib in Resources */,
 				BE204A821D93CCAE0013A483 /* ActivationViewController.xib in Resources */,
 				BE17728F1D92859B00A27E06 /* Assets.xcassets in Resources */,
@@ -471,6 +478,7 @@
 				BEC415DE1D928E18000C3CF4 /* LoginViewController.swift in Sources */,
 				BE1773011D9285DE00A27E06 /* DAFHTTPRequestOperationManager.m in Sources */,
 				BEC415E41D928E92000C3CF4 /* BaseViewController.swift in Sources */,
+				35A7AD081DBE0710000EDD39 /* ChangeMpinViewController.swift in Sources */,
 				35E8527B1DA26E73002C10CD /* TransferBankViewController.swift in Sources */,
 				35865FD81DBDAEB80019F0FE /* BalanceInfoViewController.swift in Sources */,
 				35F93ABF1D93870D00FF803A /* SplashScreenViewController.swift in Sources */,

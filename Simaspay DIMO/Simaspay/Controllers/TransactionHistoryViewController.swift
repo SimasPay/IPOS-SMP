@@ -18,7 +18,7 @@ class TransactionHistoryViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showTitle("Transaksi")
+        self.showTitle(getString("TransactionHistoryTitle"))
         self.showBackButton()
         
         
@@ -33,8 +33,8 @@ class TransactionHistoryViewController: BaseViewController {
         let paddingContent: CGFloat = 16
         var y: CGFloat  = 0
         let widthContent = width - (2 * paddingContent) - (2 * padding)
-        let heightContent: CGFloat = 67
-        var viewContent = UIView()
+        let heightContent: CGFloat = 70
+        let viewContent = UIView()
         viewContent.backgroundColor = UIColor.white
         viewContent.layer.borderColor = UIColor.init(hexString: color_border).cgColor
         viewContent.layer.borderWidth = 1;
@@ -87,7 +87,7 @@ class TransactionHistoryViewController: BaseViewController {
             viewList.addSubview(lblTotal)
             viewList.layer.addSublayer(line)
             viewContent.addSubview(viewList)
-            y += 67
+            y += 70
             height += heightContent
         }
         viewContent.frame = CGRect(x: padding, y: padding, width: width - 2 * padding, height: height)

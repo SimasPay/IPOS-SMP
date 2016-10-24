@@ -24,7 +24,7 @@ class BalanceInfoViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.showTitle("Info Saldo")
+        self.showTitle(getString("BalanceInfoTitle"))
         self.showBackButton()
         
       
@@ -44,7 +44,7 @@ class BalanceInfoViewController: BaseViewController {
         
         //attribute
         lblDate.font = UIFont.boldSystemFont(ofSize: 13)
-        let dateString = String(format: "Tanggal : %@", date)
+        let dateString = String(format: getString("BalanceInfoLabelDate"), date)
         lblDate.text = dateString as String
         let rangeDate = (dateString as NSString).range(of: date)
         let attributedDateString = NSMutableAttributedString(string:dateString)
@@ -53,7 +53,7 @@ class BalanceInfoViewController: BaseViewController {
         
         lblTime.font = lblDate.font
         lblTime.textAlignment = .right
-        let timeString = String(format: "Jam: %@", time)
+        let timeString = String(format: getString("BalanceInfoLabelTime"), time)
         lblTime.text = timeString as String
         let range = (timeString as NSString).range(of: time)
         let attributedString = NSMutableAttributedString(string:timeString)
@@ -65,7 +65,7 @@ class BalanceInfoViewController: BaseViewController {
         lblBalanceInfo.font = UIFont.systemFont(ofSize: 13)
         lblBalanceInfo.textAlignment = .center
         lblBalanceInfo.numberOfLines = 2
-        let balanceInfoString = String(format: "Saldo Anda saat ini adalah: \n %@", balance)
+        let balanceInfoString = String(format: getString("BalanceInfoLabelBalanceInfo"), balance)
         lblBalanceInfo.text = balanceInfoString as String
         let rangebalanceInfo = (balanceInfoString as NSString).range(of: balance)
         let attributedbalanceInfoString = NSMutableAttributedString(string:balanceInfoString)

@@ -34,10 +34,27 @@
 "ActivationMessageFillConfirmMpin" = "Masukkan Konfirmasi mPIN Anda.";
 "ActivationMessageSixMpin" = "mPIN yang Anda masukkan harus 6 angka.";
 "ActivationMessageFillSameMpin" = "Mohon pastikan input konfirmasi mPIN sama dengan mPIN.";
+
 //EULA
 "EulaButtonAgree" = "Setuju";
 "EulaButtonDisagree" = "Tolak";
 "EulaContent" = "dummy content";
+
+//Balance Info
+"BalanceInfoTitle" = "Info Saldo";
+"BalanceInfoLabelDate" = "Tanggal : %@";
+"BalanceInfoLabelTime" = "Jam: %@";
+"BalanceInfoLabelBalanceInfo" = "Saldo Anda saat ini adalah: \n %@";
+
+//Change Mpin
+"ChangeMPINTitle" = "Ganti mPIN";
+"ChangeMPINLebelOldMpin" = "mPIN Lama";
+"ChangeMPINLebelNewMpin" = "mPIN Baru";
+"ChangeMPINLebelConfirmNewMpin" = "Konfirmasi mPIN Baru";
+"ChangeMPINButtonSaveMpin" = "Simpan";
+
+//Transaction History
+"TransactionHistoryTitle" = "Transaksi";
 
 //Contact
 "ContactUsTitle" = "Hubungi Kami";
