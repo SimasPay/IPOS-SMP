@@ -20,6 +20,12 @@ let color_border  = "D1D1D1"
 
 let color_btn_alert = "037AFF"
 
+//Transaction History
+let color_cradit = "14BC28"
+let color_debit = "5B9FFF"
+
+//Base Color
+let color_base_white = "FFFFFF"
 
 
 
