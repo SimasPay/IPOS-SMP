@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashScreenViewController" customModule="Simaspay" customModuleProvider="target">
@@ -15,31 +16,29 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HAT-wR-S6A">
-                    <rect key="frame" x="47" y="234" width="225" height="100"/>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HAT-wR-S6A">
+                    <frame key="frameInset" minX="47" minY="234" width="225" height="100"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uyn-yb-9qF">
-                            <rect key="frame" x="0.0" y="43" width="224" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="224" id="5sy-ye-KfI"/>
                                 <constraint firstAttribute="height" constant="50" id="vxL-sZ-g6E"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcf-2n-y48" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
-                            <rect key="frame" x="4" y="0.0" width="216" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="25" id="J8x-5B-Xhp"/>
                                 <constraint firstAttribute="width" constant="216" id="p2w-WH-S07"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25490196078431371" alpha="0.0" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25490196078431371" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="Uyn-yb-9qF" firstAttribute="centerX" secondItem="HAT-wR-S6A" secondAttribute="centerX" id="DUE-ex-fGW"/>
                         <constraint firstAttribute="width" constant="225" id="RBG-CP-NSL"/>
@@ -49,22 +48,21 @@
                         <constraint firstItem="Fcf-2n-y48" firstAttribute="top" secondItem="HAT-wR-S6A" secondAttribute="top" id="vGU-mL-clH"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hw7-gY-44o">
-                    <rect key="frame" x="75" y="488" width="170" height="40"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hw7-gY-44o">
+                    <frame key="frameInset" minX="75" minY="488" width="170" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="1GD-zc-kIg"/>
                         <constraint firstAttribute="width" constant="170" id="Egc-lc-NDp"/>
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="hw7-gY-44o" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="YOs-LH-Dhh"/>
                 <constraint firstItem="HAT-wR-S6A" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Z4H-cH-R7W"/>
                 <constraint firstAttribute="bottom" secondItem="hw7-gY-44o" secondAttribute="bottom" constant="40" id="ju1-Tp-nEU"/>
                 <constraint firstItem="HAT-wR-S6A" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="nOs-YB-joO"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <point key="canvasLocation" x="254" y="323"/>
         </view>
     </objects>

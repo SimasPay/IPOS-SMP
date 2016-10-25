@@ -12,7 +12,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
   
 
     
-    static var isPurchase = false
+    var isPurchase = false
     @IBOutlet var constraintHightNoTransaction: NSLayoutConstraint!
     
     @IBOutlet var tfNomTransaction: BaseTextField!
@@ -26,8 +26,9 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
     @IBOutlet var lblNameProduct: BaseTextField!
     @IBOutlet var lblTitleNameProduct: BaseLabel!
     static func initWithOwnNib(isPurchased : Bool) -> DetailPaymentPurchaseViewController {
-        DetailPaymentPurchaseViewController.isPurchase = isPurchased
+       
         let obj:DetailPaymentPurchaseViewController = DetailPaymentPurchaseViewController.init(nibName: String(describing: self), bundle: nil)
+         obj.isPurchase = isPurchased
         return obj
     }
 
@@ -38,7 +39,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showTitle(DetailPaymentPurchaseViewController.isPurchase ? "Pembelian" : "Pembayaran")
+        self.showTitle(self.isPurchase ? "Pembelian" : "Pembayaran")
         self.showBackButton()
         lblTitleNameProduct.text = "Nama Produk"
         lblTitleNameProduct.font = UIFont.boldSystemFont(ofSize: 13)
@@ -67,7 +68,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         btnNext.setTitle("Lanjut", for: .normal)
     
         
-        if !DetailPaymentPurchaseViewController.isPurchase {
+        if !self.isPurchase {
             constraintHightNoTransaction.constant = 0
         }
        

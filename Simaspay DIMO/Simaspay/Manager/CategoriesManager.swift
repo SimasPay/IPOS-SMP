@@ -31,6 +31,15 @@ extension UIView {
         layer.shadowRadius = 4
         // corner radius
     }
+     func updateIconRoundedWithShadow() {
+        let layer = self.layer
+        layer.cornerRadius = 8
+        layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        layer.shadowOpacity = 0.4
+        layer.shadowOffset = CGSize(width: 2, height: 2);
+        layer.shadowRadius = 2
+
+    }
     
     func addUnderline() {
         addUnderline(color: UIColor.init(hexString: color_line_gray))
