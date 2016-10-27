@@ -21,7 +21,6 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
     var isPurchase = false
     
     var data:NSArray!
-    
     static func initWithOwnNib(isPurchased : Bool) -> PaymentPurchaseViewController {
         
         let obj:PaymentPurchaseViewController = PaymentPurchaseViewController.init(nibName: String(describing: self), bundle: nil)
@@ -42,7 +41,8 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
         self.showBackButton()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-
+        self.tableView.tableFooterView = UIView(frame: .zero)
+        self.tableView.rowHeight = 56
         // Do any additional setup after loading the view.
     }
     
@@ -81,14 +81,14 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
             }
             
             let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
-            DLog("\(responseDict)")
+//            DLog("\(responseDict)")
             if (responseDict.allKeys.count == 0) {
                 DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
             } else {
                 // success
                 let key = self.isPurchase ? "purchaseData" : "paymentData"
                 self.data = responseDict.object(forKey: key) as! NSArray!
-                DLog("\(self.data)")
+//                DLog("\(self.data)")
                 self.tableView.reloadData()
             }
         }
@@ -126,18 +126,20 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        var dict:NSArray!
         if (self.paymentLevel == PaymentLevel.PaymentLevelProduct) {
             // input VC
-            var vc = BaseViewController()
+            var vc = DetailPaymentPurchaseViewController()
             if isPurchase {
                 vc = DetailPaymentPurchaseViewController.initWithOwnNib(isPurchased: true)
             } else {
                 vc = DetailPaymentPurchaseViewController.initWithOwnNib(isPurchased: false)
             }
-            
+            vc.dictOfData = self.data[indexPath.row] as! NSDictionary
             navigationController?.pushViewController(vc, animated: true)
         } else {
-            var dict:NSArray
+            
             var vc: PaymentPurchaseViewController
             switch self.paymentLevel.rawValue {
             case PaymentLevel.PaymentLevelProductCategory.rawValue:
@@ -147,10 +149,12 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
             case PaymentLevel.PaymentLevelProvider.rawValue:
                 vc = PaymentPurchaseViewController.initWithOwnNib(isPurchased: self.isPurchase, type: .PaymentLevelProduct)
                 dict = (self.data[indexPath.row] as! NSDictionary).object(forKey: "products") as! NSArray
+                DLog("\(dict)")
                 break;
             default:
                 vc = PaymentPurchaseViewController.initWithOwnNib(isPurchased: self.isPurchase, type: .PaymentLevelProvider)
                 dict = (self.data[indexPath.row] as! NSDictionary).object(forKey: "providers") as! NSArray
+                
                 break;
             }
             vc.data = dict

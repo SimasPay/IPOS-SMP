@@ -102,8 +102,11 @@ class TransferOtherBankListViewController: BaseViewController, UITableViewDelega
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         tableView.deselectRow(at: indexPath, animated: false)
-        let code = (filtered[indexPath.row] as! NSDictionary)["name"]
-        DLog("\(code)")
+        let bankName = filtered[indexPath.row] as! NSDictionary
+        let vc = TransferBankViewController.initWithOwnNib(type: TransferType.TransferTypeOtherBank)
+        vc.bankName = bankName
+        self.navigationController?.pushViewController(vc, animated: true)
+        
         
     }
     

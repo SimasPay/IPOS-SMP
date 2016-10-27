@@ -188,6 +188,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3578B6971DC0667A002519BB /* TRANSFER BANK */ = {
+			isa = PBXGroup;
+			children = (
+				357732AC1DBF62B300D10713 /* ListTransferViewController.swift */,
+				357732AD1DBF62B300D10713 /* ListTransferViewController.xib */,
+				3566B9B31DB5E08E00486A61 /* TransferOtherBankListViewController.swift */,
+				3566B9B41DB5E08E00486A61 /* TransferOtherBankListViewController.xib */,
+				35E852791DA26E73002C10CD /* TransferBankViewController.swift */,
+				35E8527A1DA26E73002C10CD /* TransferBankViewController.xib */,
+			);
+			name = "TRANSFER BANK";
+			sourceTree = "<group>";
+		};
+		3578B6981DC0673A002519BB /* PAYMENT PURCHASE */ = {
+			isa = PBXGroup;
+			children = (
+				3535692B1DB74CE000F85A72 /* PaymentPurchaseViewController.swift */,
+				3535692C1DB74CE000F85A72 /* PaymentPurchaseViewController.xib */,
+				35A1A61F1DB8C83C002E737D /* DetailPaymentPurchaseViewController.swift */,
+				35A1A6201DB8C83C002E737D /* DetailPaymentPurchaseViewController.xib */,
+			);
+			name = "PAYMENT PURCHASE";
+			sourceTree = "<group>";
+		};
+		3578B6991DC09DEA002519BB /* CONFIRMATION STATUS */ = {
+			isa = PBXGroup;
+			children = (
+				35904FD21DA3ACCA00BDD3AE /* ConfirmationViewController.swift */,
+				35904FD31DA3ACCA00BDD3AE /* ConfirmationViewController.xib */,
+				35904FCE1DA3AC9B00BDD3AE /* StatusTransferViewController.swift */,
+				35904FCF1DA3AC9B00BDD3AE /* StatusTransferViewController.xib */,
+			);
+			name = "CONFIRMATION STATUS";
+			sourceTree = "<group>";
+		};
 		BE17727B1D92859B00A27E06 = {
 			isa = PBXGroup;
 			children = (
@@ -304,26 +339,15 @@
 				35F93ABE1D93870D00FF803A /* SplashScreenViewController.xib */,
 				BE17731C1D92867900A27E06 /* Login and activation */,
 				BE204A911D94D7CA0013A483 /* HOME & MENU */,
-				35E852791DA26E73002C10CD /* TransferBankViewController.swift */,
-				35E8527A1DA26E73002C10CD /* TransferBankViewController.xib */,
-				35904FD21DA3ACCA00BDD3AE /* ConfirmationViewController.swift */,
-				35904FD31DA3ACCA00BDD3AE /* ConfirmationViewController.xib */,
-				35904FCE1DA3AC9B00BDD3AE /* StatusTransferViewController.swift */,
-				35904FCF1DA3AC9B00BDD3AE /* StatusTransferViewController.xib */,
-				3566B9B31DB5E08E00486A61 /* TransferOtherBankListViewController.swift */,
-				3566B9B41DB5E08E00486A61 /* TransferOtherBankListViewController.xib */,
-				3535692B1DB74CE000F85A72 /* PaymentPurchaseViewController.swift */,
-				3535692C1DB74CE000F85A72 /* PaymentPurchaseViewController.xib */,
-				35A1A61F1DB8C83C002E737D /* DetailPaymentPurchaseViewController.swift */,
-				35A1A6201DB8C83C002E737D /* DetailPaymentPurchaseViewController.xib */,
+				3578B6971DC0667A002519BB /* TRANSFER BANK */,
+				3578B6981DC0673A002519BB /* PAYMENT PURCHASE */,
+				3578B6991DC09DEA002519BB /* CONFIRMATION STATUS */,
 				35865FD61DBDAEB80019F0FE /* BalanceInfoViewController.swift */,
 				35865FD71DBDAEB80019F0FE /* BalanceInfoViewController.xib */,
 				35A7AD001DBDDE8F000EDD39 /* TransactionHistoryViewController.swift */,
 				35A7AD011DBDDE8F000EDD39 /* TransactionHistoryViewController.xib */,
 				35A7AD061DBE0710000EDD39 /* ChangeMpinViewController.swift */,
 				35A7AD071DBE0710000EDD39 /* ChangeMpinViewController.xib */,
-				357732AC1DBF62B300D10713 /* ListTransferViewController.swift */,
-				357732AD1DBF62B300D10713 /* ListTransferViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

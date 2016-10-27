@@ -33,7 +33,7 @@ class ActivationSuccessViewController: BaseViewController {
         
         btnOK.updateButtonType1()
         btnOK.setTitle(getString("ActivationButtonOk"), for: UIControlState())
-        btnOK.addTarget(self, action: #selector(ActivationSuccessViewController.buttonTransfer) , for: .touchUpInside)
+//        btnOK.addTarget(self, action: #selector(ActivationSuccessViewController.buttonTransfer) , for: .touchUpInside)
     }
 
     func buttonClick()  {
@@ -46,21 +46,8 @@ class ActivationSuccessViewController: BaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func buttonTransfer()  {
-        let vc = TransferBankViewController.initWithOwnNib()
-        self.navigationController?.pushViewController(vc, animated: false)
-        self.animatedFadeIn()
-    }
+    
 
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

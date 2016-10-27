@@ -25,6 +25,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
     @IBOutlet var lblNoAccount: BaseLabel!
     @IBOutlet var lblNameProduct: BaseTextField!
     @IBOutlet var lblTitleNameProduct: BaseLabel!
+    var dictOfData : NSDictionary!
     static func initWithOwnNib(isPurchased : Bool) -> DetailPaymentPurchaseViewController {
        
         let obj:DetailPaymentPurchaseViewController = DetailPaymentPurchaseViewController.init(nibName: String(describing: self), bundle: nil)
@@ -32,7 +33,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         return obj
     }
 
-    var pickOption = ["one", "two", "three", "seven", "fifteen"]
+    var pickOption:[String]!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var constraintScrollViewHeight: NSLayoutConstraint!
     static var scrollViewHeight : CGFloat = 0
@@ -63,10 +64,13 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         tfNomTransaction.rightViewMode =  UITextFieldViewMode.always
         tfNomTransaction.updateTextFieldWithRightImageNamed("icon_arrow_down")
 
-        
+        let denomString = (self.dictOfData.value(forKey: "Denom") as! String)
+        self.pickOption = denomString.components(separatedBy: "|")
         btnNext.updateButtonType1()
         btnNext.setTitle("Lanjut", for: .normal)
     
+        DLog("\(dictOfData)")
+        lblNameProduct.text = dictOfData.value(forKey: "productName") as? String
         
         if !self.isPurchase {
             constraintHightNoTransaction.constant = 0

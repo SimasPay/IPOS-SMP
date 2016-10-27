@@ -10,18 +10,23 @@
             <connections>
                 <outlet property="btnNext" destination="7II-gP-gzH" id="2hS-u1-hML"/>
                 <outlet property="constraintScrollViewHeight" destination="DgU-a6-WnT" id="82p-08-Q8g"/>
+                <outlet property="constraintViewBankName" destination="qTF-uH-cff" id="Lv5-0s-b9K"/>
                 <outlet property="lblBankName" destination="NQX-6s-Am2" id="7tE-64-ZQu"/>
                 <outlet property="lblFirstTitleTf" destination="TXW-5l-b3W" id="ydF-DR-HII"/>
                 <outlet property="lblMPin" destination="2Wt-Kt-MlG" id="f45-m6-KCn"/>
                 <outlet property="lblSecondTitleTf" destination="0lZ-Xs-al0" id="sjE-Ji-171"/>
                 <outlet property="scrollView" destination="KyR-HO-64L" id="uLR-Yh-DEC"/>
+                <outlet property="tfAmountTransfer" destination="2OP-qi-1PL" id="6FK-Jp-oOa"/>
+                <outlet property="tfBankName" destination="YoS-CO-hyu" id="tbG-Xm-r6h"/>
+                <outlet property="tfMpin" destination="JkH-85-Cke" id="h1g-uf-Yzi"/>
+                <outlet property="tfNoAccount" destination="Y3A-JR-ORB" id="yct-Hp-FnU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewBackground" destination="UIT-Vl-YZ1" id="xzH-P2-Uqc"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KyR-HO-64L">
@@ -38,7 +43,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YoS-CO-hyu">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YoS-CO-hyu" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="NIb-i8-5CI"/>
@@ -51,10 +56,10 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="NQX-6s-Am2" firstAttribute="leading" secondItem="aWv-pT-OBK" secondAttribute="leading" id="0fv-Tn-6gi"/>
-                                        <constraint firstItem="NQX-6s-Am2" firstAttribute="top" secondItem="aWv-pT-OBK" secondAttribute="top" id="CJz-wn-0x7"/>
+                                        <constraint firstItem="NQX-6s-Am2" firstAttribute="top" secondItem="aWv-pT-OBK" secondAttribute="top" constant="25" id="CJz-wn-0x7"/>
                                         <constraint firstItem="YoS-CO-hyu" firstAttribute="top" secondItem="NQX-6s-Am2" secondAttribute="bottom" constant="10" id="g6Y-2t-tnT"/>
                                         <constraint firstAttribute="width" constant="270" id="i0G-Da-uv6"/>
-                                        <constraint firstAttribute="height" constant="66" id="qTF-uH-cff"/>
+                                        <constraint firstAttribute="height" constant="91" id="qTF-uH-cff"/>
                                         <constraint firstItem="YoS-CO-hyu" firstAttribute="leading" secondItem="aWv-pT-OBK" secondAttribute="leading" id="sFc-wn-jtW"/>
                                         <constraint firstAttribute="trailing" secondItem="YoS-CO-hyu" secondAttribute="trailing" id="sUa-J2-ymM"/>
                                         <constraint firstAttribute="trailing" secondItem="NQX-6s-Am2" secondAttribute="trailing" id="ugw-8x-8K1"/>
@@ -95,7 +100,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JkH-85-Cke">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JkH-85-Cke" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -118,7 +123,7 @@
                                 <constraint firstItem="2OP-qi-1PL" firstAttribute="leading" secondItem="0lZ-Xs-al0" secondAttribute="leading" id="HRo-dh-rgJ"/>
                                 <constraint firstItem="JkH-85-Cke" firstAttribute="width" secondItem="2OP-qi-1PL" secondAttribute="width" id="KeV-s0-tNY"/>
                                 <constraint firstItem="2OP-qi-1PL" firstAttribute="top" secondItem="0lZ-Xs-al0" secondAttribute="bottom" constant="8" id="PhI-zz-m3k"/>
-                                <constraint firstItem="aWv-pT-OBK" firstAttribute="top" secondItem="UIT-Vl-YZ1" secondAttribute="top" constant="25" id="Pz2-JF-hJs"/>
+                                <constraint firstItem="aWv-pT-OBK" firstAttribute="top" secondItem="UIT-Vl-YZ1" secondAttribute="top" id="Pz2-JF-hJs"/>
                                 <constraint firstItem="0lZ-Xs-al0" firstAttribute="width" secondItem="TXW-5l-b3W" secondAttribute="width" id="Ucy-EL-rSA"/>
                                 <constraint firstItem="2Wt-Kt-MlG" firstAttribute="leading" secondItem="2OP-qi-1PL" secondAttribute="leading" id="Upn-XK-eZX"/>
                                 <constraint firstItem="7II-gP-gzH" firstAttribute="top" secondItem="JkH-85-Cke" secondAttribute="bottom" constant="29" id="V8d-8p-Cah"/>

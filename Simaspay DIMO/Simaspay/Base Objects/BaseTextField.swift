@@ -22,6 +22,8 @@ class BaseTextField: UITextField {
     func updateUI() {
         let fontTextField = UIFont.systemFont(ofSize: 16)
         self.font = fontTextField
+        self.layer.cornerRadius = 2.5
+        self.clipsToBounds = true
     }
     
     func updateTextFieldWithImageNamed(_ strImg: String) {
