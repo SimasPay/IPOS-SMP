@@ -8,12 +8,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="Simaspay" customModuleProvider="target">
             <connections>
+                <outlet property="btnMove" destination="jn1-4y-YVm" id="F0Q-io-dUQ"/>
                 <outlet property="collectionView" destination="IHY-gC-1eK" id="1Er-Ja-iJR"/>
                 <outlet property="imgUser" destination="bMM-4r-rT9" id="Qch-Mt-xb0"/>
                 <outlet property="lblNoAccount" destination="HMm-Fr-0wJ" id="beO-W5-fyw"/>
                 <outlet property="lblTypeHome" destination="R3e-Bf-dMV" id="88p-q9-s4l"/>
                 <outlet property="lblUsername" destination="l0U-tn-1VH" id="fGM-bW-M5a"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewMove" destination="sfI-To-pub" id="mec-eq-aOk"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -88,10 +90,30 @@
                         <constraint firstItem="R3e-Bf-dMV" firstAttribute="leading" secondItem="nfl-YZ-Kyf" secondAttribute="leading" id="qQV-Vg-gU2"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mlA-pZ-5kK">
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mlA-pZ-5kK">
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sfI-To-pub">
+                            <color key="backgroundColor" red="1" green="0.065431795060000006" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jn1-4y-YVm">
+                            <connections>
+                                <action selector="drag:event:" destination="-1" eventType="touchDragInside" id="7Aq-oI-Swg"/>
+                                <action selector="touchDone:" destination="-1" eventType="touchDragOutside" id="GHt-WP-1St"/>
+                                <action selector="touchDone:" destination="-1" eventType="touchUpInside" id="XeC-3r-UHT"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="sfI-To-pub" secondAttribute="bottom" id="1Sd-dC-5d9"/>
+                        <constraint firstItem="sfI-To-pub" firstAttribute="top" secondItem="mlA-pZ-5kK" secondAttribute="top" id="8wY-TA-xXh"/>
+                        <constraint firstAttribute="trailing" secondItem="sfI-To-pub" secondAttribute="trailing" id="M9C-cm-bee"/>
+                        <constraint firstItem="sfI-To-pub" firstAttribute="leading" secondItem="mlA-pZ-5kK" secondAttribute="leading" id="MM4-pN-a24"/>
+                        <constraint firstItem="jn1-4y-YVm" firstAttribute="top" secondItem="mlA-pZ-5kK" secondAttribute="top" id="Nlg-rJ-7gX"/>
+                        <constraint firstItem="jn1-4y-YVm" firstAttribute="leading" secondItem="mlA-pZ-5kK" secondAttribute="leading" id="PgW-QW-bXB"/>
                         <constraint firstAttribute="height" constant="48" id="no1-b0-Aib"/>
+                        <constraint firstAttribute="trailing" secondItem="jn1-4y-YVm" secondAttribute="trailing" id="tvz-Ca-rIg"/>
+                        <constraint firstAttribute="bottom" secondItem="jn1-4y-YVm" secondAttribute="bottom" id="uPz-A0-C08"/>
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="IHY-gC-1eK">

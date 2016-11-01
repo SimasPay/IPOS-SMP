@@ -11,6 +11,7 @@ import UIKit
 class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
   
 
+  
     
     var isPurchase = false
     @IBOutlet var constraintHightNoTransaction: NSLayoutConstraint!
@@ -64,8 +65,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         tfNomTransaction.rightViewMode =  UITextFieldViewMode.always
         tfNomTransaction.updateTextFieldWithRightImageNamed("icon_arrow_down")
 
-        let denomString = (self.dictOfData.value(forKey: "Denom") as! String)
-        self.pickOption = denomString.components(separatedBy: "|")
+        
         btnNext.updateButtonType1()
         btnNext.setTitle("Lanjut", for: .normal)
     
@@ -74,6 +74,9 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         
         if !self.isPurchase {
             constraintHightNoTransaction.constant = 0
+        } else {
+            let denomString = (self.dictOfData.value(forKey: "Denom") as! String)
+            self.pickOption = denomString.components(separatedBy: "|")
         }
        
 
@@ -120,8 +123,17 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         DetailPaymentPurchaseViewController.scrollViewHeight = 0
         self.view.layoutIfNeeded()
     }
-    
-    
+    func buttonConfirmation()  {
+        let vc = ConfirmationViewController.initWithOwnNib()
+        self.navigationController?.pushViewController(vc, animated: false)
+        self.animatedFadeIn()
+    }
+
+    @IBAction func actionConfirmation(_ sender: AnyObject) {
+        let vc = ConfirmationViewController.initWithOwnNib()
+        self.navigationController?.pushViewController(vc, animated: false)
+        self.animatedFadeIn()
+    }
 }
 
 

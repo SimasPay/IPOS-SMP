@@ -25,7 +25,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     @IBOutlet var lblNoAccount: BaseLabel!
     @IBOutlet var imgUser: UIImageView!
     @IBOutlet var collectionView: UICollectionView!
-    
+    var gradientLayer : CAGradientLayer!
+    @IBOutlet weak var viewMove: UIView!
+    @IBOutlet weak var btnMove: UIButton!
+    static var positionx:CGFloat = 0
     static func initWithOwnNib() -> HomeViewController {
         let obj:HomeViewController = HomeViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
@@ -63,7 +66,59 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         collectionView.dataSource = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         
+        let leftColor = UIColor.init(hexString: "FF262B").cgColor
+        let rightColor = UIColor.init(hexString: "F7AE04").cgColor
+        let gradientLayer = CAGradientLayer()
         
+        gradientLayer.frame = self.viewMove.frame
+        
+        gradientLayer.colors = [leftColor,rightColor ]
+        gradientLayer.startPoint = CGPoint(x: 0.0,y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
+        self.gradientLayer = gradientLayer
+        self.viewMove.layer.addSublayer(gradientLayer)
+        
+    
+        
+        
+        
+    }
+    
+    
+    @IBAction func drag(_ sender: AnyObject, event: UIEvent) {
+        if let button = sender as? UIButton {
+            // get the touch inside the button
+            let touch = event.touches(for: btnMove)?.first
+            // println the touch location
+            let x = (touch?.location(in: button).x)! as CGFloat
+            if (HomeViewController.positionx == 0) {
+                
+            } else {
+                if x > HomeViewController.positionx {
+                    // do right
+                    let diff = x - HomeViewController.positionx
+                    var frame = viewMove.frame
+                    frame.origin.x += diff * 1.5
+                    viewMove.frame = frame
+                } else if (x < HomeViewController.positionx) {
+                    let diff = HomeViewController.positionx - x
+                    var frame = viewMove.frame
+                    frame.origin.x -= diff * 1.5
+                    viewMove.frame = frame
+                }
+            }
+            HomeViewController.positionx = x
+        }
+    }
+    
+    @IBAction func touchDone(_ sender: AnyObject) {
+        HomeViewController.positionx = 0
+        UIView.animate(withDuration: 0.3) {
+            var frame = self.viewMove.frame
+            frame.origin.x = 0
+            self.viewMove.frame = frame
+        }
+
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -126,6 +181,20 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         ]
         
 //        setupMenu()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        var frame = self.viewMove.frame
+        frame.origin = CGPoint.zero
+        self.gradientLayer.frame = frame
+        
+        let lblViewMove = BaseLabel.init(frame: CGRect(x: 0, y: 0, width: self.viewMove.frame.width, height: self.viewMove.frame.height))
+        lblViewMove.font = UIFont.systemFont(ofSize: 14)
+        lblViewMove.textColor = UIColor.white
+        lblViewMove.textAlignment = .center
+        lblViewMove.text = "Slide ke kanan untuk melihat saldo ->"
+        self.viewMove.addSubview(lblViewMove)
     }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -98,7 +98,40 @@ class TransferBankViewController: BaseViewController {
     }
     
     func buttonConfirmation()  {
+        
         let vc = ConfirmationViewController.initWithOwnNib()
+        let data: [String : Any]!
+        
+        if (self.transferType == TransferType.TransferTypeSinarmas) {
+            data = [
+                "title" : "Pastikan data berikut sudah benar",
+                "content" : [
+                    ["Nama Pemilik Rekening" : "BAYU SANTOSO"],
+                    ["Bank Tujuan" : "Bank Sinarmas"],
+                    ["Nomor Rekening Tujuan" : "1122334455"],
+                    ["Jumlah" : "Rp 2.500.000"],
+                ]
+            ]
+            vc.data = data as NSDictionary!
+        } else if (self.transferType == TransferType.TransferTypeOtherBank){
+           let bankNameString = bankName.value(forKey: "name") as! String
+            data = [
+                "title" : "Pastikan data berikut sudah benar",
+                "content" : [
+                    ["Nama Pemilik Rekening" : "BAYU SANTOSO"],
+                    ["Bank Tujuan" : bankNameString],
+                    ["Nomor Rekening Tujuan" : "06001234567"],
+                    ["Jumlah" : "Rp 2.500.000"],
+                    ["Biaya Transfer" : "Rp 7.500"],
+                ],
+                "footer" :[
+                    "Total Pendebitan" : "Rp 2.507.500"]
+
+            ]
+            vc.data = data as NSDictionary!
+            
+        }
+        
         self.navigationController?.pushViewController(vc, animated: false)
         self.animatedFadeIn()
     }

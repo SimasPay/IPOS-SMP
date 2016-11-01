@@ -42,42 +42,6 @@ class StatusTransferViewController: BaseViewController {
         
         btnOK.updateButtonType1()
         btnOK.setTitle("OK", for: .normal)
-        
-        data = [
-            "title" : "pastikan data berikut bla bla bla",
-            "content" : [
-                "Nama product" : "tagihan",
-                "Nomor" : "0812",
-                "Jumlah" : "rp 123.333",
-                "Diskon" : "rp 5000",
-                "Nama product12" : "tagihan",
-                "Nomor12" : "0812",
-                "Jumlah12" : "rp 123.333",
-                "Diskon12" : "rp 5000",
-                "Nama pro4duct112" : "tagihan",
-                "Nomor1231" : "0812",
-                "Jumlah13221" : "rp 123.333",
-                "Diskon12221" : "rp 5000",
-                "Nama pro1112332d1uct12" : "tagihan",
-                "Nomor1221" : "0812",
-                "Jumlah121213" : "rp 123.333",
-                "Diskon231112" : "rp 5000",
-                "Nama23 pro132duct12" : "tagihan",
-                "Nom23or11322" : "0812",
-                "Jum23lah412" : "rp 123.333",
-                "D123isk2on12" : "rp 5000",
-                "12Nama 2product12" : "tagihan",
-                "N123om5or12" : "0812",
-                "J4umlah512" : "rp 123.333",
-                "Di4124skon12" : "rp 5000"
-                
-                
-            ],
-            "footer" :[
-                "total pendebitan" : "Rp 123.123",
-                "total debit" : "Rp 123.123"
-            ]
-        ]
 
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -87,22 +51,15 @@ class StatusTransferViewController: BaseViewController {
         let sizeRect = UIScreen.main.applicationFrame
         let width    = sizeRect.size.width - 2 * 25
         let heightContent:CGFloat = 15
-        let heightTitleContent:CGFloat = 15
         let margin:CGFloat = 10
         var y:CGFloat = 16
         
         
-        let lblTitle = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightTitleContent))
-        lblTitle.font = UIFont.boldSystemFont(ofSize: 14)
-        lblTitle.text = data.value(forKey: "title") as? String
-        viewContentStatus.addSubview(lblTitle)
-        y += heightTitleContent + 10
-        
-        
-        let contentDic = data.value(forKey: "content") as! NSDictionary
-        for list in contentDic {
-            let key = list.key as! String
-            let Value = list.value as! String
+        let arrayContent = data.value(forKey: "content") as! [[String:String]]
+        for content in arrayContent {
+            for list in content {
+            let key = list.key
+            let Value = list.value 
             
             let lblKey = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
             lblKey.font = UIFont.boldSystemFont(ofSize: 13)
@@ -116,11 +73,15 @@ class StatusTransferViewController: BaseViewController {
             viewContentStatus.addSubview(lblValue)
             y += heightContent + margin
         }
+        }
         
-        let line = CALayer()
-        line.frame = CGRect(x: padding, y: y, width: width - 2 * padding, height: 1)
-        line.backgroundColor = UIColor.init(hexString: color_line_gray).cgColor
-        viewContentStatus.layer.addSublayer(line)
+        if let contentFooterDica = data.value(forKey: "footer") {
+            let contentFooterDic = contentFooterDica as! NSDictionary
+            if contentFooterDic.allKeys.count != 0 {
+            let line = CALayer()
+            line.frame = CGRect(x: padding, y: y, width: width - 2 * padding, height: 1)
+            line.backgroundColor = UIColor.init(hexString: color_line_gray).cgColor
+            viewContentStatus.layer.addSublayer(line)
         
         y += margin
         
@@ -140,6 +101,8 @@ class StatusTransferViewController: BaseViewController {
             lblValue.text = Value
             viewContentStatus.addSubview(lblValue)
             y += heightContent + margin
+          }
+          }
         }
         self.constraintViewContent.constant = y
         
@@ -151,20 +114,11 @@ class StatusTransferViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func buttonStatus()  {
-        let vc = ConfirmationViewController.initWithOwnNib()
-        self.navigationController?.pushViewController(vc, animated: false)
-        self.animatedFadeIn()
+    
+       @IBAction func actionOkButton(_ sender: AnyObject) {
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
+        self.navigationController!.popToViewController(viewControllers[viewControllers.count - 5
+            ], animated: false);
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

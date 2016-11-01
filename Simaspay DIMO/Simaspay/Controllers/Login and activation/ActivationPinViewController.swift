@@ -213,6 +213,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         tfOTP.layer.borderColor = UIColor.init(hexString: color_border).cgColor
         tfOTP.layer.borderWidth = 1;
         tfOTP.placeholder = "6 digit kode OTP"
+        tfOTP.isSecureTextEntry = true
         tfOTP.addInset()
         
         temp.addSubview(btnResandOTP)
