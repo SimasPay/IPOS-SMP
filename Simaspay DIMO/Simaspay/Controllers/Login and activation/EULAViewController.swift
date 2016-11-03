@@ -44,6 +44,9 @@ class EULAViewController: BaseViewController {
         viewFrame.addSubview(textView)
         
         btnAgree.addTarget(self, action: #selector(EULAViewController.buttonClick) , for: .touchUpInside)
+        
+  
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,7 +66,7 @@ class EULAViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     func buttonClick()  {
-        let vc = ActivationViewController.initWithOwnNib()
+        let vc = LoginViewController.initWithOwnNib()
         self.navigationController?.pushViewController(vc, animated: false)
         self.animatedFadeIn()
 //        self.navigationController?.popViewControllerAnimated(false)

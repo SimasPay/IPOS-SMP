@@ -44,6 +44,17 @@ class ChangeMpinViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func actionBtnSave(_ sender: AnyObject) {
+        let vc = StatusTransferViewController.initWithOwnNib()
+        let data = [
+            "title" : "Terima kasih",
+            "content" : [],
+            "footer" : [:]
+        ] as [String : Any]
+
+        vc.data = data as NSDictionary!
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 
     /*
     // MARK: - Navigation

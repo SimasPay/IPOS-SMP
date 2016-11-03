@@ -23,9 +23,11 @@ typedef enum {
 @interface DIMOAPIManager : NSObject
 + (instancetype)sharedInstance;
 + (BOOL)isInternetConnectionExist;
++ (NSTimer *)staticTimer;
 //+ (void)checkInternetConnection;
 
 #pragma mark - API
+
 + (void)callAPIWithParameters:(NSDictionary *)dict
         andComplete:(void(^)(NSDictionary *response, NSError *err))completion;
 

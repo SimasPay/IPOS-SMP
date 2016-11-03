@@ -9,9 +9,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StatusTransferViewController" customModule="Simaspay" customModuleProvider="target">
             <connections>
                 <outlet property="btnOK" destination="dCs-Hg-YTC" id="l0H-IP-eGl"/>
-                <outlet property="constraintViewContent" destination="5B7-oo-Tvt" id="nx7-5D-hz7"/>
+                <outlet property="constraintViewContentHeight" destination="5B7-oo-Tvt" id="jZM-yk-Qdb"/>
+                <outlet property="constraintViewMainFrameHeight" destination="ZBu-gY-fV9" id="4zF-om-gSx"/>
                 <outlet property="lblIdStatus" destination="ro6-XG-2tS" id="Zc5-kU-jc9"/>
                 <outlet property="lblStatus" destination="jZQ-FG-OOb" id="Ucv-Lh-PSt"/>
+                <outlet property="lineStatus" destination="U3A-QF-fpN" id="iBR-3Y-QzS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewContentStatus" destination="VAw-IX-F6C" id="itr-td-jwU"/>
                 <outlet property="viewMainFrame" destination="KoA-xj-QkW" id="sGS-wp-zTL"/>
@@ -24,7 +26,7 @@
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8T-bs-iC8">
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KoA-xj-QkW">
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KoA-xj-QkW">
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_success" translatesAutoresizingMaskIntoConstraints="NO" id="LcM-lO-MgQ">
                                     <constraints>
@@ -54,7 +56,7 @@
                                         <constraint firstAttribute="height" constant="1" id="5d5-Wr-0CB"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VAw-IX-F6C">
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VAw-IX-F6C">
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="100" id="5B7-oo-Tvt"/>

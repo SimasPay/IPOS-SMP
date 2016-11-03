@@ -14,6 +14,8 @@ class SplashScreenViewController: BaseViewController {
     @IBOutlet var imgLogoSinarmas: UIImageView!
     
     var timer = Timer()
+    var state :Bool = false
+    
     
     static func initWithOwnNib() -> SplashScreenViewController {
         let obj:SplashScreenViewController = SplashScreenViewController.init(nibName: String(describing: self), bundle: nil)
@@ -37,13 +39,28 @@ class SplashScreenViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        let defaults = UserDefaults.standard
+        state = defaults.bool(forKey: "eulaState")
+        
         timer = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(SplashScreenViewController.firstPage), userInfo: nil, repeats: false)
     }
     
     func firstPage() {
-        let vc = LoginViewController.initWithOwnNib()
-        self.navigationController?.pushViewController(vc, animated: false)
-        vc.animatedFadeIn()
+        
+        if state {
+            let vc = LoginViewController.initWithOwnNib()
+            self.navigationController?.pushViewController(vc, animated: false)
+            vc.animatedFadeIn()
+        } else {
+            let vc = EULAViewController.initWithOwnNib()
+            self.navigationController?.pushViewController(vc, animated: false)
+            vc.animatedFadeIn()
+            
+            let defaults = UserDefaults.standard
+            defaults.set(true, forKey: "eulaState")
+            defaults.synchronize()
+        }
     }
     /*
     // MARK: - Navigation

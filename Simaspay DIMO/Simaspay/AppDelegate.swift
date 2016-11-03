@@ -10,11 +10,14 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    var navigation: UINavigationController!
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.backToRoot), name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
+        
         // Override point for customization after application launch.
         UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: false)
         window = UIWindow(frame: UIScreen.main.bounds);
@@ -24,7 +27,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navController.navigationBar.isHidden = true;
         window!.rootViewController = navController;
         window!.makeKeyAndVisible()
+        self.navigation = navController
         return true
+    }
+    
+    func backToRoot() {
+        let viewControllers: [UIViewController] = self.navigation!.viewControllers as [UIViewController];
+        for vc in viewControllers {
+            if (vc.isKind(of: LoginViewController.self)) {
+                self.navigation!.popToViewController(vc, animated: true);
+                return
+            }
+        }
+        
+        self.navigation!.popToRootViewController(animated: true)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

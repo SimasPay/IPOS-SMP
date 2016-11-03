@@ -18,8 +18,10 @@ class StatusTransferViewController: BaseViewController {
     @IBOutlet var lblStatus: BaseLabel!
     @IBOutlet var lblIdStatus: BaseLabel!
     @IBOutlet var viewMainFrame: UIView!
+    @IBOutlet weak var lineStatus: UIView!
+    @IBOutlet weak var constraintViewMainFrameHeight: NSLayoutConstraint!
     
-    @IBOutlet var constraintViewContent: NSLayoutConstraint!
+    @IBOutlet var constraintViewContentHeight: NSLayoutConstraint!
      var data: NSDictionary!
     
     static func initWithOwnNib() -> StatusTransferViewController {
@@ -56,6 +58,14 @@ class StatusTransferViewController: BaseViewController {
         
         
         let arrayContent = data.value(forKey: "content") as! [[String:String]]
+        if arrayContent.count == 0 {
+            lblIdStatus.isHidden = true
+            lineStatus.isHidden =  true
+            constraintViewContentHeight.constant = 0
+            constraintViewMainFrameHeight.constant = 120 
+            return
+        }
+        
         for content in arrayContent {
             for list in content {
             let key = list.key
@@ -104,7 +114,7 @@ class StatusTransferViewController: BaseViewController {
           }
           }
         }
-        self.constraintViewContent.constant = y
+        self.constraintViewContentHeight.constant = y
         
         
     }
@@ -117,8 +127,14 @@ class StatusTransferViewController: BaseViewController {
     
        @IBAction func actionOkButton(_ sender: AnyObject) {
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
-        self.navigationController!.popToViewController(viewControllers[viewControllers.count - 5
-            ], animated: false);
+        for vc in viewControllers {
+            if (vc.isKind(of: HomeViewController.self)) {
+                self.navigationController!.popToViewController(vc, animated: true);
+                return
+            }
+        }
+        
+        self.navigationController!.popToRootViewController(animated: true)
     }
 
 }

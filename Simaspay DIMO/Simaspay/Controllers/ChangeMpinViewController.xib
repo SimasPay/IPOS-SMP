@@ -66,6 +66,9 @@
                                 <constraint firstAttribute="width" constant="200" id="BDL-l7-3qH"/>
                                 <constraint firstAttribute="height" constant="48" id="BW8-X7-1p1"/>
                             </constraints>
+                            <connections>
+                                <action selector="actionBtnSave:" destination="-1" eventType="touchUpInside" id="xnx-p6-m9a"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>

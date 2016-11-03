@@ -45,6 +45,9 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         btnContactUs.setTitle(getString("LoginButtonContactUs"), for: UIControlState())
         btnContactUs.addUnderline()
         
+        let timer = DIMOAPIManager.staticTimer()
+        timer?.invalidate()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -100,7 +103,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         getPublicKey {
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
-            let vc = EULAViewController.initWithOwnNib()
+            let vc = ActivationViewController.initWithOwnNib()
             self.animatedFadeIn()
             self.navigationController?.pushViewController(vc, animated: false)
         }
@@ -143,7 +146,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func btnLoginAction(_ sender: AnyObject) {
-        let vc = PaymentPurchaseViewController.initWithOwnNib(isPurchased: true)
+        let vc = HomeViewController.initWithOwnNib()
         navigationController?.pushViewController(vc, animated: false)
         return
         

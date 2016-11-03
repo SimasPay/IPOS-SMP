@@ -7,12 +7,13 @@
 #import "DIMOAPIManager.h"
 #import "DAFNetworking.h"
 #import "DIMOUtility.h"
+#import "DIMOAlertView.h"
 #import "DReachability.h"
 #import "XMLReader.h"
 
 @implementation DIMOAPIManager
 static int const errorCode401 = 401;
-
+NSTimer *timer;
 // STAGING
 #define BASE_URL @"https://54.255.194.95:8443/webapi/sdynamic?channelID=7&mspID=1"
 //#define SIMOBI_URL @"https://staging.dimo.co.id:8470/webapi/sdynamic?channelID=7&"
@@ -20,7 +21,9 @@ static int const errorCode401 = 401;
 #define DOWNLOAD_PDF_URL @"https://54.255.194.95:8443/webapi/"
 
 // Production
-
++ (NSTimer *)staticTimer {
+    return timer;
+}
 
 + (instancetype)sharedInstance {
     static id sharedInstance = nil;
@@ -43,10 +46,26 @@ static int const errorCode401 = 401;
     }
     //return ((AFNetworkReachabilityManager*)[NSClassFromString(@"AFNetworkReachabilityManager") sharedManager]).reachable;
 }
+
+
+
 #pragma mark - API
++ (void)startTimer {
+    if (timer) {
+        [timer invalidate];
+    }
+    timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(alertRelogin) userInfo:nil repeats:NO];
+}
++ (void)alertRelogin{
+    [timer invalidate];
+    [DIMOAlertView showAlertWithTitle:@"Session Out" message:@"Please login again" alertStyle:UIAlertViewStyleDefault clickedButtonAtIndexCallback:^(NSInteger buttonIndex, UIAlertView *alert) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"forceLogout" object:nil];
+    } cancelButtonTitle:@"OK" otherButtonTitles:nil];
+}
+
 + (void)callAPIWithParameters:(NSDictionary *)dict
         andComplete:(void(^)( NSDictionary *response, NSError *err))completion {
-    
+    [self startTimer];
     [self startHTTPRequestWithMethod:ConnectionManagerHTTPMethodGET
                            urlString:BASE_URL
                               params:dict
@@ -57,6 +76,7 @@ static int const errorCode401 = 401;
 
 + (void)callAPIPOSTWithParameters:(NSDictionary *)dict
                       andComplete:(void(^)(NSDictionary *response, NSError *err))completion {
+    [self startTimer];
     [self startHTTPRequestWithMethod:ConnectionManagerHTTPMethodPOST
                            urlString:BASE_URL
                               params:dict
