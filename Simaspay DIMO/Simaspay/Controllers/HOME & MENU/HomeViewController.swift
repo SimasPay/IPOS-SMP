@@ -216,7 +216,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         lblViewMove.font = UIFont.systemFont(ofSize: 14)
         lblViewMove.textColor = UIColor.white
         lblViewMove.textAlignment = .center
-        lblViewMove.text = getString("HomeTitleSliderSaldo")
+        lblViewMove.text = getString("HomeTitleSliderBalace")
         self.viewMove.addSubview(lblViewMove)
     }
     
