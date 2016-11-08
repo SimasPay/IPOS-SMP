@@ -99,11 +99,14 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     let diff = x - HomeViewController.positionx
                     var frame = viewMove.frame
                     frame.origin.x += diff * 1.5
+                    frame.origin.x = min(frame.origin.x, UIScreen.main.applicationFrame.size.width - 36)
                     viewMove.frame = frame
+                    
                 } else if (x < HomeViewController.positionx) {
-                    let diff = HomeViewController.positionx - x
                     var frame = viewMove.frame
+                    let diff = HomeViewController.positionx - x
                     frame.origin.x -= diff * 1.5
+                    frame.origin.x = max(frame.origin.x, 0)
                     viewMove.frame = frame
                 }
             }
@@ -113,16 +116,36 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     @IBAction func touchDone(_ sender: AnyObject) {
         HomeViewController.positionx = 0
+        if (viewMove.frame.origin.x >= UIScreen.main.applicationFrame.size.width / 2) {
+           DLog("Stay")
+            UIView.animate(withDuration: 0.3) {
+                var frame = self.viewMove.frame
+                frame.origin.x = UIScreen.main.applicationFrame.size.width - 36
+                self.viewMove.frame = frame
+            }
+            var timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.close), userInfo: nil, repeats: false)
+            
+        } else {
+            UIView.animate(withDuration: 0.3) {
+                var frame = self.viewMove.frame
+                frame.origin.x = 0
+                self.viewMove.frame = frame
+            }
+        }
+
+    }
+    func close() {
         UIView.animate(withDuration: 0.3) {
             var frame = self.viewMove.frame
             frame.origin.x = 0
             self.viewMove.frame = frame
         }
-
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // Do any additional setup after loading the view.
+        let timer = DIMOAPIManager.staticTimer()
+        timer?.invalidate()
         
         arrayMenu = [
             [
@@ -193,7 +216,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         lblViewMove.font = UIFont.systemFont(ofSize: 14)
         lblViewMove.textColor = UIColor.white
         lblViewMove.textAlignment = .center
-        lblViewMove.text = "Slide ke kanan untuk melihat saldo ->"
+        lblViewMove.text = getString("HomeTitleSliderSaldo")
         self.viewMove.addSubview(lblViewMove)
     }
     
