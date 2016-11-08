@@ -49,7 +49,7 @@ class SplashScreenViewController: BaseViewController {
     func firstPage() {
         
         if state {
-            let vc = LoginViewController.initWithOwnNib()
+            let vc = LandingScreenViewController.initWithOwnNib()
             self.navigationController?.pushViewController(vc, animated: false)
             vc.animatedFadeIn()
         } else {
@@ -57,19 +57,8 @@ class SplashScreenViewController: BaseViewController {
             self.navigationController?.pushViewController(vc, animated: false)
             vc.animatedFadeIn()
             
-            let defaults = UserDefaults.standard
-            defaults.set(true, forKey: "eulaState")
-            defaults.synchronize()
+            
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }

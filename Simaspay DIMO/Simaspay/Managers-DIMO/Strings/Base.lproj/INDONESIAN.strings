@@ -1,6 +1,10 @@
 //Splash
 "SplashLableWelcome" = "Selamat Datang di Layanan";
 
+
+//Landing Screen
+"LandingScreenButtonLogin" = "Login/Daftar";
+"LandingScreenButtonActivation" = "Aktivasi Akun";
 //Login
 "LoginPlaceholderNoHandphone" = "No. Handphone";
 "LoginPlaceholderMpin" = "mPIN";
@@ -12,6 +16,8 @@
 "LoginMessageSixMpin" = "mPIN yang Anda masukkan harus 6 angka.";
 "LoginMessageNotConnectServer" = "Tidak dapat terhubung dengan server SimasPay. Harap periksa koneksi internet Anda dan coba kembali setelah beberapa saat.";
 
+//Home
+"HomeTitleSliderSaldo" = "Slide ke kanan untuk melihat saldo ->";
 //Activation
 "ActivationLabelInfo" = "Silakan masukkan nomor handphone Anda diikuti dengan kode aktivasi dari Simaspay";
 "ActivationPlaceholderOTP" = "6 digit kode aktivasi";

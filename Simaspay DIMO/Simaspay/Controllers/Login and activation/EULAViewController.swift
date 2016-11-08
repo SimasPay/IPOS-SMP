@@ -8,15 +8,16 @@
 
 import UIKit
 
-class EULAViewController: BaseViewController {
+class EULAViewController: BaseViewController,UIWebViewDelegate {
 
+    
     @IBOutlet var labelTitle: BaseLabel!
     @IBOutlet var btnDisagree: BaseButton!
     @IBOutlet var btnAgree: BaseButton!
     @IBOutlet var viewFrame: UIView!
-    var textView: UITextView!
+    @IBOutlet var webView: UIWebView!
     let padding:CGFloat = 12.0
-    
+    var urlpath: String = "http://banksinarmas.com/tabunganonline/simobi"
     static func initWithOwnNib() -> EULAViewController {
         let obj:EULAViewController = EULAViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
@@ -37,20 +38,22 @@ class EULAViewController: BaseViewController {
         viewFrame.backgroundColor = UIColor.white
         viewFrame.updateViewRoundedWithShadow()
         
-        textView = UITextView()
-        textView.frame = CGRect(x: padding, y: 0 , width: viewFrame.bounds.width - (2 * padding) , height: viewFrame.bounds.height)
-        textView.text = getString("EulaContent")
-        textView.isEditable = false
-        viewFrame.addSubview(textView)
-        
         btnAgree.addTarget(self, action: #selector(EULAViewController.buttonClick) , for: .touchUpInside)
+        loadAddressURL()
         
-  
-       
+        
     }
+    func loadAddressURL(){
+        let requesturl = NSURL(string: urlpath)
+        let request = NSURLRequest(url: requesturl! as URL)
+        webView.delegate =  self
+        webView.loadRequest(request as URLRequest)
+    }
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -58,28 +61,37 @@ class EULAViewController: BaseViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        textView.frame = CGRect(x: padding, y: 0 , width: viewFrame.bounds.width - (2 * padding) , height: viewFrame.bounds.height)
+
+     
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+//    @available(iOS 2.0, *)
+//    public func webViewDidStartLoad(_ webView: UIWebView){
+//        DMBProgressHUD.showAdded(to: self.view, animated: true)
+//    }
+//    
+//    @available(iOS 2.0, *)
+//    public func webViewDidFinishLoad(_ webView: UIWebView){
+//        DMBProgressHUD.hide(for: self.view, animated: true)
+//    }
+    
     func buttonClick()  {
-        let vc = LoginViewController.initWithOwnNib()
+        let vc = LandingScreenViewController.initWithOwnNib()
         self.navigationController?.pushViewController(vc, animated: false)
         self.animatedFadeIn()
-//        self.navigationController?.popViewControllerAnimated(false)
+        let defaults = UserDefaults.standard
+        defaults.set(true, forKey: "eulaState")
+        defaults.synchronize()
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func actionDisagree(_ sender: AnyObject) {
+      exit(0)
     }
-    */
+  
+
 
 }

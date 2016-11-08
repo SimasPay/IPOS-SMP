@@ -114,7 +114,7 @@ class BaseViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
-//        BaseViewController.arrayTextFields = []
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         BaseViewController.lastObjectForKeyboardDetector = nil
     }
     

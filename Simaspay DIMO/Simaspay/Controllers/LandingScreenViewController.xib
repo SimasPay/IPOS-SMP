@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LandingScreenViewController" customModule="Simaspay" customModuleProvider="target">
+            <connections>
+                <outlet property="btnActivation" destination="tLF-7O-btU" id="3wj-Dj-aQ6"/>
+                <outlet property="btnContactUs" destination="F61-Ch-csZ" id="o2R-xp-OWv"/>
+                <outlet property="btnLogin" destination="hbh-HD-8ig" id="apd-3q-3Nr"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_Image" translatesAutoresizingMaskIntoConstraints="NO" id="sSW-QC-7ss">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="9VI-sN-MwM"/>
+                        <constraint firstAttribute="width" constant="250" id="HyK-Qa-yyf"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F61-Ch-csZ" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="130" id="2bl-5a-NVt"/>
+                        <constraint firstAttribute="height" constant="20" id="GkL-kA-pRT"/>
+                    </constraints>
+                    <state key="normal" title="Hubungi Kami">
+                        <color key="titleColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tLF-7O-btU" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="M3l-on-LT3"/>
+                        <constraint firstAttribute="width" constant="280" id="YK2-ah-OQg"/>
+                    </constraints>
+                    <connections>
+                        <action selector="actionActivation:" destination="-1" eventType="touchUpInside" id="UXG-qp-cZW"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbh-HD-8ig" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="280" id="tk7-eO-CUn"/>
+                        <constraint firstAttribute="height" constant="56" id="wdI-Hx-PTi"/>
+                    </constraints>
+                    <connections>
+                        <action selector="actionLogin:" destination="-1" eventType="touchUpInside" id="ePy-lC-aso"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="F61-Ch-csZ" secondAttribute="bottom" constant="40" id="1Q6-Qx-S1S"/>
+                <constraint firstItem="sSW-QC-7ss" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Pab-WR-ea5"/>
+                <constraint firstItem="F61-Ch-csZ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="SUx-Jw-bPU"/>
+                <constraint firstItem="tLF-7O-btU" firstAttribute="top" secondItem="hbh-HD-8ig" secondAttribute="bottom" constant="24" id="YTu-8P-b95"/>
+                <constraint firstItem="hbh-HD-8ig" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Z5Z-Gd-cS0"/>
+                <constraint firstItem="sSW-QC-7ss" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="uWc-YZ-GEI"/>
+                <constraint firstItem="F61-Ch-csZ" firstAttribute="top" secondItem="tLF-7O-btU" secondAttribute="bottom" constant="24" id="wGb-Bu-mZ7"/>
+                <constraint firstItem="tLF-7O-btU" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="zBd-fG-9mk"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="logo_Image" width="225" height="50"/>
+    </resources>
+</document>

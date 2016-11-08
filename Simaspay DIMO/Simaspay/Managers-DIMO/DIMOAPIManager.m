@@ -54,7 +54,7 @@ NSTimer *timer;
     if (timer) {
         [timer invalidate];
     }
-    timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(alertRelogin) userInfo:nil repeats:NO];
+    timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(alertRelogin) userInfo:nil repeats:NO];
 }
 + (void)alertRelogin{
     [timer invalidate];
