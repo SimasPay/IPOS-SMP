@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func backToRoot() {
         let viewControllers: [UIViewController] = self.navigation!.viewControllers as [UIViewController];
         for vc in viewControllers {
-            if (vc.isKind(of: LoginViewController.self)) {
+            if (vc.isKind(of: LoginRegisterViewController.self)) {
                 self.navigation!.popToViewController(vc, animated: true);
                 return
             }

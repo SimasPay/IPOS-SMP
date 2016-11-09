@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginRegisterViewController: BaseViewController {
+class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
 
 
     @IBOutlet weak var btnActivationAccount: BaseButton!
@@ -33,7 +33,18 @@ class LoginRegisterViewController: BaseViewController {
         btnActivationAccount.setTitle("Aktivasi Akun", for: .normal)
         btnActivationAccount.setTitleColor(UIColor.init(hexString: color_text_default), for: .normal)
         btnActivationAccount.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        tfHPNumber.delegate =  self
+    }
+    override func btnDoneAction() {
+        let vc = RegisterEMoneyViewController.initWithOwnNib()
+        navigationController?.pushViewController(vc, animated: false)
+        return
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         
+        tfHPNumber.becomeFirstResponder()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -46,6 +57,12 @@ class LoginRegisterViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        BaseViewController.lastObjectForKeyboardDetector = self.btnActivationAccount
+        updateUIWhenKeyboardShow()
+        return true
+    }
+
 
    
 }

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,7 +17,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_Image" translatesAutoresizingMaskIntoConstraints="NO" id="s5Y-ak-cmq">
@@ -56,10 +57,10 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="g8b-gl-aVS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="3hk-Xa-TwH"/>
-                <constraint firstItem="s5Y-ak-cmq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="5Fo-Lt-DAV"/>
+                <constraint firstItem="g8b-gl-aVS" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="4:5" id="7Ra-ow-TUT"/>
                 <constraint firstItem="s5Y-ak-cmq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="CZ5-u0-Zbe"/>
-                <constraint firstItem="4l0-j1-brs" firstAttribute="top" secondItem="s5Y-ak-cmq" secondAttribute="bottom" constant="15" id="Njd-wT-LNX"/>
                 <constraint firstItem="g8b-gl-aVS" firstAttribute="top" secondItem="4l0-j1-brs" secondAttribute="bottom" constant="19" id="asw-r5-U5N"/>
+                <constraint firstItem="4l0-j1-brs" firstAttribute="top" secondItem="s5Y-ak-cmq" secondAttribute="top" multiplier="2:0.8" id="pHA-MA-Fal"/>
                 <constraint firstItem="4l0-j1-brs" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="wxy-4M-Sd8"/>
             </constraints>
         </view>

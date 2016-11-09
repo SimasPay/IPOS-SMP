@@ -11,6 +11,8 @@
 		351031991DD1D03200E76D85 /* LoginPinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 351031971DD1D03200E76D85 /* LoginPinViewController.xib */; };
 		3535692D1DB74CE000F85A72 /* PaymentPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535692B1DB74CE000F85A72 /* PaymentPurchaseViewController.swift */; };
 		3535692E1DB74CE000F85A72 /* PaymentPurchaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3535692C1DB74CE000F85A72 /* PaymentPurchaseViewController.xib */; };
+		354E8FB91DD30CF600FC5F9F /* RegisterEMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354E8FB71DD30CF600FC5F9F /* RegisterEMoneyViewController.swift */; };
+		354E8FBA1DD30CF600FC5F9F /* RegisterEMoneyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 354E8FB81DD30CF600FC5F9F /* RegisterEMoneyViewController.xib */; };
 		3566B9B51DB5E08E00486A61 /* TransferOtherBankListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566B9B31DB5E08E00486A61 /* TransferOtherBankListViewController.swift */; };
 		3566B9B61DB5E08E00486A61 /* TransferOtherBankListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3566B9B41DB5E08E00486A61 /* TransferOtherBankListViewController.xib */; };
 		357732AE1DBF62B300D10713 /* ListTransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357732AC1DBF62B300D10713 /* ListTransferViewController.swift */; };
@@ -90,6 +92,8 @@
 		351031971DD1D03200E76D85 /* LoginPinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginPinViewController.xib; path = Controllers/LoginPinViewController.xib; sourceTree = "<group>"; };
 		3535692B1DB74CE000F85A72 /* PaymentPurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaymentPurchaseViewController.swift; path = Controllers/PaymentPurchaseViewController.swift; sourceTree = "<group>"; };
 		3535692C1DB74CE000F85A72 /* PaymentPurchaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PaymentPurchaseViewController.xib; path = Controllers/PaymentPurchaseViewController.xib; sourceTree = "<group>"; };
+		354E8FB71DD30CF600FC5F9F /* RegisterEMoneyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterEMoneyViewController.swift; path = Controllers/RegisterEMoneyViewController.swift; sourceTree = "<group>"; };
+		354E8FB81DD30CF600FC5F9F /* RegisterEMoneyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterEMoneyViewController.xib; path = Controllers/RegisterEMoneyViewController.xib; sourceTree = "<group>"; };
 		3566B9B31DB5E08E00486A61 /* TransferOtherBankListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransferOtherBankListViewController.swift; path = Controllers/TransferOtherBankListViewController.swift; sourceTree = "<group>"; };
 		3566B9B41DB5E08E00486A61 /* TransferOtherBankListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TransferOtherBankListViewController.xib; path = Controllers/TransferOtherBankListViewController.xib; sourceTree = "<group>"; };
 		357732AC1DBF62B300D10713 /* ListTransferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListTransferViewController.swift; path = Controllers/ListTransferViewController.swift; sourceTree = "<group>"; };
@@ -355,6 +359,8 @@
 				35835BDC1DD07A4C00D706B9 /* LoginRegisterViewController.xib */,
 				351031961DD1D03200E76D85 /* LoginPinViewController.swift */,
 				351031971DD1D03200E76D85 /* LoginPinViewController.xib */,
+				354E8FB71DD30CF600FC5F9F /* RegisterEMoneyViewController.swift */,
+				354E8FB81DD30CF600FC5F9F /* RegisterEMoneyViewController.xib */,
 				BE17731C1D92867900A27E06 /* Login and activation */,
 				BE204A911D94D7CA0013A483 /* HOME & MENU */,
 				3578B6971DC0667A002519BB /* TRANSFER BANK */,
@@ -501,6 +507,7 @@
 				35F93AC01D93870D00FF803A /* SplashScreenViewController.xib in Resources */,
 				BE204A7E1D93CC9C0013A483 /* EULAViewController.xib in Resources */,
 				3566B9B61DB5E08E00486A61 /* TransferOtherBankListViewController.xib in Resources */,
+				354E8FBA1DD30CF600FC5F9F /* RegisterEMoneyViewController.xib in Resources */,
 				351031991DD1D03200E76D85 /* LoginPinViewController.xib in Resources */,
 				35904FD51DA3ACCA00BDD3AE /* ConfirmationViewController.xib in Resources */,
 				BE9D030F1D94E18D0070894E /* ActivationSuccessViewController.xib in Resources */,
@@ -560,6 +567,7 @@
 				BEC416051D9385B9000C3CF4 /* DIMOUtility.m in Sources */,
 				BE204A811D93CCAE0013A483 /* ActivationViewController.swift in Sources */,
 				BE9D030A1D94E16B0070894E /* ActivationPinViewController.swift in Sources */,
+				354E8FB91DD30CF600FC5F9F /* RegisterEMoneyViewController.swift in Sources */,
 				BEC416081D9385B9000C3CF4 /* UserDefault.m in Sources */,
 				BEC415EB1D938201000C3CF4 /* ColorManager.swift in Sources */,
 				BE1773071D9285DE00A27E06 /* DAFURLResponseSerialization.m in Sources */,

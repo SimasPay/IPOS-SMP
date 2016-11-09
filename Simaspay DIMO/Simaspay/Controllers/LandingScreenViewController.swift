@@ -41,7 +41,7 @@ class LandingScreenViewController: BaseViewController {
     }
     
     @IBAction func actionLogin(_ sender: AnyObject) {
-        let vc = LoginViewController.initWithOwnNib()
+        let vc = LoginRegisterViewController.initWithOwnNib()
         self.navigationController?.pushViewController(vc, animated: true)
     }
 

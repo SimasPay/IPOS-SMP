@@ -38,7 +38,17 @@ class LoginPinViewController: BaseViewController {
         tfMpin.updateTextFieldWithImageNamed("icon_Mpin")
         tfMpin.placeholder = "Pin"
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        tfMpin.becomeFirstResponder()
+    }
+    
+    override func btnDoneAction() {
+        let vc = HomeViewController.initWithAccountType(AccountType.accountTypeEMoneyKYC)
+        navigationController?.pushViewController(vc, animated: false)
+        return
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -47,7 +57,6 @@ class LoginPinViewController: BaseViewController {
         super.viewDidLayoutSubviews()
         viewTextField.updateViewRoundedWithShadow()
 
-        
     }
 
 
