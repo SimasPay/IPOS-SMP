@@ -80,6 +80,10 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
         updateUIWhenKeyboardShow()
         return true
     }
+    @IBAction func actionNextButton(_ sender: AnyObject) {
+        let vc = SecurityQuestionViewController.initWithOwnNib()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 
 
     /*

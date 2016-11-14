@@ -23,6 +23,8 @@
 		35835BDE1DD07A4C00D706B9 /* LoginRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35835BDC1DD07A4C00D706B9 /* LoginRegisterViewController.xib */; };
 		35865FD81DBDAEB80019F0FE /* BalanceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35865FD61DBDAEB80019F0FE /* BalanceInfoViewController.swift */; };
 		35865FD91DBDAEB80019F0FE /* BalanceInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35865FD71DBDAEB80019F0FE /* BalanceInfoViewController.xib */; };
+		358D74D51DD56D3100767179 /* SecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358D74D31DD56D3100767179 /* SecurityQuestionViewController.swift */; };
+		358D74D61DD56D3100767179 /* SecurityQuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 358D74D41DD56D3100767179 /* SecurityQuestionViewController.xib */; };
 		35904FD01DA3AC9B00BDD3AE /* StatusTransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35904FCE1DA3AC9B00BDD3AE /* StatusTransferViewController.swift */; };
 		35904FD11DA3AC9B00BDD3AE /* StatusTransferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35904FCF1DA3AC9B00BDD3AE /* StatusTransferViewController.xib */; };
 		35904FD41DA3ACCA00BDD3AE /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35904FD21DA3ACCA00BDD3AE /* ConfirmationViewController.swift */; };
@@ -104,6 +106,8 @@
 		35835BDC1DD07A4C00D706B9 /* LoginRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginRegisterViewController.xib; path = Controllers/LoginRegisterViewController.xib; sourceTree = "<group>"; };
 		35865FD61DBDAEB80019F0FE /* BalanceInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BalanceInfoViewController.swift; path = Controllers/BalanceInfoViewController.swift; sourceTree = "<group>"; };
 		35865FD71DBDAEB80019F0FE /* BalanceInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BalanceInfoViewController.xib; path = Controllers/BalanceInfoViewController.xib; sourceTree = "<group>"; };
+		358D74D31DD56D3100767179 /* SecurityQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecurityQuestionViewController.swift; path = Controllers/SecurityQuestionViewController.swift; sourceTree = "<group>"; };
+		358D74D41DD56D3100767179 /* SecurityQuestionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SecurityQuestionViewController.xib; path = Controllers/SecurityQuestionViewController.xib; sourceTree = "<group>"; };
 		35904FCE1DA3AC9B00BDD3AE /* StatusTransferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StatusTransferViewController.swift; path = Controllers/StatusTransferViewController.swift; sourceTree = "<group>"; };
 		35904FCF1DA3AC9B00BDD3AE /* StatusTransferViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StatusTransferViewController.xib; path = Controllers/StatusTransferViewController.xib; sourceTree = "<group>"; };
 		35904FD21DA3ACCA00BDD3AE /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmationViewController.swift; path = Controllers/ConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -361,6 +365,8 @@
 				351031971DD1D03200E76D85 /* LoginPinViewController.xib */,
 				354E8FB71DD30CF600FC5F9F /* RegisterEMoneyViewController.swift */,
 				354E8FB81DD30CF600FC5F9F /* RegisterEMoneyViewController.xib */,
+				358D74D31DD56D3100767179 /* SecurityQuestionViewController.swift */,
+				358D74D41DD56D3100767179 /* SecurityQuestionViewController.xib */,
 				BE17731C1D92867900A27E06 /* Login and activation */,
 				BE204A911D94D7CA0013A483 /* HOME & MENU */,
 				3578B6971DC0667A002519BB /* TRANSFER BANK */,
@@ -506,6 +512,7 @@
 				BE1772921D92859B00A27E06 /* LaunchScreen.storyboard in Resources */,
 				35F93AC01D93870D00FF803A /* SplashScreenViewController.xib in Resources */,
 				BE204A7E1D93CC9C0013A483 /* EULAViewController.xib in Resources */,
+				358D74D61DD56D3100767179 /* SecurityQuestionViewController.xib in Resources */,
 				3566B9B61DB5E08E00486A61 /* TransferOtherBankListViewController.xib in Resources */,
 				354E8FBA1DD30CF600FC5F9F /* RegisterEMoneyViewController.xib in Resources */,
 				351031991DD1D03200E76D85 /* LoginPinViewController.xib in Resources */,
@@ -549,6 +556,7 @@
 				BE9D03021D94DA7F0070894E /* BasicEncodingRules.m in Sources */,
 				BE204A7D1D93CC9C0013A483 /* EULAViewController.swift in Sources */,
 				35904FD01DA3AC9B00BDD3AE /* StatusTransferViewController.swift in Sources */,
+				358D74D51DD56D3100767179 /* SecurityQuestionViewController.swift in Sources */,
 				BE1773041D9285DE00A27E06 /* DAFSecurityPolicy.m in Sources */,
 				35835BD91DD05F4A00D706B9 /* LandingScreenViewController.swift in Sources */,
 				BEC416031D9385B9000C3CF4 /* DIMOLocationManager.m in Sources */,

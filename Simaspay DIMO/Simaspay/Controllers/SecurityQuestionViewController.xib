@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SecurityQuestionViewController" customModule="Simaspay" customModuleProvider="target">
+            <connections>
+                <outlet property="btnRegister" destination="z2t-io-XeF" id="be0-q4-HTs"/>
+                <outlet property="lblInfo" destination="L5E-lV-rgn" id="Jzn-bD-Gkc"/>
+                <outlet property="tfAnswer" destination="hRA-Ly-r5O" id="V27-dF-vrF"/>
+                <outlet property="tfQuestion" destination="I56-ip-Wcv" id="i50-wa-TvF"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewTFQuetion" destination="iMI-2h-FBS" id="pj8-2b-3bI"/>
+                <outlet property="viewTfAnswer" destination="ldm-As-Ewj" id="LQD-Rg-LYn"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_Image" translatesAutoresizingMaskIntoConstraints="NO" id="qBh-1L-dox">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="G1y-nO-Uhl"/>
+                        <constraint firstAttribute="width" constant="250" id="j6G-8s-2MN"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L5E-lV-rgn" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="270" id="083-80-5Ps"/>
+                        <constraint firstAttribute="height" constant="72" id="y3B-UG-1Qp"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMI-2h-FBS">
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I56-ip-Wcv" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="I56-ip-Wcv" firstAttribute="top" secondItem="iMI-2h-FBS" secondAttribute="top" id="Rqe-sq-40q"/>
+                        <constraint firstItem="I56-ip-Wcv" firstAttribute="leading" secondItem="iMI-2h-FBS" secondAttribute="leading" id="dzO-9D-xK9"/>
+                        <constraint firstAttribute="width" constant="280" id="eSb-iM-RqF"/>
+                        <constraint firstAttribute="trailing" secondItem="I56-ip-Wcv" secondAttribute="trailing" id="fVs-lj-Dup"/>
+                        <constraint firstAttribute="bottom" secondItem="I56-ip-Wcv" secondAttribute="bottom" id="h8Q-lc-1Jx"/>
+                        <constraint firstAttribute="height" constant="56" id="lN9-z0-zqU"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ldm-As-Ewj">
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hRA-Ly-r5O" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="280" id="3Gm-v2-d6R"/>
+                        <constraint firstItem="hRA-Ly-r5O" firstAttribute="leading" secondItem="ldm-As-Ewj" secondAttribute="leading" id="58Y-CL-dgk"/>
+                        <constraint firstAttribute="trailing" secondItem="hRA-Ly-r5O" secondAttribute="trailing" id="Drh-Jz-npO"/>
+                        <constraint firstAttribute="bottom" secondItem="hRA-Ly-r5O" secondAttribute="bottom" id="EK8-Av-YTi"/>
+                        <constraint firstAttribute="height" constant="56" id="UUB-Tr-uB8"/>
+                        <constraint firstItem="hRA-Ly-r5O" firstAttribute="top" secondItem="ldm-As-Ewj" secondAttribute="top" id="ZIk-aL-Acz"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z2t-io-XeF" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="280" id="D8I-Wv-5Be"/>
+                        <constraint firstAttribute="height" constant="56" id="TLt-S5-s8H"/>
+                    </constraints>
+                    <connections>
+                        <action selector="actionBtnRegister:" destination="-1" eventType="touchUpInside" id="uyc-cQ-tbi"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="L5E-lV-rgn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="54I-jp-eG9"/>
+                <constraint firstItem="L5E-lV-rgn" firstAttribute="top" secondItem="qBh-1L-dox" secondAttribute="top" multiplier="2:0.8" id="8Uu-ef-umz"/>
+                <constraint firstItem="iMI-2h-FBS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="AQc-eG-jUm"/>
+                <constraint firstItem="z2t-io-XeF" firstAttribute="top" secondItem="hRA-Ly-r5O" secondAttribute="bottom" constant="25" id="JTF-Zr-pBA"/>
+                <constraint firstItem="ldm-As-Ewj" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="McG-ay-EYG"/>
+                <constraint firstItem="z2t-io-XeF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Qx5-KB-iWc"/>
+                <constraint firstItem="ldm-As-Ewj" firstAttribute="top" secondItem="iMI-2h-FBS" secondAttribute="bottom" constant="12" id="j8q-YJ-Txa"/>
+                <constraint firstItem="iMI-2h-FBS" firstAttribute="top" secondItem="L5E-lV-rgn" secondAttribute="bottom" constant="16" id="jtO-uB-4XP"/>
+                <constraint firstItem="qBh-1L-dox" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="q8m-2d-NEC"/>
+                <constraint firstItem="iMI-2h-FBS" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="wFI-Nb-ZVr"/>
+            </constraints>
+            <point key="canvasLocation" x="33.5" y="110.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="logo_Image" width="225" height="50"/>
+    </resources>
+</document>
