@@ -36,7 +36,7 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
         tfHPNumber.delegate =  self
     }
     override func btnDoneAction() {
-        let vc = RegisterEMoneyViewController.initWithOwnNib()
+        let vc = HomeViewController.initWithOwnNib()
         navigationController?.pushViewController(vc, animated: false)
         return
     }

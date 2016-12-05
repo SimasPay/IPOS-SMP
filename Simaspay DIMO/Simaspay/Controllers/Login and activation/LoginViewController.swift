@@ -146,7 +146,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func btnLoginAction(_ sender: AnyObject) {
-        let vc = HomeViewController.initWithOwnNib()
+        let vc = HomeViewController.initWithAccountType(AccountType.accountTypeEMoneyKYC)
         navigationController?.pushViewController(vc, animated: false)
         return
         

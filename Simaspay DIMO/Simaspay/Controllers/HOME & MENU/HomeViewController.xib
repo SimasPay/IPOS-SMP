@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,7 +22,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yHu-Zm-vjA">
@@ -43,8 +45,7 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bMM-4r-rT9">
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="56" id="63X-lh-8kY"/>
-                                <constraint firstAttribute="width" constant="56" id="7E7-HF-XLo"/>
+                                <constraint firstAttribute="width" secondItem="bMM-4r-rT9" secondAttribute="height" multiplier="1:1" id="SGO-U5-8UO"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0U-tn-1VH" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
@@ -77,9 +78,9 @@
                     <constraints>
                         <constraint firstItem="HMm-Fr-0wJ" firstAttribute="centerX" secondItem="yHu-Zm-vjA" secondAttribute="centerX" id="3QV-of-36n"/>
                         <constraint firstItem="R3e-Bf-dMV" firstAttribute="top" secondItem="nfl-YZ-Kyf" secondAttribute="bottom" constant="4" id="8IR-48-nu1"/>
-                        <constraint firstItem="nfl-YZ-Kyf" firstAttribute="top" secondItem="yHu-Zm-vjA" secondAttribute="top" constant="32" id="A7s-UZ-2X9"/>
+                        <constraint firstItem="nfl-YZ-Kyf" firstAttribute="top" secondItem="yHu-Zm-vjA" secondAttribute="top" constant="36" id="A7s-UZ-2X9"/>
                         <constraint firstItem="HMm-Fr-0wJ" firstAttribute="top" secondItem="l0U-tn-1VH" secondAttribute="bottom" constant="4" id="DzF-fY-Mr3"/>
-                        <constraint firstAttribute="height" constant="200" id="E7X-wp-pNz"/>
+                        <constraint firstItem="bMM-4r-rT9" firstAttribute="width" secondItem="yHu-Zm-vjA" secondAttribute="width" multiplier="1:5" id="HFo-rw-5wT"/>
                         <constraint firstItem="nfl-YZ-Kyf" firstAttribute="leading" secondItem="yHu-Zm-vjA" secondAttribute="leading" constant="16" id="MXi-6X-tG7"/>
                         <constraint firstItem="l0U-tn-1VH" firstAttribute="centerX" secondItem="yHu-Zm-vjA" secondAttribute="centerX" id="R1i-Wd-MGV"/>
                         <constraint firstItem="bMM-4r-rT9" firstAttribute="centerX" secondItem="yHu-Zm-vjA" secondAttribute="centerX" id="Wya-iR-sv6"/>
@@ -128,6 +129,7 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="yHu-Zm-vjA" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="1.9:5" id="53K-UY-8UZ"/>
                 <constraint firstItem="IHY-gC-1eK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="6dS-rJ-gGz"/>
                 <constraint firstItem="IHY-gC-1eK" firstAttribute="top" secondItem="mlA-pZ-5kK" secondAttribute="bottom" id="FaA-cd-VOB"/>
                 <constraint firstAttribute="bottom" secondItem="IHY-gC-1eK" secondAttribute="bottom" id="Kz1-zZ-Fq9"/>

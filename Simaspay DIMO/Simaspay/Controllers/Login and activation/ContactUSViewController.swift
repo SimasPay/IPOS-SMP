@@ -57,6 +57,8 @@ class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableV
         tableView.clipsToBounds = true;
         tableView.isScrollEnabled = false;
         scrollView.backgroundColor = UIColor.init(hexString: color_background)
+        let timer = DIMOAPIManager.staticTimer()
+        timer?.invalidate()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

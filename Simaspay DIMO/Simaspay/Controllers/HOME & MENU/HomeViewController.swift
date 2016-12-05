@@ -58,7 +58,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         lblNoAccount.textAlignment = .center
         lblNoAccount.text = "08881234567"
         
-        imgUser.layer.cornerRadius = 28
+        imgUser.layer.cornerRadius = (imgUser.bounds.size.width / 2) as CGFloat
         imgUser.backgroundColor = UIColor.black
         imgUser.clipsToBounds = true
         
@@ -205,7 +205,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         
 //        setupMenu()
     }
-    
+    override func viewWillLayoutSubviews() {
+        imgUser.layer.cornerRadius = (imgUser.bounds.size.width / 2) as CGFloat
+        imgUser.backgroundColor = UIColor.black
+        imgUser.clipsToBounds = true
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         var frame = self.viewMove.frame

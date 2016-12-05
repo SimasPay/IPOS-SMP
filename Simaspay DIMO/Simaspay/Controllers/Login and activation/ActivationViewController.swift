@@ -96,8 +96,11 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func actionBackLogin(_ sender: AnyObject) {
-        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
-        self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: false);
+      let vc = LoginRegisterViewController.initWithOwnNib()
+      self.navigationController!.pushViewController(vc, animated: true);
+              
+       
+
     }
     func activation() {
         var message = "";
