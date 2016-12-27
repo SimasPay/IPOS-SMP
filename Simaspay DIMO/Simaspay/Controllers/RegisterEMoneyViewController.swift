@@ -18,6 +18,8 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var tfUsername: BaseTextField!
     @IBOutlet weak var btnNext: BaseButton!
     @IBOutlet weak var viewTextField: UIView!
+    var MDNString:String!
+    
     static func initWithOwnNib() -> RegisterEMoneyViewController {
         let obj:RegisterEMoneyViewController = RegisterEMoneyViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
@@ -40,7 +42,7 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
         tfEmail.delegate = self
         
         tfHPNumber.updateTextFieldWithImageNamed("icon_Mobile")
-        tfHPNumber.placeholder = "08881234567"
+        tfHPNumber.text = MDNString
         tfHPNumber.delegate = self
         
         tfMpin.updateTextFieldWithImageNamed("icon_Mpin")
@@ -66,25 +68,50 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
         
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == tfUsername{
-            BaseViewController.lastObjectForKeyboardDetector = self.tfUsername.superview
-        }else if textField == tfEmail{
-            BaseViewController.lastObjectForKeyboardDetector = self.tfEmail.superview
-        } else if textField == tfHPNumber{
-            BaseViewController.lastObjectForKeyboardDetector = self.tfHPNumber.superview
-        } else if textField == tfMpin{
-            BaseViewController.lastObjectForKeyboardDetector = self.tfMpin.superview
-        } else {
-            BaseViewController.lastObjectForKeyboardDetector = self.btnNext
+        if textField == self.tfUsername{
+            BaseViewController.lastObjectForKeyboardDetector = self.tfUsername
+        } else if textField == self.tfEmail{
+            BaseViewController.lastObjectForKeyboardDetector = self.tfEmail
+        } else if textField == self.tfHPNumber{
+            BaseViewController.lastObjectForKeyboardDetector = self.tfConfirmMpin
+        } else if textField == self.tfMpin{
+            BaseViewController.lastObjectForKeyboardDetector = self.viewTextField
+        } else if textField == self.tfConfirmMpin{
+            BaseViewController.lastObjectForKeyboardDetector = self.viewTextField
         }
         updateUIWhenKeyboardShow()
         return true
     }
     @IBAction func actionNextButton(_ sender: AnyObject) {
-        let vc = SecurityQuestionViewController.initWithOwnNib()
-        navigationController?.pushViewController(vc, animated: true)
-    }
+        var message = "";
+        if (!tfUsername.isValid()) {
+            message = "Masukkan username Anda"
+        } else if (self.isValidEmail(testStr: tfEmail.text!) == false) {
+            message = "Email Anda tidak valid"
+        } else if (tfMpin.length() < 6) {
+            message = "Pin harus 6 digit"
+        } else if !((tfConfirmMpin.text?.isEqual(tfMpin.text))!) {
+            message = "Pin harus sama"
+        } else if (!DIMOAPIManager.isInternetConnectionExist()) {
+            message = getString("LoginMessageNotConnectServer")
+        }
+        
+        if (message.characters.count > 0) {
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            return
+        }
 
+        return
+        let vc = SecurityQuestionViewController.initWithOwnNib()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    func isValidEmail(testStr:String) -> Bool {
+        // print("validate calendar: \(testStr)")
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: testStr)
+    }
 
     /*
     // MARK: - Navigation

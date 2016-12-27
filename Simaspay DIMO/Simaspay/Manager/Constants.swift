@@ -1,3 +1,8 @@
+
+let SIMOBI =  "simobi"
+let INSTITUTION_ID = "institutionID"
+let SIMASPAY = "simaspay"
+
 // MARK: Keys
 let TXNNAME = "txnName"
 let SERVICE = "service"
@@ -18,6 +23,10 @@ let ACTIVATION_CONFORMPIN = "activationConfirmPin"
 let MFAOTP = "mfaOtp"
 let PARENTTXNID = "parentTxnID"
 let SCTL_ID = "sctlId"
+let SUBSCRIBER_STATUS = "SubscriberStatus"
+let AUTH_KEY = "authenticationKey"
+let CHANNEL_ID = "channelID"
+
 
 //MARK: Image key
 let SIMASPAY_CONFIRM = "Confirm"
@@ -46,6 +55,7 @@ let ACTIVITY_STATUS = "true"
 let INQUIRY  = "Inquiry"
 
 // MARK: RESPONSE CODE
+let SIMASPAY_SUCCESS_CODE = "0"
 let SIMASPAY_LOGIN_FAILED_CODE = "11"
 let SIMASPAY_LOGIN_SUCCESS_CODE = "630"
 let SIMASPAY_ACTIVATION__INQUERY_SUCCESS_CODE = "2040"
@@ -64,8 +74,7 @@ let TXN_RESEND_MFAOTP = "ResendMFAOTP"
 #define SIMASPAY_ACTIVITY @"isSimaspayActivity"
 
 
-#define SIMOBI @"simobi"
-#define INSTITUTION_ID @"institutionID"
+
 
 #define AMOUNT @"amount"
 #define FROM_DATE @"fromDate"
