@@ -16,6 +16,7 @@ let SOURCE_APP_VERSION_KEY = "appversion"
 let SOURCE_APP_OSVERSION_KEY = "appos"
 let VERSION = "version"
 let CATEGORY = "category"
+let CATEGORY_SECURITYQUESTION = "category.securityQuestions"
 let ACTIVATION_OTP = "otp"
 let MFATRANSACTION = "mfaTransaction"
 let ACTIVATION_NEWPIN = "activationNewPin"
@@ -26,6 +27,7 @@ let SCTL_ID = "sctlId"
 let SUBSCRIBER_STATUS = "SubscriberStatus"
 let AUTH_KEY = "authenticationKey"
 let CHANNEL_ID = "channelID"
+let GENETARE_OTP = "GenerateOTP"
 
 
 //MARK: Image key
@@ -42,6 +44,7 @@ let TXN_RESENDOTP = "ResendOtp"
 let CATEGORY_BANK_CODES = "category.bankCodes"
 let CATEGORY_PURCHASE = "category.purchase"
 let CATEGORY_PAYMENTS = "category.payments"
+let TXN_SUBSCRIBER_KTP_REGISTRATION = "SubscriberRegistration"
 
 // MARK: Service
 let SERVICE_ACCOUNT = "Account"
@@ -251,7 +254,7 @@ let TXN_RESEND_MFAOTP = "ResendMFAOTP"
 
 
 #define TXN_SUBSCRIBER_KTP_VALIDATION @"SubscriberKTPValidation"
-#define TXN_SUBSCRIBER_KTP_REGISTRATION @"SubscriberRegistration"
+
 
 #define AGENT_CASHIN_INQUERY @"CashInInquiry"
 #define AGENT_CASHIN_CONFIRMATION @"CashIn"

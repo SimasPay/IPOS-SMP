@@ -41,13 +41,51 @@ class LandingScreenViewController: BaseViewController {
     }
     
     @IBAction func actionLogin(_ sender: AnyObject) {
-        let vc = LoginRegisterViewController.initWithOwnNib()
-        self.navigationController?.pushViewController(vc, animated: true)
+        getPublicKey {
+            let vc = LoginRegisterViewController.initWithOwnNib()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+
     }
 
     @IBAction func actionActivation(_ sender: AnyObject) {
         let vc = ActivationViewController.initWithOwnNib()
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
+    //    typealias CompletionBlock = () -> Void
+    func getPublicKey(complete : @escaping () -> Void) {
+        if (publicKeys == nil || publicKeys.allKeys.count == 0) {
+            let dict = NSMutableDictionary()
+            dict[TXNNAME] = TXN_GETPUBLC_KEY
+            dict[SERVICE] = SERVICE_ACCOUNT
+            
+            let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+            DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+                if (err != nil) {
+                    let error = err as! NSError
+                    if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                        DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                    } else {
+                        DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                    }
+                    return
+                }
+                
+                let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
+                DLog("\(responseDict)")
+                if (responseDict.allKeys.count == 0) {
+                    DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+                } else {
+                    // success
+                    if (responseDict.allKeys.count > 0) {
+                        // set public keys
+                        publicKeys = responseDict;
+                    }
+                    complete()
+                }
+            }
+        } else {
+            complete()
+        }
+    }
 }

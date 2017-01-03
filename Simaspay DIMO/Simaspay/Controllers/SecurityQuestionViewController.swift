@@ -16,12 +16,13 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
     @IBOutlet weak var tfQuestion: BaseTextField!
     @IBOutlet weak var viewTFQuetion: UIView!
     @IBOutlet weak var lblInfo: BaseLabel!
-    var timerCount = 60
-    var clock:Timer!
-    var lblTimer: BaseLabel!
-    var btnResandOTP: BaseButton!
-    var tfOTP: BaseTextField!
     var pickOption:[String]!
+    var questionData : NSArray!
+    var data: NSDictionary!
+    var MDNString:String!
+    var questionArray: [String] = []
+    var dictForAcceptedOTP: NSDictionary!
+    
     static func initWithOwnNib() -> SecurityQuestionViewController {
         let obj:SecurityQuestionViewController = SecurityQuestionViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
@@ -49,15 +50,24 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
         
         btnRegister.updateButtonType1()
         btnRegister.setTitle("Daftar", for: .normal)
-        self.pickOption = ["one","two","three"]
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+      
+        for question in questionData {
+            print((question as! NSDictionary).value(forKey: "question") as! String)
+            questionArray.append((question as! NSDictionary).value(forKey: "question") as! String)
+        }
+        self.pickOption = questionArray
         let pickerView = UIPickerView()
         
         pickerView.delegate = self
         tfQuestion.delegate = self
+        tfQuestion.font = UIFont.systemFont(ofSize: 14)
         tfAnswer.delegate = self
         self.tfQuestion.inputView = pickerView
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -82,7 +92,17 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didOTPOK"), object: nil)
          
     }
-
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView
+        
+    {
+        let pickerLabel = UILabel()
+        pickerLabel.textColor = UIColor.black
+        pickerLabel.text = questionArray[row]
+        pickerLabel.font = UIFont(name: pickerLabel.font.fontName, size: 13)
+        pickerLabel.textAlignment = NSTextAlignment.center
+        return pickerLabel
+    }
+    
     @available(iOS 2.0, *)
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -102,14 +122,41 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
     }
 
     @IBAction func actionBtnRegister(_ sender: AnyObject) {
-        self.showOTP()
+        let vc = ConfirmationViewController.initWithOwnNib()
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        let dict = NSMutableDictionary()
+        dict[TXNNAME] = GENETARE_OTP
+        dict[SERVICE] = SERVICE_ACCOUNT
+        dict[SOURCEMDN] = getNormalisedMDN(MDNString as NSString)
+        dict[CHANNEL_ID] = "7"
+        
+        dict[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
+        dict[SOURCE_APP_VERSION_KEY] = version
+        dict[SOURCE_APP_OSVERSION_KEY] = "\(UIDevice.current.modelName)  \(UIDevice.current.systemVersion)"
+        
+         vc.dictForRequestOTP = dict as NSDictionary 
+        
+        vc.data = self.data
+        vc.MDNString = self.MDNString
+
+        let dict1 = NSMutableDictionary()
+        dict1[TXNNAME] = TXN_SUBSCRIBER_KTP_REGISTRATION
+        dict1[SERVICE] = SERVICE_ACCOUNT
+        dict1[INSTITUTION_ID] = SIMASPAY
+        dict1[AUTH_KEY] = ""
+        dict1[SOURCEMDN] = getNormalisedMDN(MDNString as NSString)
+        dict1[CHANNEL_ID] = "7"
+        dict1["securityQuestion"] = self.tfQuestion.text!
+        dict1["securityAnswer"] = self.tfAnswer.text!
+        dict1[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
+        dict1[SOURCE_APP_VERSION_KEY] = version
+        dict1[SOURCE_APP_OSVERSION_KEY] = "\(UIDevice.current.modelName)  \(UIDevice.current.systemVersion)"
+        let temp = NSMutableDictionary(dictionary: dict1);
+        temp .addEntries(from: dictForAcceptedOTP as! [AnyHashable : Any])
+        vc.dictForAcceptedOTP = temp as NSDictionary
+        self.navigationController?.pushViewController(vc, animated: false)
     }
 
-    func didOTPCancel() {
-        DLog("cancel");
-        clock.invalidate()
-        
-    }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == tfQuestion{
             BaseViewController.lastObjectForKeyboardDetector = self.tfQuestion.superview
@@ -121,64 +168,4 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
     }
 
     
-    func didOTPOK() {
-        DLog("OK");
-        clock.invalidate()
-        let vc = ActivationSuccessViewController.initWithOwnNib()
-        navigationController?.pushViewController(vc, animated: false)
-    }
-    
-    func showOTP()  {
-        let temp = UIView(frame: CGRect(x: 0, y: 0, width: 240, height: 400))
-        let messageAlert = UILabel(frame: CGRect(x: 10, y: 0, width: temp.frame.size.width, height: 60))
-        messageAlert.font = UIFont.systemFont(ofSize: 13)
-        messageAlert.textAlignment = .center
-        messageAlert.numberOfLines = 4
-        messageAlert.text = "Kode OTP dan link telah dikirimkan ke nomor 08881234567. Masukkan kode tersebut atau akses link yang tersedia."
-        
-        clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ActivationPinViewController.countDown), userInfo: nil, repeats: true)
-        
-        btnResandOTP = BaseButton(frame: CGRect(x: 10, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 3, width: temp.frame.size.width, height: 15))
-        btnResandOTP.setTitle("Kirim Ulang", for: .normal)
-        btnResandOTP.setTitleColor(UIColor.init(hexString: color_btn_alert), for: .normal)
-        btnResandOTP.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
-        btnResandOTP.titleLabel?.textAlignment = .center
-        btnResandOTP.addTarget(self, action: #selector(ActivationPinViewController.resendOTP), for: .touchUpInside)
-        btnResandOTP.isHidden = true
-        
-        lblTimer = BaseLabel(frame: CGRect(x: 10, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 3, width: temp.frame.size.width, height: 15))
-        lblTimer.textAlignment = .center
-        lblTimer.font = UIFont.systemFont(ofSize: 12)
-        lblTimer.text = "01:00"
-        
-        
-        tfOTP = BaseTextField(frame: CGRect(x: 10, y: lblTimer.frame.origin.y + lblTimer.frame.size.height + 3, width: temp.frame.size.width, height: 30))
-        tfOTP.borderStyle = .line
-        tfOTP.layer.borderColor = UIColor.init(hexString: color_border).cgColor
-        tfOTP.layer.borderWidth = 1;
-        tfOTP.placeholder = "6 digit kode OTP"
-        tfOTP.isSecureTextEntry = true
-        tfOTP.addInset()
-        
-        temp.addSubview(btnResandOTP)
-        temp.addSubview(lblTimer)
-        temp.addSubview(messageAlert)
-        temp.addSubview(tfOTP)
-        
-        showOTPWith(title: "Masukkan Kode OTP", view: temp)
-    }
-    func countDown(){
-        if (timerCount > 0) {
-            timerCount -= 1
-            lblTimer.text = "00:\(timerCount)"
-        } else {
-            lblTimer.isHidden = true
-            btnResandOTP.isHidden = false
-        }
-    }
-    func resendOTP()  {
-    clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ActivationPinViewController.countDown), userInfo: nil, repeats: true)
-    
-    }
-
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginPinViewController: BaseViewController {
+class LoginPinViewController: BaseViewController, UITextFieldDelegate {
 
     
  
@@ -36,6 +36,7 @@ class LoginPinViewController: BaseViewController {
         self.lblInfoNumber.attributedText = attributedString
         
         tfMpin.updateTextFieldWithImageNamed("icon_Mpin")
+        tfMpin.delegate = self
         tfMpin.placeholder = "Pin"
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -58,7 +59,16 @@ class LoginPinViewController: BaseViewController {
         viewTextField.updateViewRoundedWithShadow()
 
     }
-
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        var maxLength = 6
+        let currentString: NSString = textField.text! as NSString
+        let newString: NSString =
+            currentString.replacingCharacters(in: range, with: string) as NSString
+        return newString.length <= maxLength
+        
+        
+    }
 
     /*
     // MARK: - Navigation

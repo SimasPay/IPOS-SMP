@@ -19,7 +19,8 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var btnNext: BaseButton!
     @IBOutlet weak var viewTextField: UIView!
     var MDNString:String!
-    
+    var data: NSDictionary!
+    var paramsRegistration: NSDictionary!
     static func initWithOwnNib() -> RegisterEMoneyViewController {
         let obj:RegisterEMoneyViewController = RegisterEMoneyViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
@@ -101,10 +102,9 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
             return
         }
 
-        return
-        let vc = SecurityQuestionViewController.initWithOwnNib()
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.registrationProcess()
     }
+    
     func isValidEmail(testStr:String) -> Bool {
         // print("validate calendar: \(testStr)")
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
@@ -112,7 +112,92 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: testStr)
     }
+    
+    func registrationProcess() {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        let dict = NSMutableDictionary()
+        dict[TXNNAME] = TXN_GetThirdPartyData
+        dict[SERVICE] = SERVICE_PAYMENT
+        dict[CATEGORY] = CATEGORY_SECURITYQUESTION
+        dict[VERSION] = -1
+        dict[CHANNEL_ID] = "7"
+        
+        dict[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
+        dict[SOURCE_APP_VERSION_KEY] = version
+        dict[SOURCE_APP_OSVERSION_KEY] = "\(UIDevice.current.modelName)  \(UIDevice.current.systemVersion)"
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+            let dictionary = NSDictionary(dictionary: dict!)
+            
+            
+            if (err != nil) {
+                let error = err as! NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                } else {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                }
+                return
+            }
+            
+            if (dictionary.allKeys.count == 0) {
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+            } else {
+                let responseDict = dictionary as NSDictionary
+                let questionData = responseDict["questionData"] as! NSArray
+                DLog("\(responseDict)")
+                self.data = [
+                    "title" : "Pastikan data berikut sudah benar",
+                    "content" : [
+                        ["Nama Lengkap" : self.tfUsername.text!],
+                        ["E-Mail" : self.tfEmail.text!],
+                        ["Nomor Handphone" : self.tfHPNumber.text!],
+                      
+                    ]
+                ]
+                self.paramsRegistration = [
+                    "subFirstName":self.tfUsername.text!,
+                    "email":self.tfEmail.text!,
+                    "sourceMDN":getNormalisedMDN(self.tfHPNumber.text! as NSString),
+                    "activationNewPin":simasPayRSAencryption(self.tfMpin.text!),
+                    "activationConfirmPin":simasPayRSAencryption(self.tfConfirmMpin.text!),
+                ]
+                
+                let vc = SecurityQuestionViewController.initWithOwnNib()
+                vc.questionData = questionData
+                vc.data = self.data
+                vc.MDNString = self.tfHPNumber.text!
+                vc.dictForAcceptedOTP = self.paramsRegistration
+                self.navigationController?.pushViewController(vc, animated: false)
+               
+            
+                
+                
+            }
+        }
+    }
 
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        var maxLength = 6
+        if (tfHPNumber == textField) {
+            maxLength = 15
+        }
+        if (tfEmail == textField) {
+            maxLength = 50
+        }
+        if (tfUsername == textField) {
+            maxLength = 50
+        }
+        
+        let currentString: NSString = textField.text! as NSString
+        let newString: NSString =
+            currentString.replacingCharacters(in: range, with: string) as NSString
+        return newString.length <= maxLength
+        
+        
+    }
     /*
     // MARK: - Navigation
 
