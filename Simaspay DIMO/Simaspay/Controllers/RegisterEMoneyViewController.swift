@@ -114,17 +114,12 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func registrationProcess() {
-        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         let dict = NSMutableDictionary()
         dict[TXNNAME] = TXN_GetThirdPartyData
         dict[SERVICE] = SERVICE_PAYMENT
         dict[CATEGORY] = CATEGORY_SECURITYQUESTION
         dict[VERSION] = -1
         dict[CHANNEL_ID] = "7"
-        
-        dict[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
-        dict[SOURCE_APP_VERSION_KEY] = version
-        dict[SOURCE_APP_OSVERSION_KEY] = "\(UIDevice.current.modelName)  \(UIDevice.current.systemVersion)"
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
         DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
@@ -150,25 +145,25 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
                 self.data = [
                     "title" : "Pastikan data berikut sudah benar",
                     "content" : [
-                        ["Nama Lengkap" : self.tfUsername.text!],
-                        ["E-Mail" : self.tfEmail.text!],
-                        ["Nomor Handphone" : self.tfHPNumber.text!],
+                        [getString("ConfirmationLabelFullName") : self.tfUsername.text!],
+                        [getString("ConfirmationLabelEmail") : self.tfEmail.text!],
+                        [getString("ConfirmationLabelNoHandphone") : self.tfHPNumber.text!],
                       
                     ]
                 ]
                 self.paramsRegistration = [
-                    "subFirstName":self.tfUsername.text!,
-                    "email":self.tfEmail.text!,
-                    "sourceMDN":getNormalisedMDN(self.tfHPNumber.text! as NSString),
-                    "activationNewPin":simasPayRSAencryption(self.tfMpin.text!),
-                    "activationConfirmPin":simasPayRSAencryption(self.tfConfirmMpin.text!),
+                    SUB_FIRST_NAME:self.tfUsername.text!,
+                    EMAIL:self.tfEmail.text!,
+                    SOURCEMDN:getNormalisedMDN(self.tfHPNumber.text! as NSString),
+                    ACTIVATION_NEWPIN:simasPayRSAencryption(self.tfMpin.text!),
+                    ACTIVATION_CONFORMPIN:simasPayRSAencryption(self.tfConfirmMpin.text!),
                 ]
                 
                 let vc = SecurityQuestionViewController.initWithOwnNib()
                 vc.questionData = questionData
                 vc.data = self.data
                 vc.MDNString = self.tfHPNumber.text!
-                vc.dictForAcceptedOTP = self.paramsRegistration
+                vc.dictForAcceptedOTP = self.paramsRegistration as NSDictionary
                 self.navigationController?.pushViewController(vc, animated: false)
                
             
@@ -198,14 +193,5 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
         
         
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

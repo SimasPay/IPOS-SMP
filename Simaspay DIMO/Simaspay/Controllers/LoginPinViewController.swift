@@ -13,9 +13,9 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
     
  
     @IBOutlet weak var tfMpin: BaseTextField!
-
     @IBOutlet weak var viewTextField: UIView!
     @IBOutlet weak var lblInfoNumber: BaseLabel!
+    var MDNString:String!
     static func initWithOwnNib() -> LoginPinViewController {
         let obj:LoginPinViewController = LoginPinViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
@@ -24,7 +24,7 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.showBackButton()
 
-        let phone = "08881234567"
+        let phone:String = MDNString
         let infoString = String(format: String("Silakan masukkan mPIN untuk nomor HP %@"), phone)
         lblInfoNumber.text = infoString as String
         lblInfoNumber.textAlignment = .center

@@ -25,6 +25,13 @@ clickedButtonAtIndexCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert)
          cancelButtonTitle:(NSString *)cancelButtonTitle
          otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
 
++ (void)showNormalTitle:(NSString *)title
+          message:(NSString *)message
+       alertStyle:(UIAlertViewStyle)alertStyle
+clickedButtonAtIndexCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert))callback
+      cancelButtonTitle:(NSString *)cancelButtonTitle;
+//otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
+
 + (void)hideAllAlert;
 
 + (void)showPromptWithMessage:(NSString *) message

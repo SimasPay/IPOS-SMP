@@ -75,3 +75,20 @@
 //OTHERS
 "ErrorMessageRequestFailed" = "Request Failed.";
 "AlertCloseButtonText" = "OK";
+
+//Confirmation Page
+"ConfirmationTitle" = "Konfirmasi";
+"ConfirmationLabelFullName" = "Nama Lengkap";
+"ConfirmationLabelEmail" = "E-Mail";
+"ConfirmationLabelNoHandphone" = "Nomor Handphone";
+"ConfirmationButtonTrue" = "Benar";
+"ConfirmationButtonFalse" = "Salah";
+"ConfirmationOTPMessageTitle" = "Masukkan Kode OTP";
+"ConfirmationOTPMessage" = "Kode OTP dan link telah dikirimkan ke nomor %@. Masukkan kode tersebut atau akses link yang tersedia.";
+"ConfirmationOTPResendButton" = "Kirim Ulang";
+"ConfirmationOTPTextFieldPlaceholder" = "6 digit kode OTP";
+
+
+
+
+

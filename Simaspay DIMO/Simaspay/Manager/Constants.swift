@@ -28,6 +28,10 @@ let SUBSCRIBER_STATUS = "SubscriberStatus"
 let AUTH_KEY = "authenticationKey"
 let CHANNEL_ID = "channelID"
 let GENETARE_OTP = "GenerateOTP"
+let SUB_FIRST_NAME = "subFirstName"
+let EMAIL = "email"
+let SECURITY_QUESTION = "securityQuestion"
+let SECURITY_ANSWER = "securityAnswer"
 
 
 //MARK: Image key
@@ -64,7 +68,7 @@ let SIMASPAY_LOGIN_SUCCESS_CODE = "630"
 let SIMASPAY_ACTIVATION__INQUERY_SUCCESS_CODE = "2040"
 let SIMASPAY_ACTIVATION__CONFIRMATION_SUCCESS_CODE = "52"
 let SIMASPAY_ACTIVATION__CONFIRMATION_SUCCESS_CODE1 = "2032"
-
+let SIMASPAY_REGISTRATION__EMONEY_SUCCESS_CODE = "2180"
 // MARK: Account Roles
 let SIMASPAY_LOGIN_AGENT_TYPE = "2"
 let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
@@ -149,7 +153,6 @@ let TXN_RESEND_MFAOTP = "ResendMFAOTP"
 #define INCOME @"income"
 #define Goal_Open_Account @"goalOfOpeningAccount"
 #define SOURCE_OF_FUNDS @"sourceOfFunds"
-#define EMAIL @"email"
 #define OTHERS @"others"
 #define PRODUCT_DESIRED  @"productDesired"
 
@@ -161,7 +164,7 @@ let TXN_RESEND_MFAOTP = "ResendMFAOTP"
 #define Transaction_ID @"transactionId"
 
 
-#define SUB_FIRST_NAME @"subFirstName"
+
 #define SUB_DOB @"dob"
 
 

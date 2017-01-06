@@ -31,7 +31,7 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showTitle("Konfirmasi")
+        self.showTitle(getString("ConfirmationTitle"))
         self.showBackButton()
         self.view.backgroundColor = UIColor.init(hexString: color_background)
 
@@ -43,9 +43,9 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
         
         
         self.btnTrue.updateButtonType1()
-        self.btnTrue.setTitle("Benar", for: .normal)
+        self.btnTrue.setTitle(getString("ConfirmationButtonTrue"), for: .normal)
         self.btnFalse.updateButtonType3()
-        self.btnFalse.setTitle("Salah", for: .normal)
+        self.btnFalse.setTitle(getString("ConfirmationButtonFalse"), for: .normal)
         btnTrue.addTarget(self, action: #selector(ConfirmationViewController.buttonStatus) , for: .touchUpInside)
         
     }
@@ -148,23 +148,23 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
             DLog("OK");
             clock.invalidate()
             self.sendOTP(OTP: self.tfOTP.text!)
-            return
-            let vc = ActivationSuccessViewController.initWithOwnNib()
-            navigationController?.pushViewController(vc, animated: false)
+            
         }
     
         func showOTP()  {
             let temp = UIView(frame: CGRect(x: 0, y: 0, width: 240, height: 400))
+            let MDNString = ("\(getNormalisedMDN(dictForAcceptedOTP.value(forKey: SOURCEMDN) as! NSString))!")
+            let messageString = String(format: String("ConfirmationOTPMessage"), MDNString)
             let messageAlert = UILabel(frame: CGRect(x: 10, y: 0, width: temp.frame.size.width, height: 60))
             messageAlert.font = UIFont.systemFont(ofSize: 13)
             messageAlert.textAlignment = .center
             messageAlert.numberOfLines = 4
-            messageAlert.text = "Kode OTP dan link telah dikirimkan ke nomor 08881234567. Masukkan kode tersebut atau akses link yang tersedia."
+            messageAlert.text = messageString as String
     
             clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ActivationPinViewController.countDown), userInfo: nil, repeats: true)
     
             btnResandOTP = BaseButton(frame: CGRect(x: 10, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 3, width: temp.frame.size.width, height: 15))
-            btnResandOTP.setTitle("Kirim Ulang", for: .normal)
+            btnResandOTP.setTitle(getString("ConfirmationOTPResendButton"), for: .normal)
             btnResandOTP.setTitleColor(UIColor.init(hexString: color_btn_alert), for: .normal)
             btnResandOTP.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
             btnResandOTP.titleLabel?.textAlignment = .center
@@ -181,7 +181,8 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
             tfOTP.borderStyle = .line
             tfOTP.layer.borderColor = UIColor.init(hexString: color_border).cgColor
             tfOTP.layer.borderWidth = 1;
-            tfOTP.placeholder = "6 digit kode OTP"
+            tfOTP.keyboardType = .numberPad
+            tfOTP.placeholder = getString("ConfirmationOTPTextFieldPlaceholder")
             tfOTP.isSecureTextEntry = true
             tfOTP.addInset()
     
@@ -190,7 +191,7 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
             temp.addSubview(messageAlert)
             temp.addSubview(tfOTP)
     
-            showOTPWith(title: "Masukkan Kode OTP", view: temp)
+            showOTPWith(title: getString("ConfirmationOTPMessageTitle"), view: temp)
         }
         func countDown(){
             if (timerCount > 0) {
@@ -202,11 +203,12 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
             }
         }
         func resendOTP()  {
-        clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ActivationPinViewController.countDown), userInfo: nil, repeats: true)
+        clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ConfirmationViewController.resendOTP), userInfo: nil, repeats: true)
         
         }
     func requestOTP() {
-        DIMOAPIManager .callAPI(withParameters: dictForRequestOTP as! [AnyHashable : Any]!) { (dict, err) in
+        DLog("\(dictForRequestOTP)")
+        DIMOAPIManager .callAPI(withParameters: (dictForRequestOTP ) as! [AnyHashable : Any]!) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             let dictionary = NSDictionary(dictionary: dict!)
             
@@ -225,7 +227,7 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
                 DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
             } else {
                 let responseDict = dictionary as NSDictionary
-                print(responseDict)
+                DLog("\(responseDict)")
                 
                 
             }
@@ -233,8 +235,9 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
     }
     
     func sendOTP(OTP: String) {
+        DLog("\(OTP)")
         let dict = NSMutableDictionary()
-        dict["otp"] = OTP
+        dict[ACTIVATION_OTP] = simasPayRSAencryption(OTP)
         let temp = NSMutableDictionary(dictionary: dict);
         temp .addEntries(from: dictForAcceptedOTP as! [AnyHashable : Any])
         dictForAcceptedOTP = temp as NSDictionary
@@ -258,8 +261,34 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
                 DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
             } else {
                 let responseDict = dictionary as NSDictionary
-                print(responseDict)
-                
+                DLog("\(responseDict)")
+                let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
+                let messageText  = responseDict.value(forKeyPath: "message.text") as! String
+                let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
+                if(messagecode == SIMASPAY_REGISTRATION__EMONEY_SUCCESS_CODE){
+                    DIMOAlertView.showNormalTitle("Error", message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                        for vc in viewControllers {
+                            if (vc.isKind(of: LoginRegisterViewController.self)) {
+                                self.navigationController!.popToViewController(vc, animated: true);
+                                return
+                            }
+                        }
+                        }, cancelButtonTitle: "OK")
+                    return
+
+                 
+                } else {
+                    DIMOAlertView.showNormalTitle("Error", message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                        for vc in viewControllers {
+                            if (vc.isKind(of: RegisterEMoneyViewController.self)) {
+                                self.navigationController!.popToViewController(vc, animated: true);
+                                return
+                            }
+                        }
+                        }, cancelButtonTitle: "OK")
+                    return
+                }
+                self.navigationController!.popToRootViewController(animated: true)
                 
             }
         }

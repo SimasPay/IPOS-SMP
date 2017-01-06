@@ -74,11 +74,12 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
                 DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
             } else {
                 let responseDict = dictionary as NSDictionary
-                print(responseDict)
+                DLog("\(responseDict)")
                 let messageText  = responseDict.value(forKeyPath: "subscriberDetails.status.text") as! String
                 DLog(messageText)
                 if messageText == SIMASPAY_SUCCESS_CODE {
                     let vc = LoginPinViewController.initWithOwnNib()
+                    vc.MDNString = self.tfHPNumber.text! 
                     self.navigationController?.pushViewController(vc, animated: false)
                 } else {
                     let vc = RegisterEMoneyViewController.initWithOwnNib()

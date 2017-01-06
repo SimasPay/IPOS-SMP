@@ -66,6 +66,12 @@ NSTimer *timer;
 + (void)callAPIWithParameters:(NSDictionary *)dict
         andComplete:(void(^)( NSDictionary *response, NSError *err))completion {
     [self startTimer];
+//    NSMutableDictionary *newDict = [@{} mutableCopy];
+//    if (dict) {
+//        newDict = [dict mutableCopy];
+//    }
+//    newDict[@""] =
+//    new
     [self startHTTPRequestWithMethod:ConnectionManagerHTTPMethodGET
                            urlString:BASE_URL
                               params:dict

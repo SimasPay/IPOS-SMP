@@ -55,9 +55,13 @@ class LandingScreenViewController: BaseViewController {
     //    typealias CompletionBlock = () -> Void
     func getPublicKey(complete : @escaping () -> Void) {
         if (publicKeys == nil || publicKeys.allKeys.count == 0) {
+            let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
             let dict = NSMutableDictionary()
             dict[TXNNAME] = TXN_GETPUBLC_KEY
             dict[SERVICE] = SERVICE_ACCOUNT
+            dict[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
+            dict[SOURCE_APP_VERSION_KEY] = version
+            dict[SOURCE_APP_OSVERSION_KEY] = "1"
             
             let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
             DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
@@ -80,6 +84,14 @@ class LandingScreenViewController: BaseViewController {
                     if (responseDict.allKeys.count > 0) {
                         // set public keys
                         publicKeys = responseDict;
+                        if (responseDict.value(forKeyPath: "message.code") as! String == "546") {
+                            DIMOAlertView.showNormalTitle("Error", message: "message", alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                                exit(1)
+                                }, cancelButtonTitle: "OK")
+                            return
+                        }
+                        
+                        DLog("\(publicKeys)")
                     }
                     complete()
                 }

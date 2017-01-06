@@ -122,19 +122,18 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
     }
 
     @IBAction func actionBtnRegister(_ sender: AnyObject) {
+        DLog("\(dictForAcceptedOTP as NSDictionary)")
         let vc = ConfirmationViewController.initWithOwnNib()
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         let dict = NSMutableDictionary()
         dict[TXNNAME] = GENETARE_OTP
         dict[SERVICE] = SERVICE_ACCOUNT
-        dict[SOURCEMDN] = getNormalisedMDN(MDNString as NSString)
+        dict[SOURCEMDN] = getNormalisedMDN((dictForAcceptedOTP as NSDictionary).value(forKey: SOURCEMDN) as! NSString)
         dict[CHANNEL_ID] = "7"
-        
         dict[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
         dict[SOURCE_APP_VERSION_KEY] = version
         dict[SOURCE_APP_OSVERSION_KEY] = "\(UIDevice.current.modelName)  \(UIDevice.current.systemVersion)"
-        
-         vc.dictForRequestOTP = dict as NSDictionary 
+        vc.dictForRequestOTP = dict as NSDictionary
         
         vc.data = self.data
         vc.MDNString = self.MDNString
@@ -144,13 +143,11 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
         dict1[SERVICE] = SERVICE_ACCOUNT
         dict1[INSTITUTION_ID] = SIMASPAY
         dict1[AUTH_KEY] = ""
-        dict1[SOURCEMDN] = getNormalisedMDN(MDNString as NSString)
+        dict1[SOURCEMDN] = getNormalisedMDN((dictForAcceptedOTP as NSDictionary).value(forKey: SOURCEMDN) as! NSString)
         dict1[CHANNEL_ID] = "7"
-        dict1["securityQuestion"] = self.tfQuestion.text!
-        dict1["securityAnswer"] = self.tfAnswer.text!
-        dict1[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
-        dict1[SOURCE_APP_VERSION_KEY] = version
-        dict1[SOURCE_APP_OSVERSION_KEY] = "\(UIDevice.current.modelName)  \(UIDevice.current.systemVersion)"
+        dict1[SECURITY_QUESTION] = self.tfQuestion.text!
+        dict1[SECURITY_ANSWER] = self.tfAnswer.text!
+
         let temp = NSMutableDictionary(dictionary: dict1);
         temp .addEntries(from: dictForAcceptedOTP as! [AnyHashable : Any])
         vc.dictForAcceptedOTP = temp as NSDictionary

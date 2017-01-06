@@ -64,6 +64,15 @@ clickedButtonAtIndexCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert)
     [self showAlertWithTitle:title message:message view:nil alertStyle:alertStyle clickedButtonAtIndexCallback:callback cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles , nil];
 }
 
++ (void)showNormalTitle:(NSString *)title
+          message:(NSString *)message
+       alertStyle:(UIAlertViewStyle)alertStyle
+clickedButtonAtIndexCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert))callback
+      cancelButtonTitle:(NSString *)cancelButtonTitle {
+//otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION {
+    [self showAlertWithTitle:title message:message view:nil alertStyle:alertStyle clickedButtonAtIndexCallback:callback cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+}
+
 + (void)showAlertWithTitle:(NSString *)title
                    message:(NSString *)message
                       view:(UIView *)view
