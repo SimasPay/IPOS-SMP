@@ -46,8 +46,8 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
     }
     
     override func btnDoneAction() {
-        let vc = HomeViewController.initWithAccountType(AccountType.accountTypeEMoneyKYC)
-        navigationController?.pushViewController(vc, animated: false)
+//        let vc = HomeViewController.initWithAccountType(AccountType.accountTypeEMoneyKYC)
+//        navigationController?.pushViewController(vc, animated: false)
         return
     }
     override func didReceiveMemoryWarning() {
@@ -68,6 +68,51 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
         return newString.length <= maxLength
         
         
+    }
+    func loginProcess(){
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        let dict = NSMutableDictionary()
+        dict[TXNNAME] = TXN_LOGIN_KEY
+        dict[SERVICE] = SERVICE_ACCOUNT
+        dict[INSTITUTION_ID] = SIMASPAY
+        dict[AUTH_KEY] = "f"
+        dict[SOURCEMDN] = getNormalisedMDN(MDNString as NSString)
+        dict[mPIN_STRING] = simasPayRSAencryption(self.tfMpin.text!)
+        dict[CHANNEL_ID] = "7"
+        dict[SIMASPAY_ACTIVITY] = "true"
+        
+        dict[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
+        dict[SOURCE_APP_VERSION_KEY] = version
+        dict[SOURCE_APP_OSVERSION_KEY] = "\(UIDevice.current.modelName)  \(UIDevice.current.systemVersion)"
+        
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+            let dictionary = NSDictionary(dictionary: dict!)
+            
+            
+            if (err != nil) {
+                let error = err as! NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                } else {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                }
+                return
+            }
+            
+            if (dictionary.allKeys.count == 0) {
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+            } else {
+                let responseDict = dictionary as NSDictionary
+                DLog("\(responseDict)")
+              
+                
+                
+                
+            }
+        }
+
     }
 
     /*
