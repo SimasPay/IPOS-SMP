@@ -38,7 +38,6 @@ extension UIView {
         layer.shadowOpacity = 0.4
         layer.shadowOffset = CGSize(width: 2, height: 2);
         layer.shadowRadius = 2
-
     }
     
     func addUnderline() {

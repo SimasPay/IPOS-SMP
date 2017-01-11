@@ -208,6 +208,7 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
         }
     func requestOTP() {
         DLog("\(dictForRequestOTP)")
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
         DIMOAPIManager .callAPI(withParameters: (dictForRequestOTP ) as! [AnyHashable : Any]!) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             let dictionary = NSDictionary(dictionary: dict!)
@@ -242,6 +243,7 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
         temp .addEntries(from: dictForAcceptedOTP as! [AnyHashable : Any])
         dictForAcceptedOTP = temp as NSDictionary
         
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
         DIMOAPIManager .callAPI(withParameters: dictForAcceptedOTP as! [AnyHashable : Any]!) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             let dictionary = NSDictionary(dictionary: dict!)
@@ -265,7 +267,7 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
                 let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
                 let messageText  = responseDict.value(forKeyPath: "message.text") as! String
                 let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
-                if(messagecode == SIMASPAY_REGISTRATION__EMONEY_SUCCESS_CODE){
+                if (messagecode == SIMASPAY_REGISTRATION__EMONEY_SUCCESS_CODE){
                     DIMOAlertView.showNormalTitle("Error", message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                         for vc in viewControllers {
                             if (vc.isKind(of: LoginRegisterViewController.self)) {

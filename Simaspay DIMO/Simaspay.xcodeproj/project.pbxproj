@@ -35,6 +35,8 @@
 		35A7AD031DBDDE8F000EDD39 /* TransactionHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35A7AD011DBDDE8F000EDD39 /* TransactionHistoryViewController.xib */; };
 		35A7AD081DBE0710000EDD39 /* ChangeMpinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A7AD061DBE0710000EDD39 /* ChangeMpinViewController.swift */; };
 		35A7AD091DBE0710000EDD39 /* ChangeMpinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35A7AD071DBE0710000EDD39 /* ChangeMpinViewController.xib */; };
+		35ABA8121E236A5C00EFCF1F /* BankEMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ABA8101E236A5C00EFCF1F /* BankEMoneyViewController.swift */; };
+		35ABA8131E236A5C00EFCF1F /* BankEMoneyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35ABA8111E236A5C00EFCF1F /* BankEMoneyViewController.xib */; };
 		35E8527B1DA26E73002C10CD /* TransferBankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E852791DA26E73002C10CD /* TransferBankViewController.swift */; };
 		35E8527C1DA26E73002C10CD /* TransferBankViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35E8527A1DA26E73002C10CD /* TransferBankViewController.xib */; };
 		35F93ABF1D93870D00FF803A /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F93ABD1D93870D00FF803A /* SplashScreenViewController.swift */; };
@@ -118,6 +120,8 @@
 		35A7AD011DBDDE8F000EDD39 /* TransactionHistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TransactionHistoryViewController.xib; path = Controllers/TransactionHistoryViewController.xib; sourceTree = "<group>"; };
 		35A7AD061DBE0710000EDD39 /* ChangeMpinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangeMpinViewController.swift; path = Controllers/ChangeMpinViewController.swift; sourceTree = "<group>"; };
 		35A7AD071DBE0710000EDD39 /* ChangeMpinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChangeMpinViewController.xib; path = Controllers/ChangeMpinViewController.xib; sourceTree = "<group>"; };
+		35ABA8101E236A5C00EFCF1F /* BankEMoneyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BankEMoneyViewController.swift; path = Controllers/BankEMoneyViewController.swift; sourceTree = "<group>"; };
+		35ABA8111E236A5C00EFCF1F /* BankEMoneyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BankEMoneyViewController.xib; path = Controllers/BankEMoneyViewController.xib; sourceTree = "<group>"; };
 		35E852791DA26E73002C10CD /* TransferBankViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransferBankViewController.swift; path = Controllers/TransferBankViewController.swift; sourceTree = "<group>"; };
 		35E8527A1DA26E73002C10CD /* TransferBankViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TransferBankViewController.xib; path = Controllers/TransferBankViewController.xib; sourceTree = "<group>"; };
 		35F93ABD1D93870D00FF803A /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SplashScreenViewController.swift; path = Controllers/SplashScreenViewController.swift; sourceTree = "<group>"; };
@@ -367,6 +371,8 @@
 				354E8FB81DD30CF600FC5F9F /* RegisterEMoneyViewController.xib */,
 				358D74D31DD56D3100767179 /* SecurityQuestionViewController.swift */,
 				358D74D41DD56D3100767179 /* SecurityQuestionViewController.xib */,
+				35ABA8101E236A5C00EFCF1F /* BankEMoneyViewController.swift */,
+				35ABA8111E236A5C00EFCF1F /* BankEMoneyViewController.xib */,
 				BE17731C1D92867900A27E06 /* Login and activation */,
 				BE204A911D94D7CA0013A483 /* HOME & MENU */,
 				3578B6971DC0667A002519BB /* TRANSFER BANK */,
@@ -528,6 +534,7 @@
 				BE17728F1D92859B00A27E06 /* Assets.xcassets in Resources */,
 				BE9D02FD1D94DA1D0070894E /* HomeViewController.xib in Resources */,
 				35835BDE1DD07A4C00D706B9 /* LoginRegisterViewController.xib in Resources */,
+				35ABA8131E236A5C00EFCF1F /* BankEMoneyViewController.xib in Resources */,
 				3535692E1DB74CE000F85A72 /* PaymentPurchaseViewController.xib in Resources */,
 				BE9D030B1D94E16B0070894E /* ActivationPinViewController.xib in Resources */,
 			);
@@ -591,6 +598,7 @@
 				BE17730A1D9285DE00A27E06 /* DMBProgressHUD.m in Sources */,
 				BE9D03031D94DA7F0070894E /* NSData+Base64Extention.m in Sources */,
 				351031981DD1D03200E76D85 /* LoginPinViewController.swift in Sources */,
+				35ABA8121E236A5C00EFCF1F /* BankEMoneyViewController.swift in Sources */,
 				BE204A891D94C9CD0013A483 /* XMLReader.m in Sources */,
 				BE204A8C1D94CEEC0013A483 /* XRSA.m in Sources */,
 			);

@@ -41,6 +41,16 @@ class LandingScreenViewController: BaseViewController {
     }
     
     @IBAction func actionLogin(_ sender: AnyObject) {
+        var message = ""
+        if (!DIMOAPIManager.isInternetConnectionExist()) {
+            message = getString("LoginMessageNotConnectServer")
+        }
+        
+        if (message.characters.count > 0) {
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            return
+        }
+
         getPublicKey {
             let vc = LoginRegisterViewController.initWithOwnNib()
             self.navigationController?.pushViewController(vc, animated: true)
@@ -62,9 +72,10 @@ class LandingScreenViewController: BaseViewController {
             dict[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
             dict[SOURCE_APP_VERSION_KEY] = version
             dict[SOURCE_APP_OSVERSION_KEY] = "1"
-            
+            DMBProgressHUD.showAdded(to: self.view, animated: true)
             let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
             DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+                DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
                 if (err != nil) {
                     let error = err as! NSError
                     if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {

@@ -46,9 +46,7 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
     }
     
     override func btnDoneAction() {
-//        let vc = HomeViewController.initWithAccountType(AccountType.accountTypeEMoneyKYC)
-//        navigationController?.pushViewController(vc, animated: false)
-        return
+    self.loginProcess()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -85,6 +83,7 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
         dict[SOURCE_APP_VERSION_KEY] = version
         dict[SOURCE_APP_OSVERSION_KEY] = "\(UIDevice.current.modelName)  \(UIDevice.current.systemVersion)"
         
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
         DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
@@ -106,7 +105,45 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
             } else {
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")
-              
+                let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
+                let messageText  = responseDict.value(forKeyPath: "message.text") as! String
+                var vc = BaseViewController()
+                
+              if (messagecode == SIMASPAY_LOGIN_SUCCESS_CODE){
+                
+                if ((responseDict.value(forKeyPath: "isBank.text")  as! String) == "true" ){
+                    
+                    if ((responseDict.value(forKeyPath: "isEmoney.text") as! String) == "true" ){
+                        
+                      let accountArray = [
+                        ["accountName":"Bank","numberAccount":(responseDict.value(forKeyPath: "bankAccountNumber.text")  as! String),"accountType":HomeViewController.initWithAccountType(AccountType.accountTypeRegular)],
+                        ["accountName":"Emoney","numberAccount":"08562076603","accountType":HomeViewController.initWithAccountType(AccountType.accountTypeEMoneyKYC)]]
+                        
+                        vc = BankEMoneyViewController.initWithArray(data: accountArray as NSArray)
+                        
+                    } else {
+                        
+                        vc = HomeViewController.initWithAccountType(AccountType.accountTypeRegular)
+                        
+                    }
+                    
+                } else if ((responseDict.value(forKeyPath: "isEmoney.text") as! String) == "true" ){
+                    
+                   if  ((responseDict.value(forKeyPath: "isKyc.text") as! String) == "true" ){
+                    
+                    vc = HomeViewController.initWithAccountType(AccountType.accountTypeEMoneyKYC)
+        
+                   } else {
+                    
+                    vc = HomeViewController.initWithAccountType(AccountType.accountTypeEMoneyNonKYC)
+                   }
+                }
+                
+                self.navigationController?.pushViewController(vc, animated: false)
+                
+              } else {
+                DIMOAlertView.showAlert(withTitle: "Login", message: messageText, cancelButtonTitle: String("AlertCloseButtonText"))
+                }
                 
                 
                 

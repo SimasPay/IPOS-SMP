@@ -111,9 +111,9 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func btnLoginAction(_ sender: AnyObject) {
-        let vc = HomeViewController.initWithAccountType(AccountType.accountTypeEMoneyKYC)
-        navigationController?.pushViewController(vc, animated: false)
-        return
+//        let vc = HomeViewController.initWithAccountType(AccountType.accountTypeEMoneyKYC)
+//        navigationController?.pushViewController(vc, animated: false)
+//        return
         
         
         self.dismissKeyboard()
@@ -176,7 +176,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
                 let responseDict = dictionary as NSDictionary
                 let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
                 let messageText  = responseDict.value(forKeyPath: "message.text") as! String
-                
+                DLog("\(responseDict)")
                 if( messagecode == SIMASPAY_LOGIN_SUCCESS_CODE) {
                     _isLogin = true;
                     _MDNNumber = getNormalisedMDN(self.textFieldHpNumber.text! as NSString) as String

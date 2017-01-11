@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BankEMoneyViewController" customModule="Simaspay" customModuleProvider="target">
+            <connections>
+                <outlet property="lblInfo" destination="KNl-to-QN1" id="5os-5B-6rl"/>
+                <outlet property="tableView" destination="XFZ-3l-h59" id="IwN-pp-srW"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_Image" translatesAutoresizingMaskIntoConstraints="NO" id="WMW-Sr-415">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="Zxd-zC-cZL"/>
+                        <constraint firstAttribute="width" constant="251" id="gza-ai-9i0"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KNl-to-QN1" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="245" id="QZw-4S-yGh"/>
+                        <constraint firstAttribute="height" constant="21" id="k6O-Kv-BOX"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XFZ-3l-h59">
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="130" id="1OK-eQ-3sr"/>
+                        <constraint firstAttribute="width" constant="280" id="qoS-Dt-ads"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="EUh-K7-JAf"/>
+                        <outlet property="delegate" destination="-1" id="E52-TS-Qc0"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="XFZ-3l-h59" firstAttribute="top" secondItem="KNl-to-QN1" secondAttribute="bottom" constant="16" id="0vs-vU-sYH"/>
+                <constraint firstItem="KNl-to-QN1" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Cbe-tH-fvz"/>
+                <constraint firstItem="WMW-Sr-415" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Hsj-do-SMI"/>
+                <constraint firstItem="KNl-to-QN1" firstAttribute="top" secondItem="WMW-Sr-415" secondAttribute="bottom" constant="35" id="WAw-Ho-5v5"/>
+                <constraint firstItem="XFZ-3l-h59" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="pqA-aS-Noa"/>
+                <constraint firstItem="XFZ-3l-h59" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="wmE-aq-AQq"/>
+            </constraints>
+            <point key="canvasLocation" x="33.5" y="109.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="logo_Image" width="225" height="50"/>
+    </resources>
+</document>

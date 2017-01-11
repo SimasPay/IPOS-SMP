@@ -120,6 +120,8 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
         dict[CATEGORY] = CATEGORY_SECURITYQUESTION
         dict[VERSION] = -1
         dict[CHANNEL_ID] = "7"
+        
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
         DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
