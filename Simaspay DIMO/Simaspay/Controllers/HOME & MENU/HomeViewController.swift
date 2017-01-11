@@ -42,7 +42,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         lblTypeHome.font = UIFont.systemFont(ofSize: 11)
         lblTypeHome.textColor = UIColor.init(hexString: color_greyish_brown)
         lblTypeHome.text = "E-money"
@@ -79,9 +78,66 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.viewMove.layer.addSublayer(gradientLayer)
         
     
-        
-        
-        
+        arrayMenu = [
+            [
+                "title" : "Daftar Transaksi",
+                "icon" : "icon_Transaction",
+                "action" : TransactionHistoryViewController.initWithOwnNib(),
+                "disable" : false,
+                "isHidden": false
+            ],
+            [
+                "title" : "Transfer",
+                "icon" : "icon_Transfer",
+                "action" : ListTransferViewController.initWithOwnNib(),
+                "disable" : self.accountType == AccountType.accountTypeEMoneyNonKYC
+                    ? true : false,
+                "isHidden": false
+            ],
+            [
+                "title" : "Pembelian",
+                "icon" : "icon_Payment",
+                "action" : PaymentPurchaseViewController.initWithOwnNib(isPurchased: true),
+                "disable" : false,
+                "isHidden": false
+            ],
+            [
+                "title" : "Pembayaran",
+                "icon" : "icon_Purchase",
+                "action" : PaymentPurchaseViewController.initWithOwnNib(isPurchased: false),
+                "disable" : false,
+                "isHidden": false
+            ],
+            [
+                "title" : "Pay by QR",
+                "icon" : "icon_Paybyqr",
+                "action" : TransactionHistoryViewController.initWithOwnNib(),
+                "disable" : false,
+                "isHidden": false
+            ],
+            [
+                "title" : "Promo Pay by QR",
+                "icon" : "icon_Promo",
+                "action" : TransactionHistoryViewController.initWithOwnNib(),
+                "disable" : false,
+                "isHidden": false
+            ],
+            [
+                "title" : "Tarik Tunai",
+                "icon" : "icon_drawal",
+                "action" : TransactionHistoryViewController.initWithOwnNib(),
+                "disable" : self.accountType == AccountType.accountTypeEMoneyNonKYC ? true : false,
+                "isHidden": self.accountType ==  AccountType.accountTypeRegular ? true : false
+            ],
+            [
+                "title" : "Ganti mPIN",
+                "icon" : "icon_Changempin",
+                "action" : ChangeMpinViewController.initWithOwnNib(),
+                "disable" : false,
+                "isHidden": false
+            ]
+        ]
+        arrayMenu = arrayMenu.filtered(using: NSPredicate(format: "isHidden != TRUE")) as NSArray!
     }
     
     
@@ -146,64 +202,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         // Do any additional setup after loading the view.
         let timer = DIMOAPIManager.staticTimer()
         timer?.invalidate()
-        
-        arrayMenu = [
-            [
-                "title" : "Daftar Transaksi",
-                "icon" : "icon_Transaction",
-                "action" : TransactionHistoryViewController.initWithOwnNib(),
-                "disable" : false
-            ],
-            [
-                "title" : "Transfer",
-                "icon" : "icon_Transfer",
-                "action" : ListTransferViewController.initWithOwnNib(),
-                "disable" : self.accountType == AccountType.accountTypeEMoneyNonKYC
-                            ? true : false
-                
-            ],
-            [
-                "title" : "Pembelian",
-                "icon" : "icon_Payment",
-                "action" : PaymentPurchaseViewController.initWithOwnNib(isPurchased: true),
-                "disable" : false
-            ],
-            [
-                "title" : "Pembayaran",
-                "icon" : "icon_Purchase",
-                "action" : PaymentPurchaseViewController.initWithOwnNib(isPurchased: false),
-                "disable" : false
-            ],
-            [
-                "title" : "Pay by QR",
-                "icon" : "icon_Paybyqr",
-                "action" : TransactionHistoryViewController.initWithOwnNib(),
-                "disable" : false
-            ],
-            [
-                "title" : "Promo Pay by QR",
-                "icon" : "icon_Promo",
-                "action" : TransactionHistoryViewController.initWithOwnNib(),
-                "disable" : false
-            ],
-            [
-                "title" : "Tarik Tunai",
-                "icon" : "icon_drawal",
-                "action" : TransactionHistoryViewController.initWithOwnNib(),
-                "disable" : self.accountType == AccountType.accountTypeEMoneyNonKYC ? true : false
-            ],
-            [
-                "title" : "Ganti mPIN",
-                "icon" : "icon_Changempin",
-                "action" : ChangeMpinViewController.initWithOwnNib(),
-                "disable" : false
-            ]
 
-
-
-        ]
-        
-//        setupMenu()
     }
     override func viewWillLayoutSubviews() {
         imgUser.layer.cornerRadius = (imgUser.bounds.size.width / 2) as CGFloat
@@ -225,12 +224,14 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.arrayMenu.count
+        return arrayMenu.count
         ;
     }
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath)
+        if !((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"isHidden")  as! Bool) {
+       
         if (self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"disable") as! Bool {
             cell.alpha = 0.5
         } else {
@@ -253,8 +254,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         cell.addSubview(lblIcon)
         cell.addSubview(imgIcon)
             
-        
-        return cell
+        }
+         return cell
     }
  
     

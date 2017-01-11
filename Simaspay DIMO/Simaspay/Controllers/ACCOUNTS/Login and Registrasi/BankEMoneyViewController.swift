@@ -24,14 +24,14 @@ class BankEMoneyViewController: BaseViewController,UITableViewDelegate, UITableV
         
         lblInfo.textAlignment = .center
         lblInfo.text = "Pilih Akun Simaspay Anda:"
-//        tableView.backgroundColor = UIColor.white
-//        tableView.layer.cornerRadius = 5
-//        tableView.layer.borderWidth = 1
-//        tableView.layer.borderColor = UIColor.init(hexString: "f1f1f1").cgColor
-//        tableView.clipsToBounds = true;
-//        tableView.isScrollEnabled = false;
-//        tableView.delegate = self
-//        tableView.dataSource = self
+        tableView.backgroundColor = UIColor.white
+        tableView.layer.cornerRadius = 5
+        tableView.layer.borderWidth = 1
+        tableView.layer.borderColor = UIColor.init(hexString: "f1f1f1").cgColor
+        tableView.clipsToBounds = true;
+        tableView.isScrollEnabled = false;
+        tableView.delegate = self
+        tableView.dataSource = self
  
     }
 
@@ -43,7 +43,6 @@ class BankEMoneyViewController: BaseViewController,UITableViewDelegate, UITableV
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-//        tableView.updateViewRoundedWithShadow()
     }
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

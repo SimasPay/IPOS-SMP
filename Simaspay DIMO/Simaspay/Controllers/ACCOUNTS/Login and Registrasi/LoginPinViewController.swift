@@ -87,7 +87,7 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
         DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
-            let dictionary = NSDictionary(dictionary: dict!)
+            
             
             
             if (err != nil) {
@@ -99,7 +99,7 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
                 }
                 return
             }
-            
+            let dictionary = NSDictionary(dictionary: dict!)
             if (dictionary.allKeys.count == 0) {
                 DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
             } else {
