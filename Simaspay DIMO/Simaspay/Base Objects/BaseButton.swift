@@ -42,6 +42,24 @@ class BaseButton: UIButton {
         self.setTitleColor(UIColor.black, for: UIControlState())
     }
 
+    func updateToRadioButton() {
+        
+        self.setImage(UIImage.init(named: "radiobutton_off.png"), for: UIControlState.normal)
+        self.setImage(UIImage.init(named: "radiobutton_on.png"), for: UIControlState.selected)
+        self.setTitleColor(UIColor.red, for: UIControlState.selected)
+    }
+    func updateToRadioButtonWith(_titleButton:String) {
+        self.contentHorizontalAlignment = .left;
+        self.setImage(UIImage.init(named: "radiobutton_off.png"), for: UIControlState.normal)
+        self.setImage(UIImage.init(named: "radiobutton_on.png"), for: UIControlState.selected)
+        self.setTitle(_titleButton, for: .normal)
+        self.setTitleColor(UIColor.init(hexString: color_text_default), for: .normal)
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        let insetAmount:CGFloat = 5
+        imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: insetAmount)
+        titleEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount * 2, bottom: 0, right: -insetAmount)
+        contentEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount, bottom: 0, right: insetAmount)
+    }
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

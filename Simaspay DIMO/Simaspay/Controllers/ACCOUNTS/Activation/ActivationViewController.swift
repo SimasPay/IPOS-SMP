@@ -128,7 +128,7 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
         dict[MFATRANSACTION] = INQUIRY
         
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DIMOAPIManager.callAPI(withParameters: param) { (dict, err) in
+        DIMOAPIManager.callAPI(withParameters: param, withSessionCheck:false) { (dict, err) in
             if (err != nil) {
                 let error = err as! NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {

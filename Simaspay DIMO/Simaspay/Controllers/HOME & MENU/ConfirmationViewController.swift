@@ -236,6 +236,16 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
     }
     
     func sendOTP(OTP: String) {
+        var message = ""
+        if (!DIMOAPIManager.isInternetConnectionExist()){
+            message = getString("LoginMessageNotConnectServer")
+        }
+        
+        if (message.characters.count > 0) {
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            return
+        }
+
         DLog("\(OTP)")
         let dict = NSMutableDictionary()
         dict[ACTIVATION_OTP] = simasPayRSAencryption(OTP)
@@ -244,7 +254,7 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
         dictForAcceptedOTP = temp as NSDictionary
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)
-        DIMOAPIManager .callAPI(withParameters: dictForAcceptedOTP as! [AnyHashable : Any]!) { (dict, err) in
+        DIMOAPIManager .callAPI(withParameters: dictForAcceptedOTP as! [AnyHashable : Any]!, withSessionCheck: false) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             let dictionary = NSDictionary(dictionary: dict!)
             
@@ -266,21 +276,15 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
                 DLog("\(responseDict)")
                 let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
                 let messageText  = responseDict.value(forKeyPath: "message.text") as! String
-                let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
+                
                 if (messagecode == SIMASPAY_REGISTRATION__EMONEY_SUCCESS_CODE){
-                    DIMOAlertView.showNormalTitle("Error", message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
-                        for vc in viewControllers {
-                            if (vc.isKind(of: LoginRegisterViewController.self)) {
-                                self.navigationController!.popToViewController(vc, animated: true);
-                                return
-                            }
-                        }
-                        }, cancelButtonTitle: "OK")
-                    return
+                    let vc = ActivationSuccessViewController.initWithMessageInfo(message: getString("RegistrationLabelInfoSuccessMessage"), title: getString("RegistrationLabelInfoSuccess"))
+                    self.navigationController?.pushViewController(vc, animated: false)
 
                  
                 } else {
                     DIMOAlertView.showNormalTitle("Error", message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
                         for vc in viewControllers {
                             if (vc.isKind(of: RegisterEMoneyViewController.self)) {
                                 self.navigationController!.popToViewController(vc, animated: true);
@@ -288,9 +292,10 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
                             }
                         }
                         }, cancelButtonTitle: "OK")
+                      self.navigationController!.popToRootViewController(animated: true)
                     return
                 }
-                self.navigationController!.popToRootViewController(animated: true)
+              
                 
             }
         }

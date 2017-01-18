@@ -74,11 +74,12 @@ class BankEMoneyViewController: BaseViewController,UITableViewDelegate, UITableV
         temp.addSubview(view)
         view.isUserInteractionEnabled = true
         temp.isUserInteractionEnabled = true
-        
+        temp.selectionStyle = .none
         return temp
     }
     @available(iOS 2.0, *)
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        UserDefault.setObject((accountArray[indexPath.row] as! NSDictionary).value(forKey: "numberAccount") as! String?, forKey: ACCOUNT_NUMBER)
         let vc = (self.accountArray[indexPath.row] as! NSDictionary).value(forKey:"accountType")
         self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
 

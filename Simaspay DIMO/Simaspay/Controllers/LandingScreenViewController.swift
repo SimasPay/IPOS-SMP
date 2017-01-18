@@ -74,7 +74,7 @@ class LandingScreenViewController: BaseViewController {
             dict[SOURCE_APP_OSVERSION_KEY] = "1"
             DMBProgressHUD.showAdded(to: self.view, animated: true)
             let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-            DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+            DIMOAPIManager.callAPI(withParameters: param, withSessionCheck: false, andComplete: { (dict, err) in
                 DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
                 if (err != nil) {
                     let error = err as! NSError
@@ -106,7 +106,7 @@ class LandingScreenViewController: BaseViewController {
                     }
                     complete()
                 }
-            }
+            })
         } else {
             complete()
         }

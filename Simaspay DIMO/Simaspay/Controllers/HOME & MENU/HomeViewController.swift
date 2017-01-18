@@ -17,9 +17,12 @@ enum AccountType: Int {
 class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
 
+    @IBOutlet weak var btnSwitchAccount: UIButton!
+    @IBOutlet weak var lblBalance: BaseLabel!
     var accountType : AccountType!
     var arrayMenu: NSArray!
     
+    @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     @IBOutlet var lblTypeHome: BaseLabel!
     @IBOutlet var lblUsername: BaseLabel!
     @IBOutlet var lblNoAccount: BaseLabel!
@@ -39,27 +42,31 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         vc.accountType = type
         return vc
     }
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
         lblTypeHome.font = UIFont.systemFont(ofSize: 11)
         lblTypeHome.textColor = UIColor.init(hexString: color_greyish_brown)
-        lblTypeHome.text = "E-money"
+        lblTypeHome.text = self.accountType == AccountType.accountTypeRegular ? "Bank Sinarmas": self.accountType == AccountType.accountTypeEMoneyKYC ? "E-money Plus": self.accountType == AccountType.accountTypeEMoneyNonKYC ? "E-money Regular": "Laku Pandai"
+        UserDefault.setObject(self.accountType == AccountType.accountTypeRegular ? "2": self.accountType == AccountType.accountTypeEMoneyKYC ? "1": self.accountType == AccountType.accountTypeEMoneyNonKYC ? "1": "6", forKey: SOURCEPOCKETCODE)
         
         
         lblUsername.font = UIFont.boldSystemFont(ofSize: 18)
         lblUsername.textColor = lblTypeHome.textColor
         lblUsername.textAlignment = .center
-        lblUsername.text = "Harriett Jordan"
+        lblUsername.text = UserDefault.objectFromUserDefaults(forKey: USERNAME) as! String?
     
         lblNoAccount.textColor = lblTypeHome.textColor
         lblNoAccount.font = lblTypeHome.font
         lblNoAccount.textAlignment = .center
-        lblNoAccount.text = "08881234567"
+        lblNoAccount.text = UserDefault.objectFromUserDefaults(forKey: ACCOUNT_NUMBER) as! String?
+        lblBalance.textAlignment = .center
         
         imgUser.layer.cornerRadius = (imgUser.bounds.size.width / 2) as CGFloat
         imgUser.backgroundColor = UIColor.black
         imgUser.clipsToBounds = true
+        
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -82,7 +89,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             [
                 "title" : "Daftar Transaksi",
                 "icon" : "icon_Transaction",
-                "action" : TransactionHistoryViewController.initWithOwnNib(),
+                "action" : TransactionPeriodViewController.initWithOwnNib(),
                 "disable" : false,
                 "isHidden": false
             ],
@@ -138,6 +145,17 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             ]
         ]
         arrayMenu = arrayMenu.filtered(using: NSPredicate(format: "isHidden != TRUE")) as NSArray!
+        self.btnSwitchAccount.isHidden = true
+        
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
+        for vc in viewControllers {
+            if (vc.isKind(of: BankEMoneyViewController.self)) {
+                self.btnSwitchAccount.isHidden = false
+                return
+            }
+            
+        }
+        
     }
     
     
@@ -174,12 +192,14 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         HomeViewController.positionx = 0
         if (viewMove.frame.origin.x >= UIScreen.main.applicationFrame.size.width / 2) {
            DLog("Stay")
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.3, animations: {
                 var frame = self.viewMove.frame
                 frame.origin.x = UIScreen.main.applicationFrame.size.width - 36
                 self.viewMove.frame = frame
-            }
-            var timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.close), userInfo: nil, repeats: false)
+            }, completion: { (complete) in
+                self.checkBalance()
+                
+            })
             
         } else {
             UIView.animate(withDuration: 0.3) {
@@ -196,6 +216,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             frame.origin.x = 0
             self.viewMove.frame = frame
         }
+        self.lblBalance.text = ""
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -278,10 +299,76 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         }
     }
   
-    
+    func checkBalance() {
+        var message = ""
+        if (!DIMOAPIManager.isInternetConnectionExist()){
+            message = getString("LoginMessageNotConnectServer")
+        }
+        
+        if (message.characters.count > 0) {
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            self.close()
+            return
+        }
+        
+        let dict = NSMutableDictionary()
+        dict[TXNNAME] = TXN_ACCOUNT_BALANCE
+        dict[SERVICE] = SERVICE_WALLET
+        dict[INSTITUTION_ID] = SIMASPAY
+        dict[AUTH_KEY] = ""
+        dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: ACCOUNT_NUMBER) as! NSString)
+        dict[SOURCEPIN] = simasPayRSAencryption(UserDefault.objectFromUserDefaults(forKey: MPIN) as! String)
+        dict[CHANNEL_ID] = "7"
+        dict[BANK_ID] = ""
+        dict[SOURCEPOCKETCODE] = self.accountType == AccountType.accountTypeRegular ? "2": self.accountType == AccountType.accountTypeEMoneyKYC ? "1": self.accountType == AccountType.accountTypeEMoneyNonKYC ? "1": "6"
+        
+        self.indicatorView.isHidden = false
+        self.indicatorView.startAnimating()
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+            
+            if (err != nil) {
+                let error = err as! NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                } else {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                }
+                return
+            }
+            let dictionary = NSDictionary(dictionary: dict!)
+            let messageText  = dictionary.value(forKeyPath: "message.text") as! String
+            if (dictionary.allKeys.count == 0) {
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+            } else {
+                let responseDict = dictionary as NSDictionary
+                DLog("\(responseDict)")
+                if let amount = responseDict["amount"] {
+                    let amountText = (amount as! NSDictionary).value(forKey: "text") as! String
+                    DLog("\(amountText)")
+                    self.indicatorView.stopAnimating()
+                    self.indicatorView.isHidden = true
+                    self.lblBalance.text = String(format: "Rp %@", amountText)
+                    _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.close), userInfo: nil, repeats: false)
+                } else {
+                    self.close()
+                    DIMOAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: String("AlertCloseButtonText"))
+                }
+            }
   
-
+        }
+    }
     
+    @IBAction func actionSwitchAccount(_ sender: Any) {
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
+        for vc in viewControllers {
+            if (vc.isKind(of: BankEMoneyViewController.self)) {
+                self.navigationController!.popToViewController(vc, animated: true);
+                return
+            }
+        }
+        
+    }
     func setupMenu() {
         var column = 1
         var row = 1
@@ -291,17 +378,17 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         
         var width = size * 3 + padding * 2
         let height = size + padding + lblHeight
-        if (arrayMenu.count >= 4) {
+        if (self.arrayMenu.count >= 4) {
             row = 2;
-            if (arrayMenu.count == 4) {
+            if (self.arrayMenu.count == 4) {
                 column = 2;
                 width = size * 2 + padding
             } else {
                 column = 3;
             }
         } else {
-            column = arrayMenu.count
-            if (arrayMenu.count == 2) {
+            column = self.arrayMenu.count
+            if (self.arrayMenu.count == 2) {
                 width = size * 2 + padding
             }
         }
@@ -312,12 +399,12 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         for i in 0  ..< row  {
             for j in 0 ..< column {
                 let index = i * column + j
-                if (index < arrayMenu.count) {
-                    let dict = arrayMenu[index]
+                if (index < self.arrayMenu.count) {
+                    _ = self.arrayMenu[index]
                     var x = j * (size + padding)
                     y = i * (height + padding)
                     
-                    if (arrayMenu.count == 5 && i == 1) {
+                    if (self.arrayMenu.count == 5 && i == 1) {
                         // for 5 items
                         x += (size + padding) / 2
                     }

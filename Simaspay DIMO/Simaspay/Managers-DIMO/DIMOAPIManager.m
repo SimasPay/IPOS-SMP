@@ -65,7 +65,15 @@ NSTimer *timer;
 
 + (void)callAPIWithParameters:(NSDictionary *)dict
         andComplete:(void(^)( NSDictionary *response, NSError *err))completion {
-    [self startTimer];
+    [self callAPIWithParameters:dict withSessionCheck:true andComplete:completion];
+}
+
++ (void)callAPIWithParameters:(NSDictionary *)dict
+             withSessionCheck:(Boolean)isCheck
+                  andComplete:(void(^)(NSDictionary *response, NSError *err))completion {
+    if (!isCheck) {
+        [self startTimer];
+    }
 //    NSMutableDictionary *newDict = [@{} mutableCopy];
 //    if (dict) {
 //        newDict = [dict mutableCopy];

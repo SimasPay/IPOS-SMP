@@ -32,7 +32,7 @@ let SUB_FIRST_NAME = "subFirstName"
 let EMAIL = "email"
 let SECURITY_QUESTION = "securityQuestion"
 let SECURITY_ANSWER = "securityAnswer"
-
+let BANK_ID = "bankID"
 
 //MARK: Image key
 let SIMASPAY_CONFIRM = "Confirm"
@@ -49,10 +49,13 @@ let CATEGORY_BANK_CODES = "category.bankCodes"
 let CATEGORY_PURCHASE = "category.purchase"
 let CATEGORY_PAYMENTS = "category.payments"
 let TXN_SUBSCRIBER_KTP_REGISTRATION = "SubscriberRegistration"
+let TXN_ACCOUNT_BALANCE = "CheckBalance"
+let TXN_ACCOUNT_HISTORY = "History"
 
 // MARK: Service
 let SERVICE_ACCOUNT = "Account"
 let SERVICE_PAYMENT = "Payment"
+let SOURCEPOCKETCODE = "sourcePocketCode"
 
 // MARK: UserDefault
 let SIMASPAY_PUBLIC_KEY = "simasPayPublicKey"
@@ -78,6 +81,12 @@ let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
 let SERVICE_WALLET = "Wallet"
 let TXN_RESEND_MFAOTP = "ResendMFAOTP"
 
+
+//MARK: User defult
+let ACCOUNT_NUMBER = "Account_Number"
+let MPIN = "Mpin"
+let USERNAME = "Username"
+
 /*
 #define SIMASPAY_ACTIVITY @"isSimaspayActivity"
 
@@ -93,7 +102,7 @@ let TXN_RESEND_MFAOTP = "ResendMFAOTP"
 
 #define SOURCEPINTEXT @"sourcePINText"
 #define SOURCENAME @"sourceName"
-#define SOURCEPOCKETCODE @"sourcePocketCode"
+
 #define DEST_BANK_CODE @"destBankCode"
 #define MFAOTP @"mfaOtp"
 #define DESTPOCKETCODE @"destPocketCode"
@@ -289,7 +298,6 @@ let TXN_RESEND_MFAOTP = "ResendMFAOTP"
 #define TXN_INQUIRY_CHANGEMPIN @"ChangePIN"
 #define TXN_INQUIRY_ACTIVATION @"Activation"
 #define TXN_ACCOUNT_BALANCE @"CheckBalance"
-#define TXN_ACCOUNT_HISTORY @"History"
 #define TXN_REGISTRATION @"GetRegistrationMedium"
 #define TXN_RESETPIN @"ResetPinByOTP"
 #define TXN_REACTIVATION @"Reactivation" //SubscriberReactivation Reactivation

@@ -10,6 +10,7 @@ import UIKit
 
 class TransactionHistoryViewController: BaseViewController {
 
+    var arrayData: [[String:Any]] = []
     @IBOutlet var scrollView: UIScrollView!
     static func initWithOwnNib() -> TransactionHistoryViewController {
         let obj:TransactionHistoryViewController = TransactionHistoryViewController.init(nibName: String(describing: self), bundle: nil)
@@ -21,10 +22,10 @@ class TransactionHistoryViewController: BaseViewController {
         self.showTitle(getString("TransactionHistoryTitle"))
         self.showBackButton()
         
+       
+       
         
-        var arrayData: [[String:Any]] = []
-        
-        arrayData = [["date":"06/04/2015","Type":"C","name":"Transfer","total":"Rp 500.000"],["date":"06/04/2015","Type":"D","name":"Bill Payme","total":"Rp 35.000"],["date":"06/04/2015","Type":"D","name":"Admin Fee","total":"Rp 10.000"],["date":"06/04/2015","Type":"C","name":"Transfer","total":"Rp 500.000"],["date":"06/04/2015","Type":"D","name":"Bill Payme","total":"Rp 35.000"],["date":"06/04/2015","Type":"D","name":"Admin Fee","total":"Rp 10.000"],["date":"06/04/2015","Type":"C","name":"Transfer","total":"Rp 500.000"],["date":"06/04/2015","Type":"D","name":"Bill Payme","total":"Rp 35.000"],["date":"06/04/2015","Type":"D","name":"Admin Fee","total":"Rp 10.000"],["date":"06/04/2015","Type":"C","name":"Transfer","total":"Rp 500.000"],["date":"06/04/2015","Type":"D","name":"Bill Payme","total":"Rp 35.000"],["date":"06/04/2015","Type":"D","name":"Admin Fee","total":"Rp 10.000"]]
+//        arrayData = [["date":"06/04/2015","Type":"C","name":"Transfer","total":"Rp 500.000"],["date":"06/04/2015","Type":"D","name":"Bill Payme","total":"Rp 35.000"],["date":"06/04/2015","Type":"D","name":"Admin Fee","total":"Rp 10.000"],["date":"06/04/2015","Type":"C","name":"Transfer","total":"Rp 500.000"],["date":"06/04/2015","Type":"D","name":"Bill Payme","total":"Rp 35.000"],["date":"06/04/2015","Type":"D","name":"Admin Fee","total":"Rp 10.000"],["date":"06/04/2015","Type":"C","name":"Transfer","total":"Rp 500.000"],["date":"06/04/2015","Type":"D","name":"Bill Payme","total":"Rp 35.000"],["date":"06/04/2015","Type":"D","name":"Admin Fee","total":"Rp 10.000"],["date":"06/04/2015","Type":"C","name":"Transfer","total":"Rp 500.000"],["date":"06/04/2015","Type":"D","name":"Bill Payme","total":"Rp 35.000"],["date":"06/04/2015","Type":"D","name":"Admin Fee","total":"Rp 10.000"]]
         
         let padding:CGFloat = 25
         let sizeRect = UIScreen.main.applicationFrame
@@ -47,7 +48,7 @@ class TransactionHistoryViewController: BaseViewController {
             
             let lblDate = UILabel(frame: CGRect(x: 0, y: 16, width: 80, height: 20))
             lblDate.font = UIFont.systemFont(ofSize: 13)
-            lblDate.text = list["date"] as! String?
+            lblDate.text = (list["transactionTime"] as! NSDictionary).object(forKey: "text") as? String
             
             let lblType = UILabel(frame: CGRect(x: viewList.bounds.size.width - 30, y: 16, width: 30, height: 20))
             lblType.font = UIFont.systemFont(ofSize: 10)
@@ -55,25 +56,29 @@ class TransactionHistoryViewController: BaseViewController {
             lblType.textAlignment = .center
             lblType.layer.cornerRadius = 2.5
             lblType.clipsToBounds = true
-            let type = list["Type"] as! String?
-            
-            if (type!.isEqual("C")) {
-                lblType.text = "credit"
-                lblType.backgroundColor = UIColor.init(hexString: color_cradit)
-                
-            } else {
-                lblType.text = "debit"
-                lblType.backgroundColor = UIColor.init(hexString: color_debit)
-            }
-            
-            let lblNameTransaction = UILabel(frame: CGRect(x: 0, y: 40, width: 80, height: 20))
-            lblNameTransaction.font = UIFont.systemFont(ofSize: 13)
-            lblNameTransaction.text = list["name"] as! String?
+            let type = (list["isCredit"] as! NSDictionary).object(forKey: "text") as? String
             
             let lblTotal = UILabel(frame: CGRect(x: viewList.bounds.size.width - 100, y: 40, width: 100, height: 20))
             lblTotal.font = UIFont.systemFont(ofSize: 13)
             lblTotal.textAlignment = .right
-            lblTotal.text = list["total"] as! String?
+            let Total = (list["amount"] as! NSDictionary).object(forKey: "text") as? String
+            
+            
+            if (type == "true") {
+                lblType.text = "credit"
+                lblType.backgroundColor = UIColor.init(hexString: color_cradit)
+                lblTotal.text = String(format: "-IDR %@", Total!)
+            } else {
+                lblType.text = "debit"
+                lblType.backgroundColor = UIColor.init(hexString: color_debit)
+                lblTotal.text = String(format: "IDR %@", Total!)
+            }
+            
+            let lblNameTransaction = UILabel(frame: CGRect(x: 0, y: 40, width: 200, height: 20))
+            lblNameTransaction.font = UIFont.systemFont(ofSize: 13)
+            lblNameTransaction.text = (list["transactionType"] as! NSDictionary).object(forKey: "text") as? String
+            
+            
             
             
             

@@ -144,7 +144,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         dict[ACTIVATION_OTP] = activationInqueryOTP
         
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DIMOAPIManager.callAPI(withParameters: param) { (dict, err) in
+        DIMOAPIManager.callAPI(withParameters: param, withSessionCheck:false) { (dict, err) in
             if (err != nil) {
                 let error = err as! NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
@@ -159,7 +159,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
             let messagecode  = responseDict.value(forKeyPath:"message.code") as! String
             let messageText  = responseDict.value(forKeyPath:"message.text") as! String
             if (messagecode == SIMASPAY_ACTIVATION__CONFIRMATION_SUCCESS_CODE || messagecode == SIMASPAY_ACTIVATION__CONFIRMATION_SUCCESS_CODE1) {
-                let vc = ActivationSuccessViewController.initWithOwnNib()
+                let vc = ActivationSuccessViewController.initWithMessageInfo(message: getString("ActivationLabelInfoSuccessMessage"),title: getString("ActivationLabelInfoSuccess") )
                 self.animatedFadeIn()
                 self.navigationController?.pushViewController(vc, animated: false)
             } else {

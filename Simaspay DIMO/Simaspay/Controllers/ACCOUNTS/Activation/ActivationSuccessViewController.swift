@@ -9,37 +9,48 @@
 import UIKit
 
 class ActivationSuccessViewController: BaseViewController {
+    @IBOutlet weak var lblTitleMessage: BaseLabel!
 
     @IBOutlet var btnOK: BaseButton!
     @IBOutlet var lblInfoSuccess: BaseLabel!
+    var messageInfo: String!
+     var TitleInfo: String!
     
-    static func initWithOwnNib() -> ActivationSuccessViewController {
+    
+    static func initWithMessageInfo(message: String, title: String) -> ActivationSuccessViewController {
         let obj:ActivationSuccessViewController = ActivationSuccessViewController.init(nibName: String(describing: self), bundle: nil)
+        obj.messageInfo = message
+        obj.TitleInfo = title
         return obj
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let infoString = getString("ActivationLabelInfoSuccess")
-        lblInfoSuccess.text = infoString as String
-        lblInfoSuccess.textAlignment = .center
-        lblInfoSuccess.numberOfLines = 4
+       
         
-        let range = (infoString as NSString).range(of: "Aktivasi Berhasil!")
-        let attributedString = NSMutableAttributedString(string:infoString)
-        attributedString.addAttributes([NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15)], range: range)
-        self.lblInfoSuccess.attributedText = attributedString
+        lblInfoSuccess.textAlignment = .center
+        lblInfoSuccess.numberOfLines  = 3
+        lblInfoSuccess.text = messageInfo as String
+        
+        lblTitleMessage.textAlignment = .center
+        lblTitleMessage.text = TitleInfo
         
         btnOK.updateButtonType1()
         btnOK.setTitle(getString("ActivationButtonOk"), for: UIControlState())
-//        btnOK.addTarget(self, action: #selector(ActivationSuccessViewController.buttonTransfer) , for: .touchUpInside)
+        btnOK.addTarget(self, action: #selector(ActivationSuccessViewController.buttonClick) , for: .touchUpInside)
     }
 
     func buttonClick()  {
-        let vc = ActivationSuccessViewController.initWithOwnNib()
-        self.navigationController?.pushViewController(vc, animated: false)
-        self.animatedFadeIn()
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
+        for vc in viewControllers {
+            if (vc.isKind(of: LoginRegisterViewController.self)) {
+                self.navigationController!.popToViewController(vc, animated: true);
+                return
+            }
+        }
+        self.navigationController!.popToRootViewController(animated: true)
+    
     }
 
     override func didReceiveMemoryWarning() {

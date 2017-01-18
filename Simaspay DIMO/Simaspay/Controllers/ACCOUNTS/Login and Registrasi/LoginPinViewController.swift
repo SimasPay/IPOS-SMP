@@ -59,7 +59,7 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
-        var maxLength = 6
+        let maxLength = 6
         let currentString: NSString = textField.text! as NSString
         let newString: NSString =
             currentString.replacingCharacters(in: range, with: string) as NSString
@@ -68,6 +68,20 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
         
     }
     func loginProcess(){
+        
+        var message = ""
+        
+        if (!tfMpin.isValid()) {
+            message = getString("LoginMessageFillMpin")
+        } else if (!DIMOAPIManager.isInternetConnectionExist()){
+            message = getString("LoginMessageNotConnectServer")
+        }
+        
+        if (message.characters.count > 0) {
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            return
+        }
+        
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         let dict = NSMutableDictionary()
         dict[TXNNAME] = TXN_LOGIN_KEY
@@ -110,14 +124,17 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
                 var vc = BaseViewController()
                 
               if (messagecode == SIMASPAY_LOGIN_SUCCESS_CODE){
-                
+                UserDefault.setObject(self.MDNString, forKey: SOURCEMDN)
+                UserDefault.setObject(self.MDNString, forKey: ACCOUNT_NUMBER)
+                UserDefault.setObject(self.tfMpin.text!, forKey: MPIN)
+                UserDefault.setObject(responseDict.value(forKeyPath: "name.text") as! String, forKey: USERNAME)
                 if ((responseDict.value(forKeyPath: "isBank.text")  as! String) == "true" ){
                     
                     if ((responseDict.value(forKeyPath: "isEmoney.text") as! String) == "true" ){
                         
                       let accountArray = [
                         ["accountName":"Bank","numberAccount":(responseDict.value(forKeyPath: "bankAccountNumber.text")  as! String),"accountType":HomeViewController.initWithAccountType(AccountType.accountTypeRegular)],
-                        ["accountName":"Emoney","numberAccount":"08562076603","accountType":HomeViewController.initWithAccountType(AccountType.accountTypeEMoneyKYC)]]
+                        ["accountName":"E-money","numberAccount":self.MDNString,"accountType":HomeViewController.initWithAccountType(AccountType.accountTypeEMoneyKYC)]]
                         
                         vc = BankEMoneyViewController.initWithArray(data: accountArray as NSArray)
                         

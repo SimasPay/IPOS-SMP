@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		356CC84A1E288DCE00E25355 /* TransactionPeriodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356CC8481E288DCE00E25355 /* TransactionPeriodViewController.swift */; };
+		356CC84B1E288DCE00E25355 /* TransactionPeriodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 356CC8491E288DCE00E25355 /* TransactionPeriodViewController.xib */; };
 		359959ED1E2623D3007EB516 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359959EC1E2623D3007EB516 /* Utilities.swift */; };
 		35995AA21E262B14007EB516 /* ActivationPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35995A6D1E262B14007EB516 /* ActivationPinViewController.swift */; };
 		35995AA31E262B14007EB516 /* ActivationPinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995A6E1E262B14007EB516 /* ActivationPinViewController.xib */; };
@@ -90,6 +92,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		356CC8481E288DCE00E25355 /* TransactionPeriodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionPeriodViewController.swift; sourceTree = "<group>"; };
+		356CC8491E288DCE00E25355 /* TransactionPeriodViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionPeriodViewController.xib; sourceTree = "<group>"; };
 		359959EC1E2623D3007EB516 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = Manager/Utilities.swift; sourceTree = "<group>"; };
 		35995A6D1E262B14007EB516 /* ActivationPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivationPinViewController.swift; sourceTree = "<group>"; };
 		35995A6E1E262B14007EB516 /* ActivationPinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivationPinViewController.xib; sourceTree = "<group>"; };
@@ -206,6 +210,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		356CC8471E2884CF00E25355 /* Encryption */ = {
+			isa = PBXGroup;
+			children = (
+				BE204A8A1D94CEEC0013A483 /* XRSA.h */,
+				BE204A8B1D94CEEC0013A483 /* XRSA.m */,
+				BE9D02FE1D94DA7F0070894E /* BasicEncodingRules.h */,
+				BE9D02FF1D94DA7F0070894E /* BasicEncodingRules.m */,
+				BE9D03001D94DA7F0070894E /* NSData+Base64Extention.m */,
+				BE9D03011D94DA7F0070894E /* NSData+Base64Extention.h */,
+			);
+			name = Encryption;
+			sourceTree = "<group>";
+		};
 		35995A6A1E262B14007EB516 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,12 +252,12 @@
 		35995A6C1E262B14007EB516 /* Activation */ = {
 			isa = PBXGroup;
 			children = (
+				35995A711E262B14007EB516 /* ActivationViewController.swift */,
+				35995A721E262B14007EB516 /* ActivationViewController.xib */,
 				35995A6D1E262B14007EB516 /* ActivationPinViewController.swift */,
 				35995A6E1E262B14007EB516 /* ActivationPinViewController.xib */,
 				35995A6F1E262B14007EB516 /* ActivationSuccessViewController.swift */,
 				35995A701E262B14007EB516 /* ActivationSuccessViewController.xib */,
-				35995A711E262B14007EB516 /* ActivationViewController.swift */,
-				35995A721E262B14007EB516 /* ActivationViewController.xib */,
 			);
 			path = Activation;
 			sourceTree = "<group>";
@@ -300,6 +317,8 @@
 				35995A921E262B14007EB516 /* ChangeMpinViewController.xib */,
 				35995A931E262B14007EB516 /* TransactionHistoryViewController.swift */,
 				35995A941E262B14007EB516 /* TransactionHistoryViewController.xib */,
+				356CC8481E288DCE00E25355 /* TransactionPeriodViewController.swift */,
+				356CC8491E288DCE00E25355 /* TransactionPeriodViewController.xib */,
 			);
 			path = SETTING;
 			sourceTree = "<group>";
@@ -358,12 +377,7 @@
 				BE1772D51D9285DE00A27E06 /* DReachability.m */,
 				BE204A871D94C9CD0013A483 /* XMLReader.h */,
 				BE204A881D94C9CD0013A483 /* XMLReader.m */,
-				BE204A8A1D94CEEC0013A483 /* XRSA.h */,
-				BE204A8B1D94CEEC0013A483 /* XRSA.m */,
-				BE9D02FE1D94DA7F0070894E /* BasicEncodingRules.h */,
-				BE9D02FF1D94DA7F0070894E /* BasicEncodingRules.m */,
-				BE9D03001D94DA7F0070894E /* NSData+Base64Extention.m */,
-				BE9D03011D94DA7F0070894E /* NSData+Base64Extention.h */,
+				356CC8471E2884CF00E25355 /* Encryption */,
 				BE1772D61D9285DE00A27E06 /* ProgressHUD */,
 			);
 			name = Thirdparties;
@@ -481,7 +495,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Kendy Susantho";
 				TargetAttributes = {
 					BE1772831D92859B00A27E06 = {
@@ -529,6 +543,7 @@
 				35995AB91E262B14007EB516 /* ConfirmationViewController.xib in Resources */,
 				35995AD11E262B14007EB516 /* SplashScreenViewController.xib in Resources */,
 				35995AA31E262B14007EB516 /* ActivationPinViewController.xib in Resources */,
+				356CC84B1E288DCE00E25355 /* TransactionPeriodViewController.xib in Resources */,
 				BE1772921D92859B00A27E06 /* LaunchScreen.storyboard in Resources */,
 				35995AC11E262B14007EB516 /* BalanceInfoViewController.xib in Resources */,
 				BEC416071D9385B9000C3CF4 /* INDONESIAN.strings in Resources */,
@@ -560,6 +575,7 @@
 				BE204A861D93D5A00013A483 /* Constants.swift in Sources */,
 				BE1773091D9285DE00A27E06 /* DReachability.m in Sources */,
 				35995ABE1E262B14007EB516 /* PaymentPurchaseViewController.swift in Sources */,
+				356CC84A1E288DCE00E25355 /* TransactionPeriodViewController.swift in Sources */,
 				35995AC41E262B14007EB516 /* TransactionHistoryViewController.swift in Sources */,
 				BE1773081D9285DE00A27E06 /* DAFURLSessionManager.m in Sources */,
 				35995AAE1E262B14007EB516 /* LoginPinViewController.swift in Sources */,
@@ -651,8 +667,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -696,8 +714,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -716,6 +736,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -727,7 +748,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				DEVELOPMENT_TEAM = R76ECPX6J8;
 				INFOPLIST_FILE = Simaspay/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.id.dimo.Simaspay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -743,7 +764,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				DEVELOPMENT_TEAM = R76ECPX6J8;
 				INFOPLIST_FILE = Simaspay/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.id.dimo.Simaspay;
 				PRODUCT_NAME = "$(TARGET_NAME)";

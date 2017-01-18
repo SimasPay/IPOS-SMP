@@ -41,6 +41,20 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
         
     }
     func doMDNValidation() {
+        var message = ""
+        if (!tfHPNumber.isValid()) {
+            message = getString("LoginMessageFillHpNumber")
+        } else if (!DIMOAPIManager.isInternetConnectionExist()){
+            message = getString("LoginMessageNotConnectServer")
+        }
+        
+        if (message.characters.count > 0) {
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            return
+        }
+     
+      
+
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         let dict = NSMutableDictionary()
         dict[TXNNAME] = SUBSCRIBER_STATUS
