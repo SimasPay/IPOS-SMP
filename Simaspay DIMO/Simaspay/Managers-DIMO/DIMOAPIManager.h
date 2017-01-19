@@ -21,13 +21,16 @@ typedef enum {
 } ConnectionManagerHTTPMethod;
 
 @interface DIMOAPIManager : NSObject
+@property (nonatomic, strong) NSString *encryptedMPin;
+@property (nonatomic, strong) NSString *sourcePocketCode;
 + (instancetype)sharedInstance;
 + (BOOL)isInternetConnectionExist;
 + (NSTimer *)staticTimer;
++ (NSString *)downloadPDFURL;
 //+ (void)checkInternetConnection;
 
 #pragma mark - API
-
++ (void)startTimer;
 + (void)callAPIWithParameters:(NSDictionary *)dict
         andComplete:(void(^)(NSDictionary *response, NSError *err))completion;
 

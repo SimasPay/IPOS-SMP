@@ -15,14 +15,19 @@
 static int const errorCode401 = 401;
 NSTimer *timer;
 // STAGING
-#define BASE_URL @"https://52.78.238.224:8443/webapi/sdynamic?channelID=7&mspID=1"
+
+#define DOWNLOAD_PDF_URL @"https://52.78.238.224:8443/webapi/"
+#define BASE_URL DOWNLOAD_PDF_URL@"sdynamic?channelID=7&mspID=1"
 //#define SIMOBI_URL @"https://staging.dimo.co.id:8470/webapi/sdynamic?channelID=7&"
 #define PayByQR_URL  ServerURLUat
-#define DOWNLOAD_PDF_URL @"https://54.255.194.95:8443/webapi/"
 
 // Production
 + (NSTimer *)staticTimer {
     return timer;
+}
+
++ (NSString *)downloadPDFURL {
+    return DOWNLOAD_PDF_URL;
 }
 
 + (instancetype)sharedInstance {
@@ -71,8 +76,10 @@ NSTimer *timer;
 + (void)callAPIWithParameters:(NSDictionary *)dict
              withSessionCheck:(Boolean)isCheck
                   andComplete:(void(^)(NSDictionary *response, NSError *err))completion {
-    if (!isCheck) {
+    if (isCheck) {
         [self startTimer];
+    } else {
+        [timer invalidate];
     }
 //    NSMutableDictionary *newDict = [@{} mutableCopy];
 //    if (dict) {

@@ -22,6 +22,7 @@
                 <outlet property="lblNoAccount" destination="HMm-Fr-0wJ" id="beO-W5-fyw"/>
                 <outlet property="lblTypeHome" destination="R3e-Bf-dMV" id="88p-q9-s4l"/>
                 <outlet property="lblUsername" destination="l0U-tn-1VH" id="fGM-bW-M5a"/>
+                <outlet property="lblViewMove" destination="Zrt-vC-k86" id="GpE-HH-ja6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewMove" destination="sfI-To-pub" id="mec-eq-aOk"/>
             </connections>
@@ -121,7 +122,21 @@
                         </activityIndicatorView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sfI-To-pub">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zrt-vC-k86" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                             <color key="backgroundColor" red="1" green="0.065431795060000006" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="Zrt-vC-k86" firstAttribute="top" secondItem="sfI-To-pub" secondAttribute="top" id="1de-Dk-wK5"/>
+                                <constraint firstAttribute="bottom" secondItem="Zrt-vC-k86" secondAttribute="bottom" id="7U9-QL-P3t"/>
+                                <constraint firstItem="Zrt-vC-k86" firstAttribute="leading" secondItem="sfI-To-pub" secondAttribute="leading" id="xd7-C7-gu3"/>
+                                <constraint firstAttribute="trailing" secondItem="Zrt-vC-k86" secondAttribute="trailing" id="xro-fR-0XD"/>
+                            </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jn1-4y-YVm">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>

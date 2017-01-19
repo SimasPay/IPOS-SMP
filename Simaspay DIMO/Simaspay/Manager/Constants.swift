@@ -33,6 +33,8 @@ let EMAIL = "email"
 let SECURITY_QUESTION = "securityQuestion"
 let SECURITY_ANSWER = "securityAnswer"
 let BANK_ID = "bankID"
+let FROM_DATE = "fromDate"
+let TO_DATE = "toDate"
 
 //MARK: Image key
 let SIMASPAY_CONFIRM = "Confirm"
@@ -51,7 +53,7 @@ let CATEGORY_PAYMENTS = "category.payments"
 let TXN_SUBSCRIBER_KTP_REGISTRATION = "SubscriberRegistration"
 let TXN_ACCOUNT_BALANCE = "CheckBalance"
 let TXN_ACCOUNT_HISTORY = "History"
-
+let TXN_DownLoad_History_PDF = "DownloadHistoryAsPDF"
 // MARK: Service
 let SERVICE_ACCOUNT = "Account"
 let SERVICE_PAYMENT = "Payment"
@@ -79,12 +81,12 @@ let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
 
 //MARK: opration
 let SERVICE_WALLET = "Wallet"
+let SERVICE_BANK = "Bank"
 let TXN_RESEND_MFAOTP = "ResendMFAOTP"
 
 
 //MARK: User defult
 let ACCOUNT_NUMBER = "Account_Number"
-let MPIN = "Mpin"
 let USERNAME = "Username"
 
 /*
@@ -94,8 +96,6 @@ let USERNAME = "Username"
 
 
 #define AMOUNT @"amount"
-#define FROM_DATE @"fromDate"
-#define TO_DATE @"toDate"
 #define PAGENUMBER @"pageNumber"
 #define mPIN_STRING @"authenticationString"
 
@@ -303,7 +303,7 @@ let USERNAME = "Username"
 #define TXN_REACTIVATION @"Reactivation" //SubscriberReactivation Reactivation
 #define TXN_BILLINQUIRY @"BillInquiry"
 
-#define TXN_DownLoad_History_PDF @"DownloadHistoryAsPDF"
+
 
 #define TXN_GetThirdPartyDataLocation @"GetThirdPartyLocation"
 #define TXN_GetUserKey @"GetUserAPIKey"

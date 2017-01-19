@@ -101,9 +101,6 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
         DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
-            
-            
-            
             if (err != nil) {
                 let error = err as! NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
@@ -117,52 +114,52 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
             if (dictionary.allKeys.count == 0) {
                 DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
             } else {
+                DIMOAPIManager.sharedInstance().encryptedMPin = simasPayRSAencryption(self.tfMpin.text!)
+                
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")
                 let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
                 let messageText  = responseDict.value(forKeyPath: "message.text") as! String
                 var vc = BaseViewController()
                 
-              if (messagecode == SIMASPAY_LOGIN_SUCCESS_CODE){
-                UserDefault.setObject(self.MDNString, forKey: SOURCEMDN)
-                UserDefault.setObject(self.MDNString, forKey: ACCOUNT_NUMBER)
-                UserDefault.setObject(self.tfMpin.text!, forKey: MPIN)
-                UserDefault.setObject(responseDict.value(forKeyPath: "name.text") as! String, forKey: USERNAME)
-                if ((responseDict.value(forKeyPath: "isBank.text")  as! String) == "true" ){
+                if (messagecode == SIMASPAY_LOGIN_SUCCESS_CODE){
+                    UserDefault.setObject(self.MDNString, forKey: SOURCEMDN)
+                    UserDefault.setObject(self.MDNString, forKey: ACCOUNT_NUMBER)
                     
-                    if ((responseDict.value(forKeyPath: "isEmoney.text") as! String) == "true" ){
+                    UserDefault.setObject(responseDict.value(forKeyPath: "name.text") as! String, forKey: USERNAME)
+                    if ((responseDict.value(forKeyPath: "isBank.text")  as! String) == "true" ){
                         
-                      let accountArray = [
-                        ["accountName":"Bank","numberAccount":(responseDict.value(forKeyPath: "bankAccountNumber.text")  as! String),"accountType":HomeViewController.initWithAccountType(AccountType.accountTypeRegular)],
-                        ["accountName":"E-money","numberAccount":self.MDNString,"accountType":HomeViewController.initWithAccountType(AccountType.accountTypeEMoneyKYC)]]
+                        if ((responseDict.value(forKeyPath: "isEmoney.text") as! String) == "true" ){
+                            
+                            let accountArray = [
+                                ["accountName":"Bank","numberAccount":(responseDict.value(forKeyPath: "bankAccountNumber.text")  as! String),"accountType":HomeViewController.initWithAccountType(AccountType.accountTypeRegular)],
+                                ["accountName":"E-money","numberAccount":self.MDNString,"accountType":HomeViewController.initWithAccountType(AccountType.accountTypeEMoneyKYC)]]
+                            
+                            vc = BankEMoneyViewController.initWithArray(data: accountArray as NSArray)
+                            
+                        } else {
+                            
+                            vc = HomeViewController.initWithAccountType(AccountType.accountTypeRegular)
+                            
+                        }
                         
-                        vc = BankEMoneyViewController.initWithArray(data: accountArray as NSArray)
+                    } else if ((responseDict.value(forKeyPath: "isEmoney.text") as! String) == "true" ){
                         
-                    } else {
-                        
-                        vc = HomeViewController.initWithAccountType(AccountType.accountTypeRegular)
-                        
+                        if  ((responseDict.value(forKeyPath: "isKyc.text") as! String) == "true" ){
+                            
+                            vc = HomeViewController.initWithAccountType(AccountType.accountTypeEMoneyKYC)
+                            
+                        } else {
+                            
+                            vc = HomeViewController.initWithAccountType(AccountType.accountTypeEMoneyNonKYC)
+                        }
                     }
                     
-                } else if ((responseDict.value(forKeyPath: "isEmoney.text") as! String) == "true" ){
+                    self.navigationController?.pushViewController(vc, animated: false)
                     
-                   if  ((responseDict.value(forKeyPath: "isKyc.text") as! String) == "true" ){
-                    
-                    vc = HomeViewController.initWithAccountType(AccountType.accountTypeEMoneyKYC)
-        
-                   } else {
-                    
-                    vc = HomeViewController.initWithAccountType(AccountType.accountTypeEMoneyNonKYC)
-                   }
+                } else {
+                    DIMOAlertView.showAlert(withTitle: "Login", message: messageText, cancelButtonTitle: String("AlertCloseButtonText"))
                 }
-                
-                self.navigationController?.pushViewController(vc, animated: false)
-                
-              } else {
-                DIMOAlertView.showAlert(withTitle: "Login", message: messageText, cancelButtonTitle: String("AlertCloseButtonText"))
-                }
-                
-                
                 
             }
         }

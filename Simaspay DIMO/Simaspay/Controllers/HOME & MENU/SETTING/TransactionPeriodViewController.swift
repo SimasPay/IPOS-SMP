@@ -21,7 +21,7 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var lblCustomPeriod: BaseLabel!
     var datePicker = UIDatePicker()
     var datePicker2 = UIDatePicker()
-    var fromDate: NSString!
+    var startDate: NSString!
     var toDate: NSString!
     
     static func initWithOwnNib() -> TransactionPeriodViewController {
@@ -49,9 +49,11 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
         tfFirstDate.delegate = self
         tfSecondDate.delegate = self
         
-        tfFirstDate.text = "DD-MM-YYYY"
-        tfSecondDate.text = "DD-MM-YYYY"
+        tfFirstDate.placeholder = "DD-MM-YYYY"
+        tfSecondDate.placeholder = "DD-MM-YYYY"
         
+        tfFirstDate.isUserInteractionEnabled = false
+        tfSecondDate.isUserInteractionEnabled = false
         tfFirstDate.addInset()
         tfSecondDate.addInset()
         tfFirstDate.rightViewMode =  UITextFieldViewMode.always
@@ -66,7 +68,7 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
         datePicker2.maximumDate = Calendar.current.date(byAdding: .year, value: 0, to: Date())
         self.tfSecondDate.inputView = datePicker2
         datePicker2.addTarget(self, action: #selector(datePickerChanged(sender:)), for: .valueChanged)
-       
+       self.getDateWithPreviousMonth(numberOfMonth: 0)
     }
 
     
@@ -94,7 +96,8 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
         let current = sender as! UIButton
         current.isSelected = true
         
-        
+        tfFirstDate.text = ""
+        tfSecondDate.text = ""
         tfFirstDate.isUserInteractionEnabled = false
         tfSecondDate.isUserInteractionEnabled = false
         if radioBtnThisMonth.isSelected {
@@ -107,7 +110,7 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
             
             tfFirstDate.isUserInteractionEnabled = true
             tfSecondDate.isUserInteractionEnabled = true
-            fromDate = tfFirstDate.text as NSString!
+            startDate = tfFirstDate.text as NSString!
             toDate = tfSecondDate.text as NSString!
         }
 
@@ -117,11 +120,11 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
     func getDateWithPreviousMonth(numberOfMonth: Int) {
         let date = Date()
         let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day], from: date)
+        var components = calendar.dateComponents([.year, .month, .day], from: date)
         
         var year =  components.year! as Int
         var month = components.month! as Int
-        let day = components.day! as Int
+        var day = components.day! as Int
         
         var endDate = ""
         var fromDate = ""
@@ -151,16 +154,20 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
             endDate = String(format: "01%@%@%@", additionalEndDate, String(toMonth),String(toYear))
             
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "ddmmyyyy"
+            dateFormatter.dateFormat = "ddMMyyyy"
             let endDateTamp = dateFormatter.date(from: endDate)
+            let endDateTampString = calendar.date(byAdding: .day, value: -1, to: endDateTamp!)
+            components = calendar.dateComponents([.year, .month, .day], from: endDateTampString!)
             
-            // condition for - 1 day endDate
-            // date from string
-            // date - 1 day
-            // string from date.
+            year =  components.year! as Int
+            month = components.month! as Int
+            day = components.day! as Int
+            endDate = String(format: "%@%@%@%@", String(day), String(month < 10 ? "0" : ""),String(month),String(year))
+            
         }
-        
-     
+        startDate = fromDate as NSString!
+        toDate = endDate as NSString!
+       
         DLog("\(fromDate) & \(endDate)")
         
         
@@ -168,8 +175,24 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
       
     }
     @IBAction func actionBtnNext(_ sender: Any) {
-       
-    self.checkTransactionHistory()
+        if radioBtnCustomPeriod.isSelected {
+            var message = "";
+            if (!tfFirstDate.isValid()) {
+                message = "Masukkan periode waktu yang diinginkan"
+            } else if (!tfSecondDate.isValid()) {
+                message = "Masukkan periode waktu yang diinginkan"
+            }
+            
+            if (message.characters.count > 0) {
+                DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+                return
+            }
+
+        }
+        let vc = TransactionHistoryViewController.initWithOwnNib()
+        vc.startDate = startDate
+        vc.toDate = toDate
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == self.tfFirstDate{
@@ -182,62 +205,6 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
     }
 
     
-    func checkTransactionHistory() {
-        var message = ""
-        if (!DIMOAPIManager.isInternetConnectionExist()){
-            message = getString("LoginMessageNotConnectServer")
-        }
-        
-        if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
-            return
-        }
-        DLog("\(UserDefault.objectFromUserDefaults(forKey: SOURCEPOCKETCODE))")
-        let dict = NSMutableDictionary()
-        dict[TXNNAME] = TXN_ACCOUNT_HISTORY
-        dict[SERVICE] = SERVICE_WALLET
-        dict[INSTITUTION_ID] = ""
-        dict[AUTH_KEY] = ""
-        dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
-        dict[SOURCEPIN] = simasPayRSAencryption(UserDefault.objectFromUserDefaults(forKey: MPIN) as! String)
-        dict["fromDate"] = fromDate
-        dict["toDate"] = toDate
-        dict[CHANNEL_ID] = "7"
-        dict[SOURCEPOCKETCODE] = UserDefault.objectFromUserDefaults(forKey: SOURCEPOCKETCODE)
-        
-
-        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
-            
-            if (err != nil) {
-                let error = err as! NSError
-                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
-                } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
-                }
-                return
-            }
-            let dictionary = NSDictionary(dictionary: dict!)
-            let messageCode  = dictionary.value(forKeyPath: "message.code") as! String
-            if (dictionary.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
-            } else {
-                let responseDict = dictionary as NSDictionary
-                if (messageCode == "39"){
-//                    DLog("\(responseDict)")
-                    let vc = TransactionHistoryViewController.initWithOwnNib()
-                    vc.arrayData = responseDict.value(forKeyPath: "transactionDetails.transactionDetail") as! [[String : Any]]
-                    self.navigationController?.pushViewController(vc, animated: true)
-                } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: dictionary.value(forKeyPath: "message.text") as! String, cancelButtonTitle: String("AlertCloseButtonText"))
-                }
-                
-            }
-            
-            
-        }
-    }
-    
+       
 
 }

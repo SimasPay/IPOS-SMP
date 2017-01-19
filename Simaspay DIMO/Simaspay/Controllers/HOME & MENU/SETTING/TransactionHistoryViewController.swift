@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import QuickLook
 
-class TransactionHistoryViewController: BaseViewController {
-
+class TransactionHistoryViewController: BaseViewController,QLPreviewControllerDataSource,QLPreviewControllerDelegate {
+    @IBOutlet weak var btnDownload: UIButton!
     var arrayData: [[String:Any]] = []
     @IBOutlet var scrollView: UIScrollView!
+    var startDate: NSString! = ""
+    var toDate: NSString! = ""
     static func initWithOwnNib() -> TransactionHistoryViewController {
         let obj:TransactionHistoryViewController = TransactionHistoryViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
@@ -22,12 +25,20 @@ class TransactionHistoryViewController: BaseViewController {
         self.showTitle(getString("TransactionHistoryTitle"))
         self.showBackButton()
         
-       
-       
+        self.checkTransactionHistory()
         
-//        arrayData = [["date":"06/04/2015","Type":"C","name":"Transfer","total":"Rp 500.000"],["date":"06/04/2015","Type":"D","name":"Bill Payme","total":"Rp 35.000"],["date":"06/04/2015","Type":"D","name":"Admin Fee","total":"Rp 10.000"],["date":"06/04/2015","Type":"C","name":"Transfer","total":"Rp 500.000"],["date":"06/04/2015","Type":"D","name":"Bill Payme","total":"Rp 35.000"],["date":"06/04/2015","Type":"D","name":"Admin Fee","total":"Rp 10.000"],["date":"06/04/2015","Type":"C","name":"Transfer","total":"Rp 500.000"],["date":"06/04/2015","Type":"D","name":"Bill Payme","total":"Rp 35.000"],["date":"06/04/2015","Type":"D","name":"Admin Fee","total":"Rp 10.000"],["date":"06/04/2015","Type":"C","name":"Transfer","total":"Rp 500.000"],["date":"06/04/2015","Type":"D","name":"Bill Payme","total":"Rp 35.000"],["date":"06/04/2015","Type":"D","name":"Admin Fee","total":"Rp 10.000"]]
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if (startDate.length == 0) {
+            
+            self.btnDownload.isHidden = true
+         }
         let padding:CGFloat = 25
+        var yPadding:CGFloat = 25
         let sizeRect = UIScreen.main.applicationFrame
         let width    = sizeRect.size.width
         var height:CGFloat = 0
@@ -35,6 +46,13 @@ class TransactionHistoryViewController: BaseViewController {
         var y: CGFloat  = 0
         let widthContent = width - (2 * paddingContent) - (2 * padding)
         let heightContent: CGFloat = 70
+        
+       if startDate.length != 0 {
+            let periode = BaseLabel(frame: CGRect(x: padding, y: yPadding, width: width - 2 * padding, height: 20))
+            periode.text = String(format: "Periode:  %@ - %@", startDate,toDate)
+            yPadding += 30
+            scrollView.addSubview(periode)
+        }
         let viewContent = UIView()
         viewContent.backgroundColor = UIColor.white
         viewContent.layer.borderColor = UIColor.init(hexString: color_border).cgColor
@@ -79,10 +97,6 @@ class TransactionHistoryViewController: BaseViewController {
             lblNameTransaction.text = (list["transactionType"] as! NSDictionary).object(forKey: "text") as? String
             
             
-            
-            
-            
-            
             let line = CALayer()
             line.frame = CGRect(x: 0, y:heightContent - 1 , width: widthContent, height: 1)
             line.backgroundColor = UIColor.init(hexString: color_border).cgColor
@@ -95,11 +109,13 @@ class TransactionHistoryViewController: BaseViewController {
             y += 70
             height += heightContent
         }
-        viewContent.frame = CGRect(x: padding, y: padding, width: width - 2 * padding, height: height)
+        viewContent.frame = CGRect(x: padding, y: yPadding, width: width - 2 * padding, height: height)
         scrollView.addSubview(viewContent)
-        
-        scrollView.contentSize = CGSize(width: width, height: height + 2 * padding)
-        
+        scrollView.contentSize = CGSize(width: width, height: height + 2 * yPadding)
+
+    }
+    @IBAction func actionDownloadPDF(_ sender: Any) {
+        self.downloadPDF()
     }
 
     override func didReceiveMemoryWarning() {
@@ -107,15 +123,168 @@ class TransactionHistoryViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func checkTransactionHistory() {
+        var message = ""
+        if (!DIMOAPIManager.isInternetConnectionExist()){
+            message = getString("LoginMessageNotConnectServer")
+        }
+        
+        if (message.characters.count > 0) {
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            return
+        }
 
-    /*
-    // MARK: - Navigation
+        let dict = NSMutableDictionary()
+        dict[TXNNAME] = TXN_ACCOUNT_HISTORY
+        dict[SERVICE] = SERVICE_WALLET
+        dict[INSTITUTION_ID] = ""
+        dict[AUTH_KEY] = ""
+        dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+        dict[SOURCEPIN] = DIMOAPIManager.sharedInstance().encryptedMPin
+        if startDate.length != 0 {
+            dict["fromDate"] = startDate
+            dict["toDate"] = toDate
+        }
+        
+        dict[CHANNEL_ID] = "7"
+        dict[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode
+        
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+            if (err != nil) {
+                let error = err as! NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                } else {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                }
+                return
+            }
+            let dictionary = NSDictionary(dictionary: dict!)
+            DLog("\(dictionary)")
+            let messageCode  = dictionary.value(forKeyPath: "message.code") as! String
+            if (dictionary.allKeys.count == 0) {
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+            } else {
+                let responseDict = dictionary as NSDictionary
+                if (messageCode == "39"){
+                    if let result = responseDict.value(forKeyPath: "transactionDetails.transactionDetail") as! [[String : Any]]? {
+                        self.arrayData = result
+                    } else {
+                        self.arrayData = [responseDict.value(forKeyPath: "transactionDetails.transactionDetail") as! Dictionary<String, Any>]
+                    }
+                } else {
+                    
+                    DIMOAlertView.showNormalTitle("Error", message: dictionary.value(forKeyPath: "message.text") as! String, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
+                        for vc in viewControllers {
+                            if (vc.isKind(of: HomeViewController.self)) {
+                                self.navigationController!.popToViewController(vc, animated: true);
+                                return
+                            }
+                        }
+                    }, cancelButtonTitle: "OK")
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+                }
+                
+            }
+            
+            
+        }
     }
-    */
+    
+    func downloadPDF()  {
+        var message = ""
+        if (!DIMOAPIManager.isInternetConnectionExist()){
+            message = getString("LoginMessageNotConnectServer")
+        }
+        
+        if (message.characters.count > 0) {
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            return
+        }
+        
+        let dict = NSMutableDictionary()
+        dict[TXNNAME] = TXN_DownLoad_History_PDF
+        dict[SERVICE] = SERVICE_WALLET
+        dict[INSTITUTION_ID] = SIMASPAY
+        dict[AUTH_KEY] = ""
+        dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+        dict[SOURCEPIN] = DIMOAPIManager.sharedInstance().encryptedMPin
+        dict[FROM_DATE] = startDate
+        dict[TO_DATE] = toDate
+        dict[CHANNEL_ID] = "7"
+        dict[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode
+        
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+            if (err != nil) {
+                let error = err as! NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                } else {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                }
+                
+                DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+                return
+            }
+            
+            let dictionary = NSDictionary(dictionary: dict!)
+            DLog("\(dictionary)")
+            if (dictionary.allKeys.count == 0) {
+                DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+            } else {
+                let responseDict = dictionary as NSDictionary
+                DispatchQueue.global().async {
+                    let str = "\(DIMOAPIManager.downloadPDFURL()!)\(responseDict.object(forKeyPaths: "downloadURL.text")!)"
+                    if let data: NSData = NSData(contentsOf: URL(string: str)!) {
+                        DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+                        let fileManager = FileManager.default
+                        let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                        let fileURL = documentsURL.appendingPathComponent("Mutasi.pdf")
+                        let path = fileURL.path
+                        //fileManager.removeItemAtPath(path)
+                        DispatchQueue.main.async {
+                            fileManager.createFile(atPath: path, contents: data as Data,attributes: nil)
+                            self.previewPDFDownloaded(path: path)
+                        }
+                    }
+                }
+            }
+        }
+    }
 
+    static var currentPath : String = ""
+    func previewPDFDownloaded(path : String){
+        TransactionHistoryViewController.currentPath = path
+        let previewController:QLPreviewController = QLPreviewController()
+        previewController.currentPreviewItemIndex = 0
+        previewController.dataSource = self
+        previewController.delegate = self
+        
+        self.navigationController?.navigationBar.tintColor = UIColor.black
+        self.title = ""
+        self.navigationController!.present(previewController, animated: true, completion: {
+        })
+        
+        
+        //self.navigationController?.presentViewController(previewController, animated: true, completion: nil)
+        
+    }
+    
+    
+    @available(iOS 4.0, *)
+    public func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
+    }
+    
+    internal func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem
+    {
+        return NSURL.fileURL(withPath: TransactionHistoryViewController.currentPath) as QLPreviewItem
+    }
 }

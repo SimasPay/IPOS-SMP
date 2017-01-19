@@ -17,6 +17,7 @@ enum AccountType: Int {
 class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
 
+    @IBOutlet weak var lblViewMove: BaseLabel!
     @IBOutlet weak var btnSwitchAccount: UIButton!
     @IBOutlet weak var lblBalance: BaseLabel!
     var accountType : AccountType!
@@ -49,7 +50,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         lblTypeHome.font = UIFont.systemFont(ofSize: 11)
         lblTypeHome.textColor = UIColor.init(hexString: color_greyish_brown)
         lblTypeHome.text = self.accountType == AccountType.accountTypeRegular ? "Bank Sinarmas": self.accountType == AccountType.accountTypeEMoneyKYC ? "E-money Plus": self.accountType == AccountType.accountTypeEMoneyNonKYC ? "E-money Regular": "Laku Pandai"
-        UserDefault.setObject(self.accountType == AccountType.accountTypeRegular ? "2": self.accountType == AccountType.accountTypeEMoneyKYC ? "1": self.accountType == AccountType.accountTypeEMoneyNonKYC ? "1": "6", forKey: SOURCEPOCKETCODE)
+       
         
         
         lblUsername.font = UIFont.boldSystemFont(ofSize: 18)
@@ -82,14 +83,14 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         gradientLayer.startPoint = CGPoint(x: 0.0,y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
         self.gradientLayer = gradientLayer
-        self.viewMove.layer.addSublayer(gradientLayer)
-        
+        self.viewMove.layer.insertSublayer(gradientLayer, at: 0)
+        DIMOAPIManager.sharedInstance().sourcePocketCode =  self.accountType == AccountType.accountTypeRegular ? "2": self.accountType == AccountType.accountTypeEMoneyKYC ? "1": self.accountType == AccountType.accountTypeEMoneyNonKYC ? "1": "6"
     
         arrayMenu = [
             [
                 "title" : "Daftar Transaksi",
                 "icon" : "icon_Transaction",
-                "action" : TransactionPeriodViewController.initWithOwnNib(),
+                "action" :self.accountType == AccountType.accountTypeEMoneyKYC ? TransactionPeriodViewController.initWithOwnNib() : self.accountType == AccountType.accountTypeEMoneyNonKYC ? TransactionPeriodViewController.initWithOwnNib():self.accountType == AccountType.accountTypeRegular ? TransactionHistoryViewController.initWithOwnNib() :TransactionHistoryViewController.initWithOwnNib(),
                 "disable" : false,
                 "isHidden": false
             ],
@@ -155,74 +156,18 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             }
             
         }
-        
     }
     
-    
-    @IBAction func drag(_ sender: AnyObject, event: UIEvent) {
-        if let button = sender as? UIButton {
-            // get the touch inside the button
-            let touch = event.touches(for: btnMove)?.first
-            // println the touch location
-            let x = (touch?.location(in: button).x)! as CGFloat
-            if (HomeViewController.positionx == 0) {
-                
-            } else {
-                if x > HomeViewController.positionx {
-                    // do right
-                    let diff = x - HomeViewController.positionx
-                    var frame = viewMove.frame
-                    frame.origin.x += diff * 1.5
-                    frame.origin.x = min(frame.origin.x, UIScreen.main.applicationFrame.size.width - 36)
-                    viewMove.frame = frame
-                    
-                } else if (x < HomeViewController.positionx) {
-                    var frame = viewMove.frame
-                    let diff = HomeViewController.positionx - x
-                    frame.origin.x -= diff * 1.5
-                    frame.origin.x = max(frame.origin.x, 0)
-                    viewMove.frame = frame
-                }
-            }
-            HomeViewController.positionx = x
-        }
-    }
-    
-    @IBAction func touchDone(_ sender: AnyObject) {
-        HomeViewController.positionx = 0
-        if (viewMove.frame.origin.x >= UIScreen.main.applicationFrame.size.width / 2) {
-           DLog("Stay")
-            UIView.animate(withDuration: 0.3, animations: {
-                var frame = self.viewMove.frame
-                frame.origin.x = UIScreen.main.applicationFrame.size.width - 36
-                self.viewMove.frame = frame
-            }, completion: { (complete) in
-                self.checkBalance()
-                
-            })
-            
-        } else {
-            UIView.animate(withDuration: 0.3) {
-                var frame = self.viewMove.frame
-                frame.origin.x = 0
-                self.viewMove.frame = frame
-            }
-        }
-
-    }
-    func close() {
-        UIView.animate(withDuration: 0.3) {
-            var frame = self.viewMove.frame
-            frame.origin.x = 0
-            self.viewMove.frame = frame
-        }
-        self.lblBalance.text = ""
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         // Do any additional setup after loading the view.
         let timer = DIMOAPIManager.staticTimer()
         timer?.invalidate()
+        
+        lblViewMove.font = UIFont.systemFont(ofSize: 14)
+        lblViewMove.textColor = UIColor.white
+        lblViewMove.textAlignment = .center
+        lblViewMove.text = getString("HomeTitleSliderBalace")
 
     }
     override func viewWillLayoutSubviews() {
@@ -235,70 +180,18 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         var frame = self.viewMove.frame
         frame.origin = CGPoint.zero
         self.gradientLayer.frame = frame
-        
-        let lblViewMove = BaseLabel.init(frame: CGRect(x: 0, y: 0, width: self.viewMove.frame.width, height: self.viewMove.frame.height))
-        lblViewMove.font = UIFont.systemFont(ofSize: 14)
-        lblViewMove.textColor = UIColor.white
-        lblViewMove.textAlignment = .center
-        lblViewMove.text = getString("HomeTitleSliderBalace")
-        self.viewMove.addSubview(lblViewMove)
     }
     
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return arrayMenu.count
-        ;
-    }
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-    {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath)
-        if !((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"isHidden")  as! Bool) {
-       
-        if (self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"disable") as! Bool {
-            cell.alpha = 0.5
-        } else {
-            cell.alpha = 1
-        }
-        cell.backgroundColor = UIColor.white
-        cell.updateIconRoundedWithShadow()
-
-        
-        let imgIcon = UIImageView(frame: CGRect(x: cell.frame.size.width/2 - 25 , y: cell.frame.size.height/2 - 35 , width: 50, height: 50))
-        imgIcon.image = UIImage.init(named: "\(((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"icon") as! NSString) as String)")
-        
-        let lblIcon = BaseLabel(frame: CGRect(x: 0, y: imgIcon.frame.origin.y  + imgIcon.frame.size.width + 4 , width: cell.frame.size.width, height: 10))
-        lblIcon.textAlignment = .center
-        lblIcon.textColor = UIColor.black
-        lblIcon.font = UIFont.systemFont(ofSize: 10)
-        lblIcon.text = ((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"title") as! NSString) as String
-        
-        
-        cell.addSubview(lblIcon)
-        cell.addSubview(imgIcon)
-            
-        }
-         return cell
-    }
- 
     
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        let sizeRect = UIScreen.main.applicationFrame
-        let width    = ((sizeRect.size.width - 16 * 4) / 3)
-        return CGSize(width: width, height: width)
-    }
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets{
-        
-        return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-    }
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
-        if !((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"disable")  as! Bool) {
-            DLog("\(((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"title") as! NSString) as String)")
-            let vc = (self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"action")
-            self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
-        } else {
-            
+    func close() {
+        UIView.animate(withDuration: 0.3) {
+            var frame = self.viewMove.frame
+            frame.origin.x = 0
+            self.viewMove.frame = frame
         }
+        self.lblBalance.text = ""
     }
-  
+    
     func checkBalance() {
         var message = ""
         if (!DIMOAPIManager.isInternetConnectionExist()){
@@ -316,11 +209,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         dict[SERVICE] = SERVICE_WALLET
         dict[INSTITUTION_ID] = SIMASPAY
         dict[AUTH_KEY] = ""
-        dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: ACCOUNT_NUMBER) as! NSString)
-        dict[SOURCEPIN] = simasPayRSAencryption(UserDefault.objectFromUserDefaults(forKey: MPIN) as! String)
+        dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+        dict[SOURCEPIN] = DIMOAPIManager.sharedInstance().encryptedMPin as String!
         dict[CHANNEL_ID] = "7"
         dict[BANK_ID] = ""
-        dict[SOURCEPOCKETCODE] = self.accountType == AccountType.accountTypeRegular ? "2": self.accountType == AccountType.accountTypeEMoneyKYC ? "1": self.accountType == AccountType.accountTypeEMoneyNonKYC ? "1": "6"
+        dict[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode as String
         
         self.indicatorView.isHidden = false
         self.indicatorView.startAnimating()
@@ -355,19 +248,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     DIMOAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: String("AlertCloseButtonText"))
                 }
             }
-  
+            
         }
-    }
-    
-    @IBAction func actionSwitchAccount(_ sender: Any) {
-        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
-        for vc in viewControllers {
-            if (vc.isKind(of: BankEMoneyViewController.self)) {
-                self.navigationController!.popToViewController(vc, animated: true);
-                return
-            }
-        }
-        
     }
     func setupMenu() {
         var column = 1
@@ -423,6 +305,125 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         view.addSubview(container)
     }
 
+    // MARK: Button
+    @IBAction func actionSwitchAccount(_ sender: Any) {
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
+        for vc in viewControllers {
+            if (vc.isKind(of: BankEMoneyViewController.self)) {
+                self.navigationController!.popToViewController(vc, animated: true);
+                return
+            }
+        }
+        
+    }
+    @IBAction func drag(_ sender: AnyObject, event: UIEvent) {
+        if let button = sender as? UIButton {
+            // get the touch inside the button
+            let touch = event.touches(for: btnMove)?.first
+            // println the touch location
+            let x = (touch?.location(in: button).x)! as CGFloat
+            if (HomeViewController.positionx == 0) {
+                
+            } else {
+                if x > HomeViewController.positionx {
+                    // do right
+                    let diff = x - HomeViewController.positionx
+                    var frame = viewMove.frame
+                    frame.origin.x += diff * 1.5
+                    frame.origin.x = min(frame.origin.x, UIScreen.main.applicationFrame.size.width - 36)
+                    viewMove.frame = frame
+                    
+                } else if (x < HomeViewController.positionx) {
+                    var frame = viewMove.frame
+                    let diff = HomeViewController.positionx - x
+                    frame.origin.x -= diff * 1.5
+                    frame.origin.x = max(frame.origin.x, 0)
+                    viewMove.frame = frame
+                }
+            }
+            HomeViewController.positionx = x
+        }
+    }
+    
+    @IBAction func touchDone(_ sender: AnyObject) {
+        HomeViewController.positionx = 0
+        if (viewMove.frame.origin.x >= UIScreen.main.applicationFrame.size.width / 2) {
+            DLog("Stay")
+            UIView.animate(withDuration: 0.3, animations: {
+                var frame = self.viewMove.frame
+                frame.origin.x = UIScreen.main.applicationFrame.size.width - 36
+                self.viewMove.frame = frame
+            }, completion: { (complete) in
+                self.checkBalance()
+                
+            })
+            
+        } else {
+            UIView.animate(withDuration: 0.3) {
+                var frame = self.viewMove.frame
+                frame.origin.x = 0
+                self.viewMove.frame = frame
+            }
+        }
+        
+    }
+    
+    // MARK: test
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return arrayMenu.count
+        ;
+    }
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath)
+        if !((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"isHidden")  as! Bool) {
+       
+        if (self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"disable") as! Bool {
+            cell.alpha = 0.5
+        } else {
+            cell.alpha = 1
+        }
+        cell.backgroundColor = UIColor.white
+        cell.updateIconRoundedWithShadow()
+
+        
+        let imgIcon = UIImageView(frame: CGRect(x: cell.frame.size.width/2 - 25 , y: cell.frame.size.height/2 - 35 , width: 50, height: 50))
+        imgIcon.image = UIImage.init(named: "\(((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"icon") as! NSString) as String)")
+        
+        let lblIcon = BaseLabel(frame: CGRect(x: 0, y: imgIcon.frame.origin.y  + imgIcon.frame.size.width + 4 , width: cell.frame.size.width, height: 10))
+        lblIcon.textAlignment = .center
+        lblIcon.textColor = UIColor.black
+        lblIcon.font = UIFont.systemFont(ofSize: 10)
+        lblIcon.text = ((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"title") as! NSString) as String
+        
+        
+        cell.addSubview(lblIcon)
+        cell.addSubview(imgIcon)
+            
+        }
+         return cell
+    }
+ 
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+        let sizeRect = UIScreen.main.applicationFrame
+        let width    = ((sizeRect.size.width - 16 * 4) / 3)
+        return CGSize(width: width, height: width)
+    }
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets{
+        
+        return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+    }
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
+        if !((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"disable")  as! Bool) {
+            DLog("\(((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"title") as! NSString) as String)")
+            let vc = (self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"action")
+            self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
+        } else {
+            
+        }
+    }
+  
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

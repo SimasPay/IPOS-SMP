@@ -254,7 +254,18 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
         dictForAcceptedOTP = temp as NSDictionary
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)
-        DIMOAPIManager .callAPI(withParameters: dictForAcceptedOTP as! [AnyHashable : Any]!, withSessionCheck: false) { (dict, err) in
+        
+        var sessionCheck = false
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
+        for vc in viewControllers {
+            if (vc.isKind(of: HomeViewController.self)) {
+                sessionCheck = true
+                
+            }
+        }
+
+       
+        DIMOAPIManager .callAPI(withParameters: dictForAcceptedOTP as! [AnyHashable : Any]!, withSessionCheck:sessionCheck) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             let dictionary = NSDictionary(dictionary: dict!)
             
