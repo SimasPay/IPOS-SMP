@@ -64,6 +64,11 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         
 
     }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+        
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -83,6 +88,16 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         super.viewDidLayoutSubviews()
         tfMpin.addUnderline()
     }
+    
+    //MARK: keyboard Show set last object above keyboard
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        BaseViewController.lastObjectForKeyboardDetector = self.btnSaveMpin
+        updateUIWhenKeyboardShow()
+        return true
+    }
+    
+    //MARK: Action button for save MPIN
     @IBAction func actionSaveMpin(_ sender: AnyObject) {
     
         var message = ""
@@ -110,19 +125,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-        
-        
-    }
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        
-        BaseViewController.lastObjectForKeyboardDetector = self.btnSaveMpin
-        updateUIWhenKeyboardShow()
-        return true
-    }
-    
+
     func confirmationRequest(otpText:NSString) {
                 
         let activationInquerySctlId = activationDict.value(forKeyPath:"sctlID.text") as! String

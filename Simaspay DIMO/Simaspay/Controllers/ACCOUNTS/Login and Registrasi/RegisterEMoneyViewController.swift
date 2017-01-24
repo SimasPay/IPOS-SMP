@@ -59,6 +59,7 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         viewTextField.updateViewRoundedWithShadow()
@@ -68,21 +69,8 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
         tfMpin.addUnderline()
         
     }
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == self.tfUsername{
-            BaseViewController.lastObjectForKeyboardDetector = self.tfUsername
-        } else if textField == self.tfEmail{
-            BaseViewController.lastObjectForKeyboardDetector = self.tfEmail
-        } else if textField == self.tfHPNumber{
-            BaseViewController.lastObjectForKeyboardDetector = self.tfConfirmMpin
-        } else if textField == self.tfMpin{
-            BaseViewController.lastObjectForKeyboardDetector = self.viewTextField
-        } else if textField == self.tfConfirmMpin{
-            BaseViewController.lastObjectForKeyboardDetector = self.viewTextField
-        }
-        updateUIWhenKeyboardShow()
-        return true
-    }
+    
+    //MARK: Action button
     @IBAction func actionNextButton(_ sender: AnyObject) {
         var message = "";
         if (!tfUsername.isValid()) {
@@ -105,6 +93,7 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
         self.registrationProcess()
     }
     
+    //MARK: Validation Email
     func isValidEmail(testStr:String) -> Bool {
         // print("validate calendar: \(testStr)")
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
@@ -113,6 +102,46 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
         return emailTest.evaluate(with: testStr)
     }
     
+    //MARK: keyboard Show set last object above keyboard
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == self.tfUsername{
+            BaseViewController.lastObjectForKeyboardDetector = self.tfUsername
+        } else if textField == self.tfEmail{
+            BaseViewController.lastObjectForKeyboardDetector = self.tfEmail
+        } else if textField == self.tfHPNumber{
+            BaseViewController.lastObjectForKeyboardDetector = self.tfConfirmMpin
+        } else if textField == self.tfMpin{
+            BaseViewController.lastObjectForKeyboardDetector = self.viewTextField
+        } else if textField == self.tfConfirmMpin{
+            BaseViewController.lastObjectForKeyboardDetector = self.viewTextField
+        }
+        updateUIWhenKeyboardShow()
+        return true
+    }
+
+    //MARK: Maximum Textfield length
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        var maxLength = 6
+        if (tfHPNumber == textField) {
+            maxLength = 15
+        }
+        if (tfEmail == textField) {
+            maxLength = 50
+        }
+        if (tfUsername == textField) {
+            maxLength = 50
+        }
+        
+        let currentString: NSString = textField.text! as NSString
+        let newString: NSString =
+            currentString.replacingCharacters(in: range, with: string) as NSString
+        return newString.length <= maxLength
+        
+        
+    }
+
+    //MARK: Registration process get security question
     func registrationProcess() {
         let dict = NSMutableDictionary()
         dict[TXNNAME] = TXN_GetThirdPartyData
@@ -175,25 +204,5 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
         }
     }
 
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool {
-        var maxLength = 6
-        if (tfHPNumber == textField) {
-            maxLength = 15
-        }
-        if (tfEmail == textField) {
-            maxLength = 50
-        }
-        if (tfUsername == textField) {
-            maxLength = 50
-        }
-        
-        let currentString: NSString = textField.text! as NSString
-        let newString: NSString =
-            currentString.replacingCharacters(in: range, with: string) as NSString
-        return newString.length <= maxLength
-        
-        
-    }
-
+    
 }

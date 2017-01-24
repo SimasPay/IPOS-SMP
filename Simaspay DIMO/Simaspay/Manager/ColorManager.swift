@@ -8,17 +8,17 @@
 
 import Foundation
 
-let color_text_default:String = "5b5b5b"
-
+//MARK: Base color
 let color_btn_red:String = "cc0000"
 let color_btn_gray:String = color_text_default
 let color_btn_gray2 = "dbdbdb"
-let color_line_gray = "969696"
 
+//MARK: color for spesific object
+let color_line_gray = "969696"
 let color_background = "F3F3F3"
 let color_border  = "D1D1D1"
-
 let color_btn_alert = "037AFF"
+let color_text_default:String = "5b5b5b"
 
 //Transaction History
 let color_cradit = "14BC28"

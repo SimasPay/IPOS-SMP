@@ -8,21 +8,9 @@
 
 import Foundation
 
+//MARK: custom view like rounded and underline
 extension UIView {
     func updateViewRoundedWithShadow() {
-        /*
-        let temp = UIView(frame: CGRect(origin: CGPoint.zero, size: frame.size))
-        temp.backgroundColor = backgroundColor
-        temp.layer.cornerRadius = 5
-        temp.clipsToBounds = true
-        insertSubview(temp, at: 0)
-        
-        self.backgroundColor = UIColor.clear
-        layer.shadowColor = UIColor.black.withAlphaComponent(0.23).cgColor
-        layer.shadowOpacity = 0.5;
-        layer.shadowOffset = CGSize(width: 2, height: 2);
-        layer.shadowRadius = 0.5;
- */
         let layer = self.layer
         layer.cornerRadius = 5
         layer.shadowColor = UIColor.black.withAlphaComponent(0.23).cgColor
@@ -58,6 +46,7 @@ extension UIView {
     }
 }
 
+//MARK: Checking Textfield
 extension UITextField {
     func length()->Int {
         return (self.text?.characters.count)!
@@ -67,6 +56,7 @@ extension UITextField {
     }
 }
 
+//MARK: Device
 public extension UIDevice {
     var modelName: String {
         var systemInfo = utsname()

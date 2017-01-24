@@ -9,12 +9,13 @@
 import UIKit
 
 class ActivationSuccessViewController: BaseViewController {
+    
     @IBOutlet weak var lblTitleMessage: BaseLabel!
-
-    @IBOutlet var btnOK: BaseButton!
     @IBOutlet var lblInfoSuccess: BaseLabel!
+    @IBOutlet var btnOK: BaseButton!
+    
     var messageInfo: String!
-     var TitleInfo: String!
+    var TitleInfo: String!
     
     
     static func initWithMessageInfo(message: String, title: String) -> ActivationSuccessViewController {
@@ -27,7 +28,7 @@ class ActivationSuccessViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
+        
         
         lblInfoSuccess.textAlignment = .center
         lblInfoSuccess.numberOfLines  = 3
@@ -40,7 +41,8 @@ class ActivationSuccessViewController: BaseViewController {
         btnOK.setTitle(getString("ActivationButtonOk"), for: UIControlState())
         btnOK.addTarget(self, action: #selector(ActivationSuccessViewController.buttonClick) , for: .touchUpInside)
     }
-
+    
+    //MARK: action button OK
     func buttonClick()  {
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
         for vc in viewControllers {
@@ -50,15 +52,15 @@ class ActivationSuccessViewController: BaseViewController {
             }
         }
         self.navigationController!.popToRootViewController(animated: true)
-    
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-
-
+    
+    
+    
 }

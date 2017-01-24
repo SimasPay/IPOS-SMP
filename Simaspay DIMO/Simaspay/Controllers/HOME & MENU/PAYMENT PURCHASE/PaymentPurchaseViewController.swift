@@ -8,6 +8,7 @@
 
 import UIKit
 
+//MARK: Payment lavel
 enum PaymentLevel : Int {
     case PaymentLevelProductCategory
     case PaymentLevelProvider
@@ -15,25 +16,26 @@ enum PaymentLevel : Int {
 }
 
 class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UITableViewDataSource {
-
+    
     @IBOutlet var tableView: UITableView!
     var paymentLevel : PaymentLevel!
     var isPurchase = false
     
     var data:NSArray!
+    
     static func initWithOwnNib(isPurchased : Bool) -> PaymentPurchaseViewController {
-        
         let obj:PaymentPurchaseViewController = PaymentPurchaseViewController.init(nibName: String(describing: self), bundle: nil)
         obj.isPurchase = isPurchased
         obj.paymentLevel = PaymentLevel.PaymentLevelProductCategory
         return obj
     }
+    
     static func initWithOwnNib(isPurchased : Bool, type : PaymentLevel) -> PaymentPurchaseViewController {
         let obj = self.initWithOwnNib(isPurchased: isPurchased)
         obj.paymentLevel = type
         return obj
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.showTitle(self.isPurchase ? "Pembelian" : "Pembayaran")
@@ -43,7 +45,7 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
         self.tableView.dataSource = self
         self.tableView.tableFooterView = UIView(frame: .zero)
         self.tableView.rowHeight = 56
-        // Do any additional setup after loading the view.
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,48 +54,13 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
             self.loadProductCategories()
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    func loadProductCategories() {
-        let dict = NSMutableDictionary()
-        dict[TXNNAME] = TXN_GetThirdPartyData
-        dict[SERVICE] = SERVICE_PAYMENT
-        dict[CATEGORY] = self.isPurchase ? CATEGORY_PURCHASE : CATEGORY_PAYMENTS
-        dict[VERSION] = "0"
-        
-        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DMBProgressHUD.showAdded(to: self.view, animated: true)
-        DIMOAPIManager .callAPIPOST(withParameters: param) { (dict, err) in
-            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
-            if (err != nil) {
-                let error = err as! NSError
-                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
-                } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
-                }
-                return
-            }
-            
-            let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
-//            DLog("\(responseDict)")
-            if (responseDict.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
-            } else {
-                // success
-                let key = self.isPurchase ? "purchaseData" : "paymentData"
-                self.data = responseDict.object(forKey: key) as! NSArray!
-//                DLog("\(self.data)")
-                self.tableView.reloadData()
-            }
-        }
-        
-    }
+    //MARK: TableView
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.data != nil ? self.data.count : 0
     }
@@ -160,6 +127,43 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
             vc.data = dict
             navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    //MARK: get product categories
+    func loadProductCategories() {
+        let dict = NSMutableDictionary()
+        dict[TXNNAME] = TXN_GetThirdPartyData
+        dict[SERVICE] = SERVICE_PAYMENT
+        dict[CATEGORY] = self.isPurchase ? CATEGORY_PURCHASE : CATEGORY_PAYMENTS
+        dict[VERSION] = "0"
+        
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
+        DIMOAPIManager .callAPIPOST(withParameters: param) { (dict, err) in
+            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+            if (err != nil) {
+                let error = err as! NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                } else {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                }
+                return
+            }
+            
+            let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
+            //            DLog("\(responseDict)")
+            if (responseDict.allKeys.count == 0) {
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+            } else {
+                // success
+                let key = self.isPurchase ? "purchaseData" : "paymentData"
+                self.data = responseDict.object(forKey: key) as! NSArray!
+                //                DLog("\(self.data)")
+                self.tableView.reloadData()
+            }
+        }
+        
     }
 
     

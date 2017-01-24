@@ -18,6 +18,8 @@ class BaseLabel: UILabel {
         super.init(frame: frame)
         self.updateForDefaultLabel()
     }
+    
+    //MARK: setting default all label
     func updateForDefaultLabel() {
         // system font with size 16
         self.font = UIFont.systemFont(ofSize: 16)

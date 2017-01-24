@@ -9,18 +9,28 @@
 import UIKit
 
 class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
-    @IBOutlet weak var tfFirstDate: BaseTextField!
-    @IBOutlet weak var tfSecondDate: BaseTextField!
+    
+    
 
     @IBOutlet weak var lblInfo: BaseLabel!
+    @IBOutlet weak var lblCustomPeriod: BaseLabel!
+    
+    //radio button
     @IBOutlet weak var radioBtnThisMonth: BaseButton!
     @IBOutlet weak var radioBtnLastMonth: BaseButton!
     @IBOutlet weak var radioBtnTwoMonthAgo: BaseButton!
     @IBOutlet weak var radioBtnCustomPeriod: BaseButton!
+    
     @IBOutlet weak var btnNext: BaseButton!
-    @IBOutlet weak var lblCustomPeriod: BaseLabel!
+    @IBOutlet weak var tfFirstDate: BaseTextField!
+    @IBOutlet weak var tfSecondDate: BaseTextField!
+    
+    //datePicker for tfFirstDate
     var datePicker = UIDatePicker()
+    
+    //datePicker for tfsecondDAte
     var datePicker2 = UIDatePicker()
+    
     var startDate: NSString!
     var toDate: NSString!
     
@@ -28,6 +38,7 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
         let obj:TransactionPeriodViewController = TransactionPeriodViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.showTitle(getString("Periode Transaksi"))
@@ -37,6 +48,8 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
         lblInfo.numberOfLines = 2
         lblInfo.text = "Silakan pilih periode transaksi yang ingin Anda lihat"
         lblCustomPeriod.text = "Hingga"
+        
+        //Radio button title
         radioBtnThisMonth.updateToRadioButtonWith(_titleButton: "Bulan ini")
         radioBtnLastMonth.updateToRadioButtonWith(_titleButton: "Bulan lalu")
         radioBtnTwoMonthAgo.updateToRadioButtonWith(_titleButton: "2 bulan lalu")
@@ -54,21 +67,30 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
         
         tfFirstDate.isUserInteractionEnabled = false
         tfSecondDate.isUserInteractionEnabled = false
+        
         tfFirstDate.addInset()
         tfSecondDate.addInset()
+        
+        //Right Image in textfield
         tfFirstDate.rightViewMode =  UITextFieldViewMode.always
         tfSecondDate.rightViewMode =  UITextFieldViewMode.always
         tfFirstDate.updateTextFieldWithRightImageNamed("icon_Calendar.png")
         tfSecondDate.updateTextFieldWithRightImageNamed("icon_Calendar.png")
+        
+        //Datepicker first textfield
         datePicker.datePickerMode = .date
         datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: 0, to: Date())
         self.tfFirstDate.inputView = datePicker
         datePicker.addTarget(self, action: #selector(datePickerChanged(sender:)), for: .valueChanged)
+        
+        //Datepicker first textfield
         datePicker2.datePickerMode = .date
         datePicker2.maximumDate = Calendar.current.date(byAdding: .year, value: 0, to: Date())
         self.tfSecondDate.inputView = datePicker2
         datePicker2.addTarget(self, action: #selector(datePickerChanged(sender:)), for: .valueChanged)
-       self.getDateWithPreviousMonth(numberOfMonth: 0)
+        
+        //Defult selection previous month
+        self.getDateWithPreviousMonth(numberOfMonth: 0)
     }
 
     
@@ -76,17 +98,19 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func datePickerChanged(sender: UIDatePicker) {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.dateFormat = "ddMMyyyy"
-        if sender == datePicker {
-            tfFirstDate.text = formatter.string(from: sender.date)
-        } else {
-            tfSecondDate.text = formatter.string(from: sender.date)
+    
+    //MARK: keyboard Show set last object above keyboard
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == self.tfFirstDate{
+            BaseViewController.lastObjectForKeyboardDetector = self.tfSecondDate
+        } else if textField == self.tfSecondDate{
+            BaseViewController.lastObjectForKeyboardDetector = self.btnNext
         }
-        
+        updateUIWhenKeyboardShow()
+        return true
     }
+
+    //MARK: Radio button action
     @IBAction func actionRadioPeriod(_ sender: Any) {
         radioBtnThisMonth.isSelected = false
         radioBtnLastMonth.isSelected = false
@@ -100,12 +124,19 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
         tfSecondDate.text = ""
         tfFirstDate.isUserInteractionEnabled = false
         tfSecondDate.isUserInteractionEnabled = false
+        
         if radioBtnThisMonth.isSelected {
+            
             self.getDateWithPreviousMonth(numberOfMonth: 0)
+            
         } else if radioBtnLastMonth.isSelected {
+            
             self.getDateWithPreviousMonth(numberOfMonth: 1)
+            
         } else if radioBtnTwoMonthAgo.isSelected {
+            
             self.getDateWithPreviousMonth(numberOfMonth: 2)
+            
         } else if radioBtnCustomPeriod.isSelected {
             
             tfFirstDate.isUserInteractionEnabled = true
@@ -117,6 +148,24 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
         
     }
     
+    //MARK: date formatter from date picker
+    func datePickerChanged(sender: UIDatePicker) {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.dateFormat = "ddMMyyyy"
+        if sender == datePicker {
+            
+            tfFirstDate.text = formatter.string(from: sender.date)
+            
+        } else {
+            
+            tfSecondDate.text = formatter.string(from: sender.date)
+            
+        }
+        
+    }
+
+    //MARK: get range date, if int: 0 (this month) else if int:1 (last month) else if int 2 (two month ago)
     func getDateWithPreviousMonth(numberOfMonth: Int) {
         let date = Date()
         let calendar = Calendar.current
@@ -130,7 +179,8 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
         var fromDate = ""
         if numberOfMonth == 0 {
             endDate = String(format: "%@%@%@%@", String(day), String(month < 10 ? "0" : ""),String(month),String(year))
-            fromDate = endDate.replacingOccurrences(of: String(day), with: "01", options: .literal, range: nil)
+            fromDate = endDate
+           fromDate = String(format: "01%@", endDate.substring(from: endDate.index(endDate.startIndex, offsetBy: 2)))
         } else {
             // month
             month -= numberOfMonth
@@ -169,11 +219,10 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
         toDate = endDate as NSString!
        
         DLog("\(fromDate) & \(endDate)")
-        
-        
-   
       
     }
+    
+    //MARK: Action buttpn next
     @IBAction func actionBtnNext(_ sender: Any) {
         if radioBtnCustomPeriod.isSelected {
             var message = "";
@@ -194,16 +243,8 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
         vc.toDate = toDate
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == self.tfFirstDate{
-            BaseViewController.lastObjectForKeyboardDetector = self.tfSecondDate
-        } else if textField == self.tfSecondDate{
-            BaseViewController.lastObjectForKeyboardDetector = self.btnNext
-        }
-        updateUIWhenKeyboardShow()
-        return true
-    }
-
+    
+    
     
        
 

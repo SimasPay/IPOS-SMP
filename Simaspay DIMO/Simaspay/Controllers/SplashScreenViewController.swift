@@ -9,6 +9,7 @@
 import UIKit
 
 class SplashScreenViewController: BaseViewController {
+    
     @IBOutlet var lblWelcome: BaseLabel!
     @IBOutlet var imgLogo: UIImageView!
     @IBOutlet var imgLogoSinarmas: UIImageView!
@@ -46,6 +47,7 @@ class SplashScreenViewController: BaseViewController {
         timer = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(SplashScreenViewController.firstPage), userInfo: nil, repeats: false)
     }
     
+    //MARK: function selection viewcontroller
     func firstPage() {
         
         if state {

@@ -18,36 +18,44 @@ class BaseButton: UIButton {
         super.init(frame: frame)
         self.updateUI()
     }
+    
+    //MARK: button just with corner radius and set font size
     func updateUI() {
         self.layer.cornerRadius = 4;
         self.clipsToBounds = true;
         self.titleLabel?.font = UIFont.systemFont(ofSize: 20)
     }
     
+    //MARK: button type with red background  and white title
     func updateButtonType1() {
         // background red with text white
         self.backgroundColor = UIColor.init(hexString: color_btn_red)
         self.setTitleColor(UIColor.white, for: UIControlState())
     }
     
+    //MARK: button type with dark gray background and white title
     func updateButtonType2() {
         // background gray with text white
         self.backgroundColor = UIColor.init(hexString: color_btn_gray)
         self.setTitleColor(UIColor.white, for: UIControlState())
     }
     
+    //MARK: button type with light gray background  and white title
     func updateButtonType3() {
         // background light grey with color black   
         self.backgroundColor = UIColor.init(hexString:color_btn_gray2)
         self.setTitleColor(UIColor.black, for: UIControlState())
     }
-
+    
+    //MARK: radio button button type wihtout title
     func updateToRadioButton() {
         
         self.setImage(UIImage.init(named: "radiobutton_off.png"), for: UIControlState.normal)
         self.setImage(UIImage.init(named: "radiobutton_on.png"), for: UIControlState.selected)
         self.setTitleColor(UIColor.red, for: UIControlState.selected)
     }
+    
+    //MARK: radio button button type with title
     func updateToRadioButtonWith(_titleButton:String) {
         self.contentHorizontalAlignment = .left;
         self.setImage(UIImage.init(named: "radiobutton_off.png"), for: UIControlState.normal)
@@ -60,12 +68,6 @@ class BaseButton: UIButton {
         titleEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount * 2, bottom: 0, right: -insetAmount)
         contentEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount, bottom: 0, right: insetAmount)
     }
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
+    
 
 }

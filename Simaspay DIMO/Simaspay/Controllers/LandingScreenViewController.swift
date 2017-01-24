@@ -21,6 +21,7 @@ class LandingScreenViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         btnContactUs.setTitle(getString("LoginButtonContactUs"), for: UIControlState())
         btnLogin.updateButtonType1()
         btnLogin.setTitle(getString("LandingScreenButtonLogin"), for: .normal)
@@ -40,6 +41,7 @@ class LandingScreenViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: Action button
     @IBAction func actionLogin(_ sender: AnyObject) {
         var message = ""
         if (!DIMOAPIManager.isInternetConnectionExist()) {
@@ -59,9 +61,25 @@ class LandingScreenViewController: BaseViewController {
     }
 
     @IBAction func actionActivation(_ sender: AnyObject) {
-        let vc = ActivationViewController.initWithOwnNib()
-        self.navigationController?.pushViewController(vc, animated: true)
+        var message = ""
+        if (!DIMOAPIManager.isInternetConnectionExist()) {
+            message = getString("LoginMessageNotConnectServer")
+        }
+        
+        if (message.characters.count > 0) {
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            return
+        }
+        
+        getPublicKey {
+            let vc = ActivationViewController.initWithOwnNib()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
+    
+    
+    //MARK: Get public key
     //    typealias CompletionBlock = () -> Void
     func getPublicKey(complete : @escaping () -> Void) {
         if (publicKeys == nil || publicKeys.allKeys.count == 0) {

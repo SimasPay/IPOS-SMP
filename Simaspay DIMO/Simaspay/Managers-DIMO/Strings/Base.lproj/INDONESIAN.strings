@@ -93,4 +93,10 @@
 "RegistrationLabelInfoSuccess" = "Registrasi Berhasil!";
 "RegistrationLabelInfoSuccessMessage" = "Selamat Anda berhasil membuat akun E-money Simaspay";
 
+//Security Question
+"SecurityQuestionButtonTitle" = "Daftar";
+"SecurityQuestionInfoTitle" = "Silakan pilih; dan jawab pertanyaan keamanan untuk keperluan reset mPIN Anda.";
+"SecurityQuestionTextfieldAnswerPlaceholder" = "Jawaban Anda…";
+"SecurityQuestionTextfieldQuestion" = "Pilih Pertanyaan Keamanan";
+
 

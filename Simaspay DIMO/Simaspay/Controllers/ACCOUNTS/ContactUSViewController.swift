@@ -8,29 +8,6 @@
 
 import UIKit
 
-class ContactUsCell: UITableViewCell {
-    var urlAction : String = ""
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
-        if (highlighted) {
-            DLog("selected : \(urlAction)")
-            if let url = NSURL(string: urlAction) {
-                var string = urlAction
-                var strOkBtn = "Call"
-                string = string.replacingOccurrences(of: "://", with: " : ")
-                if (!string.contains("tel://")) {
-                    strOkBtn = "OK"
-                }
-                
-                DIMOAlertView.showPrompt(withMessage: string, okTitle: strOkBtn, complete: { (index, alertview) in
-                    if index != 0 {
-                        UIApplication.shared.openURL(url as URL)
-                    }
-                })
-            }
-        }
-    }
-}
 
 class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var scrollView: UIScrollView!
@@ -65,6 +42,7 @@ class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableV
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: Table View 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 2
@@ -134,4 +112,29 @@ class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableV
         return headerView
     }
     
+}
+
+//MARK: Table view cell
+class ContactUsCell: UITableViewCell {
+    var urlAction : String = ""
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        if (highlighted) {
+            DLog("selected : \(urlAction)")
+            if let url = NSURL(string: urlAction) {
+                var string = urlAction
+                var strOkBtn = "Call"
+                string = string.replacingOccurrences(of: "://", with: " : ")
+                if (!string.contains("tel://")) {
+                    strOkBtn = "OK"
+                }
+                
+                DIMOAlertView.showPrompt(withMessage: string, okTitle: strOkBtn, complete: { (index, alertview) in
+                    if index != 0 {
+                        UIApplication.shared.openURL(url as URL)
+                    }
+                })
+            }
+        }
+    }
 }

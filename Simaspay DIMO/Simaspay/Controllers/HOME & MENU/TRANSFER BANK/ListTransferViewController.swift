@@ -9,6 +9,7 @@
 import UIKit
 
 class ListTransferViewController: BaseViewController,UITableViewDelegate, UITableViewDataSource {
+    
     var arrayMenu: NSArray = []
     @IBOutlet var tableView: UITableView!
     static func initWithOwnNib() -> ListTransferViewController {
@@ -28,8 +29,8 @@ class ListTransferViewController: BaseViewController,UITableViewDelegate, UITabl
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // Do any additional setup after loading the view.
         
+        //Array of list bank menu transfer
         self.arrayMenu = [[
                           "title" : "Bank Sinarmas",
                           "action" : TransferBankViewController.initWithOwnNib(type: TransferType.TransferTypeSinarmas)],
@@ -48,13 +49,14 @@ class ListTransferViewController: BaseViewController,UITableViewDelegate, UITabl
                         ];
         
         self.tableView.reloadData()
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    //MARK: Table view
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return  self.arrayMenu.count
     }

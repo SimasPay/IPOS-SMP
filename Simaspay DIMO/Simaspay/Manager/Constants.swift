@@ -38,6 +38,7 @@ let TO_DATE = "toDate"
 
 //MARK: Image key
 let SIMASPAY_CONFIRM = "Confirm"
+
 // MARK: Category
 let CATEGORY_CONTACTUS = "category.ContactUsfile"
 

@@ -17,20 +17,10 @@ class BaseViewController: UIViewController {
     static var lastObjectForKeyboardDetector : UIView!
     static var keyboardSize : CGSize!
     
-    func showBackgroundImage() {
-        if (ivBackground == nil) {
-            ivBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: DIMOUtility.screenSize().width, height: DIMOUtility.screenSize().height))
-            ivBackground.image = UIImage(named: "background-image")
-        }
-        view.insertSubview(ivBackground, at: 0)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setNeedsStatusBarAppearanceUpdate()
         showBackgroundImage()
-        
-        // tap to dismiss
         
         if (toolbar == nil) {
             let numberToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 50))
@@ -53,6 +43,60 @@ class BaseViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(BaseViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(BaseViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.dismissKeyboard()
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        BaseViewController.lastObjectForKeyboardDetector = nil
+    }
+
+    //MARK: Show background image
+    func showBackgroundImage() {
+        if (ivBackground == nil) {
+            ivBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: DIMOUtility.screenSize().width, height: DIMOUtility.screenSize().height))
+            ivBackground.image = UIImage(named: "background-image")
+        }
+        view.insertSubview(ivBackground, at: 0)
+    }
+    
+    //MARK: Show Title ViewController
+    func showTitle(_ stringTitle : String) {
+        if (lblTitle == nil) {
+            lblTitle = BaseLabel();
+            lblTitle.frame = CGRect(x: 0, y: 20, width:DIMOUtility.screenSize().width, height: 44)
+            lblTitle.textAlignment = .center
+        }
+        lblTitle.text = stringTitle;
+        view.addSubview(lblTitle)
+    }
+    
+   //MARK: Show back Button
+    func showBackButton() {
+        if (btnBack == nil) {
+            btnBack = BaseButton(frame: CGRect(x: 0, y: 20, width: 44, height: 44))
+            btnBack.addTarget(self, action: #selector(BaseViewController.btnBackAction), for: UIControlEvents.touchUpInside)
+            btnBack.setImage(UIImage(named: "btnBack"), for: UIControlState())
+        }
+        view.addSubview(btnBack)
+    }
+    
+    //MARK: Action back Button
+    func btnBackAction() {
+        if let vc = navigationController?.popViewController(animated: true) {
+            DLog("\(vc)")
+        }
+    }
+    
+    //MARK: Action for next prev button textfield
     func btnPrevAction() {
         var last : UITextField!
         for item in arrayTextFields {
@@ -102,22 +146,8 @@ class BaseViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(BaseViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(BaseViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        self.dismissKeyboard()
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        BaseViewController.lastObjectForKeyboardDetector = nil
-    }
-    
+    //MARK: Setting keyboard show and hide
     func keyboardWillShow(notification: NSNotification) {
         if (BaseViewController.keyboardSize == nil) {
             if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -154,31 +184,6 @@ class BaseViewController: UIViewController {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
-    
-    func showTitle(_ stringTitle : String) {
-        if (lblTitle == nil) {
-            lblTitle = BaseLabel();
-            lblTitle.frame = CGRect(x: 0, y: 20, width:DIMOUtility.screenSize().width, height: 44)
-            lblTitle.textAlignment = .center
-        }
-        lblTitle.text = stringTitle;
-        view.addSubview(lblTitle)
-    }
-    
-    func showBackButton() {
-        if (btnBack == nil) {
-            btnBack = BaseButton(frame: CGRect(x: 0, y: 20, width: 44, height: 44))
-            btnBack.addTarget(self, action: #selector(BaseViewController.btnBackAction), for: UIControlEvents.touchUpInside)
-            btnBack.setImage(UIImage(named: "btnBack"), for: UIControlState())
-        }
-        view.addSubview(btnBack)
-    }
-    
-    func btnBackAction() {
-        if let vc = navigationController?.popViewController(animated: true) {
-            DLog("\(vc)")
-        }
-    }
 
     func animatedFadeIn() {
         let transition:CATransition = CATransition()
@@ -193,18 +198,10 @@ class BaseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: Status bar
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return .lightContent;
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+  
 }

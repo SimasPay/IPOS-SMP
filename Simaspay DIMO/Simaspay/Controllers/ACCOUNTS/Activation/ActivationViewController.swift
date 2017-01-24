@@ -25,10 +25,10 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
         let obj:ActivationViewController = ActivationViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tfHpNumber.delegate = self
         tfActivationCode.delegate = self
         
@@ -63,8 +63,8 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
         
         btnNext.updateButtonType1()
         btnNext.setTitle(getString("ActivationButtonNext"), for: UIControlState())
-       
-
+        
+        
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.dismissKeyboard()
@@ -80,28 +80,61 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
         line.backgroundColor = UIColor.init(hexString: color_line_gray).cgColor
         btnLogin.layer.addSublayer(line)
     }
-
-    @IBAction func actionResendOTP(_ sender: AnyObject) {
-        self.resendOTP()
-    }
-    @IBAction func actionNextButton(_ sender: AnyObject) {
-//        let vc = ActivationPinViewController.initWithOwnNib()
-//        self.animatedFadeIn()
-//        self.navigationController?.pushViewController(vc, animated: false)
-        self.activation()
-    }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func actionBackLogin(_ sender: AnyObject) {
-      let vc = LoginRegisterViewController.initWithOwnNib()
-      self.navigationController!.pushViewController(vc, animated: true);
-              
-       
-
+    //MARK: action resend OTP Button
+    @IBAction func actionResendOTP(_ sender: AnyObject) {
+        self.resendOTP()
     }
+    
+    //MARK: action action Next button
+    @IBAction func actionNextButton(_ sender: AnyObject) {
+        //        let vc = ActivationPinViewController.initWithOwnNib()
+        //        self.animatedFadeIn()
+        //        self.navigationController?.pushViewController(vc, animated: false)
+        self.activation()
+    }
+    
+   
+    
+    //MARK Action button login
+    @IBAction func actionBackLogin(_ sender: AnyObject) {
+        let vc = LoginRegisterViewController.initWithOwnNib()
+        self.navigationController!.pushViewController(vc, animated: true);
+        
+    }
+    
+    //MARK: Maximum Textfield length
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        var maxLength = 6
+        if (tfHpNumber == textField) {
+            maxLength = 15
+        }
+        
+        let currentString: NSString = textField.text! as NSString
+        let newString: NSString =
+            currentString.replacingCharacters(in: range, with: string) as NSString
+        return newString.length <= maxLength
+        
+        
+    }
+    
+    //MARK: keyboard Show set last object above keyboard
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == tfHpNumber{
+            BaseViewController.lastObjectForKeyboardDetector = self.btnResendOTP.superview
+        } else {
+            BaseViewController.lastObjectForKeyboardDetector = self.btnNext
+        }
+        updateUIWhenKeyboardShow()
+        return true
+    }
+    
+    //MARK: Actiovation
     func activation() {
         var message = "";
         if (!tfHpNumber.isValid()) {
@@ -156,6 +189,7 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
         }
     }
     
+    //MARK: resend OTP
     func resendOTP() {
         
         if (!tfHpNumber.isValid()) {
@@ -189,34 +223,12 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
             }else{
                 DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: String("AlertCloseButtonText"))
             }
-
-        }
-       
-    }
-
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool {
-        var maxLength = 6
-        if (tfHpNumber == textField) {
-            maxLength = 15
+            
         }
         
-        let currentString: NSString = textField.text! as NSString
-        let newString: NSString =
-            currentString.replacingCharacters(in: range, with: string) as NSString
-        return newString.length <= maxLength
-        
-        
     }
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == tfHpNumber{
-            BaseViewController.lastObjectForKeyboardDetector = self.btnResendOTP.superview
-        } else {
-            BaseViewController.lastObjectForKeyboardDetector = self.btnNext
-        }
-        updateUIWhenKeyboardShow()
-        return true
-    }
-
-
+    
+  
+    
+    
 }

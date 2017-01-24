@@ -8,33 +8,45 @@
 
 import UIKit
 
-class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
-    @IBOutlet var viewContentConfirmation: UIView!
+class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
+    
+    
     @IBOutlet var btnTrue: BaseButton!
     @IBOutlet var btnFalse: BaseButton!
+    @IBOutlet var viewContentConfirmation: UIView!
     @IBOutlet var constraintViewContent: NSLayoutConstraint!
-
+    
+    
+    var btnResandOTP: BaseButton!
+    var tfOTP: BaseTextField!
+    
+    //Timer for OTP resend button
     var timerCount = 60
     var clock:Timer!
     var lblTimer: BaseLabel!
-    var btnResandOTP: BaseButton!
-    var tfOTP: BaseTextField!
+    
     var MDNString:String!
+    
+    //Dictionary for show data registration
     var data: NSDictionary!
+    
+    //Dictionary Req OTP
     var dictForRequestOTP: NSDictionary!
+    
+    //Dictionary send ORP
     var dictForAcceptedOTP: NSDictionary!
     
     static func initWithOwnNib() -> ConfirmationViewController {
         let obj:ConfirmationViewController = ConfirmationViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.showTitle(getString("ConfirmationTitle"))
         self.showBackButton()
         self.view.backgroundColor = UIColor.init(hexString: color_background)
-
+        
         DLog("\(data)")
         self.viewContentConfirmation.layer.cornerRadius = 5.0;
         self.viewContentConfirmation.layer.borderColor = UIColor.init(hexString: color_border).cgColor
@@ -56,7 +68,21 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(ActivationPinViewController.didOTPCancel), name: NSNotification.Name(rawValue: "didOTPCancel"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ActivationPinViewController.didOTPOK), name: NSNotification.Name(rawValue: "didOTPOK"), object: nil)
     }
-
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didOTPCancel"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didOTPOK"), object: nil)
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    //MARK: Programmatically UI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -126,86 +152,91 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
         let height = y + margin
         self.constraintViewContent.constant = height
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
+    
+    //function true button
     func buttonStatus()  {
         self.requestOTP()
         self.showOTP()
     }
     
+    //MARK: Action button for OTP alert
     func didOTPCancel() {
         DLog("cancel");
         clock.invalidate()
+        
+    }
     
+    func didOTPOK() {
+        DLog("OK");
+        clock.invalidate()
+        self.sendOTP(OTP: self.tfOTP.text!)
+        
+    }
+    
+    //MARK: Count down timer
+    func countDown(){
+        if (timerCount > 0) {
+            timerCount -= 1
+            lblTimer.text = "00:\(timerCount)"
+        } else {
+            lblTimer.isHidden = true
+            btnResandOTP.isHidden = false
+        }
+    }
+    
+    //MARK Action button to resand OTP
+    func resendOTP()  {
+        clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ConfirmationViewController.resendOTP), userInfo: nil, repeats: true)
+        
     }
 
     
-        func didOTPOK() {
-            DLog("OK");
-            clock.invalidate()
-            self.sendOTP(OTP: self.tfOTP.text!)
-            
-        }
-    
-        func showOTP()  {
-            let temp = UIView(frame: CGRect(x: 0, y: 0, width: 240, height: 400))
-            let MDNString = ("\(getNormalisedMDN(dictForAcceptedOTP.value(forKey: SOURCEMDN) as! NSString))!")
-            let messageString = String(format: String("ConfirmationOTPMessage"), MDNString)
-            let messageAlert = UILabel(frame: CGRect(x: 10, y: 0, width: temp.frame.size.width, height: 60))
-            messageAlert.font = UIFont.systemFont(ofSize: 13)
-            messageAlert.textAlignment = .center
-            messageAlert.numberOfLines = 4
-            messageAlert.text = messageString as String
-    
-            clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ActivationPinViewController.countDown), userInfo: nil, repeats: true)
-    
-            btnResandOTP = BaseButton(frame: CGRect(x: 10, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 3, width: temp.frame.size.width, height: 15))
-            btnResandOTP.setTitle(getString("ConfirmationOTPResendButton"), for: .normal)
-            btnResandOTP.setTitleColor(UIColor.init(hexString: color_btn_alert), for: .normal)
-            btnResandOTP.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
-            btnResandOTP.titleLabel?.textAlignment = .center
-            btnResandOTP.addTarget(self, action: #selector(ActivationPinViewController.resendOTP), for: .touchUpInside)
-            btnResandOTP.isHidden = true
-    
-            lblTimer = BaseLabel(frame: CGRect(x: 10, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 3, width: temp.frame.size.width, height: 15))
-            lblTimer.textAlignment = .center
-            lblTimer.font = UIFont.systemFont(ofSize: 12)
-            lblTimer.text = "01:00"
-    
-    
-            tfOTP = BaseTextField(frame: CGRect(x: 10, y: lblTimer.frame.origin.y + lblTimer.frame.size.height + 3, width: temp.frame.size.width, height: 30))
-            tfOTP.borderStyle = .line
-            tfOTP.layer.borderColor = UIColor.init(hexString: color_border).cgColor
-            tfOTP.layer.borderWidth = 1;
-            tfOTP.keyboardType = .numberPad
-            tfOTP.placeholder = getString("ConfirmationOTPTextFieldPlaceholder")
-            tfOTP.isSecureTextEntry = true
-            tfOTP.addInset()
-    
-            temp.addSubview(btnResandOTP)
-            temp.addSubview(lblTimer)
-            temp.addSubview(messageAlert)
-            temp.addSubview(tfOTP)
-    
-            showOTPWith(title: getString("ConfirmationOTPMessageTitle"), view: temp)
-        }
-        func countDown(){
-            if (timerCount > 0) {
-                timerCount -= 1
-                lblTimer.text = "00:\(timerCount)"
-            } else {
-                lblTimer.isHidden = true
-                btnResandOTP.isHidden = false
-            }
-        }
-        func resendOTP()  {
-        clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ConfirmationViewController.resendOTP), userInfo: nil, repeats: true)
+    //MARK: Show OTP Alert
+    func showOTP()  {
+        let temp = UIView(frame: CGRect(x: 0, y: 0, width: 240, height: 400))
+        let MDNString = ("\(getNormalisedMDN(dictForAcceptedOTP.value(forKey: SOURCEMDN) as! NSString))!")
+        let messageString = String(format: String("ConfirmationOTPMessage"), MDNString)
+        let messageAlert = UILabel(frame: CGRect(x: 10, y: 0, width: temp.frame.size.width, height: 60))
+        messageAlert.font = UIFont.systemFont(ofSize: 13)
+        messageAlert.textAlignment = .center
+        messageAlert.numberOfLines = 4
+        messageAlert.text = messageString as String
         
-        }
+        clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ActivationPinViewController.countDown), userInfo: nil, repeats: true)
+        
+        btnResandOTP = BaseButton(frame: CGRect(x: 10, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 3, width: temp.frame.size.width, height: 15))
+        btnResandOTP.setTitle(getString("ConfirmationOTPResendButton"), for: .normal)
+        btnResandOTP.setTitleColor(UIColor.init(hexString: color_btn_alert), for: .normal)
+        btnResandOTP.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
+        btnResandOTP.titleLabel?.textAlignment = .center
+        btnResandOTP.addTarget(self, action: #selector(ActivationPinViewController.resendOTP), for: .touchUpInside)
+        btnResandOTP.isHidden = true
+        
+        lblTimer = BaseLabel(frame: CGRect(x: 10, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 3, width: temp.frame.size.width, height: 15))
+        lblTimer.textAlignment = .center
+        lblTimer.font = UIFont.systemFont(ofSize: 12)
+        lblTimer.text = "01:00"
+        
+        
+        tfOTP = BaseTextField(frame: CGRect(x: 10, y: lblTimer.frame.origin.y + lblTimer.frame.size.height + 3, width: temp.frame.size.width, height: 30))
+        tfOTP.borderStyle = .line
+        tfOTP.layer.borderColor = UIColor.init(hexString: color_border).cgColor
+        tfOTP.layer.borderWidth = 1;
+        tfOTP.keyboardType = .numberPad
+        tfOTP.placeholder = getString("ConfirmationOTPTextFieldPlaceholder")
+        tfOTP.isSecureTextEntry = true
+        tfOTP.addInset()
+        
+        temp.addSubview(btnResandOTP)
+        temp.addSubview(lblTimer)
+        temp.addSubview(messageAlert)
+        temp.addSubview(tfOTP)
+        
+        showOTPWith(title: getString("ConfirmationOTPMessageTitle"), view: temp)
+    }
+    
+    //MARK: Request OTP
     func requestOTP() {
         DLog("\(dictForRequestOTP)")
         DMBProgressHUD.showAdded(to: self.view, animated: true)
@@ -235,6 +266,7 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
         }
     }
     
+    //MARK: Send OTP
     func sendOTP(OTP: String) {
         var message = ""
         if (!DIMOAPIManager.isInternetConnectionExist()){
@@ -245,7 +277,7 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
             DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
             return
         }
-
+        
         DLog("\(OTP)")
         let dict = NSMutableDictionary()
         dict[ACTIVATION_OTP] = simasPayRSAencryption(OTP)
@@ -263,8 +295,8 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
                 
             }
         }
-
-       
+        
+        
         DIMOAPIManager .callAPI(withParameters: dictForAcceptedOTP as! [AnyHashable : Any]!, withSessionCheck:sessionCheck) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             let dictionary = NSDictionary(dictionary: dict!)
@@ -291,8 +323,8 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
                 if (messagecode == SIMASPAY_REGISTRATION__EMONEY_SUCCESS_CODE){
                     let vc = ActivationSuccessViewController.initWithMessageInfo(message: getString("RegistrationLabelInfoSuccessMessage"), title: getString("RegistrationLabelInfoSuccess"))
                     self.navigationController?.pushViewController(vc, animated: false)
-
-                 
+                    
+                    
                 } else {
                     DIMOAlertView.showNormalTitle("Error", message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
@@ -300,19 +332,22 @@ class ConfirmationViewController: BaseViewController,UIAlertViewDelegate {
                             if (vc.isKind(of: RegisterEMoneyViewController.self)) {
                                 self.navigationController!.popToViewController(vc, animated: true);
                                 return
+                            } else if(vc.isKind(of: HomeViewController.self)) {
+                                self.navigationController!.popToViewController(vc, animated: true);
+                                return
                             }
                         }
-                        }, cancelButtonTitle: "OK")
-                      self.navigationController!.popToRootViewController(animated: true)
+                    }, cancelButtonTitle: "OK")
+                    self.navigationController!.popToRootViewController(animated: true)
                     return
                 }
-              
+                
                 
             }
         }
-
+        
     }
-
-
-
+    
+    
+    
 }

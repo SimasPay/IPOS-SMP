@@ -9,17 +9,23 @@
 import UIKit
 import QuickLook
 
-class TransactionHistoryViewController: BaseViewController,QLPreviewControllerDataSource,QLPreviewControllerDelegate {
-    @IBOutlet weak var btnDownload: UIButton!
-    var arrayData: [[String:Any]] = []
+class TransactionHistoryViewController: BaseViewController, QLPreviewControllerDataSource, QLPreviewControllerDelegate {
+    
     @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet weak var btnDownload: UIButton!
+    
+    //Array of data transaction
+    var arrayData: [[String:Any]] = []
+    
+    //date
     var startDate: NSString! = ""
     var toDate: NSString! = ""
+    
     static func initWithOwnNib() -> TransactionHistoryViewController {
         let obj:TransactionHistoryViewController = TransactionHistoryViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.showTitle(getString("TransactionHistoryTitle"))
@@ -30,13 +36,14 @@ class TransactionHistoryViewController: BaseViewController,QLPreviewControllerDa
         
     }
     
+    //MARK: programmatically list of transaction history
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         if (startDate.length == 0) {
             
             self.btnDownload.isHidden = true
-         }
+        }
         let padding:CGFloat = 25
         var yPadding:CGFloat = 25
         let sizeRect = UIScreen.main.applicationFrame
@@ -47,7 +54,7 @@ class TransactionHistoryViewController: BaseViewController,QLPreviewControllerDa
         let widthContent = width - (2 * paddingContent) - (2 * padding)
         let heightContent: CGFloat = 70
         
-       if startDate.length != 0 {
+        if startDate.length != 0 {
             let periode = BaseLabel(frame: CGRect(x: padding, y: yPadding, width: width - 2 * padding, height: 20))
             periode.text = String(format: "Periode:  %@ - %@", startDate,toDate)
             yPadding += 30
@@ -112,16 +119,14 @@ class TransactionHistoryViewController: BaseViewController,QLPreviewControllerDa
         viewContent.frame = CGRect(x: padding, y: yPadding, width: width - 2 * padding, height: height)
         scrollView.addSubview(viewContent)
         scrollView.contentSize = CGSize(width: width, height: height + 2 * yPadding)
-
+        
     }
-    @IBAction func actionDownloadPDF(_ sender: Any) {
-        self.downloadPDF()
-    }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     func checkTransactionHistory() {
         var message = ""
@@ -133,7 +138,7 @@ class TransactionHistoryViewController: BaseViewController,QLPreviewControllerDa
             DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
             return
         }
-
+        
         let dict = NSMutableDictionary()
         dict[TXNNAME] = TXN_ACCOUNT_HISTORY
         dict[SERVICE] = SERVICE_WALLET
@@ -186,15 +191,21 @@ class TransactionHistoryViewController: BaseViewController,QLPreviewControllerDa
                             }
                         }
                     }, cancelButtonTitle: "OK")
-
+                    
                 }
                 
             }
             
-            
         }
     }
     
+    
+    //MARK: Download PDF
+    @IBAction func actionDownloadPDF(_ sender: Any) {
+        self.downloadPDF()
+    }
+    
+    //get pdf url for downloading
     func downloadPDF()  {
         var message = ""
         if (!DIMOAPIManager.isInternetConnectionExist()){
@@ -258,7 +269,8 @@ class TransactionHistoryViewController: BaseViewController,QLPreviewControllerDa
             }
         }
     }
-
+    
+    //MARK: Preview PDF with QLPreviewController
     static var currentPath : String = ""
     func previewPDFDownloaded(path : String){
         TransactionHistoryViewController.currentPath = path
@@ -273,10 +285,7 @@ class TransactionHistoryViewController: BaseViewController,QLPreviewControllerDa
         })
         
         
-        //self.navigationController?.presentViewController(previewController, animated: true, completion: nil)
-        
     }
-    
     
     @available(iOS 4.0, *)
     public func numberOfPreviewItems(in controller: QLPreviewController) -> Int {

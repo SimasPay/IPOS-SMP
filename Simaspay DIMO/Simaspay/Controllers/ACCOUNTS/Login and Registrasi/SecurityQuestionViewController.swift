@@ -10,12 +10,13 @@ import UIKit
 
 class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource{
 
+    @IBOutlet weak var lblInfo: BaseLabel!
     @IBOutlet weak var btnRegister: BaseButton!
     @IBOutlet weak var tfAnswer: BaseTextField!
-    @IBOutlet weak var viewTfAnswer: UIView!
     @IBOutlet weak var tfQuestion: BaseTextField!
     @IBOutlet weak var viewTFQuetion: UIView!
-    @IBOutlet weak var lblInfo: BaseLabel!
+    @IBOutlet weak var viewTfAnswer: UIView!
+   
     var pickOption:[String]!
     var questionData : NSArray!
     var data: NSDictionary!
@@ -36,20 +37,20 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
         lblInfo.textColor = UIColor.init(hexString: color_text_default)
         lblInfo.numberOfLines = 3;
         lblInfo.textAlignment = .center
-        lblInfo.text = "Silakan pilih dan jawab pertanyaan keamanan untuk keperluan reset mPIN Anda."
+        lblInfo.text = getString("SecurityQuestionInfoTitle")
         
         tfQuestion.font = UIFont.systemFont(ofSize: 16)
-        tfQuestion.text = "Pilih Pertanyaan Keamanan"
+        tfQuestion.text = getString("SecurityQuestionTextfieldQuestion")
         tfQuestion.addInset()
         tfQuestion.rightViewMode =  UITextFieldViewMode.always
         tfQuestion.updateTextFieldWithRightImageNamed("icon_arrow_down")
         
-        tfAnswer.placeholder = "Jawaban Anda…"
+        tfAnswer.placeholder = getString("SecurityQuestionTextfieldAnswerPlaceholder")
         tfAnswer.addInset()
         tfAnswer.font = UIFont.systemFont(ofSize: 16)
         
         btnRegister.updateButtonType1()
-        btnRegister.setTitle("Daftar", for: .normal)
+        btnRegister.setTitle(getString("SecurityQuestionButtonTitle"), for: .normal)
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -80,21 +81,16 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(ActivationPinViewController.didOTPCancel), name: NSNotification.Name(rawValue: "didOTPCancel"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ActivationPinViewController.didOTPOK), name: NSNotification.Name(rawValue: "didOTPOK"), object: nil)
+    
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didOTPCancel"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didOTPOK"), object: nil)
          
     }
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView
-        
-    {
+    
+    //MARK: PickerView
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerLabel = UILabel()
         pickerLabel.textColor = UIColor.black
         pickerLabel.text = questionArray[row]
@@ -120,8 +116,24 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
         self.tfQuestion.text = pickOption[row]
     }
+    
+    
+    //MARK: keyboard Show set last object above keyboard
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == tfQuestion{
+            BaseViewController.lastObjectForKeyboardDetector = self.tfQuestion.superview
+        }else if textField == tfAnswer{
+            BaseViewController.lastObjectForKeyboardDetector = self.tfAnswer.superview
+        }
+        updateUIWhenKeyboardShow()
+        return true
+    }
 
+
+    //MARK: Action button Register
     @IBAction func actionBtnRegister(_ sender: AnyObject) {
+        
+        //Dictionary data for request OTP
         DLog("\(dictForAcceptedOTP as NSDictionary)")
         let vc = ConfirmationViewController.initWithOwnNib()
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
@@ -138,6 +150,7 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
         vc.data = self.data
         vc.MDNString = self.MDNString
 
+        //Dictionary data for send OTP
         let dict1 = NSMutableDictionary()
         dict1[TXNNAME] = TXN_SUBSCRIBER_KTP_REGISTRATION
         dict1[SERVICE] = SERVICE_ACCOUNT
@@ -152,16 +165,6 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
         temp .addEntries(from: dictForAcceptedOTP as! [AnyHashable : Any])
         vc.dictForAcceptedOTP = temp as NSDictionary
         self.navigationController?.pushViewController(vc, animated: false)
-    }
-
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == tfQuestion{
-            BaseViewController.lastObjectForKeyboardDetector = self.tfQuestion.superview
-        }else if textField == tfAnswer{
-             BaseViewController.lastObjectForKeyboardDetector = self.tfAnswer.superview
-        }
-        updateUIWhenKeyboardShow()
-        return true
     }
 
     

@@ -9,20 +9,23 @@
 import UIKit
 
 class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
-
-
+    
+    
     @IBOutlet weak var btnActivationAccount: BaseButton!
     @IBOutlet weak var tfHPNumber: BaseTextField!
     @IBOutlet weak var lblEntryHPNumber: UILabel!
     @IBOutlet weak var viewTextField: UIView!
+    
+    
     static func initWithOwnNib() -> LoginRegisterViewController {
         let obj:LoginRegisterViewController = LoginRegisterViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.showBackButton()
-
+        
         lblEntryHPNumber.font = UIFont.systemFont(ofSize: 18)
         lblEntryHPNumber.textColor = UIColor.init(hexString: color_text_default)
         lblEntryHPNumber.textAlignment = .center
@@ -35,12 +38,41 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
         btnActivationAccount.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         tfHPNumber.delegate =  self
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        tfHPNumber.becomeFirstResponder()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        viewTextField.updateViewRoundedWithShadow()
+        btnActivationAccount.addUnderline()
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    //MARK: action button done in keyboard
     override func btnDoneAction() {
         self.doMDNValidation()
         
         
     }
+    
+    //MARK: keyboard Show set last object above keyboard
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        BaseViewController.lastObjectForKeyboardDetector = self.btnActivationAccount
+        updateUIWhenKeyboardShow()
+        return true
+    }
+    
+    //MARK: MDN Validation Process
     func doMDNValidation() {
+        
         var message = ""
         if (!tfHPNumber.isValid()) {
             message = getString("LoginMessageFillHpNumber")
@@ -52,9 +84,7 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
             DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
             return
         }
-     
-      
-
+        
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         let dict = NSMutableDictionary()
         dict[TXNNAME] = SUBSCRIBER_STATUS
@@ -68,6 +98,8 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
         dict[SOURCE_APP_VERSION_KEY] = version
         dict[SOURCE_APP_OSVERSION_KEY] = "\(UIDevice.current.modelName)  \(UIDevice.current.systemVersion)"
         DMBProgressHUD.showAdded(to: self.view, animated: true)
+        
+        
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
         DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
@@ -85,50 +117,31 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
             }
             
             if (dictionary.allKeys.count == 0) {
+                
                 DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+                
             } else {
+                
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")
                 let messageText  = responseDict.value(forKeyPath: "subscriberDetails.status.text") as! String
-                DLog(messageText)
+                
+                //if MDN have created
                 if messageText == SIMASPAY_SUCCESS_CODE {
                     let vc = LoginPinViewController.initWithOwnNib()
-                    vc.MDNString = self.tfHPNumber.text! 
+                    vc.MDNString = self.tfHPNumber.text!
                     self.navigationController?.pushViewController(vc, animated: false)
                 } else {
+                    
+                    //if new MDN for registration
                     let vc = RegisterEMoneyViewController.initWithOwnNib()
                     vc.MDNString = self.tfHPNumber.text
                     self.navigationController?.pushViewController(vc, animated: false)
                 }
                 
-               
+                
             }
         }
     }
-
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
-        tfHPNumber.becomeFirstResponder()
-    }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        viewTextField.updateViewRoundedWithShadow()
-        btnActivationAccount.addUnderline()
     
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        BaseViewController.lastObjectForKeyboardDetector = self.btnActivationAccount
-        updateUIWhenKeyboardShow()
-        return true
-    }
-
-
-   
 }

@@ -79,6 +79,7 @@ class EULAViewController: BaseViewController,UIWebViewDelegate {
 //        DMBProgressHUD.hide(for: self.view, animated: true)
 //    }
     
+    //MARK: Action button to landing page
     func buttonClick()  {
         let vc = LandingScreenViewController.initWithOwnNib()
         self.navigationController?.pushViewController(vc, animated: false)
@@ -88,6 +89,7 @@ class EULAViewController: BaseViewController,UIWebViewDelegate {
         defaults.synchronize()
     }
 
+    //MARK: exit app if select disagree button
     @IBAction func actionDisagree(_ sender: AnyObject) {
       exit(0)
     }

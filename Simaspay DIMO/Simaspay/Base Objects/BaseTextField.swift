@@ -19,6 +19,8 @@ class BaseTextField: UITextField {
         super.init(frame: frame)
         self.updateUI()
     }
+    
+    //MARK: setting all type textfield
     func updateUI() {
         let fontTextField = UIFont.systemFont(ofSize: 16)
         self.font = fontTextField
@@ -26,6 +28,7 @@ class BaseTextField: UITextField {
         self.clipsToBounds = true
     }
     
+    //MARK: add left image in textfield
     func updateTextFieldWithImageNamed(_ strImg: String) {
         self.leftViewMode = UITextFieldViewMode.always
         let container = UIView()
@@ -35,6 +38,7 @@ class BaseTextField: UITextField {
         container.addSubview(imageView)
         self.leftView = container
     }
+    //MARK: add right image in textfield
     func updateTextFieldWithRightImageNamed(_ strImg: String)  {
         let container = UIView()
         container.frame = CGRect(x: 0, y: 0, width: 35, height: 40)
@@ -46,7 +50,7 @@ class BaseTextField: UITextField {
         self.rightView = container
     }
    
-    
+    //MARK: add left gap for textfield
     func addInset() {
         self.leftViewMode = UITextFieldViewMode.always
         let container = UIView()

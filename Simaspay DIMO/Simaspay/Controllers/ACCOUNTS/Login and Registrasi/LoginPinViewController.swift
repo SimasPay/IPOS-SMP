@@ -16,6 +16,7 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var viewTextField: UIView!
     @IBOutlet weak var lblInfoNumber: BaseLabel!
     var MDNString:String!
+    
     static func initWithOwnNib() -> LoginPinViewController {
         let obj:LoginPinViewController = LoginPinViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
@@ -45,9 +46,11 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
         tfMpin.becomeFirstResponder()
     }
     
+    //MARK: action button done in keyboard
     override func btnDoneAction() {
     self.loginProcess()
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -57,6 +60,8 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
         viewTextField.updateViewRoundedWithShadow()
 
     }
+    
+    //MARK: Maximum Textfield length
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
         let maxLength = 6
@@ -67,6 +72,8 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
         
         
     }
+    
+    //MARK: Login process
     func loginProcess(){
         
         var message = ""

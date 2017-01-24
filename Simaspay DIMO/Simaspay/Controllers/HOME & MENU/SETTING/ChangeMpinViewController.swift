@@ -14,11 +14,17 @@ class ChangeMpinViewController: BaseViewController {
     @IBOutlet var lblOldMpin: BaseLabel!
     @IBOutlet var lblNewMpin: BaseLabel!
     @IBOutlet var lblConfirmMpin: BaseLabel!
+    @IBOutlet weak var tfOldMpin: BaseTextField!
+    @IBOutlet weak var tfNewMpin: BaseTextField!
+    @IBOutlet weak var tfConfirmMpin: BaseTextField!
     @IBOutlet var btnSaveMpin: BaseButton!
+    
+    
     static func initWithOwnNib() -> ChangeMpinViewController {
         let obj:ChangeMpinViewController = ChangeMpinViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.showTitle(getString("ChangeMPINTitle"))
@@ -35,7 +41,9 @@ class ChangeMpinViewController: BaseViewController {
         lblNewMpin.text = getString("ChangeMPINLebelNewMpin")
         lblConfirmMpin.text = getString("ChangeMPINLebelConfirmNewMpin")
         
-        
+        tfNewMpin.addInset()
+        tfOldMpin.addInset()
+        tfConfirmMpin.addInset()
         
     }
 
@@ -44,6 +52,7 @@ class ChangeMpinViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: Action button
     @IBAction func actionBtnSave(_ sender: AnyObject) {
         let vc = StatusTransferViewController.initWithOwnNib()
         let data = [
@@ -56,14 +65,5 @@ class ChangeMpinViewController: BaseViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+
+//MARK: Transfer type
 enum TransferType : Int {
     case TransferTypeSinarmas
     case TransferTypeOtherBank
@@ -20,12 +22,12 @@ class TransferBankViewController: BaseViewController {
     @IBOutlet var lblFirstTitleTf: BaseLabel!
     @IBOutlet var lblSecondTitleTf: BaseLabel!
     @IBOutlet var lblMPin: BaseLabel!
-    @IBOutlet var viewBackground: UIView!
+    
     @IBOutlet var tfBankName: BaseTextField!
     @IBOutlet var tfNoAccount: BaseTextField!
     @IBOutlet var tfAmountTransfer: BaseTextField!
     @IBOutlet var tfMpin: BaseTextField!
-    
+    @IBOutlet var viewBackground: UIView!
     
     var transferType : TransferType!
     var bankName : NSDictionary!
@@ -84,9 +86,15 @@ class TransferBankViewController: BaseViewController {
         self.tfMpin.addInset()
         
         if (self.transferType != TransferType.TransferTypeOtherBank) {
+            
             constraintViewBankName.constant = 0
+            self.tfBankName.isUserInteractionEnabled = false
+            
         } else {
+            
+            self.tfBankName.isUserInteractionEnabled = true
             self.tfBankName.text = bankName.value(forKey: "name") as? String
+            
         }
         
     }
@@ -97,9 +105,12 @@ class TransferBankViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: function comfirmation
     func buttonConfirmation()  {
         
         let vc = ConfirmationViewController.initWithOwnNib()
+        
+        //Data is used to show in confirmation page
         let data: [String : Any]!
         
         if (self.transferType == TransferType.TransferTypeSinarmas) {
@@ -113,7 +124,9 @@ class TransferBankViewController: BaseViewController {
                 ]
             ]
             vc.data = data as NSDictionary!
+            
         } else if (self.transferType == TransferType.TransferTypeOtherBank){
+            
            let bankNameString = bankName.value(forKey: "name") as! String
             data = [
                 "title" : "Pastikan data berikut sudah benar",

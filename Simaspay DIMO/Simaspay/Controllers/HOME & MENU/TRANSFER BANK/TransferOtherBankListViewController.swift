@@ -9,11 +9,15 @@
 import UIKit
 
 class TransferOtherBankListViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate {
+    
+    
     @IBOutlet var tfSearch: UISearchBar!
     @IBOutlet var tableView: UITableView!
+    
     var bankList:NSMutableArray = NSMutableArray();
     var filtered:NSMutableArray = []
-    var data:NSMutableArray = [] //= ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
+    
+    var data:NSMutableArray = []
     static func initWithOwnNib() -> TransferOtherBankListViewController {
         let obj:TransferOtherBankListViewController = TransferOtherBankListViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
@@ -32,6 +36,7 @@ class TransferOtherBankListViewController: BaseViewController, UITableViewDelega
         
     }
     
+    //MARK: Search bar filter function
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filtered = NSMutableArray(array: data)
         filtered.filter(using: NSPredicate(format: "%K CONTAINS[c] %@", "name", searchText))
@@ -41,6 +46,8 @@ class TransferOtherBankListViewController: BaseViewController, UITableViewDelega
         self.tableView.reloadData()
     }
     
+    
+    //MARK: get other bank list
     func getBankList() {
         let dict = NSMutableDictionary()
         dict[TXNNAME] = TXN_GetThirdPartyData
@@ -71,7 +78,7 @@ class TransferOtherBankListViewController: BaseViewController, UITableViewDelega
             self.data = self.bankList
             self.filtered = self.bankList
             
-//            DLog("\(self.bankList)")
+            DLog("\(self.bankList)")
             self.tableView.reloadData()
         }
 
@@ -82,7 +89,7 @@ class TransferOtherBankListViewController: BaseViewController, UITableViewDelega
         // Dispose of any resources that can be recreated.
     }
     
-
+    //MARK: Tableview list other bank transfer
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filtered.count
     }
