@@ -36,7 +36,9 @@ let BANK_ID = "bankID"
 let FROM_DATE = "fromDate"
 let TO_DATE = "toDate"
 
-//MARK: Image key
+
+// MARK: VALUE for keys start here
+// MARK: =========================
 let SIMASPAY_CONFIRM = "Confirm"
 
 // MARK: Category
@@ -60,12 +62,20 @@ let SERVICE_ACCOUNT = "Account"
 let SERVICE_PAYMENT = "Payment"
 let SOURCEPOCKETCODE = "sourcePocketCode"
 
-// MARK: UserDefault
-let SIMASPAY_PUBLIC_KEY = "simasPayPublicKey"
-
 // MARK: others
 let ACTIVITY_STATUS = "true"
 let INQUIRY  = "Inquiry"
+
+// MARK: Account Roles
+let SIMASPAY_LOGIN_AGENT_TYPE = "2"
+let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
+
+// MARK: opration
+let SERVICE_WALLET = "Wallet"
+let SERVICE_BANK = "Bank"
+let TXN_RESEND_MFAOTP = "ResendMFAOTP"
+// MARK: =========================
+// MARK: VALUE for keys end here
 
 // MARK: RESPONSE CODE
 let SIMASPAY_SUCCESS_CODE = "0"
@@ -76,20 +86,13 @@ let SIMASPAY_ACTIVATION__CONFIRMATION_SUCCESS_CODE = "52"
 let SIMASPAY_ACTIVATION__CONFIRMATION_SUCCESS_CODE1 = "2032"
 let SIMASPAY_REGISTRATION__EMONEY_SUCCESS_CODE = "2180"
 
-// MARK: Account Roles
-let SIMASPAY_LOGIN_AGENT_TYPE = "2"
-let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
-
-//MARK: opration
-let SERVICE_WALLET = "Wallet"
-let SERVICE_BANK = "Bank"
-let TXN_RESEND_MFAOTP = "ResendMFAOTP"
-
-
 //MARK: User defult
+let SIMASPAY_PUBLIC_KEY = "simasPayPublicKey"
 let ACCOUNT_NUMBER = "Account_Number"
 let USERNAME = "Username"
 
+
+let TERMS_CONDITIONS = "https://www.banksinarmas.com/PersonalBanking/IB.do?action=terms"
 /*
 #define SIMASPAY_ACTIVITY @"isSimaspayActivity"
 

@@ -113,7 +113,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
           message = getString("LoginMessageNotConnectServer")
         }
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         
@@ -151,9 +151,9 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
             if (err != nil) {
                 let error = err as! NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
@@ -166,7 +166,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
                 self.animatedFadeIn()
                 self.navigationController?.pushViewController(vc, animated: false)
             } else {
-                DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: String("AlertCloseButtonText"))
+                DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
             }
  
             
@@ -238,7 +238,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
 
     func resendOTP()  {
        if (!DIMOAPIManager.isInternetConnectionExist()){
-        DIMOAlertView.showAlert(withTitle: "", message: getString("LoginMessageNotConnectServer"), cancelButtonTitle: String("AlertCloseButtonText"))
+        DIMOAlertView.showAlert(withTitle: "", message: getString("LoginMessageNotConnectServer"), cancelButtonTitle: getString("AlertCloseButtonText"))
         }
         
         let MDNString = activationDict.value(forKey: "MDN") as! String
@@ -255,9 +255,9 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
             if (err != nil) {
                 let error = err as! NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
@@ -268,7 +268,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
             if (messageCode == "608") {
                 
             } else {
-                DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: String("AlertCloseButtonText"))
+                DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
             }
 
         }

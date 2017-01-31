@@ -25,7 +25,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
     var clock:Timer!
     var lblTimer: BaseLabel!
     
-    var MDNString:String!
+    var MDNString:String! = ""
     
     //Dictionary for show data registration
     var data: NSDictionary!
@@ -248,15 +248,15 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
             if (err != nil) {
                 let error = err as! NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
             
             if (dictionary.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")
@@ -274,7 +274,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         
@@ -305,15 +305,15 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
             if (err != nil) {
                 let error = err as! NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
             
             if (dictionary.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")

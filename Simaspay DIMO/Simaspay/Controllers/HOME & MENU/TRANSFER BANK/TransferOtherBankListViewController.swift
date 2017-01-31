@@ -62,9 +62,9 @@ class TransferOtherBankListViewController: BaseViewController, UITableViewDelega
             if (err != nil) {
                 let error = err as! NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }

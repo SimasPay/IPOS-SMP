@@ -17,7 +17,6 @@ class EULAViewController: BaseViewController,UIWebViewDelegate {
     @IBOutlet var viewFrame: UIView!
     @IBOutlet var webView: UIWebView!
     let padding:CGFloat = 12.0
-    var urlpath: String = "http://banksinarmas.com/tabunganonline/simobi"
     static func initWithOwnNib() -> EULAViewController {
         let obj:EULAViewController = EULAViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
@@ -44,7 +43,7 @@ class EULAViewController: BaseViewController,UIWebViewDelegate {
         
     }
     func loadAddressURL(){
-        let requesturl = NSURL(string: urlpath)
+        let requesturl = NSURL(string: TERMS_CONDITIONS)
         let request = NSURLRequest(url: requesturl! as URL)
         webView.delegate =  self
         webView.loadRequest(request as URLRequest)
@@ -69,15 +68,15 @@ class EULAViewController: BaseViewController,UIWebViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-//    @available(iOS 2.0, *)
-//    public func webViewDidStartLoad(_ webView: UIWebView){
-//        DMBProgressHUD.showAdded(to: self.view, animated: true)
-//    }
-//    
-//    @available(iOS 2.0, *)
-//    public func webViewDidFinishLoad(_ webView: UIWebView){
-//        DMBProgressHUD.hide(for: self.view, animated: true)
-//    }
+    @available(iOS 2.0, *)
+    public func webViewDidStartLoad(_ webView: UIWebView){
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
+    }
+    
+    @available(iOS 2.0, *)
+    public func webViewDidFinishLoad(_ webView: UIWebView){
+        DMBProgressHUD.hide(for: self.view, animated: true)
+    }
     
     //MARK: Action button to landing page
     func buttonClick()  {

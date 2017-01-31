@@ -81,7 +81,7 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         
@@ -101,7 +101,10 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
         
         
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+
+    
+       //DIMOAPIManager without Session check
+        DIMOAPIManager .callAPI(withParameters: param, withSessionCheck: false) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             let dictionary = NSDictionary(dictionary: dict!)
             
@@ -109,16 +112,16 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
             if (err != nil) {
                 let error = err as! NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
             
             if (dictionary.allKeys.count == 0) {
                 
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
                 
             } else {
                 

@@ -85,7 +85,7 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         
@@ -96,30 +96,30 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
         dict[INSTITUTION_ID] = SIMASPAY
         dict[AUTH_KEY] = "f"
         dict[SOURCEMDN] = getNormalisedMDN(MDNString as NSString)
-        dict[mPIN_STRING] = simasPayRSAencryption(self.tfMpin.text!)
+        dict[mPIN_STRING] = /*"814f8147ddcbdba05fad8bd5cf125530d9f5dece879d2b908d4b139cbb3f216ac8b7eb312a71b0cc0a3681d26074aa1e9f6c5299f2bf104fa277417bb57b8005" */simasPayRSAencryption(self.tfMpin.text!)/*"34680a237df794396d653e4c7f425aacffbc9445973444a9f935f9680ff81bca59b54b6dc4d683c2d05984a95ff4d689ec0a402707b1b83c865eb1342cc56967"*/
         dict[CHANNEL_ID] = "7"
         dict[SIMASPAY_ACTIVITY] = "true"
         
-        dict[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
-        dict[SOURCE_APP_VERSION_KEY] = version
-        dict[SOURCE_APP_OSVERSION_KEY] = "\(UIDevice.current.modelName)  \(UIDevice.current.systemVersion)"
+        dict[SOURCE_APP_TYPE_KEY] = "" /*SOURCE_APP_TYPE_VALUE*/
+        dict[SOURCE_APP_VERSION_KEY] = ""/*version*/
+        dict[SOURCE_APP_OSVERSION_KEY] = ""/*"\(UIDevice.current.modelName)  \(UIDevice.current.systemVersion)"*/
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+        DIMOAPIManager .callAPI(withParameters: param, withSessionCheck: false) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {
                 let error = err as! NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
             let dictionary = NSDictionary(dictionary: dict!)
             if (dictionary.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 DIMOAPIManager.sharedInstance().encryptedMPin = simasPayRSAencryption(self.tfMpin.text!)
                 
@@ -165,7 +165,7 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
                     self.navigationController?.pushViewController(vc, animated: false)
                     
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "Login", message: messageText, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "Login", message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 
             }

@@ -24,7 +24,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     @IBOutlet var lblUsername: BaseLabel!
     @IBOutlet var lblNoAccount: BaseLabel!
     @IBOutlet weak var btnSwitchAccount: UIButton!
+     @IBOutlet weak var lblSwitchAccount: UILabel!
     @IBOutlet weak var btnMove: UIButton!
+    @IBOutlet weak var btnLogout: UIButton!
     
     var accountType : AccountType!
     var arrayMenu: NSArray!
@@ -37,6 +39,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     
     static var positionx:CGFloat = 0
+   
     static func initWithOwnNib() -> HomeViewController {
         let obj:HomeViewController = HomeViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
@@ -151,11 +154,12 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         ]
         arrayMenu = arrayMenu.filtered(using: NSPredicate(format: "isHidden != TRUE")) as NSArray!
         self.btnSwitchAccount.isHidden = true
-        
+        self.lblSwitchAccount.isHidden = true
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
         for vc in viewControllers {
             if (vc.isKind(of: BankEMoneyViewController.self)) {
                 self.btnSwitchAccount.isHidden = false
+                self.lblSwitchAccount.isHidden = false
                 return
             }
             
@@ -189,6 +193,16 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    // MARK: Button logout account
+    @IBAction func actionLogout(_ sender: Any) {
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
+        for vc in viewControllers {
+            if (vc.isKind(of: LoginRegisterViewController.self)) {
+                self.navigationController!.popToViewController(vc, animated: true);
+                return
+            }
+        }
     }
     
     // MARK: Button switch account
@@ -275,7 +289,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             self.close()
             return
         }
@@ -299,16 +313,16 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             if (err != nil) {
                 let error = err as! NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
             let dictionary = NSDictionary(dictionary: dict!)
             let messageText  = dictionary.value(forKeyPath: "message.text") as! String
             if (dictionary.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")
@@ -321,7 +335,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.close), userInfo: nil, repeats: false)
                 } else {
                     self.close()
-                    DIMOAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
             }
             

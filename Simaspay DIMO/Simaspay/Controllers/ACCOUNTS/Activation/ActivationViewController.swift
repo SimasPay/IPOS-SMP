@@ -148,7 +148,7 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         
@@ -165,9 +165,9 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
             if (err != nil) {
                 let error = err as! NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
@@ -184,7 +184,7 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
                 self.animatedFadeIn()
                 self.navigationController?.pushViewController(vc, animated: false)
             } else {
-                DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: String("AlertCloseButtonText"))
+                DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
             }
         }
     }
@@ -193,7 +193,7 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
     func resendOTP() {
         
         if (!tfHpNumber.isValid()) {
-            DIMOAlertView.showAlert(withTitle: "", message: getString("LoginMessageFillHpNumber"), cancelButtonTitle: String("AlertCloseButtonText"))
+            DIMOAlertView.showAlert(withTitle: "", message: getString("LoginMessageFillHpNumber"), cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         
@@ -207,9 +207,9 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
             if (err != nil) {
                 let error = err as! NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
@@ -219,9 +219,9 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
             let messageText  = responseDict.value(forKeyPath: "message.text") as! String
             if((responseDict.object(forKey: "OneTimePin")) != nil)
             {
-                DIMOAlertView.showAlert(withTitle: getString("ActivationAlertTitleResendOTP"), message: getString("ActivationAlertResendOTP"), cancelButtonTitle: String("AlertCloseButtonText"))
+                DIMOAlertView.showAlert(withTitle: getString("ActivationAlertTitleResendOTP"), message: getString("ActivationAlertResendOTP"), cancelButtonTitle: getString("AlertCloseButtonText"))
             }else{
-                DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: String("AlertCloseButtonText"))
+                DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
             }
             
         }

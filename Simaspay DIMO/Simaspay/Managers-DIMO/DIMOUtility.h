@@ -27,17 +27,13 @@
 
 static BOOL const DIMO_IS_DEBUG = 1;
 typedef enum :NSInteger {
-    SDKLocaleEnglish,
-    SDKLocaleIndonesia,
-}SDKLocale;
+    LocaleEnglish,
+    LocaleIndonesia,
+}Locale;
 
 void DLog(NSString *message);
-NSBundle *mainBundle();
-NSString *String(NSString *key);
-
 
 @interface DIMOUtility : NSObject
-+ (void)setSDKLocale:(SDKLocale)locale;
 + (CGSize)screenSize;
 + (void)DIMOLog:(NSString *)string;
 @end

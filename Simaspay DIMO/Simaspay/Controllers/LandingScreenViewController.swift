@@ -49,7 +49,7 @@ class LandingScreenViewController: BaseViewController {
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
 
@@ -67,7 +67,7 @@ class LandingScreenViewController: BaseViewController {
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         
@@ -97,9 +97,9 @@ class LandingScreenViewController: BaseViewController {
                 if (err != nil) {
                     let error = err as! NSError
                     if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                        DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                        DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                     } else {
-                        DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                        DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                     }
                     return
                 }
@@ -107,7 +107,7 @@ class LandingScreenViewController: BaseViewController {
                 let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
                 DLog("\(responseDict)")
                 if (responseDict.allKeys.count == 0) {
-                    DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
                     // success
                     if (responseDict.allKeys.count > 0) {

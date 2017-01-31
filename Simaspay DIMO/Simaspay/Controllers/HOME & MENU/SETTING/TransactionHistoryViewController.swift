@@ -135,7 +135,7 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         
@@ -161,9 +161,9 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
             if (err != nil) {
                 let error = err as! NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
@@ -171,7 +171,7 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
             DLog("\(dictionary)")
             let messageCode  = dictionary.value(forKeyPath: "message.code") as! String
             if (dictionary.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 let responseDict = dictionary as NSDictionary
                 if (messageCode == "39"){
@@ -213,7 +213,7 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         
@@ -235,9 +235,9 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
             if (err != nil) {
                 let error = err as! NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 
                 DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
@@ -248,7 +248,7 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
             DLog("\(dictionary)")
             if (dictionary.allKeys.count == 0) {
                 DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 let responseDict = dictionary as NSDictionary
                 DispatchQueue.global().async {

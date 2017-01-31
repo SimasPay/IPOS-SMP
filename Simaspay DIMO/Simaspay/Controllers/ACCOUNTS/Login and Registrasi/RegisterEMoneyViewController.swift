@@ -75,7 +75,7 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
         var message = "";
         if (!tfUsername.isValid()) {
             message = "Masukkan username Anda"
-        } else if (self.isValidEmail(testStr: tfEmail.text!) == false) {
+        } else if !(tfEmail.text! as NSString).isEmail() {
             message = "Email Anda tidak valid"
         } else if (tfMpin.length() < 6) {
             message = "Pin harus 6 digit"
@@ -86,20 +86,11 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
 
         self.registrationProcess()
-    }
-    
-    //MARK: Validation Email
-    func isValidEmail(testStr:String) -> Bool {
-        // print("validate calendar: \(testStr)")
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-        
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailTest.evaluate(with: testStr)
     }
     
     //MARK: keyboard Show set last object above keyboard
@@ -160,15 +151,15 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
             if (err != nil) {
                 let error = err as! NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
             
             if (dictionary.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 let responseDict = dictionary as NSDictionary
                 let questionData = responseDict["questionData"] as! NSArray

@@ -137,8 +137,8 @@ clickedButtonAtIndexCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert)
     [self showAlertWithTitle:title message:nil view:view alertStyle:UIAlertViewStyleDefault clickedButtonAtIndexCallback:callback cancelButtonTitle:@"Cancel" otherButtonTitles:stringOkBtn, nil];
 }
 + (void)showUnknownErrorCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert))callback {
-    NSString *title = String(@"DIMOError");
-    NSString *message = String(@"DIMOUnknownError");
+    NSString *title = @"Error";
+    NSString *message = @"Unknown error";
     [self showAlertWithTitle:title message:message alertStyle:UIAlertViewStyleDefault clickedButtonAtIndexCallback:callback cancelButtonTitle:@"OK" otherButtonTitles:nil];
 }
 #pragma mark private

@@ -22,21 +22,6 @@ void DLog(NSString *message) {
         NSLog(@"%@ - %@ %@", [array objectAtIndex:3], [array objectAtIndex:4], message);
     }
 }
-NSString *String(NSString *key) {
-    NSString *result = NSLocalizedStringFromTableInBundle(key, strLocale, [NSBundle mainBundle], nil);
-    if ([result isEqualToString:key]) {
-        result = NSLocalizedStringFromTableInBundle(key, @"INDONESIAN", [NSBundle mainBundle], nil);
-    }
-    if (!result || result.length == 0) result = @"";
-    return result;
-}
-+ (void)setSDKLocale:(SDKLocale)locale {
-    if (locale == SDKLocaleEnglish) {
-        strLocale = @"ENGLISH";
-    } else {
-        strLocale = @"INDONESIAN";
-    }
-}
 + (CGSize)screenSize {
     return ScreenSize;
 }

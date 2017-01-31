@@ -89,9 +89,9 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             if (err != nil) {
                 let error = err as! NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
@@ -99,7 +99,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
             DLog("\(responseDict)")
             if (responseDict.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 let vc = ContactUSViewController.initWithOwnNib()
                 self.navigationController?.pushViewController(vc, animated: false)
@@ -130,7 +130,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: String("AlertCloseButtonText"))
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         
@@ -163,15 +163,15 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             if (err != nil) {
                 let error = err as! NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
             
             if (dictionary.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: String("AlertCloseButtonText"))
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 let responseDict = dictionary as NSDictionary
                 let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
@@ -192,7 +192,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
                         // AGENT LOGIN FlOW
                         // AGENT FLOW
                         // WARNING: NEED TO IMPLEMENT AGENT FLOW
-                        DIMOAlertView.showAlert(withTitle: "Not implemented", message: "AGENT", cancelButtonTitle: String("AlertCloseButtonText"))
+                        DIMOAlertView.showAlert(withTitle: "Not implemented", message: "AGENT", cancelButtonTitle: getString("AlertCloseButtonText"))
                     } else {
                         let isBank  = responseDict.value(forKeyPath: "isBank.text") as! String
                         let vc = HomeViewController.initWithOwnNib()
@@ -210,7 +210,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
                         self.navigationController?.pushViewController(vc, animated: true)
                     }
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: String("AlertCloseButtonText"))
+                    DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 
                 self.textFieldMPin.text! = ""
