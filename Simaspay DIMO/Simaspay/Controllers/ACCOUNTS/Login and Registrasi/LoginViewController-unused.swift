@@ -87,7 +87,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         DIMOAPIManager .callAPIPOST(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {
-                let error = err as! NSError
+                let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
                     DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
@@ -161,7 +161,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             DLog("\(dictionary)")
             
             if (err != nil) {
-                let error = err as! NSError
+                let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
                     DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {

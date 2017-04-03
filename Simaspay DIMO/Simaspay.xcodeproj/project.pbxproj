@@ -145,7 +145,7 @@
 		35995AA11E262B14007EB516 /* SplashScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashScreenViewController.xib; sourceTree = "<group>"; };
 		BE1772841D92859B00A27E06 /* Simaspay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Simaspay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1772871D92859B00A27E06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BE17728E1D92859B00A27E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BE17728E1D92859B00A27E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Simaspay/Assets.xcassets; sourceTree = "<group>"; };
 		BE1772911D92859B00A27E06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE1772931D92859B00A27E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE1772C11D9285DE00A27E06 /* DAFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -339,6 +339,7 @@
 		BE17727B1D92859B00A27E06 = {
 			isa = PBXGroup;
 			children = (
+				BE17728E1D92859B00A27E06 /* Assets.xcassets */,
 				BE1773211D9286EE00A27E06 /* Dimo-Bridging-Header.h */,
 				BE1772BF1D9285DE00A27E06 /* Thirdparties */,
 				BE1772D91D9285DE00A27E06 /* Managers-DIMO */,
@@ -362,7 +363,6 @@
 				BEC415E81D938173000C3CF4 /* Manager */,
 				BEC415D71D928D72000C3CF4 /* Base Objects */,
 				BE1772871D92859B00A27E06 /* AppDelegate.swift */,
-				BE17728E1D92859B00A27E06 /* Assets.xcassets */,
 				BE1772901D92859B00A27E06 /* LaunchScreen.storyboard */,
 				BE1772931D92859B00A27E06 /* Info.plist */,
 			);
@@ -502,6 +502,7 @@
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = R76ECPX6J8;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -746,12 +747,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = R76ECPX6J8;
 				INFOPLIST_FILE = Simaspay/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.id.dimo.Simaspay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dimo-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -762,12 +766,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = R76ECPX6J8;
 				INFOPLIST_FILE = Simaspay/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.id.dimo.Simaspay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Dimo-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

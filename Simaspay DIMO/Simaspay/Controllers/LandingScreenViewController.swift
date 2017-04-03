@@ -41,92 +41,28 @@ class LandingScreenViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
     //MARK: Action button
     @IBAction func actionLogin(_ sender: AnyObject) {
-        var message = ""
-        if (!DIMOAPIManager.isInternetConnectionExist()) {
-            message = getString("LoginMessageNotConnectServer")
-        }
-        
-        if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
-            return
-        }
-
-        getPublicKey {
+        let defaults = UserDefaults.standard
+        let MDNString = defaults.string(forKey: SOURCEMDN)
+        if MDNString == nil {
             let vc = LoginRegisterViewController.initWithOwnNib()
             self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = LoginPinViewController.initWithOwnNib()
+            vc.MDNString = MDNString
+            self.navigationController?.pushViewController(vc, animated: false)
         }
 
     }
 
     @IBAction func actionActivation(_ sender: AnyObject) {
-        var message = ""
-        if (!DIMOAPIManager.isInternetConnectionExist()) {
-            message = getString("LoginMessageNotConnectServer")
-        }
-        
-        if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
-            return
-        }
-        
-        getPublicKey {
-            let vc = ActivationViewController.initWithOwnNib()
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
+
+        let vc = ActivationViewController.initWithOwnNib()
+        self.navigationController?.pushViewController(vc, animated: true)
+
         
     }
     
-    
-    //MARK: Get public key
-    //    typealias CompletionBlock = () -> Void
-    func getPublicKey(complete : @escaping () -> Void) {
-        if (publicKeys == nil || publicKeys.allKeys.count == 0) {
-            let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-            let dict = NSMutableDictionary()
-            dict[TXNNAME] = TXN_GETPUBLC_KEY
-            dict[SERVICE] = SERVICE_ACCOUNT
-            dict[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
-            dict[SOURCE_APP_VERSION_KEY] = version
-            dict[SOURCE_APP_OSVERSION_KEY] = "1"
-            DMBProgressHUD.showAdded(to: self.view, animated: true)
-            let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-            DIMOAPIManager.callAPI(withParameters: param, withSessionCheck: false, andComplete: { (dict, err) in
-                DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
-                if (err != nil) {
-                    let error = err as! NSError
-                    if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                        DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
-                    } else {
-                        DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
-                    }
-                    return
-                }
-                
-                let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
-                DLog("\(responseDict)")
-                if (responseDict.allKeys.count == 0) {
-                    DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
-                } else {
-                    // success
-                    if (responseDict.allKeys.count > 0) {
-                        // set public keys
-                        publicKeys = responseDict;
-                        if (responseDict.value(forKeyPath: "message.code") as! String == "546") {
-                            DIMOAlertView.showNormalTitle("Error", message: "message", alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
-                                exit(1)
-                                }, cancelButtonTitle: "OK")
-                            return
-                        }
-                        
-                        DLog("\(publicKeys)")
-                    }
-                    complete()
-                }
-            })
-        } else {
-            complete()
-        }
-    }
 }

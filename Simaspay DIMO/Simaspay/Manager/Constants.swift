@@ -1,7 +1,7 @@
 
 let SIMOBI =  "simobi"
 let INSTITUTION_ID = "institutionID"
-let SIMASPAY = "simaspay"
+let SIMASPAY = ""
 
 // MARK: Keys
 let TXNNAME = "txnName"
@@ -40,6 +40,7 @@ let TO_DATE = "toDate"
 // MARK: VALUE for keys start here
 // MARK: =========================
 let SIMASPAY_CONFIRM = "Confirm"
+let SIMASPAY_ACTIVITY_VALUE = "true"
 
 // MARK: Category
 let CATEGORY_CONTACTUS = "category.ContactUsfile"

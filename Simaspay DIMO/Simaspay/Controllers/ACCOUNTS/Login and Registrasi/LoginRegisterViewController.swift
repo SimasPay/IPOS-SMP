@@ -44,6 +44,10 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
         tfHPNumber.becomeFirstResponder()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         viewTextField.updateViewRoundedWithShadow()
@@ -93,7 +97,7 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
         dict[AUTH_KEY] = ""
         dict[SOURCEMDN] = getNormalisedMDN(tfHPNumber.text! as NSString)
         dict[CHANNEL_ID] = "7"
-        
+        dict[SIMASPAY_ACTIVITY] = SIMASPAY_ACTIVITY_VALUE
         dict[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
         dict[SOURCE_APP_VERSION_KEY] = version
         dict[SOURCE_APP_OSVERSION_KEY] = "\(UIDevice.current.modelName)  \(UIDevice.current.systemVersion)"
@@ -110,7 +114,7 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
             
             
             if (err != nil) {
-                let error = err as! NSError
+                let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
                     DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {

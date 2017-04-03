@@ -196,6 +196,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     // MARK: Button logout account
     @IBAction func actionLogout(_ sender: Any) {
+        let prefs = UserDefaults.standard
+        prefs.removeObject(forKey: SOURCEMDN)
+        prefs.removeObject(forKey: ACCOUNT_NUMBER)
+        prefs.removeObject(forKey: USERNAME)
+        
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
         for vc in viewControllers {
             if (vc.isKind(of: LoginRegisterViewController.self)) {
@@ -311,7 +316,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
             
             if (err != nil) {
-                let error = err as! NSError
+                let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
                     DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {

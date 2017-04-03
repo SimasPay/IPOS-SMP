@@ -246,7 +246,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
             
             
             if (err != nil) {
-                let error = err as! NSError
+                let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
                     DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
@@ -303,7 +303,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
             
             
             if (err != nil) {
-                let error = err as! NSError
+                let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
                     DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {

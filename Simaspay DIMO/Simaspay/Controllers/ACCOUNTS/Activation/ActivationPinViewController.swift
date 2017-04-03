@@ -135,6 +135,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         let dict = NSMutableDictionary()
         dict[TXNNAME] = TXN_INQUIRY_ACTIVATION
         dict[SERVICE] = SERVICE_ACCOUNT
+        dict[SIMASPAY_ACTIVITY] = SIMASPAY_ACTIVITY_VALUE
         dict[SOURCEMDN] = getNormalisedMDN(MDNString as NSString)
         dict[ACTIVATION_NEWPIN] = simasPayRSAencryption(tfMpin.text!)
         dict[ACTIVATION_CONFORMPIN] = simasPayRSAencryption(tfConfirmMpin.text!)
@@ -149,7 +150,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
         DIMOAPIManager.callAPI(withParameters: param, withSessionCheck:false) { (dict, err) in
             if (err != nil) {
-                let error = err as! NSError
+                let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
                     DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
@@ -184,7 +185,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
     func didOTPOK() {
         DLog("OK");
         clock.invalidate()
-        confirmationRequest(otpText: (tfOTP.text as! NSString))
+        confirmationRequest(otpText: (tfOTP.text! as NSString))
     }
     
     func showOTP()  {
@@ -253,7 +254,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
         DIMOAPIManager.callAPI(withParameters: param) { (dict, err) in
             if (err != nil) {
-                let error = err as! NSError
+                let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
                     DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
