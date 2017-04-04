@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		353C2BA51E9224030082C250 /* libTestFairy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BA21E9224030082C250 /* libTestFairy.a */; };
+		353C2BA61E9224030082C250 /* upload-dsym.sh in Resources */ = {isa = PBXBuildFile; fileRef = 353C2BA41E9224030082C250 /* upload-dsym.sh */; };
+		353C2BAD1E9226E60082C250 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BA81E9226E60082C250 /* AVFoundation.framework */; };
+		353C2BAE1E9226E60082C250 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BA91E9226E60082C250 /* CoreMedia.framework */; };
+		353C2BAF1E9226E60082C250 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BAA1E9226E60082C250 /* CoreMotion.framework */; };
+		353C2BB01E9226E60082C250 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BAB1E9226E60082C250 /* OpenGLES.framework */; };
+		353C2BB11E9226E60082C250 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BAC1E9226E60082C250 /* SystemConfiguration.framework */; };
 		356CC84A1E288DCE00E25355 /* TransactionPeriodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356CC8481E288DCE00E25355 /* TransactionPeriodViewController.swift */; };
 		356CC84B1E288DCE00E25355 /* TransactionPeriodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 356CC8491E288DCE00E25355 /* TransactionPeriodViewController.xib */; };
 		359959ED1E2623D3007EB516 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359959EC1E2623D3007EB516 /* Utilities.swift */; };
@@ -92,6 +99,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		353C2BA21E9224030082C250 /* libTestFairy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFairy.a; sourceTree = "<group>"; };
+		353C2BA31E9224030082C250 /* TestFairy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFairy.h; sourceTree = "<group>"; };
+		353C2BA41E9224030082C250 /* upload-dsym.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "upload-dsym.sh"; sourceTree = "<group>"; };
+		353C2BA81E9226E60082C250 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		353C2BA91E9226E60082C250 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		353C2BAA1E9226E60082C250 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		353C2BAB1E9226E60082C250 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		353C2BAC1E9226E60082C250 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		356CC8481E288DCE00E25355 /* TransactionPeriodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionPeriodViewController.swift; sourceTree = "<group>"; };
 		356CC8491E288DCE00E25355 /* TransactionPeriodViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionPeriodViewController.xib; sourceTree = "<group>"; };
 		359959EC1E2623D3007EB516 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = Manager/Utilities.swift; sourceTree = "<group>"; };
@@ -204,12 +219,40 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				353C2BAD1E9226E60082C250 /* AVFoundation.framework in Frameworks */,
+				353C2BAE1E9226E60082C250 /* CoreMedia.framework in Frameworks */,
+				353C2BAF1E9226E60082C250 /* CoreMotion.framework in Frameworks */,
+				353C2BB01E9226E60082C250 /* OpenGLES.framework in Frameworks */,
+				353C2BB11E9226E60082C250 /* SystemConfiguration.framework in Frameworks */,
+				353C2BA51E9224030082C250 /* libTestFairy.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		353C2BA11E9224030082C250 /* TestFairySDK-1.8.5 */ = {
+			isa = PBXGroup;
+			children = (
+				353C2BA21E9224030082C250 /* libTestFairy.a */,
+				353C2BA31E9224030082C250 /* TestFairy.h */,
+				353C2BA41E9224030082C250 /* upload-dsym.sh */,
+			);
+			path = "TestFairySDK-1.8.5";
+			sourceTree = "<group>";
+		};
+		353C2BA71E9226E60082C250 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				353C2BA81E9226E60082C250 /* AVFoundation.framework */,
+				353C2BA91E9226E60082C250 /* CoreMedia.framework */,
+				353C2BAA1E9226E60082C250 /* CoreMotion.framework */,
+				353C2BAB1E9226E60082C250 /* OpenGLES.framework */,
+				353C2BAC1E9226E60082C250 /* SystemConfiguration.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		356CC8471E2884CF00E25355 /* Encryption */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +388,7 @@
 				BE1772D91D9285DE00A27E06 /* Managers-DIMO */,
 				BE1772861D92859B00A27E06 /* Simaspay */,
 				BE1772851D92859B00A27E06 /* Products */,
+				353C2BA71E9226E60082C250 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -372,6 +416,7 @@
 		BE1772BF1D9285DE00A27E06 /* Thirdparties */ = {
 			isa = PBXGroup;
 			children = (
+				353C2BA11E9224030082C250 /* TestFairySDK-1.8.5 */,
 				BE1772C01D9285DE00A27E06 /* AFNetworking */,
 				BE1772D41D9285DE00A27E06 /* DReachability.h */,
 				BE1772D51D9285DE00A27E06 /* DReachability.m */,
@@ -533,6 +578,7 @@
 				35995AA51E262B14007EB516 /* ActivationSuccessViewController.xib in Resources */,
 				35995AAD1E262B14007EB516 /* BankEMoneyViewController.xib in Resources */,
 				35995ABD1E262B14007EB516 /* DetailPaymentPurchaseViewController.xib in Resources */,
+				353C2BA61E9224030082C250 /* upload-dsym.sh in Resources */,
 				35995ACB1E262B14007EB516 /* TransferBankViewController.xib in Resources */,
 				BEC416061D9385B9000C3CF4 /* ENGLISH.strings in Resources */,
 				35995ACD1E262B14007EB516 /* TransferOtherBankListViewController.xib in Resources */,
@@ -752,6 +798,10 @@
 				INFOPLIST_FILE = Simaspay/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Simaspay/Thirdparties/TestFairySDK-1.8.5",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.id.dimo.Simaspay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -771,6 +821,10 @@
 				INFOPLIST_FILE = Simaspay/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Simaspay/Thirdparties/TestFairySDK-1.8.5",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.id.dimo.Simaspay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

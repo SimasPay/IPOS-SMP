@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        TestFairy.begin("b1bf291000e3be48f82f8c0a6b7376affe1f9549") 
+        
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.backToRoot), name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
         
         // Override point for customization after application launch.
