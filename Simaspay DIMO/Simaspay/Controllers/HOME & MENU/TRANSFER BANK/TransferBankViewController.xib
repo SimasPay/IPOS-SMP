@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -26,16 +29,27 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tj4-Ss-pdm">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                    <color key="backgroundColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="65" id="wO4-H8-Cjd"/>
+                    </constraints>
+                </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KyR-HO-64L">
+                    <rect key="frame" x="0.0" y="65" width="375" height="602"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UIT-Vl-YZ1">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="480"/>
                             <subviews>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aWv-pT-OBK">
+                                    <rect key="frame" x="52.5" y="0.0" width="270" height="91"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQX-6s-Am2" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="25" width="270" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="Mas-DQ-Q2P"/>
                                             </constraints>
@@ -44,6 +58,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YoS-CO-hyu" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="51" width="270" height="40"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="NIb-i8-5CI"/>
@@ -66,6 +81,7 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXW-5l-b3W" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="52.5" y="111" width="270" height="16"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="16" id="eTM-pz-rPM"/>
                                         <constraint firstAttribute="width" constant="270" id="iFO-qi-CKc"/>
@@ -75,6 +91,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y3A-JR-ORB" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="52.5" y="137" width="270" height="40"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="270" id="gL4-Ni-ziW"/>
@@ -85,28 +102,33 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0lZ-Xs-al0" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="52.5" y="197" width="270" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2OP-qi-1PL" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="52.5" y="221" width="270" height="40"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Wt-Kt-MlG" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="52.5" y="281" width="270" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JkH-85-Cke" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="52.5" y="307" width="270" height="40"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7II-gP-gzH" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="87.5" y="376" width="200" height="48"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="48" id="9cF-g8-Vf8"/>
                                         <constraint firstAttribute="width" constant="200" id="jGI-dx-7Gq"/>
@@ -155,11 +177,15 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="KyR-HO-64L" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" constant="-64" id="DgU-a6-WnT"/>
+                <constraint firstAttribute="trailing" secondItem="Tj4-Ss-pdm" secondAttribute="trailing" id="0bs-a4-XWJ"/>
+                <constraint firstItem="KyR-HO-64L" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" constant="-65" id="DgU-a6-WnT"/>
                 <constraint firstItem="KyR-HO-64L" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="XBL-BN-Oo6"/>
+                <constraint firstItem="KyR-HO-64L" firstAttribute="top" secondItem="Tj4-Ss-pdm" secondAttribute="bottom" id="aZN-9m-wXw"/>
                 <constraint firstAttribute="trailing" secondItem="KyR-HO-64L" secondAttribute="trailing" id="coM-qO-0Pm"/>
-                <constraint firstItem="KyR-HO-64L" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="iUS-HH-3RR"/>
+                <constraint firstItem="Tj4-Ss-pdm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vKH-a9-b9T"/>
+                <constraint firstItem="Tj4-Ss-pdm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="wbT-59-rZ6"/>
             </constraints>
+            <point key="canvasLocation" x="70.5" y="59.5"/>
         </view>
     </objects>
 </document>

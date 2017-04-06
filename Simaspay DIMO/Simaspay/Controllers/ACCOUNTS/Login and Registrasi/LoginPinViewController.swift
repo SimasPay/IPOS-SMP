@@ -24,7 +24,7 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.showBackButton()
+        self.showBackButton(subMenu: false)
 
         let phone:String = MDNString
         let infoString = String(format: String("Silakan masukkan mPIN untuk nomor HP %@"), phone)

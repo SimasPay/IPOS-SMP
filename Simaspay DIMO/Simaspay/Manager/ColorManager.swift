@@ -27,6 +27,7 @@ let color_debit = "5B9FFF"
 //Base Color
 let color_base_white = "FFFFFF"
 let color_greyish_brown = "4A4A4A"
+let color_status_bar = "5C0104"
 
 
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,30 +25,45 @@
                     <rect key="frame" x="0.0" y="65" width="375" height="602"/>
                     <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                 </scrollView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XO3-gn-0Fm">
-                    <rect key="frame" x="331" y="25" width="36" height="36"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UrH-tB-596">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XO3-gn-0Fm">
+                            <rect key="frame" x="331" y="21" width="44" height="44"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="BSW-65-SZ4"/>
+                                <constraint firstAttribute="width" constant="44" id="DKF-13-4Ae"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="11" minY="9" maxX="14" maxY="9"/>
+                            <state key="normal" image="icon_Download"/>
+                            <connections>
+                                <action selector="actionDownloadPDF:" destination="-1" eventType="touchUpInside" id="CjI-mv-gZv"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="36" id="Vmo-5Q-GQ2"/>
-                        <constraint firstAttribute="height" constant="36" id="q6G-Ix-Jfm"/>
+                        <constraint firstAttribute="bottom" secondItem="XO3-gn-0Fm" secondAttribute="bottom" id="9Mk-RG-e0M"/>
+                        <constraint firstAttribute="height" constant="65" id="bow-P1-Pj1"/>
+                        <constraint firstAttribute="trailing" secondItem="XO3-gn-0Fm" secondAttribute="trailing" id="j9x-GK-eAf"/>
                     </constraints>
-                    <state key="normal" image="icon_Download"/>
-                    <connections>
-                        <action selector="actionDownloadPDF:" destination="-1" eventType="touchUpInside" id="CjI-mv-gZv"/>
-                    </connections>
-                </button>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="MDu-xR-OQG" firstAttribute="top" secondItem="XO3-gn-0Fm" secondAttribute="bottom" constant="4" id="FhB-sh-RZt"/>
+                <constraint firstItem="UrH-tB-596" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="2Rb-qv-XlE"/>
+                <constraint firstItem="UrH-tB-596" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7os-s9-R6J"/>
                 <constraint firstAttribute="trailing" secondItem="MDu-xR-OQG" secondAttribute="trailing" id="UxM-BM-Q5t"/>
-                <constraint firstAttribute="trailing" secondItem="XO3-gn-0Fm" secondAttribute="trailing" constant="8" id="VI8-GI-Ekm"/>
-                <constraint firstItem="MDu-xR-OQG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="65" id="aUa-b2-tL2"/>
+                <constraint firstAttribute="trailing" secondItem="UrH-tB-596" secondAttribute="trailing" id="cF4-3T-8pG"/>
                 <constraint firstAttribute="bottom" secondItem="MDu-xR-OQG" secondAttribute="bottom" id="hdV-UH-K0O"/>
                 <constraint firstItem="MDu-xR-OQG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="rh8-Jw-qfq"/>
+                <constraint firstItem="MDu-xR-OQG" firstAttribute="top" secondItem="UrH-tB-596" secondAttribute="bottom" id="ymO-Bt-Lhw"/>
             </constraints>
+            <point key="canvasLocation" x="71.5" y="110.5"/>
         </view>
     </objects>
     <resources>
-        <image name="icon_Download" width="36" height="36"/>
+        <image name="icon_Download" width="48" height="64"/>
     </resources>
 </document>

@@ -39,6 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if (vc.isKind(of: LoginRegisterViewController.self)) {
                 self.navigation!.popToViewController(vc, animated: true);
                 return
+            } else if (vc.isKind(of: LandingScreenViewController.self)) {
+                self.navigation!.popToViewController(vc, animated: true);
+                return
             }
         }
         

@@ -203,11 +203,17 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
         for vc in viewControllers {
+            print(vc)
             if (vc.isKind(of: LoginRegisterViewController.self)) {
                 self.navigationController!.popToViewController(vc, animated: true);
                 return
+            } else if (vc.isKind(of: LandingScreenViewController.self)) {
+                 self.navigationController!.popToViewController(vc, animated: true);
+                return
             }
         }
+        let vc = LoginRegisterViewController(nibName: "LoginRegisterViewController", bundle: nil)
+        self.navigationController?.popToViewController(vc, animated: true)
     }
     
     // MARK: Button switch account
@@ -337,7 +343,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     self.indicatorView.stopAnimating()
                     self.indicatorView.isHidden = true
                     self.lblBalance.text = String(format: "Rp %@", amountText)
-                    _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.close), userInfo: nil, repeats: false)
+                    _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.close), userInfo: nil, repeats: false)
                 } else {
                     self.close()
                     DIMOAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))

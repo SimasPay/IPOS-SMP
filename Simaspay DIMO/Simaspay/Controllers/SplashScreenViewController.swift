@@ -58,72 +58,67 @@ class SplashScreenViewController: BaseViewController {
     //MARK: Get public key
     //    typealias CompletionBlock = () -> Void
     func getPublicKey() {
-        if (publicKeys == nil || publicKeys.allKeys.count == 0) {
-            let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-            let dict = NSMutableDictionary()
-            dict[TXNNAME] = TXN_GETPUBLC_KEY
-            dict[SERVICE] = SERVICE_ACCOUNT
-            dict[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
-            dict[SOURCE_APP_VERSION_KEY] = version
-            dict[SOURCE_APP_OSVERSION_KEY] = "1"
-            dict[SIMASPAY_ACTIVITY] = SIMASPAY_ACTIVITY_VALUE
-            DMBProgressHUD.showAdded(to: self.view, animated: true)
-            let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-            DIMOAPIManager.callAPI(withParameters: param, withSessionCheck: false, andComplete: { (dict, err) in
-                DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
-                if (err != nil) {
-                    let error = err! as NSError
-                    if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                        DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
-                    } else {
-                        DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
-                    }
-                    return
-                }
-                
-                let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
-                DLog("\(responseDict)")
-                if (responseDict.allKeys.count == 0) {
-                    DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        let dict = NSMutableDictionary()
+        dict[TXNNAME] = TXN_GETPUBLC_KEY
+        dict[SERVICE] = SERVICE_ACCOUNT
+        dict[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
+        dict[SOURCE_APP_VERSION_KEY] = version
+        dict[SOURCE_APP_OSVERSION_KEY] = "1"
+        dict[SIMASPAY_ACTIVITY] = SIMASPAY_ACTIVITY_VALUE
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DIMOAPIManager.callAPI(withParameters: param, withSessionCheck: false, andComplete: { (dict, err) in
+            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+            if (err != nil) {
+                let error = err! as NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    // success
-                    if (responseDict.allKeys.count > 0) {
-                        // set public keys
-                        publicKeys = responseDict;
-                        let message = responseDict.value(forKeyPath: "message.text") as! String
-                        if (responseDict.value(forKeyPath: "message.code") as! String == "546") {
-                            DIMOAlertView.showNormalTitle("Error", message: "message", alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
-                                exit(1)
-                            }, cancelButtonTitle: "OK")
-                            return
-                        } else if (responseDict.value(forKeyPath: "message.code") as! String == "2310") {
-                            DIMOAlertView.showNormalTitle("", message: message, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
-                                UIApplication.shared.openURL(NSURL(string: responseDict.value(forKeyPath: "AppURL.text") as! String)! as URL)
-                                 exit(1)
-                            }, cancelButtonTitle: getString("AlertCloseButtonText"))
-                        } else if (responseDict.value(forKeyPath: "message.code") as! String == "null"){
-                            DIMOAlertView.showNormalTitle("Error", message: message, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
-                                exit(1)
-                            }, cancelButtonTitle: "OK")
-                        } else {
-                            self.firstPage()
-                        }
-                        
-                    } else {
-                        DIMOAlertView.showNormalTitle("Error", message: "Server error", alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                }
+                return
+            }
+            
+            let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
+            DLog("\(responseDict)")
+            if (responseDict.allKeys.count == 0) {
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+            } else {
+                // success
+                if (responseDict.allKeys.count > 0) {
+                    // set public keys
+                    publicKeys = responseDict;
+                    let message = responseDict.value(forKeyPath: "message.text") as! String
+                    if (responseDict.value(forKeyPath: "message.code") as! String == "546") {
+                        DIMOAlertView.showNormalTitle("Error", message: "message", alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                             exit(1)
                         }, cancelButtonTitle: "OK")
+                        return
+                    } else if (responseDict.value(forKeyPath: "message.code") as! String == "2310") {
+                        DIMOAlertView.showNormalTitle("", message: message, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                            UIApplication.shared.openURL(NSURL(string: responseDict.value(forKeyPath: "AppURL.text") as! String)! as URL)
+                             exit(1)
+                        }, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    } else if (responseDict.value(forKeyPath: "message.code") as! String == "null"){
+                        DIMOAlertView.showNormalTitle("Error", message: message, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                            exit(1)
+                        }, cancelButtonTitle: "OK")
+                    } else {
+                        self.firstPage()
                     }
+                    
+                } else {
+                    DIMOAlertView.showNormalTitle("Error", message: "Server error", alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                        exit(1)
+                    }, cancelButtonTitle: "OK")
                 }
-            })
-        } else {
-            self.firstPage()
-        }
+            }
+        })
     }
     
     //MARK: function selection viewcontroller
     func firstPage() {
-        
         if state {
             let vc = LandingScreenViewController.initWithOwnNib()
             self.navigationController?.pushViewController(vc, animated: false)

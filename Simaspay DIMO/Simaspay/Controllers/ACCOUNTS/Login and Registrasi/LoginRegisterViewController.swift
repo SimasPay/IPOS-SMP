@@ -24,7 +24,7 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showBackButton()
+        self.showBackButton(subMenu: false)
         
         lblEntryHPNumber.font = UIFont.systemFont(ofSize: 18)
         lblEntryHPNumber.textColor = UIColor.init(hexString: color_text_default)

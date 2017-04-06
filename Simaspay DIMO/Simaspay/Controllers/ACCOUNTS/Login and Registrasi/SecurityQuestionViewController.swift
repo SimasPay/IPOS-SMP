@@ -31,8 +31,8 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showBackButton()
-        self.showTitle("Pendaftaran Akun E-money")
+        self.showBackButton(subMenu: false)
+        self.showTitle("Pendaftaran Akun E-money", subMenu: false)
         lblInfo.font = UIFont.systemFont(ofSize: 18)
         lblInfo.textColor = UIColor.init(hexString: color_text_default)
         lblInfo.numberOfLines = 3;
@@ -133,6 +133,19 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
     //MARK: Action button Register
     @IBAction func actionBtnRegister(_ sender: AnyObject) {
         
+        var message = "";
+        if (!tfQuestion.isValid() || self.tfQuestion.text == getString("SecurityQuestionTextfieldQuestion")) {
+            message = "Masukkan pertanyaan Anda"
+        } else if (!tfAnswer.isValid()) {
+            message = "Masukkan jawaban Anda"
+        }
+        
+        if (message.characters.count > 0) {
+            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
+            return
+        }
+
+        
         //Dictionary data for request OTP
         DLog("\(dictForAcceptedOTP as NSDictionary)")
         let vc = ConfirmationViewController.initWithOwnNib()
@@ -162,8 +175,9 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
         dict1[SECURITY_ANSWER] = self.tfAnswer.text!
 
         let temp = NSMutableDictionary(dictionary: dict1);
-        temp .addEntries(from: dictForAcceptedOTP as! [AnyHashable : Any])
+        temp.addEntries(from: dictForAcceptedOTP as! [AnyHashable : Any])
         vc.dictForAcceptedOTP = temp as NSDictionary
+        vc.useNavigation = false
         self.navigationController?.pushViewController(vc, animated: false)
     }
 

@@ -1,4 +1,4 @@
-//
+    //
 //  BaseViewController.swift
 //  Simaspay
 //
@@ -20,6 +20,7 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNeedsStatusBarAppearanceUpdate()
+        UIApplication.shared.statusBarView?.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
         showBackgroundImage()
         
         if (toolbar == nil) {
@@ -69,22 +70,31 @@ class BaseViewController: UIViewController {
     }
     
     //MARK: Show Title ViewController
-    func showTitle(_ stringTitle : String) {
+    func showTitle(_ stringTitle : String, subMenu: Bool = true) {
         if (lblTitle == nil) {
             lblTitle = BaseLabel();
             lblTitle.frame = CGRect(x: 0, y: 20, width:DIMOUtility.screenSize().width, height: 44)
             lblTitle.textAlignment = .center
         }
-        lblTitle.text = stringTitle;
+        if (subMenu){
+            lblTitle.textColor = UIColor.white
+        }
+        lblTitle.text = stringTitle
         view.addSubview(lblTitle)
     }
     
    //MARK: Show back Button
-    func showBackButton() {
+    func showBackButton(subMenu: Bool = true) {
         if (btnBack == nil) {
-            btnBack = BaseButton(frame: CGRect(x: 0, y: 20, width: 44, height: 44))
+            if subMenu {
+                btnBack = BaseButton(frame: CGRect(x: 0, y: 20, width: 44, height: 44))
+                btnBack.setImage(UIImage(named: "go_back_arrow"), for: UIControlState())
+                btnBack.imageEdgeInsets = UIEdgeInsetsMake(14,14,14,14)
+            } else {
+                btnBack = BaseButton(frame: CGRect(x: 0, y: 20, width: 44, height: 44))
+                btnBack.setImage(UIImage(named: "btnBack"), for: UIControlState())
+            }
             btnBack.addTarget(self, action: #selector(BaseViewController.btnBackAction), for: UIControlEvents.touchUpInside)
-            btnBack.setImage(UIImage(named: "btnBack"), for: UIControlState())
         }
         view.addSubview(btnBack)
     }

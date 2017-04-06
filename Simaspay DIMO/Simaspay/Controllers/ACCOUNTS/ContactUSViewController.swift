@@ -25,7 +25,7 @@ class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
 
         self.showTitle(getString("ContactUsTitle"))
-        self.showBackButton()
+        self.showBackButton(subMenu: false)
         
         tableView.backgroundColor = UIColor.white
         tableView.layer.cornerRadius = 5

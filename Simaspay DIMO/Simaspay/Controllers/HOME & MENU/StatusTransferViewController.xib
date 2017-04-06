@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,20 +24,31 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YEM-he-ZHh">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                    <color key="backgroundColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="65" id="j9o-Ae-YnY"/>
+                    </constraints>
+                </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8T-bs-iC8">
+                    <rect key="frame" x="0.0" y="65" width="375" height="602"/>
                     <subviews>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KoA-xj-QkW">
+                            <rect key="frame" x="25" y="25" width="325" height="250"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_success" translatesAutoresizingMaskIntoConstraints="NO" id="LcM-lO-MgQ">
+                                    <rect key="frame" x="137.5" y="16" width="50" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="774-RH-PXR"/>
                                         <constraint firstAttribute="height" constant="50" id="PcF-FA-2LD"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZQ-FG-OOb" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="16" y="74" width="293" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="KUL-9m-j3a"/>
                                     </constraints>
@@ -43,6 +57,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ro6-XG-2tS" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="16" y="100" width="293" height="18"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="18" id="9ho-ew-IBk"/>
                                     </constraints>
@@ -51,12 +66,14 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U3A-QF-fpN">
+                                    <rect key="frame" x="16" y="134" width="293" height="1"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="5d5-Wr-0CB"/>
                                     </constraints>
                                 </view>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VAw-IX-F6C">
+                                    <rect key="frame" x="0.0" y="135" width="325" height="100"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="100" id="5B7-oo-Tvt"/>
@@ -83,6 +100,7 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCs-Hg-YTC" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                            <rect key="frame" x="87.5" y="304" width="200" height="48"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="48" id="2cY-hU-Ran"/>
                                 <constraint firstAttribute="width" constant="200" id="qwT-8y-pjz"/>
@@ -108,8 +126,11 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="g8T-bs-iC8" secondAttribute="bottom" id="359-sC-cr7"/>
-                <constraint firstItem="g8T-bs-iC8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="MQt-Du-NKf"/>
+                <constraint firstItem="g8T-bs-iC8" firstAttribute="top" secondItem="YEM-he-ZHh" secondAttribute="bottom" id="Sa6-KQ-5Yw"/>
+                <constraint firstItem="YEM-he-ZHh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Xmx-ub-c0D"/>
                 <constraint firstItem="g8T-bs-iC8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bbP-bz-1ix"/>
+                <constraint firstItem="YEM-he-ZHh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ib8-Mj-qgl"/>
+                <constraint firstAttribute="trailing" secondItem="YEM-he-ZHh" secondAttribute="trailing" id="v4v-Kj-fyC"/>
                 <constraint firstAttribute="trailing" secondItem="g8T-bs-iC8" secondAttribute="trailing" id="z5M-oS-3t2"/>
             </constraints>
         </view>

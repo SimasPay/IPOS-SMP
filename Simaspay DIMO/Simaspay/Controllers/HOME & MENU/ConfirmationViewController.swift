@@ -10,6 +10,7 @@ import UIKit
 
 class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
     
+    @IBOutlet weak var viewNavigation: UIView!
     
     @IBOutlet var btnTrue: BaseButton!
     @IBOutlet var btnFalse: BaseButton!
@@ -36,6 +37,9 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
     //Dictionary send ORP
     var dictForAcceptedOTP: NSDictionary!
     
+    //Value to set background navigation
+    var useNavigation: Bool = true
+    
     static func initWithOwnNib() -> ConfirmationViewController {
         let obj:ConfirmationViewController = ConfirmationViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
@@ -43,8 +47,11 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if (!useNavigation) {
+            self.viewNavigation.backgroundColor = UIColor.clear
+        }
         self.showTitle(getString("ConfirmationTitle"))
-        self.showBackButton()
+        self.showBackButton(subMenu: false)
         self.view.backgroundColor = UIColor.init(hexString: color_background)
         
         DLog("\(data)")

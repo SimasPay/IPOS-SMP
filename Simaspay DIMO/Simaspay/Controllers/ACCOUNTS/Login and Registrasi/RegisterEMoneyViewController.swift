@@ -29,30 +29,35 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.showBackButton()
-        self.showTitle("Pendaftaran Akun E-money")
+        self.showBackButton(subMenu: false)
+        self.showTitle("Pendaftaran Akun E-money", subMenu: false)
         btnNext.updateButtonType1()
         btnNext.setTitle("Lanjut", for: .normal)
         
         tfUsername.updateTextFieldWithImageNamed("icon_username")
         tfUsername.placeholder = "Nama Lengkap"
         tfUsername.delegate = self
+        tfUsername.tag = 1
         
         tfEmail.updateTextFieldWithImageNamed("icon_email")
         tfEmail.placeholder = "E-mail (bila ada)"
         tfEmail.delegate = self
+        tfEmail.tag = 2
         
         tfHPNumber.updateTextFieldWithImageNamed("icon_Mobile")
         tfHPNumber.text = MDNString
         tfHPNumber.delegate = self
+        tfHPNumber.tag = 3
         
         tfMpin.updateTextFieldWithImageNamed("icon_Mpin")
         tfMpin.placeholder = "mPIN"
         tfMpin.delegate = self
+        tfMpin.tag = 4
         
         tfConfirmMpin.updateTextFieldWithImageNamed("icon_Mpin")
         tfConfirmMpin.placeholder = "Konfirmasi mPIN"
         tfConfirmMpin.delegate = self
+        tfConfirmMpin.tag = 5
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,8 +80,10 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
         var message = "";
         if (!tfUsername.isValid()) {
             message = "Masukkan username Anda"
-        } else if !(tfEmail.text! as NSString).isEmail() {
-            message = "Email Anda tidak valid"
+        } else if (tfEmail.text != "") {
+            if !(tfEmail.text! as NSString).isEmail(){
+                message = "Email Anda tidak valid"
+            }
         } else if (tfMpin.length() < 6) {
             message = "Pin harus 6 digit"
         } else if !((tfConfirmMpin.text?.isEqual(tfMpin.text))!) {
@@ -128,8 +135,26 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
         let newString: NSString =
             currentString.replacingCharacters(in: range, with: string) as NSString
         return newString.length <= maxLength
+    }
+    
+    //MARK: handle next and go keyboard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
+        let nextTage=textField.tag+1;
+        // Try to find next responder
+        var nextResponder=textField.superview?.viewWithTag(nextTage) as UIResponder!
+        if (!(textField.superview?.viewWithTag(nextTage)?.isUserInteractionEnabled)!) {
+           nextResponder=textField.superview?.viewWithTag(nextTage+1) as UIResponder!
+        }
         
+        if (nextResponder != nil){
+            // Found next responder, so set it.
+            nextResponder?.becomeFirstResponder()
+        } else {
+            // Not found, so remove keyboard
+            textField.resignFirstResponder()
+        }
+        return false // We do not want UITextField to insert line-breaks.
     }
 
     //MARK: Registration process get security question

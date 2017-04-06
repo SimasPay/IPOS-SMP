@@ -49,6 +49,9 @@ class ActivationSuccessViewController: BaseViewController {
             if (vc.isKind(of: LoginRegisterViewController.self)) {
                 self.navigationController!.popToViewController(vc, animated: true);
                 return
+            } else if (vc.isKind(of: LandingScreenViewController.self)) {
+                self.navigationController!.popToViewController(vc, animated: true);
+                return
             }
         }
         self.navigationController!.popToRootViewController(animated: true)

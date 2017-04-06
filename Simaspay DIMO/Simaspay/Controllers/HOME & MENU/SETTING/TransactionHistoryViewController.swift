@@ -30,7 +30,6 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
         super.viewDidLoad()
         self.showTitle(getString("TransactionHistoryTitle"))
         self.showBackButton()
-        
         self.checkTransactionHistory()
         
         
