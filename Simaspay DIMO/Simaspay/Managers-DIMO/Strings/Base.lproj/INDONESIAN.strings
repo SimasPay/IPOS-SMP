@@ -72,6 +72,9 @@
 "TransferLebelAmount" = "Jumlah";
 "TransferLebelMPIN" = "mPIN";
 "TransferButtonNext" = "Lanjut";
+"TransferEMoneyTitle" = "Transfer - E-money";
+"TransferLebelMdn" = "Nomor Handphone Tujuan";
+
 
 //OTHERS
 "ErrorMessageRequestFailed" = "Request Failed.";
@@ -88,6 +91,7 @@
 "ConfirmationOTPMessage" = "Kode OTP dan link telah dikirimkan ke nomor %@. Masukkan kode tersebut atau akses link yang tersedia.";
 "ConfirmationOTPResendButton" = "Kirim Ulang";
 "ConfirmationOTPTextFieldPlaceholder" = "6 digit kode OTP";
+"ConfirmationOwnMdn" = "Nama Pemilik Rekening";
 
 //Registration
 "RegistrationLabelInfoSuccess" = "Registrasi Berhasil!";

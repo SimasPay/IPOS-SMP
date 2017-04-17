@@ -16,6 +16,7 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
     @IBOutlet weak var tfQuestion: BaseTextField!
     @IBOutlet weak var viewTFQuetion: UIView!
     @IBOutlet weak var viewTfAnswer: UIView!
+    @IBOutlet weak var constraintHeightBtn: NSLayoutConstraint!
    
     var pickOption:[String]!
     var questionData : NSArray!
@@ -23,12 +24,13 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
     var MDNString:String!
     var questionArray: [String] = []
     var dictForAcceptedOTP: NSDictionary!
+    let pickerView = UIPickerView()
     
     static func initWithOwnNib() -> SecurityQuestionViewController {
         let obj:SecurityQuestionViewController = SecurityQuestionViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
     }
-
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         self.showBackButton(subMenu: false)
@@ -44,6 +46,7 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
         tfQuestion.addInset()
         tfQuestion.rightViewMode =  UITextFieldViewMode.always
         tfQuestion.updateTextFieldWithRightImageNamed("icon_arrow_down")
+        
         
         tfAnswer.placeholder = getString("SecurityQuestionTextfieldAnswerPlaceholder")
         tfAnswer.addInset()
@@ -61,8 +64,6 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
             questionArray.append((question as! NSDictionary).value(forKey: "question") as! String)
         }
         self.pickOption = questionArray
-        let pickerView = UIPickerView()
-        
         pickerView.delegate = self
         tfQuestion.delegate = self
         tfQuestion.font = UIFont.systemFont(ofSize: 14)
@@ -117,16 +118,24 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
         self.tfQuestion.text = pickOption[row]
     }
     
+    @IBAction func actionShowPicker(_ sender: Any) {
+        
+    }
     
     //MARK: keyboard Show set last object above keyboard
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == tfQuestion{
+            constraintHeightBtn.constant = 56
             BaseViewController.lastObjectForKeyboardDetector = self.tfQuestion.superview
         }else if textField == tfAnswer{
             BaseViewController.lastObjectForKeyboardDetector = self.tfAnswer.superview
         }
         updateUIWhenKeyboardShow()
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        constraintHeightBtn.constant = 0
     }
 
 

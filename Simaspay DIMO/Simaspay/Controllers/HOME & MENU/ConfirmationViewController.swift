@@ -49,9 +49,12 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
         super.viewDidLoad()
         if (!useNavigation) {
             self.viewNavigation.backgroundColor = UIColor.clear
+            self.showBackButton(subMenu: false)
+        } else {
+            self.showBackButton()
         }
         self.showTitle(getString("ConfirmationTitle"))
-        self.showBackButton(subMenu: false)
+        
         self.view.backgroundColor = UIColor.init(hexString: color_background)
         
         DLog("\(data)")
@@ -287,11 +290,15 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
         
         DLog("\(OTP)")
         let dict = NSMutableDictionary()
-        dict[ACTIVATION_OTP] = simasPayRSAencryption(OTP)
         let temp = NSMutableDictionary(dictionary: dict);
-        temp .addEntries(from: dictForAcceptedOTP as! [AnyHashable : Any])
-        dictForAcceptedOTP = temp as NSDictionary
+        temp.addEntries(from: dictForAcceptedOTP as! [AnyHashable : Any])
         
+        if ((temp.value(forKey: MFAOTP)) != nil) {
+            temp[MFAOTP] = simasPayRSAencryption(OTP)
+        } else {
+            temp[ACTIVATION_OTP] = simasPayRSAencryption(OTP)
+        }
+        dictForAcceptedOTP = temp as NSDictionary
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         
         var sessionCheck = false
@@ -345,8 +352,8 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
                             }
                         }
                     }, cancelButtonTitle: "OK")
-                    self.navigationController!.popToRootViewController(animated: true)
-                    return
+                    // self.navigationController!.popToRootViewController(animated: true)
+                    // return
                 }
                 
                 

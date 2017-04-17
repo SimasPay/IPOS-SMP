@@ -38,14 +38,11 @@ class ListTransferViewController: BaseViewController,UITableViewDelegate, UITabl
                           "title" : "Bank Lainnya",
                           "action" : TransferOtherBankListViewController.initWithOwnNib()],
                           [
-                          "title" : "Laku Pandai",
-                          "action" : TransferBankViewController.initWithOwnNib(type: TransferType.TransferTypeSinarmas)],
-                          [
                           "title" : "Uangku",
-                          "action" : TransferBankViewController.initWithOwnNib(type: TransferType.TransferTypeSinarmas)],
+                          "action" : TransferBankViewController.initWithOwnNib(type: TransferType.TransferTypeUangku)],
                           [
                           "title" :"E-money Lainnya",
-                          "action" : TransferBankViewController.initWithOwnNib(type: TransferType.TransferTypeSinarmas)]
+                          "action" : TransferToEMoney.initWithOwnNib()]
                         ];
         
         self.tableView.reloadData()

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3535ED961E9DE5BE007D7942 /* TransferToEMoney.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535ED951E9DE5BE007D7942 /* TransferToEMoney.swift */; };
+		3535ED981E9DE616007D7942 /* TransferToEMoney.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3535ED971E9DE616007D7942 /* TransferToEMoney.xib */; };
 		353C2BA51E9224030082C250 /* libTestFairy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BA21E9224030082C250 /* libTestFairy.a */; };
 		353C2BA61E9224030082C250 /* upload-dsym.sh in Resources */ = {isa = PBXBuildFile; fileRef = 353C2BA41E9224030082C250 /* upload-dsym.sh */; };
 		353C2BAD1E9226E60082C250 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BA81E9226E60082C250 /* AVFoundation.framework */; };
@@ -14,6 +16,8 @@
 		353C2BAF1E9226E60082C250 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BAA1E9226E60082C250 /* CoreMotion.framework */; };
 		353C2BB01E9226E60082C250 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BAB1E9226E60082C250 /* OpenGLES.framework */; };
 		353C2BB11E9226E60082C250 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BAC1E9226E60082C250 /* SystemConfiguration.framework */; };
+		353D29521EA48E3E00E94B74 /* SuccesTransfer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 353D29511EA48E3E00E94B74 /* SuccesTransfer.xib */; };
+		353D29541EA48E5E00E94B74 /* SuccesTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353D29531EA48E5E00E94B74 /* SuccesTransfer.swift */; };
 		356CC84A1E288DCE00E25355 /* TransactionPeriodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356CC8481E288DCE00E25355 /* TransactionPeriodViewController.swift */; };
 		356CC84B1E288DCE00E25355 /* TransactionPeriodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 356CC8491E288DCE00E25355 /* TransactionPeriodViewController.xib */; };
 		359959ED1E2623D3007EB516 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359959EC1E2623D3007EB516 /* Utilities.swift */; };
@@ -99,6 +103,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3535ED951E9DE5BE007D7942 /* TransferToEMoney.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferToEMoney.swift; sourceTree = "<group>"; };
+		3535ED971E9DE616007D7942 /* TransferToEMoney.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransferToEMoney.xib; sourceTree = "<group>"; };
 		353C2BA21E9224030082C250 /* libTestFairy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFairy.a; sourceTree = "<group>"; };
 		353C2BA31E9224030082C250 /* TestFairy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFairy.h; sourceTree = "<group>"; };
 		353C2BA41E9224030082C250 /* upload-dsym.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "upload-dsym.sh"; sourceTree = "<group>"; };
@@ -107,6 +113,8 @@
 		353C2BAA1E9226E60082C250 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		353C2BAB1E9226E60082C250 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		353C2BAC1E9226E60082C250 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		353D29511EA48E3E00E94B74 /* SuccesTransfer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccesTransfer.xib; sourceTree = "<group>"; };
+		353D29531EA48E5E00E94B74 /* SuccesTransfer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccesTransfer.swift; sourceTree = "<group>"; };
 		356CC8481E288DCE00E25355 /* TransactionPeriodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionPeriodViewController.swift; sourceTree = "<group>"; };
 		356CC8491E288DCE00E25355 /* TransactionPeriodViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionPeriodViewController.xib; sourceTree = "<group>"; };
 		359959EC1E2623D3007EB516 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = Manager/Utilities.swift; sourceTree = "<group>"; };
@@ -375,6 +383,10 @@
 				35995A9B1E262B14007EB516 /* TransferBankViewController.xib */,
 				35995A9C1E262B14007EB516 /* TransferOtherBankListViewController.swift */,
 				35995A9D1E262B14007EB516 /* TransferOtherBankListViewController.xib */,
+				3535ED951E9DE5BE007D7942 /* TransferToEMoney.swift */,
+				3535ED971E9DE616007D7942 /* TransferToEMoney.xib */,
+				353D29531EA48E5E00E94B74 /* SuccesTransfer.swift */,
+				353D29511EA48E3E00E94B74 /* SuccesTransfer.xib */,
 			);
 			path = "TRANSFER BANK";
 			sourceTree = "<group>";
@@ -588,7 +600,9 @@
 				35995AAB1E262B14007EB516 /* EULAViewController.xib in Resources */,
 				35995AA71E262B14007EB516 /* ActivationViewController.xib in Resources */,
 				35995AB91E262B14007EB516 /* ConfirmationViewController.xib in Resources */,
+				353D29521EA48E3E00E94B74 /* SuccesTransfer.xib in Resources */,
 				35995AD11E262B14007EB516 /* SplashScreenViewController.xib in Resources */,
+				3535ED981E9DE616007D7942 /* TransferToEMoney.xib in Resources */,
 				35995AA31E262B14007EB516 /* ActivationPinViewController.xib in Resources */,
 				356CC84B1E288DCE00E25355 /* TransactionPeriodViewController.xib in Resources */,
 				BE1772921D92859B00A27E06 /* LaunchScreen.storyboard in Resources */,
@@ -632,6 +646,7 @@
 				35995AA81E262B14007EB516 /* ContactUSViewController.swift in Sources */,
 				BE1772881D92859B00A27E06 /* AppDelegate.swift in Sources */,
 				35995AB81E262B14007EB516 /* ConfirmationViewController.swift in Sources */,
+				353D29541EA48E5E00E94B74 /* SuccesTransfer.swift in Sources */,
 				BE1773001D9285DE00A27E06 /* DAFHTTPRequestOperation.m in Sources */,
 				35995ACE1E262B14007EB516 /* LandingScreenViewController.swift in Sources */,
 				35995AB01E262B14007EB516 /* LoginRegisterViewController.swift in Sources */,
@@ -650,6 +665,7 @@
 				BE204A781D93CBFB0013A483 /* BaseTextField.swift in Sources */,
 				35995ACA1E262B14007EB516 /* TransferBankViewController.swift in Sources */,
 				35995AAC1E262B14007EB516 /* BankEMoneyViewController.swift in Sources */,
+				3535ED961E9DE5BE007D7942 /* TransferToEMoney.swift in Sources */,
 				BE1773061D9285DE00A27E06 /* DAFURLRequestSerialization.m in Sources */,
 				BEC415E11D928E84000C3CF4 /* BaseLabel.swift in Sources */,
 				BEC416021D9385B9000C3CF4 /* DIMOAPIManager.m in Sources */,

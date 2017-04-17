@@ -35,6 +35,12 @@ let SECURITY_ANSWER = "securityAnswer"
 let BANK_ID = "bankID"
 let FROM_DATE = "fromDate"
 let TO_DATE = "toDate"
+let DESTMDN = "destMDN"
+let DESTBANKACCOUNT = "destBankAccount"
+let AMOUNT = "amount"
+let TRANSFER = "Transfer"
+let TRANSFERID = "transferID"
+let CONFIRMED = "confirmed"
 
 
 // MARK: VALUE for keys start here
@@ -58,10 +64,12 @@ let TXN_SUBSCRIBER_KTP_REGISTRATION = "SubscriberRegistration"
 let TXN_ACCOUNT_BALANCE = "CheckBalance"
 let TXN_ACCOUNT_HISTORY = "History"
 let TXN_DownLoad_History_PDF = "DownloadHistoryAsPDF"
+let TXN_TRANSFER_INQUIRY = "TransferInquiry"
 // MARK: Service
 let SERVICE_ACCOUNT = "Account"
 let SERVICE_PAYMENT = "Payment"
 let SOURCEPOCKETCODE = "sourcePocketCode"
+let DESTPOCKETCODE = "destPocketCode"
 
 // MARK: others
 let ACTIVITY_STATUS = "true"
@@ -86,11 +94,17 @@ let SIMASPAY_ACTIVATION__INQUERY_SUCCESS_CODE = "2040"
 let SIMASPAY_ACTIVATION__CONFIRMATION_SUCCESS_CODE = "52"
 let SIMASPAY_ACTIVATION__CONFIRMATION_SUCCESS_CODE1 = "2032"
 let SIMASPAY_REGISTRATION__EMONEY_SUCCESS_CODE = "2180"
+let SIMASPAY_TRANSFER_TO__EMONEY_SUCCESS_CODE = "72"
+let SIMASPAY_CONFIRM_TRANSFER_TO__EMONEY_SUCCESS_CODE = "293"
 
 //MARK: User defult
 let SIMASPAY_PUBLIC_KEY = "simasPayPublicKey"
 let ACCOUNT_NUMBER = "Account_Number"
 let USERNAME = "Username"
+
+let ACCOUNTTYPEEMMONEY = "1"
+let ACCOUNTTYPEREGULER = "2"
+let ACCOUNTTYPELAKUPANDAI = "6"
 
 
 let TERMS_CONDITIONS = "https://www.banksinarmas.com/PersonalBanking/IB.do?action=terms"
