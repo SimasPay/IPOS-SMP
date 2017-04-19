@@ -54,9 +54,9 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HgB-3c-7Xj">
-                            <rect key="frame" x="-0.5" y="-0.5" width="280" height="0.0"/>
+                            <rect key="frame" x="-0.5" y="-0.5" width="280" height="56"/>
                             <constraints>
-                                <constraint firstAttribute="height" id="aJC-4H-Cev"/>
+                                <constraint firstAttribute="height" constant="56" id="aJC-4H-Cev"/>
                             </constraints>
                             <connections>
                                 <action selector="actionShowPicker:" destination="-1" eventType="touchUpInside" id="Yhj-2N-qw1"/>

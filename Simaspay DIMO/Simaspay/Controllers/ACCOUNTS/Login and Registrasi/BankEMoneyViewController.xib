@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -39,7 +39,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XFZ-3l-h59">
-                    <rect key="frame" x="47.5" y="268.5" width="280" height="130"/>
+                    <rect key="frame" x="47" y="268.5" width="280" height="130"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="130" id="1OK-eQ-3sr"/>
@@ -50,12 +50,33 @@
                         <outlet property="delegate" destination="-1" id="E52-TS-Qc0"/>
                     </connections>
                 </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LiC-B2-rgS">
+                    <rect key="frame" x="170" y="635" width="34" height="12"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6St-Vk-GO5">
+                    <rect key="frame" x="167.5" y="600" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="8ld-Lr-jjP"/>
+                        <constraint firstAttribute="width" constant="40" id="YCq-8C-5zV"/>
+                    </constraints>
+                    <state key="normal" image="btn_logout"/>
+                    <connections>
+                        <action selector="actionLogout:" destination="-1" eventType="touchUpInside" id="94X-LS-I3p"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="XFZ-3l-h59" firstAttribute="top" secondItem="KNl-to-QN1" secondAttribute="bottom" constant="16" id="0vs-vU-sYH"/>
                 <constraint firstItem="KNl-to-QN1" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Cbe-tH-fvz"/>
+                <constraint firstItem="LiC-B2-rgS" firstAttribute="top" secondItem="6St-Vk-GO5" secondAttribute="bottom" constant="-5" id="DIf-cH-zeu"/>
+                <constraint firstItem="6St-Vk-GO5" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="F6f-pJ-gcB"/>
                 <constraint firstItem="WMW-Sr-415" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Hsj-do-SMI"/>
+                <constraint firstItem="LiC-B2-rgS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Hst-oY-1jI"/>
+                <constraint firstAttribute="bottom" secondItem="LiC-B2-rgS" secondAttribute="bottom" constant="20" id="K7s-gw-eJj"/>
                 <constraint firstItem="KNl-to-QN1" firstAttribute="top" secondItem="WMW-Sr-415" secondAttribute="bottom" constant="35" id="WAw-Ho-5v5"/>
                 <constraint firstItem="XFZ-3l-h59" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="pqA-aS-Noa"/>
                 <constraint firstItem="XFZ-3l-h59" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="wmE-aq-AQq"/>
@@ -64,6 +85,7 @@
         </view>
     </objects>
     <resources>
+        <image name="btn_logout" width="28" height="28"/>
         <image name="logo_Image" width="225" height="50"/>
     </resources>
 </document>

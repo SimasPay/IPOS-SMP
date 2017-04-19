@@ -69,6 +69,8 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
         self.btnFalse.updateButtonType3()
         self.btnFalse.setTitle(getString("ConfirmationButtonFalse"), for: .normal)
         btnTrue.addTarget(self, action: #selector(ConfirmationViewController.buttonStatus) , for: .touchUpInside)
+        btnFalse.addTarget(self, action: #selector(ConfirmationViewController.cancel), for: .touchUpInside)
+        
         
     }
     
@@ -163,11 +165,25 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
         self.constraintViewContent.constant = height
     }
     
+    //MARK: Action cancel
+    func cancel()  {
+        navigationController?.popViewController(animated: true)
+    }
+    
     
     //function true button
     func buttonStatus()  {
         self.requestOTP()
         self.showOTP()
+    }
+    
+    func resendTheOTP() {
+        self.requestOTP()
+        timerCount = 60
+        lblTimer.text = "01:00"
+        lblTimer.isHidden = false
+        btnResandOTP.isHidden = true
+       
     }
     
     //MARK: Action button for OTP alert
@@ -215,12 +231,12 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
         
         clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ActivationPinViewController.countDown), userInfo: nil, repeats: true)
         
-        btnResandOTP = BaseButton(frame: CGRect(x: 10, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 3, width: temp.frame.size.width, height: 15))
+        btnResandOTP = BaseButton(frame: CGRect(x: 10, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height - 10, width: temp.frame.size.width, height: 25))
         btnResandOTP.setTitle(getString("ConfirmationOTPResendButton"), for: .normal)
         btnResandOTP.setTitleColor(UIColor.init(hexString: color_btn_alert), for: .normal)
         btnResandOTP.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
         btnResandOTP.titleLabel?.textAlignment = .center
-        btnResandOTP.addTarget(self, action: #selector(ActivationPinViewController.resendOTP), for: .touchUpInside)
+        btnResandOTP.addTarget(self, action: #selector(self.resendTheOTP), for: .touchUpInside)
         btnResandOTP.isHidden = true
         
         lblTimer = BaseLabel(frame: CGRect(x: 10, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 3, width: temp.frame.size.width, height: 15))
@@ -337,8 +353,12 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
                 if (messagecode == SIMASPAY_REGISTRATION__EMONEY_SUCCESS_CODE){
                     let vc = ActivationSuccessViewController.initWithMessageInfo(message: getString("RegistrationLabelInfoSuccessMessage"), title: getString("RegistrationLabelInfoSuccess"))
                     self.navigationController?.pushViewController(vc, animated: false)
-                    
-                    
+                
+                } else if (messagecode == SIMASPAY_CONFIRM_TRANSFER_TO__EMONEY_SUCCESS_CODE || messagecode == SIMASPAY_BANK_TRANSFER_TO__EMONEY_SUCCESS_CODE) {
+                    let vc = SuccesTransferController.initWithOwnNib()
+                    vc.data = self.data
+                    vc.idTran =  responseDict.value(forKeyPath: "sctlID.text") as! String
+                    self.navigationController?.pushViewController(vc, animated: true)
                 } else {
                     DIMOAlertView.showNormalTitle("Error", message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];

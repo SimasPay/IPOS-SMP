@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TransferToEMoney" customModule="Simaspay" customModuleProvider="target">
+            <connections>
+                <outlet property="LabelAmount" destination="VO6-GB-m5t" id="b4r-KI-a0A"/>
+                <outlet property="btnNext" destination="XSW-OK-mnx" id="3ea-0J-uOf"/>
+                <outlet property="constraintBottomScroll" destination="HXw-20-FmP" id="st1-I3-xOy"/>
+                <outlet property="inputAmount" destination="agR-1N-7hY" id="CTE-zN-U0v"/>
+                <outlet property="inputMdn" destination="btd-3W-dfq" id="IaP-MB-Yg4"/>
+                <outlet property="inputmPin" destination="Tgs-eb-XKH" id="ayc-BL-oFl"/>
+                <outlet property="labelMdn" destination="seZ-tN-R8p" id="bPl-gL-Ubf"/>
+                <outlet property="labelmPin" destination="mf7-xe-jQ7" id="Qzh-Z9-eei"/>
+                <outlet property="view" destination="iN0-l3-epB" id="bsP-qy-wjO"/>
+                <outlet property="viewBackground" destination="Qwt-h4-Wrg" id="m3e-nY-f94"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kba-IV-kZz">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                    <color key="backgroundColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="65" id="Y0c-9X-6tK"/>
+                    </constraints>
+                </view>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LjI-0z-64h">
+                    <rect key="frame" x="0.0" y="65" width="375" height="602"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qwt-h4-Wrg">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="594"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="seZ-tN-R8p" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="28" y="25" width="319" height="16"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="16" id="Alk-2i-ajv"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="btd-3W-dfq" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="28" y="51" width="319" height="40"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="IMv-3j-te3"/>
+                                    </constraints>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                </textField>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VO6-GB-m5t" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="28" y="111" width="319" height="16"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="agR-1N-7hY" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="28" y="135" width="319" height="40"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                </textField>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mf7-xe-jQ7" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="28" y="195" width="319" height="16"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tgs-eb-XKH" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="28" y="221" width="319" height="40"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
+                                </textField>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSW-OK-mnx" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="88" y="290" width="200" height="48"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="48" id="bis-fh-sxY"/>
+                                        <constraint firstAttribute="width" constant="200" id="nX2-7l-P0p"/>
+                                    </constraints>
+                                    <connections>
+                                        <action selector="actionProses:" destination="-1" eventType="touchUpInside" id="312-z5-beb"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="XSW-OK-mnx" secondAttribute="bottom" constant="30" id="0Mv-tP-twz"/>
+                                <constraint firstItem="btd-3W-dfq" firstAttribute="leading" secondItem="seZ-tN-R8p" secondAttribute="leading" id="1Y2-n2-E0b"/>
+                                <constraint firstItem="agR-1N-7hY" firstAttribute="height" secondItem="btd-3W-dfq" secondAttribute="height" id="2qx-yZ-f3H"/>
+                                <constraint firstItem="Tgs-eb-XKH" firstAttribute="top" secondItem="mf7-xe-jQ7" secondAttribute="bottom" constant="10" id="56V-xa-pGv"/>
+                                <constraint firstItem="mf7-xe-jQ7" firstAttribute="top" secondItem="agR-1N-7hY" secondAttribute="bottom" constant="20" id="Bfq-LL-UNW"/>
+                                <constraint firstItem="agR-1N-7hY" firstAttribute="top" secondItem="VO6-GB-m5t" secondAttribute="bottom" constant="8" id="Cx9-lb-eVv"/>
+                                <constraint firstItem="VO6-GB-m5t" firstAttribute="height" secondItem="seZ-tN-R8p" secondAttribute="height" id="Huo-Uc-LWL"/>
+                                <constraint firstItem="agR-1N-7hY" firstAttribute="trailing" secondItem="VO6-GB-m5t" secondAttribute="trailing" id="IfU-8V-e1f"/>
+                                <constraint firstItem="btd-3W-dfq" firstAttribute="top" secondItem="seZ-tN-R8p" secondAttribute="bottom" constant="10" id="JtZ-jz-aYW"/>
+                                <constraint firstItem="mf7-xe-jQ7" firstAttribute="trailing" secondItem="agR-1N-7hY" secondAttribute="trailing" id="Oxx-ld-e5J"/>
+                                <constraint firstItem="VO6-GB-m5t" firstAttribute="trailing" secondItem="btd-3W-dfq" secondAttribute="trailing" id="PCc-ht-XBi"/>
+                                <constraint firstItem="mf7-xe-jQ7" firstAttribute="height" secondItem="VO6-GB-m5t" secondAttribute="height" id="Peb-aB-8Yt"/>
+                                <constraint firstItem="Tgs-eb-XKH" firstAttribute="leading" secondItem="mf7-xe-jQ7" secondAttribute="leading" id="VpL-dD-cKb"/>
+                                <constraint firstItem="agR-1N-7hY" firstAttribute="leading" secondItem="VO6-GB-m5t" secondAttribute="leading" id="aWa-CG-RGp"/>
+                                <constraint firstItem="seZ-tN-R8p" firstAttribute="top" secondItem="Qwt-h4-Wrg" secondAttribute="top" constant="25" id="b9X-cm-5ct"/>
+                                <constraint firstItem="VO6-GB-m5t" firstAttribute="leading" secondItem="btd-3W-dfq" secondAttribute="leading" id="cGF-Yp-zkG"/>
+                                <constraint firstAttribute="trailing" secondItem="seZ-tN-R8p" secondAttribute="trailing" constant="28" id="cUq-Mz-zqE"/>
+                                <constraint firstItem="XSW-OK-mnx" firstAttribute="centerX" secondItem="Qwt-h4-Wrg" secondAttribute="centerX" id="dHY-bT-TN7"/>
+                                <constraint firstItem="XSW-OK-mnx" firstAttribute="top" secondItem="Tgs-eb-XKH" secondAttribute="bottom" constant="29" id="hMb-2R-nfP"/>
+                                <constraint firstItem="Tgs-eb-XKH" firstAttribute="trailing" secondItem="mf7-xe-jQ7" secondAttribute="trailing" id="hnl-Zx-a7l"/>
+                                <constraint firstItem="seZ-tN-R8p" firstAttribute="leading" secondItem="Qwt-h4-Wrg" secondAttribute="leading" constant="28" id="jw3-BD-gWE"/>
+                                <constraint firstAttribute="height" priority="250" constant="594" placeholder="YES" id="kWj-Qe-Lfd"/>
+                                <constraint firstItem="Tgs-eb-XKH" firstAttribute="height" secondItem="agR-1N-7hY" secondAttribute="height" id="kzK-78-DGu"/>
+                                <constraint firstItem="VO6-GB-m5t" firstAttribute="top" secondItem="btd-3W-dfq" secondAttribute="bottom" constant="20" id="mGl-pW-WGK"/>
+                                <constraint firstItem="btd-3W-dfq" firstAttribute="trailing" secondItem="seZ-tN-R8p" secondAttribute="trailing" id="muO-S6-DK4"/>
+                                <constraint firstItem="mf7-xe-jQ7" firstAttribute="leading" secondItem="agR-1N-7hY" secondAttribute="leading" id="ytR-Xy-a6g"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Qwt-h4-Wrg" secondAttribute="bottom" id="67Y-vA-jS6"/>
+                        <constraint firstItem="Qwt-h4-Wrg" firstAttribute="top" secondItem="LjI-0z-64h" secondAttribute="top" id="Q61-px-HIs"/>
+                        <constraint firstItem="Qwt-h4-Wrg" firstAttribute="leading" secondItem="LjI-0z-64h" secondAttribute="leading" id="YC2-qg-Fwk"/>
+                        <constraint firstItem="Qwt-h4-Wrg" firstAttribute="centerX" secondItem="LjI-0z-64h" secondAttribute="centerX" id="fhO-sn-vr6"/>
+                        <constraint firstAttribute="trailing" secondItem="Qwt-h4-Wrg" secondAttribute="trailing" id="zfz-Mm-bbp"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="LjI-0z-64h" secondAttribute="trailing" id="2C0-Wi-Q9P"/>
+                <constraint firstItem="LjI-0z-64h" firstAttribute="top" secondItem="kba-IV-kZz" secondAttribute="bottom" id="5F9-or-ITy"/>
+                <constraint firstAttribute="trailing" secondItem="kba-IV-kZz" secondAttribute="trailing" id="7LX-pK-byU"/>
+                <constraint firstAttribute="bottom" secondItem="LjI-0z-64h" secondAttribute="bottom" id="HXw-20-FmP"/>
+                <constraint firstItem="kba-IV-kZz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="JDY-kK-ffe"/>
+                <constraint firstItem="kba-IV-kZz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="UWY-aB-MeX"/>
+                <constraint firstItem="LjI-0z-64h" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="b79-Ik-3lq"/>
+            </constraints>
+            <point key="canvasLocation" x="57.5" y="136.5"/>
+        </view>
+    </objects>
+</document>

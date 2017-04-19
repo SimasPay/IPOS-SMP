@@ -47,7 +47,6 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
         tfQuestion.rightViewMode =  UITextFieldViewMode.always
         tfQuestion.updateTextFieldWithRightImageNamed("icon_arrow_down")
         
-        
         tfAnswer.placeholder = getString("SecurityQuestionTextfieldAnswerPlaceholder")
         tfAnswer.addInset()
         tfAnswer.font = UIFont.systemFont(ofSize: 16)
@@ -119,13 +118,13 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
     }
     
     @IBAction func actionShowPicker(_ sender: Any) {
-        
+        self.tfQuestion.becomeFirstResponder()
     }
     
     //MARK: keyboard Show set last object above keyboard
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == tfQuestion{
-            constraintHeightBtn.constant = 56
+            // constraintHeightBtn.constant = 56
             BaseViewController.lastObjectForKeyboardDetector = self.tfQuestion.superview
         }else if textField == tfAnswer{
             BaseViewController.lastObjectForKeyboardDetector = self.tfAnswer.superview
@@ -135,7 +134,7 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        constraintHeightBtn.constant = 0
+        // constraintHeightBtn.constant = 0
     }
 
 

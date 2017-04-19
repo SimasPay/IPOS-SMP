@@ -86,6 +86,28 @@ class BankEMoneyViewController: BaseViewController,UITableViewDelegate, UITableV
 
     }
 
+    @IBAction func actionLogout(_ sender: Any) {
+        
+        let prefs = UserDefaults.standard
+        prefs.removeObject(forKey: SOURCEMDN)
+        prefs.removeObject(forKey: ACCOUNT_NUMBER)
+        prefs.removeObject(forKey: USERNAME)
+        
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
+        for vc in viewControllers {
+            print(vc)
+            if (vc.isKind(of: LoginRegisterViewController.self)) {
+                self.navigationController!.popToViewController(vc, animated: true);
+                return
+            } else if (vc.isKind(of: LandingScreenViewController.self)) {
+                self.navigationController!.popToViewController(vc, animated: true);
+                return
+            }
+        }
+        let vc = LoginRegisterViewController(nibName: "LoginRegisterViewController", bundle: nil)
+        self.navigationController?.popToViewController(vc, animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 
