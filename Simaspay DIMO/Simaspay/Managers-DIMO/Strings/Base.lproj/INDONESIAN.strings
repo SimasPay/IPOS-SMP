@@ -74,6 +74,10 @@
 "TransferButtonNext" = "Lanjut";
 "TransferEMoneyTitle" = "Transfer - E-money";
 "TransferLebelMdn" = "Nomor Handphone Tujuan";
+"TransferFee" = "Biaya Transfer";
+"TotalDebit" = "Total Pendebitan";
+"NotSubscriberMDN" = "*Nomor ini belum terdaftar sebagai e-money user. Kami akan mengirimkan SMS panduan download Simaspay E-money ke nomor tujuan.";
+"NotRegisterMDN" = "(belum terdaftar)";
 
 
 //OTHERS
@@ -90,7 +94,7 @@
 "ConfirmationOTPMessageTitle" = "Masukkan Kode OTP";
 "ConfirmationOTPMessage" = "Kode OTP dan link telah dikirimkan ke nomor %@. Masukkan kode tersebut atau akses link yang tersedia.";
 "ConfirmationOTPResendButton" = "Kirim Ulang";
-"ConfirmationOTPTextFieldPlaceholder" = "6 digit kode OTP";
+"ConfirmationOTPTextFieldPlaceholder" = "4 digit kode OTP";
 "ConfirmationOwnMdn" = "Nama Pemilik Rekening";
 
 //Registration
@@ -99,8 +103,6 @@
 
 //Security Question
 "SecurityQuestionButtonTitle" = "Daftar";
-"SecurityQuestionInfoTitle" = "Silakan pilih; dan jawab pertanyaan keamanan untuk keperluan reset mPIN Anda.";
+"SecurityQuestionInfoTitle" = "Silakan pilih dan jawab pertanyaan keamanan untuk keperluan reset mPIN Anda.";
 "SecurityQuestionTextfieldAnswerPlaceholder" = "Jawaban Anda…";
 "SecurityQuestionTextfieldQuestion" = "Pilih Pertanyaan Keamanan";
-
-

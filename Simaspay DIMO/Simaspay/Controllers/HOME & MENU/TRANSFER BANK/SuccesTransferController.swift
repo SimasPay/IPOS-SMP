@@ -79,18 +79,21 @@ class SuccesTransferController: BaseViewController {
             for list in content {
                 let key = list.key
                 let Value = list.value
-                
-                let lblKey = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
-                lblKey.font = UIFont.boldSystemFont(ofSize: 13)
-                lblKey.text = key
-                viewContentConfirmation.addSubview(lblKey)
-                y += heightContent
-                
-                let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
-                lblValue.font = UIFont.systemFont(ofSize: 13)
-                lblValue.text = Value
-                viewContentConfirmation.addSubview(lblValue)
-                y += heightContent + margin
+               
+                if (key != "-") {
+                    let lblKey = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
+                    lblKey.font = UIFont.boldSystemFont(ofSize: 13)
+                    lblKey.text = key
+                    viewContentConfirmation.addSubview(lblKey)
+                    y += heightContent
+                    
+                    let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
+                    lblValue.font = UIFont.systemFont(ofSize: 13)
+                    lblValue.text = Value
+                    viewContentConfirmation.addSubview(lblValue)
+                    y += heightContent + margin
+                }
+               
             }
         }
         

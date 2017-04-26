@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="btnRegister" destination="z2t-io-XeF" id="be0-q4-HTs"/>
                 <outlet property="constraintHeightBtn" destination="aJC-4H-Cev" id="IhK-rT-iau"/>
+                <outlet property="labelQuestion" destination="JVe-7E-GJe" id="lEm-cX-dHI"/>
                 <outlet property="lblInfo" destination="L5E-lV-rgn" id="Jzn-bD-Gkc"/>
                 <outlet property="tfAnswer" destination="hRA-Ly-r5O" id="V27-dF-vrF"/>
                 <outlet property="tfQuestion" destination="I56-ip-Wcv" id="i50-wa-TvF"/>
@@ -47,26 +48,46 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMI-2h-FBS">
                     <rect key="frame" x="47.5" y="305.5" width="280" height="56"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I56-ip-Wcv" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I56-ip-Wcv" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="280" height="56"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oiU-pB-kHf">
+                            <rect key="frame" x="5" y="5" width="235" height="46"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JVe-7E-GJe">
+                            <rect key="frame" x="9.5" y="17.5" width="225" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HgB-3c-7Xj">
                             <rect key="frame" x="-0.5" y="-0.5" width="280" height="56"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="56" id="aJC-4H-Cev"/>
                             </constraints>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="actionShowPicker:" destination="-1" eventType="touchUpInside" id="Yhj-2N-qw1"/>
                             </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="HgB-3c-7Xj" secondAttribute="trailing" id="7Qe-iC-j7L"/>
+                        <constraint firstItem="oiU-pB-kHf" firstAttribute="top" secondItem="iMI-2h-FBS" secondAttribute="top" constant="5" id="80A-Ut-0aW"/>
+                        <constraint firstAttribute="bottom" secondItem="oiU-pB-kHf" secondAttribute="bottom" constant="5" id="8en-fx-MTH"/>
+                        <constraint firstItem="oiU-pB-kHf" firstAttribute="leading" secondItem="iMI-2h-FBS" secondAttribute="leading" constant="5" id="ASW-sq-HAN"/>
+                        <constraint firstItem="JVe-7E-GJe" firstAttribute="leading" secondItem="iMI-2h-FBS" secondAttribute="leading" constant="10" id="MmX-0T-Iz7"/>
                         <constraint firstItem="I56-ip-Wcv" firstAttribute="top" secondItem="iMI-2h-FBS" secondAttribute="top" id="Rqe-sq-40q"/>
+                        <constraint firstAttribute="trailing" secondItem="JVe-7E-GJe" secondAttribute="trailing" constant="45" id="SLp-Er-zZi"/>
+                        <constraint firstAttribute="trailing" secondItem="oiU-pB-kHf" secondAttribute="trailing" constant="40" id="YGh-HX-ubV"/>
+                        <constraint firstItem="JVe-7E-GJe" firstAttribute="centerY" secondItem="iMI-2h-FBS" secondAttribute="centerY" id="aOH-L2-YXE"/>
                         <constraint firstItem="I56-ip-Wcv" firstAttribute="leading" secondItem="iMI-2h-FBS" secondAttribute="leading" id="dzO-9D-xK9"/>
                         <constraint firstAttribute="width" constant="280" id="eSb-iM-RqF"/>
                         <constraint firstAttribute="trailing" secondItem="I56-ip-Wcv" secondAttribute="trailing" id="fVs-lj-Dup"/>

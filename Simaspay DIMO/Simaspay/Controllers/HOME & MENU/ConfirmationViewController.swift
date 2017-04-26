@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
+class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var viewNavigation: UIView!
     
@@ -27,6 +27,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
     var lblTimer: BaseLabel!
     
     var MDNString:String! = ""
+    var otpString:String! = ""
     
     //Dictionary for show data registration
     var data: NSDictionary!
@@ -57,6 +58,8 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
         
         self.view.backgroundColor = UIColor.init(hexString: color_background)
         
+//        DLog("\(dictForRequestOTP)")
+//        DLog("\(dictForAcceptedOTP)")
         DLog("\(data)")
         self.viewContentConfirmation.layer.cornerRadius = 5.0;
         self.viewContentConfirmation.layer.borderColor = UIColor.init(hexString: color_border).cgColor
@@ -120,17 +123,29 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
                 let key = list.key
                 let Value = list.value
                 
-                let lblKey = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
-                lblKey.font = UIFont.boldSystemFont(ofSize: 13)
-                lblKey.text = key
-                viewContentConfirmation.addSubview(lblKey)
-                y += heightContent
+                if key == "-" {
+                    let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: 90))
+                    lblValue.font = UIFont.systemFont(ofSize: 13)
+                    lblValue.numberOfLines = 0
+                    lblValue.lineBreakMode = .byWordWrapping
+                    lblValue.text = Value
+                    viewContentConfirmation.addSubview(lblValue)
+                    y += 90 + margin
+                } else {
+                    
+                    let lblKey = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
+                    lblKey.font = UIFont.boldSystemFont(ofSize: 13)
+                    lblKey.text = key
+                    viewContentConfirmation.addSubview(lblKey)
+                    y += heightContent
+                    
+                    let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
+                    lblValue.font = UIFont.systemFont(ofSize: 13)
+                    lblValue.text = Value
+                    viewContentConfirmation.addSubview(lblValue)
+                    y += heightContent + margin
+                }
                 
-                let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
-                lblValue.font = UIFont.systemFont(ofSize: 13)
-                lblValue.text = Value
-                viewContentConfirmation.addSubview(lblValue)
-                y += heightContent + margin
             }
         }
         
@@ -196,7 +211,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
     func didOTPOK() {
         DLog("OK");
         clock.invalidate()
-        self.sendOTP(OTP: self.tfOTP.text!)
+        self.sendOTP(OTP: self.otpString)
         
     }
     
@@ -220,10 +235,13 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
     
     //MARK: Show OTP Alert
     func showOTP()  {
-        let temp = UIView(frame: CGRect(x: 0, y: 0, width: 240, height: 400))
-        let MDNString = ("\(getNormalisedMDN(dictForAcceptedOTP.value(forKey: SOURCEMDN) as! NSString))!")
-        let messageString = String(format: String("ConfirmationOTPMessage"), MDNString)
-        let messageAlert = UILabel(frame: CGRect(x: 10, y: 0, width: temp.frame.size.width, height: 60))
+        
+        let alertController = UIAlertController(title: getString("ConfirmationOTPMessageTitle") + "\n\n\n\n", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        
+        let temp = UIView(frame: CGRect(x: 0, y: 40, width: 270, height: 100))
+        let MDNString = ("\(getNormalisedMDN(dictForAcceptedOTP.value(forKey: SOURCEMDN) as! NSString))")
+        let messageString = String(format: getString("ConfirmationOTPMessage"), MDNString)
+        let messageAlert = UILabel(frame: CGRect(x: 0, y: 10, width: temp.frame.size.width, height: 60))
         messageAlert.font = UIFont.systemFont(ofSize: 13)
         messageAlert.textAlignment = .center
         messageAlert.numberOfLines = 4
@@ -231,7 +249,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
         
         clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ActivationPinViewController.countDown), userInfo: nil, repeats: true)
         
-        btnResandOTP = BaseButton(frame: CGRect(x: 10, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height - 10, width: temp.frame.size.width, height: 25))
+        btnResandOTP = BaseButton(frame: CGRect(x: 0, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height, width: temp.frame.size.width, height: 35))
         btnResandOTP.setTitle(getString("ConfirmationOTPResendButton"), for: .normal)
         btnResandOTP.setTitleColor(UIColor.init(hexString: color_btn_alert), for: .normal)
         btnResandOTP.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
@@ -239,27 +257,80 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
         btnResandOTP.addTarget(self, action: #selector(self.resendTheOTP), for: .touchUpInside)
         btnResandOTP.isHidden = true
         
-        lblTimer = BaseLabel(frame: CGRect(x: 10, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 3, width: temp.frame.size.width, height: 15))
+        lblTimer = BaseLabel(frame: CGRect(x: 0, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 10, width: temp.frame.size.width, height: 15))
         lblTimer.textAlignment = .center
         lblTimer.font = UIFont.systemFont(ofSize: 12)
         lblTimer.text = "01:00"
         
-        
-        tfOTP = BaseTextField(frame: CGRect(x: 10, y: lblTimer.frame.origin.y + lblTimer.frame.size.height + 3, width: temp.frame.size.width, height: 30))
-        tfOTP.borderStyle = .line
-        tfOTP.layer.borderColor = UIColor.init(hexString: color_border).cgColor
-        tfOTP.layer.borderWidth = 1;
-        tfOTP.keyboardType = .numberPad
-        tfOTP.placeholder = getString("ConfirmationOTPTextFieldPlaceholder")
-        tfOTP.isSecureTextEntry = true
-        tfOTP.addInset()
+//        tfOTP = BaseTextField(frame: CGRect(x: 10, y: lblTimer.frame.origin.y + lblTimer.frame.size.height + 3, width: temp.frame.size.width, height: 30))
+//        tfOTP.borderStyle = .line
+//        tfOTP.layer.borderColor = UIColor.init(hexString: color_border).cgColor
+//        tfOTP.layer.borderWidth = 1;
+//        tfOTP.keyboardType = .numberPad
+//        tfOTP.placeholder = getString("ConfirmationOTPTextFieldPlaceholder")
+//        tfOTP.isSecureTextEntry = true
+//        tfOTP.addInset()
         
         temp.addSubview(btnResandOTP)
         temp.addSubview(lblTimer)
         temp.addSubview(messageAlert)
-        temp.addSubview(tfOTP)
         
-        showOTPWith(title: getString("ConfirmationOTPMessageTitle"), view: temp)
+        alertController.view.addSubview(temp)
+        let cancelAction = UIAlertAction(title:"Cancel",
+                                         style: .default) { (action) -> Void in
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didOTPCancel"), object: nil)
+        }
+
+        let okAction = UIAlertAction(title:"Ok", style: .cancel) { (action) -> Void in
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didOTPOK"), object: nil)
+        }
+    
+        
+        alertController.addTextField { (textField) -> Void in
+            textField.layer.borderColor = UIColor.init(hexString: color_border).cgColor
+            textField.keyboardType = .numberPad
+            textField.isSecureTextEntry = true
+            textField.placeholder = getString("ConfirmationOTPTextFieldPlaceholder")
+            textField.addTarget(self, action: #selector(self.alertTextFieldDidChange(sender:)),
+                                for: .editingChanged)
+            textField.delegate = self
+            textField.tag = 10
+            
+        }
+        
+        okAction.isEnabled = false
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion:{})
+        }
+        alertController.view.endEditing(true)
+        // showOTPWith(title: getString("ConfirmationOTPMessageTitle"), view: temp)
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        if textField.tag == 10 {
+            let maxLength = 4
+            let currentString: NSString = textField.text! as NSString
+            let newString: NSString =
+                currentString.replacingCharacters(in: range, with: string) as NSString
+            self.otpString = newString as String!
+            return newString.length <= maxLength
+        } else {
+            return true
+        }
+    }
+    
+    func alertTextFieldDidChange(sender : UITextField) {
+        guard let alertController = self.presentedViewController as? UIAlertController,
+            let otp = sender.text,
+            let submitAction = alertController.actions.last else {
+            return
+        }
+        submitAction.isEnabled = otp.characters.count == 4
     }
     
     //MARK: Request OTP
@@ -354,7 +425,9 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate {
                     let vc = ActivationSuccessViewController.initWithMessageInfo(message: getString("RegistrationLabelInfoSuccessMessage"), title: getString("RegistrationLabelInfoSuccess"))
                     self.navigationController?.pushViewController(vc, animated: false)
                 
-                } else if (messagecode == SIMASPAY_CONFIRM_TRANSFER_TO__EMONEY_SUCCESS_CODE || messagecode == SIMASPAY_BANK_TRANSFER_TO__EMONEY_SUCCESS_CODE) {
+                } else if (messagecode == SIMASPAY_CONFIRM_TRANSFER_TO__EMONEY_SUCCESS_CODE || messagecode == SIMASPAY_BANK_TRANSFER_TO__EMONEY_SUCCESS_CODE ||
+                    messagecode == SIMASPAY_EMONEY_TO_BSIM ||
+                    messagecode == SIMASPAY_EMONEY_TO_UNSUBCRIBER) {
                     let vc = SuccesTransferController.initWithOwnNib()
                     vc.data = self.data
                     vc.idTran =  responseDict.value(forKeyPath: "sctlID.text") as! String

@@ -17,7 +17,8 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
     @IBOutlet weak var viewTFQuetion: UIView!
     @IBOutlet weak var viewTfAnswer: UIView!
     @IBOutlet weak var constraintHeightBtn: NSLayoutConstraint!
-   
+    @IBOutlet weak var labelQuestion: UILabel!
+    
     var pickOption:[String]!
     var questionData : NSArray!
     var data: NSDictionary!
@@ -35,13 +36,15 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
         super.viewDidLoad()
         self.showBackButton(subMenu: false)
         self.showTitle("Pendaftaran Akun E-money", subMenu: false)
+        labelQuestion.font = UIFont.systemFont(ofSize: 14)
+        
         lblInfo.font = UIFont.systemFont(ofSize: 18)
         lblInfo.textColor = UIColor.init(hexString: color_text_default)
         lblInfo.numberOfLines = 3;
         lblInfo.textAlignment = .center
         lblInfo.text = getString("SecurityQuestionInfoTitle")
         
-        tfQuestion.font = UIFont.systemFont(ofSize: 16)
+        // tfQuestion.font = UIFont.systemFont(ofSize: 16)
         tfQuestion.text = getString("SecurityQuestionTextfieldQuestion")
         tfQuestion.addInset()
         tfQuestion.rightViewMode =  UITextFieldViewMode.always
@@ -53,6 +56,8 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
         
         btnRegister.updateButtonType1()
         btnRegister.setTitle(getString("SecurityQuestionButtonTitle"), for: .normal)
+        
+        labelQuestion.text = getString("SecurityQuestionTextfieldQuestion")
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -66,6 +71,7 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
         pickerView.delegate = self
         tfQuestion.delegate = self
         tfQuestion.font = UIFont.systemFont(ofSize: 14)
+        tfQuestion.tintColor = UIColor.white
         tfAnswer.delegate = self
         self.tfQuestion.inputView = pickerView
     }
@@ -81,12 +87,10 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-    
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-         
     }
     
     //MARK: PickerView
@@ -115,18 +119,23 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
     @available(iOS 2.0, *)
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
         self.tfQuestion.text = pickOption[row]
+        self.labelQuestion.text = pickOption[row]
     }
     
     @IBAction func actionShowPicker(_ sender: Any) {
+        if self.tfQuestion.text == getString("SecurityQuestionTextfieldQuestion") {
+            self.tfQuestion.text = pickOption[0]
+            self.labelQuestion.text = pickOption[0]
+        }
         self.tfQuestion.becomeFirstResponder()
     }
     
     //MARK: keyboard Show set last object above keyboard
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == tfQuestion{
+        if textField == tfQuestion {
             // constraintHeightBtn.constant = 56
             BaseViewController.lastObjectForKeyboardDetector = self.tfQuestion.superview
-        }else if textField == tfAnswer{
+        } else if textField == tfAnswer{
             BaseViewController.lastObjectForKeyboardDetector = self.tfAnswer.superview
         }
         updateUIWhenKeyboardShow()
@@ -140,7 +149,6 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
 
     //MARK: Action button Register
     @IBAction func actionBtnRegister(_ sender: AnyObject) {
-        
         var message = "";
         if (!tfQuestion.isValid() || self.tfQuestion.text == getString("SecurityQuestionTextfieldQuestion")) {
             message = "Masukkan pertanyaan Anda"
@@ -153,7 +161,6 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
             return
         }
 
-        
         //Dictionary data for request OTP
         DLog("\(dictForAcceptedOTP as NSDictionary)")
         let vc = ConfirmationViewController.initWithOwnNib()

@@ -128,7 +128,8 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate {
                 DLog("\(responseDict)")
                 let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
                 let messageText  = responseDict.value(forKeyPath: "message.text") as! String
-                if ( messagecode == SIMASPAY_TRANSFER_TO__EMONEY_SUCCESS_CODE ){
+                if ( messagecode == SIMASPAY_INQUIRY_TRANSFER_SUCCESS_CODE ||
+                    messagecode == SIMASPAY_EMONEY_TO_EMONEY_UN_SUBSCRIBER ){
                     //Dictionary data for request OTP
                     let vc = ConfirmationViewController.initWithOwnNib()
                     let dictOtp = NSMutableDictionary()
@@ -144,14 +145,28 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate {
                     vc.dictForRequestOTP = dictOtp as NSDictionary
                     
                     let data: [String : Any]!
-                    data = [
-                        "title" : "Pastikan data berikut sudah benar",
-                        "content" : [
-                            [getString("ConfirmationOwnMdn") : responseDict.value(forKeyPath: "ReceiverAccountName.text")],
-                            [getString("TransferLebelMdn") : responseDict.value(forKeyPath: "destinationMDN.text")],
-                            [getString("TransferLebelAmount") :  String(format: "Rp %@", self.inputAmount.text!)],
+                    let debit = String(format: "Rp %@", (responseDict.value(forKeyPath: "debitamt.text") as? String)!)
+                    if messagecode == SIMASPAY_INQUIRY_TRANSFER_SUCCESS_CODE {
+                        data = [
+                            "title" : "Pastikan data berikut sudah benar",
+                            "content" : [
+                                [getString("ConfirmationOwnMdn") : responseDict.value(forKeyPath: "ReceiverAccountName.text")],
+                                [getString("TransferLebelMdn") : responseDict.value(forKeyPath: "destinationMDN.text")],
+                                [getString("TransferLebelAmount") : debit],
+                            ]
                         ]
-                    ]
+                    } else {
+                        data = [
+                            "title" : "Pastikan data berikut sudah benar",
+                            "content" : [
+                                [getString("ConfirmationOwnMdn") : getString("NotRegisterMDN")],
+                                [getString("TransferLebelMdn") : (responseDict.value(forKeyPath: "destinationMDN.text") as? String)! + "*"],
+                                [getString("TransferLebelAmount") : debit],
+                                ["-" : getString("NotSubscriberMDN")],
+                            ]
+                        ]
+                    }
+                    
                     vc.data = data! as NSDictionary
                     vc.MDNString = UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! String
                     
