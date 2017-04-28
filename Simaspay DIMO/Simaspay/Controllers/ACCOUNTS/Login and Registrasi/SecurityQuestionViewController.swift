@@ -169,7 +169,7 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
         dict[TXNNAME] = GENETARE_OTP
         dict[SERVICE] = SERVICE_ACCOUNT
         dict[SOURCEMDN] = getNormalisedMDN((dictForAcceptedOTP as NSDictionary).value(forKey: SOURCEMDN) as! NSString)
-        dict[CHANNEL_ID] = "7"
+        dict[CHANNEL_ID] = CHANNEL_ID_VALUE
         dict[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
         dict[SOURCE_APP_VERSION_KEY] = version
         dict[SOURCE_APP_OSVERSION_KEY] = "\(UIDevice.current.modelName)  \(UIDevice.current.systemVersion)"
@@ -185,7 +185,7 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
         dict1[INSTITUTION_ID] = SIMASPAY
         dict1[AUTH_KEY] = ""
         dict1[SOURCEMDN] = getNormalisedMDN((dictForAcceptedOTP as NSDictionary).value(forKey: SOURCEMDN) as! NSString)
-        dict1[CHANNEL_ID] = "7"
+        dict1[CHANNEL_ID] = CHANNEL_ID_VALUE
         dict1[SECURITY_QUESTION] = self.tfQuestion.text!
         dict1[SECURITY_ANSWER] = self.tfAnswer.text!
 

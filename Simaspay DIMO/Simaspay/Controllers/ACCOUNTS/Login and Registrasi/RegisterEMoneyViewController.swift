@@ -168,7 +168,7 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
         dict[SERVICE] = SERVICE_PAYMENT
         dict[CATEGORY] = CATEGORY_SECURITYQUESTION
         dict[VERSION] = -1
-        dict[CHANNEL_ID] = "7"
+        dict[CHANNEL_ID] = CHANNEL_ID_VALUE
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]

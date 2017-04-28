@@ -97,7 +97,7 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
         dict[AUTH_KEY] = "f"
         dict[SOURCEMDN] = getNormalisedMDN(MDNString as NSString)
         dict[mPIN_STRING] = /*"814f8147ddcbdba05fad8bd5cf125530d9f5dece879d2b908d4b139cbb3f216ac8b7eb312a71b0cc0a3681d26074aa1e9f6c5299f2bf104fa277417bb57b8005" */simasPayRSAencryption(self.tfMpin.text!)/*"34680a237df794396d653e4c7f425aacffbc9445973444a9f935f9680ff81bca59b54b6dc4d683c2d05984a95ff4d689ec0a402707b1b83c865eb1342cc56967"*/
-        dict[CHANNEL_ID] = "7"
+        dict[CHANNEL_ID] = CHANNEL_ID_VALUE
         dict[SIMASPAY_ACTIVITY] = SIMASPAY_ACTIVITY_VALUE
         dict[SOURCE_APP_TYPE_KEY] = "" /*SOURCE_APP_TYPE_VALUE*/
         dict[SOURCE_APP_VERSION_KEY] = ""/*version*/

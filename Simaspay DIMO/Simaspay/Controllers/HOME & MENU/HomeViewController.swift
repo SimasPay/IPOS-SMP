@@ -312,7 +312,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         dict[AUTH_KEY] = ""
         dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
         dict[SOURCEPIN] = DIMOAPIManager.sharedInstance().encryptedMPin as String!
-        dict[CHANNEL_ID] = "7"
+        dict[CHANNEL_ID] = CHANNEL_ID_VALUE
         dict[BANK_ID] = ""
         dict[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode as String
         

@@ -150,7 +150,7 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
             dict["toDate"] = toDate
         }
         
-        dict[CHANNEL_ID] = "7"
+        dict[CHANNEL_ID] = CHANNEL_ID_VALUE
         dict[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)
@@ -225,7 +225,7 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
         dict[SOURCEPIN] = DIMOAPIManager.sharedInstance().encryptedMPin
         dict[FROM_DATE] = startDate
         dict[TO_DATE] = toDate
-        dict[CHANNEL_ID] = "7"
+        dict[CHANNEL_ID] = CHANNEL_ID_VALUE
         dict[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)

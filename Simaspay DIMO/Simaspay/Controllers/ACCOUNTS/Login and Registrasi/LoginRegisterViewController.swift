@@ -96,7 +96,7 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
         dict[INSTITUTION_ID] = SIMASPAY
         dict[AUTH_KEY] = ""
         dict[SOURCEMDN] = getNormalisedMDN(tfHPNumber.text! as NSString)
-        dict[CHANNEL_ID] = "7"
+        dict[CHANNEL_ID] = CHANNEL_ID_VALUE
         dict[SIMASPAY_ACTIVITY] = SIMASPAY_ACTIVITY_VALUE
         dict[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
         dict[SOURCE_APP_VERSION_KEY] = version

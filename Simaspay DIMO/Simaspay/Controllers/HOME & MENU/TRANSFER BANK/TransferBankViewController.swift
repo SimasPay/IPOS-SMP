@@ -49,7 +49,6 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showTitle(getString("Transfer"))
         self.showBackButton()
         self.viewBackground.backgroundColor = UIColor.init(hexString: color_background)
         
@@ -90,12 +89,11 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
         if (self.transferType != TransferType.TransferTypeOtherBank) {
             constraintViewBankName.constant = 0
             self.tfBankName.isUserInteractionEnabled = false
-            
+            self.showTitle(getString("TransferBSIMTitle"))
         } else {
-            
             self.tfBankName.isUserInteractionEnabled = true
             self.tfBankName.text = bankName.value(forKey: "name") as? String
-            
+            self.showTitle(getString("TransferOtherBankTitle"))
         }
         
     }
@@ -145,12 +143,15 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
             DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
-        
-        self.confirmation()
+        if (self.transferType == TransferType.TransferTypeSinarmas) {
+            self.confirmationToBSIM()
+        } else {
+            self.confirmationToOther()
+        }
     }
     
     //MARK: function comfirmation
-    func confirmation()  {
+    func confirmationToBSIM()  {
         
         let dict = NSMutableDictionary()
         if (DIMOAPIManager.sharedInstance().sourcePocketCode as String == "1") {
@@ -166,7 +167,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
         dict[DESTMDN] = ""
         dict[DESTBANKACCOUNT] = self.tfNoAccount.text
         dict[AMOUNT] = self.tfAmountTransfer.text
-        dict[CHANNEL_ID] = "7"
+        dict[CHANNEL_ID] = CHANNEL_ID_VALUE
         dict[BANK_ID] = ""
         dict[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode as String
         dict[DESTPOCKETCODE] = ACCOUNTTYPEREGULER
@@ -204,14 +205,14 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
                     dictOtp[SOURCEMDN] =  getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
                     dictOtp[SOURCEPIN] = simasPayRSAencryption(self.tfMpin.text!)
                     dictOtp[SCTL_ID] = responseDict.value(forKeyPath: "sctlID.text") as! String
-                    dictOtp[CHANNEL_ID] = "7"
+                    dictOtp[CHANNEL_ID] = CHANNEL_ID_VALUE
                     dictOtp[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
                     dictOtp[AUTH_KEY] = ""
                     vc.dictForRequestOTP = dictOtp as NSDictionary
                     
                     let dictSendOtp = NSMutableDictionary()
                     let data: [String : Any]!
-                    if (self.transferType == TransferType.TransferTypeSinarmas) {
+                    
                         let credit = String(format: "Rp %@", (responseDict.value(forKeyPath: "debitamt.text") as? String)!)
                         data = [
                             "title" : "Pastikan data berikut sudah benar",
@@ -224,29 +225,6 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
                         ]
                         vc.data = data as NSDictionary!
                         dictSendOtp[BANK_ID] = ""
-                    } else if (self.transferType == TransferType.TransferTypeOtherBank) {
-                        let bankNameString = self.bankName.value(forKey: "name") as! String
-                        let chargerString = (responseDict.value(forKeyPath: "charges.text") as? String)!
-                        let creditString = (responseDict.value(forKeyPath: "debitamt.text") as? String)!
-                        let chargerInt = Int(chargerString)
-                        let creditInt = Int(creditString)
-                        let debit = chargerInt! + creditInt!
-                        data = [
-                            "title" : "Pastikan data berikut sudah benar",
-                            "content" : [
-                                    [getString("ConfirmationOwnMdn") : responseDict.value(forKeyPath: "ReceiverAccountName.text")],
-                                    [getString("TransferLebelBankName") : bankNameString],
-                                    [getString("TransferLebelAccountNumber") : responseDict.value(forKeyPath: "destinationAccountNumber.text")],
-                                    [getString("TransferLebelAmount") : String(format: "Rp %@", creditString)],
-                                    [getString("TransferFee") :  String(format: "Rp %@", chargerString)],
-                            ],
-                            "footer" :[
-                                getString("TotalDebit") : String(format: "Rp %@", debit)]
-                        ]
-                        vc.data = data as NSDictionary!
-                        dictSendOtp[BANK_ID] = self.bankName.value(forKey: "code") as? String
-                    }
-                    
                     vc.MDNString = UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! String
                     
                     if (DIMOAPIManager.sharedInstance().sourcePocketCode as String == "1") {
@@ -260,7 +238,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
                     dictSendOtp[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
                     dictSendOtp[DESTMDN] = ""
                     dictSendOtp[DESTBANKACCOUNT] = self.tfNoAccount.text
-                    dictSendOtp[CHANNEL_ID] = "7"
+                    dictSendOtp[CHANNEL_ID] = CHANNEL_ID_VALUE
                     dictSendOtp[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode as String
                     dictSendOtp[DESTPOCKETCODE] = ACCOUNTTYPEREGULER
                     dictSendOtp[TRANSFERID] = responseDict.value(forKeyPath: "transferID.text")
@@ -276,10 +254,130 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
                 
             }
         }
-
-//        self.navigationController?.pushViewController(vc, animated: false)
-//        self.animatedFadeIn()
     }
+    
+    //MARK: function comfirmation otherBank
+    func confirmationToOther()  {
+        
+        let dict = NSMutableDictionary()
+        if (DIMOAPIManager.sharedInstance().sourcePocketCode as String == "1") {
+            dict[SERVICE] = SERVICE_WALLET
+        } else {
+            dict[SERVICE] = SERVICE_BANK
+        }
+        dict[TXNNAME] = TXN_INQUIRY_OTHERBANK
+        dict[MFATRANSACTION] = INQUIRY
+        dict[INSTITUTION_ID] = SIMASPAY
+        dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+        dict[SOURCEPIN] = simasPayRSAencryption(self.tfMpin.text!)
+        dict[DESTACCOUNTNUMBER] = self.tfNoAccount.text
+        dict[AMOUNT] = self.tfAmountTransfer.text
+        dict[DEST_BANK_CODE] = self.bankName.value(forKey: "code") as? String
+        dict[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode as String
+        dict[DESTPOCKETCODE] = ACCOUNTTYPEREGULER
+        dict[BANK_ID] = ""
+        dict[ACCOUNT_TYPE] = ""
+        
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DLog("\(param)")
+        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+            if (err != nil) {
+                let error = err! as NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                } else {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                }
+                return
+            }
+            
+            let dictionary = NSDictionary(dictionary: dict!)
+            if (dictionary.allKeys.count == 0) {
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+            } else {
+                let responseDict = dictionary as NSDictionary
+                DLog("\(responseDict)")
+                let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
+                let messageText  = responseDict.value(forKeyPath: "message.text") as! String
+                if ( messagecode == SIMASPAY_INQUIRY_TRANSFER_SUCCESS_CODE ){
+                    //Dictionary data for request OTP
+                    let vc = ConfirmationViewController.initWithOwnNib()
+                    let dictOtp = NSMutableDictionary()
+                    dictOtp[TXNNAME] = TXN_RESEND_MFAOTP
+                    dictOtp[SERVICE] = SERVICE_WALLET
+                    dictOtp[INSTITUTION_ID] = SIMASPAY
+                    dictOtp[SOURCEMDN] =  getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+                    dictOtp[SOURCEPIN] = simasPayRSAencryption(self.tfMpin.text!)
+                    dictOtp[SCTL_ID] = responseDict.value(forKeyPath: "sctlID.text") as! String
+                    dictOtp[CHANNEL_ID] = CHANNEL_ID_VALUE
+                    dictOtp[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
+                    dictOtp[AUTH_KEY] = ""
+                    vc.dictForRequestOTP = dictOtp as NSDictionary
+                    
+                    let dictSendOtp = NSMutableDictionary()
+                    let data: [String : Any]!
+                    
+                    let chargerString = (responseDict.value(forKeyPath: "charges.text") as? String)!
+                    let debitString = (responseDict.value(forKeyPath: "debitamt.text") as? String)!
+                    let chargerInt = Int(chargerString.replacingOccurrences(of: ".", with: "", options: .literal, range: nil))
+                    let creditInt = Int(debitString.replacingOccurrences(of: ".", with: "", options: .literal, range: nil))
+                    let debit = chargerInt! + creditInt!
+                    let formatter = NumberFormatter()
+                    formatter.numberStyle = .currency
+                    formatter.locale = Locale(identifier: "id_ID")
+                    let result = formatter.string(from: debit as NSNumber);
+                    data = [
+                        "title" : "Pastikan data berikut sudah benar",
+                        "content" : [
+                            [getString("ConfirmationOwnMdn") : responseDict.value(forKeyPath: "destinationName.text")],
+                            [getString("TransferLebelBankName") : responseDict.value(forKeyPath: "destinationBank.text")],
+                            [getString("TransferLebelAccountNumber") : responseDict.value(forKeyPath: "destinationAccountNumber.text")],
+                            [getString("TransferLebelAmount") : String(format: "Rp %@", debitString)],
+                            [getString("TransferFee") :  String(format: "Rp %@", chargerString)],
+                        ],
+                        "footer" :[
+                            getString("TotalDebit") : result?.replacingOccurrences(of: "Rp", with: "Rp ", options: .literal, range: nil)]
+                    ]
+                    vc.data = data as NSDictionary!
+                    
+                    vc.MDNString = UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! String
+                    
+                    if (DIMOAPIManager.sharedInstance().sourcePocketCode as String == "1") {
+                        dictSendOtp[SERVICE] = SERVICE_WALLET
+                    } else {
+                        dictSendOtp[SERVICE] = SERVICE_BANK
+                    }
+                    dictSendOtp[TXNNAME] = TXN_OTHERBANK
+                    dictSendOtp[INSTITUTION_ID] = SIMASPAY
+                    dictSendOtp[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+                    dictSendOtp[DESTACCOUNTNUMBER] = self.tfNoAccount.text
+                    dictSendOtp[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode as String
+                    dictSendOtp[DESTPOCKETCODE] = ACCOUNTTYPEREGULER
+                    dictSendOtp[TRANSFERID] = responseDict.value(forKeyPath: "transferID.text")
+                    dictSendOtp[PARENTTXNID] = responseDict.value(forKeyPath: "parentTxnID.text")
+                    dictSendOtp[CONFIRMED] = "true"
+                    dictSendOtp[DEST_BANK_CODE] = self.bankName.value(forKey: "code") as? String
+                    dictSendOtp[BANK_ID] = ""
+                    dictSendOtp[ACCOUNT_TYPE] = ""
+                    dictSendOtp[MFATRANSACTION] = "Confirm"
+                    dictSendOtp["mspID"] = "1"
+                    dictSendOtp[CHANNEL_ID] = CHANNEL_ID_VALUE
+                    dictSendOtp[MFAOTP] = true
+                    
+                    vc.dictForAcceptedOTP = dictSendOtp
+                    self.navigationController?.pushViewController(vc, animated: false)
+                } else {
+                    DIMOAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                }
+                
+            }
+        }
+        
+       
+    }
+    
     
     override func keyboardWillShow(notification: NSNotification) {
         super.keyboardWillShow(notification: notification)

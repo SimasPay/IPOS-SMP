@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		351BC2FD1EB1995B0049849B /* TansferToUangkuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 351BC2FC1EB1995B0049849B /* TansferToUangkuController.xib */; };
+		351BC2FF1EB19FA50049849B /* TansferToUangkuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351BC2FE1EB19FA50049849B /* TansferToUangkuController.swift */; };
 		3535ED961E9DE5BE007D7942 /* TransferToEMoney.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535ED951E9DE5BE007D7942 /* TransferToEMoney.swift */; };
 		3535ED981E9DE616007D7942 /* TransferToEMoney.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3535ED971E9DE616007D7942 /* TransferToEMoney.xib */; };
 		353C2BA51E9224030082C250 /* libTestFairy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BA21E9224030082C250 /* libTestFairy.a */; };
@@ -103,7 +105,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3535ED951E9DE5BE007D7942 /* TransferToEMoney.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferToEMoney.swift; sourceTree = "<group>"; };
+		351BC2FC1EB1995B0049849B /* TansferToUangkuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TansferToUangkuController.xib; sourceTree = "<group>"; };
+		351BC2FE1EB19FA50049849B /* TansferToUangkuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TansferToUangkuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		3535ED951E9DE5BE007D7942 /* TransferToEMoney.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TransferToEMoney.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3535ED971E9DE616007D7942 /* TransferToEMoney.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransferToEMoney.xib; sourceTree = "<group>"; };
 		353C2BA21E9224030082C250 /* libTestFairy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFairy.a; sourceTree = "<group>"; };
 		353C2BA31E9224030082C250 /* TestFairy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFairy.h; sourceTree = "<group>"; };
@@ -130,19 +134,19 @@
 		35995A761E262B14007EB516 /* EULAViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EULAViewController.xib; sourceTree = "<group>"; };
 		35995A781E262B14007EB516 /* BankEMoneyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankEMoneyViewController.swift; sourceTree = "<group>"; };
 		35995A791E262B14007EB516 /* BankEMoneyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BankEMoneyViewController.xib; sourceTree = "<group>"; };
-		35995A7A1E262B14007EB516 /* LoginPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPinViewController.swift; sourceTree = "<group>"; };
+		35995A7A1E262B14007EB516 /* LoginPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LoginPinViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A7B1E262B14007EB516 /* LoginPinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginPinViewController.xib; sourceTree = "<group>"; };
-		35995A7C1E262B14007EB516 /* LoginRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRegisterViewController.swift; sourceTree = "<group>"; };
+		35995A7C1E262B14007EB516 /* LoginRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LoginRegisterViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A7D1E262B14007EB516 /* LoginRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginRegisterViewController.xib; sourceTree = "<group>"; };
 		35995A7E1E262B14007EB516 /* LoginViewController-unused.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginViewController-unused.swift"; sourceTree = "<group>"; };
 		35995A7F1E262B14007EB516 /* LoginViewController-unused.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "LoginViewController-unused.xib"; sourceTree = "<group>"; };
-		35995A801E262B14007EB516 /* RegisterEMoneyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterEMoneyViewController.swift; sourceTree = "<group>"; };
+		35995A801E262B14007EB516 /* RegisterEMoneyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RegisterEMoneyViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A811E262B14007EB516 /* RegisterEMoneyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterEMoneyViewController.xib; sourceTree = "<group>"; };
-		35995A821E262B14007EB516 /* SecurityQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityQuestionViewController.swift; sourceTree = "<group>"; };
+		35995A821E262B14007EB516 /* SecurityQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SecurityQuestionViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A831E262B14007EB516 /* SecurityQuestionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecurityQuestionViewController.xib; sourceTree = "<group>"; };
 		35995A851E262B14007EB516 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
 		35995A861E262B14007EB516 /* ConfirmationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmationViewController.xib; sourceTree = "<group>"; };
-		35995A871E262B14007EB516 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		35995A871E262B14007EB516 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = HomeViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A881E262B14007EB516 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		35995A8A1E262B14007EB516 /* DetailPaymentPurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPaymentPurchaseViewController.swift; sourceTree = "<group>"; };
 		35995A8B1E262B14007EB516 /* DetailPaymentPurchaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailPaymentPurchaseViewController.xib; sourceTree = "<group>"; };
@@ -152,13 +156,13 @@
 		35995A901E262B14007EB516 /* BalanceInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BalanceInfoViewController.xib; sourceTree = "<group>"; };
 		35995A911E262B14007EB516 /* ChangeMpinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeMpinViewController.swift; sourceTree = "<group>"; };
 		35995A921E262B14007EB516 /* ChangeMpinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeMpinViewController.xib; sourceTree = "<group>"; };
-		35995A931E262B14007EB516 /* TransactionHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewController.swift; sourceTree = "<group>"; };
+		35995A931E262B14007EB516 /* TransactionHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TransactionHistoryViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A941E262B14007EB516 /* TransactionHistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionHistoryViewController.xib; sourceTree = "<group>"; };
 		35995A951E262B14007EB516 /* StatusTransferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusTransferViewController.swift; sourceTree = "<group>"; };
 		35995A961E262B14007EB516 /* StatusTransferViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusTransferViewController.xib; sourceTree = "<group>"; };
 		35995A981E262B14007EB516 /* ListTransferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferViewController.swift; sourceTree = "<group>"; };
 		35995A991E262B14007EB516 /* ListTransferViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListTransferViewController.xib; sourceTree = "<group>"; };
-		35995A9A1E262B14007EB516 /* TransferBankViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferBankViewController.swift; sourceTree = "<group>"; };
+		35995A9A1E262B14007EB516 /* TransferBankViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TransferBankViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A9B1E262B14007EB516 /* TransferBankViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransferBankViewController.xib; sourceTree = "<group>"; };
 		35995A9C1E262B14007EB516 /* TransferOtherBankListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferOtherBankListViewController.swift; sourceTree = "<group>"; };
 		35995A9D1E262B14007EB516 /* TransferOtherBankListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransferOtherBankListViewController.xib; sourceTree = "<group>"; };
@@ -196,7 +200,7 @@
 		BE1772D81D9285DE00A27E06 /* DMBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMBProgressHUD.m; sourceTree = "<group>"; };
 		BE1773211D9286EE00A27E06 /* Dimo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dimo-Bridging-Header.h"; sourceTree = "<group>"; };
 		BE204A771D93CBFB0013A483 /* BaseTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseTextField.swift; path = "Base Objects/BaseTextField.swift"; sourceTree = "<group>"; };
-		BE204A851D93D5A00013A483 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Manager/Constants.swift; sourceTree = "<group>"; };
+		BE204A851D93D5A00013A483 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Constants.swift; path = Manager/Constants.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE204A871D94C9CD0013A483 /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
 		BE204A881D94C9CD0013A483 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
 		BE204A8A1D94CEEC0013A483 /* XRSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRSA.h; sourceTree = "<group>"; };
@@ -387,6 +391,8 @@
 				3535ED971E9DE616007D7942 /* TransferToEMoney.xib */,
 				354F48A01EA4AAB400263340 /* SuccesTransferController.swift */,
 				354F48A21EA4AAC000263340 /* SuccesTransferController.xib */,
+				351BC2FE1EB19FA50049849B /* TansferToUangkuController.swift */,
+				351BC2FC1EB1995B0049849B /* TansferToUangkuController.xib */,
 			);
 			path = "TRANSFER BANK";
 			sourceTree = "<group>";
@@ -604,6 +610,7 @@
 				354F48A31EA4AAC000263340 /* SuccesTransferController.xib in Resources */,
 				3535ED981E9DE616007D7942 /* TransferToEMoney.xib in Resources */,
 				35995AA31E262B14007EB516 /* ActivationPinViewController.xib in Resources */,
+				351BC2FD1EB1995B0049849B /* TansferToUangkuController.xib in Resources */,
 				356CC84B1E288DCE00E25355 /* TransactionPeriodViewController.xib in Resources */,
 				BE1772921D92859B00A27E06 /* LaunchScreen.storyboard in Resources */,
 				35995AC11E262B14007EB516 /* BalanceInfoViewController.xib in Resources */,
@@ -683,6 +690,7 @@
 				35995AB61E262B14007EB516 /* SecurityQuestionViewController.swift in Sources */,
 				35995AC21E262B14007EB516 /* ChangeMpinViewController.swift in Sources */,
 				BE204A8C1D94CEEC0013A483 /* XRSA.m in Sources */,
+				351BC2FF1EB19FA50049849B /* TansferToUangkuController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -38,15 +38,18 @@ let TO_DATE = "toDate"
 let DESTMDN = "destMDN"
 let DESTBANKACCOUNT = "destBankAccount"
 let AMOUNT = "amount"
-let TRANSFER = "Transfer"
 let TRANSFERID = "transferID"
 let CONFIRMED = "confirmed"
+let DESTACCOUNTNUMBER = "destAccountNo"
+let DEST_BANK_CODE = "destBankCode"
+let ACCOUNT_TYPE = "accountType"
 
 
 // MARK: VALUE for keys start here
 // MARK: =========================
 let SIMASPAY_CONFIRM = "Confirm"
 let SIMASPAY_ACTIVITY_VALUE = "true"
+let CHANNEL_ID_VALUE = "7"
 
 // MARK: Category
 let CATEGORY_CONTACTUS = "category.ContactUsfile"
@@ -65,6 +68,11 @@ let TXN_ACCOUNT_BALANCE = "CheckBalance"
 let TXN_ACCOUNT_HISTORY = "History"
 let TXN_DownLoad_History_PDF = "DownloadHistoryAsPDF"
 let TXN_TRANSFER_INQUIRY = "TransferInquiry"
+let TRANSFER = "Transfer"
+let TXN_INQUIRY_UANGKU = "TransferToUangkuInquiry"
+let TXN_TRANSFER_UANGKU = "TransferToUangku"
+let TXN_INQUIRY_OTHERBANK = "InterBankTransferInquiry"
+let TXN_OTHERBANK = "InterBankTransfer"
 // MARK: Service
 let SERVICE_ACCOUNT = "Account"
 let SERVICE_PAYMENT = "Payment"
@@ -100,6 +108,7 @@ let SIMASPAY_BANK_TRANSFER_TO__EMONEY_SUCCESS_CODE = "81"
 let SIMASPAY_EMONEY_TO_BSIM = "703"
 let SIMASPAY_EMONEY_TO_EMONEY_UN_SUBSCRIBER = "676"
 let SIMASPAY_EMONEY_TO_UNSUBCRIBER = "678"
+let SIMASPAY_TRANSFER_UANGKU_CONFIRM_SUCCESSCODE = "2176"
 
 //MARK: User defult
 let SIMASPAY_PUBLIC_KEY = "simasPayPublicKey"

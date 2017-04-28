@@ -427,7 +427,8 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
                 
                 } else if (messagecode == SIMASPAY_CONFIRM_TRANSFER_TO__EMONEY_SUCCESS_CODE || messagecode == SIMASPAY_BANK_TRANSFER_TO__EMONEY_SUCCESS_CODE ||
                     messagecode == SIMASPAY_EMONEY_TO_BSIM ||
-                    messagecode == SIMASPAY_EMONEY_TO_UNSUBCRIBER) {
+                    messagecode == SIMASPAY_EMONEY_TO_UNSUBCRIBER ||
+                    messagecode == SIMASPAY_TRANSFER_UANGKU_CONFIRM_SUCCESSCODE) {
                     let vc = SuccesTransferController.initWithOwnNib()
                     vc.data = self.data
                     vc.idTran =  responseDict.value(forKeyPath: "sctlID.text") as! String

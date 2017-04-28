@@ -101,7 +101,7 @@ class SuccesTransferController: BaseViewController {
             let contentFooterDic = contentFooterDica as! NSDictionary
             if contentFooterDic.allKeys.count != 0 {
                 let line = CALayer()
-                line.frame = CGRect(x: padding, y: y, width: width - 2 * padding, height: 1)
+                line.frame = CGRect(x: 0, y: y, width: width - 2 * padding, height: 1)
                 line.backgroundColor = UIColor.init(hexString: color_line_gray).cgColor
                 viewContentConfirmation.layer.addSublayer(line)
                 
