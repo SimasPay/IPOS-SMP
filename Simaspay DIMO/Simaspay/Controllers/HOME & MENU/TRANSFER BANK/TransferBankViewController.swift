@@ -79,7 +79,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
         self.tfNoAccount.delegate = self
         
         self.tfAmountTransfer.font = UIFont.systemFont(ofSize: 14)
-        self.tfAmountTransfer.placeholder = "RP"
+        self.tfAmountTransfer.placeholder = "Rp"
         self.tfAmountTransfer.addInset()
         
         self.tfMpin.font = UIFont.systemFont(ofSize: 14)

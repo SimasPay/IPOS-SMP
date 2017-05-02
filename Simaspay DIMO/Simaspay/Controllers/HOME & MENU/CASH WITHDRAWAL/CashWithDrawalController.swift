@@ -19,11 +19,11 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
     @IBOutlet var lblFirstTitleTf: BaseLabel!
     @IBOutlet var lblSecondTitleTf: BaseLabel!
     @IBOutlet var lblMPin: BaseLabel!
+    @IBOutlet weak var lblMinimumAmount: BaseLabel!
     
     @IBOutlet var tfNoAccount: BaseTextField!
     @IBOutlet var tfAmountTransfer: BaseTextField!
-    @IBOutlet var tfMpin: BaseTextField!
-    @IBOutlet var viewBackground: UIView!
+    @IBOutlet weak var textFieldmPin: BaseTextField!
     
     var withDrawalType : WithDrawalType!
     
@@ -45,7 +45,6 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.showBackButton()
-        self.viewBackground.backgroundColor = UIColor.init(hexString: color_background)
         
         self.lblFirstTitleTf.font = UIFont .boldSystemFont(ofSize: 13)
         self.lblFirstTitleTf.text = getString("TransferLebelMdn")
@@ -56,6 +55,9 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
         self.lblMPin.font = self.lblFirstTitleTf.font
         self.lblMPin.text = getString("TransferLebelMPIN")
         
+        self.lblMinimumAmount.font = UIFont .boldSystemFont(ofSize: 12)
+        self.lblMinimumAmount.text = getString("WithDrawalAmountMinimal")
+        
         btnNext.updateButtonType1()
         btnNext.setTitle(getString("TransferButtonNext"), for: .normal)
         btnNext.addTarget(self, action: #selector(self.actionNext) , for: .touchUpInside)
@@ -64,15 +66,17 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
         self.tfNoAccount.addInset()
         self.tfNoAccount.delegate = self
         
+        self.textFieldmPin.font = UIFont.systemFont(ofSize: 14)
+        self.textFieldmPin.addInset()
+        self.textFieldmPin.delegate = self
+        
         self.tfAmountTransfer.font = UIFont.systemFont(ofSize: 14)
-        self.tfAmountTransfer.placeholder = "RP"
+        self.tfAmountTransfer.placeholder = "Rp"
         self.tfAmountTransfer.addInset()
+        self.tfAmountTransfer.delegate = self
         
-        self.tfMpin.font = UIFont.systemFont(ofSize: 14)
-        self.tfMpin.addInset()
-        self.tfMpin.delegate = self
         
-        if (self.withDrawalType != WithDrawalType.WithDrawalTypeMe) {
+        if (self.withDrawalType == WithDrawalType.WithDrawalTypeMe) {
             constraintViewAcount.constant = 0
             self.showTitle(getString("WithDrawalMe"))
         } else {
@@ -95,22 +99,28 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
         }
     }
     
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     func actionNext() {
+        var intValue = 0
+        if (tfAmountTransfer.isValid()) {
+            intValue = Int(tfAmountTransfer.text!)!
+        }
         var message = "";
-        if (!tfNoAccount.isValid()) {
+        if (self.withDrawalType != WithDrawalType.WithDrawalTypeMe && !tfNoAccount.isValid()) {
             message = "Masukan " + getString("TransferLebelMdn")
         } else if (!tfAmountTransfer.isValid()){
             message = "Masukan " + getString("TransferLebelAmount")
-        } else if (!tfMpin.isValid()){
+        } else if (tfAmountTransfer.isValid() && intValue < 100000) {
+            message = getString("WithDrawalAmountMinimalMessage")
+        } else if (tfAmountTransfer.isValid() && intValue % 50000 != 0) {
+             message = getString("WithDrawalAmountMinimalMessage")
+        } else if (!textFieldmPin.isValid()){
             message = "Masukan " + getString("TransferLebelMPIN")
-        } else if (tfMpin.length() < 6) {
+        } else if (textFieldmPin.length() < 6) {
             message = "PIN harus 6 digit "
         } else if (!DIMOAPIManager.isInternetConnectionExist()) {
             message = getString("LoginMessageNotConnectServer")
@@ -120,13 +130,109 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
             DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
-        
         nextProces()
     }
     
     //MARK: function comfirmation
     func nextProces()  {
+        let dict = NSMutableDictionary()
         
+        if (self.withDrawalType == WithDrawalType.WithDrawalTypeOther) {
+             dict[BEHALF_OF_MDN] = getNormalisedMDN(self.tfNoAccount.text! as NSString)
+        }
+        
+        dict[SERVICE] = SERVICE_WALLET
+        dict[TXNNAME] = TXN_CASHWITHDRAWAL
+        dict[INSTITUTION_ID] = SIMASPAY
+        dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+        dict[SOURCEPIN] = simasPayRSAencryption(self.textFieldmPin.text!)
+        dict[AMOUNT] = self.tfAmountTransfer.text
+        
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DLog("\(param)")
+        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+            if (err != nil) {
+                let error = err! as NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                } else {
+                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                }
+                return
+            }
+            
+            let dictionary = NSDictionary(dictionary: dict!)
+            if (dictionary.allKeys.count == 0) {
+                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+            } else {
+                let responseDict = dictionary as NSDictionary
+                DLog("\(responseDict)")
+                let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
+                let messageText  = responseDict.value(forKeyPath: "message.text") as! String
+                if ( messagecode == SIMASPAY_INQUIRY_CASH_WITH_DRAWAL ){
+                    //Dictionary data for request OTP
+                    let vc = ConfirmationViewController.initWithOwnNib()
+                    let dictOtp = NSMutableDictionary()
+                    dictOtp[TXNNAME] = TXN_RESEND_MFAOTP
+                    dictOtp[SERVICE] = SERVICE_WALLET
+                    dictOtp[INSTITUTION_ID] = SIMASPAY
+                    dictOtp[SOURCEMDN] =  getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+                    dictOtp[SOURCEPIN] = simasPayRSAencryption(self.textFieldmPin.text!)
+                    dictOtp[SCTL_ID] = responseDict.value(forKeyPath: "sctlID.text") as! String
+                    dictOtp[AUTH_KEY] = ""
+                    vc.dictForRequestOTP = dictOtp as NSDictionary
+                    
+                    let data: [String : Any]!
+                    let debit = String(format: "Rp %@", (responseDict.value(forKeyPath: "debitamt.text") as? String)!)
+                    if (self.withDrawalType == WithDrawalType.WithDrawalTypeMe) {
+                        data = [
+                            "title" : "Pastikan data berikut sudah benar",
+                            "content" : [
+                                [getString("TypeOfTransaction") : getString("WithDrawalMe")],
+                                [getString("TransferLebelAmount") : debit],
+                            ]
+                        ]
+                    } else {
+                        data = [
+                            "title" : "Pastikan data berikut sudah benar",
+                            "content" : [
+                                [getString("TypeOfTransaction") : getString("WithDrawalOther")],
+                                [getString("TransferLebelMdn") : self.tfNoAccount.text!],
+                                [getString("TransferLebelAmount") : debit],
+                            ]
+                        ]
+                    }
+                    
+                    vc.data = data! as NSDictionary
+                    vc.MDNString = UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! String
+                    
+                    let dictSendOtp = NSMutableDictionary()
+                    dictSendOtp[SERVICE] = SERVICE_WALLET
+                    dictSendOtp[TXNNAME] = TXN_CASHWITHDRAWAL
+                    dictSendOtp[INSTITUTION_ID] = SIMASPAY
+                    dictSendOtp[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+                    dictSendOtp[TRANSFERID] = responseDict.value(forKeyPath: "transferID.text")
+                    dictSendOtp[PARENTTXNID] = responseDict.value(forKeyPath: "parentTxnID.text")
+                    dictSendOtp[CONFIRMED] = "true"
+                    dictSendOtp[MFAOTP] = true
+                    
+                    vc.dictForAcceptedOTP = dictSendOtp
+                    self.navigationController?.pushViewController(vc, animated: false)
+                } else if (messagecode == "631") {
+                    DIMOAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                        if index == 0 {
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
+                        }
+                    }, cancelButtonTitle: "OK")
+                } else {
+                    DIMOAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                }
+                
+            }
+        }
+
     }
     
     

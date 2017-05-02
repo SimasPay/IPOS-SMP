@@ -16,10 +16,11 @@
                 <outlet property="constraintViewAcount" destination="4Mb-gM-EqW" id="2fa-kz-VvW"/>
                 <outlet property="lblFirstTitleTf" destination="HDU-T2-NxF" id="cCk-Q8-nOR"/>
                 <outlet property="lblMPin" destination="zSw-5W-d2L" id="fLj-ze-KQD"/>
+                <outlet property="lblMinimumAmount" destination="GFP-Oh-jWi" id="Hqc-f2-Cop"/>
                 <outlet property="lblSecondTitleTf" destination="fnT-wO-VsM" id="ood-Ts-JY0"/>
                 <outlet property="scrollView" destination="sKN-ph-7oC" id="Vvr-ws-8wk"/>
+                <outlet property="textFieldmPin" destination="4dV-KI-sUp" id="MZw-kN-jHD"/>
                 <outlet property="tfAmountTransfer" destination="5GE-eB-AJw" id="a3l-4h-Ibw"/>
-                <outlet property="tfMpin" destination="4dV-KI-sUp" id="nIh-rD-4Z2"/>
                 <outlet property="tfNoAccount" destination="7w5-Nc-eu8" id="4E3-xF-Umh"/>
                 <outlet property="view" destination="dJ4-Bv-a0F" id="dXM-xw-Ae5"/>
             </connections>
@@ -62,7 +63,7 @@
                                             </constraints>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -99,33 +100,43 @@
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSw-5W-d2L" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="53" y="197" width="270" height="16"/>
+                                    <rect key="frame" x="53" y="226" width="270" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4dV-KI-sUp" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="53" y="223" width="270" height="40"/>
+                                    <rect key="frame" x="53" y="252" width="270" height="40"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1H9-SC-5i5" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="88" y="292" width="200" height="48"/>
+                                    <rect key="frame" x="88" y="321" width="200" height="48"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="200" id="BHq-rZ-1is"/>
                                         <constraint firstAttribute="height" constant="48" id="CIr-Af-y3H"/>
                                     </constraints>
                                 </button>
+                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GFP-Oh-jWi" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="53" y="185" width="270" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <color key="highlightedColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25490196078431371" alpha="0.62109375" colorSpace="calibratedRGB"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="zSw-5W-d2L" firstAttribute="width" secondItem="fnT-wO-VsM" secondAttribute="width" id="0zi-0y-X1z"/>
+                                <constraint firstItem="GFP-Oh-jWi" firstAttribute="leading" secondItem="HDU-T2-NxF" secondAttribute="leading" id="2G1-Vp-mnc"/>
+                                <constraint firstItem="GFP-Oh-jWi" firstAttribute="width" secondItem="HDU-T2-NxF" secondAttribute="width" id="2IW-eK-JGw"/>
                                 <constraint firstItem="fnT-wO-VsM" firstAttribute="top" secondItem="YJl-cS-BZk" secondAttribute="bottom" constant="20" id="3H8-8J-83I"/>
-                                <constraint firstItem="zSw-5W-d2L" firstAttribute="top" secondItem="5GE-eB-AJw" secondAttribute="bottom" constant="20" id="4nv-Uj-Llt"/>
+                                <constraint firstItem="zSw-5W-d2L" firstAttribute="top" secondItem="GFP-Oh-jWi" secondAttribute="bottom" constant="20" id="569-3x-FeM"/>
                                 <constraint firstItem="YJl-cS-BZk" firstAttribute="centerX" secondItem="QcR-9M-nUx" secondAttribute="centerX" id="DJA-0I-Gga"/>
+                                <constraint firstItem="GFP-Oh-jWi" firstAttribute="top" secondItem="5GE-eB-AJw" secondAttribute="bottom" constant="8" id="GWU-7v-hNu"/>
                                 <constraint firstItem="zSw-5W-d2L" firstAttribute="leading" secondItem="5GE-eB-AJw" secondAttribute="leading" id="HJ1-3A-K1j"/>
+                                <constraint firstItem="GFP-Oh-jWi" firstAttribute="trailing" secondItem="HDU-T2-NxF" secondAttribute="trailing" id="I93-q7-ehe"/>
                                 <constraint firstItem="4dV-KI-sUp" firstAttribute="top" secondItem="zSw-5W-d2L" secondAttribute="bottom" constant="10" id="KDi-vk-Ujz"/>
                                 <constraint firstItem="5GE-eB-AJw" firstAttribute="top" secondItem="fnT-wO-VsM" secondAttribute="bottom" constant="10" id="NOq-ch-1Bx"/>
                                 <constraint firstItem="YJl-cS-BZk" firstAttribute="top" secondItem="QcR-9M-nUx" secondAttribute="top" id="OKb-rs-E9v"/>

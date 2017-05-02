@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SuccesTransferController: BaseViewController {
+class SuccesConfirmationController: BaseViewController {
 
     @IBOutlet weak var viewNavigation: UIView!
     
@@ -26,8 +26,8 @@ class SuccesTransferController: BaseViewController {
     var useNavigation: Bool = true
     
     
-    static func initWithOwnNib() -> SuccesTransferController {
-        let obj:SuccesTransferController = SuccesTransferController.init(nibName: String(describing: self), bundle: nil)
+    static func initWithOwnNib() -> SuccesConfirmationController {
+        let obj:SuccesConfirmationController = SuccesConfirmationController.init(nibName: String(describing: self), bundle: nil)
         return obj
     }
     

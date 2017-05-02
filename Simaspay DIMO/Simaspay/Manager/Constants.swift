@@ -43,6 +43,7 @@ let CONFIRMED = "confirmed"
 let DESTACCOUNTNUMBER = "destAccountNo"
 let DEST_BANK_CODE = "destBankCode"
 let ACCOUNT_TYPE = "accountType"
+let BEHALF_OF_MDN = "onBehalfOfMDN"
 
 
 // MARK: VALUE for keys start here
@@ -73,11 +74,16 @@ let TXN_INQUIRY_UANGKU = "TransferToUangkuInquiry"
 let TXN_TRANSFER_UANGKU = "TransferToUangku"
 let TXN_INQUIRY_OTHERBANK = "InterBankTransferInquiry"
 let TXN_OTHERBANK = "InterBankTransfer"
+let TXN_CASHWITHDRAWAL = "CashOutAtATMInquiry"
+
 // MARK: Service
 let SERVICE_ACCOUNT = "Account"
 let SERVICE_PAYMENT = "Payment"
 let SOURCEPOCKETCODE = "sourcePocketCode"
 let DESTPOCKETCODE = "destPocketCode"
+
+// MART: Cash Withdrawal
+let TXN = "CashOutAtATMInquiry"
 
 // MARK: others
 let ACTIVITY_STATUS = "true"
@@ -109,6 +115,7 @@ let SIMASPAY_EMONEY_TO_BSIM = "703"
 let SIMASPAY_EMONEY_TO_EMONEY_UN_SUBSCRIBER = "676"
 let SIMASPAY_EMONEY_TO_UNSUBCRIBER = "678"
 let SIMASPAY_TRANSFER_UANGKU_CONFIRM_SUCCESSCODE = "2176"
+let SIMASPAY_INQUIRY_CASH_WITH_DRAWAL = "708"
 
 //MARK: User defult
 let SIMASPAY_PUBLIC_KEY = "simasPayPublicKey"

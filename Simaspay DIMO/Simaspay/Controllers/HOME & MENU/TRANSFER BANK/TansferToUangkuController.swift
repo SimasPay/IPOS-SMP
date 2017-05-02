@@ -48,7 +48,7 @@ class TansferToUangkuController: BaseViewController, UITextFieldDelegate {
         self.inputMdn.addInset()
         
         self.inputAmount.font = UIFont.systemFont(ofSize: 14)
-        self.inputAmount.placeholder = "RP"
+        self.inputAmount.placeholder = "Rp"
         self.inputAmount.addInset()
         
         self.inputmPin.font = UIFont.systemFont(ofSize: 14)

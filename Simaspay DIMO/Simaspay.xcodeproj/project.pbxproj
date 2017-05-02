@@ -18,8 +18,8 @@
 		353C2BAF1E9226E60082C250 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BAA1E9226E60082C250 /* CoreMotion.framework */; };
 		353C2BB01E9226E60082C250 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BAB1E9226E60082C250 /* OpenGLES.framework */; };
 		353C2BB11E9226E60082C250 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BAC1E9226E60082C250 /* SystemConfiguration.framework */; };
-		354F48A11EA4AAB400263340 /* SuccesTransferController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354F48A01EA4AAB400263340 /* SuccesTransferController.swift */; };
-		354F48A31EA4AAC000263340 /* SuccesTransferController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 354F48A21EA4AAC000263340 /* SuccesTransferController.xib */; };
+		354F48A11EA4AAB400263340 /* SuccesConfirmationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354F48A01EA4AAB400263340 /* SuccesConfirmationController.swift */; };
+		354F48A31EA4AAC000263340 /* SuccesConfirmationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 354F48A21EA4AAC000263340 /* SuccesConfirmationController.xib */; };
 		356CC84A1E288DCE00E25355 /* TransactionPeriodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356CC8481E288DCE00E25355 /* TransactionPeriodViewController.swift */; };
 		356CC84B1E288DCE00E25355 /* TransactionPeriodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 356CC8491E288DCE00E25355 /* TransactionPeriodViewController.xib */; };
 		359959ED1E2623D3007EB516 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359959EC1E2623D3007EB516 /* Utilities.swift */; };
@@ -121,8 +121,8 @@
 		353C2BAA1E9226E60082C250 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		353C2BAB1E9226E60082C250 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		353C2BAC1E9226E60082C250 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		354F48A01EA4AAB400263340 /* SuccesTransferController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccesTransferController.swift; sourceTree = "<group>"; };
-		354F48A21EA4AAC000263340 /* SuccesTransferController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccesTransferController.xib; sourceTree = "<group>"; };
+		354F48A01EA4AAB400263340 /* SuccesConfirmationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccesConfirmationController.swift; sourceTree = "<group>"; };
+		354F48A21EA4AAC000263340 /* SuccesConfirmationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccesConfirmationController.xib; sourceTree = "<group>"; };
 		356CC8481E288DCE00E25355 /* TransactionPeriodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionPeriodViewController.swift; sourceTree = "<group>"; };
 		356CC8491E288DCE00E25355 /* TransactionPeriodViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionPeriodViewController.xib; sourceTree = "<group>"; };
 		359959EC1E2623D3007EB516 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = Manager/Utilities.swift; sourceTree = "<group>"; };
@@ -354,9 +354,11 @@
 				35995A881E262B14007EB516 /* HomeViewController.xib */,
 				35995A891E262B14007EB516 /* PAYMENT PURCHASE */,
 				35995A8E1E262B14007EB516 /* SETTING */,
+				35995A971E262B14007EB516 /* TRANSFER BANK */,
 				35995A951E262B14007EB516 /* StatusTransferViewController.swift */,
 				35995A961E262B14007EB516 /* StatusTransferViewController.xib */,
-				35995A971E262B14007EB516 /* TRANSFER BANK */,
+				354F48A01EA4AAB400263340 /* SuccesConfirmationController.swift */,
+				354F48A21EA4AAC000263340 /* SuccesConfirmationController.xib */,
 			);
 			path = "HOME & MENU";
 			sourceTree = "<group>";
@@ -398,8 +400,6 @@
 				35995A9D1E262B14007EB516 /* TransferOtherBankListViewController.xib */,
 				3535ED951E9DE5BE007D7942 /* TransferToEMoney.swift */,
 				3535ED971E9DE616007D7942 /* TransferToEMoney.xib */,
-				354F48A01EA4AAB400263340 /* SuccesTransferController.swift */,
-				354F48A21EA4AAC000263340 /* SuccesTransferController.xib */,
 				351BC2FE1EB19FA50049849B /* TansferToUangkuController.swift */,
 				351BC2FC1EB1995B0049849B /* TansferToUangkuController.xib */,
 			);
@@ -627,7 +627,7 @@
 				35995AA71E262B14007EB516 /* ActivationViewController.xib in Resources */,
 				35995AB91E262B14007EB516 /* ConfirmationViewController.xib in Resources */,
 				35995AD11E262B14007EB516 /* SplashScreenViewController.xib in Resources */,
-				354F48A31EA4AAC000263340 /* SuccesTransferController.xib in Resources */,
+				354F48A31EA4AAC000263340 /* SuccesConfirmationController.xib in Resources */,
 				3535ED981E9DE616007D7942 /* TransferToEMoney.xib in Resources */,
 				35995AA31E262B14007EB516 /* ActivationPinViewController.xib in Resources */,
 				351BC2FD1EB1995B0049849B /* TansferToUangkuController.xib in Resources */,
@@ -678,7 +678,7 @@
 				BE1773001D9285DE00A27E06 /* DAFHTTPRequestOperation.m in Sources */,
 				35995ACE1E262B14007EB516 /* LandingScreenViewController.swift in Sources */,
 				35995AB01E262B14007EB516 /* LoginRegisterViewController.swift in Sources */,
-				354F48A11EA4AAB400263340 /* SuccesTransferController.swift in Sources */,
+				354F48A11EA4AAB400263340 /* SuccesConfirmationController.swift in Sources */,
 				BEC4160A1D9385D2000C3CF4 /* CategoriesManager.swift in Sources */,
 				BEC416051D9385B9000C3CF4 /* DIMOUtility.m in Sources */,
 				BEC416081D9385B9000C3CF4 /* UserDefault.m in Sources */,

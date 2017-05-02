@@ -331,18 +331,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 return
             }
             let dictionary = NSDictionary(dictionary: dict!)
-            let messageText  = dictionary.value(forKeyPath: "message.text") as! String
-            let messagecode  = dictionary.value(forKeyPath:"message.code") as! String
             if (dictionary.allKeys.count == 0) {
                 DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
-            } else if (messagecode == "631") {
-                self.close()
-                DIMOAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
-                    if index == 0 {
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
-                    }
-                }, cancelButtonTitle: "OK")
             } else {
+                let messageText  = dictionary.value(forKeyPath: "message.text") as! String
+                let messagecode  = dictionary.value(forKeyPath:"message.code") as! String
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")
                 if let amount = responseDict["amount"] {
@@ -352,6 +345,13 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     self.indicatorView.isHidden = true
                     self.lblBalance.text = String(format: "Rp %@", amountText)
                     _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.close), userInfo: nil, repeats: false)
+                } else if (messagecode == "631") {
+                    self.close()
+                    DIMOAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                        if index == 0 {
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
+                        }
+                    }, cancelButtonTitle: "OK")
                 } else {
                     self.close()
                     DIMOAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))

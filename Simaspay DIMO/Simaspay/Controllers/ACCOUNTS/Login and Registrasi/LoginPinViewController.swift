@@ -131,7 +131,6 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
                 let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
                 let messageText  = responseDict.value(forKeyPath: "message.text") as! String
                 var vc = BaseViewController()
-                
                 if (messagecode == SIMASPAY_LOGIN_SUCCESS_CODE){
                     UserDefault.setObject(self.MDNString, forKey: SOURCEMDN)
                     UserDefault.setObject(self.MDNString, forKey: ACCOUNT_NUMBER)

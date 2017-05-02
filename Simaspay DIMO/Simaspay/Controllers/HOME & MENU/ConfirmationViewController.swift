@@ -429,10 +429,16 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
                     messagecode == SIMASPAY_EMONEY_TO_BSIM ||
                     messagecode == SIMASPAY_EMONEY_TO_UNSUBCRIBER ||
                     messagecode == SIMASPAY_TRANSFER_UANGKU_CONFIRM_SUCCESSCODE) {
-                    let vc = SuccesTransferController.initWithOwnNib()
+                    let vc = SuccesConfirmationController.initWithOwnNib()
                     vc.data = self.data
                     vc.idTran =  responseDict.value(forKeyPath: "sctlID.text") as! String
                     self.navigationController?.pushViewController(vc, animated: true)
+                } else if (messagecode == "631") {
+                    DIMOAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                        if index == 0 {
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
+                        }
+                    }, cancelButtonTitle: "OK")
                 } else {
                     DIMOAlertView.showNormalTitle("Error", message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];

@@ -34,10 +34,10 @@ class ListCashWithDrawalController: BaseViewController,UITableViewDelegate, UITa
         self.arrayMenu = [
             [
                 "title" : "Untuk Saya",
-                "action" : TransferBankViewController.initWithOwnNib(type: TransferType.TransferTypeSinarmas)],
+                "action" : CashWithDrawalController.initWithOwnNib(type: WithDrawalType.WithDrawalTypeMe)],
             [
                 "title" : "Untuk Orang Lain",
-                "action" : TransferOtherBankListViewController.initWithOwnNib()]
+                "action" : CashWithDrawalController.initWithOwnNib(type: WithDrawalType.WithDrawalTypeOther)]
         ];
         
         self.tableView.reloadData()
