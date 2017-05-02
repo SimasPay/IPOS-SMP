@@ -71,6 +71,10 @@
 		35995ACF1E262B14007EB516 /* LandingScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995A9F1E262B14007EB516 /* LandingScreenViewController.xib */; };
 		35995AD01E262B14007EB516 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35995AA01E262B14007EB516 /* SplashScreenViewController.swift */; };
 		35995AD11E262B14007EB516 /* SplashScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995AA11E262B14007EB516 /* SplashScreenViewController.xib */; };
+		35CDC6251EB7817800E5296A /* ListCashWithDrawalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CDC6241EB7817800E5296A /* ListCashWithDrawalController.swift */; };
+		35CDC6271EB7818A00E5296A /* ListCashWithDrawalController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35CDC6261EB7818A00E5296A /* ListCashWithDrawalController.xib */; };
+		35CDC6291EB78D5D00E5296A /* CashWithDrawalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CDC6281EB78D5D00E5296A /* CashWithDrawalController.swift */; };
+		35CDC62B1EB78D6E00E5296A /* CashWithDrawalController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35CDC62A1EB78D6E00E5296A /* CashWithDrawalController.xib */; };
 		BE1772881D92859B00A27E06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1772871D92859B00A27E06 /* AppDelegate.swift */; };
 		BE17728F1D92859B00A27E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE17728E1D92859B00A27E06 /* Assets.xcassets */; };
 		BE1772921D92859B00A27E06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE1772901D92859B00A27E06 /* LaunchScreen.storyboard */; };
@@ -170,6 +174,10 @@
 		35995A9F1E262B14007EB516 /* LandingScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LandingScreenViewController.xib; sourceTree = "<group>"; };
 		35995AA01E262B14007EB516 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		35995AA11E262B14007EB516 /* SplashScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashScreenViewController.xib; sourceTree = "<group>"; };
+		35CDC6241EB7817800E5296A /* ListCashWithDrawalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListCashWithDrawalController.swift; path = "CASH WITHDRAWAL/ListCashWithDrawalController.swift"; sourceTree = "<group>"; };
+		35CDC6261EB7818A00E5296A /* ListCashWithDrawalController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ListCashWithDrawalController.xib; path = "CASH WITHDRAWAL/ListCashWithDrawalController.xib"; sourceTree = "<group>"; };
+		35CDC6281EB78D5D00E5296A /* CashWithDrawalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CashWithDrawalController.swift; path = "CASH WITHDRAWAL/CashWithDrawalController.swift"; sourceTree = "<group>"; };
+		35CDC62A1EB78D6E00E5296A /* CashWithDrawalController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CashWithDrawalController.xib; path = "CASH WITHDRAWAL/CashWithDrawalController.xib"; sourceTree = "<group>"; };
 		BE1772841D92859B00A27E06 /* Simaspay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Simaspay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1772871D92859B00A27E06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE17728E1D92859B00A27E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Simaspay/Assets.xcassets; sourceTree = "<group>"; };
@@ -339,6 +347,7 @@
 		35995A841E262B14007EB516 /* HOME & MENU */ = {
 			isa = PBXGroup;
 			children = (
+				35CDC6231EB7809100E5296A /* CASH WITHDRAWAL */,
 				35995A851E262B14007EB516 /* ConfirmationViewController.swift */,
 				35995A861E262B14007EB516 /* ConfirmationViewController.xib */,
 				35995A871E262B14007EB516 /* HomeViewController.swift */,
@@ -395,6 +404,17 @@
 				351BC2FC1EB1995B0049849B /* TansferToUangkuController.xib */,
 			);
 			path = "TRANSFER BANK";
+			sourceTree = "<group>";
+		};
+		35CDC6231EB7809100E5296A /* CASH WITHDRAWAL */ = {
+			isa = PBXGroup;
+			children = (
+				35CDC6241EB7817800E5296A /* ListCashWithDrawalController.swift */,
+				35CDC6261EB7818A00E5296A /* ListCashWithDrawalController.xib */,
+				35CDC6281EB78D5D00E5296A /* CashWithDrawalController.swift */,
+				35CDC62A1EB78D6E00E5296A /* CashWithDrawalController.xib */,
+			);
+			name = "CASH WITHDRAWAL";
 			sourceTree = "<group>";
 		};
 		BE17727B1D92859B00A27E06 = {
@@ -618,11 +638,13 @@
 				35995ABF1E262B14007EB516 /* PaymentPurchaseViewController.xib in Resources */,
 				35995AC31E262B14007EB516 /* ChangeMpinViewController.xib in Resources */,
 				35995ACF1E262B14007EB516 /* LandingScreenViewController.xib in Resources */,
+				35CDC6271EB7818A00E5296A /* ListCashWithDrawalController.xib in Resources */,
 				35995AB11E262B14007EB516 /* LoginRegisterViewController.xib in Resources */,
 				BE17728F1D92859B00A27E06 /* Assets.xcassets in Resources */,
 				35995AC71E262B14007EB516 /* StatusTransferViewController.xib in Resources */,
 				35995ABB1E262B14007EB516 /* HomeViewController.xib in Resources */,
 				35995AB31E262B14007EB516 /* LoginViewController-unused.xib in Resources */,
+				35CDC62B1EB78D6E00E5296A /* CashWithDrawalController.xib in Resources */,
 				35995AB51E262B14007EB516 /* RegisterEMoneyViewController.xib in Resources */,
 				35995AA91E262B14007EB516 /* ContactUSViewController.xib in Resources */,
 			);
@@ -672,6 +694,7 @@
 				BE204A781D93CBFB0013A483 /* BaseTextField.swift in Sources */,
 				35995ACA1E262B14007EB516 /* TransferBankViewController.swift in Sources */,
 				35995AAC1E262B14007EB516 /* BankEMoneyViewController.swift in Sources */,
+				35CDC6251EB7817800E5296A /* ListCashWithDrawalController.swift in Sources */,
 				3535ED961E9DE5BE007D7942 /* TransferToEMoney.swift in Sources */,
 				BE1773061D9285DE00A27E06 /* DAFURLRequestSerialization.m in Sources */,
 				BEC415E11D928E84000C3CF4 /* BaseLabel.swift in Sources */,
@@ -681,6 +704,7 @@
 				35995AAA1E262B14007EB516 /* EULAViewController.swift in Sources */,
 				BE17730A1D9285DE00A27E06 /* DMBProgressHUD.m in Sources */,
 				35995AD01E262B14007EB516 /* SplashScreenViewController.swift in Sources */,
+				35CDC6291EB78D5D00E5296A /* CashWithDrawalController.swift in Sources */,
 				35995AA61E262B14007EB516 /* ActivationViewController.swift in Sources */,
 				35995AB41E262B14007EB516 /* RegisterEMoneyViewController.swift in Sources */,
 				35995ABA1E262B14007EB516 /* HomeViewController.swift in Sources */,

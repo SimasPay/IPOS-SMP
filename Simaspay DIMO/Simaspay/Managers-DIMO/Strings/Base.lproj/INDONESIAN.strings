@@ -82,6 +82,11 @@
 "TransferBSIMTitle" = "Transfer - Bank Sinarmas";
 "TransferOtherBankTitle" = "Transfer - Bank Lain";
 
+// Cash Withdrawal
+"WithDrawalMe" = "Tarik Tunai - Untuk Saya";
+"WithDrawalOther" = "Tarik Tunai - Untuk Orang Lain";
+
+
 
 //OTHERS
 "ErrorMessageRequestFailed" = "Request Failed.";

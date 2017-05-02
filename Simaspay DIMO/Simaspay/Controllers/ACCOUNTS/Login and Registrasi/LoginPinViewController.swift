@@ -43,8 +43,12 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        
+        tfMpin.text = ""
         tfMpin.becomeFirstResponder()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tfMpin.text = ""
     }
     
     //MARK: action button done in keyboard

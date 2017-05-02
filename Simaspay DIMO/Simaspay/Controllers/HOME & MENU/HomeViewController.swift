@@ -140,7 +140,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             [
                 "title" : "Tarik Tunai",
                 "icon" : "icon_drawal",
-                "action" : TransactionHistoryViewController.initWithOwnNib(),
+                "action" : ListCashWithDrawalController.initWithOwnNib(),
                 "disable" : self.accountType == AccountType.accountTypeEMoneyNonKYC ? true : false,
                 "isHidden": self.accountType ==  AccountType.accountTypeRegular ? true : false
             ],
@@ -332,8 +332,16 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             }
             let dictionary = NSDictionary(dictionary: dict!)
             let messageText  = dictionary.value(forKeyPath: "message.text") as! String
+            let messagecode  = dictionary.value(forKeyPath:"message.code") as! String
             if (dictionary.allKeys.count == 0) {
                 DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+            } else if (messagecode == "631") {
+                self.close()
+                DIMOAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                    if index == 0 {
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
+                    }
+                }, cancelButtonTitle: "OK")
             } else {
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")

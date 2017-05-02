@@ -248,6 +248,12 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
                     
                     vc.dictForAcceptedOTP = dictSendOtp
                     self.navigationController?.pushViewController(vc, animated: false)
+                } else if (messagecode == "631") {
+                    DIMOAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                        if index == 0 {
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
+                        }
+                    }, cancelButtonTitle: "OK")
                 } else {
                     DIMOAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
@@ -368,6 +374,12 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
                     
                     vc.dictForAcceptedOTP = dictSendOtp
                     self.navigationController?.pushViewController(vc, animated: false)
+                } else if (messagecode == "631") {
+                    DIMOAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                        if index == 0 {
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
+                        }
+                    }, cancelButtonTitle: "OK")
                 } else {
                     DIMOAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }

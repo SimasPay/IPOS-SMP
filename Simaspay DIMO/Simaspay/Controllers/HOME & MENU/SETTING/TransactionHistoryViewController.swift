@@ -179,8 +179,14 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
                     } else {
                         self.arrayData = [responseDict.value(forKeyPath: "transactionDetails.transactionDetail") as! Dictionary<String, Any>]
                     }
+                } else if (messageCode == "631") {
+                     let messageText  = responseDict.value(forKeyPath: "message.text") as! String
+                    DIMOAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                        if index == 0 {
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
+                        }
+                    }, cancelButtonTitle: "OK")
                 } else {
-                    
                     DIMOAlertView.showNormalTitle("Error", message: dictionary.value(forKeyPath: "message.text") as! String, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
                         for vc in viewControllers {
