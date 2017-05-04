@@ -75,15 +75,30 @@ let TXN_TRANSFER_UANGKU = "TransferToUangku"
 let TXN_INQUIRY_OTHERBANK = "InterBankTransferInquiry"
 let TXN_OTHERBANK = "InterBankTransfer"
 let TXN_CASHWITHDRAWAL = "CashOutAtATMInquiry"
+let TXN_CASH_OUT_ATM_WITHDRAWAL = "CashOutAtATM"
+let TXN_INQUIRY_PURCHASE = "PurchaseInquiry"
+let TXN_CONFIRM_PURCHASE = "Purchase"
+let TXN_INQUIRY_PURCHASE_AIRTIME = "AirtimePurchaseInquiry"
+let TXN_CONFIRM_PURCHASE_AIRTIME = "AirtimePurchase"
+let TXN_INQUIRY_PAYMENT = "BillPayInquiry"
+let TXN_CONFIRM_PAYMENT = "BillPay"
 
 // MARK: Service
 let SERVICE_ACCOUNT = "Account"
 let SERVICE_PAYMENT = "Payment"
 let SOURCEPOCKETCODE = "sourcePocketCode"
 let DESTPOCKETCODE = "destPocketCode"
+let SERVICE_PURCHASE_AIRTIME = "Buy"
 
-// MART: Cash Withdrawal
+// MARK: Cash Withdrawal
 let TXN = "CashOutAtATMInquiry"
+
+// MARK: Purchase
+let BILLNO = "billNo"
+let DENOM_CODE = "denomCode"
+let BILLERCODE = "billerCode"
+let PAYMENT_MODE = "paymentMode"
+let NOMINAL_AMOUNT = "nominalAmount"
 
 // MARK: others
 let ACTIVITY_STATUS = "true"
@@ -116,6 +131,11 @@ let SIMASPAY_EMONEY_TO_EMONEY_UN_SUBSCRIBER = "676"
 let SIMASPAY_EMONEY_TO_UNSUBCRIBER = "678"
 let SIMASPAY_TRANSFER_UANGKU_CONFIRM_SUCCESSCODE = "2176"
 let SIMASPAY_INQUIRY_CASH_WITH_DRAWAL = "708"
+let SIMASPAY_CASH_WITH_DRAWAL_SUCCESSCODE = "709"
+let SIMASPAY_PURCHASE_INQUIRY = "660"
+let SIMASPAY_PURCHASE_SUCCESCODE = "2030"
+let SIMASPAY_PAYMENT_INQUIRY = "713"
+let SIMASPAY_PAYMENT_SUCCESSCODE = "653"
 
 //MARK: User defult
 let SIMASPAY_PUBLIC_KEY = "simasPayPublicKey"
@@ -152,7 +172,7 @@ let TERMS_CONDITIONS = "https://www.banksinarmas.com/PersonalBanking/IB.do?actio
 #define BILLNO @"billNo"
 #define DENOM_CODE @"denomCode"
 #define BILLERCODE @"billerCode"
-#define PAYMENT_MODE @"paymentMode"
+
 
 #define ACTIVATION_CONFORMPIN @"activationConfirmPin"
 #define ACTIVATION_OTP @"otp"

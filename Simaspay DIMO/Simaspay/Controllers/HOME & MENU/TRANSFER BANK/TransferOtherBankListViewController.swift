@@ -71,14 +71,11 @@ class TransferOtherBankListViewController: BaseViewController, UITableViewDelega
             
             let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
             self.bankList =  responseDict.value(forKey: "bankData") as! NSMutableArray
-            
-            
-            // add objects to data
-            // add objects to filtered for default
+
             self.data = self.bankList
             self.filtered = self.bankList
             
-            DLog("\(self.bankList)")
+            // DLog("\(self.bankList)")
             self.tableView.reloadData()
         }
 

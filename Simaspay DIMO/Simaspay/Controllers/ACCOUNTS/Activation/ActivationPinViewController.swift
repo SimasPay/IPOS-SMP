@@ -166,6 +166,12 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
                 let vc = ActivationSuccessViewController.initWithMessageInfo(message: getString("ActivationLabelInfoSuccessMessage"),title: getString("ActivationLabelInfoSuccess") )
                 self.animatedFadeIn()
                 self.navigationController?.pushViewController(vc, animated: false)
+            } else if (messagecode == "631") {
+                DIMOAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                    if index == 0 {
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
+                    }
+                }, cancelButtonTitle: "OK")
             } else {
                 DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
             }

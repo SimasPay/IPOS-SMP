@@ -92,6 +92,8 @@
 //OTHERS
 "ErrorMessageRequestFailed" = "Request Failed.";
 "AlertCloseButtonText" = "OK";
+"messageEndOtp" = "Silakan masukkan code sebelum batas waktu yang ditentukan.";
+"titleEndOtp" = "Verifikasi kode gagal";
 
 //Confirmation Page
 "ConfirmationTitle" = "Konfirmasi";
@@ -115,3 +117,7 @@
 "SecurityQuestionInfoTitle" = "Silakan pilih dan jawab pertanyaan keamanan untuk keperluan reset mPIN Anda.";
 "SecurityQuestionTextfieldAnswerPlaceholder" = "Jawaban Anda…";
 "SecurityQuestionTextfieldQuestion" = "Pilih Pertanyaan Keamanan";
+
+// purchase
+"Charges" = "Biaya Administrasi";
+

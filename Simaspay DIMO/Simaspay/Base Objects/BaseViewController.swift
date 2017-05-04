@@ -1,4 +1,4 @@
-    //
+//
 //  BaseViewController.swift
 //  Simaspay
 //
@@ -110,6 +110,9 @@ class BaseViewController: UIViewController {
     func btnPrevAction() {
         var last : UITextField!
         for item in arrayTextFields {
+            if !(item as! UITextField).isEnabled && !(item as! UITextField).isUserInteractionEnabled {
+                continue
+            }
             if (item as! UITextField).isFirstResponder && last != nil {
                 (last as UITextField).becomeFirstResponder()
                 break
@@ -121,6 +124,9 @@ class BaseViewController: UIViewController {
     func btnNextAction() {
         var isFirstResponder = false
         for item in arrayTextFields {
+            if !(item as! UITextField).isEnabled && !(item as! UITextField).isUserInteractionEnabled {
+                continue
+            }
             if isFirstResponder {
                 (item as! UITextField).becomeFirstResponder()
                 break

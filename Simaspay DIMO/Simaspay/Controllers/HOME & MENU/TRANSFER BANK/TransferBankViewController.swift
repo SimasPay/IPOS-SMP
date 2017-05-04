@@ -174,7 +174,6 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DLog("\(param)")
         DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {
@@ -213,7 +212,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
                     let dictSendOtp = NSMutableDictionary()
                     let data: [String : Any]!
                     
-                        let credit = String(format: "Rp %@", (responseDict.value(forKeyPath: "debitamt.text") as? String)!)
+                        let credit = String(format: "Rp %@", (responseDict.value(forKeyPath: "creditamt.text") as? String)!)
                         data = [
                             "title" : "Pastikan data berikut sudah benar",
                             "content" : [
@@ -326,9 +325,9 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
                     let data: [String : Any]!
                     
                     let chargerString = (responseDict.value(forKeyPath: "charges.text") as? String)!
-                    let debitString = (responseDict.value(forKeyPath: "debitamt.text") as? String)!
+                    let creditamt = (responseDict.value(forKeyPath: "creditamt.text") as? String)!
                     let chargerInt = Int(chargerString.replacingOccurrences(of: ".", with: "", options: .literal, range: nil))
-                    let creditInt = Int(debitString.replacingOccurrences(of: ".", with: "", options: .literal, range: nil))
+                    let creditInt = Int(creditamt.replacingOccurrences(of: ".", with: "", options: .literal, range: nil))
                     let debit = chargerInt! + creditInt!
                     let formatter = NumberFormatter()
                     formatter.numberStyle = .currency
@@ -340,7 +339,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
                             [getString("ConfirmationOwnMdn") : responseDict.value(forKeyPath: "destinationName.text")],
                             [getString("TransferLebelBankName") : responseDict.value(forKeyPath: "destinationBank.text")],
                             [getString("TransferLebelAccountNumber") : responseDict.value(forKeyPath: "destinationAccountNumber.text")],
-                            [getString("TransferLebelAmount") : String(format: "Rp %@", debitString)],
+                            [getString("TransferLebelAmount") : String(format: "Rp %@", creditamt)],
                             [getString("TransferFee") :  String(format: "Rp %@", chargerString)],
                         ],
                         "footer" :[

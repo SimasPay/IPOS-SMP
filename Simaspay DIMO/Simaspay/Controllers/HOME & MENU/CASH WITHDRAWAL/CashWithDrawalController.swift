@@ -105,18 +105,23 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
     }
     
     func actionNext() {
-        var intValue = 0
+        var intValue : Int?
         if (tfAmountTransfer.isValid()) {
-            intValue = Int(tfAmountTransfer.text!)!
+            var anOptionalString : String?
+            anOptionalString = tfAmountTransfer.text
+            intValue = Int(anOptionalString!)
+        } else {
+            intValue = 0
         }
+        
         var message = "";
         if (self.withDrawalType != WithDrawalType.WithDrawalTypeMe && !tfNoAccount.isValid()) {
             message = "Masukan " + getString("TransferLebelMdn")
         } else if (!tfAmountTransfer.isValid()){
             message = "Masukan " + getString("TransferLebelAmount")
-        } else if (tfAmountTransfer.isValid() && intValue < 100000) {
+        } else if (tfAmountTransfer.isValid() && intValue! < 100000) {
             message = getString("WithDrawalAmountMinimalMessage")
-        } else if (tfAmountTransfer.isValid() && intValue % 50000 != 0) {
+        } else if (tfAmountTransfer.isValid() && intValue! % 50000 != 0) {
              message = getString("WithDrawalAmountMinimalMessage")
         } else if (!textFieldmPin.isValid()){
             message = "Masukan " + getString("TransferLebelMPIN")
@@ -185,13 +190,13 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
                     vc.dictForRequestOTP = dictOtp as NSDictionary
                     
                     let data: [String : Any]!
-                    let debit = String(format: "Rp %@", (responseDict.value(forKeyPath: "debitamt.text") as? String)!)
+                    let creditamt = String(format: "Rp %@", (responseDict.value(forKeyPath: "creditamt.text") as? String)!)
                     if (self.withDrawalType == WithDrawalType.WithDrawalTypeMe) {
                         data = [
                             "title" : "Pastikan data berikut sudah benar",
                             "content" : [
                                 [getString("TypeOfTransaction") : getString("WithDrawalMe")],
-                                [getString("TransferLebelAmount") : debit],
+                                [getString("TransferLebelAmount") : creditamt],
                             ]
                         ]
                     } else {
@@ -200,7 +205,7 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
                             "content" : [
                                 [getString("TypeOfTransaction") : getString("WithDrawalOther")],
                                 [getString("TransferLebelMdn") : self.tfNoAccount.text!],
-                                [getString("TransferLebelAmount") : debit],
+                                [getString("TransferLebelAmount") : creditamt],
                             ]
                         ]
                     }
@@ -210,7 +215,7 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
                     
                     let dictSendOtp = NSMutableDictionary()
                     dictSendOtp[SERVICE] = SERVICE_WALLET
-                    dictSendOtp[TXNNAME] = TXN_CASHWITHDRAWAL
+                    dictSendOtp[TXNNAME] = TXN_CASH_OUT_ATM_WITHDRAWAL
                     dictSendOtp[INSTITUTION_ID] = SIMASPAY
                     dictSendOtp[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
                     dictSendOtp[TRANSFERID] = responseDict.value(forKeyPath: "transferID.text")

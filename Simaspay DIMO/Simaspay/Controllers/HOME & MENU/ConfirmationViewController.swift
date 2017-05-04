@@ -41,6 +41,8 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
     //Value to set background navigation
     var useNavigation: Bool = true
     
+    var alertController = UIAlertController()
+    
     static func initWithOwnNib() -> ConfirmationViewController {
         let obj:ConfirmationViewController = ConfirmationViewController.init(nibName: String(describing: self), bundle: nil)
         return obj
@@ -57,15 +59,12 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
         self.showTitle(getString("ConfirmationTitle"))
         
         self.view.backgroundColor = UIColor.init(hexString: color_background)
-        
-//        DLog("\(dictForRequestOTP)")
-//        DLog("\(dictForAcceptedOTP)")
+
         DLog("\(data)")
         self.viewContentConfirmation.layer.cornerRadius = 5.0;
         self.viewContentConfirmation.layer.borderColor = UIColor.init(hexString: color_border).cgColor
         self.viewContentConfirmation.layer.borderWidth = 0.5
         self.viewContentConfirmation.clipsToBounds = true;
-        
         
         self.btnTrue.updateButtonType1()
         self.btnTrue.setTitle(getString("ConfirmationButtonTrue"), for: .normal)
@@ -221,8 +220,12 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
             timerCount -= 1
             lblTimer.text = "00:\(timerCount)"
         } else {
-            lblTimer.isHidden = true
-            btnResandOTP.isHidden = false
+            self.alertController.dismiss(animated: true, completion: {
+                DIMOAlertView.showAlert(withTitle: getString("titleEndOtp"), message: getString("messageEndOtp"), cancelButtonTitle: getString("AlertCloseButtonText"))
+            })
+            clock.invalidate()
+//            lblTimer.isHidden = true
+//            btnResandOTP.isHidden = false
         }
     }
     
@@ -235,13 +238,13 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
     
     //MARK: Show OTP Alert
     func showOTP()  {
-        
-        let alertController = UIAlertController(title: getString("ConfirmationOTPMessageTitle") + "\n\n\n\n", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        timerCount = 60
+        alertController = UIAlertController(title: getString("ConfirmationOTPMessageTitle") + "\n\n\n\n", message: nil, preferredStyle: UIAlertControllerStyle.alert)
         
         let temp = UIView(frame: CGRect(x: 0, y: 40, width: 270, height: 100))
         let MDNString = ("\(getNormalisedMDN(dictForAcceptedOTP.value(forKey: SOURCEMDN) as! NSString))")
         let messageString = String(format: getString("ConfirmationOTPMessage"), MDNString)
-        let messageAlert = UILabel(frame: CGRect(x: 0, y: 10, width: temp.frame.size.width, height: 60))
+        let messageAlert = UILabel(frame: CGRect(x: 10, y: 10, width: temp.frame.size.width - 20, height: 60))
         messageAlert.font = UIFont.systemFont(ofSize: 13)
         messageAlert.textAlignment = .center
         messageAlert.numberOfLines = 4
@@ -262,14 +265,6 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
         lblTimer.font = UIFont.systemFont(ofSize: 12)
         lblTimer.text = "01:00"
         
-//        tfOTP = BaseTextField(frame: CGRect(x: 10, y: lblTimer.frame.origin.y + lblTimer.frame.size.height + 3, width: temp.frame.size.width, height: 30))
-//        tfOTP.borderStyle = .line
-//        tfOTP.layer.borderColor = UIColor.init(hexString: color_border).cgColor
-//        tfOTP.layer.borderWidth = 1;
-//        tfOTP.keyboardType = .numberPad
-//        tfOTP.placeholder = getString("ConfirmationOTPTextFieldPlaceholder")
-//        tfOTP.isSecureTextEntry = true
-//        tfOTP.addInset()
         
         temp.addSubview(btnResandOTP)
         temp.addSubview(lblTimer)
@@ -304,9 +299,9 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
         alertController.addAction(okAction)
         
         DispatchQueue.main.async {
-            self.present(alertController, animated: true, completion:{})
+            self.present(self.alertController, animated: true, completion:{})
+            self.alertController.view.endEditing(true)
         }
-        alertController.view.endEditing(true)
         // showOTPWith(title: getString("ConfirmationOTPMessageTitle"), view: temp)
     }
     
@@ -428,7 +423,10 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
                 } else if (messagecode == SIMASPAY_CONFIRM_TRANSFER_TO__EMONEY_SUCCESS_CODE || messagecode == SIMASPAY_BANK_TRANSFER_TO__EMONEY_SUCCESS_CODE ||
                     messagecode == SIMASPAY_EMONEY_TO_BSIM ||
                     messagecode == SIMASPAY_EMONEY_TO_UNSUBCRIBER ||
-                    messagecode == SIMASPAY_TRANSFER_UANGKU_CONFIRM_SUCCESSCODE) {
+                    messagecode == SIMASPAY_TRANSFER_UANGKU_CONFIRM_SUCCESSCODE ||
+                    messagecode == SIMASPAY_CASH_WITH_DRAWAL_SUCCESSCODE ||
+                    messagecode == SIMASPAY_PURCHASE_SUCCESCODE ||
+                    messagecode == SIMASPAY_PAYMENT_SUCCESSCODE) {
                     let vc = SuccesConfirmationController.initWithOwnNib()
                     vc.data = self.data
                     vc.idTran =  responseDict.value(forKeyPath: "sctlID.text") as! String

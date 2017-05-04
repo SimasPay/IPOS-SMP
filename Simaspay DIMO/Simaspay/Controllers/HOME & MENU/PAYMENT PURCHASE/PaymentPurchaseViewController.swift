@@ -22,6 +22,7 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
     var isPurchase = false
     
     var data:NSArray!
+    var strTitle: String! = nil
     
     static func initWithOwnNib(isPurchased : Bool) -> PaymentPurchaseViewController {
         let obj:PaymentPurchaseViewController = PaymentPurchaseViewController.init(nibName: String(describing: self), bundle: nil)
@@ -38,13 +39,17 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showTitle(self.isPurchase ? "Pembelian" : "Pembayaran")
-        
         self.showBackButton()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.tableFooterView = UIView(frame: .zero)
         self.tableView.rowHeight = 56
+        
+        if strTitle == nil {
+             self.showTitle(self.isPurchase ? "Pembelian" : "Pembayaran")
+        } else {
+             self.showTitle(strTitle)
+        }
         
     }
     
@@ -67,7 +72,6 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
     
     public func numberOfSections(in tableView: UITableView) -> Int{
         return 1
-        
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -93,7 +97,6 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
         var dict:NSArray!
         if (self.paymentLevel == PaymentLevel.PaymentLevelProduct) {
             // input VC
@@ -106,24 +109,26 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
             vc.dictOfData = self.data[indexPath.row] as! NSDictionary
             navigationController?.pushViewController(vc, animated: true)
         } else {
-            
+            var title: String!
             var vc: PaymentPurchaseViewController
             switch self.paymentLevel.rawValue {
             case PaymentLevel.PaymentLevelProductCategory.rawValue:
                 vc = PaymentPurchaseViewController.initWithOwnNib(isPurchased: self.isPurchase, type: .PaymentLevelProvider)
                 dict = (self.data[indexPath.row] as! NSDictionary).object(forKey: "providers") as! NSArray
+                title = (self.data[indexPath.row] as! NSDictionary).object(forKey: "productCategory") as! String
                 break;
             case PaymentLevel.PaymentLevelProvider.rawValue:
                 vc = PaymentPurchaseViewController.initWithOwnNib(isPurchased: self.isPurchase, type: .PaymentLevelProduct)
                 dict = (self.data[indexPath.row] as! NSDictionary).object(forKey: "products") as! NSArray
-                DLog("\(dict)")
+                title = (self.data[indexPath.row] as! NSDictionary).object(forKey: "providerName") as! String
                 break;
             default:
                 vc = PaymentPurchaseViewController.initWithOwnNib(isPurchased: self.isPurchase, type: .PaymentLevelProvider)
                 dict = (self.data[indexPath.row] as! NSDictionary).object(forKey: "providers") as! NSArray
-                
+                title = (self.data[indexPath.row] as! NSDictionary).object(forKey: "productCategory") as! String
                 break;
             }
+            vc.strTitle = title
             vc.data = dict
             navigationController?.pushViewController(vc, animated: true)
         }
@@ -159,7 +164,7 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
                 // success
                 let key = self.isPurchase ? "purchaseData" : "paymentData"
                 self.data = responseDict.object(forKey: key) as! NSArray!
-                //                DLog("\(self.data)")
+                // DLog("\(self.data)")
                 self.tableView.reloadData()
             }
         }

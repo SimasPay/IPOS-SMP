@@ -140,13 +140,13 @@ class TansferToUangkuController: BaseViewController, UITextFieldDelegate {
                     vc.dictForRequestOTP = dictOtp as NSDictionary
                     
                     let data: [String : Any]!
-                    let debit = String(format: "Rp %@", (responseDict.value(forKeyPath: "debitamt.text") as? String)!)
+                    let creditamt = String(format: "Rp %@", (responseDict.value(forKeyPath: "creditamt.text") as? String)!)
                     data = [
                         "title" : "Pastikan data berikut sudah benar",
                         "content" : [
                             [getString("ConfirmationOwnMdn") : responseDict.value(forKeyPath: "destinationName.text")],
                             [getString("TransferLebelMdn") : responseDict.value(forKeyPath: "destinationAccountNumber.text")],
-                            [getString("TransferLebelAmount") : debit],
+                            [getString("TransferLebelAmount") : creditamt],
                         ]
                     ]
                     

@@ -145,14 +145,14 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate {
                     vc.dictForRequestOTP = dictOtp as NSDictionary
                     
                     let data: [String : Any]!
-                    let debit = String(format: "Rp %@", (responseDict.value(forKeyPath: "debitamt.text") as? String)!)
+                    let creditamt = String(format: "Rp %@", (responseDict.value(forKeyPath: "creditamt.text") as? String)!)
                     if messagecode == SIMASPAY_INQUIRY_TRANSFER_SUCCESS_CODE {
                         data = [
                             "title" : "Pastikan data berikut sudah benar",
                             "content" : [
                                 [getString("ConfirmationOwnMdn") : responseDict.value(forKeyPath: "ReceiverAccountName.text")],
                                 [getString("TransferLebelMdn") : responseDict.value(forKeyPath: "destinationMDN.text")],
-                                [getString("TransferLebelAmount") : debit],
+                                [getString("TransferLebelAmount") : creditamt],
                             ]
                         ]
                     } else {
@@ -161,7 +161,7 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate {
                             "content" : [
                                 [getString("ConfirmationOwnMdn") : getString("NotRegisterMDN")],
                                 [getString("TransferLebelMdn") : (responseDict.value(forKeyPath: "destinationMDN.text") as? String)! + "*"],
-                                [getString("TransferLebelAmount") : debit],
+                                [getString("TransferLebelAmount") : creditamt],
                                 ["-" : getString("NotSubscriberMDN")],
                             ]
                         ]
