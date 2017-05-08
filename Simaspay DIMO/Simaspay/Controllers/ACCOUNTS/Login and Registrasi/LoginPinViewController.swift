@@ -136,6 +136,8 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
                     UserDefault.setObject(self.MDNString, forKey: ACCOUNT_NUMBER)
                     
                     UserDefault.setObject(responseDict.value(forKeyPath: "name.text") as! String, forKey: USERNAME)
+                    
+                    UserDefault.setObject(responseDict.value(forKeyPath: "key.text") as! String, forKey: KEY)
                     if ((responseDict.value(forKeyPath: "isBank.text")  as! String) == "true" ){
                         
                         if ((responseDict.value(forKeyPath: "isEmoney.text") as! String) == "true" ){

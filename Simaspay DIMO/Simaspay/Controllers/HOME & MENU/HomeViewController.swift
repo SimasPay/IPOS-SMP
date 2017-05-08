@@ -164,6 +164,12 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             }
             
         }
+        
+        DIMOPay.setServerURL(ServerURLDev)
+        DIMOPay.setIsPolling(true)
+        DIMOPay.setMinimumTransaction(1000)
+        DIMOPay.setEULAState(false)
+        DIMOPay.setIsUsingCustomDialog(false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -477,22 +483,14 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     func generateUserkey(){
-        
+        let key = UserDefault.objectFromUserDefaults(forKey: KEY) as! NSString
     }
     
     func payBYQRBtnClicked() {
-        flashizInitSDK()
+      
         DIMOPay.startSDK(self, with: self)
     }
     
-    
-    func flashizInitSDK()
-    {
-        DIMOPay.setServerURL(ServerURLDev)
-        DIMOPay.setIsPolling(false)
-        DIMOPay.setMinimumTransaction(1000)
-        
-    }
     
     /// This function will be called when authentication error page appear
     func callbackAuthenticationError() {

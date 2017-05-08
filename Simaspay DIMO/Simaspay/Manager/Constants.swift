@@ -141,6 +141,7 @@ let SIMASPAY_PAYMENT_SUCCESSCODE = "653"
 let SIMASPAY_PUBLIC_KEY = "simasPayPublicKey"
 let ACCOUNT_NUMBER = "Account_Number"
 let USERNAME = "Username"
+let KEY = "key"
 
 let ACCOUNTTYPEEMMONEY = "1"
 let ACCOUNTTYPEREGULER = "2"

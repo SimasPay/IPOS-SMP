@@ -6,10 +6,10 @@
 //  Copyright © 2016 Kendy Susantho. All rights reserved.
 //
 
-#ifndef Dimo_Bridging_Header_h
-#define Dimo_Bridging_Header_h
+//#ifndef Dimo_Bridging_Header_h
+//#define Dimo_Bridging_Header_h
 #import "DIMOUtility.h"
 #import "XRSA.h"
 #import "TestFairy.h"
 #import <DIMOPayiOS/DIMOPayiOS.h>
-#endif /* Dimo_Bridging_Header_h */
+// #endif /* Dimo_Bridging_Header_h */
