@@ -79,8 +79,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
         self.tfNoAccount.delegate = self
         
         self.tfAmountTransfer.font = UIFont.systemFont(ofSize: 14)
-        self.tfAmountTransfer.placeholder = "Rp"
-        self.tfAmountTransfer.addInset()
+        self.tfAmountTransfer.updateTextFieldWithLabelText("Rp.")
         
         self.tfMpin.font = UIFont.systemFont(ofSize: 14)
         self.tfMpin.addInset()
@@ -128,11 +127,11 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
     func actionNext() {
         var message = "";
         if (!tfNoAccount.isValid()) {
-            message = "Masukan " + getString("TransferLebelAccountNumber")
+            message = "Harap Masukkan " + getString("TransferLebelAccountNumber") + " Anda"
         } else if (!tfAmountTransfer.isValid()){
-            message = "Masukan " + getString("TransferLebelAmount")
+            message = getString("TransferEmptyNominal")
         } else if (!tfMpin.isValid()){
-            message = "Masukan " + getString("TransferLebelMPIN")
+            message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
         } else if (tfMpin.length() < 6) {
             message = "PIN harus 6 digit "
         } else if (!DIMOAPIManager.isInternetConnectionExist()) {

@@ -47,8 +47,7 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate {
         self.inputMdn.addInset()
         
         self.inputAmount.font = UIFont.systemFont(ofSize: 14)
-        self.inputAmount.placeholder = "Rp"
-        self.inputAmount.addInset()
+        self.inputAmount.updateTextFieldWithLabelText("Rp.")
         
         self.inputmPin.font = UIFont.systemFont(ofSize: 14)
         self.inputmPin.addInset()
@@ -217,11 +216,11 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate {
     @IBAction func actionProses(_ sender: Any) {
         var message = "";
         if (!inputMdn.isValid()) {
-            message = "Masukan " + getString("TransferLebelMdn")
+            message = "Harap Masukkan " + getString("TransferLebelMdn") + " Anda"
         } else if (!inputAmount.isValid()){
-            message = "Masukan " + getString("TransferLebelAmount")
+            message = getString("TransferEmptyNominal")
         } else if (!inputmPin.isValid()){
-            message = "Masukan " + getString("TransferLebelMPIN")
+            message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
         } else if (inputmPin.length() < 6) {
             message = "PIN harus 6 digit "
         } else if (!DIMOAPIManager.isInternetConnectionExist()) {

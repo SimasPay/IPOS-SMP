@@ -58,5 +58,16 @@ class BaseTextField: UITextField {
         self.leftView = container
     }
   
+    func updateTextFieldWithLabelText(_ strLabel: String) {
+        self.leftViewMode = UITextFieldViewMode.always
+        let container = UIView()
+        container.frame = CGRect(x: 0, y: 0, width: 37, height: 40)
+        let label = BaseLabel(frame: CGRect(x: 8, y: 0, width: 28, height: 40))
+        label.textAlignment = .center
+        label.font = self.font
+        label.text = strLabel
+        container.addSubview(label)
+        self.leftView = container
+    }
     
 }

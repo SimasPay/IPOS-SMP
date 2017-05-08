@@ -18,6 +18,8 @@
 		353C2BAF1E9226E60082C250 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BAA1E9226E60082C250 /* CoreMotion.framework */; };
 		353C2BB01E9226E60082C250 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BAB1E9226E60082C250 /* OpenGLES.framework */; };
 		353C2BB11E9226E60082C250 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BAC1E9226E60082C250 /* SystemConfiguration.framework */; };
+		3543FDB21EC016F5007AFD2D /* DIMOPayiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3543FDB01EC016F5007AFD2D /* DIMOPayiOS.framework */; };
+		3543FDB31EC016F5007AFD2D /* DIMOPayiOSResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3543FDB11EC016F5007AFD2D /* DIMOPayiOSResources.bundle */; };
 		354F48A11EA4AAB400263340 /* SuccesConfirmationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354F48A01EA4AAB400263340 /* SuccesConfirmationController.swift */; };
 		354F48A31EA4AAC000263340 /* SuccesConfirmationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 354F48A21EA4AAC000263340 /* SuccesConfirmationController.xib */; };
 		356CC84A1E288DCE00E25355 /* TransactionPeriodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356CC8481E288DCE00E25355 /* TransactionPeriodViewController.swift */; };
@@ -121,6 +123,8 @@
 		353C2BAA1E9226E60082C250 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		353C2BAB1E9226E60082C250 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		353C2BAC1E9226E60082C250 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		3543FDB01EC016F5007AFD2D /* DIMOPayiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DIMOPayiOS.framework; sourceTree = "<group>"; };
+		3543FDB11EC016F5007AFD2D /* DIMOPayiOSResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DIMOPayiOSResources.bundle; sourceTree = "<group>"; };
 		354F48A01EA4AAB400263340 /* SuccesConfirmationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccesConfirmationController.swift; sourceTree = "<group>"; };
 		354F48A21EA4AAC000263340 /* SuccesConfirmationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccesConfirmationController.xib; sourceTree = "<group>"; };
 		356CC8481E288DCE00E25355 /* TransactionPeriodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionPeriodViewController.swift; sourceTree = "<group>"; };
@@ -239,6 +243,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3543FDB21EC016F5007AFD2D /* DIMOPayiOS.framework in Frameworks */,
 				353C2BAD1E9226E60082C250 /* AVFoundation.framework in Frameworks */,
 				353C2BAE1E9226E60082C250 /* CoreMedia.framework in Frameworks */,
 				353C2BAF1E9226E60082C250 /* CoreMotion.framework in Frameworks */,
@@ -271,6 +276,15 @@
 				353C2BAC1E9226E60082C250 /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3543FDAF1EC016F5007AFD2D /* PaybyQR */ = {
+			isa = PBXGroup;
+			children = (
+				3543FDB01EC016F5007AFD2D /* DIMOPayiOS.framework */,
+				3543FDB11EC016F5007AFD2D /* DIMOPayiOSResources.bundle */,
+			);
+			path = PaybyQR;
 			sourceTree = "<group>";
 		};
 		356CC8471E2884CF00E25355 /* Encryption */ = {
@@ -454,6 +468,7 @@
 		BE1772BF1D9285DE00A27E06 /* Thirdparties */ = {
 			isa = PBXGroup;
 			children = (
+				3543FDAF1EC016F5007AFD2D /* PaybyQR */,
 				353C2BA11E9224030082C250 /* TestFairySDK-1.8.5 */,
 				BE1772C01D9285DE00A27E06 /* AFNetworking */,
 				BE1772D41D9285DE00A27E06 /* DReachability.h */,
@@ -647,6 +662,7 @@
 				35CDC62B1EB78D6E00E5296A /* CashWithDrawalController.xib in Resources */,
 				35995AB51E262B14007EB516 /* RegisterEMoneyViewController.xib in Resources */,
 				35995AA91E262B14007EB516 /* ContactUSViewController.xib in Resources */,
+				3543FDB31EC016F5007AFD2D /* DIMOPayiOSResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -843,6 +859,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = R76ECPX6J8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Simaspay/Thirdparties/PaybyQR",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Simaspay/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -866,6 +887,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = R76ECPX6J8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Simaspay/Thirdparties/PaybyQR",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Simaspay/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

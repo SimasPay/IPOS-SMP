@@ -16,7 +16,7 @@ enum AccountType: Int {
     case accountTypeEMoneyNonKYC //E-Money non KYC
 }
 
-class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, DIMOPayDelegate {
     
     @IBOutlet weak var lblViewMove: BaseLabel!
     @IBOutlet weak var lblBalance: BaseLabel!
@@ -476,6 +476,87 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         view.addSubview(container)
     }
     
+    func generateUserkey(){
+        
+    }
+    
+    func payBYQRBtnClicked() {
+        flashizInitSDK()
+        DIMOPay.startSDK(self, with: self)
+    }
     
     
+    func flashizInitSDK()
+    {
+        DIMOPay.setServerURL(ServerURLDev)
+        DIMOPay.setIsPolling(false)
+        DIMOPay.setMinimumTransaction(1000)
+        
+    }
+    
+    /// This function will be called when authentication error page appear
+    func callbackAuthenticationError() {
+        
+    }
+    
+    /// Return true to close sdk
+    /// This function will be called when unknown error page appear
+    func callbackUnknowError() -> Bool {
+        return true
+    }
+    
+    /// Return true to close sdk
+    /// This function will be called when payment failed error page appear
+    func callbackTransactionStatus(_ paymentStatus: PaymentStatus, withMessage message: String!) -> Bool {
+         return true
+    }
+    
+    /// Return true to close sdk
+    /// This function will be called when invalid qr code error page appear
+    func callbackInvalidQRCode() -> Bool {
+         return true
+    }
+    
+    /// This function will be called when lost internet connection error page appear
+    func callbackLostConnection() {
+        
+    }
+    
+    /// This function will be called when the sdk has been closed
+    func callbackSDKClosed() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    /// This function will be called when isUsingCustomDialog is Yes, and host-app need to show their own dialog
+    func callbackShowDialog(_ paymentStatus: PaymentStatus, withMessage message: String!, andLoyaltyModel fidelitiz: DIMOFidelitizModel!) {
+        
+    }
+    
+    /// This function will be called when user clicked pay button and host-app need to doing payment here
+    func callbackPayInvoice(_ invoice: DIMOInvoiceModel!) {
+        
+    }
+    
+    /// This function will be called when user cancel process payment or close invoice summary
+    func callbackUserHasCancelTransaction() {
+        
+    }
+    
+    /// This function will be called when the SDK opened at the first time or there is no user api key found
+    func callbackGenerateUserAPIKey() {
+        // self.generateKey()
+    }
+    
+    /// This function will be called when the EULA state changed
+    func callbackEULAStateChanged(_ state: Bool) {
+        
+    }
+    
+    /// This function will be called when EULA state is false
+    /// Return view controller, there is a standard view controller for eula or using your own EULA view controller
+    /// example : [DIMOPay EULAWithStringHTML:@"test<br>Test2"];
+    @available(iOS 2.0, *)
+    func callbackShowEULA() -> UIViewController! {
+        return DIMOPay.eula(withStringHTML: EulaTermsText)
+    }
 }

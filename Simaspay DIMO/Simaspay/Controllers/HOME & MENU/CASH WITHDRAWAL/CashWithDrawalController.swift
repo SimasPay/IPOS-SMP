@@ -71,8 +71,7 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
         self.textFieldmPin.delegate = self
         
         self.tfAmountTransfer.font = UIFont.systemFont(ofSize: 14)
-        self.tfAmountTransfer.placeholder = "Rp"
-        self.tfAmountTransfer.addInset()
+        self.tfAmountTransfer.updateTextFieldWithLabelText("Rp.")
         self.tfAmountTransfer.delegate = self
         
         
@@ -116,15 +115,15 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
         
         var message = "";
         if (self.withDrawalType != WithDrawalType.WithDrawalTypeMe && !tfNoAccount.isValid()) {
-            message = "Masukan " + getString("TransferLebelMdn")
+            message = "Harap Masukkan " + getString("TransferLebelMdn")
         } else if (!tfAmountTransfer.isValid()){
-            message = "Masukan " + getString("TransferLebelAmount")
+            message = "Harap Masukkan " + getString("TransferLebelAmount")
         } else if (tfAmountTransfer.isValid() && intValue! < 100000) {
             message = getString("WithDrawalAmountMinimalMessage")
         } else if (tfAmountTransfer.isValid() && intValue! % 50000 != 0) {
              message = getString("WithDrawalAmountMinimalMessage")
         } else if (!textFieldmPin.isValid()){
-            message = "Masukan " + getString("TransferLebelMPIN")
+            message = "Harap Masukkan " + getString("TransferLebelMPIN")
         } else if (textFieldmPin.length() < 6) {
             message = "PIN harus 6 digit "
         } else if (!DIMOAPIManager.isInternetConnectionExist()) {

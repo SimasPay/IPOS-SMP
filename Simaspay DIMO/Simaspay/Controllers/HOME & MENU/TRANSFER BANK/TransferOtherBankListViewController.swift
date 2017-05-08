@@ -14,7 +14,7 @@ class TransferOtherBankListViewController: BaseViewController, UITableViewDelega
     @IBOutlet var tfSearch: UISearchBar!
     @IBOutlet var tableView: UITableView!
     
-    var bankList:NSMutableArray = NSMutableArray();
+    var bankList:NSMutableArray = []
     var filtered:NSMutableArray = []
     
     var data:NSMutableArray = []
@@ -70,15 +70,15 @@ class TransferOtherBankListViewController: BaseViewController, UITableViewDelega
             }
             
             let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
-            self.bankList =  responseDict.value(forKey: "bankData") as! NSMutableArray
-
+            
+            self.bankList = (responseDict.value(forKey: "bankData") as! NSArray).mutableCopy() as! NSMutableArray
+            
             self.data = self.bankList
             self.filtered = self.bankList
             
             // DLog("\(self.bankList)")
             self.tableView.reloadData()
         }
-
     }
 
     override func didReceiveMemoryWarning() {

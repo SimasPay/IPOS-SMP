@@ -68,7 +68,7 @@
 
 //Transfer
 "TransferLebelBankName" = "Bank Tujuan";
-"TransferLebelAccountNumber" = "Nomor Rekening Tujuann";
+"TransferLebelAccountNumber" = "Nomor Rekening Tujuan";
 "TransferLebelAmount" = "Jumlah";
 "TransferLebelMPIN" = "mPIN";
 "TransferButtonNext" = "Lanjut";
@@ -81,6 +81,7 @@
 "TransferUangkuTitle" = "Transfer - Uangku";
 "TransferBSIMTitle" = "Transfer - Bank Sinarmas";
 "TransferOtherBankTitle" = "Transfer - Bank Lain";
+"TransferEmptyNominal" = "Harap masukkan jumlah yang ingin Anda Transfer";
 
 // Cash Withdrawal
 "WithDrawalMe" = "Tarik Tunai - Untuk Saya";

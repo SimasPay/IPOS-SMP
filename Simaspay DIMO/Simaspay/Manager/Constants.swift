@@ -148,6 +148,10 @@ let ACCOUNTTYPELAKUPANDAI = "6"
 
 
 let TERMS_CONDITIONS = "https://www.banksinarmas.com/PersonalBanking/IB.do?action=terms"
+
+let EulaTermsText = "<html><p style='font-family:Montserrat;'>Dengan menyetujui Syarat dan Ketentuan Pembayaran QR ini, maka saya menyatakan bahwa saya telah menerima dan menyetujui untuk tunduk dan terikat pada ketentuan-ketentuan sebagai berikut:<br><br>1. Pembayaran QR hanya dapat dilakukan pada merchant-merchant atau outlet-outlet yang berpartisipasi.<br><br>2. Pembayaran QR ini menggunakan teknologi FLASHiZ.<br><br>3. Segala ketentuan mengenai penggunaan pembayaran QR mengacu kepada ketentuan induk yang tertera pada Syarat dan Ketentuan Umum SIMOBI.</p></html>"
+
+
 /*
 #define SIMASPAY_ACTIVITY @"isSimaspayActivity"
 

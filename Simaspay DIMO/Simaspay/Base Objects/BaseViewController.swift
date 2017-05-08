@@ -13,7 +13,7 @@ class BaseViewController: UIViewController {
     var btnBack: BaseButton!
     var ivBackground : UIImageView!
     var arrayTextFields : NSMutableArray!
-    var toolbar : UIToolbar!
+    var toolbarNav : UIToolbar!
     static var lastObjectForKeyboardDetector : UIView!
     static var keyboardSize : CGSize!
     
@@ -23,16 +23,16 @@ class BaseViewController: UIViewController {
         UIApplication.shared.statusBarView?.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
         showBackgroundImage()
         
-        if (toolbar == nil) {
+        if (toolbarNav == nil) {
             let numberToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 50))
             numberToolbar.barStyle = UIBarStyle.default
             numberToolbar.items = [
                 UIBarButtonItem(title: " Prev ", style: UIBarButtonItemStyle.plain, target: self, action: #selector(BaseViewController.btnPrevAction)),
                 UIBarButtonItem(title: " Next ", style: UIBarButtonItemStyle.plain, target: self, action: #selector(BaseViewController.btnNextAction)),
-                UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil),
+                UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil),
                 UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(BaseViewController.btnDoneAction))]
             numberToolbar.sizeToFit()
-            toolbar = numberToolbar
+            toolbarNav = numberToolbar
         }
         
         arrayTextFields = []
@@ -154,7 +154,7 @@ class BaseViewController: UIViewController {
                     let tf = item as! UITextField
                     if tf.isEnabled {
                         arrayTextFields.add(item)
-                        (item as! UITextField).inputAccessoryView = toolbar
+                        (item as! UITextField).inputAccessoryView = self.toolbarNav
                         (item as! UITextField).autocorrectionType = .no
                     }
                 }

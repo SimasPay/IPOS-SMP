@@ -48,7 +48,9 @@ class SplashScreenViewController: BaseViewController {
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
+            DIMOAlertView.showNormalTitle("Error", message: message, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                exit(1)
+            }, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         self.getPublicKey()
@@ -73,9 +75,15 @@ class SplashScreenViewController: BaseViewController {
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+//                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    DIMOAlertView.showNormalTitle("Error", message: error.userInfo["error"] as! String, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                        exit(1)
+                    }, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+//                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    DIMOAlertView.showNormalTitle("Error", message: error.localizedDescription, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                        exit(1)
+                    }, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
@@ -83,7 +91,11 @@ class SplashScreenViewController: BaseViewController {
             let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
             DLog("\(responseDict)")
             if (responseDict.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+//                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+                DIMOAlertView.showNormalTitle("Error", message: String("ErrorMessageRequestFailed"), alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                    exit(1)
+                }, cancelButtonTitle: "OK")
+                return
             } else {
                 // success
                 if (responseDict.allKeys.count > 0) {
@@ -91,7 +103,7 @@ class SplashScreenViewController: BaseViewController {
                     publicKeys = responseDict;
                     let message = responseDict.value(forKeyPath: "message.text") as! String
                     if (responseDict.value(forKeyPath: "message.code") as! String == "546") {
-                        DIMOAlertView.showNormalTitle("Error", message: "message", alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                        DIMOAlertView.showNormalTitle("Error", message: message, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                             exit(1)
                         }, cancelButtonTitle: "OK")
                         return

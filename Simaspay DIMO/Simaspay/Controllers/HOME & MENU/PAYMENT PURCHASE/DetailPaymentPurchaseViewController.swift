@@ -32,6 +32,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
     var errorMsg : String!
     var errorMsg1 : String!
     var maxlength : Int! = 0
+    var minlength : Int! = 0
     var invoiceTypeString: String!
     
     static func initWithOwnNib(isPurchased : Bool) -> DetailPaymentPurchaseViewController {
@@ -59,6 +60,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
             maxlength = dictOfData.value(forKey: "maxlenght") as! Int
         }
        
+        minlength = dictOfData.value(forKey: "minlength") as! Int
         
         invoiceTypeString = dictOfData.value(forKey: "invoiceType") as? String
         let invoiceTypeArr = invoiceTypeString?.characters.split{$0 == "|"}.map(String.init)
@@ -78,11 +80,11 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         lblNomPayment.font = lblTitleNameProduct.font
         lblNomPayment.text = "Nominal"
         
-        tfDisplayNom.addInset()
-        tfNomTransaction.addInset()
+        tfDisplayNom.updateTextFieldWithLabelText("Rp.")
+        tfNomTransaction.updateTextFieldWithLabelText("Rp.")
         tfNoAccount.addInset()
         tfMpin.addInset()
-        tfNomPayment.addInset()
+        tfNomPayment.updateTextFieldWithLabelText("Rp.")
             
         tfDisplayNom.delegate = self
         tfNomTransaction.delegate = self
@@ -399,10 +401,10 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
             message = "Pilih nominal"
         } else if (!tfNoAccount.isValid()){
             message = errorMsg
-        } else if (tfNoAccount.length() < 10){
+        } else if (tfNoAccount.length() < minlength){
             message = errorMsg1
         } else if (!tfMpin.isValid()){
-            message = "Masukan " + getString("TransferLebelMPIN")
+            message = "Harap Masukkan " + getString("TransferLebelMPIN")
         } else if (tfMpin.length() < 6) {
             message = "PIN harus 6 digit"
         } else if (!DIMOAPIManager.isInternetConnectionExist()) {
@@ -423,10 +425,10 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         if (paymentMode == "ZeroAmount") {
             if (!tfNoAccount.isValid()){
                 message = errorMsg
-            } else if (tfNoAccount.length() < 10){
+            } else if (tfNoAccount.length() < minlength){
                 message = errorMsg1
             } else if (!tfMpin.isValid()){
-                message = "Masukan " + getString("TransferLebelMPIN")
+                message = "Harap Masukkan " + getString("TransferLebelMPIN")
             } else if (tfMpin.length() < 6) {
                 message = "PIN harus 6 digit"
             } else if (!DIMOAPIManager.isInternetConnectionExist()) {
@@ -435,12 +437,12 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         } else {
             if (!tfNoAccount.isValid()){
                 message = errorMsg
-            } else if (tfNoAccount.length() < 10){
+            } else if (tfNoAccount.length() < minlength){
                 message = errorMsg1
             } else  if (!self.tfNomPayment.isValid()){
-                message = "Masukan nominal"
+                message = "Masukkan nominal"
             } else if (!tfMpin.isValid()){
-                message = "Masukan " + getString("TransferLebelMPIN")
+                message = "Harap Masukkan " + getString("TransferLebelMPIN")
             } else if (tfMpin.length() < 6) {
                 message = "PIN harus 6 digit"
             } else if (!DIMOAPIManager.isInternetConnectionExist()) {
