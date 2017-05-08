@@ -8,7 +8,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import <math.h>
 
-@implementation DIMOUtility
+@implementation SimasUtility
 static NSString *strLocale = @"INDONESIAN";
 
 void DLog(NSString *message) {
@@ -417,7 +417,7 @@ static NSSearchPathDirectory directorySave = NSLibraryDirectory;
     }
     
     if (imageURL && imageURL.length > 0 && ![imageURL isKindOfClass:[NSNull class]]) {
-//        self.image = [DIMOUtility imageNamedInFramework:@"loading-image" extension:@"png"];
+//        self.image = [SimasUtility imageNamedInFramework:@"loading-image" extension:@"png"];
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
             if (imageData && imageData.length > 0) {
@@ -428,7 +428,7 @@ static NSSearchPathDirectory directorySave = NSLibraryDirectory;
                 });
             } else {
                 dispatch_async(dispatch_get_main_queue(), ^(void){
-//                    self.image = [DIMOUtility imageNamedInFramework:@"ico-no-image" extension:@"png"];
+//                    self.image = [SimasUtility imageNamedInFramework:@"ico-no-image" extension:@"png"];
                 });
             }
         });

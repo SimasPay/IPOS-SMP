@@ -33,7 +33,7 @@ typedef enum :NSInteger {
 
 void DLog(NSString *message);
 
-@interface DIMOUtility : NSObject
+@interface SimasUtility : NSObject
 + (CGSize)screenSize;
 + (void)DIMOLog:(NSString *)string;
 @end

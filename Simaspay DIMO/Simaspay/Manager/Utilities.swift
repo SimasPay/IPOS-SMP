@@ -24,7 +24,7 @@ enum AppLocale: Int {
 }
 
 func DLog(_ str: String) {
-    DIMOUtility.dimoLog(str)
+    SimasUtility.dimoLog(str)
 }
 
 func setLocale(_ appLocale: AppLocale) {

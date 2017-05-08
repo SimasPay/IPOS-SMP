@@ -63,7 +63,7 @@ class BaseViewController: UIViewController {
     //MARK: Show background image
     func showBackgroundImage() {
         if (ivBackground == nil) {
-            ivBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: DIMOUtility.screenSize().width, height: DIMOUtility.screenSize().height))
+            ivBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: SimasUtility.screenSize().width, height: SimasUtility.screenSize().height))
             ivBackground.image = UIImage(named: "background-image")
         }
         view.insertSubview(ivBackground, at: 0)
@@ -73,7 +73,7 @@ class BaseViewController: UIViewController {
     func showTitle(_ stringTitle : String, subMenu: Bool = true) {
         if (lblTitle == nil) {
             lblTitle = BaseLabel();
-            lblTitle.frame = CGRect(x: 0, y: 20, width:DIMOUtility.screenSize().width, height: 44)
+            lblTitle.frame = CGRect(x: 0, y: 20, width:SimasUtility.screenSize().width, height: 44)
             lblTitle.textAlignment = .center
         }
         if (subMenu){
