@@ -92,6 +92,7 @@ class BankEMoneyViewController: BaseViewController,UITableViewDelegate, UITableV
         prefs.removeObject(forKey: SOURCEMDN)
         prefs.removeObject(forKey: ACCOUNT_NUMBER)
         prefs.removeObject(forKey: USERNAME)
+        prefs.removeObject(forKey: GET_USER_API_KEY)
         
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
         for vc in viewControllers {

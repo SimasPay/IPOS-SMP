@@ -143,12 +143,12 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
             message = getString("ActivationMessageFillActivation")
         } else if (tfActivationCode.length() < 6) {
             message = getString("ActivationMessageSixActivation")
-        } else if (!DIMOAPIManager.isInternetConnectionExist()) {
+        } else if (!SimasAPIManager.isInternetConnectionExist()) {
             message = getString("LoginMessageNotConnectServer")
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
+            SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         
@@ -161,13 +161,13 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
         dict[MFATRANSACTION] = INQUIRY
         
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DIMOAPIManager.callAPI(withParameters: param, withSessionCheck:false) { (dict, err) in
+        SimasAPIManager.callAPI(withParameters: param, withSessionCheck:false) { (dict, err) in
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
@@ -184,7 +184,7 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
                 self.animatedFadeIn()
                 self.navigationController?.pushViewController(vc, animated: false)
             } else {
-                DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                SimasAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
             }
         }
     }
@@ -193,7 +193,7 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
     func resendOTP() {
         
         if (!tfHpNumber.isValid()) {
-            DIMOAlertView.showAlert(withTitle: "", message: getString("LoginMessageFillHpNumber"), cancelButtonTitle: getString("AlertCloseButtonText"))
+            SimasAlertView.showAlert(withTitle: "", message: getString("LoginMessageFillHpNumber"), cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         
@@ -203,13 +203,13 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
         dict[SOURCEMDN] = getNormalisedMDN(self.tfHpNumber.text! as NSString)
         
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DIMOAPIManager.callAPIPOST(withParameters: param) { (dict, err) in
+        SimasAPIManager.callAPIPOST(withParameters: param) { (dict, err) in
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
@@ -219,9 +219,9 @@ class ActivationViewController: BaseViewController, UITextFieldDelegate {
             let messageText  = responseDict.value(forKeyPath: "message.text") as! String
             if((responseDict.object(forKey: "OneTimePin")) != nil)
             {
-                DIMOAlertView.showAlert(withTitle: getString("ActivationAlertTitleResendOTP"), message: getString("ActivationAlertResendOTP"), cancelButtonTitle: getString("AlertCloseButtonText"))
+                SimasAlertView.showAlert(withTitle: getString("ActivationAlertTitleResendOTP"), message: getString("ActivationAlertResendOTP"), cancelButtonTitle: getString("AlertCloseButtonText"))
             }else{
-                DIMOAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                SimasAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
             }
             
         }

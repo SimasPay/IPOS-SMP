@@ -43,12 +43,12 @@ class SplashScreenViewController: BaseViewController {
         let defaults = UserDefaults.standard
         state = defaults.bool(forKey: "eulaState")
         var message = ""
-        if (!DIMOAPIManager.isInternetConnectionExist()) {
+        if (!SimasAPIManager.isInternetConnectionExist()) {
             message = getString("LoginMessageNotConnectServer")
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showNormalTitle("Error", message: message, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+            SimasAlertView.showNormalTitle("Error", message: message, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                 exit(1)
             }, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
@@ -70,18 +70,18 @@ class SplashScreenViewController: BaseViewController {
         dict[SIMASPAY_ACTIVITY] = SIMASPAY_ACTIVITY_VALUE
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DIMOAPIManager.callAPI(withParameters: param, withSessionCheck: false, andComplete: { (dict, err) in
+        SimasAPIManager.callAPI(withParameters: param, withSessionCheck: false, andComplete: { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-//                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
-                    DIMOAlertView.showNormalTitle("Error", message: error.userInfo["error"] as! String, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+//                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showNormalTitle("Error", message: error.userInfo["error"] as! String, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                         exit(1)
                     }, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-//                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
-                    DIMOAlertView.showNormalTitle("Error", message: error.localizedDescription, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+//                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showNormalTitle("Error", message: error.localizedDescription, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                         exit(1)
                     }, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
@@ -91,8 +91,8 @@ class SplashScreenViewController: BaseViewController {
             let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
             DLog("\(responseDict)")
             if (responseDict.allKeys.count == 0) {
-//                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
-                DIMOAlertView.showNormalTitle("Error", message: String("ErrorMessageRequestFailed"), alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+//                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+                SimasAlertView.showNormalTitle("Error", message: String("ErrorMessageRequestFailed"), alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                     exit(1)
                 }, cancelButtonTitle: "OK")
                 return
@@ -103,17 +103,17 @@ class SplashScreenViewController: BaseViewController {
                     publicKeys = responseDict;
                     let message = responseDict.value(forKeyPath: "message.text") as! String
                     if (responseDict.value(forKeyPath: "message.code") as! String == "546") {
-                        DIMOAlertView.showNormalTitle("Error", message: message, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                        SimasAlertView.showNormalTitle("Error", message: message, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                             exit(1)
                         }, cancelButtonTitle: "OK")
                         return
                     } else if (responseDict.value(forKeyPath: "message.code") as! String == "2310") {
-                        DIMOAlertView.showNormalTitle("", message: message, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                        SimasAlertView.showNormalTitle("", message: message, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                             UIApplication.shared.openURL(NSURL(string: responseDict.value(forKeyPath: "AppURL.text") as! String)! as URL)
                              exit(1)
                         }, cancelButtonTitle: getString("AlertCloseButtonText"))
                     } else if (responseDict.value(forKeyPath: "message.code") as! String == "null"){
-                        DIMOAlertView.showNormalTitle("Error", message: message, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                        SimasAlertView.showNormalTitle("Error", message: message, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                             exit(1)
                         }, cancelButtonTitle: "OK")
                     } else {
@@ -121,7 +121,7 @@ class SplashScreenViewController: BaseViewController {
                     }
                     
                 } else {
-                    DIMOAlertView.showNormalTitle("Error", message: "Server error", alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                    SimasAlertView.showNormalTitle("Error", message: "Server error", alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                         exit(1)
                     }, cancelButtonTitle: "OK")
                 }

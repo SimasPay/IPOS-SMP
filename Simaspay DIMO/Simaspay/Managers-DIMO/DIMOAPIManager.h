@@ -20,7 +20,7 @@ typedef enum {
     ConnectionManagerHTTPMethodPOST = 1
 } ConnectionManagerHTTPMethod;
 
-@interface DIMOAPIManager : NSObject
+@interface SimasAPIManager : NSObject
 @property (nonatomic, strong) NSString *encryptedMPin;
 @property (nonatomic, strong) NSString *sourcePocketCode;
 + (instancetype)sharedInstance;

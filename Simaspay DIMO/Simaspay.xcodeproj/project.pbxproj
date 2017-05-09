@@ -18,8 +18,6 @@
 		353C2BAF1E9226E60082C250 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BAA1E9226E60082C250 /* CoreMotion.framework */; };
 		353C2BB01E9226E60082C250 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BAB1E9226E60082C250 /* OpenGLES.framework */; };
 		353C2BB11E9226E60082C250 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BAC1E9226E60082C250 /* SystemConfiguration.framework */; };
-		3543FDBE1EC04D7C007AFD2D /* DIMOPayiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3543FDBC1EC04D7C007AFD2D /* DIMOPayiOS.framework */; };
-		3543FDBF1EC04D7C007AFD2D /* DIMOPayiOSResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3543FDBD1EC04D7C007AFD2D /* DIMOPayiOSResources.bundle */; };
 		354F48A11EA4AAB400263340 /* SuccesConfirmationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354F48A01EA4AAB400263340 /* SuccesConfirmationController.swift */; };
 		354F48A31EA4AAC000263340 /* SuccesConfirmationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 354F48A21EA4AAC000263340 /* SuccesConfirmationController.xib */; };
 		356CC84A1E288DCE00E25355 /* TransactionPeriodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356CC8481E288DCE00E25355 /* TransactionPeriodViewController.swift */; };
@@ -73,6 +71,10 @@
 		35995ACF1E262B14007EB516 /* LandingScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995A9F1E262B14007EB516 /* LandingScreenViewController.xib */; };
 		35995AD01E262B14007EB516 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35995AA01E262B14007EB516 /* SplashScreenViewController.swift */; };
 		35995AD11E262B14007EB516 /* SplashScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995AA11E262B14007EB516 /* SplashScreenViewController.xib */; };
+		35A497C01EC18B2E009755B5 /* PayByQrController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A497BF1EC18B2E009755B5 /* PayByQrController.swift */; };
+		35A497C21EC18B4D009755B5 /* PayByQrController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35A497C11EC18B4D009755B5 /* PayByQrController.xib */; };
+		35A497CA1EC1B616009755B5 /* DIMOPayiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35A497C91EC1B616009755B5 /* DIMOPayiOS.framework */; };
+		35A497CC1EC1B621009755B5 /* DIMOPayiOSResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 35A497CB1EC1B621009755B5 /* DIMOPayiOSResources.bundle */; };
 		35CDC6251EB7817800E5296A /* ListCashWithDrawalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CDC6241EB7817800E5296A /* ListCashWithDrawalController.swift */; };
 		35CDC6271EB7818A00E5296A /* ListCashWithDrawalController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35CDC6261EB7818A00E5296A /* ListCashWithDrawalController.xib */; };
 		35CDC6291EB78D5D00E5296A /* CashWithDrawalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CDC6281EB78D5D00E5296A /* CashWithDrawalController.swift */; };
@@ -123,20 +125,18 @@
 		353C2BAA1E9226E60082C250 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		353C2BAB1E9226E60082C250 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		353C2BAC1E9226E60082C250 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		3543FDBC1EC04D7C007AFD2D /* DIMOPayiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DIMOPayiOS.framework; sourceTree = "<group>"; };
-		3543FDBD1EC04D7C007AFD2D /* DIMOPayiOSResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DIMOPayiOSResources.bundle; sourceTree = "<group>"; };
 		354F48A01EA4AAB400263340 /* SuccesConfirmationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccesConfirmationController.swift; sourceTree = "<group>"; };
 		354F48A21EA4AAC000263340 /* SuccesConfirmationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccesConfirmationController.xib; sourceTree = "<group>"; };
 		356CC8481E288DCE00E25355 /* TransactionPeriodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionPeriodViewController.swift; sourceTree = "<group>"; };
 		356CC8491E288DCE00E25355 /* TransactionPeriodViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionPeriodViewController.xib; sourceTree = "<group>"; };
 		359959EC1E2623D3007EB516 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = Manager/Utilities.swift; sourceTree = "<group>"; };
-		35995A6D1E262B14007EB516 /* ActivationPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivationPinViewController.swift; sourceTree = "<group>"; };
+		35995A6D1E262B14007EB516 /* ActivationPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ActivationPinViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A6E1E262B14007EB516 /* ActivationPinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivationPinViewController.xib; sourceTree = "<group>"; };
 		35995A6F1E262B14007EB516 /* ActivationSuccessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivationSuccessViewController.swift; sourceTree = "<group>"; };
 		35995A701E262B14007EB516 /* ActivationSuccessViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivationSuccessViewController.xib; sourceTree = "<group>"; };
-		35995A711E262B14007EB516 /* ActivationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivationViewController.swift; sourceTree = "<group>"; };
+		35995A711E262B14007EB516 /* ActivationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ActivationViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A721E262B14007EB516 /* ActivationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivationViewController.xib; sourceTree = "<group>"; };
-		35995A731E262B14007EB516 /* ContactUSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUSViewController.swift; sourceTree = "<group>"; };
+		35995A731E262B14007EB516 /* ContactUSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ContactUSViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A741E262B14007EB516 /* ContactUSViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactUSViewController.xib; sourceTree = "<group>"; };
 		35995A751E262B14007EB516 /* EULAViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EULAViewController.swift; sourceTree = "<group>"; };
 		35995A761E262B14007EB516 /* EULAViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EULAViewController.xib; sourceTree = "<group>"; };
@@ -146,19 +146,19 @@
 		35995A7B1E262B14007EB516 /* LoginPinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginPinViewController.xib; sourceTree = "<group>"; };
 		35995A7C1E262B14007EB516 /* LoginRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LoginRegisterViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A7D1E262B14007EB516 /* LoginRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginRegisterViewController.xib; sourceTree = "<group>"; };
-		35995A7E1E262B14007EB516 /* LoginViewController-unused.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginViewController-unused.swift"; sourceTree = "<group>"; };
+		35995A7E1E262B14007EB516 /* LoginViewController-unused.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "LoginViewController-unused.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A7F1E262B14007EB516 /* LoginViewController-unused.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "LoginViewController-unused.xib"; sourceTree = "<group>"; };
 		35995A801E262B14007EB516 /* RegisterEMoneyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RegisterEMoneyViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A811E262B14007EB516 /* RegisterEMoneyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterEMoneyViewController.xib; sourceTree = "<group>"; };
 		35995A821E262B14007EB516 /* SecurityQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SecurityQuestionViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A831E262B14007EB516 /* SecurityQuestionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecurityQuestionViewController.xib; sourceTree = "<group>"; };
-		35995A851E262B14007EB516 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
+		35995A851E262B14007EB516 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ConfirmationViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A861E262B14007EB516 /* ConfirmationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmationViewController.xib; sourceTree = "<group>"; };
 		35995A871E262B14007EB516 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = HomeViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A881E262B14007EB516 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
-		35995A8A1E262B14007EB516 /* DetailPaymentPurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPaymentPurchaseViewController.swift; sourceTree = "<group>"; };
+		35995A8A1E262B14007EB516 /* DetailPaymentPurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DetailPaymentPurchaseViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A8B1E262B14007EB516 /* DetailPaymentPurchaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailPaymentPurchaseViewController.xib; sourceTree = "<group>"; };
-		35995A8C1E262B14007EB516 /* PaymentPurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentPurchaseViewController.swift; sourceTree = "<group>"; };
+		35995A8C1E262B14007EB516 /* PaymentPurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PaymentPurchaseViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A8D1E262B14007EB516 /* PaymentPurchaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentPurchaseViewController.xib; sourceTree = "<group>"; };
 		35995A8F1E262B14007EB516 /* BalanceInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceInfoViewController.swift; sourceTree = "<group>"; };
 		35995A901E262B14007EB516 /* BalanceInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BalanceInfoViewController.xib; sourceTree = "<group>"; };
@@ -178,9 +178,13 @@
 		35995A9F1E262B14007EB516 /* LandingScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LandingScreenViewController.xib; sourceTree = "<group>"; };
 		35995AA01E262B14007EB516 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		35995AA11E262B14007EB516 /* SplashScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashScreenViewController.xib; sourceTree = "<group>"; };
+		35A497BF1EC18B2E009755B5 /* PayByQrController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PayByQrController.swift; path = "PAY BY QR/PayByQrController.swift"; sourceTree = "<group>"; };
+		35A497C11EC18B4D009755B5 /* PayByQrController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PayByQrController.xib; path = "PAY BY QR/PayByQrController.xib"; sourceTree = "<group>"; };
+		35A497C91EC1B616009755B5 /* DIMOPayiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DIMOPayiOS.framework; sourceTree = "<group>"; };
+		35A497CB1EC1B621009755B5 /* DIMOPayiOSResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DIMOPayiOSResources.bundle; sourceTree = "<group>"; };
 		35CDC6241EB7817800E5296A /* ListCashWithDrawalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListCashWithDrawalController.swift; path = "CASH WITHDRAWAL/ListCashWithDrawalController.swift"; sourceTree = "<group>"; };
 		35CDC6261EB7818A00E5296A /* ListCashWithDrawalController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ListCashWithDrawalController.xib; path = "CASH WITHDRAWAL/ListCashWithDrawalController.xib"; sourceTree = "<group>"; };
-		35CDC6281EB78D5D00E5296A /* CashWithDrawalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CashWithDrawalController.swift; path = "CASH WITHDRAWAL/CashWithDrawalController.swift"; sourceTree = "<group>"; };
+		35CDC6281EB78D5D00E5296A /* CashWithDrawalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CashWithDrawalController.swift; path = "CASH WITHDRAWAL/CashWithDrawalController.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35CDC62A1EB78D6E00E5296A /* CashWithDrawalController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CashWithDrawalController.xib; path = "CASH WITHDRAWAL/CashWithDrawalController.xib"; sourceTree = "<group>"; };
 		BE1772841D92859B00A27E06 /* Simaspay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Simaspay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1772871D92859B00A27E06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -225,11 +229,11 @@
 		BEC415E21D928E92000C3CF4 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = "Base Objects/BaseViewController.swift"; sourceTree = "<group>"; };
 		BEC415E61D929544000C3CF4 /* BaseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseButton.swift; path = "Base Objects/BaseButton.swift"; sourceTree = "<group>"; };
 		BEC415EA1D938201000C3CF4 /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorManager.swift; path = Manager/ColorManager.swift; sourceTree = "<group>"; };
-		BEC415F01D9385B9000C3CF4 /* DIMOAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DIMOAlertView.h; path = "Simaspay/Managers-DIMO/DIMOAlertView.h"; sourceTree = SOURCE_ROOT; };
-		BEC415F11D9385B9000C3CF4 /* DIMOAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DIMOAlertView.m; path = "Simaspay/Managers-DIMO/DIMOAlertView.m"; sourceTree = SOURCE_ROOT; };
+		BEC415F01D9385B9000C3CF4 /* DIMOAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = DIMOAlertView.h; path = "Simaspay/Managers-DIMO/DIMOAlertView.h"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		BEC415F11D9385B9000C3CF4 /* DIMOAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = DIMOAlertView.m; path = "Simaspay/Managers-DIMO/DIMOAlertView.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BEC415F21D9385B9000C3CF4 /* DIMOAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DIMOAPIManager.h; path = "Simaspay/Managers-DIMO/DIMOAPIManager.h"; sourceTree = SOURCE_ROOT; };
-		BEC415F31D9385B9000C3CF4 /* DIMOAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DIMOAPIManager.m; path = "Simaspay/Managers-DIMO/DIMOAPIManager.m"; sourceTree = SOURCE_ROOT; };
-		BEC415F81D9385B9000C3CF4 /* DIMOUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DIMOUtility.h; path = "Simaspay/Managers-DIMO/DIMOUtility.h"; sourceTree = SOURCE_ROOT; };
+		BEC415F31D9385B9000C3CF4 /* DIMOAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = DIMOAPIManager.m; path = "Simaspay/Managers-DIMO/DIMOAPIManager.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		BEC415F81D9385B9000C3CF4 /* DIMOUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = DIMOUtility.h; path = "Simaspay/Managers-DIMO/DIMOUtility.h"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		BEC415F91D9385B9000C3CF4 /* DIMOUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DIMOUtility.m; path = "Simaspay/Managers-DIMO/DIMOUtility.m"; sourceTree = SOURCE_ROOT; };
 		BEC415FC1D9385B9000C3CF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/ENGLISH.strings; sourceTree = "<group>"; };
 		BEC415FE1D9385B9000C3CF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/INDONESIAN.strings; sourceTree = "<group>"; };
@@ -243,7 +247,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3543FDBE1EC04D7C007AFD2D /* DIMOPayiOS.framework in Frameworks */,
+				35A497CA1EC1B616009755B5 /* DIMOPayiOS.framework in Frameworks */,
 				353C2BAD1E9226E60082C250 /* AVFoundation.framework in Frameworks */,
 				353C2BAE1E9226E60082C250 /* CoreMedia.framework in Frameworks */,
 				353C2BAF1E9226E60082C250 /* CoreMotion.framework in Frameworks */,
@@ -269,8 +273,8 @@
 		353C2BA71E9226E60082C250 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3543FDBC1EC04D7C007AFD2D /* DIMOPayiOS.framework */,
-				3543FDBD1EC04D7C007AFD2D /* DIMOPayiOSResources.bundle */,
+				35A497C91EC1B616009755B5 /* DIMOPayiOS.framework */,
+				35A497CB1EC1B621009755B5 /* DIMOPayiOSResources.bundle */,
 				353C2BA81E9226E60082C250 /* AVFoundation.framework */,
 				353C2BA91E9226E60082C250 /* CoreMedia.framework */,
 				353C2BAA1E9226E60082C250 /* CoreMotion.framework */,
@@ -354,6 +358,7 @@
 		35995A841E262B14007EB516 /* HOME & MENU */ = {
 			isa = PBXGroup;
 			children = (
+				35A497BE1EC18AD4009755B5 /* PAY BY QR */,
 				35CDC6231EB7809100E5296A /* CASH WITHDRAWAL */,
 				35995A851E262B14007EB516 /* ConfirmationViewController.swift */,
 				35995A861E262B14007EB516 /* ConfirmationViewController.xib */,
@@ -411,6 +416,15 @@
 				351BC2FC1EB1995B0049849B /* TansferToUangkuController.xib */,
 			);
 			path = "TRANSFER BANK";
+			sourceTree = "<group>";
+		};
+		35A497BE1EC18AD4009755B5 /* PAY BY QR */ = {
+			isa = PBXGroup;
+			children = (
+				35A497BF1EC18B2E009755B5 /* PayByQrController.swift */,
+				35A497C11EC18B4D009755B5 /* PayByQrController.xib */,
+			);
+			name = "PAY BY QR";
 			sourceTree = "<group>";
 		};
 		35CDC6231EB7809100E5296A /* CASH WITHDRAWAL */ = {
@@ -622,6 +636,7 @@
 				35995AB71E262B14007EB516 /* SecurityQuestionViewController.xib in Resources */,
 				35995AA51E262B14007EB516 /* ActivationSuccessViewController.xib in Resources */,
 				35995AAD1E262B14007EB516 /* BankEMoneyViewController.xib in Resources */,
+				35A497C21EC18B4D009755B5 /* PayByQrController.xib in Resources */,
 				35995ABD1E262B14007EB516 /* DetailPaymentPurchaseViewController.xib in Resources */,
 				353C2BA61E9224030082C250 /* upload-dsym.sh in Resources */,
 				35995ACB1E262B14007EB516 /* TransferBankViewController.xib in Resources */,
@@ -634,6 +649,7 @@
 				35995AA71E262B14007EB516 /* ActivationViewController.xib in Resources */,
 				35995AB91E262B14007EB516 /* ConfirmationViewController.xib in Resources */,
 				35995AD11E262B14007EB516 /* SplashScreenViewController.xib in Resources */,
+				35A497CC1EC1B621009755B5 /* DIMOPayiOSResources.bundle in Resources */,
 				354F48A31EA4AAC000263340 /* SuccesConfirmationController.xib in Resources */,
 				3535ED981E9DE616007D7942 /* TransferToEMoney.xib in Resources */,
 				35995AA31E262B14007EB516 /* ActivationPinViewController.xib in Resources */,
@@ -654,7 +670,6 @@
 				35CDC62B1EB78D6E00E5296A /* CashWithDrawalController.xib in Resources */,
 				35995AB51E262B14007EB516 /* RegisterEMoneyViewController.xib in Resources */,
 				35995AA91E262B14007EB516 /* ContactUSViewController.xib in Resources */,
-				3543FDBF1EC04D7C007AFD2D /* DIMOPayiOSResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,6 +680,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35A497C01EC18B2E009755B5 /* PayByQrController.swift in Sources */,
 				BE1773011D9285DE00A27E06 /* DAFHTTPRequestOperationManager.m in Sources */,
 				BEC415E41D928E92000C3CF4 /* BaseViewController.swift in Sources */,
 				BE9D03021D94DA7F0070894E /* BasicEncodingRules.m in Sources */,

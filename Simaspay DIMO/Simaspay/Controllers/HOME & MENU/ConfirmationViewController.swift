@@ -221,7 +221,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
             lblTimer.text = "00:\(timerCount)"
         } else {
             self.alertController.dismiss(animated: true, completion: {
-                DIMOAlertView.showAlert(withTitle: getString("titleEndOtp"), message: getString("messageEndOtp"), cancelButtonTitle: getString("AlertCloseButtonText"))
+                SimasAlertView.showAlert(withTitle: getString("titleEndOtp"), message: getString("messageEndOtp"), cancelButtonTitle: getString("AlertCloseButtonText"))
             })
             clock.invalidate()
 //            lblTimer.isHidden = true
@@ -332,7 +332,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
     func requestOTP() {
         DLog("\(dictForRequestOTP)")
         DMBProgressHUD.showAdded(to: self.view, animated: true)
-        DIMOAPIManager .callAPI(withParameters: (dictForRequestOTP ) as! [AnyHashable : Any]!) { (dict, err) in
+        SimasAPIManager .callAPI(withParameters: (dictForRequestOTP ) as! [AnyHashable : Any]!) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             let dictionary = NSDictionary(dictionary: dict!)
             
@@ -340,15 +340,15 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
             
             if (dictionary.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")
@@ -361,12 +361,12 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
     //MARK: Send OTP
     func sendOTP(OTP: String) {
         var message = ""
-        if (!DIMOAPIManager.isInternetConnectionExist()){
+        if (!SimasAPIManager.isInternetConnectionExist()){
             message = getString("LoginMessageNotConnectServer")
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
+            SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         
@@ -393,7 +393,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
         }
         
         
-        DIMOAPIManager .callAPI(withParameters: dictForAcceptedOTP as! [AnyHashable : Any]!, withSessionCheck:sessionCheck) { (dict, err) in
+        SimasAPIManager .callAPI(withParameters: dictForAcceptedOTP as! [AnyHashable : Any]!, withSessionCheck:sessionCheck) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             let dictionary = NSDictionary(dictionary: dict!)
             
@@ -401,15 +401,15 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
             
             if (dictionary.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")
@@ -432,13 +432,13 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
                     vc.idTran =  responseDict.value(forKeyPath: "sctlID.text") as! String
                     self.navigationController?.pushViewController(vc, animated: true)
                 } else if (messagecode == "631") {
-                    DIMOAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                    SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
                         if index == 0 {
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
                         }
                     }, cancelButtonTitle: "OK")
                 } else {
-                    DIMOAlertView.showNormalTitle("Error", message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                    SimasAlertView.showNormalTitle("Error", message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
                         for vc in viewControllers {
                             if (vc.isKind(of: RegisterEMoneyViewController.self)) {

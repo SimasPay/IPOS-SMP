@@ -34,7 +34,7 @@ class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableV
         tableView.clipsToBounds = true;
         tableView.isScrollEnabled = false;
         scrollView.backgroundColor = UIColor.init(hexString: color_background)
-        let timer = DIMOAPIManager.staticTimer()
+        let timer = SimasAPIManager.staticTimer()
         timer?.invalidate()
     }
     override func didReceiveMemoryWarning() {
@@ -129,7 +129,7 @@ class ContactUsCell: UITableViewCell {
                     strOkBtn = "OK"
                 }
                 
-                DIMOAlertView.showPrompt(withMessage: string, okTitle: strOkBtn, complete: { (index, alertview) in
+                SimasAlertView.showPrompt(withMessage: string, okTitle: strOkBtn, complete: { (index, alertview) in
                     if index != 0 {
                         UIApplication.shared.openURL(url as URL)
                     }

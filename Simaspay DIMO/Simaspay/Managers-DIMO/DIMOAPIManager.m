@@ -11,7 +11,7 @@
 #import "DReachability.h"
 #import "XMLReader.h"
 
-@implementation DIMOAPIManager
+@implementation SimasAPIManager
 static int const errorCode401 = 401;
 NSTimer *timer;
 // STAGING
@@ -63,7 +63,7 @@ NSTimer *timer;
 }
 + (void)alertRelogin{
     [timer invalidate];
-    [DIMOAlertView showAlertWithTitle:@"Session Out" message:@"Please login again" alertStyle:UIAlertViewStyleDefault clickedButtonAtIndexCallback:^(NSInteger buttonIndex, UIAlertView *alert) {
+    [SimasAlertView showAlertWithTitle:@"Session Out" message:@"Please login again" alertStyle:UIAlertViewStyleDefault clickedButtonAtIndexCallback:^(NSInteger buttonIndex, UIAlertView *alert) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"forceLogout" object:nil];
     } cancelButtonTitle:@"OK" otherButtonTitles:nil];
 }
@@ -87,6 +87,7 @@ NSTimer *timer;
 //    }
 //    newDict[@""] =
 //    new
+    NSLog(BASE_URL);
     [self startHTTPRequestWithMethod:ConnectionManagerHTTPMethodGET
                            urlString:BASE_URL
                               params:dict
@@ -98,6 +99,7 @@ NSTimer *timer;
 + (void)callAPIPOSTWithParameters:(NSDictionary *)dict
                       andComplete:(void(^)(NSDictionary *response, NSError *err))completion {
     [self startTimer];
+    NSLog(BASE_URL);
     [self startHTTPRequestWithMethod:ConnectionManagerHTTPMethodPOST
                            urlString:BASE_URL
                               params:dict
@@ -188,21 +190,21 @@ NSTimer *timer;
     DAFHTTPRequestOperationManager *manager = [self createRequestManager];
     if (method == ConnectionManagerHTTPMethodPOST) {
         [manager POST:urlString parameters:params success:^(DAFHTTPRequestOperation *operation, id responseObject) {
-            [DIMOAPIManager handleSuccessForOperation:operation
+            [SimasAPIManager handleSuccessForOperation:operation
                                        responseObject:responseObject
                                            completion:completion];
         } failure:^(DAFHTTPRequestOperation *operation, NSError *error) {
-            [DIMOAPIManager handleErrorForOperation:operation
+            [SimasAPIManager handleErrorForOperation:operation
                                               error:error
                                          completion:completion];
         }];        
     } else {
         [manager GET:urlString parameters:params success:^(DAFHTTPRequestOperation *operation, id responseObject) {
-            [DIMOAPIManager handleSuccessForOperation:operation
+            [SimasAPIManager handleSuccessForOperation:operation
                                           responseObject:responseObject
                                               completion:completion];
         } failure:^(DAFHTTPRequestOperation *operation, NSError *error) {
-            [DIMOAPIManager handleErrorForOperation:operation
+            [SimasAPIManager handleErrorForOperation:operation
                                                  error:error
                                             completion:completion];
         }];
@@ -324,11 +326,11 @@ NSTimer *timer;
             [manager.requestSerializer setValue:[headers objectForKey:key] forHTTPHeaderField:key];
         }
         [manager POST:urlString parameters:params success:^(DAFHTTPRequestOperation *operation, id responseObject) {
-            [DIMOAPIManager handleSuccessForOperation:operation
+            [SimasAPIManager handleSuccessForOperation:operation
                                        responseObject:responseObject
                                            completion:completion];
         } failure:^(DAFHTTPRequestOperation *operation, NSError *error) {
-            [DIMOAPIManager handleErrorForOperation:operation
+            [SimasAPIManager handleErrorForOperation:operation
                                               error:error
                                          completion:completion];
         }];
@@ -337,11 +339,11 @@ NSTimer *timer;
             [manager.requestSerializer setValue:[headers objectForKey:key] forHTTPHeaderField:key];
         }
         [manager GET:urlString parameters:params success:^(DAFHTTPRequestOperation *operation, id responseObject) {
-            [DIMOAPIManager handleSuccessForOperation:operation
+            [SimasAPIManager handleSuccessForOperation:operation
                                        responseObject:responseObject
                                            completion:completion];
         } failure:^(DAFHTTPRequestOperation *operation, NSError *error) {
-            [DIMOAPIManager handleErrorForOperation:operation
+            [SimasAPIManager handleErrorForOperation:operation
                                               error:error
                                          completion:completion];
         }];

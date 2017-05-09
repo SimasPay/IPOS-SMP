@@ -87,7 +87,7 @@
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHG-Vu-tRh" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="88" y="290" width="200" height="48"/>
+                                    <rect key="frame" x="88" y="286" width="200" height="48"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="48" id="48g-EA-Kkz"/>
                                         <constraint firstAttribute="width" constant="200" id="Vc2-Rw-3Kz"/>
@@ -111,9 +111,9 @@
                                 <constraint firstItem="J1s-XM-Moy" firstAttribute="leading" secondItem="0h2-xC-n0V" secondAttribute="leading" id="HHb-ht-Ioc"/>
                                 <constraint firstItem="ZTr-YN-sd1" firstAttribute="trailing" secondItem="J8A-Ie-Fzb" secondAttribute="trailing" id="K0t-iI-cCn"/>
                                 <constraint firstItem="0h2-xC-n0V" firstAttribute="height" secondItem="ldc-QG-vrx" secondAttribute="height" id="KSu-Gw-dl7"/>
-                                <constraint firstItem="WHG-Vu-tRh" firstAttribute="top" secondItem="ZTr-YN-sd1" secondAttribute="bottom" constant="29" id="NUp-Ff-1Wo"/>
+                                <constraint firstItem="WHG-Vu-tRh" firstAttribute="top" secondItem="ZTr-YN-sd1" secondAttribute="bottom" constant="25" id="NUp-Ff-1Wo"/>
                                 <constraint firstItem="ZTr-YN-sd1" firstAttribute="top" secondItem="J8A-Ie-Fzb" secondAttribute="bottom" constant="10" id="OWO-FV-0jF"/>
-                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="WHG-Vu-tRh" secondAttribute="bottom" constant="30" id="QjN-aF-S4P"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="WHG-Vu-tRh" secondAttribute="bottom" constant="20" id="QjN-aF-S4P"/>
                                 <constraint firstItem="J8A-Ie-Fzb" firstAttribute="top" secondItem="J1s-XM-Moy" secondAttribute="bottom" constant="20" id="awA-Ze-Was"/>
                                 <constraint firstItem="J8A-Ie-Fzb" firstAttribute="height" secondItem="0h2-xC-n0V" secondAttribute="height" id="bWs-P3-kpy"/>
                                 <constraint firstItem="ldc-QG-vrx" firstAttribute="top" secondItem="KCc-9G-HXv" secondAttribute="top" constant="25" id="bbA-Ho-35J"/>

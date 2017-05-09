@@ -85,12 +85,12 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
         
         if (!tfMpin.isValid()) {
             message = getString("LoginMessageFillMpin")
-        } else if (!DIMOAPIManager.isInternetConnectionExist()){
+        } else if (!SimasAPIManager.isInternetConnectionExist()){
             message = getString("LoginMessageNotConnectServer")
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
+            SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         
@@ -109,22 +109,22 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DIMOAPIManager .callAPI(withParameters: param, withSessionCheck: false) { (dict, err) in
+        SimasAPIManager .callAPI(withParameters: param, withSessionCheck: false) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
             let dictionary = NSDictionary(dictionary: dict!)
             if (dictionary.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
-                DIMOAPIManager.sharedInstance().encryptedMPin = simasPayRSAencryption(self.tfMpin.text!)
+                SimasAPIManager.sharedInstance().encryptedMPin = simasPayRSAencryption(self.tfMpin.text!)
                 
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")
@@ -137,7 +137,12 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
                     
                     UserDefault.setObject(responseDict.value(forKeyPath: "name.text") as! String, forKey: USERNAME)
                     
-                    UserDefault.setObject(responseDict.value(forKeyPath: "key.text") as! String, forKey: KEY)
+//                    if responseDict.value(forKey: "userAPIKey") != nil {
+//                        UserDefault.setObject(responseDict.value(forKeyPath: "userAPIKey.text") as! String, forKey: GET_USER_API_KEY)
+//                    }
+                    
+                     UserDefault.setObject("5f65c5ae027371e6ab0f044927696abb662200f7", forKey: GET_USER_API_KEY)
+                   
                     if ((responseDict.value(forKeyPath: "isBank.text")  as! String) == "true" ){
                         
                         if ((responseDict.value(forKeyPath: "isEmoney.text") as! String) == "true" ){
@@ -169,7 +174,7 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
                     self.navigationController?.pushViewController(vc, animated: false)
                     
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "Login", message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "Login", message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 
             }

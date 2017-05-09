@@ -6,7 +6,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DIMOAlertView : UIAlertView
+@interface SimasAlertView : UIAlertView
 + (void)showAlertWithMessage:(NSString *)message
                   alertStyle:(UIAlertViewStyle)alertStyle
 clickedButtonAtIndexCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert))callback

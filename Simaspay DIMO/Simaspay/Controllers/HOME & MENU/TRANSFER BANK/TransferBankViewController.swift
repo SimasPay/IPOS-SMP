@@ -134,12 +134,12 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
             message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
         } else if (tfMpin.length() < 6) {
             message = "PIN harus 6 digit "
-        } else if (!DIMOAPIManager.isInternetConnectionExist()) {
+        } else if (!SimasAPIManager.isInternetConnectionExist()) {
             message = getString("LoginMessageNotConnectServer")
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
+            SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         if (self.transferType == TransferType.TransferTypeSinarmas) {
@@ -153,7 +153,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
     func confirmationToBSIM()  {
         
         let dict = NSMutableDictionary()
-        if (DIMOAPIManager.sharedInstance().sourcePocketCode as String == "1") {
+        if (SimasAPIManager.sharedInstance().sourcePocketCode as String == "1") {
             dict[SERVICE] = SERVICE_WALLET
         } else {
             dict[SERVICE] = SERVICE_BANK
@@ -168,26 +168,26 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
         dict[AMOUNT] = self.tfAmountTransfer.text
         dict[CHANNEL_ID] = CHANNEL_ID_VALUE
         dict[BANK_ID] = ""
-        dict[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode as String
+        dict[SOURCEPOCKETCODE] = SimasAPIManager.sharedInstance().sourcePocketCode as String
         dict[DESTPOCKETCODE] = ACCOUNTTYPEREGULER
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+        SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
             
             let dictionary = NSDictionary(dictionary: dict!)
             if (dictionary.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")
@@ -225,7 +225,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
                         dictSendOtp[BANK_ID] = ""
                     vc.MDNString = UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! String
                     
-                    if (DIMOAPIManager.sharedInstance().sourcePocketCode as String == "1") {
+                    if (SimasAPIManager.sharedInstance().sourcePocketCode as String == "1") {
                         dictSendOtp[SERVICE] = SERVICE_WALLET
                     } else {
                         dictSendOtp[SERVICE] = SERVICE_BANK
@@ -237,7 +237,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
                     dictSendOtp[DESTMDN] = ""
                     dictSendOtp[DESTBANKACCOUNT] = self.tfNoAccount.text
                     dictSendOtp[CHANNEL_ID] = CHANNEL_ID_VALUE
-                    dictSendOtp[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode as String
+                    dictSendOtp[SOURCEPOCKETCODE] = SimasAPIManager.sharedInstance().sourcePocketCode as String
                     dictSendOtp[DESTPOCKETCODE] = ACCOUNTTYPEREGULER
                     dictSendOtp[TRANSFERID] = responseDict.value(forKeyPath: "transferID.text")
                     dictSendOtp[PARENTTXNID] = responseDict.value(forKeyPath: "parentTxnID.text")
@@ -247,13 +247,13 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
                     vc.dictForAcceptedOTP = dictSendOtp
                     self.navigationController?.pushViewController(vc, animated: false)
                 } else if (messagecode == "631") {
-                    DIMOAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                    SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
                         if index == 0 {
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
                         }
                     }, cancelButtonTitle: "OK")
                 } else {
-                    DIMOAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 
             }
@@ -264,7 +264,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
     func confirmationToOther()  {
         
         let dict = NSMutableDictionary()
-        if (DIMOAPIManager.sharedInstance().sourcePocketCode as String == "1") {
+        if (SimasAPIManager.sharedInstance().sourcePocketCode as String == "1") {
             dict[SERVICE] = SERVICE_WALLET
         } else {
             dict[SERVICE] = SERVICE_BANK
@@ -277,7 +277,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
         dict[DESTACCOUNTNUMBER] = self.tfNoAccount.text
         dict[AMOUNT] = self.tfAmountTransfer.text
         dict[DEST_BANK_CODE] = self.bankName.value(forKey: "code") as? String
-        dict[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode as String
+        dict[SOURCEPOCKETCODE] = SimasAPIManager.sharedInstance().sourcePocketCode as String
         dict[DESTPOCKETCODE] = ACCOUNTTYPEREGULER
         dict[BANK_ID] = ""
         dict[ACCOUNT_TYPE] = ""
@@ -285,21 +285,21 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
         DLog("\(param)")
-        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+        SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
             
             let dictionary = NSDictionary(dictionary: dict!)
             if (dictionary.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")
@@ -348,7 +348,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
                     
                     vc.MDNString = UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! String
                     
-                    if (DIMOAPIManager.sharedInstance().sourcePocketCode as String == "1") {
+                    if (SimasAPIManager.sharedInstance().sourcePocketCode as String == "1") {
                         dictSendOtp[SERVICE] = SERVICE_WALLET
                     } else {
                         dictSendOtp[SERVICE] = SERVICE_BANK
@@ -357,7 +357,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
                     dictSendOtp[INSTITUTION_ID] = SIMASPAY
                     dictSendOtp[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
                     dictSendOtp[DESTACCOUNTNUMBER] = self.tfNoAccount.text
-                    dictSendOtp[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode as String
+                    dictSendOtp[SOURCEPOCKETCODE] = SimasAPIManager.sharedInstance().sourcePocketCode as String
                     dictSendOtp[DESTPOCKETCODE] = ACCOUNTTYPEREGULER
                     dictSendOtp[TRANSFERID] = responseDict.value(forKeyPath: "transferID.text")
                     dictSendOtp[PARENTTXNID] = responseDict.value(forKeyPath: "parentTxnID.text")
@@ -373,13 +373,13 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
                     vc.dictForAcceptedOTP = dictSendOtp
                     self.navigationController?.pushViewController(vc, animated: false)
                 } else if (messagecode == "631") {
-                    DIMOAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                    SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
                         if index == 0 {
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
                         }
                     }, cancelButtonTitle: "OK")
                 } else {
-                    DIMOAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 
             }
@@ -392,7 +392,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
     override func keyboardWillShow(notification: NSNotification) {
         super.keyboardWillShow(notification: notification)
         TransferBankViewController.scrollViewHeight = constraintScrollViewHeight.constant
-        constraintScrollViewHeight.constant = TransferBankViewController.scrollViewHeight - BaseViewController.keyboardSize.height
+        constraintScrollViewHeight.constant = (TransferBankViewController.scrollViewHeight - 65) - BaseViewController.keyboardSize.height
         self.view.layoutIfNeeded()
     }
     

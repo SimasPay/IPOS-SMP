@@ -9,14 +9,14 @@
 
 typedef void(^AlertCallback)(NSInteger buttonIndex, UIAlertView *alert);
 
-@interface DIMOAlertView () <UIAlertViewDelegate>
+@interface SimasAlertView () <UIAlertViewDelegate>
 //@property (nonatomic, strong) AlertCallback alertCallback;
 
 @property (nonatomic, strong) NSMutableDictionary *alertCallBackDictionary;
 @property (nonatomic, strong) NSMutableArray *alertArray;
 @end
 
-@implementation DIMOAlertView
+@implementation SimasAlertView
 static NSString *const ApplicationNameString = @"DIMO";
 static NSString *const NOT_IMPLEMENTED_MESSAGE = @"Not implemented yet";
 
@@ -87,7 +87,7 @@ clickedButtonAtIndexCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert)
         return;
     }
     
-    DIMOAlertView *obj = [self getSharedAlertView];
+    SimasAlertView *obj = [self getSharedAlertView];
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:obj cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, nil];
     alert.alertViewStyle = alertStyle;
@@ -114,7 +114,7 @@ clickedButtonAtIndexCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert)
 }
 
 + (void)hideAllAlert {
-    DIMOAlertView *obj = [self getSharedAlertView];
+    SimasAlertView *obj = [self getSharedAlertView];
     
     [obj.alertArray enumerateObjectsUsingBlock:^(UIAlertView *alert , NSUInteger idx, BOOL *stop) {
         [alert removeFromSuperview];
@@ -142,8 +142,8 @@ clickedButtonAtIndexCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert)
     [self showAlertWithTitle:title message:message alertStyle:UIAlertViewStyleDefault clickedButtonAtIndexCallback:callback cancelButtonTitle:@"OK" otherButtonTitles:nil];
 }
 #pragma mark private
-+ (DIMOAlertView *)getSharedAlertView {
-    DIMOAlertView *obj = [self sharedInstance];
++ (SimasAlertView *)getSharedAlertView {
+    SimasAlertView *obj = [self sharedInstance];
     if (!obj.alertArray) { obj.alertArray = [NSMutableArray array]; }
     if (!obj.alertCallBackDictionary) { obj.alertCallBackDictionary = [NSMutableDictionary dictionary]; }
     
@@ -153,7 +153,7 @@ clickedButtonAtIndexCallback:(void(^)(NSInteger buttonIndex, UIAlertView *alert)
 #pragma mark UIAlert delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    DIMOAlertView *obj = [[self class] getSharedAlertView];
+    SimasAlertView *obj = [[self class] getSharedAlertView];
     [obj.alertArray removeObject:alertView];
     
     if ([obj.alertCallBackDictionary objectForKey:@(alertView.tag)]) {

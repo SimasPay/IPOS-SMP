@@ -144,14 +144,14 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
         
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
         DMBProgressHUD.showAdded(to: self.view, animated: true)
-        DIMOAPIManager .callAPIPOST(withParameters: param) { (dict, err) in
+        SimasAPIManager .callAPIPOST(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
@@ -159,7 +159,7 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
             let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
             //            DLog("\(responseDict)")
             if (responseDict.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 // success
                 let key = self.isPurchase ? "purchaseData" : "paymentData"

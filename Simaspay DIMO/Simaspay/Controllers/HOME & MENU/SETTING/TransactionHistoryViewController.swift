@@ -129,12 +129,12 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
     
     func checkTransactionHistory() {
         var message = ""
-        if (!DIMOAPIManager.isInternetConnectionExist()){
+        if (!SimasAPIManager.isInternetConnectionExist()){
             message = getString("LoginMessageNotConnectServer")
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
+            SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         
@@ -144,25 +144,25 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
         dict[INSTITUTION_ID] = ""
         dict[AUTH_KEY] = ""
         dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
-        dict[SOURCEPIN] = DIMOAPIManager.sharedInstance().encryptedMPin
+        dict[SOURCEPIN] = SimasAPIManager.sharedInstance().encryptedMPin
         if startDate.length != 0 {
             dict["fromDate"] = startDate
             dict["toDate"] = toDate
         }
         
         dict[CHANNEL_ID] = CHANNEL_ID_VALUE
-        dict[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode
+        dict[SOURCEPOCKETCODE] = SimasAPIManager.sharedInstance().sourcePocketCode
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+        SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
@@ -170,7 +170,7 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
             DLog("\(dictionary)")
             let messageCode  = dictionary.value(forKeyPath: "message.code") as! String
             if (dictionary.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 let responseDict = dictionary as NSDictionary
                 if (messageCode == "39"){
@@ -181,13 +181,13 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
                     }
                 } else if (messageCode == "631") {
                      let messageText  = responseDict.value(forKeyPath: "message.text") as! String
-                    DIMOAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                    SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
                         if index == 0 {
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
                         }
                     }, cancelButtonTitle: "OK")
                 } else {
-                    DIMOAlertView.showNormalTitle("Error", message: dictionary.value(forKeyPath: "message.text") as! String, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+                    SimasAlertView.showNormalTitle("Error", message: dictionary.value(forKeyPath: "message.text") as! String, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
                         for vc in viewControllers {
                             if (vc.isKind(of: HomeViewController.self)) {
@@ -213,12 +213,12 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
     //get pdf url for downloading
     func downloadPDF()  {
         var message = ""
-        if (!DIMOAPIManager.isInternetConnectionExist()){
+        if (!SimasAPIManager.isInternetConnectionExist()){
             message = getString("LoginMessageNotConnectServer")
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
+            SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         
@@ -228,21 +228,21 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
         dict[INSTITUTION_ID] = SIMASPAY
         dict[AUTH_KEY] = ""
         dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
-        dict[SOURCEPIN] = DIMOAPIManager.sharedInstance().encryptedMPin
+        dict[SOURCEPIN] = SimasAPIManager.sharedInstance().encryptedMPin
         dict[FROM_DATE] = startDate
         dict[TO_DATE] = toDate
         dict[CHANNEL_ID] = CHANNEL_ID_VALUE
-        dict[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode
+        dict[SOURCEPOCKETCODE] = SimasAPIManager.sharedInstance().sourcePocketCode
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+        SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 
                 DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
@@ -253,11 +253,11 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
             DLog("\(dictionary)")
             if (dictionary.allKeys.count == 0) {
                 DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 let responseDict = dictionary as NSDictionary
                 DispatchQueue.global().async {
-                    let str = "\(DIMOAPIManager.downloadPDFURL()!)\(responseDict.object(forKeyPaths: "downloadURL.text")!)"
+                    let str = "\(SimasAPIManager.downloadPDFURL()!)\(responseDict.object(forKeyPaths: "downloadURL.text")!)"
                     if let data: NSData = NSData(contentsOf: URL(string: str)!) {
                         DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
                         let fileManager = FileManager.default

@@ -25,8 +25,17 @@ void DLog(NSString *message) {
 + (CGSize)screenSize {
     return ScreenSize;
 }
+
 + (void)DIMOLog:(NSString *)string {
-    DLog(string);
+    if (DIMO_IS_DEBUG) {
+        NSString *sourceString = [[NSThread callStackSymbols] objectAtIndex:1];
+        NSCharacterSet *separatorSet = [NSCharacterSet characterSetWithCharactersInString:@" -[]+?.,"];
+        NSMutableArray *array = [NSMutableArray arrayWithArray:[sourceString  componentsSeparatedByCharactersInSet:separatorSet]];
+        [array removeObject:@""];
+        //NSLog(@"Class caller = %@", [array objectAtIndex:3]);
+        //NSLog(@"Function caller = %@", [array objectAtIndex:4]);
+        NSLog(@"%@ - %@ %@", [array objectAtIndex:3], [array objectAtIndex:4], string);
+    }
 }
 @end
 

@@ -24,7 +24,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     @IBOutlet var lblUsername: BaseLabel!
     @IBOutlet var lblNoAccount: BaseLabel!
     @IBOutlet weak var btnSwitchAccount: UIButton!
-     @IBOutlet weak var lblSwitchAccount: UILabel!
+    @IBOutlet weak var lblSwitchAccount: UILabel!
     @IBOutlet weak var btnMove: UIButton!
     @IBOutlet weak var btnLogout: UIButton!
     
@@ -36,6 +36,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var viewMove: UIView!
     @IBOutlet var collectionView: UICollectionView!
     var gradientLayer : CAGradientLayer!
+    
+    var qrInqueryDict = NSMutableDictionary()
+    var qrInvoiceDict = NSMutableDictionary()
     
     
     static var positionx:CGFloat = 0
@@ -90,7 +93,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
         self.gradientLayer = gradientLayer
         self.viewMove.layer.insertSublayer(gradientLayer, at: 0)
-        DIMOAPIManager.sharedInstance().sourcePocketCode =  self.accountType == AccountType.accountTypeRegular ? "2": self.accountType == AccountType.accountTypeEMoneyKYC ? "1": self.accountType == AccountType.accountTypeEMoneyNonKYC ? "1": "6"
+        SimasAPIManager.sharedInstance().sourcePocketCode =  self.accountType == AccountType.accountTypeRegular ? "2": self.accountType == AccountType.accountTypeEMoneyKYC ? "1": self.accountType == AccountType.accountTypeEMoneyNonKYC ? "1": "6"
         
         //Array of menu
         arrayMenu = [
@@ -126,14 +129,14 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             [
                 "title" : "Pay by QR",
                 "icon" : "icon_Paybyqr",
-                "action" : TransactionHistoryViewController.initWithOwnNib(),
+                "action" : "",
                 "disable" : false,
                 "isHidden": false
             ],
             [
                 "title" : "Promo Pay by QR",
                 "icon" : "icon_Promo",
-                "action" : TransactionHistoryViewController.initWithOwnNib(),
+                "action" : "",
                 "disable" : false,
                 "isHidden": false
             ],
@@ -165,17 +168,16 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             
         }
         
-        DIMOPay.setServerURL(ServerURLDev)
+        DIMOPay.setServerURL(ServerURLUat)
         DIMOPay.setIsPolling(true)
         DIMOPay.setMinimumTransaction(1000)
         DIMOPay.setEULAState(false)
-        DIMOPay.setIsUsingCustomDialog(false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Do any additional setup after loading the view.
-        let timer = DIMOAPIManager.staticTimer()
+        let timer = SimasAPIManager.staticTimer()
         timer?.invalidate()
         
         lblViewMove.font = UIFont.systemFont(ofSize: 14)
@@ -206,6 +208,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         prefs.removeObject(forKey: SOURCEMDN)
         prefs.removeObject(forKey: ACCOUNT_NUMBER)
         prefs.removeObject(forKey: USERNAME)
+        prefs.removeObject(forKey: GET_USER_API_KEY)
         
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
         for vc in viewControllers {
@@ -274,7 +277,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.viewMove.frame = frame
             }, completion: { (complete) in
                 self.checkBalance()
-                
             })
             
         } else {
@@ -284,7 +286,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.viewMove.frame = frame
             }
         }
-        
     }
     
     
@@ -301,12 +302,12 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     func checkBalance() {
         
         var message = ""
-        if (!DIMOAPIManager.isInternetConnectionExist()){
+        if (!SimasAPIManager.isInternetConnectionExist()){
             message = getString("LoginMessageNotConnectServer")
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
+            SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             self.close()
             return
         }
@@ -317,28 +318,28 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         dict[INSTITUTION_ID] = SIMASPAY
         dict[AUTH_KEY] = ""
         dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
-        dict[SOURCEPIN] = DIMOAPIManager.sharedInstance().encryptedMPin as String!
+        dict[SOURCEPIN] = SimasAPIManager.sharedInstance().encryptedMPin as String!
         dict[CHANNEL_ID] = CHANNEL_ID_VALUE
         dict[BANK_ID] = ""
-        dict[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode as String
+        dict[SOURCEPOCKETCODE] = SimasAPIManager.sharedInstance().sourcePocketCode as String
         
         self.indicatorView.isHidden = false
         self.indicatorView.startAnimating()
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+        SimasAPIManager.callAPI(withParameters: param) { (dict, err) in
             
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
             let dictionary = NSDictionary(dictionary: dict!)
             if (dictionary.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 let messageText  = dictionary.value(forKeyPath: "message.text") as! String
                 let messagecode  = dictionary.value(forKeyPath:"message.code") as! String
@@ -353,14 +354,14 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.close), userInfo: nil, repeats: false)
                 } else if (messagecode == "631") {
                     self.close()
-                    DIMOAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                    SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
                         if index == 0 {
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
                         }
                     }, cancelButtonTitle: "OK")
                 } else {
                     self.close()
-                    DIMOAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
             }
             
@@ -418,14 +419,20 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         if !((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"disable")  as! Bool) {
-            DLog("\(((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"title") as! NSString) as String)")
-            let vc = (self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"action")
-            self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
+            
+            if ((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey: "title") as! String == "Pay by QR") {
+                self.payBYQRBtnClicked()
+            } else if ((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey: "title") as! String == "Promo Pay by QR") {
+                self.promoBYQRBtnClicked()
+            } else {
+                DLog("\(((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"title") as! NSString) as String)")
+                let vc = (self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"action")
+                self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
+            }
         } else {
             
         }
     }
-    
     
     //MARK: Unused
     func setupMenu() {
@@ -483,12 +490,93 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     func generateUserkey(){
-        let key = UserDefault.objectFromUserDefaults(forKey: KEY) as! NSString
+        var message = ""
+        if (!SimasAPIManager.isInternetConnectionExist()){
+            message = getString("LoginMessageNotConnectServer")
+        }
+        
+        if (message.characters.count > 0) {
+            SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
+            return
+        }
+
+        if (UserDefault.objectFromUserDefaults(forKey: GET_USER_API_KEY) != nil) {
+            let key = UserDefault.objectFromUserDefaults(forKey: GET_USER_API_KEY) as! NSString
+            DLog("\(key)")
+            DIMOPay.setUserAPIKey(key as String!)
+        } else {
+            let dict = NSMutableDictionary()
+            
+            dict[SERVICE] = SERVICE_ACCOUNT
+            dict[TXNNAME] = GET_USER_API_KEY
+            dict[INSTITUTION_ID] = SIMASPAY
+            dict[AUTH_KEY] = ""
+            dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+            
+            DMBProgressHUD.showAdded(to: self.view, animated: true)
+            let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+            DLog("\(dict)")
+            SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
+                DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+                if (err != nil) {
+                    let error = err! as NSError
+                    if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                        SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    } else {
+                        SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    }
+                    return
+                }
+                
+                let dictionary = NSDictionary(dictionary: dict!)
+                if (dictionary.allKeys.count == 0) {
+                    SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+                } else {
+                    let responseDict = dictionary as NSDictionary
+                    DLog("\(responseDict)")
+                    let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
+                    let messageText  = responseDict.value(forKeyPath: "message.text") as! String
+                    if ( messagecode == GENERATE_API_KEY_SUCCESS_CODE ){
+                        let userAPIKeyText  = responseDict.value(forKeyPath: "userAPIKey.text") as! String
+                        UserDefault.setObject(userAPIKeyText, forKey: GET_USER_API_KEY)
+                        DIMOPay.setUserAPIKey(userAPIKeyText)
+                    } else if (messagecode == "631") {
+                        SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                            if index == 0 {
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
+                            }
+                        }, cancelButtonTitle: "OK")
+                    } else {
+                        SimasAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    }
+                }
+            }
+        }
+    }
+    
+    func payInvoice(invoiceId:NSString, amount:Double, discountedAmount:Double,merchantName:NSString,nbOfCoupons:Int32,discountType:NSString,loyaltyProgramName:NSString,amountOfDiscount:Double,tippingAmount:Double,pointsRedeemed:Int,amountRedeemed:Int){
+        let number1: Int32 = nbOfCoupons
+        let numberOfCoupons = Int(number1)
+        
+        qrInqueryDict["invoiceId"] = invoiceId
+        qrInqueryDict["amount"] = amount
+        qrInqueryDict["discountedAmount"] = discountedAmount
+        qrInvoiceDict["merchantName"] = merchantName
+        qrInqueryDict["nbOfCoupons"] = numberOfCoupons
+        qrInqueryDict["discountType"] = discountType
+        qrInqueryDict["loyaltyProgramName"] = loyaltyProgramName
+        qrInqueryDict["amountOfDiscount"] = amountOfDiscount
+        qrInqueryDict["tippingAmount"] = tippingAmount
+        qrInqueryDict["pointsRedeemed"] = pointsRedeemed
+        qrInqueryDict["amountRedeemed"] = amountRedeemed
     }
     
     func payBYQRBtnClicked() {
-      
         DIMOPay.startSDK(self, with: self)
+    }
+    
+    func promoBYQRBtnClicked() {
+        DIMOPay.startLoyalty(self, with: self)
     }
     
     
@@ -500,19 +588,19 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     /// Return true to close sdk
     /// This function will be called when unknown error page appear
     func callbackUnknowError() -> Bool {
-        return true
+        return false
     }
     
     /// Return true to close sdk
     /// This function will be called when payment failed error page appear
     func callbackTransactionStatus(_ paymentStatus: PaymentStatus, withMessage message: String!) -> Bool {
-         return true
+         return false
     }
     
     /// Return true to close sdk
     /// This function will be called when invalid qr code error page appear
     func callbackInvalidQRCode() -> Bool {
-         return true
+         return false
     }
     
     /// This function will be called when lost internet connection error page appear
@@ -522,7 +610,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     /// This function will be called when the sdk has been closed
     func callbackSDKClosed() {
-        self.dismiss(animated: true, completion: nil)
+        // self.dismiss(animated: true, completion: nil)
     }
     
     /// This function will be called when isUsingCustomDialog is Yes, and host-app need to show their own dialog
@@ -532,7 +620,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     /// This function will be called when user clicked pay button and host-app need to doing payment here
     func callbackPayInvoice(_ invoice: DIMOInvoiceModel!) {
-        
+            payInvoice(invoiceId: invoice.invoiceId! as NSString, amount: invoice.originalAmount, discountedAmount: invoice.paidAmount, merchantName: invoice.merchantName! as NSString, nbOfCoupons: invoice.numberOfCoupons, discountType: invoice.discountType! as NSString, loyaltyProgramName: invoice.loyaltyProgramName! as NSString, amountOfDiscount: invoice.amountOfDiscount, tippingAmount: invoice.tipAmount, pointsRedeemed: 0, amountRedeemed: 0)
     }
     
     /// This function will be called when user cancel process payment or close invoice summary
@@ -542,7 +630,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     /// This function will be called when the SDK opened at the first time or there is no user api key found
     func callbackGenerateUserAPIKey() {
-        // self.generateKey()
+        self.generateUserkey()
     }
     
     /// This function will be called when the EULA state changed

@@ -977,8 +977,7 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
         
     }
     
-    func payInvoice(invoiceId:NSString, amount:Double, discountedAmount:Double,merchantName:NSString,nbOfCoupons:Int32,discountType:NSString,loyaltyProgramName:NSString,amountOfDiscount:Double,tippingAmount:Double,pointsRedeemed:Int,amountRedeemed:Int)
-    {
+    func payInvoice(invoiceId:NSString, amount:Double, discountedAmount:Double,merchantName:NSString,nbOfCoupons:Int32,discountType:NSString,loyaltyProgramName:NSString,amountOfDiscount:Double,tippingAmount:Double,pointsRedeemed:Int,amountRedeemed:Int){
         let number1: Int32 = nbOfCoupons
         let numberOfCoupons = Int(number1)
         

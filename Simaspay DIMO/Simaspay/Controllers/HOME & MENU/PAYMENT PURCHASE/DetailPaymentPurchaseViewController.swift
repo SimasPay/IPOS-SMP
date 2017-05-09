@@ -188,26 +188,26 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         dict[PAYMENT_MODE] = dictOfData.value(forKey: "paymentMode") as? String
         dict[DENOM_CODE] = "2"
         dict[NOMINAL_AMOUNT] = self.tfNomTransaction.text!
-        dict[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode as String
+        dict[SOURCEPOCKETCODE] = SimasAPIManager.sharedInstance().sourcePocketCode as String
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
         DLog("\(param)")
-        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+        SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
             
             let dictionary = NSDictionary(dictionary: dict!)
             if (dictionary.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")
@@ -262,18 +262,18 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
                     dictSendOtp[TRANSFERID] = responseDict.value(forKeyPath: "transferID.text")
                     dictSendOtp[PARENTTXNID] = responseDict.value(forKeyPath: "parentTxnID.text")
                     dictSendOtp[CONFIRMED] = "true"
-                    dictSendOtp[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode as String
+                    dictSendOtp[SOURCEPOCKETCODE] = SimasAPIManager.sharedInstance().sourcePocketCode as String
                     dictSendOtp[MFAOTP] = true
                     vc.dictForAcceptedOTP = dictSendOtp
                     self.navigationController?.pushViewController(vc, animated: false)
                 } else if (messagecode == "631") {
-                    DIMOAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                    SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
                         if index == 0 {
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
                         }
                     }, cancelButtonTitle: "OK")
                 } else {
-                    DIMOAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 
             }
@@ -299,26 +299,26 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
             dict[AMOUNT] = self.tfNomPayment.text!
         }
         dict[DENOM_CODE] = ""
-        dict[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode as String
+        dict[SOURCEPOCKETCODE] = SimasAPIManager.sharedInstance().sourcePocketCode as String
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
         DLog("\(param)")
-        DIMOAPIManager .callAPI(withParameters: param) { (dict, err) in
+        SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-                    DIMOAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 return
             }
             
             let dictionary = NSDictionary(dictionary: dict!)
             if (dictionary.allKeys.count == 0) {
-                DIMOAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")
@@ -377,18 +377,18 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
                     dictSendOtp[TRANSFERID] = responseDict.value(forKeyPath: "transferID.text")
                     dictSendOtp[PARENTTXNID] = responseDict.value(forKeyPath: "parentTxnID.text")
                     dictSendOtp[CONFIRMED] = "true"
-                    dictSendOtp[SOURCEPOCKETCODE] = DIMOAPIManager.sharedInstance().sourcePocketCode as String
+                    dictSendOtp[SOURCEPOCKETCODE] = SimasAPIManager.sharedInstance().sourcePocketCode as String
                     dictSendOtp[MFAOTP] = true
                     vc.dictForAcceptedOTP = dictSendOtp
                     self.navigationController?.pushViewController(vc, animated: false)
                 } else if (messagecode == "631") {
-                    DIMOAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                    SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
                         if index == 0 {
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
                         }
                     }, cancelButtonTitle: "OK")
                 } else {
-                    DIMOAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    SimasAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
                 
             }
@@ -407,12 +407,12 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
             message = "Harap Masukkan " + getString("TransferLebelMPIN")
         } else if (tfMpin.length() < 6) {
             message = "PIN harus 6 digit"
-        } else if (!DIMOAPIManager.isInternetConnectionExist()) {
+        } else if (!SimasAPIManager.isInternetConnectionExist()) {
             message = getString("LoginMessageNotConnectServer")
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
+            SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         
@@ -431,7 +431,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
                 message = "Harap Masukkan " + getString("TransferLebelMPIN")
             } else if (tfMpin.length() < 6) {
                 message = "PIN harus 6 digit"
-            } else if (!DIMOAPIManager.isInternetConnectionExist()) {
+            } else if (!SimasAPIManager.isInternetConnectionExist()) {
                 message = getString("LoginMessageNotConnectServer")
             }
         } else {
@@ -445,13 +445,13 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
                 message = "Harap Masukkan " + getString("TransferLebelMPIN")
             } else if (tfMpin.length() < 6) {
                 message = "PIN harus 6 digit"
-            } else if (!DIMOAPIManager.isInternetConnectionExist()) {
+            } else if (!SimasAPIManager.isInternetConnectionExist()) {
                 message = getString("LoginMessageNotConnectServer")
             }
         }
         
         if (message.characters.count > 0) {
-            DIMOAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
+            SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
         
