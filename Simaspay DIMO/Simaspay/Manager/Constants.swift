@@ -44,7 +44,14 @@ let DESTACCOUNTNUMBER = "destAccountNo"
 let DEST_BANK_CODE = "destBankCode"
 let ACCOUNT_TYPE = "accountType"
 let BEHALF_OF_MDN = "onBehalfOfMDN"
-
+let MERCHANT_DATA = "merchantData"
+let DISCOUNT_AMOUNT = "discountAmount"
+let DISCOUNT_TYPE = "discountType"
+let LOYALITY_NAME = "loyalityName"
+let NUMBER_OF_COUPONS = "numberOfCoupons"
+let POINTS_OF_REDEEMED = "pointsRedeemed"
+let AMOUNT_REDEEMED = "amountRedeemed"
+let TIPPING_AMOUNT = "tippingAmount"
 
 // MARK: VALUE for keys start here
 // MARK: =========================
@@ -82,6 +89,9 @@ let TXN_INQUIRY_PURCHASE_AIRTIME = "AirtimePurchaseInquiry"
 let TXN_CONFIRM_PURCHASE_AIRTIME = "AirtimePurchase"
 let TXN_INQUIRY_PAYMENT = "BillPayInquiry"
 let TXN_CONFIRM_PAYMENT = "BillPay"
+let TXN_QR_PAYMENT_INQUIRY = "QRPaymentInquiry"
+let TXN_QR_PAYMENT_CONFIRMATION = "QRPayment"
+let USER_API_KEY = "userAPIKey"
 
 // MARK: Service
 let SERVICE_ACCOUNT = "Account"
@@ -89,6 +99,8 @@ let SERVICE_PAYMENT = "Payment"
 let SOURCEPOCKETCODE = "sourcePocketCode"
 let DESTPOCKETCODE = "destPocketCode"
 let SERVICE_PURCHASE_AIRTIME = "Buy"
+let QRFLASHIZ = "QRFLASHIZ"
+let QR_PAYMENT = "QRPayment"
 
 // MARK: Cash Withdrawal
 let TXN = "CashOutAtATMInquiry"
@@ -137,6 +149,8 @@ let SIMASPAY_PURCHASE_SUCCESCODE = "2030"
 let SIMASPAY_PAYMENT_INQUIRY = "713"
 let SIMASPAY_PAYMENT_SUCCESSCODE = "653"
 let GENERATE_API_KEY_SUCCESS_CODE = "2103"
+let QR_INQUIRY_SUCCESS_CODE = "2109"
+let QR_SUCCESS_CODE = "2111"
 
 //MARK: User defult
 let SIMASPAY_PUBLIC_KEY = "simasPayPublicKey"
@@ -236,7 +250,7 @@ let EulaTermsText = "<html><p style='font-family:Montserrat;'>Dengan menyetujui 
 #define SUBSCRIBER_FOR_DOCUMENT @"subscriberFormDocument"
 #define SUPPORTING_DOCUMENT @"supportingDocument"
 
-#define QR_PAYMENT @"QRPayment"
+
 #define Transaction_ID @"transactionId"
 
 

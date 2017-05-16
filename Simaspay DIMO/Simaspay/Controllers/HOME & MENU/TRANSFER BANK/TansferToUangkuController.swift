@@ -196,6 +196,8 @@ class TansferToUangkuController: BaseViewController, UITextFieldDelegate {
         var message = "";
         if (!inputMdn.isValid()) {
             message = "Harap Masukkan " + getString("TransferLebelMdn")  + " Anda"
+        }else if(inputMdn.length() <= 10){
+            message = "Nomor Handphone yang Anda masukkan harus 10-14 angka"
         } else if (!inputAmount.isValid()){
             message = getString("TransferEmptyNominal")
         } else if (!inputmPin.isValid()){

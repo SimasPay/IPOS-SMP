@@ -16,7 +16,7 @@ enum AccountType: Int {
     case accountTypeEMoneyNonKYC //E-Money non KYC
 }
 
-class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, DIMOPayDelegate {
+class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, DIMOPayDelegate {
     
     @IBOutlet weak var lblViewMove: BaseLabel!
     @IBOutlet weak var lblBalance: BaseLabel!
@@ -30,6 +30,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     var accountType : AccountType!
     var arrayMenu: NSArray!
+    var qrInqueryDict = NSMutableDictionary()
     
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     @IBOutlet var imgUser: UIImageView!
@@ -37,11 +38,28 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     @IBOutlet var collectionView: UICollectionView!
     var gradientLayer : CAGradientLayer!
     
-    var qrInqueryDict = NSMutableDictionary()
-    var qrInvoiceDict = NSMutableDictionary()
-    
-    
     static var positionx:CGFloat = 0
+    
+    var viewMpin: UIView!
+    var viewOtp: UIView!
+    var lblMPin: BaseLabel!
+    var tfMpin: BaseTextField!
+    var tfOtp: BaseTextField!
+    var btnNext: BaseButton!
+    var btnOk: UIButton!
+    var dictForRequestOTP = NSMutableDictionary()
+    var dictConfirmation = NSMutableDictionary()
+    
+    //Timer for OTP resend button
+    var timerCount = 60
+    var clock:Timer!
+    var lblTimer: BaseLabel!
+    var lblTitleOtp: BaseLabel!
+    var MDNString:String! = ""
+    var otpString:String! = ""
+    var mPinString:String! = ""
+    
+    var alertController = UIAlertController()
    
     static func initWithOwnNib() -> HomeViewController {
         let obj:HomeViewController = HomeViewController.init(nibName: String(describing: self), bundle: nil)
@@ -100,7 +118,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             [
                 "title" : "Daftar Transaksi",
                 "icon" : "icon_Transaction",
-                "action" :self.accountType == AccountType.accountTypeEMoneyKYC ? TransactionPeriodViewController.initWithOwnNib() : self.accountType == AccountType.accountTypeEMoneyNonKYC ? TransactionPeriodViewController.initWithOwnNib():self.accountType == AccountType.accountTypeRegular ? TransactionHistoryViewController.initWithOwnNib() :TransactionHistoryViewController.initWithOwnNib(),
+                "action" :self.accountType == AccountType.accountTypeEMoneyKYC ? TransactionPeriodViewController.initWithOwnNib() : self.accountType == AccountType.accountTypeEMoneyNonKYC ? TransactionPeriodViewController.initWithOwnNib() : self.accountType == AccountType.accountTypeRegular ? TransactionHistoryViewController.initWithOwnNib() :TransactionHistoryViewController.initWithOwnNib(),
                 "disable" : false,
                 "isHidden": false
             ],
@@ -167,11 +185,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             }
             
         }
-        
-        DIMOPay.setServerURL(ServerURLUat)
-        DIMOPay.setIsPolling(true)
-        DIMOPay.setMinimumTransaction(1000)
-        DIMOPay.setEULAState(false)
+        self.initSDKPayQR()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -186,6 +200,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         lblViewMove.text = getString("HomeTitleSliderBalace")
         
     }
+    
     override func viewWillLayoutSubviews() {
         imgUser.layer.cornerRadius = (imgUser.bounds.size.width / 2) as CGFloat
         imgUser.backgroundColor = UIColor.black
@@ -502,7 +517,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 
         if (UserDefault.objectFromUserDefaults(forKey: GET_USER_API_KEY) != nil) {
             let key = UserDefault.objectFromUserDefaults(forKey: GET_USER_API_KEY) as! NSString
-            DLog("\(key)")
             DIMOPay.setUserAPIKey(key as String!)
         } else {
             let dict = NSMutableDictionary()
@@ -557,11 +571,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     func payInvoice(invoiceId:NSString, amount:Double, discountedAmount:Double,merchantName:NSString,nbOfCoupons:Int32,discountType:NSString,loyaltyProgramName:NSString,amountOfDiscount:Double,tippingAmount:Double,pointsRedeemed:Int,amountRedeemed:Int){
         let number1: Int32 = nbOfCoupons
         let numberOfCoupons = Int(number1)
-        
+      
         qrInqueryDict["invoiceId"] = invoiceId
         qrInqueryDict["amount"] = amount
         qrInqueryDict["discountedAmount"] = discountedAmount
-        qrInvoiceDict["merchantName"] = merchantName
+        qrInqueryDict["merchantName"] = merchantName
         qrInqueryDict["nbOfCoupons"] = numberOfCoupons
         qrInqueryDict["discountType"] = discountType
         qrInqueryDict["loyaltyProgramName"] = loyaltyProgramName
@@ -569,10 +583,62 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         qrInqueryDict["tippingAmount"] = tippingAmount
         qrInqueryDict["pointsRedeemed"] = pointsRedeemed
         qrInqueryDict["amountRedeemed"] = amountRedeemed
+        
+        let window = UIApplication.shared.keyWindow!
+        viewMpin = UIView()
+        viewMpin.frame = CGRect(x: 0, y: 0, width: window.frame.width, height: window.frame.height)
+        viewMpin.backgroundColor = UIColor.init(hexString: "F3F3F3")
+        let navigation = UIView(frame: CGRect(x: 0, y: 0, width: window.frame.width, height: 65))
+        navigation.backgroundColor = UIColor.init(hexString: color_btn_red)
+        var lblTitle: BaseLabel!
+        lblTitle = BaseLabel()
+        lblTitle.textColor = UIColor.white
+        lblTitle.frame = CGRect(x: 0, y: 20, width:SimasUtility.screenSize().width, height: 44)
+        lblTitle.textAlignment = .center
+        lblTitle.text = "Masukan mPin"
+        navigation.addSubview(lblTitle)
+        
+        let main = UIView(frame: CGRect(x: 0, y: 65, width: window.frame.width, height: window.frame.height - 65))
+        main.backgroundColor = UIColor.clear
+        lblMPin = BaseLabel()
+        lblMPin.frame = CGRect(x: 28, y: 25, width: window.frame.width - 56, height: 17)
+        tfMpin = BaseTextField()
+        tfMpin.frame = CGRect(x: 28, y: 52, width: window.frame.width - 56, height: 40)
+        btnNext = BaseButton()
+        btnNext.frame = CGRect(x: 90, y: 130, width: window.frame.width - 180, height: 40)
+        
+        lblMPin.font = UIFont.boldSystemFont(ofSize: 13)
+        lblMPin.text = getString("TransferLebelMPIN")
+        tfMpin.font = UIFont.systemFont(ofSize: 14)
+        tfMpin.backgroundColor = UIColor.white
+        tfMpin.addInset()
+        tfMpin.keyboardType = UIKeyboardType.numberPad
+        tfMpin.tag = 7
+        tfMpin.isSecureTextEntry = true
+        tfMpin.delegate = self
+
+        btnNext.updateButtonType1()
+        btnNext.setTitle(getString("TransferButtonNext"), for: .normal)
+        btnNext.addTarget(self, action: #selector(self.actionNext) , for: .touchUpInside)
+        
+        main.addSubview(lblMPin)
+        main.addSubview(tfMpin)
+        main.addSubview(btnNext)
+
+        viewMpin.addSubview(navigation)
+        viewMpin.addSubview(main)
+        window.addSubview(viewMpin)
+        tfMpin.becomeFirstResponder()
     }
     
     func payBYQRBtnClicked() {
         DIMOPay.startSDK(self, with: self)
+    }
+    
+    func initSDKPayQR() {
+        DIMOPay.setServerURL(ServerURLDev)
+        DIMOPay.setMinimumTransaction(1000)
+        DIMOPay.setEULAState(false)
     }
     
     func promoBYQRBtnClicked() {
@@ -594,7 +660,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     /// Return true to close sdk
     /// This function will be called when payment failed error page appear
     func callbackTransactionStatus(_ paymentStatus: PaymentStatus, withMessage message: String!) -> Bool {
-         return false
+        if (paymentStatus == PaymentStatusSuccess) {
+            return true
+        } else {
+            return false
+        }
     }
     
     /// Return true to close sdk
@@ -610,12 +680,12 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     /// This function will be called when the sdk has been closed
     func callbackSDKClosed() {
-        // self.dismiss(animated: true, completion: nil)
+       
     }
     
     /// This function will be called when isUsingCustomDialog is Yes, and host-app need to show their own dialog
     func callbackShowDialog(_ paymentStatus: PaymentStatus, withMessage message: String!, andLoyaltyModel fidelitiz: DIMOFidelitizModel!) {
-        
+   
     }
     
     /// This function will be called when user clicked pay button and host-app need to doing payment here
@@ -644,5 +714,362 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     @available(iOS 2.0, *)
     func callbackShowEULA() -> UIViewController! {
         return DIMOPay.eula(withStringHTML: EulaTermsText)
+    }
+    
+    func nextProses() {
+        let dict = NSMutableDictionary()
+        dict[SERVICE] = SERVICE_PAYMENT
+        dict[TXNNAME] = TXN_QR_PAYMENT_INQUIRY
+        dict[INSTITUTION_ID] = SIMASPAY
+        dict[AUTH_KEY] = ""
+        dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+        dict[SOURCEPIN] = simasPayRSAencryption(self.tfMpin.text!)
+        dict[BILLERCODE] = QRFLASHIZ
+        dict[BILLNO] = self.qrInqueryDict.object(forKey: "invoiceId")
+        dict[PAYMENT_MODE] = QR_PAYMENT
+        dict[AMOUNT] = self.qrInqueryDict.object(forKey: "amount")
+        dict[MERCHANT_DATA] = self.qrInqueryDict.object(forKey: "merchantName")
+        dict[USER_API_KEY] = UserDefault.objectFromUserDefaults(forKey: GET_USER_API_KEY)
+        dict[SOURCEPOCKETCODE] = SimasAPIManager.sharedInstance().sourcePocketCode as String
+        dict[DISCOUNT_AMOUNT] = self.qrInqueryDict.object(forKey: "amountOfDiscount")
+        dict[LOYALITY_NAME] = self.qrInqueryDict.object(forKey: "loyaltyProgramName")
+        dict[DISCOUNT_TYPE] = self.qrInqueryDict.object(forKey: "discountType")
+        dict[NUMBER_OF_COUPONS] = self.qrInqueryDict.object(forKey: "nbOfCoupons")
+        dict[POINTS_OF_REDEEMED] = self.qrInqueryDict.object(forKey: "pointsRedeemed")
+        dict[AMOUNT_REDEEMED] = self.qrInqueryDict.object(forKey: "amountRedeemed")
+        dict[TIPPING_AMOUNT] = self.qrInqueryDict.object(forKey: "tippingAmount")
+        DMBProgressHUD.showAdded(to: self.viewMpin, animated: true)
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DLog("\(param)")
+        SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
+            DMBProgressHUD.hide(for: self.viewMpin, animated: true)
+            // DMBProgressHUD .hideAllHUDs(for: self.viewMpin, animated: true)
+            if (err != nil) {
+                let error = err! as NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                } else {
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                }
+                return
+            }
+            
+            let dictionary = NSDictionary(dictionary: dict!)
+            if (dictionary.allKeys.count == 0) {
+                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+            } else {
+                let responseDict = dictionary as NSDictionary
+                DLog("\(responseDict)")
+                let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
+                let messageText  = responseDict.value(forKeyPath: "message.text") as! String
+                if ( messagecode == QR_INQUIRY_SUCCESS_CODE ) {
+                    // request otp data
+                    self.dictForRequestOTP[TXNNAME] = TXN_RESEND_MFAOTP
+                    self.dictForRequestOTP[SERVICE] = SERVICE_WALLET
+                    self.dictForRequestOTP[INSTITUTION_ID] = SIMASPAY
+                    self.dictForRequestOTP[SOURCEMDN] =  getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+                    self.dictForRequestOTP[SOURCEPIN] = simasPayRSAencryption(self.tfMpin.text!)
+                    self.dictForRequestOTP[SCTL_ID] = responseDict.value(forKeyPath: "sctlID.text") as! String
+                    self.dictForRequestOTP[CHANNEL_ID] = CHANNEL_ID_VALUE
+                    self.dictForRequestOTP[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
+                    self.dictForRequestOTP[AUTH_KEY] = ""
+                    
+                    // confirmation data
+                    self.dictConfirmation[SERVICE] = SERVICE_PAYMENT
+                    self.dictConfirmation[TXNNAME] = TXN_QR_PAYMENT_CONFIRMATION
+                    self.dictConfirmation[INSTITUTION_ID] = SIMASPAY
+                    self.dictConfirmation[AUTH_KEY] = ""
+                    self.dictConfirmation[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+                    self.dictConfirmation[BILLERCODE] = QRFLASHIZ
+                    self.dictConfirmation[BILLNO] = self.qrInqueryDict.object(forKey: "invoiceId")
+                    self.dictConfirmation[PAYMENT_MODE] = QR_PAYMENT
+                    self.dictConfirmation[MERCHANT_DATA] = self.qrInqueryDict.object(forKey: "merchantName")
+                    self.dictConfirmation[USER_API_KEY] = UserDefault.objectFromUserDefaults(forKey: GET_USER_API_KEY)
+                    self.dictConfirmation[SOURCEPOCKETCODE] = SimasAPIManager.sharedInstance().sourcePocketCode as String
+                    self.dictConfirmation[DISCOUNT_AMOUNT] = self.qrInqueryDict.object(forKey: "amountOfDiscount")
+                    self.dictConfirmation[LOYALITY_NAME] = self.qrInqueryDict.object(forKey: "loyaltyProgramName")
+                    self.dictConfirmation[DISCOUNT_TYPE] = self.qrInqueryDict.object(forKey: "discountType")
+                    self.dictConfirmation[NUMBER_OF_COUPONS] = self.qrInqueryDict.object(forKey: "nbOfCoupons")
+                    self.dictConfirmation[POINTS_OF_REDEEMED] = self.qrInqueryDict.object(forKey: "pointsRedeemed")
+                    self.dictConfirmation[AMOUNT_REDEEMED] = self.qrInqueryDict.object(forKey: "amountRedeemed")
+                    self.dictConfirmation[TIPPING_AMOUNT] = self.qrInqueryDict.object(forKey: "tippingAmount")
+                    self.dictConfirmation[TRANSFERID] = responseDict.value(forKeyPath: "transferID.text")
+                    self.dictConfirmation[PARENTTXNID] = responseDict.value(forKeyPath: "parentTxnID.text")
+                    self.dictConfirmation[CONFIRMED] = "true"
+                    
+                    self.requestOTP()
+                    self.showOTP()
+                    
+                } else if (messagecode == "631") {
+                    DIMOPay.closeSDK()
+                    self.viewMpin.removeFromSuperview()
+                    SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                        if index == 0 {
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
+                        }
+                    }, cancelButtonTitle: "OK")
+                } else {
+                    SimasAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                }
+                
+            }
+        }
+    }
+    
+    
+    
+    func actionNext() {
+        var message = "";
+        if (!tfMpin.isValid()){
+            message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
+        } else if (tfMpin.length() < 6) {
+            message = "PIN harus 6 digit "
+        } else if (!SimasAPIManager.isInternetConnectionExist()) {
+            message = getString("LoginMessageNotConnectServer")
+        }
+        
+        if (message.characters.count > 0) {
+            SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
+            return
+        }
+
+        self.nextProses()
+        // v.removeFromSuperview()
+    }
+    
+    //MARK: Action button for OTP alert
+    func didOTPCancel() {
+        DLog("cancel");
+        clock.invalidate()
+        viewOtp.removeFromSuperview()
+        
+    }
+    
+    func didOTPOK() {
+        DLog("OK");
+        clock.invalidate()
+        self.sendOTP()
+    }
+    
+    
+    //MARK: Show OTP Alert
+    func showOTP()  {
+        timerCount = 60
+        
+        let window = UIApplication.shared.keyWindow!
+        viewOtp = UIView()
+        viewOtp.frame = CGRect(x: 0, y: 0, width: window.frame.width, height: window.frame.height)
+        viewOtp.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        
+        let viewContent = UIView(frame: CGRect(x: 28, y: 65, width: window.frame.width - 56, height: 210))
+        viewContent.backgroundColor = UIColor.init(hexString: "F3F3F3")
+        viewContent.layer.cornerRadius = 15.0
+        
+        lblTitleOtp = BaseLabel(frame: CGRect(x: 0, y: 10, width: window.frame.width - 56, height: 40))
+        lblTitleOtp.textColor = UIColor.black
+        lblTitleOtp.textAlignment = .center
+        lblTitleOtp.font = UIFont.boldSystemFont(ofSize: 16)
+        lblTitleOtp.text = "Masukan Kode OTP"
+        let temp = UIView(frame: CGRect(x: 0, y: lblTitleOtp.bounds.origin.y + lblTitleOtp.bounds.size.height, width: window.frame.width - 56 , height: 170))
+        let MDNString = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+        let messageString = String(format: getString("ConfirmationOTPMessage"), MDNString)
+        let messageAlert = UILabel(frame: CGRect(x: 10, y: 10, width: temp.frame.size.width - 20, height: 60))
+        messageAlert.font = UIFont.systemFont(ofSize: 13)
+        messageAlert.textAlignment = .center
+        messageAlert.numberOfLines = 4
+        messageAlert.text = messageString as String
+
+        clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ActivationPinViewController.countDown), userInfo: nil, repeats: true)
+
+        lblTimer = BaseLabel(frame: CGRect(x: 0, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 10, width: temp.frame.size.width, height: 15))
+        lblTimer.textAlignment = .center
+        lblTimer.font = UIFont.systemFont(ofSize: 12)
+        lblTimer.text = "01:00"
+        
+        tfOtp = BaseTextField(frame: CGRect(x: 10, y: 90, width: temp.frame.size.width - 20, height: 30))
+        tfOtp.font = UIFont.systemFont(ofSize: 14)
+        tfOtp.backgroundColor = UIColor.white
+        tfOtp.addInset()
+        tfOtp.isSecureTextEntry = true
+        tfOtp.keyboardType = UIKeyboardType.numberPad
+        tfOtp.tag = 10
+        tfOtp.placeholder = "4 digit kode OTP"
+        tfOtp.delegate = self
+        tfOtp.layer.borderColor = UIColor.init(hexString: "999999").cgColor
+        tfOtp.layer.borderWidth = 1.0
+        
+        let border = UIView(frame: CGRect(x: 0, y: 130, width: temp.frame.size.width, height: 1))
+        border.backgroundColor = UIColor.init(hexString: "CCCCCC")
+        
+        let widthTemp = temp.frame.size.width
+        
+        let btnCancel = UIButton(frame: CGRect(x: 0, y: 131 , width: (widthTemp/2) - 0.5, height: 40))
+        btnCancel.setTitle("Cancel", for: UIControlState.normal)
+        btnCancel.setTitleColor(UIColor.init(hexString: "0080FF"), for: UIControlState.normal)
+        btnCancel.isUserInteractionEnabled = true
+        
+        let lineBorder = UIView(frame: CGRect(x: (widthTemp/2) - 0.5, y: 130, width: 1, height: 40))
+        lineBorder.backgroundColor = UIColor.init(hexString: "CCCCCC")
+        btnOk = UIButton(frame: CGRect(x: (widthTemp/2) + 0.5, y: 131 , width: (widthTemp/2) + 0.5, height: 40))
+        btnOk.setTitle("Ok", for: UIControlState.normal)
+        // btnOk.isEnabled = false
+        btnOk.setTitleColor(UIColor.init(hexString: "0080FF"), for: UIControlState.normal)
+        btnOk.setTitleColor(UIColor.init(hexString: "AAAAAA"), for: UIControlState.disabled)
+        btnOk.isEnabled = false
+        
+        btnCancel.addTarget(self, action: #selector(self.didOTPCancel), for: .touchUpInside)
+        btnOk.addTarget(self, action: #selector(self.didOTPOK), for: .touchUpInside)
+        
+        temp.addSubview(border)
+        temp.addSubview(messageAlert)
+        temp.addSubview(lblTimer)
+        temp.addSubview(tfOtp)
+        temp.addSubview(lineBorder)
+        temp.addSubview(btnCancel)
+        temp.addSubview(btnOk)
+        
+        viewContent.addSubview(lblTitleOtp)
+        viewContent.addSubview(temp)
+        
+        viewOtp.addSubview(viewContent)
+        window.addSubview(viewOtp)
+
+    }
+    
+    //MARK: Request OTP
+    func requestOTP() {
+        DLog("\(self.dictForRequestOTP)")
+        DMBProgressHUD.showAdded(to: self.viewMpin, animated: true)
+        SimasAPIManager .callAPI(withParameters: self.dictForRequestOTP as! [AnyHashable : Any] ) { (dict, err) in
+            DMBProgressHUD.hideAllHUDs(for: self.viewMpin, animated: true)
+            let dictionary = NSDictionary(dictionary: dict!)
+            
+            
+            if (err != nil) {
+                let error = err! as NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                } else {
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                }
+                return
+            }
+            
+            if (dictionary.allKeys.count == 0) {
+                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+            } else {
+                let responseDict = dictionary as NSDictionary
+                DLog("\(responseDict)")
+                
+                
+            }
+        }
+    }
+    
+    //MARK: Send OTP
+    func sendOTP() {
+        self.viewOtp.removeFromSuperview()
+        var message = ""
+        if (!SimasAPIManager.isInternetConnectionExist()){
+            message = getString("LoginMessageNotConnectServer")
+        }
+        
+        if (message.characters.count > 0) {
+            SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
+            return
+        }
+        
+        DLog(self.tfOtp.text)
+        self.dictConfirmation[MFAOTP] = simasPayRSAencryption(self.tfOtp.text!)
+        DMBProgressHUD.showAdded(to: self.viewMpin, animated: true)
+        
+        var sessionCheck = false
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
+        for vc in viewControllers {
+            if (vc.isKind(of: HomeViewController.self)) {
+                sessionCheck = true
+                
+            }
+        }
+        
+        
+        SimasAPIManager .callAPI(withParameters: self.dictConfirmation as! [AnyHashable : Any], withSessionCheck:sessionCheck) { (dict, err) in
+            DMBProgressHUD .hideAllHUDs(for: self.viewMpin, animated: true)
+            let dictionary = NSDictionary(dictionary: dict!)
+            
+            
+            if (err != nil) {
+                let error = err! as NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                } else {
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                }
+                return
+            }
+            
+            if (dictionary.allKeys.count == 0) {
+                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+                
+            } else {
+                let responseDict = dictionary as NSDictionary
+                DLog("\(responseDict)")
+                let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
+                let messageText  = responseDict.value(forKeyPath: "message.text") as! String
+                
+                self.viewMpin.removeFromSuperview()
+                if (messagecode == QR_SUCCESS_CODE) {
+                    DIMOPay.notifyTransaction(PaymentStatusSuccess, withMessage: "Berhasil melakukan pembayaran dengan Qr Code", isDefaultLayout: true)
+                } else if (messagecode == "631") {
+                    DIMOPay.closeSDK()
+                    self.viewMpin.removeFromSuperview()
+                    SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                        if index == 0 {
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
+                        }
+                    }, cancelButtonTitle: "OK")
+                } else {
+                    DIMOPay.notifyTransaction(PaymentStatusFailed, withMessage: messageText, isDefaultLayout: true)
+                }
+                
+                
+            }
+        }
+        
+    }
+
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        if textField.tag == 10 {
+            let maxLength = 4
+            let currentString: NSString = textField.text! as NSString
+            let newString: NSString =
+                currentString.replacingCharacters(in: range, with: string) as NSString
+            self.otpString = newString as String!
+            btnOk.isEnabled = newString.length >= 4
+            return newString.length <= maxLength
+        } else if textField.tag == 7 {
+            let maxLength = 6
+            let currentString: NSString = textField.text! as NSString
+            let newString: NSString =
+                currentString.replacingCharacters(in: range, with: string) as NSString
+            self.mPinString = newString as String!
+            return newString.length <= maxLength
+        } else {
+            return true
+        }
+    }
+    
+    
+    func countDown(){
+        if (timerCount > 0) {
+            timerCount -= 1
+            lblTimer.text = "00:\(timerCount)"
+        } else {
+            self.viewOtp.removeFromSuperview()
+            SimasAlertView.showAlert(withTitle: getString("titleEndOtp"), message: getString("messageEndOtp"), cancelButtonTitle: getString("AlertCloseButtonText"))
+            clock.invalidate()
+        }
     }
 }

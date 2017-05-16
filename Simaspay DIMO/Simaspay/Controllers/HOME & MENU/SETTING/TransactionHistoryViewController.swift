@@ -31,8 +31,6 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
         self.showTitle(getString("TransactionHistoryTitle"))
         self.showBackButton()
         self.checkTransactionHistory()
-        
-        
     }
     
     //MARK: programmatically list of transaction history
@@ -139,8 +137,12 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
         }
         
         let dict = NSMutableDictionary()
+        if (SimasAPIManager.sharedInstance().sourcePocketCode as String == "1") {
+            dict[SERVICE] = SERVICE_WALLET
+        } else {
+            dict[SERVICE] = SERVICE_BANK
+        }
         dict[TXNNAME] = TXN_ACCOUNT_HISTORY
-        dict[SERVICE] = SERVICE_WALLET
         dict[INSTITUTION_ID] = ""
         dict[AUTH_KEY] = ""
         dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
@@ -174,6 +176,12 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
             } else {
                 let responseDict = dictionary as NSDictionary
                 if (messageCode == "39"){
+                    if let result = responseDict.value(forKeyPath: "transactionDetails.transactionDetail") as! [[String : Any]]? {
+                        self.arrayData = result
+                    } else {
+                        self.arrayData = [responseDict.value(forKeyPath: "transactionDetails.transactionDetail") as! Dictionary<String, Any>]
+                    }
+                } else if (messageCode == "67"){
                     if let result = responseDict.value(forKeyPath: "transactionDetails.transactionDetail") as! [[String : Any]]? {
                         self.arrayData = result
                     } else {

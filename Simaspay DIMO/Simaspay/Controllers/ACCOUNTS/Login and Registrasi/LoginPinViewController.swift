@@ -137,11 +137,9 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
                     
                     UserDefault.setObject(responseDict.value(forKeyPath: "name.text") as! String, forKey: USERNAME)
                     
-//                    if responseDict.value(forKey: "userAPIKey") != nil {
-//                        UserDefault.setObject(responseDict.value(forKeyPath: "userAPIKey.text") as! String, forKey: GET_USER_API_KEY)
-//                    }
-                    
-                     UserDefault.setObject("5f65c5ae027371e6ab0f044927696abb662200f7", forKey: GET_USER_API_KEY)
+                    if responseDict.value(forKey: "userAPIKey") != nil {
+                        UserDefault.setObject(responseDict.value(forKeyPath: "userAPIKey.text") as! String, forKey: GET_USER_API_KEY)
+                    }
                    
                     if ((responseDict.value(forKeyPath: "isBank.text")  as! String) == "true" ){
                         

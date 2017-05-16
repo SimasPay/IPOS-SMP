@@ -1193,7 +1193,7 @@ class MainMenuViewController: UIViewController,DIMOPayDelegate,CZPickerViewDeleg
                         }else{
                             self.confirmationServiceRequest()
                         }
-                        
+
                     }else{
                         
                         DIMOPay.notifyTransaction(PaymentStatusFailed, withMessage: messageText, isDefaultLayout: true)
