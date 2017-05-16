@@ -49,6 +49,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     var btnOk: UIButton!
     var dictForRequestOTP = NSMutableDictionary()
     var dictConfirmation = NSMutableDictionary()
+    var back: BaseButton!
     
     //Timer for OTP resend button
     var timerCount = 60
@@ -596,6 +597,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         lblTitle.frame = CGRect(x: 0, y: 20, width:SimasUtility.screenSize().width, height: 44)
         lblTitle.textAlignment = .center
         lblTitle.text = "Masukan mPin"
+        back = BaseButton(frame: CGRect(x: 0, y: 20, width: 44, height: 44))
+        back.setImage(UIImage(named: "go_back_arrow"), for: UIControlState())
+        back.imageEdgeInsets = UIEdgeInsetsMake(14,14,14,14)
+        back.addTarget(self, action: #selector(self.actionBack), for: UIControlEvents.touchUpInside)
+        // navigation.addSubview(back)
         navigation.addSubview(lblTitle)
         
         let main = UIView(frame: CGRect(x: 0, y: 65, width: window.frame.width, height: window.frame.height - 65))
@@ -629,6 +635,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         viewMpin.addSubview(main)
         window.addSubview(viewMpin)
         tfMpin.becomeFirstResponder()
+    }
+    
+    func actionBack() {
+        // DIMOPay.
+        self.viewMpin.removeFromSuperview()
     }
     
     func payBYQRBtnClicked() {
