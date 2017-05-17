@@ -114,6 +114,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.viewMove.layer.insertSublayer(gradientLayer, at: 0)
         SimasAPIManager.sharedInstance().sourcePocketCode =  self.accountType == AccountType.accountTypeRegular ? "2": self.accountType == AccountType.accountTypeEMoneyKYC ? "1": self.accountType == AccountType.accountTypeEMoneyNonKYC ? "1": "6"
         
+        
+        
         //Array of menu
         arrayMenu = [
             [
@@ -601,7 +603,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         back.setImage(UIImage(named: "go_back_arrow"), for: UIControlState())
         back.imageEdgeInsets = UIEdgeInsetsMake(14,14,14,14)
         back.addTarget(self, action: #selector(self.actionBack), for: UIControlEvents.touchUpInside)
-        // navigation.addSubview(back)
+        navigation.addSubview(back)
         navigation.addSubview(lblTitle)
         
         let main = UIView(frame: CGRect(x: 0, y: 65, width: window.frame.width, height: window.frame.height - 65))
@@ -638,7 +640,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     func actionBack() {
-        // DIMOPay.
+        DIMOPay.closeSDK()
+        DIMOPay.startSDK(self, with: self)
         self.viewMpin.removeFromSuperview()
     }
     

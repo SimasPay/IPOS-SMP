@@ -71,10 +71,9 @@
 		35995ACF1E262B14007EB516 /* LandingScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995A9F1E262B14007EB516 /* LandingScreenViewController.xib */; };
 		35995AD01E262B14007EB516 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35995AA01E262B14007EB516 /* SplashScreenViewController.swift */; };
 		35995AD11E262B14007EB516 /* SplashScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995AA11E262B14007EB516 /* SplashScreenViewController.xib */; };
-		35A497C01EC18B2E009755B5 /* PayByQrController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A497BF1EC18B2E009755B5 /* PayByQrController.swift */; };
-		35A497C21EC18B4D009755B5 /* PayByQrController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35A497C11EC18B4D009755B5 /* PayByQrController.xib */; };
-		35A497CF1EC1C9DB009755B5 /* DIMOPayiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35A497CD1EC1C9DB009755B5 /* DIMOPayiOS.framework */; };
-		35A497D01EC1C9DB009755B5 /* DIMOPayiOSResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 35A497CE1EC1C9DB009755B5 /* DIMOPayiOSResources.bundle */; };
+		35AF51E61ECC3DA4009F5F4F /* DIMOPayiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35AF51E41ECC3DA4009F5F4F /* DIMOPayiOS.framework */; };
+		35AF51E71ECC3DA4009F5F4F /* DIMOPayiOSResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 35AF51E51ECC3DA4009F5F4F /* DIMOPayiOSResources.bundle */; };
+		35BFA0611ECC404800146FFF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35AF51E81ECC3F0E009F5F4F /* MobileCoreServices.framework */; };
 		35CDC6251EB7817800E5296A /* ListCashWithDrawalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CDC6241EB7817800E5296A /* ListCashWithDrawalController.swift */; };
 		35CDC6271EB7818A00E5296A /* ListCashWithDrawalController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35CDC6261EB7818A00E5296A /* ListCashWithDrawalController.xib */; };
 		35CDC6291EB78D5D00E5296A /* CashWithDrawalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CDC6281EB78D5D00E5296A /* CashWithDrawalController.swift */; };
@@ -178,10 +177,9 @@
 		35995A9F1E262B14007EB516 /* LandingScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LandingScreenViewController.xib; sourceTree = "<group>"; };
 		35995AA01E262B14007EB516 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		35995AA11E262B14007EB516 /* SplashScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashScreenViewController.xib; sourceTree = "<group>"; };
-		35A497BF1EC18B2E009755B5 /* PayByQrController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PayByQrController.swift; path = "PAY BY QR/PayByQrController.swift"; sourceTree = "<group>"; };
-		35A497C11EC18B4D009755B5 /* PayByQrController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PayByQrController.xib; path = "PAY BY QR/PayByQrController.xib"; sourceTree = "<group>"; };
-		35A497CD1EC1C9DB009755B5 /* DIMOPayiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DIMOPayiOS.framework; sourceTree = "<group>"; };
-		35A497CE1EC1C9DB009755B5 /* DIMOPayiOSResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DIMOPayiOSResources.bundle; sourceTree = "<group>"; };
+		35AF51E41ECC3DA4009F5F4F /* DIMOPayiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DIMOPayiOS.framework; sourceTree = "<group>"; };
+		35AF51E51ECC3DA4009F5F4F /* DIMOPayiOSResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DIMOPayiOSResources.bundle; sourceTree = "<group>"; };
+		35AF51E81ECC3F0E009F5F4F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		35CDC6241EB7817800E5296A /* ListCashWithDrawalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListCashWithDrawalController.swift; path = "CASH WITHDRAWAL/ListCashWithDrawalController.swift"; sourceTree = "<group>"; };
 		35CDC6261EB7818A00E5296A /* ListCashWithDrawalController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ListCashWithDrawalController.xib; path = "CASH WITHDRAWAL/ListCashWithDrawalController.xib"; sourceTree = "<group>"; };
 		35CDC6281EB78D5D00E5296A /* CashWithDrawalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CashWithDrawalController.swift; path = "CASH WITHDRAWAL/CashWithDrawalController.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -247,7 +245,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35A497CF1EC1C9DB009755B5 /* DIMOPayiOS.framework in Frameworks */,
+				35BFA0611ECC404800146FFF /* MobileCoreServices.framework in Frameworks */,
+				35AF51E61ECC3DA4009F5F4F /* DIMOPayiOS.framework in Frameworks */,
 				353C2BAD1E9226E60082C250 /* AVFoundation.framework in Frameworks */,
 				353C2BAE1E9226E60082C250 /* CoreMedia.framework in Frameworks */,
 				353C2BAF1E9226E60082C250 /* CoreMotion.framework in Frameworks */,
@@ -273,8 +272,7 @@
 		353C2BA71E9226E60082C250 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				35A497CD1EC1C9DB009755B5 /* DIMOPayiOS.framework */,
-				35A497CE1EC1C9DB009755B5 /* DIMOPayiOSResources.bundle */,
+				35AF51E81ECC3F0E009F5F4F /* MobileCoreServices.framework */,
 				353C2BA81E9226E60082C250 /* AVFoundation.framework */,
 				353C2BA91E9226E60082C250 /* CoreMedia.framework */,
 				353C2BAA1E9226E60082C250 /* CoreMotion.framework */,
@@ -358,7 +356,6 @@
 		35995A841E262B14007EB516 /* HOME & MENU */ = {
 			isa = PBXGroup;
 			children = (
-				35A497BE1EC18AD4009755B5 /* PAY BY QR */,
 				35CDC6231EB7809100E5296A /* CASH WITHDRAWAL */,
 				35995A851E262B14007EB516 /* ConfirmationViewController.swift */,
 				35995A861E262B14007EB516 /* ConfirmationViewController.xib */,
@@ -418,13 +415,13 @@
 			path = "TRANSFER BANK";
 			sourceTree = "<group>";
 		};
-		35A497BE1EC18AD4009755B5 /* PAY BY QR */ = {
+		35AF51E31ECC3DA4009F5F4F /* PaybyQr */ = {
 			isa = PBXGroup;
 			children = (
-				35A497BF1EC18B2E009755B5 /* PayByQrController.swift */,
-				35A497C11EC18B4D009755B5 /* PayByQrController.xib */,
+				35AF51E41ECC3DA4009F5F4F /* DIMOPayiOS.framework */,
+				35AF51E51ECC3DA4009F5F4F /* DIMOPayiOSResources.bundle */,
 			);
-			name = "PAY BY QR";
+			path = PaybyQr;
 			sourceTree = "<group>";
 		};
 		35CDC6231EB7809100E5296A /* CASH WITHDRAWAL */ = {
@@ -475,6 +472,7 @@
 		BE1772BF1D9285DE00A27E06 /* Thirdparties */ = {
 			isa = PBXGroup;
 			children = (
+				35AF51E31ECC3DA4009F5F4F /* PaybyQr */,
 				353C2BA11E9224030082C250 /* TestFairySDK-1.8.5 */,
 				BE1772C01D9285DE00A27E06 /* AFNetworking */,
 				BE1772D41D9285DE00A27E06 /* DReachability.h */,
@@ -636,7 +634,6 @@
 				35995AB71E262B14007EB516 /* SecurityQuestionViewController.xib in Resources */,
 				35995AA51E262B14007EB516 /* ActivationSuccessViewController.xib in Resources */,
 				35995AAD1E262B14007EB516 /* BankEMoneyViewController.xib in Resources */,
-				35A497C21EC18B4D009755B5 /* PayByQrController.xib in Resources */,
 				35995ABD1E262B14007EB516 /* DetailPaymentPurchaseViewController.xib in Resources */,
 				353C2BA61E9224030082C250 /* upload-dsym.sh in Resources */,
 				35995ACB1E262B14007EB516 /* TransferBankViewController.xib in Resources */,
@@ -649,7 +646,6 @@
 				35995AA71E262B14007EB516 /* ActivationViewController.xib in Resources */,
 				35995AB91E262B14007EB516 /* ConfirmationViewController.xib in Resources */,
 				35995AD11E262B14007EB516 /* SplashScreenViewController.xib in Resources */,
-				35A497D01EC1C9DB009755B5 /* DIMOPayiOSResources.bundle in Resources */,
 				354F48A31EA4AAC000263340 /* SuccesConfirmationController.xib in Resources */,
 				3535ED981E9DE616007D7942 /* TransferToEMoney.xib in Resources */,
 				35995AA31E262B14007EB516 /* ActivationPinViewController.xib in Resources */,
@@ -670,6 +666,7 @@
 				35CDC62B1EB78D6E00E5296A /* CashWithDrawalController.xib in Resources */,
 				35995AB51E262B14007EB516 /* RegisterEMoneyViewController.xib in Resources */,
 				35995AA91E262B14007EB516 /* ContactUSViewController.xib in Resources */,
+				35AF51E71ECC3DA4009F5F4F /* DIMOPayiOSResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,7 +677,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35A497C01EC18B2E009755B5 /* PayByQrController.swift in Sources */,
 				BE1773011D9285DE00A27E06 /* DAFHTTPRequestOperationManager.m in Sources */,
 				BEC415E41D928E92000C3CF4 /* BaseViewController.swift in Sources */,
 				BE9D03021D94DA7F0070894E /* BasicEncodingRules.m in Sources */,
@@ -871,6 +867,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Simaspay/Thirdparties/PaybyQR",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Simaspay/Thirdparties/PaybyQr",
 				);
 				INFOPLIST_FILE = Simaspay/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -899,6 +896,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Simaspay/Thirdparties/PaybyQR",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Simaspay/Thirdparties/PaybyQr",
 				);
 				INFOPLIST_FILE = Simaspay/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

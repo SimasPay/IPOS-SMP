@@ -31,9 +31,7 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
     
     @IBOutlet var constraintViewAcount: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var constraintScrollViewHeight: NSLayoutConstraint!
-    static var scrollViewHeight : CGFloat = 0
-    
+    @IBOutlet weak var constraintBottomScroll: NSLayoutConstraint!
     
     static func initWithOwnNib(type : WithDrawalType) -> CashWithDrawalController {
         let obj:CashWithDrawalController = CashWithDrawalController.init(nibName: String(describing: self), bundle: nil)
@@ -81,7 +79,6 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
         } else {
             self.showTitle(getString("WithDrawalOther"))
         }
-        
     }
     
     //MARK: Maximum Textfield length
@@ -242,14 +239,13 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
     
     override func keyboardWillShow(notification: NSNotification) {
         super.keyboardWillShow(notification: notification)
-        TransferBankViewController.scrollViewHeight = constraintScrollViewHeight.constant
-        constraintScrollViewHeight.constant = TransferBankViewController.scrollViewHeight - BaseViewController.keyboardSize.height
+        self.constraintBottomScroll.constant = BaseViewController.keyboardSize.height
         self.view.layoutIfNeeded()
     }
     
     override func keyboardWillHide(notification: NSNotification) {
         super.keyboardWillHide(notification: notification)
-        constraintScrollViewHeight.constant = TransferBankViewController.scrollViewHeight
+        self.constraintBottomScroll.constant = 0
         self.view.layoutIfNeeded()
     }
     

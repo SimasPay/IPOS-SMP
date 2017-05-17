@@ -36,8 +36,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
     
     @IBOutlet var constraintViewBankName: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var constraintScrollViewHeight: NSLayoutConstraint!
-    static var scrollViewHeight : CGFloat = 0
+    @IBOutlet weak var constraintBottomScroll: NSLayoutConstraint!
     
     
     static func initWithOwnNib(type : TransferType) -> TransferBankViewController {
@@ -393,14 +392,13 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
     
     override func keyboardWillShow(notification: NSNotification) {
         super.keyboardWillShow(notification: notification)
-        TransferBankViewController.scrollViewHeight = constraintScrollViewHeight.constant
-        constraintScrollViewHeight.constant = (TransferBankViewController.scrollViewHeight - 65) - BaseViewController.keyboardSize.height
+        self.constraintBottomScroll.constant = BaseViewController.keyboardSize.height
         self.view.layoutIfNeeded()
     }
     
     override func keyboardWillHide(notification: NSNotification) {
         super.keyboardWillHide(notification: notification)
-        constraintScrollViewHeight.constant = TransferBankViewController.scrollViewHeight
+        self.constraintBottomScroll.constant = 0
         self.view.layoutIfNeeded()
     }
 
