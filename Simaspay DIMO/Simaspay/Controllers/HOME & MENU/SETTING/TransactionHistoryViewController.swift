@@ -101,11 +101,11 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
             if (type == "true") {
                 lblType.text = "credit"
                 lblType.backgroundColor = UIColor.init(hexString: color_cradit)
-                lblTotal.text = String(format: "-IDR %@", Total!)
+                lblTotal.text = String(format: "IDR %@", Total!)
             } else {
                 lblType.text = "debit"
                 lblType.backgroundColor = UIColor.init(hexString: color_debit)
-                lblTotal.text = String(format: "IDR %@", Total!)
+                lblTotal.text = String(format: "-IDR %@", Total!)
             }
             
             let lblNameTransaction = UILabel(frame: CGRect(x: 0, y: 40, width: 200, height: 20))
