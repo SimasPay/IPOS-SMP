@@ -31,6 +31,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     var accountType : AccountType!
     var arrayMenu: NSArray!
     var qrInqueryDict = NSMutableDictionary()
+    var noReqEmoney: Bool = true
     
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     @IBOutlet var imgUser: UIImageView!
@@ -73,6 +74,13 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         return vc
     }
     
+    static func initWithAccountTypeAndReqEmoney(_ type: AccountType, reqEmoney: Bool) -> HomeViewController {
+        let vc = HomeViewController.initWithOwnNib()
+        vc.accountType = type
+        vc.noReqEmoney = reqEmoney
+        return vc
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -112,9 +120,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
         self.gradientLayer = gradientLayer
         self.viewMove.layer.insertSublayer(gradientLayer, at: 0)
-        SimasAPIManager.sharedInstance().sourcePocketCode =  self.accountType == AccountType.accountTypeRegular ? "2": self.accountType == AccountType.accountTypeEMoneyKYC ? "1": self.accountType == AccountType.accountTypeEMoneyNonKYC ? "1": "6"
-        
-        
         
         //Array of menu
         arrayMenu = [
@@ -174,6 +179,13 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 "action" : ChangeMpinViewController.initWithOwnNib(),
                 "disable" : false,
                 "isHidden": false
+            ],
+            [
+                "title" : "Daftar E-money",
+                "icon" : "ic_daftaremoney",
+                "action" : "",
+                "disable" : noReqEmoney,
+                "isHidden": noReqEmoney
             ]
         ]
         arrayMenu = arrayMenu.filtered(using: NSPredicate(format: "isHidden != TRUE")) as NSArray!
@@ -201,7 +213,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         lblViewMove.textColor = UIColor.white
         lblViewMove.textAlignment = .center
         lblViewMove.text = getString("HomeTitleSliderBalace")
-        
+       
+        let pocketCode = self.accountType == AccountType.accountTypeRegular ? "2": self.accountType == AccountType.accountTypeEMoneyKYC ? "1": self.accountType == AccountType.accountTypeEMoneyNonKYC ? "1": "6"
+        SimasAPIManager.sharedInstance().sourcePocketCode = pocketCode
     }
     
     override func viewWillLayoutSubviews() {
@@ -227,6 +241,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         prefs.removeObject(forKey: ACCOUNT_NUMBER)
         prefs.removeObject(forKey: USERNAME)
         prefs.removeObject(forKey: GET_USER_API_KEY)
+        prefs.removeObject(forKey: mPin)
         
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
         for vc in viewControllers {
@@ -442,6 +457,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.payBYQRBtnClicked()
             } else if ((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey: "title") as! String == "Promo Pay by QR") {
                 self.promoBYQRBtnClicked()
+            } else if ((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey: "title") as! String == "Daftar E-money") {
+                self.registerEmoney()
             } else {
                 DLog("\(((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"title") as! NSString) as String)")
                 let vc = (self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"action")
@@ -1084,6 +1101,84 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.viewOtp.removeFromSuperview()
             SimasAlertView.showAlert(withTitle: getString("titleEndOtp"), message: getString("messageEndOtp"), cancelButtonTitle: getString("AlertCloseButtonText"))
             clock.invalidate()
+        }
+    }
+    
+    
+    //MARK: Register e-money from bank
+    
+    func registerEmoney() {
+        let dict = NSMutableDictionary()
+
+        dict[SERVICE] = SERVICE_ACCOUNT
+        dict[TXNNAME] = TXN_INQUIRY_SUB
+        dict[INSTITUTION_ID] = SIMASPAY
+        dict[AUTH_KEY] = ""
+        dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+        dict[SOURCEPIN] = simasPayRSAencryption(UserDefault.objectFromUserDefaults(forKey: mPin) as! String)
+        
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DLog("\(param)")
+        SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
+            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+            if (err != nil) {
+                let error = err! as NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                } else {
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                }
+                return
+            }
+            
+            let dictionary = NSDictionary(dictionary: dict!)
+            if (dictionary.allKeys.count == 0) {
+                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+            } else {
+                let responseDict = dictionary as NSDictionary
+                DLog("\(responseDict)")
+                let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
+                let messageText  = responseDict.value(forKeyPath: "message.text") as! String
+                if ( messagecode == SIMASPAY_POKET_ADDING_INQUIRY_SUCCES){
+                    let vc = ConfirmationViewController.initWithOwnNib()
+                    let dictOtp = NSMutableDictionary()
+                    dictOtp[TXNNAME] = TXN_RESEND_MFAOTP
+                    dictOtp[SERVICE] = SERVICE_WALLET
+                    dictOtp[INSTITUTION_ID] = SIMASPAY
+                    dictOtp[SOURCEMDN] =  getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+                    dictOtp[SCTL_ID] = responseDict.value(forKeyPath: "sctlID.text") as! String
+                    dictOtp[SOURCEPIN] = simasPayRSAencryption(UserDefault.objectFromUserDefaults(forKey: mPin) as! String)
+                    dictOtp[AUTH_KEY] = ""
+                    
+                    vc.dictForRequestOTP = dictOtp as NSDictionary
+                 
+                    
+                    vc.MDNString = UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! String
+                    let dictSendOtp = NSMutableDictionary()
+               
+                    dictSendOtp[SERVICE] = SERVICE_ACCOUNT
+                    dictSendOtp[TXNNAME] = TXN_CONFIRM_SUB
+                    dictSendOtp[INSTITUTION_ID] = SIMASPAY
+                    dictSendOtp[AUTH_KEY] = ""
+                    dictSendOtp[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+                    dictSendOtp[SCTL_ID] = responseDict.value(forKeyPath: "sctlID.text") as! String
+                    
+                    vc.dictForAcceptedOTP = dictSendOtp
+                    vc.isRegister = true
+                    
+                    self.navigationController?.pushViewController(vc, animated: false)
+                } else if (messagecode == "631") {
+                    SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                        if index == 0 {
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
+                        }
+                    }, cancelButtonTitle: "OK")
+                } else {
+                    SimasAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                }
+                
+            }
         }
     }
 }

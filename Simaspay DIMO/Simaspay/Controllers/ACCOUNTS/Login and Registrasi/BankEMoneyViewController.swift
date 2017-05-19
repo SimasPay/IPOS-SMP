@@ -81,6 +81,9 @@ class BankEMoneyViewController: BaseViewController,UITableViewDelegate, UITableV
     @available(iOS 2.0, *)
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         UserDefault.setObject((accountArray[indexPath.row] as! NSDictionary).value(forKey: "numberAccount") as! String?, forKey: ACCOUNT_NUMBER)
+        
+        // DLog("\(accountArray[indexPath.row] as! NSDictionary)")
+        
         let vc = (self.accountArray[indexPath.row] as! NSDictionary).value(forKey:"accountType")
         self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
 
@@ -93,6 +96,7 @@ class BankEMoneyViewController: BaseViewController,UITableViewDelegate, UITableV
         prefs.removeObject(forKey: ACCOUNT_NUMBER)
         prefs.removeObject(forKey: USERNAME)
         prefs.removeObject(forKey: GET_USER_API_KEY)
+        prefs.removeObject(forKey: mPin)
         
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
         for vc in viewControllers {

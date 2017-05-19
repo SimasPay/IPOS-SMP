@@ -37,7 +37,7 @@
                     <rect key="frame" x="0.0" y="65" width="375" height="602"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ytg-2Y-krs" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
-                            <rect key="frame" x="88" y="494" width="200" height="48"/>
+                            <rect key="frame" x="88" y="514" width="200" height="48"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="48" id="LzI-jG-CkH"/>
@@ -48,7 +48,7 @@
                             </connections>
                         </button>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2k-Kf-eYW">
-                            <rect key="frame" x="25" y="28" width="325" height="430"/>
+                            <rect key="frame" x="25" y="28" width="325" height="450"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_check" translatesAutoresizingMaskIntoConstraints="NO" id="bAa-q1-Jja">
                                     <rect key="frame" x="122" y="16" width="80" height="80"/>
@@ -105,7 +105,7 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="g2k-Kf-eYW" secondAttribute="trailing" constant="25" id="B8K-nH-MTZ"/>
                         <constraint firstItem="Ytg-2Y-krs" firstAttribute="top" secondItem="g2k-Kf-eYW" secondAttribute="bottom" constant="36" id="Zdt-X1-hbR"/>
-                        <constraint firstAttribute="bottom" secondItem="Ytg-2Y-krs" secondAttribute="bottom" constant="60" id="dFy-zV-N9G"/>
+                        <constraint firstAttribute="bottom" secondItem="Ytg-2Y-krs" secondAttribute="bottom" constant="40" id="dFy-zV-N9G"/>
                         <constraint firstItem="Ytg-2Y-krs" firstAttribute="centerX" secondItem="a3Z-dX-GMZ" secondAttribute="centerX" id="i3V-S5-6Ha"/>
                         <constraint firstItem="g2k-Kf-eYW" firstAttribute="leading" secondItem="a3Z-dX-GMZ" secondAttribute="leading" constant="25" id="o1U-lv-Aij"/>
                         <constraint firstItem="g2k-Kf-eYW" firstAttribute="top" secondItem="a3Z-dX-GMZ" secondAttribute="top" constant="28" id="oyq-6O-0bb"/>

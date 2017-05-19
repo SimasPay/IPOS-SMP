@@ -16,7 +16,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
     @IBOutlet var btnFalse: BaseButton!
     @IBOutlet var viewContentConfirmation: UIView!
     @IBOutlet var constraintViewContent: NSLayoutConstraint!
-    
+    @IBOutlet var viewMainContent: UIView!
     
     var btnResandOTP: BaseButton!
     var tfOTP: BaseTextField!
@@ -41,6 +41,11 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
     //Value to set background navigation
     var useNavigation: Bool = true
     
+    var isRegister:Bool = false
+    var isAditional: Bool = false
+    //Dictionary for show data registration
+    var dataAditional: Array<String>!
+    
     var alertController = UIAlertController()
     
     static func initWithOwnNib() -> ConfirmationViewController {
@@ -61,15 +66,21 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
         self.view.backgroundColor = UIColor.init(hexString: color_background)
 
         DLog("\(data)")
-        self.viewContentConfirmation.layer.cornerRadius = 5.0;
-        self.viewContentConfirmation.layer.borderColor = UIColor.init(hexString: color_border).cgColor
-        self.viewContentConfirmation.layer.borderWidth = 0.5
-        self.viewContentConfirmation.clipsToBounds = true;
+        self.viewMainContent.layer.cornerRadius = 5.0;
+        self.viewMainContent.layer.borderColor = UIColor.init(hexString: color_border).cgColor
+        self.viewMainContent.layer.borderWidth = 0.5
+        self.viewMainContent.clipsToBounds = true;
         
         self.btnTrue.updateButtonType1()
-        self.btnTrue.setTitle(getString("ConfirmationButtonTrue"), for: .normal)
         self.btnFalse.updateButtonType3()
-        self.btnFalse.setTitle(getString("ConfirmationButtonFalse"), for: .normal)
+        
+        if isRegister {
+            self.btnTrue.setTitle("Daftar Akun E-money", for: .normal)
+            self.btnFalse.setTitle("Batal", for: .normal)
+        } else {
+            self.btnTrue.setTitle(getString("ConfirmationButtonTrue"), for: .normal)
+            self.btnFalse.setTitle(getString("ConfirmationButtonFalse"), for: .normal)
+        }
         btnTrue.addTarget(self, action: #selector(ConfirmationViewController.buttonStatus) , for: .touchUpInside)
         btnFalse.addTarget(self, action: #selector(ConfirmationViewController.cancel), for: .touchUpInside)
         
@@ -103,78 +114,122 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
         let padding:CGFloat = 16
         let sizeRect = UIScreen.main.applicationFrame
         let width    = sizeRect.size.width - 2 * 25
-        let heightContent:CGFloat = 15
-        let heightTitleContent:CGFloat = 15
+        let heightContent:CGFloat = 17
+        let heightTitleContent:CGFloat = 17
         let margin:CGFloat = 10
         var y:CGFloat = 16
         
-        
-        let lblTitle = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightTitleContent))
-        lblTitle.font = UIFont.boldSystemFont(ofSize: 14)
-        lblTitle.text = data.value(forKey: "title") as? String
-        viewContentConfirmation.addSubview(lblTitle)
-        y += heightTitleContent + 10
-        
-        
-        let arrayContent = data.value(forKey: "content")
-        for content in arrayContent as! Array<[String : String]> {
-            for list in content {
-                let key = list.key
-                let Value = list.value
-                
-                if key == "-" {
-                    let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: 90))
-                    lblValue.font = UIFont.systemFont(ofSize: 13)
-                    lblValue.numberOfLines = 0
-                    lblValue.lineBreakMode = .byWordWrapping
-                    lblValue.text = Value
-                    viewContentConfirmation.addSubview(lblValue)
-                    y += 90 + margin
-                } else {
-                    
-                    let lblKey = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
-                    lblKey.font = UIFont.boldSystemFont(ofSize: 13)
-                    lblKey.text = key
-                    viewContentConfirmation.addSubview(lblKey)
-                    y += heightContent
-                    
-                    let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
-                    lblValue.font = UIFont.systemFont(ofSize: 13)
-                    lblValue.text = Value
-                    viewContentConfirmation.addSubview(lblValue)
-                    y += heightContent + margin
+        if isRegister {
+            let lblTitle = BaseLabel.init(frame: CGRect(x: padding, y: padding, width: width - 2 * padding, height: 90))
+            // lblTitle.textAlignment =
+            lblTitle.numberOfLines = 7
+            lblTitle.font = UIFont.systemFont(ofSize: 14)
+            lblTitle.text = "Anda akan membuka akun e-money dengan data diri Anda sebagai nasabah Bank Sinarmas. Lanjutkan proses?"
+            viewContentConfirmation.addSubview(lblTitle)
+            y += 90 + 10
+        } else if isAditional {
+            let lblTitle = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightTitleContent))
+            lblTitle.font = UIFont.boldSystemFont(ofSize: 14)
+            lblTitle.text = "Pastikan data berikut sudah benar"
+            viewContentConfirmation.addSubview(lblTitle)
+            y += heightTitleContent + 20
+            
+            var i: Int = 1
+            for newData in dataAditional {
+                if i == dataAditional.count {
+                    let line = CALayer()
+                    line.frame = CGRect(x: padding, y: y, width: width - 2 * padding, height: 1)
+                    line.backgroundColor = UIColor.init(hexString: color_line_gray).cgColor
+                    viewContentConfirmation.layer.addSublayer(line)
+                    y += margin
                 }
+                let arrVal = newData.characters.split{$0 == ":"}.map(String.init)
+                let key = arrVal[0]
+                let value = arrVal[1].trimmingCharacters(in: .whitespacesAndNewlines)
                 
+                let lblKey = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
+                lblKey.font = UIFont.boldSystemFont(ofSize: 13)
+                lblKey.text = key.capitalized
+                viewContentConfirmation.addSubview(lblKey)
+                y += heightContent
+                
+                let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
+                lblValue.font = UIFont.systemFont(ofSize: 13)
+                lblValue.text = value.capitalized
+                viewContentConfirmation.addSubview(lblValue)
+                y += heightContent + margin
+                i += 1
+            }
+        
+        } else {
+            let lblTitle = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightTitleContent))
+            lblTitle.font = UIFont.boldSystemFont(ofSize: 14)
+            lblTitle.text = data.value(forKey: "title") as? String
+            viewContentConfirmation.addSubview(lblTitle)
+            y += heightTitleContent + 10
+            
+            
+            let arrayContent = data.value(forKey: "content")
+            for content in arrayContent as! Array<[String : String]> {
+                for list in content {
+                    let key = list.key
+                    let Value = list.value
+                    
+                    if key == "-" {
+                        let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: 90))
+                        lblValue.font = UIFont.systemFont(ofSize: 13)
+                        lblValue.numberOfLines = 0
+                        lblValue.lineBreakMode = .byWordWrapping
+                        lblValue.text = Value
+                        viewContentConfirmation.addSubview(lblValue)
+                        y += 90 + margin
+                    } else {
+                        
+                        let lblKey = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
+                        lblKey.font = UIFont.boldSystemFont(ofSize: 13)
+                        lblKey.text = key
+                        viewContentConfirmation.addSubview(lblKey)
+                        y += heightContent
+                        
+                        let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
+                        lblValue.font = UIFont.systemFont(ofSize: 13)
+                        lblValue.text = Value
+                        viewContentConfirmation.addSubview(lblValue)
+                        y += heightContent + margin
+                    }
+                    
+                }
+            }
+            
+            if let contentFooterDica = data.value(forKey: "footer") {
+                let contentFooterDic = contentFooterDica as! NSDictionary
+                if contentFooterDic.allKeys.count != 0 {
+                    let line = CALayer()
+                    line.frame = CGRect(x: padding, y: y, width: width - 2 * padding, height: 1)
+                    line.backgroundColor = UIColor.init(hexString: color_line_gray).cgColor
+                    viewContentConfirmation.layer.addSublayer(line)
+                    
+                    y += margin
+                    for list in contentFooterDic {
+                        let key = list.key as! String
+                        let Value = list.value as! String
+                        
+                        let lblKey = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
+                        lblKey.font = UIFont.boldSystemFont(ofSize: 13)
+                        lblKey.text = key
+                        viewContentConfirmation.addSubview(lblKey)
+                        y += heightContent
+                        
+                        let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
+                        lblValue.font = UIFont.systemFont(ofSize: 13)
+                        lblValue.text = Value
+                        viewContentConfirmation.addSubview(lblValue)
+                        y += heightContent + margin
+                    }
+                }
             }
         }
         
-        if let contentFooterDica = data.value(forKey: "footer") {
-            let contentFooterDic = contentFooterDica as! NSDictionary
-            if contentFooterDic.allKeys.count != 0 {
-                let line = CALayer()
-                line.frame = CGRect(x: padding, y: y, width: width - 2 * padding, height: 1)
-                line.backgroundColor = UIColor.init(hexString: color_line_gray).cgColor
-                viewContentConfirmation.layer.addSublayer(line)
-                
-                y += margin
-                for list in contentFooterDic {
-                    let key = list.key as! String
-                    let Value = list.value as! String
-                    
-                    let lblKey = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
-                    lblKey.font = UIFont.boldSystemFont(ofSize: 13)
-                    lblKey.text = key
-                    viewContentConfirmation.addSubview(lblKey)
-                    y += heightContent
-                    
-                    let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
-                    lblValue.font = UIFont.systemFont(ofSize: 13)
-                    lblValue.text = Value
-                    viewContentConfirmation.addSubview(lblValue)
-                    y += heightContent + margin
-                }
-            }
-        }
         let height = y + margin
         self.constraintViewContent.constant = height
     }
@@ -425,11 +480,19 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
                     messagecode == SIMASPAY_EMONEY_TO_UNSUBCRIBER ||
                     messagecode == SIMASPAY_TRANSFER_UANGKU_CONFIRM_SUCCESSCODE ||
                     messagecode == SIMASPAY_CASH_WITH_DRAWAL_SUCCESSCODE ||
-                    messagecode == SIMASPAY_PURCHASE_SUCCESCODE ||
-                    messagecode == SIMASPAY_PAYMENT_SUCCESSCODE) {
+                    messagecode == SIMASPAY_PURCHASE_SUCCESCODE) {
                     let vc = SuccesConfirmationController.initWithOwnNib()
                     vc.data = self.data
                     vc.idTran =  responseDict.value(forKeyPath: "sctlID.text") as! String
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else if (messagecode == SIMASPAY_EMONEY_POKET_SUCCES) {
+                    let vc = SuccesRegisterController.initWithOwnNib()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else if (messagecode == SIMASPAY_PAYMENT_SUCCESSCODE) {
+                    let vc = SuccesConfirmationController.initWithOwnNib()
+                    vc.isAditional = self.isAditional
+                    vc.dataAditional = self.dataAditional
+                    vc.idTran = responseDict.value(forKeyPath: "sctlID.text") as! String
                     self.navigationController?.pushViewController(vc, animated: true)
                 } else if (messagecode == "631") {
                     SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in

@@ -134,6 +134,7 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
                 if (messagecode == SIMASPAY_LOGIN_SUCCESS_CODE){
                     UserDefault.setObject(self.MDNString, forKey: SOURCEMDN)
                     UserDefault.setObject(self.MDNString, forKey: ACCOUNT_NUMBER)
+                    UserDefault.setObject(self.tfMpin.text, forKey: mPin)
                     
                     UserDefault.setObject(responseDict.value(forKeyPath: "name.text") as! String, forKey: USERNAME)
                     
@@ -152,9 +153,7 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
                             vc = BankEMoneyViewController.initWithArray(data: accountArray as NSArray)
                             
                         } else {
-                            
-                            vc = HomeViewController.initWithAccountType(AccountType.accountTypeRegular)
-                            
+                            vc = HomeViewController.initWithAccountTypeAndReqEmoney(AccountType.accountTypeRegular, reqEmoney: false)
                         }
                         
                     } else if ((responseDict.value(forKeyPath: "isEmoney.text") as! String) == "true" ){

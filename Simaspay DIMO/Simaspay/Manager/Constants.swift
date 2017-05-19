@@ -92,6 +92,8 @@ let TXN_CONFIRM_PAYMENT = "BillPay"
 let TXN_QR_PAYMENT_INQUIRY = "QRPaymentInquiry"
 let TXN_QR_PAYMENT_CONFIRMATION = "QRPayment"
 let USER_API_KEY = "userAPIKey"
+let TXN_INQUIRY_SUB = "SubRegularWithEMoneyInquiry"
+let TXN_CONFIRM_SUB = "SubRegularWithEMoney"
 
 // MARK: Service
 let SERVICE_ACCOUNT = "Account"
@@ -151,10 +153,14 @@ let SIMASPAY_PAYMENT_SUCCESSCODE = "653"
 let GENERATE_API_KEY_SUCCESS_CODE = "2103"
 let QR_INQUIRY_SUCCESS_CODE = "2109"
 let QR_SUCCESS_CODE = "2111"
+let SIMASPAY_EMONEY_POKET_SUCCES = "2306"
+let SIMASPAY_POKET_ADDING_INQUIRY_SUCCES = "2304"
+
 
 //MARK: User defult
 let SIMASPAY_PUBLIC_KEY = "simasPayPublicKey"
 let ACCOUNT_NUMBER = "Account_Number"
+let mPin = "mPin"
 let USERNAME = "Username"
 let KEY = "key"
 let GET_USER_API_KEY = "GetUserAPIKey"

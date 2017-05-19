@@ -25,6 +25,10 @@ class SuccesConfirmationController: BaseViewController {
     //Value to set background navigation
     var useNavigation: Bool = true
     
+    var isAditional: Bool = false
+    //Dictionary for show data registration
+    var dataAditional: Array<String>!
+    
     
     static func initWithOwnNib() -> SuccesConfirmationController {
         let obj:SuccesConfirmationController = SuccesConfirmationController.init(nibName: String(describing: self), bundle: nil)
@@ -48,10 +52,7 @@ class SuccesConfirmationController: BaseViewController {
         myMutableString = NSMutableAttributedString(string: myString as String)
         
         myMutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: NSRange(location:0,length:13))
-    
-        
         transactionId.attributedText = myMutableString
-        
         DLog("\(data)")
         
         self.scrollViewArea.layer.cornerRadius = 5.0;
@@ -70,60 +71,92 @@ class SuccesConfirmationController: BaseViewController {
         let padding:CGFloat = 16
         let sizeRect = UIScreen.main.applicationFrame
         let width    = sizeRect.size.width - 2 * 25
-        let heightContent:CGFloat = 15
+        let heightContent:CGFloat = 17
         let margin:CGFloat = 10
         var y:CGFloat = 16
         
-        let arrayContent = data.value(forKey: "content")
-        for content in arrayContent as! Array<[String : String]> {
-            for list in content {
-                let key = list.key
-                let Value = list.value
-               
-                if (key != "-") {
-                    let lblKey = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
-                    lblKey.font = UIFont.boldSystemFont(ofSize: 13)
-                    lblKey.text = key
-                    viewContentConfirmation.addSubview(lblKey)
-                    y += heightContent
-                    
-                    let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
-                    lblValue.font = UIFont.systemFont(ofSize: 13)
-                    lblValue.text = Value
-                    viewContentConfirmation.addSubview(lblValue)
-                    y += heightContent + margin
+        if isAditional {
+            
+            var i: Int = 1
+            for newData in dataAditional {
+                if i == dataAditional.count {
+                    let line = CALayer()
+                    line.frame = CGRect(x: 0, y: y, width: width - 2 * padding, height: 1)
+                    line.backgroundColor = UIColor.init(hexString: color_line_gray).cgColor
+                    viewContentConfirmation.layer.addSublayer(line)
+                    y += margin
                 }
-               
+                let arrVal = newData.characters.split{$0 == ":"}.map(String.init)
+                let key = arrVal[0]
+                let value = arrVal[1].trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                let lblKey = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
+                lblKey.font = UIFont.boldSystemFont(ofSize: 13)
+                lblKey.text = key.capitalized
+                viewContentConfirmation.addSubview(lblKey)
+                y += heightContent
+                let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
+                lblValue.font = UIFont.systemFont(ofSize: 13)
+                lblValue.text = value.capitalized
+                viewContentConfirmation.addSubview(lblValue)
+                y += heightContent + margin
+                i += 1
             }
+            
+            
+        } else {
+            let arrayContent = data.value(forKey: "content")
+            for content in arrayContent as! Array<[String : String]> {
+                for list in content {
+                    let key = list.key
+                    let Value = list.value
+                    
+                    if (key != "-") {
+                        let lblKey = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
+                        lblKey.font = UIFont.boldSystemFont(ofSize: 13)
+                        lblKey.text = key
+                        viewContentConfirmation.addSubview(lblKey)
+                        y += heightContent
+                        
+                        let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
+                        lblValue.font = UIFont.systemFont(ofSize: 13)
+                        lblValue.text = Value
+                        viewContentConfirmation.addSubview(lblValue)
+                        y += heightContent + margin
+                    }
+                    
+                }
+            }
+            
+            if let contentFooterDica = data.value(forKey: "footer") {
+                let contentFooterDic = contentFooterDica as! NSDictionary
+                if contentFooterDic.allKeys.count != 0 {
+                    let line = CALayer()
+                    line.frame = CGRect(x: 0, y: y, width: width - 2 * padding, height: 1)
+                    line.backgroundColor = UIColor.init(hexString: color_line_gray).cgColor
+                    viewContentConfirmation.layer.addSublayer(line)
+                    
+                    y += margin
+                    for list in contentFooterDic {
+                        let key = list.key as! String
+                        let Value = list.value as! String
+                        
+                        let lblKey = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
+                        lblKey.font = UIFont.boldSystemFont(ofSize: 13)
+                        lblKey.text = key
+                        viewContentConfirmation.addSubview(lblKey)
+                        y += heightContent
+                        
+                        let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
+                        lblValue.font = UIFont.systemFont(ofSize: 13)
+                        lblValue.text = Value
+                        viewContentConfirmation.addSubview(lblValue)
+                        y += heightContent + margin
+                    }
+                }
+            } 
         }
         
-        if let contentFooterDica = data.value(forKey: "footer") {
-            let contentFooterDic = contentFooterDica as! NSDictionary
-            if contentFooterDic.allKeys.count != 0 {
-                let line = CALayer()
-                line.frame = CGRect(x: 0, y: y, width: width - 2 * padding, height: 1)
-                line.backgroundColor = UIColor.init(hexString: color_line_gray).cgColor
-                viewContentConfirmation.layer.addSublayer(line)
-                
-                y += margin
-                for list in contentFooterDic {
-                    let key = list.key as! String
-                    let Value = list.value as! String
-                    
-                    let lblKey = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
-                    lblKey.font = UIFont.boldSystemFont(ofSize: 13)
-                    lblKey.text = key
-                    viewContentConfirmation.addSubview(lblKey)
-                    y += heightContent
-                    
-                    let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
-                    lblValue.font = UIFont.systemFont(ofSize: 13)
-                    lblValue.text = Value
-                    viewContentConfirmation.addSubview(lblValue)
-                    y += heightContent + margin
-                }
-            }
-        }
         let height = y + margin
         self.constraintViewContent.constant = height
     }

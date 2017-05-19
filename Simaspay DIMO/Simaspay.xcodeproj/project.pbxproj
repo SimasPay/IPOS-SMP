@@ -74,6 +74,8 @@
 		35AF51E61ECC3DA4009F5F4F /* DIMOPayiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35AF51E41ECC3DA4009F5F4F /* DIMOPayiOS.framework */; };
 		35AF51E71ECC3DA4009F5F4F /* DIMOPayiOSResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 35AF51E51ECC3DA4009F5F4F /* DIMOPayiOSResources.bundle */; };
 		35BFA0611ECC404800146FFF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35AF51E81ECC3F0E009F5F4F /* MobileCoreServices.framework */; };
+		35BFA0631ECD4E7D00146FFF /* SuccesRegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BFA0621ECD4E7D00146FFF /* SuccesRegisterController.swift */; };
+		35BFA0651ECD4E8900146FFF /* SuccesRegisterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35BFA0641ECD4E8900146FFF /* SuccesRegisterController.xib */; };
 		35CDC6251EB7817800E5296A /* ListCashWithDrawalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CDC6241EB7817800E5296A /* ListCashWithDrawalController.swift */; };
 		35CDC6271EB7818A00E5296A /* ListCashWithDrawalController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35CDC6261EB7818A00E5296A /* ListCashWithDrawalController.xib */; };
 		35CDC6291EB78D5D00E5296A /* CashWithDrawalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CDC6281EB78D5D00E5296A /* CashWithDrawalController.swift */; };
@@ -180,6 +182,8 @@
 		35AF51E41ECC3DA4009F5F4F /* DIMOPayiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DIMOPayiOS.framework; sourceTree = "<group>"; };
 		35AF51E51ECC3DA4009F5F4F /* DIMOPayiOSResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DIMOPayiOSResources.bundle; sourceTree = "<group>"; };
 		35AF51E81ECC3F0E009F5F4F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		35BFA0621ECD4E7D00146FFF /* SuccesRegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccesRegisterController.swift; sourceTree = "<group>"; };
+		35BFA0641ECD4E8900146FFF /* SuccesRegisterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccesRegisterController.xib; sourceTree = "<group>"; };
 		35CDC6241EB7817800E5296A /* ListCashWithDrawalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListCashWithDrawalController.swift; path = "CASH WITHDRAWAL/ListCashWithDrawalController.swift"; sourceTree = "<group>"; };
 		35CDC6261EB7818A00E5296A /* ListCashWithDrawalController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ListCashWithDrawalController.xib; path = "CASH WITHDRAWAL/ListCashWithDrawalController.xib"; sourceTree = "<group>"; };
 		35CDC6281EB78D5D00E5296A /* CashWithDrawalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CashWithDrawalController.swift; path = "CASH WITHDRAWAL/CashWithDrawalController.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -317,6 +321,8 @@
 				35995A751E262B14007EB516 /* EULAViewController.swift */,
 				35995A761E262B14007EB516 /* EULAViewController.xib */,
 				35995A771E262B14007EB516 /* Login and Registrasi */,
+				35BFA0621ECD4E7D00146FFF /* SuccesRegisterController.swift */,
+				35BFA0641ECD4E8900146FFF /* SuccesRegisterController.xib */,
 			);
 			path = ACCOUNTS;
 			sourceTree = "<group>";
@@ -663,6 +669,7 @@
 				35995AC71E262B14007EB516 /* StatusTransferViewController.xib in Resources */,
 				35995ABB1E262B14007EB516 /* HomeViewController.xib in Resources */,
 				35995AB31E262B14007EB516 /* LoginViewController-unused.xib in Resources */,
+				35BFA0651ECD4E8900146FFF /* SuccesRegisterController.xib in Resources */,
 				35CDC62B1EB78D6E00E5296A /* CashWithDrawalController.xib in Resources */,
 				35995AB51E262B14007EB516 /* RegisterEMoneyViewController.xib in Resources */,
 				35995AA91E262B14007EB516 /* ContactUSViewController.xib in Resources */,
@@ -709,6 +716,7 @@
 				35995AA21E262B14007EB516 /* ActivationPinViewController.swift in Sources */,
 				BEC416011D9385B9000C3CF4 /* DIMOAlertView.m in Sources */,
 				35995AB21E262B14007EB516 /* LoginViewController-unused.swift in Sources */,
+				35BFA0631ECD4E7D00146FFF /* SuccesRegisterController.swift in Sources */,
 				BE1773051D9285DE00A27E06 /* DAFURLConnectionOperation.m in Sources */,
 				35995ACC1E262B14007EB516 /* TransferOtherBankListViewController.swift in Sources */,
 				BE204A781D93CBFB0013A483 /* BaseTextField.swift in Sources */,

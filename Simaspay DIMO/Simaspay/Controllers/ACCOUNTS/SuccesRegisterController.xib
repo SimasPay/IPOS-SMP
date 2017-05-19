@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SuccesRegisterController" customModule="Simaspay" customModuleProvider="target">
+            <connections>
+                <outlet property="btnOk" destination="S3r-ct-KnN" id="ymQ-KD-hN6"/>
+                <outlet property="view" destination="fuV-uy-mHo" id="4bc-Jz-4oS"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="fuV-uy-mHo">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6XP-Cx-HX9">
+                    <rect key="frame" x="60" y="194.5" width="256" height="278"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_check" translatesAutoresizingMaskIntoConstraints="NO" id="isj-Ze-Z8r">
+                            <rect key="frame" x="88" y="10" width="80" height="80"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="6SM-yQ-rT6"/>
+                                <constraint firstAttribute="height" constant="80" id="OLg-KM-6Nh"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pendaftaran Berhasil!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ji-hV-EC4" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="110" width="256" height="21.5"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selamat, Anda berhasil membuka akun e-money Simaspay." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93u-Cf-qee">
+                            <rect key="frame" x="0.0" y="151.5" width="256" height="38.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="0.35686274509999999" green="0.35686274509999999" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S3r-ct-KnN" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                            <rect key="frame" x="28" y="210" width="200" height="48"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="8EB-lJ-3cw"/>
+                                <constraint firstAttribute="width" constant="200" id="Blg-Za-NQa"/>
+                            </constraints>
+                            <connections>
+                                <action selector="actionOk:" destination="-1" eventType="touchDown" id="u7C-Tb-TlK"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="isj-Ze-Z8r" firstAttribute="centerX" secondItem="6XP-Cx-HX9" secondAttribute="centerX" id="1pD-lB-Kyw"/>
+                        <constraint firstItem="93u-Cf-qee" firstAttribute="leading" secondItem="6XP-Cx-HX9" secondAttribute="leading" id="4pd-4H-LCZ"/>
+                        <constraint firstItem="9ji-hV-EC4" firstAttribute="top" secondItem="isj-Ze-Z8r" secondAttribute="bottom" constant="20" id="YgF-Mv-Alu"/>
+                        <constraint firstItem="9ji-hV-EC4" firstAttribute="leading" secondItem="6XP-Cx-HX9" secondAttribute="leading" id="Zci-qQ-mVS"/>
+                        <constraint firstAttribute="bottom" secondItem="S3r-ct-KnN" secondAttribute="bottom" constant="20" id="dSv-FN-acp"/>
+                        <constraint firstItem="S3r-ct-KnN" firstAttribute="centerX" secondItem="6XP-Cx-HX9" secondAttribute="centerX" id="fOl-FD-aeq"/>
+                        <constraint firstAttribute="width" constant="256" id="gNK-un-tD6"/>
+                        <constraint firstItem="S3r-ct-KnN" firstAttribute="top" secondItem="93u-Cf-qee" secondAttribute="bottom" constant="20" id="hIt-lk-8x7"/>
+                        <constraint firstAttribute="trailing" secondItem="9ji-hV-EC4" secondAttribute="trailing" id="oSi-FZ-E3T"/>
+                        <constraint firstAttribute="trailing" secondItem="93u-Cf-qee" secondAttribute="trailing" id="oqo-xt-fjg"/>
+                        <constraint firstItem="93u-Cf-qee" firstAttribute="top" secondItem="9ji-hV-EC4" secondAttribute="bottom" constant="20" id="v3k-Kf-H8V"/>
+                        <constraint firstItem="isj-Ze-Z8r" firstAttribute="top" secondItem="6XP-Cx-HX9" secondAttribute="top" constant="10" id="zyY-8w-5R3"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="6XP-Cx-HX9" firstAttribute="centerX" secondItem="fuV-uy-mHo" secondAttribute="centerX" id="KjM-5e-MeY"/>
+                <constraint firstItem="6XP-Cx-HX9" firstAttribute="centerY" secondItem="fuV-uy-mHo" secondAttribute="centerY" id="bAg-bl-sH7"/>
+            </constraints>
+            <point key="canvasLocation" x="81.5" y="69.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_check" width="85" height="86"/>
+    </resources>
+</document>

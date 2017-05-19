@@ -76,6 +76,12 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate {
             let newString: NSString =
                 currentString.replacingCharacters(in: range, with: string) as NSString
             return newString.length <= maxLength
+        } else if textField.tag == 1 {
+            let maxLength = 14
+            let currentString: NSString = textField.text! as NSString
+            let newString: NSString =
+                currentString.replacingCharacters(in: range, with: string) as NSString
+            return newString.length <= maxLength
         } else {
             return true
         }
@@ -217,6 +223,8 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate {
         var message = "";
         if (!inputMdn.isValid()) {
             message = "Harap Masukkan " + getString("TransferLebelMdn") + " Anda"
+        }else if(inputMdn.length() < 10){
+            message = "Nomor Handphone yang Anda masukkan harus 10-14 angka"
         } else if (!inputAmount.isValid()){
             message = getString("TransferEmptyNominal")
         } else if (!inputmPin.isValid()){

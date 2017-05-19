@@ -28,10 +28,22 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        arrayData = []
         self.showTitle(getString("TransactionHistoryTitle"))
         self.showBackButton()
-        self.checkTransactionHistory()
+//        self.checkTransactionHistory()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if arrayData.count == 0 {
+           self.checkTransactionHistory()
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        arrayData = []
+    }
+    
     
     //MARK: programmatically list of transaction history
     override func viewDidLayoutSubviews() {

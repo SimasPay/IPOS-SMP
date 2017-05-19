@@ -127,7 +127,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
         var message = "";
         if (!tfNoAccount.isValid()) {
             message = "Harap Masukkan " + getString("TransferLebelAccountNumber") + " Anda"
-        } else if (tfNoAccount.length() <= 8) {
+        } else if (tfNoAccount.length() < 8) {
             message = "Nomor rekening Bank Tujuan yang Anda masukkan harus 8-25 angka."
         } else if (!tfAmountTransfer.isValid()){
             message = getString("TransferEmptyNominal")

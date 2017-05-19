@@ -339,30 +339,28 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
                     dictOtp[AUTH_KEY] = ""
                     vc.dictForRequestOTP = dictOtp as NSDictionary
                     
-                    let data: [String : Any]!
-                    let creditamt = String(format: "Rp %@", (responseDict.value(forKeyPath: "creditamt.text") as? String)!)
-                    let debitamt = String(format: "Rp %@", (responseDict.value(forKeyPath: "debitamt.text") as? String)!)
-                    let chargerString = (responseDict.value(forKeyPath: "charges.text") as? String)!
-                    let lblSum: String!
-                    if self.isPurchase {
-                        lblSum = self.lblNomTransaction.text!
-                    } else {
-                        lblSum = getString("TransferLebelAmount")
+                    let strAditional = responseDict.value(forKeyPath: "AdditionalInfo.text") as! String
+                    let arrAditional = strAditional.characters.split{$0 == "|"}.map(String.init)
+                    var newArrAditional = [String]()
+                    for data in arrAditional {
+                        let strConvert = data.replacingOccurrences(of: "  ", with: "~")
+                        let strRemoveStart = strConvert.replacingOccurrences(of: " ~", with: "")
+                        let strRemoveEnd = strRemoveStart.replacingOccurrences(of: "~ ", with: "")
+                        let strNew = strRemoveEnd.replacingOccurrences(of: "~", with: "")
+                        if strNew != "" {
+                            newArrAditional.append(strNew)
+                        }
                     }
                     
-                    data = [
-                        "title" : "Pastikan data berikut sudah benar",
-                        "content" : [
-                            ["Nama Produk" : self.dictOfData.value(forKey: "productName") as! String],
-                            [self.lblNoAccount.text! : self.tfNoAccount.text!],
-                            [lblSum : creditamt],
-                            [getString("Charges") : String(format: "Rp %@", chargerString)],
-                        ],
-                        "footer" :[
-                            getString("TotalDebit") : debitamt]
-                    ]
+//                    var content = [String: String]()
+//                    for newData in newArrAditional {
+//                        let arrVal = newData.characters.split{$0 == ":"}.map(String.init)
+//                        content[arrVal[0]] = arrVal[1]
+//                    }
+
+                    vc.isAditional = true
+                    vc.dataAditional = newArrAditional
                     
-                    vc.data = data! as NSDictionary
                     vc.MDNString = UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! String
                     
                     let dictSendOtp = NSMutableDictionary()
