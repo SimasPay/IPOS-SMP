@@ -219,6 +219,7 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
                     dictSendOtp[CONFIRMED] = "true"
                     dictSendOtp[MFAOTP] = true
                     
+                    vc.lblSuccesTransaction = getString("SuccesWithDrawal")
                     vc.dictForAcceptedOTP = dictSendOtp
                     self.navigationController?.pushViewController(vc, animated: false)
                 } else if (messagecode == "631") {

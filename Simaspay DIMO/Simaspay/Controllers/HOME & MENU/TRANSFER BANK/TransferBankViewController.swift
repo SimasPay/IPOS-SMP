@@ -246,6 +246,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
                     dictSendOtp[MFAOTP] = true
                     
                     vc.dictForAcceptedOTP = dictSendOtp
+                    vc.lblSuccesTransaction = getString("SuccesTransfer")
                     self.navigationController?.pushViewController(vc, animated: false)
                 } else if (messagecode == "631") {
                     SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in

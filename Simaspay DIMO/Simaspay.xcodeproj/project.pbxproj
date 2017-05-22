@@ -59,8 +59,8 @@
 		35995AC31E262B14007EB516 /* ChangeMpinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995A921E262B14007EB516 /* ChangeMpinViewController.xib */; };
 		35995AC41E262B14007EB516 /* TransactionHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35995A931E262B14007EB516 /* TransactionHistoryViewController.swift */; };
 		35995AC51E262B14007EB516 /* TransactionHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995A941E262B14007EB516 /* TransactionHistoryViewController.xib */; };
-		35995AC61E262B14007EB516 /* StatusTransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35995A951E262B14007EB516 /* StatusTransferViewController.swift */; };
-		35995AC71E262B14007EB516 /* StatusTransferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995A961E262B14007EB516 /* StatusTransferViewController.xib */; };
+		35995AC61E262B14007EB516 /* SuccesChangemPinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35995A951E262B14007EB516 /* SuccesChangemPinController.swift */; };
+		35995AC71E262B14007EB516 /* SuccesChangemPinController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995A961E262B14007EB516 /* SuccesChangemPinController.xib */; };
 		35995AC81E262B14007EB516 /* ListTransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35995A981E262B14007EB516 /* ListTransferViewController.swift */; };
 		35995AC91E262B14007EB516 /* ListTransferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995A991E262B14007EB516 /* ListTransferViewController.xib */; };
 		35995ACA1E262B14007EB516 /* TransferBankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35995A9A1E262B14007EB516 /* TransferBankViewController.swift */; };
@@ -167,8 +167,8 @@
 		35995A921E262B14007EB516 /* ChangeMpinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeMpinViewController.xib; sourceTree = "<group>"; };
 		35995A931E262B14007EB516 /* TransactionHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TransactionHistoryViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A941E262B14007EB516 /* TransactionHistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionHistoryViewController.xib; sourceTree = "<group>"; };
-		35995A951E262B14007EB516 /* StatusTransferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusTransferViewController.swift; sourceTree = "<group>"; };
-		35995A961E262B14007EB516 /* StatusTransferViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusTransferViewController.xib; sourceTree = "<group>"; };
+		35995A951E262B14007EB516 /* SuccesChangemPinController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccesChangemPinController.swift; sourceTree = "<group>"; };
+		35995A961E262B14007EB516 /* SuccesChangemPinController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccesChangemPinController.xib; sourceTree = "<group>"; };
 		35995A981E262B14007EB516 /* ListTransferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransferViewController.swift; sourceTree = "<group>"; };
 		35995A991E262B14007EB516 /* ListTransferViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListTransferViewController.xib; sourceTree = "<group>"; };
 		35995A9A1E262B14007EB516 /* TransferBankViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TransferBankViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -370,8 +370,8 @@
 				35995A891E262B14007EB516 /* PAYMENT PURCHASE */,
 				35995A8E1E262B14007EB516 /* SETTING */,
 				35995A971E262B14007EB516 /* TRANSFER BANK */,
-				35995A951E262B14007EB516 /* StatusTransferViewController.swift */,
-				35995A961E262B14007EB516 /* StatusTransferViewController.xib */,
+				35995A951E262B14007EB516 /* SuccesChangemPinController.swift */,
+				35995A961E262B14007EB516 /* SuccesChangemPinController.xib */,
 				354F48A01EA4AAB400263340 /* SuccesConfirmationController.swift */,
 				354F48A21EA4AAC000263340 /* SuccesConfirmationController.xib */,
 			);
@@ -666,7 +666,7 @@
 				35CDC6271EB7818A00E5296A /* ListCashWithDrawalController.xib in Resources */,
 				35995AB11E262B14007EB516 /* LoginRegisterViewController.xib in Resources */,
 				BE17728F1D92859B00A27E06 /* Assets.xcassets in Resources */,
-				35995AC71E262B14007EB516 /* StatusTransferViewController.xib in Resources */,
+				35995AC71E262B14007EB516 /* SuccesChangemPinController.xib in Resources */,
 				35995ABB1E262B14007EB516 /* HomeViewController.xib in Resources */,
 				35995AB31E262B14007EB516 /* LoginViewController-unused.xib in Resources */,
 				35BFA0651ECD4E8900146FFF /* SuccesRegisterController.xib in Resources */,
@@ -728,7 +728,7 @@
 				BEC415E11D928E84000C3CF4 /* BaseLabel.swift in Sources */,
 				BEC416021D9385B9000C3CF4 /* DIMOAPIManager.m in Sources */,
 				BE1773031D9285DE00A27E06 /* DAFNetworkReachabilityManager.m in Sources */,
-				35995AC61E262B14007EB516 /* StatusTransferViewController.swift in Sources */,
+				35995AC61E262B14007EB516 /* SuccesChangemPinController.swift in Sources */,
 				35995AAA1E262B14007EB516 /* EULAViewController.swift in Sources */,
 				BE17730A1D9285DE00A27E06 /* DMBProgressHUD.m in Sources */,
 				35995AD01E262B14007EB516 /* SplashScreenViewController.swift in Sources */,

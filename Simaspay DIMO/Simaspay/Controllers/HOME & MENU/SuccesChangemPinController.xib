@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StatusTransferViewController" customModule="Simaspay" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SuccesChangemPinController" customModule="Simaspay" customModuleProvider="target">
             <connections>
                 <outlet property="btnOK" destination="dCs-Hg-YTC" id="l0H-IP-eGl"/>
                 <outlet property="constraintViewContentHeight" destination="5B7-oo-Tvt" id="jZM-yk-Qdb"/>

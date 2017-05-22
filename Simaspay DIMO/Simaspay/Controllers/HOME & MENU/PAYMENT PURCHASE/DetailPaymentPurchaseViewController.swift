@@ -265,6 +265,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
                     dictSendOtp[SOURCEPOCKETCODE] = SimasAPIManager.sharedInstance().sourcePocketCode as String
                     dictSendOtp[MFAOTP] = true
                     vc.dictForAcceptedOTP = dictSendOtp
+                    vc.lblSuccesTransaction = getString("SuccesPurchase")
                     self.navigationController?.pushViewController(vc, animated: false)
                 } else if (messagecode == "631") {
                     SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
@@ -394,6 +395,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
                     dictSendOtp[SOURCEPOCKETCODE] = SimasAPIManager.sharedInstance().sourcePocketCode as String
                     dictSendOtp[MFAOTP] = true
                     vc.dictForAcceptedOTP = dictSendOtp
+                    vc.lblSuccesTransaction = getString("SuccesPayment")
                     self.navigationController?.pushViewController(vc, animated: false)
                 } else if (messagecode == "631") {
                     SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in

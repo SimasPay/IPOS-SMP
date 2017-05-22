@@ -122,3 +122,9 @@
 // purchase
 "Charges" = "Biaya Administrasi";
 
+// succes tittle
+"SuccesWithDrawal" = "Tarik Tunai Berhasil!";
+"SuccesPayment" = "Pembayaran Berhasil!";
+"SuccesPurchase" = "Pembelian Berhasil!";
+"SuccesTransfer" = "Transfer Berhasil!";
+

@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConfirmationViewController" customModule="Simaspay" customModuleProvider="target">
             <connections>
+                <outlet property="bottomBtnCancel" destination="g7G-QI-5Fs" id="Uid-QH-J2T"/>
                 <outlet property="btnFalse" destination="qLf-Ep-C8n" id="IZs-8R-coU"/>
                 <outlet property="btnTrue" destination="9mG-XC-mAP" id="ZiR-oH-ifA"/>
                 <outlet property="constraintViewContent" destination="lxD-Nd-Pjf" id="xOh-hi-K19"/>

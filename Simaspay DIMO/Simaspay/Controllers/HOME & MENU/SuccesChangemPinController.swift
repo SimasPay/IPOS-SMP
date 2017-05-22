@@ -1,5 +1,5 @@
 //
-//  StatusTransferViewController.swift
+//  SuccesChangemPinController.swift
 //  Simaspay
 //
 //  Created by Dimo on 10/4/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StatusTransferViewController: BaseViewController {
+class SuccesChangemPinController: BaseViewController {
     
     
     @IBOutlet var btnOK: BaseButton!
@@ -23,9 +23,10 @@ class StatusTransferViewController: BaseViewController {
     @IBOutlet var constraintViewContentHeight: NSLayoutConstraint!
     
     var data: NSDictionary!
+    var lblSuccesTransaction: String!
     
-    static func initWithOwnNib() -> StatusTransferViewController {
-        let obj:StatusTransferViewController = StatusTransferViewController.init(nibName: String(describing: self), bundle: nil)
+    static func initWithOwnNib() -> SuccesChangemPinController {
+        let obj:SuccesChangemPinController = SuccesChangemPinController.init(nibName: String(describing: self), bundle: nil)
         return obj
     }
     
@@ -39,8 +40,7 @@ class StatusTransferViewController: BaseViewController {
         self.viewMainFrame.clipsToBounds = true;
         self.lblStatus.font = UIFont.boldSystemFont(ofSize: 16)
         self.lblIdStatus.font = UIFont.boldSystemFont(ofSize: 13)
-        self.lblStatus.text = "Transfer Berhasil!"
-        self.lblIdStatus.text = "ID Transaksi: 123958"
+        self.lblStatus.text = self.lblSuccesTransaction
         
         btnOK.updateButtonType1()
         btnOK.setTitle("OK", for: .normal)
@@ -129,15 +129,7 @@ class StatusTransferViewController: BaseViewController {
     
     //MARK: Action ok button
     @IBAction func actionOkButton(_ sender: AnyObject) {
-        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
-        for vc in viewControllers {
-            if (vc.isKind(of: HomeViewController.self)) {
-                self.navigationController!.popToViewController(vc, animated: true);
-                return
-            }
-        }
-        
-        self.navigationController!.popToRootViewController(animated: true)
+       NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
     }
     
 }

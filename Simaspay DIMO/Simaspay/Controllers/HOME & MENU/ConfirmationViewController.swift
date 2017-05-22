@@ -17,6 +17,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
     @IBOutlet var viewContentConfirmation: UIView!
     @IBOutlet var constraintViewContent: NSLayoutConstraint!
     @IBOutlet var viewMainContent: UIView!
+    @IBOutlet var bottomBtnCancel: NSLayoutConstraint!
     
     var btnResandOTP: BaseButton!
     var tfOTP: BaseTextField!
@@ -43,8 +44,12 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
     
     var isRegister:Bool = false
     var isAditional: Bool = false
+    var ismPinChange: Bool = false
+    
     //Dictionary for show data registration
     var dataAditional: Array<String>!
+    
+    var lblSuccesTransaction: String = ""
     
     var alertController = UIAlertController()
     
@@ -160,7 +165,16 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
                 y += heightContent + margin
                 i += 1
             }
-        
+        } else if ismPinChange {
+            let lblTitle = BaseLabel.init(frame: CGRect(x: padding, y: padding, width: width - 2 * padding, height: 60))
+            // lblTitle.textAlignment =
+            lblTitle.numberOfLines = 7
+            lblTitle.font = UIFont.systemFont(ofSize: 14)
+            lblTitle.text = "Anda akan mengubah mPin Anda. Lanjutkan proses?"
+            viewContentConfirmation.addSubview(lblTitle)
+            let screenSize = UIScreen.main.bounds
+            self.bottomBtnCancel.constant = screenSize.height - 400
+            y += 60 + 10
         } else {
             let lblTitle = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightTitleContent))
             lblTitle.font = UIFont.boldSystemFont(ofSize: 14)
@@ -447,7 +461,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
             }
         }
         
-        
+        DLog("\(dictForAcceptedOTP)")
         SimasAPIManager .callAPI(withParameters: dictForAcceptedOTP as! [AnyHashable : Any]!, withSessionCheck:sessionCheck) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             let dictionary = NSDictionary(dictionary: dict!)
@@ -470,11 +484,20 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
                 DLog("\(responseDict)")
                 let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
                 let messageText  = responseDict.value(forKeyPath: "message.text") as! String
-                
-                if (messagecode == SIMASPAY_REGISTRATION__EMONEY_SUCCESS_CODE){
+                if (messagecode == SIMAPAY_SUCCESS_CHANGEPIN_CODE){
+                    let vc = SuccesChangemPinController.initWithOwnNib()
+                    let data = [
+                        "title" : "mPin Berhasil Diubah",
+                        "content" : [],
+                        "footer" : [:]
+                        ] as [String : Any]
+            
+                    vc.data = data as NSDictionary!
+                    vc.lblSuccesTransaction = self.lblSuccesTransaction
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else if (messagecode == SIMASPAY_REGISTRATION__EMONEY_SUCCESS_CODE){
                     let vc = ActivationSuccessViewController.initWithMessageInfo(message: getString("RegistrationLabelInfoSuccessMessage"), title: getString("RegistrationLabelInfoSuccess"))
                     self.navigationController?.pushViewController(vc, animated: false)
-                
                 } else if (messagecode == SIMASPAY_CONFIRM_TRANSFER_TO__EMONEY_SUCCESS_CODE || messagecode == SIMASPAY_BANK_TRANSFER_TO__EMONEY_SUCCESS_CODE ||
                     messagecode == SIMASPAY_EMONEY_TO_BSIM ||
                     messagecode == SIMASPAY_EMONEY_TO_UNSUBCRIBER ||
@@ -483,6 +506,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
                     messagecode == SIMASPAY_PURCHASE_SUCCESCODE) {
                     let vc = SuccesConfirmationController.initWithOwnNib()
                     vc.data = self.data
+                    vc.lblSuccesTransaction = self.lblSuccesTransaction
                     vc.idTran =  responseDict.value(forKeyPath: "sctlID.text") as! String
                     self.navigationController?.pushViewController(vc, animated: true)
                 } else if (messagecode == SIMASPAY_EMONEY_POKET_SUCCES) {
@@ -492,6 +516,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
                     let vc = SuccesConfirmationController.initWithOwnNib()
                     vc.isAditional = self.isAditional
                     vc.dataAditional = self.dataAditional
+                    vc.lblSuccesTransaction = self.lblSuccesTransaction
                     vc.idTran = responseDict.value(forKeyPath: "sctlID.text") as! String
                     self.navigationController?.pushViewController(vc, animated: true)
                 } else if (messagecode == "631") {

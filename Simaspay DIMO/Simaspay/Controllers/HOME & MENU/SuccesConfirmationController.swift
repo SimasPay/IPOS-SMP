@@ -22,6 +22,7 @@ class SuccesConfirmationController: BaseViewController {
     //Dictionary for show data registration
     var data: NSDictionary!
     var idTran: String = ""
+    var lblSuccesTransaction: String = ""
     //Value to set background navigation
     var useNavigation: Bool = true
     
@@ -44,8 +45,9 @@ class SuccesConfirmationController: BaseViewController {
         
         self.view.backgroundColor = UIColor.init(hexString: color_background)
         self.succesTransaction.font = UIFont.boldSystemFont(ofSize: 15)
-        self.transactionId.font = UIFont.systemFont(ofSize: 13)
+        self.succesTransaction.text = lblSuccesTransaction
         
+        self.transactionId.font = UIFont.systemFont(ofSize: 13)
         let myString:NSString = "ID Transaksi: " + idTran as NSString
         var myMutableString = NSMutableAttributedString()
         

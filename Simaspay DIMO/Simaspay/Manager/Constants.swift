@@ -52,12 +52,17 @@ let NUMBER_OF_COUPONS = "numberOfCoupons"
 let POINTS_OF_REDEEMED = "pointsRedeemed"
 let AMOUNT_REDEEMED = "amountRedeemed"
 let TIPPING_AMOUNT = "tippingAmount"
+let CHANGEPIN_NEWPIN = "newPIN"
+let CHANGEPIN_NEWPIN_TEXT = "newPINText"
+let CHANGEPIN_CONFIRMPIN = "confirmPIN"
+let CHANGEPIN_CONFIRMPIN_Text = "confirmPINText"
 
 // MARK: VALUE for keys start here
 // MARK: =========================
 let SIMASPAY_CONFIRM = "Confirm"
 let SIMASPAY_ACTIVITY_VALUE = "true"
 let CHANNEL_ID_VALUE = "7"
+let TXN_INQUIRY_CHANGEMPIN = "ChangePIN"
 
 // MARK: Category
 let CATEGORY_CONTACTUS = "category.ContactUsfile"
@@ -155,6 +160,7 @@ let QR_INQUIRY_SUCCESS_CODE = "2109"
 let QR_SUCCESS_CODE = "2111"
 let SIMASPAY_EMONEY_POKET_SUCCES = "2306"
 let SIMASPAY_POKET_ADDING_INQUIRY_SUCCES = "2304"
+let SIMAPAY_SUCCESS_CHANGEPIN_CODE = "26"
 
 
 //MARK: User defult

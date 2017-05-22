@@ -85,13 +85,13 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
                 message = "Email Anda tidak valid"
             }
         } else if (!tfMpin.isValid()) {
-            message = "mpin wajib diisi"
+            message = "mPin wajib diisi"
         } else if (tfMpin.isValid() && tfMpin.length() != 6) {
-            message = "Pin harus 6 digit"
+            message = "mPin harus 6 digit"
         } else if (!tfConfirmMpin.isValid()) {
-            message = "konfirmasi mPIN wajib diisi"
+            message = "Konfirmasi mPin wajib diisi"
         } else if !((tfConfirmMpin.text?.isEqual(tfMpin.text))!) {
-            message = "Pin harus sama"
+            message = "Konfirmasi mPin dan mPin harus sama"
         } else if (!SimasAPIManager.isInternetConnectionExist()) {
             message = getString("LoginMessageNotConnectServer")
         }
