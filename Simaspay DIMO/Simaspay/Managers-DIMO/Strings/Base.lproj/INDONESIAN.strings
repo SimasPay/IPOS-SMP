@@ -11,6 +11,7 @@
 "LoginButtonLogin" = "Login";
 "LoginButtonActivation" = "Aktivasi Akun";
 "LoginButtonContactUs" = "Hubungi Kami";
+"LoginButtonLostmPin" = "Lupa mPIN";
 "LoginMessageFillHpNumber" = "Harap masukkan nomor handphone Anda.";
 "LoginMessageFillMpin" = "Masukkan mPIN Anda.";
 "LoginMessageSixMpin" = "mPIN yang Anda masukkan harus 6 angka.";

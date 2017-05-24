@@ -78,12 +78,11 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
     //MARK: Action button
     @IBAction func actionNextButton(_ sender: AnyObject) {
         var message = "";
+        
         if (!tfUsername.isValid()) {
             message = "Masukkan username Anda"
-        } else if (tfEmail.text != "") {
-            if !(tfEmail.text! as NSString).isEmail(){
-                message = "Email Anda tidak valid"
-            }
+        } else if (tfEmail.text != "" && !(tfEmail.text! as NSString).isEmail()) {
+           message = "Email Anda tidak valid"
         } else if (!tfMpin.isValid()) {
             message = "mPin wajib diisi"
         } else if (tfMpin.isValid() && tfMpin.length() != 6) {
@@ -99,9 +98,9 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
         if (message.characters.count > 0) {
             SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
+        } else {
+             self.registrationProcess()
         }
-
-        self.registrationProcess()
     }
     
     //MARK: keyboard Show set last object above keyboard
@@ -217,8 +216,6 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
                 vc.dictForAcceptedOTP = self.paramsRegistration as NSDictionary
                 self.navigationController?.pushViewController(vc, animated: false)
                
-            
-                
                 
             }
         }

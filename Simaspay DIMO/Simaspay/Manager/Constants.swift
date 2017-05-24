@@ -99,6 +99,9 @@ let TXN_QR_PAYMENT_CONFIRMATION = "QRPayment"
 let USER_API_KEY = "userAPIKey"
 let TXN_INQUIRY_SUB = "SubRegularWithEMoneyInquiry"
 let TXN_CONFIRM_SUB = "SubRegularWithEMoney"
+let TXN_MDN_VALIDATION_FORGOT_PIN = "MDNvalidationforForgotPIN"
+let TXN_FORGOT_PIN_INQUIRY = "ForgotPinInquiry"
+let TXN_FORGOT_PIN = "ForgotPin"
 
 // MARK: Service
 let SERVICE_ACCOUNT = "Account"
@@ -131,6 +134,7 @@ let SIMASPAY_LOGIN_REGULAR_TYPE = "true"
 let SERVICE_WALLET = "Wallet"
 let SERVICE_BANK = "Bank"
 let TXN_RESEND_MFAOTP = "ResendMFAOTP"
+let TXN_RESEND_MFAOTP_NO_PIN = "ResendMFAOTPNoPIN"
 // MARK: =========================
 // MARK: VALUE for keys end here
 

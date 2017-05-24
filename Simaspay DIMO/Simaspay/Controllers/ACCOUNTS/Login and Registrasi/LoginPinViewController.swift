@@ -10,11 +10,11 @@ import UIKit
 
 class LoginPinViewController: BaseViewController, UITextFieldDelegate {
 
-    
- 
+    @IBOutlet weak var btnLostPassword: BaseButton!
     @IBOutlet weak var tfMpin: BaseTextField!
     @IBOutlet weak var viewTextField: UIView!
     @IBOutlet weak var lblInfoNumber: BaseLabel!
+    
     var MDNString:String!
     
     static func initWithOwnNib() -> LoginPinViewController {
@@ -40,6 +40,9 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
         tfMpin.updateTextFieldWithImageNamed("icon_Mpin")
         tfMpin.delegate = self
         tfMpin.placeholder = "Pin"
+        
+        btnLostPassword.setTitle(getString("LoginButtonLostmPin"), for: UIControlState())
+         btnLostPassword.titleLabel?.font = UIFont.systemFont(ofSize: 15)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
@@ -63,7 +66,7 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         viewTextField.updateViewRoundedWithShadow()
-
+        btnLostPassword.addUnderline()
     }
     
     //MARK: Maximum Textfield length
@@ -177,6 +180,68 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
             }
         }
 
+    }
+    
+    
+    @IBAction func actionLostPassword(_ sender: Any) {
+        self.tfMpin.resignFirstResponder()
+        let dict = NSMutableDictionary()
+        let mdn: String!
+        
+        if (UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) != nil) {
+            mdn = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString) as String!
+        } else {
+            mdn = getNormalisedMDN(self.MDNString! as NSString) as String!
+        }
+        
+        dict[SERVICE] = SERVICE_ACCOUNT
+        dict[TXNNAME] = TXN_MDN_VALIDATION_FORGOT_PIN
+        dict[INSTITUTION_ID] = SIMASPAY
+        dict[AUTH_KEY] = ""
+        dict[SOURCEMDN] = mdn
+        
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DLog("\(param)")
+        SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
+            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+            if (err != nil) {
+                let error = err! as NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                } else {
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                }
+                return
+            }
+            
+            let dictionary = NSDictionary(dictionary: dict!)
+            if (dictionary.allKeys.count == 0) {
+                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+            } else {
+                let responseDict = dictionary as NSDictionary
+                DLog("\(responseDict)")
+                let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
+                let messageText  = responseDict.value(forKeyPath: "message.text") as! String
+                if ( messagecode == "2300" ){
+                    SimasAlertView.showAlert(withTitle: "Reset mPIN Anda", message: "Silakan datang ke ATM Bank Sinarmas terdekat, lalu lakukan reset mPIN di menu Lainnya > Registrasi M-Banking.", cancelButtonTitle: getString("AlertCloseButtonText"))
+                } else if ( messagecode == "2301" ) {
+                    let vc = SecurityQuestionResetController.initWithOwnNib()
+                    vc.mdn = mdn
+                    vc.question = responseDict.value(forKeyPath: "securityQuestion.text") as! String
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else if (messagecode == "631") {
+                    SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                        if index == 0 {
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
+                        }
+                    }, cancelButtonTitle: "OK")
+                } else {
+                    SimasAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                }
+                
+            }
+        }
     }
 
     /*

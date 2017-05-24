@@ -22,6 +22,10 @@
 		354F48A31EA4AAC000263340 /* SuccesConfirmationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 354F48A21EA4AAC000263340 /* SuccesConfirmationController.xib */; };
 		356CC84A1E288DCE00E25355 /* TransactionPeriodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356CC8481E288DCE00E25355 /* TransactionPeriodViewController.swift */; };
 		356CC84B1E288DCE00E25355 /* TransactionPeriodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 356CC8491E288DCE00E25355 /* TransactionPeriodViewController.xib */; };
+		357E1B451ED4252600E4E8CB /* SecurityQuestionResetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357E1B441ED4252600E4E8CB /* SecurityQuestionResetController.swift */; };
+		357E1B471ED4253600E4E8CB /* SecurityQuestionResetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 357E1B461ED4253600E4E8CB /* SecurityQuestionResetController.xib */; };
+		357E1B4B1ED4976300E4E8CB /* NewPinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357E1B4A1ED4976300E4E8CB /* NewPinController.swift */; };
+		357E1B4D1ED4977E00E4E8CB /* NewPinController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 357E1B4C1ED4977E00E4E8CB /* NewPinController.xib */; };
 		359959ED1E2623D3007EB516 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359959EC1E2623D3007EB516 /* Utilities.swift */; };
 		35995AA21E262B14007EB516 /* ActivationPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35995A6D1E262B14007EB516 /* ActivationPinViewController.swift */; };
 		35995AA31E262B14007EB516 /* ActivationPinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995A6E1E262B14007EB516 /* ActivationPinViewController.xib */; };
@@ -130,6 +134,10 @@
 		354F48A21EA4AAC000263340 /* SuccesConfirmationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccesConfirmationController.xib; sourceTree = "<group>"; };
 		356CC8481E288DCE00E25355 /* TransactionPeriodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionPeriodViewController.swift; sourceTree = "<group>"; };
 		356CC8491E288DCE00E25355 /* TransactionPeriodViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionPeriodViewController.xib; sourceTree = "<group>"; };
+		357E1B441ED4252600E4E8CB /* SecurityQuestionResetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecurityQuestionResetController.swift; path = "Reset mPin/SecurityQuestionResetController.swift"; sourceTree = "<group>"; };
+		357E1B461ED4253600E4E8CB /* SecurityQuestionResetController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SecurityQuestionResetController.xib; path = "Reset mPin/SecurityQuestionResetController.xib"; sourceTree = "<group>"; };
+		357E1B4A1ED4976300E4E8CB /* NewPinController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewPinController.swift; path = "Reset mPin/NewPinController.swift"; sourceTree = "<group>"; };
+		357E1B4C1ED4977E00E4E8CB /* NewPinController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewPinController.xib; path = "Reset mPin/NewPinController.xib"; sourceTree = "<group>"; };
 		359959EC1E2623D3007EB516 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = Manager/Utilities.swift; sourceTree = "<group>"; };
 		35995A6D1E262B14007EB516 /* ActivationPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ActivationPinViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A6E1E262B14007EB516 /* ActivationPinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivationPinViewController.xib; sourceTree = "<group>"; };
@@ -299,6 +307,17 @@
 			name = Encryption;
 			sourceTree = "<group>";
 		};
+		357E1B431ED424C800E4E8CB /* Reset mPin */ = {
+			isa = PBXGroup;
+			children = (
+				357E1B441ED4252600E4E8CB /* SecurityQuestionResetController.swift */,
+				357E1B461ED4253600E4E8CB /* SecurityQuestionResetController.xib */,
+				357E1B4A1ED4976300E4E8CB /* NewPinController.swift */,
+				357E1B4C1ED4977E00E4E8CB /* NewPinController.xib */,
+			);
+			name = "Reset mPin";
+			sourceTree = "<group>";
+		};
 		35995A6A1E262B14007EB516 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +334,7 @@
 		35995A6B1E262B14007EB516 /* ACCOUNTS */ = {
 			isa = PBXGroup;
 			children = (
+				357E1B431ED424C800E4E8CB /* Reset mPin */,
 				35995A6C1E262B14007EB516 /* Activation */,
 				35995A731E262B14007EB516 /* ContactUSViewController.swift */,
 				35995A741E262B14007EB516 /* ContactUSViewController.xib */,
@@ -648,6 +668,7 @@
 				35995AAF1E262B14007EB516 /* LoginPinViewController.xib in Resources */,
 				35995AC51E262B14007EB516 /* TransactionHistoryViewController.xib in Resources */,
 				35995AC91E262B14007EB516 /* ListTransferViewController.xib in Resources */,
+				357E1B471ED4253600E4E8CB /* SecurityQuestionResetController.xib in Resources */,
 				35995AAB1E262B14007EB516 /* EULAViewController.xib in Resources */,
 				35995AA71E262B14007EB516 /* ActivationViewController.xib in Resources */,
 				35995AB91E262B14007EB516 /* ConfirmationViewController.xib in Resources */,
@@ -668,6 +689,7 @@
 				BE17728F1D92859B00A27E06 /* Assets.xcassets in Resources */,
 				35995AC71E262B14007EB516 /* SuccesChangemPinController.xib in Resources */,
 				35995ABB1E262B14007EB516 /* HomeViewController.xib in Resources */,
+				357E1B4D1ED4977E00E4E8CB /* NewPinController.xib in Resources */,
 				35995AB31E262B14007EB516 /* LoginViewController-unused.xib in Resources */,
 				35BFA0651ECD4E8900146FFF /* SuccesRegisterController.xib in Resources */,
 				35CDC62B1EB78D6E00E5296A /* CashWithDrawalController.xib in Resources */,
@@ -704,9 +726,11 @@
 				35995AB81E262B14007EB516 /* ConfirmationViewController.swift in Sources */,
 				BE1773001D9285DE00A27E06 /* DAFHTTPRequestOperation.m in Sources */,
 				35995ACE1E262B14007EB516 /* LandingScreenViewController.swift in Sources */,
+				357E1B4B1ED4976300E4E8CB /* NewPinController.swift in Sources */,
 				35995AB01E262B14007EB516 /* LoginRegisterViewController.swift in Sources */,
 				354F48A11EA4AAB400263340 /* SuccesConfirmationController.swift in Sources */,
 				BEC4160A1D9385D2000C3CF4 /* CategoriesManager.swift in Sources */,
+				357E1B451ED4252600E4E8CB /* SecurityQuestionResetController.swift in Sources */,
 				BEC416051D9385B9000C3CF4 /* DIMOUtility.m in Sources */,
 				BEC416081D9385B9000C3CF4 /* UserDefault.m in Sources */,
 				35995AC81E262B14007EB516 /* ListTransferViewController.swift in Sources */,

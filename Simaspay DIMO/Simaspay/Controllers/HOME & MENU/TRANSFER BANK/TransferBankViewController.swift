@@ -212,13 +212,15 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
                     let dictSendOtp = NSMutableDictionary()
                     let data: [String : Any]!
                     
+                    let strName = responseDict.value(forKeyPath: "destinationName.text") as! String
+                    
                         let credit = String(format: "Rp %@", (responseDict.value(forKeyPath: "creditamt.text") as? String)!)
                         data = [
                             "title" : "Pastikan data berikut sudah benar",
                             "content" : [
-                                [getString("ConfirmationOwnMdn") :  responseDict.value(forKeyPath: "ReceiverAccountName.text")],
-                                [getString("TransferLebelBankName") :  responseDict.value(forKeyPath: "destinationBank.text")],
-                                [getString("TransferLebelAccountNumber") : responseDict.value(forKeyPath: "destinationAccountNumber.text")],
+                                [getString("ConfirmationOwnMdn") :  strName.capitalized ],
+                                [getString("TransferLebelBankName") :  responseDict.value(forKeyPath: "destinationBank.text") as! String],
+                                [getString("TransferLebelAccountNumber") : responseDict.value(forKeyPath: "destinationAccountNumber.text") as! String],
                                 [getString("TransferLebelAmount") : credit],
                             ]
                         ]

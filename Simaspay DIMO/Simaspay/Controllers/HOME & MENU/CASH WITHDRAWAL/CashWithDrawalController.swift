@@ -90,6 +90,17 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
             let newString: NSString =
                 currentString.replacingCharacters(in: range, with: string) as NSString
             return newString.length <= maxLength
+        } else if textField.tag == 1 {
+            if (self.withDrawalType != WithDrawalType.WithDrawalTypeMe) {
+                let maxLength = 14
+                let currentString: NSString = textField.text! as NSString
+                let newString: NSString =
+                    currentString.replacingCharacters(in: range, with: string) as NSString
+                return newString.length <= maxLength
+            } else {
+                return true
+            }
+         
         } else {
             return true
         }
@@ -113,6 +124,8 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
         var message = "";
         if (self.withDrawalType != WithDrawalType.WithDrawalTypeMe && !tfNoAccount.isValid()) {
             message = "Harap Masukkan " + getString("TransferLebelMdn") + " Anda"
+        } else if(self.withDrawalType != WithDrawalType.WithDrawalTypeMe && tfNoAccount.length() < 10){
+                message = "Nomor Handphone yang Anda masukkan harus 10-14 angka"
         } else if (!tfAmountTransfer.isValid()){
             message = "Harap Masukkan " + getString("TransferLebelAmount") + " yang ingin Anda Cashout"
         } else if (tfAmountTransfer.isValid() && intValue! < 100000) {

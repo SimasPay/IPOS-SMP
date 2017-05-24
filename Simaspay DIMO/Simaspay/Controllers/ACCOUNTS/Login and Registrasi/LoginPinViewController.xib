@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginPinViewController" customModule="Simaspay" customModuleProvider="target">
             <connections>
+                <outlet property="btnLostPassword" destination="eAN-gq-fe4" id="u2D-Wy-aZ2"/>
                 <outlet property="lblInfoNumber" destination="4l0-j1-brs" id="zuh-Em-M2T"/>
                 <outlet property="tfMpin" destination="nXh-0V-mrx" id="t7K-rI-hgQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -21,12 +25,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_Image" translatesAutoresizingMaskIntoConstraints="NO" id="s5Y-ak-cmq">
+                    <rect key="frame" x="62" y="70.5" width="251" height="56"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="56" id="jQY-pl-oYV"/>
                         <constraint firstAttribute="width" constant="251" id="wXl-NV-sRV"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4l0-j1-brs" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
+                    <rect key="frame" x="52.5" y="176" width="270" height="48"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="270" id="Ckt-h7-4xh"/>
                         <constraint firstAttribute="height" constant="48" id="czx-qg-sQo"/>
@@ -36,8 +42,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8b-gl-aVS">
+                    <rect key="frame" x="52.5" y="243" width="270" height="48"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nXh-0V-mrx" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="270" height="48"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="phonePad" secureTextEntry="YES"/>
@@ -53,13 +61,29 @@
                         <constraint firstAttribute="height" constant="48" id="yMS-Nn-Tq0"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAN-gq-fe4" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                    <rect key="frame" x="147" y="316" width="80" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="6Em-T5-3sx"/>
+                        <constraint firstAttribute="height" constant="20" id="gqf-US-G4j"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="3"/>
+                    <state key="normal" title="Lupa mPIN">
+                        <color key="titleColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="0.60560252568493156" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="actionLostPassword:" destination="-1" eventType="touchUpInside" id="5hN-nn-g3Q"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="g8b-gl-aVS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="3hk-Xa-TwH"/>
                 <constraint firstItem="g8b-gl-aVS" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="4:5" id="7Ra-ow-TUT"/>
                 <constraint firstItem="s5Y-ak-cmq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="CZ5-u0-Zbe"/>
+                <constraint firstItem="eAN-gq-fe4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Rah-Ee-Wjj"/>
                 <constraint firstItem="g8b-gl-aVS" firstAttribute="top" secondItem="4l0-j1-brs" secondAttribute="bottom" constant="19" id="asw-r5-U5N"/>
+                <constraint firstItem="eAN-gq-fe4" firstAttribute="top" secondItem="g8b-gl-aVS" secondAttribute="bottom" constant="25" id="eFv-Cu-V8v"/>
                 <constraint firstItem="4l0-j1-brs" firstAttribute="top" secondItem="s5Y-ak-cmq" secondAttribute="top" multiplier="2:0.8" id="pHA-MA-Fal"/>
                 <constraint firstItem="4l0-j1-brs" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="wxy-4M-Sd8"/>
             </constraints>
