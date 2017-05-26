@@ -139,7 +139,6 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
                     vc.MDNString = self.tfHPNumber.text!
                     self.navigationController?.pushViewController(vc, animated: false)
                 } else {
-                    
                     //if new MDN for registration
                     let vc = RegisterEMoneyViewController.initWithOwnNib()
                     vc.MDNString = self.tfHPNumber.text

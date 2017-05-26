@@ -19,6 +19,8 @@ class ChangeMpinViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var tfConfirmMpin: BaseTextField!
     @IBOutlet var btnSaveMpin: BaseButton!
     
+    var mdn:String!
+    
     
     static func initWithOwnNib() -> ChangeMpinViewController {
         let obj:ChangeMpinViewController = ChangeMpinViewController.init(nibName: String(describing: self), bundle: nil)
@@ -71,12 +73,18 @@ class ChangeMpinViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func nextProses() {
+        let mdn: String!
+        if (UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) != nil) {
+            mdn = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString) as String!
+        } else {
+            mdn = getNormalisedMDN(self.mdn! as NSString) as String!
+        }
         
         let dict = NSMutableDictionary()
         dict[SERVICE] = SERVICE_ACCOUNT
         dict[TXNNAME] = TXN_INQUIRY_CHANGEMPIN
         dict[CHANNEL_ID] = CHANNEL_ID_VALUE
-        dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+        dict[SOURCEMDN] = mdn
         dict[SOURCEPIN] = simasPayRSAencryption(tfOldMpin.text!)
         dict[MFATRANSACTION] = INQUIRY
         dict[CHANGEPIN_NEWPIN] = simasPayRSAencryption(tfNewMpin.text!)

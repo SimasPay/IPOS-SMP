@@ -26,21 +26,14 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9QS-ok-PfC">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="65" id="Efe-MM-DfJ"/>
-                    </constraints>
-                </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OWK-hS-cgi">
-                    <rect key="frame" x="0.0" y="65" width="375" height="602"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yfR-BY-C2S">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="594"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RAL-j1-Sds">
-                                    <rect key="frame" x="40" y="25" width="295" height="56"/>
+                                    <rect key="frame" x="40" y="85" width="295" height="56"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_Image" translatesAutoresizingMaskIntoConstraints="NO" id="Sac-If-OAl">
                                             <rect key="frame" x="22" y="0.0" width="250" height="56"/>
@@ -59,7 +52,7 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eic-81-bEc" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="30" y="91" width="315" height="72"/>
+                                    <rect key="frame" x="30" y="151" width="315" height="72"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="72" id="BYk-tc-avf"/>
                                     </constraints>
@@ -70,7 +63,7 @@ reset mPIN Anda.</string>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEL-h9-WLr" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="88" y="315" width="200" height="48"/>
+                                    <rect key="frame" x="88" y="375" width="200" height="48"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="48" id="3Bs-dn-q8S"/>
                                         <constraint firstAttribute="width" constant="200" id="Rx6-BJ-xo7"/>
@@ -80,7 +73,7 @@ reset mPIN Anda.</string>
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9at-P6-ONp">
-                                    <rect key="frame" x="40" y="173" width="295" height="56"/>
+                                    <rect key="frame" x="40" y="233" width="295" height="56"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Moc-CM-hAi" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="295" height="56"/>
@@ -99,7 +92,7 @@ reset mPIN Anda.</string>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Dv-sg-d76">
-                                    <rect key="frame" x="40" y="229" width="295" height="56"/>
+                                    <rect key="frame" x="40" y="289" width="295" height="56"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Eet-E6-F4e" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="295" height="56"/>
@@ -123,7 +116,7 @@ reset mPIN Anda.</string>
                                 <constraint firstItem="RAL-j1-Sds" firstAttribute="leading" secondItem="yfR-BY-C2S" secondAttribute="leading" constant="40" id="9Ln-r6-D8T"/>
                                 <constraint firstItem="8Dv-sg-d76" firstAttribute="top" secondItem="9at-P6-ONp" secondAttribute="bottom" id="HGb-Iw-h7T"/>
                                 <constraint firstItem="sEL-h9-WLr" firstAttribute="top" secondItem="8Dv-sg-d76" secondAttribute="bottom" constant="30" id="J5Z-95-bDb"/>
-                                <constraint firstItem="RAL-j1-Sds" firstAttribute="top" secondItem="yfR-BY-C2S" secondAttribute="top" constant="25" id="M60-jw-t1y"/>
+                                <constraint firstItem="RAL-j1-Sds" firstAttribute="top" secondItem="yfR-BY-C2S" secondAttribute="top" constant="85" id="M60-jw-t1y"/>
                                 <constraint firstItem="Eic-81-bEc" firstAttribute="top" secondItem="RAL-j1-Sds" secondAttribute="bottom" constant="10" id="Og9-Wc-HVa"/>
                                 <constraint firstAttribute="trailing" secondItem="8Dv-sg-d76" secondAttribute="trailing" constant="40" id="Qa9-Sc-0di"/>
                                 <constraint firstAttribute="trailing" secondItem="Eic-81-bEc" secondAttribute="trailing" constant="30" id="YfD-UH-PAc"/>
@@ -151,13 +144,10 @@ reset mPIN Anda.</string>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="9QS-ok-PfC" secondAttribute="trailing" id="1a3-yd-y2T"/>
+                <constraint firstItem="OWK-hS-cgi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="090-ms-2bz"/>
                 <constraint firstAttribute="trailing" secondItem="OWK-hS-cgi" secondAttribute="trailing" id="aXL-2X-3yW"/>
                 <constraint firstAttribute="bottom" secondItem="OWK-hS-cgi" secondAttribute="bottom" id="cqM-ij-0Nz"/>
-                <constraint firstItem="OWK-hS-cgi" firstAttribute="top" secondItem="9QS-ok-PfC" secondAttribute="bottom" id="gcD-Ju-geR"/>
                 <constraint firstItem="OWK-hS-cgi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="h5u-k3-bv1"/>
-                <constraint firstItem="9QS-ok-PfC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="nam-7P-L0f"/>
-                <constraint firstItem="9QS-ok-PfC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yZr-V5-Mji"/>
             </constraints>
             <point key="canvasLocation" x="32.5" y="103.5"/>
         </view>

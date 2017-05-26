@@ -56,7 +56,15 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
     
     //MARK: action button done in keyboard
     override func btnDoneAction() {
-    self.loginProcess()
+//        SimasAlertView.showNormalTitle(nil, message: "Reset Mpin", alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+//            if index == 0 {
+//                let vc = ChangeMpinViewController.initWithOwnNib()
+//                vc.mdn = self.MDNString
+//                self.navigationController?.pushViewController(vc, animated: true)
+//            }
+//        }, cancelButtonTitle: "OK")
+        
+        self.loginProcess()
     }
     
     override func didReceiveMemoryWarning() {
@@ -83,6 +91,7 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
     
     //MARK: Login process
     func loginProcess(){
+        
         
         var message = ""
         
@@ -173,6 +182,22 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
                     
                     self.navigationController?.pushViewController(vc, animated: false)
                     
+                } else if(messagecode == "2182"){
+                    SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                        if index == 0 {
+                            let vc = ChangeMpinViewController.initWithOwnNib()
+                            vc.mdn = self.MDNString
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }, cancelButtonTitle: "OK")
+                } else if(messagecode == "2315"){
+                    SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                        if index == 0 {
+                            let vc = ChangeMpinViewController.initWithOwnNib()
+                            vc.mdn = self.MDNString
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }, cancelButtonTitle: "OK")
                 } else {
                     SimasAlertView.showAlert(withTitle: "Login", message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
