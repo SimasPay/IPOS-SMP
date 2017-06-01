@@ -43,8 +43,6 @@
 		35995AAF1E262B14007EB516 /* LoginPinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995A7B1E262B14007EB516 /* LoginPinViewController.xib */; };
 		35995AB01E262B14007EB516 /* LoginRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35995A7C1E262B14007EB516 /* LoginRegisterViewController.swift */; };
 		35995AB11E262B14007EB516 /* LoginRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995A7D1E262B14007EB516 /* LoginRegisterViewController.xib */; };
-		35995AB21E262B14007EB516 /* LoginViewController-unused.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35995A7E1E262B14007EB516 /* LoginViewController-unused.swift */; };
-		35995AB31E262B14007EB516 /* LoginViewController-unused.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995A7F1E262B14007EB516 /* LoginViewController-unused.xib */; };
 		35995AB41E262B14007EB516 /* RegisterEMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35995A801E262B14007EB516 /* RegisterEMoneyViewController.swift */; };
 		35995AB51E262B14007EB516 /* RegisterEMoneyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995A811E262B14007EB516 /* RegisterEMoneyViewController.xib */; };
 		35995AB61E262B14007EB516 /* SecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35995A821E262B14007EB516 /* SecurityQuestionViewController.swift */; };
@@ -155,8 +153,6 @@
 		35995A7B1E262B14007EB516 /* LoginPinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginPinViewController.xib; sourceTree = "<group>"; };
 		35995A7C1E262B14007EB516 /* LoginRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LoginRegisterViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A7D1E262B14007EB516 /* LoginRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginRegisterViewController.xib; sourceTree = "<group>"; };
-		35995A7E1E262B14007EB516 /* LoginViewController-unused.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "LoginViewController-unused.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		35995A7F1E262B14007EB516 /* LoginViewController-unused.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "LoginViewController-unused.xib"; sourceTree = "<group>"; };
 		35995A801E262B14007EB516 /* RegisterEMoneyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RegisterEMoneyViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35995A811E262B14007EB516 /* RegisterEMoneyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterEMoneyViewController.xib; sourceTree = "<group>"; };
 		35995A821E262B14007EB516 /* SecurityQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SecurityQuestionViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -369,8 +365,6 @@
 				35995A7B1E262B14007EB516 /* LoginPinViewController.xib */,
 				35995A7C1E262B14007EB516 /* LoginRegisterViewController.swift */,
 				35995A7D1E262B14007EB516 /* LoginRegisterViewController.xib */,
-				35995A7E1E262B14007EB516 /* LoginViewController-unused.swift */,
-				35995A7F1E262B14007EB516 /* LoginViewController-unused.xib */,
 				35995A801E262B14007EB516 /* RegisterEMoneyViewController.swift */,
 				35995A811E262B14007EB516 /* RegisterEMoneyViewController.xib */,
 				35995A821E262B14007EB516 /* SecurityQuestionViewController.swift */,
@@ -690,7 +684,6 @@
 				35995AC71E262B14007EB516 /* SuccesChangemPinController.xib in Resources */,
 				35995ABB1E262B14007EB516 /* HomeViewController.xib in Resources */,
 				357E1B4D1ED4977E00E4E8CB /* NewPinController.xib in Resources */,
-				35995AB31E262B14007EB516 /* LoginViewController-unused.xib in Resources */,
 				35BFA0651ECD4E8900146FFF /* SuccesRegisterController.xib in Resources */,
 				35CDC62B1EB78D6E00E5296A /* CashWithDrawalController.xib in Resources */,
 				35995AB51E262B14007EB516 /* RegisterEMoneyViewController.xib in Resources */,
@@ -739,7 +732,6 @@
 				BE1773071D9285DE00A27E06 /* DAFURLResponseSerialization.m in Sources */,
 				35995AA21E262B14007EB516 /* ActivationPinViewController.swift in Sources */,
 				BEC416011D9385B9000C3CF4 /* DIMOAlertView.m in Sources */,
-				35995AB21E262B14007EB516 /* LoginViewController-unused.swift in Sources */,
 				35BFA0631ECD4E7D00146FFF /* SuccesRegisterController.swift in Sources */,
 				BE1773051D9285DE00A27E06 /* DAFURLConnectionOperation.m in Sources */,
 				35995ACC1E262B14007EB516 /* TransferOtherBankListViewController.swift in Sources */,
