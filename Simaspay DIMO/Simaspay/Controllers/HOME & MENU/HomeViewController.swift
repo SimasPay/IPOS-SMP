@@ -16,7 +16,7 @@ enum AccountType: Int {
     case accountTypeEMoneyNonKYC //E-Money non KYC
 }
 
-class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, DIMOPayDelegate {
+class HomeViewController: BaseViewController, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, DIMOPayDelegate {
     
     @IBOutlet weak var lblViewMove: BaseLabel!
     @IBOutlet weak var lblBalance: BaseLabel!
@@ -27,6 +27,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var lblSwitchAccount: UILabel!
     @IBOutlet weak var btnMove: UIButton!
     @IBOutlet weak var btnLogout: UIButton!
+    
+    @IBOutlet var lblInitial: BaseLabel!
     
     var accountType : AccountType!
     var arrayMenu: NSArray!
@@ -62,6 +64,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     var mPinString:String! = ""
     
     var alertController = UIAlertController()
+    var imagePicker = UIImagePickerController()
    
     static func initWithOwnNib() -> HomeViewController {
         let obj:HomeViewController = HomeViewController.init(nibName: String(describing: self), bundle: nil)
@@ -84,6 +87,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        lblInitial.font = UIFont.boldSystemFont(ofSize: 33)
+        lblInitial.textColor = UIColor.init(hexString: "ff7e1a")
+        
         lblTypeHome.font = UIFont.systemFont(ofSize: 11)
         lblTypeHome.textColor = UIColor.init(hexString: color_greyish_brown)
         lblTypeHome.text = self.accountType == AccountType.accountTypeRegular ? "Bank Sinarmas": self.accountType == AccountType.accountTypeEMoneyKYC ? "E-money Plus": self.accountType == AccountType.accountTypeEMoneyNonKYC ? "E-money Regular": "Laku Pandai"
@@ -101,7 +107,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         lblBalance.textAlignment = .center
         
         imgUser.layer.cornerRadius = (imgUser.bounds.size.width / 2) as CGFloat
-        imgUser.backgroundColor = UIColor.black
+        imgUser.backgroundColor = UIColor.init(hexString: "AAAAAA")
         imgUser.clipsToBounds = true
         
         
@@ -198,8 +204,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.lblSwitchAccount.isHidden = false
                 return
             }
-            
         }
+        
         self.initSDKPayQR()
     }
     
@@ -216,11 +222,34 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
        
         let pocketCode = self.accountType == AccountType.accountTypeRegular ? "2": self.accountType == AccountType.accountTypeEMoneyKYC ? "1": self.accountType == AccountType.accountTypeEMoneyNonKYC ? "1": "6"
         SimasAPIManager.sharedInstance().sourcePocketCode = pocketCode
+        
+        if (UserDefault.objectFromUserDefaults(forKey: "imageProfil") != nil){
+            let strBase64 = UserDefault.objectFromUserDefaults(forKey: "imageProfil") as! String
+            let dataDecoded:NSData = NSData(base64Encoded: strBase64, options: NSData.Base64DecodingOptions(rawValue: 0))!
+            let decodedimage:UIImage = UIImage(data: dataDecoded as Data)!
+            self.imgUser.image = decodedimage
+        } else {
+            let name = UserDefault.objectFromUserDefaults(forKey: USERNAME) as! String
+            let arrname = name.components(separatedBy: " ")
+            var initial: String = ""
+            if (arrname.count == 1) {
+                let startIndex = name.startIndex
+                initial = String(name[startIndex])
+            } else if (arrname.count >= 2) {
+                let strFirst = arrname[0]
+                let startIndexFirst = strFirst.startIndex
+                initial = String(strFirst[startIndexFirst])
+                let strEnd = arrname[arrname.count - 1]
+                let startIndexstrEnd = strEnd.startIndex
+                initial += String(strEnd[startIndexstrEnd])
+            }
+            self.lblInitial.text = initial.uppercased()
+        }
     }
     
     override func viewWillLayoutSubviews() {
         imgUser.layer.cornerRadius = (imgUser.bounds.size.width / 2) as CGFloat
-        imgUser.backgroundColor = UIColor.black
+        imgUser.backgroundColor = UIColor.init(hexString: "AAAAAA")
         imgUser.clipsToBounds = true
     }
     override func viewDidLayoutSubviews() {
@@ -242,6 +271,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         prefs.removeObject(forKey: USERNAME)
         prefs.removeObject(forKey: GET_USER_API_KEY)
         prefs.removeObject(forKey: mPin)
+        prefs.removeObject(forKey: "imageProfil")
         
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
         for vc in viewControllers {
@@ -852,7 +882,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     func actionNext() {
         var message = "";
         if (!tfMpin.isValid()){
-            message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
+            message = "Silakan Masukkan " + getString("TransferLebelMPIN") + " Anda"
         } else if (tfMpin.length() < 6) {
             message = "PIN harus 6 digit "
         } else if (!SimasAPIManager.isInternetConnectionExist()) {
@@ -910,7 +940,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         messageAlert.numberOfLines = 4
         messageAlert.text = messageString as String
 
-        clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ActivationPinViewController.countDown), userInfo: nil, repeats: true)
+        clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.countDown), userInfo: nil, repeats: true)
 
         lblTimer = BaseLabel(frame: CGRect(x: 0, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 10, width: temp.frame.size.width, height: 15))
         lblTimer.textAlignment = .center
@@ -1180,5 +1210,78 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 
             }
         }
+    }
+    
+    @IBAction func actionChangePictureUser(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+            imagePicker.delegate = self
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.allowsEditing = true
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            self.dismiss(animated: true, completion: nil)
+            let imageData:NSData = UIImageJPEGRepresentation(image, 0.5)! as NSData
+            let strBase64 = imageData.base64EncodedString()
+            
+            let dict = NSMutableDictionary()
+            dict[SERVICE] = SERVICE_ACCOUNT
+            dict[TXNNAME] = TXN_UPDATE_PROFILE
+            dict[INSTITUTION_ID] = SIMASPAY
+            dict[AUTH_KEY] = ""
+            dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+            dict[SOURCEPIN] = simasPayRSAencryption(UserDefault.objectFromUserDefaults(forKey: mPin) as! String)
+            dict[PROFIL_IMAGE_STRING] = strBase64
+            
+            DMBProgressHUD.showAdded(to: self.view, animated: true)
+            let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+            DLog("\(dict)")
+            SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
+                DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+                if (err != nil) {
+                    let error = err! as NSError
+                    if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                        SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    } else {
+                        SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    }
+                    return
+                }
+                
+                let dictionary = NSDictionary(dictionary: dict!)
+                if (dictionary.allKeys.count == 0) {
+                    SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+                } else {
+                    let responseDict = dictionary as NSDictionary
+                    DLog("\(responseDict)")
+                    let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
+                    let messageText  = responseDict.value(forKeyPath: "message.text") as! String
+                    if ( messagecode == SIMAPAY_SUCCESS_CHANGEPIN_PICTURE){
+                        self.imgUser.image = image
+                        self.lblInitial.text=""
+                        UserDefault.setObject(strBase64, forKey: "imageProfil")
+//                        print(strBase64)
+                    } else if (messagecode == "631") {
+                        SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                            if index == 0 {
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
+                            }
+                        }, cancelButtonTitle: "OK")
+                    } else {
+                        SimasAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    }
+                    
+                }
+            }
+    
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

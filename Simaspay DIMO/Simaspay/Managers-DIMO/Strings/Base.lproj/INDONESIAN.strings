@@ -12,16 +12,16 @@
 "LoginButtonActivation" = "Aktivasi Akun";
 "LoginButtonContactUs" = "Hubungi Kami";
 "LoginButtonLostmPin" = "Lupa mPIN";
-"LoginMessageFillHpNumber" = "Harap masukkan nomor handphone Anda.";
+"LoginMessageFillHpNumber" = "Silakan masukkan nomor handphone Anda.";
 "LoginMessageFillMpin" = "Masukkan mPIN Anda.";
 "LoginMessageSixMpin" = "mPIN yang Anda masukkan harus 6 angka.";
-"LoginMessageNotConnectServer" = "Tidak dapat terhubung dengan server SimasPay. Harap periksa koneksi internet Anda dan coba kembali setelah beberapa saat.";
+"LoginMessageNotConnectServer" = "Tidak dapat terhubung dengan server SimasPay. Silakan periksa koneksi internet Anda dan coba kembali setelah beberapa saat.";
 
 //Home
 "HomeTitleSliderBalace" = "Slide ke kanan untuk melihat saldo ->";
 //Activation
 "ActivationLabelInfo" = "Silakan masukkan nomor handphone Anda diikuti dengan kode aktivasi dari Simaspay";
-"ActivationPlaceholderOTP" = "6 digit kode aktivasi";
+"ActivationPlaceholderOTP" = "4 digit kode aktivasi";
 "ActivationQuestionNoOTP" = "Tidak Menerima SMS?";
 "ActivationQuestionForLogin" = "Sudah memiliki Akun?";
 "ActivationButtonResend" = "Kirim Ulang";
@@ -35,7 +35,7 @@
 "ActivationLabelInfoSuccessMessage" = "Selamat, akun Anda telah berhasil diaktifkan";
 "ActivationAlertTitleResendOTP" = "Mohon Tunggu";
 "ActivationAlertResendOTP" = "Kami sudah mengirimkan SMS \n kode OTP yang baru untuk Anda.\nApabila SMS belum diterima,\nsilakan cek koneksi atau hubungi \nmobile service provider Anda.";
-"ActivationMessageFillHpNumber" = "Harap masukkan nomor handphone Anda.";
+"ActivationMessageFillHpNumber" = "Silakan masukkan nomor handphone Anda.";
 "ActivationMessageFillActivation" = "Masukkan kode aktivasi Anda.";
 "ActivationMessageSixActivation" = "Kode Aktivasi yang anda masukkan harus 6 angka.";
 "ActivationMessageFillMpin" = "Masukkan mPIN Anda.";
@@ -82,7 +82,7 @@
 "TransferUangkuTitle" = "Transfer - Uangku";
 "TransferBSIMTitle" = "Transfer - Bank Sinarmas";
 "TransferOtherBankTitle" = "Transfer - Bank Lain";
-"TransferEmptyNominal" = "Harap masukkan jumlah yang ingin Anda Transfer";
+"TransferEmptyNominal" = "Silakan masukkan jumlah yang ingin Anda Transfer";
 
 // Cash Withdrawal
 "WithDrawalMe" = "Tarik Tunai - Untuk Saya";

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAlertViewDelegate{
+class ActivationPinViewController: BaseViewController, UITextFieldDelegate{
     
     @IBOutlet var lblInfoUser: BaseLabel!
     
@@ -19,12 +19,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
     @IBOutlet var btnSaveMpin: BaseButton!
     
     var activationDict:NSDictionary!
-    
-    var timerCount = 60
-    var clock:Timer!
-    var lblTimer: BaseLabel!
-    var btnResandOTP: BaseButton!
-    var tfOTP: BaseTextField!
+    var otp:String = ""
     
     
     
@@ -72,16 +67,10 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(ActivationPinViewController.didOTPCancel), name: NSNotification.Name(rawValue: "didOTPCancel"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ActivationPinViewController.didOTPOK), name: NSNotification.Name(rawValue: "didOTPOK"), object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didOTPCancel"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didOTPOK"), object: nil)
 
     }
     override func viewDidLayoutSubviews() {
@@ -95,6 +84,16 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         BaseViewController.lastObjectForKeyboardDetector = self.btnSaveMpin
         updateUIWhenKeyboardShow()
         return true
+    }
+    
+    //MARK: Maximum Textfield length
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        let maxLength = 6
+        let currentString: NSString = textField.text! as NSString
+        let newString: NSString =
+            currentString.replacingCharacters(in: range, with: string) as NSString
+        return newString.length <= maxLength
     }
     
     //MARK: Action button for save MPIN
@@ -119,7 +118,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
         
         let mfaModeStatus = activationDict.value(forKeyPath:"mfaMode.text") as! String
         if (mfaModeStatus == "OTP") {
-            self.showOTP()
+            self.confirmationRequest(otpText: self.otp as NSString)
         } else {
             self.confirmationRequest(otpText: "")
         }
@@ -172,6 +171,14 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
                     }
                 }, cancelButtonTitle: "OK")
+            } else if (messagecode == "2174") {
+                SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                    if index == 0 {
+                        let vc = ActivationViewController.initWithOwnNib()
+                        self.navigationController!.popToViewController(vc, animated: true);
+                    }
+                }, cancelButtonTitle: "OK")
+            
             } else {
                 SimasAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
             }
@@ -179,105 +186,5 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate, UIAl
             
         }
 
-    }
-    
-    // MARK: OTP
-    func didOTPCancel() {
-        DLog("cancel");
-        clock.invalidate()
-
-    }
-    
-    func didOTPOK() {
-        DLog("OK");
-        clock.invalidate()
-        confirmationRequest(otpText: (tfOTP.text! as NSString))
-    }
-    
-    func showOTP()  {
-        let temp = UIView(frame: CGRect(x: 0, y: 0, width: 240, height: 400))
-        let messageAlert = UILabel(frame: CGRect(x: 10, y: 0, width: temp.frame.size.width, height: 60))
-        messageAlert.font = UIFont.systemFont(ofSize: 13)
-        messageAlert.textAlignment = .center
-        messageAlert.numberOfLines = 4
-        messageAlert.text = "Kode OTP dan link telah dikirimkan ke nomor 08881234567. Masukkan kode tersebut atau akses link yang tersedia."
-        
-        clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ActivationPinViewController.countDown), userInfo: nil, repeats: true)
-        
-        btnResandOTP = BaseButton(frame: CGRect(x: 10, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 3, width: temp.frame.size.width, height: 15))
-        btnResandOTP.setTitle("Kirim Ulang", for: .normal)
-        btnResandOTP.setTitleColor(UIColor.init(hexString: color_btn_alert), for: .normal)
-        btnResandOTP.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
-        btnResandOTP.titleLabel?.textAlignment = .center
-        btnResandOTP.addTarget(self, action: #selector(ActivationPinViewController.resendOTP), for: .touchUpInside)
-        btnResandOTP.isHidden = true
-        
-        lblTimer = BaseLabel(frame: CGRect(x: 10, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 3, width: temp.frame.size.width, height: 15))
-        lblTimer.textAlignment = .center
-        lblTimer.font = UIFont.systemFont(ofSize: 12)
-        lblTimer.text = "01:00"
-        
-        
-        tfOTP = BaseTextField(frame: CGRect(x: 10, y: lblTimer.frame.origin.y + lblTimer.frame.size.height + 3, width: temp.frame.size.width, height: 30))
-        tfOTP.borderStyle = .line
-        tfOTP.layer.borderColor = UIColor.init(hexString: color_border).cgColor
-        tfOTP.layer.borderWidth = 1;
-        tfOTP.placeholder = "6 digit kode OTP"
-        tfOTP.isSecureTextEntry = true
-        tfOTP.addInset()
-        
-        temp.addSubview(btnResandOTP)
-        temp.addSubview(lblTimer)
-        temp.addSubview(messageAlert)
-        temp.addSubview(tfOTP)
-        
-        showOTPWith(title: "Masukkan Kode OTP", view: temp)
-    }
-    func countDown(){
-        if (timerCount > 0) {
-            timerCount -= 1
-            lblTimer.text = "00:\(timerCount)"
-        } else {
-            lblTimer.isHidden = true
-            btnResandOTP.isHidden = false
-        }
-    }
-
-    func resendOTP()  {
-       if (!SimasAPIManager.isInternetConnectionExist()){
-        SimasAlertView.showAlert(withTitle: "", message: getString("LoginMessageNotConnectServer"), cancelButtonTitle: getString("AlertCloseButtonText"))
-        }
-        
-        let MDNString = activationDict.value(forKey: "MDN") as! String
-        let activationSctlID = activationDict.value(forKey: "sctlID.text")
-//        responseDict.valueForKeyPath("response.sctlID.text") as! String
-        let dict = NSMutableDictionary()
-        dict[SERVICE] = SERVICE_WALLET
-        dict[TXNNAME] = TXN_RESEND_MFAOTP
-        dict[SOURCEMDN] = getNormalisedMDN(MDNString as NSString)
-        dict[SOURCEPIN] = simasPayRSAencryption( tfMpin.text! as String)
-        dict[SCTL_ID] = activationSctlID
-        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        SimasAPIManager.callAPI(withParameters: param) { (dict, err) in
-            if (err != nil) {
-                let error = err! as NSError
-                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
-                } else {
-                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
-                }
-                return
-            }
-            let responseDict = dict != nil ? NSMutableDictionary(dictionary: dict!) : [:]
-            DLog("\(responseDict)")
-            let messageCode = responseDict.value(forKey: "") as! String
-            let messageText = responseDict.value(forKey: "") as! String
-            if (messageCode == "608") {
-                
-            } else {
-                SimasAlertView.showAlert(withTitle: "", message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
-            }
-
-        }
     }
 }

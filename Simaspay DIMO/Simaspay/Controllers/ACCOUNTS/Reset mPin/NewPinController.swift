@@ -94,8 +94,8 @@ class NewPinController: BaseViewController, UIAlertViewDelegate, UITextFieldDele
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(ActivationPinViewController.didOTPCancel), name: NSNotification.Name(rawValue: "didOTPCancel"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ActivationPinViewController.didOTPOK), name: NSNotification.Name(rawValue: "didOTPOK"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didOTPCancel), name: NSNotification.Name(rawValue: "didOTPCancel"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didOTPOK), name: NSNotification.Name(rawValue: "didOTPOK"), object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -183,7 +183,7 @@ class NewPinController: BaseViewController, UIAlertViewDelegate, UITextFieldDele
         messageAlert.numberOfLines = 4
         messageAlert.text = messageString as String
         
-        clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ActivationPinViewController.countDown), userInfo: nil, repeats: true)
+        clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.countDown), userInfo: nil, repeats: true)
         
         
         lblTimer = BaseLabel(frame: CGRect(x: 0, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 10, width: temp.frame.size.width, height: 15))

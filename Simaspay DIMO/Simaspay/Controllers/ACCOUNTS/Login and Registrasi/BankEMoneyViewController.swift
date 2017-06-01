@@ -97,6 +97,7 @@ class BankEMoneyViewController: BaseViewController,UITableViewDelegate, UITableV
         prefs.removeObject(forKey: USERNAME)
         prefs.removeObject(forKey: GET_USER_API_KEY)
         prefs.removeObject(forKey: mPin)
+        prefs.removeObject(forKey: "imageProfil")
         
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
         for vc in viewControllers {

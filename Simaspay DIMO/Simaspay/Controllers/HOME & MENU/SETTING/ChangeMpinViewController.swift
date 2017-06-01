@@ -166,17 +166,17 @@ class ChangeMpinViewController: BaseViewController, UITextFieldDelegate {
         
         var message = "";
         if (!tfOldMpin.isValid()) {
-            message = "Harap masukkan mPIN lama Anda."
+            message = "Silakan masukkan mPIN lama Anda."
         } else if (tfOldMpin.length() < 6) {
             message = "mPIN lama harus 6 digit."
         } else if(!tfNewMpin.isValid()){
-            message = "Harap masukkan mPIN baru Anda."
+            message = "Silakan masukkan mPIN baru Anda."
         } else if (tfNewMpin.length() < 6) {
             message = "mPIN baru harus 6 digit."
         } else if (tfNewMpin.text == tfOldMpin.text){
             message = "mPIN lama dan PIN baru tidak boleh sama."
         } else if (!tfConfirmMpin.isValid()){
-            message = "Harap masukkan konfirmasi mPIN baru Anda."
+            message = "Silakan masukkan konfirmasi mPIN baru Anda."
         } else if (tfOldMpin.length() < 6) {
             message = "Konfirmasi mPIN harus 6 digit."
         } else if (tfNewMpin.text != tfConfirmMpin.text){

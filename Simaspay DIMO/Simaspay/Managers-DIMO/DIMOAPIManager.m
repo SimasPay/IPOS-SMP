@@ -88,7 +88,7 @@ NSTimer *timer;
 //    newDict[@""] =
 //    new
     NSLog(BASE_URL);
-    [self startHTTPRequestWithMethod:ConnectionManagerHTTPMethodGET
+    [self startHTTPRequestWithMethod:ConnectionManagerHTTPMethodPOST
                            urlString:BASE_URL
                               params:dict
                           completion:^(DAFHTTPRequestOperation *operation, id responseObject, NSError *err) {
@@ -178,7 +178,7 @@ NSTimer *timer;
     if (![self isInternetConnectionExist]) {
         NSError *err = [NSError errorWithDomain:@"No internet connection"
                                            code:0
-                                       userInfo:@{@"error" : @"Tidak dapat terhubung dengan server SimasPay. Harap periksa koneksi internet Anda dan coba kembali setelah beberapa saat."}];
+                                       userInfo:@{@"error" : @"Tidak dapat terhubung dengan server SimasPay. Silakan periksa koneksi internet Anda dan coba kembali setelah beberapa saat."}];
         completion(nil, nil, err);
         return;
     }

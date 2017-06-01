@@ -129,6 +129,14 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
                 
             } else {
                 
+                let prefs = UserDefaults.standard
+                prefs.removeObject(forKey: SOURCEMDN)
+                prefs.removeObject(forKey: ACCOUNT_NUMBER)
+                prefs.removeObject(forKey: USERNAME)
+                prefs.removeObject(forKey: GET_USER_API_KEY)
+                prefs.removeObject(forKey: mPin)
+                prefs.removeObject(forKey: "imageProfil")
+                
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")
                 let messageText  = responseDict.value(forKeyPath: "subscriberDetails.status.text") as! String

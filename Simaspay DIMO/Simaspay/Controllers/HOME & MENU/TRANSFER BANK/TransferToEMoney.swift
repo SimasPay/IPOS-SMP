@@ -224,13 +224,13 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate {
     @IBAction func actionProses(_ sender: Any) {
         var message = "";
         if (!inputMdn.isValid()) {
-            message = "Harap Masukkan " + getString("TransferLebelMdn") + " Anda"
+            message = "Silakan Masukkan " + getString("TransferLebelMdn") + " Anda"
         }else if(inputMdn.length() < 10){
             message = "Nomor Handphone yang Anda masukkan harus 10-14 angka"
         } else if (!inputAmount.isValid()){
             message = getString("TransferEmptyNominal")
         } else if (!inputmPin.isValid()){
-            message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
+            message = "Silakan Masukkan " + getString("TransferLebelMPIN") + " Anda"
         } else if (inputmPin.length() < 6) {
             message = "PIN harus 6 digit "
         } else if (!SimasAPIManager.isInternetConnectionExist()) {

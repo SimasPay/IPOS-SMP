@@ -56,6 +56,7 @@ let CHANGEPIN_NEWPIN = "newPIN"
 let CHANGEPIN_NEWPIN_TEXT = "newPINText"
 let CHANGEPIN_CONFIRMPIN = "confirmPIN"
 let CHANGEPIN_CONFIRMPIN_Text = "confirmPINText"
+let PROFIL_IMAGE_STRING = "profileImageString"
 
 // MARK: VALUE for keys start here
 // MARK: =========================
@@ -102,6 +103,7 @@ let TXN_CONFIRM_SUB = "SubRegularWithEMoney"
 let TXN_MDN_VALIDATION_FORGOT_PIN = "MDNvalidationforForgotPIN"
 let TXN_FORGOT_PIN_INQUIRY = "ForgotPinInquiry"
 let TXN_FORGOT_PIN = "ForgotPin"
+let TXN_UPDATE_PROFILE = "UpdateProfile"
 
 // MARK: Service
 let SERVICE_ACCOUNT = "Account"
@@ -165,6 +167,7 @@ let QR_SUCCESS_CODE = "2111"
 let SIMASPAY_EMONEY_POKET_SUCCES = "2306"
 let SIMASPAY_POKET_ADDING_INQUIRY_SUCCES = "2304"
 let SIMAPAY_SUCCESS_CHANGEPIN_CODE = "26"
+let SIMAPAY_SUCCESS_CHANGEPIN_PICTURE = "2143"
 
 
 //MARK: User defult
@@ -625,7 +628,7 @@ let EulaTermsText = "<html><p style='font-family:Montserrat;'>Dengan menyetujui 
 #define BAHASA_TIME_OUT_ERROR @"Nasabah yang terhormat, saat ini tidak dapat terhubung dengan server Bank Sinarmas. Silahkan coba lagi nanti."
 #define BAHASA_TIME_OUT_ERROR_FINANCE @"Mohon menunggu, transaksi Anda sedang dalam proses. Periksa riwayat transaksi untuk mengetahui status transaksi Anda"
 
-#define SHOW_INTERNET_MSG @"Tidak dapat terhubung dengan server SimasPay. Harap periksa koneksi internet Anda dan coba kembali setelah beberapa saat."
+#define SHOW_INTERNET_MSG @"Tidak dapat terhubung dengan server SimasPay. Silakan periksa koneksi internet Anda dan coba kembali setelah beberapa saat."
 
 #define SHOW_NETWORK_LOST @"Koneksi jaringan hilang"
 

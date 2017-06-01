@@ -123,17 +123,17 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
         
         var message = "";
         if (self.withDrawalType != WithDrawalType.WithDrawalTypeMe && !tfNoAccount.isValid()) {
-            message = "Harap Masukkan " + getString("TransferLebelMdn") + " Anda"
+            message = "Silakan Masukkan " + getString("TransferLebelMdn") + " Anda"
         } else if(self.withDrawalType != WithDrawalType.WithDrawalTypeMe && tfNoAccount.length() < 10){
                 message = "Nomor Handphone yang Anda masukkan harus 10-14 angka"
         } else if (!tfAmountTransfer.isValid()){
-            message = "Harap Masukkan " + getString("TransferLebelAmount") + " yang ingin Anda Cashout"
+            message = "Silakan Masukkan " + getString("TransferLebelAmount") + " yang ingin Anda Cashout"
         } else if (tfAmountTransfer.isValid() && intValue! < 100000) {
             message = "Jumlah transaksi tarik tunai minimal Rp 100.000 dan harus kelipatan Rp. 50.000"
         } else if (tfAmountTransfer.isValid() && intValue! % 50000 != 0) {
              message = "Jumlah transaksi tarik tunai minimal Rp 100.000 dan harus kelipatan Rp. 50.000"
         } else if (!textFieldmPin.isValid()){
-            message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
+            message = "Silakan Masukkan " + getString("TransferLebelMPIN") + " Anda"
         } else if (textFieldmPin.length() < 6) {
             message = "PIN harus 6 digit "
         } else if (!SimasAPIManager.isInternetConnectionExist()) {

@@ -56,14 +56,6 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
     
     //MARK: action button done in keyboard
     override func btnDoneAction() {
-//        SimasAlertView.showNormalTitle(nil, message: "Reset Mpin", alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
-//            if index == 0 {
-//                let vc = ChangeMpinViewController.initWithOwnNib()
-//                vc.mdn = self.MDNString
-//                self.navigationController?.pushViewController(vc, animated: true)
-//            }
-//        }, cancelButtonTitle: "OK")
-        
         self.loginProcess()
     }
     
@@ -147,6 +139,10 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
                     UserDefault.setObject(self.MDNString, forKey: SOURCEMDN)
                     UserDefault.setObject(self.MDNString, forKey: ACCOUNT_NUMBER)
                     UserDefault.setObject(self.tfMpin.text, forKey: mPin)
+                    
+                    if (dictionary.value(forKeyPath: "profileImageString.text") != nil) {
+                        UserDefault.setObject(dictionary.value(forKeyPath: "profileImageString.text") as! String, forKey: "imageProfil")
+                    }
                     
                     UserDefault.setObject(responseDict.value(forKeyPath: "name.text") as! String, forKey: USERNAME)
                     

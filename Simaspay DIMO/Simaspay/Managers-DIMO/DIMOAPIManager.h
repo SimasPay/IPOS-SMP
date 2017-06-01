@@ -37,9 +37,9 @@ typedef enum {
 + (void)callAPIWithParameters:(NSDictionary *)dict
              withSessionCheck:(Boolean)isCheck
                   andComplete:(void(^)(NSDictionary *response, NSError *err))completion;
-
-+ (void)callAPIPOSTWithParameters:(NSDictionary *)dict
-                      andComplete:(void(^)(NSDictionary *response, NSError *err))completion;
+//
+//+ (void)callAPIPOSTWithParameters:(NSDictionary *)dict
+//                      andComplete:(void(^)(NSDictionary *response, NSError *err))completion;
 @end
 
 @interface NSURLRequest (SSLValidation)

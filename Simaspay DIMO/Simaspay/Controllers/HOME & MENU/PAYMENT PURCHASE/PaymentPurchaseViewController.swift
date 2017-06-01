@@ -144,7 +144,7 @@ class PaymentPurchaseViewController: BaseViewController,UITableViewDelegate, UIT
         
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
         DMBProgressHUD.showAdded(to: self.view, animated: true)
-        SimasAPIManager .callAPIPOST(withParameters: param) { (dict, err) in
+        SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {
                 let error = err! as NSError

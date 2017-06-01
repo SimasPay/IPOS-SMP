@@ -126,13 +126,13 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
     func actionNext() {
         var message = "";
         if (!tfNoAccount.isValid()) {
-            message = "Harap Masukkan " + getString("TransferLebelAccountNumber") + " Anda"
+            message = "Silakan Masukkan " + getString("TransferLebelAccountNumber") + " Anda"
         } else if (tfNoAccount.length() < 8) {
             message = "Nomor rekening Bank Tujuan yang Anda masukkan harus 8-25 angka."
         } else if (!tfAmountTransfer.isValid()){
             message = getString("TransferEmptyNominal")
         } else if (!tfMpin.isValid()){
-            message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
+            message = "Silakan Masukkan " + getString("TransferLebelMPIN") + " Anda"
         } else if (tfMpin.length() < 6) {
             message = "PIN harus 6 digit "
         } else if (!SimasAPIManager.isInternetConnectionExist()) {
