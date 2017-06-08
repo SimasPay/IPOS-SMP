@@ -136,6 +136,7 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
                 prefs.removeObject(forKey: GET_USER_API_KEY)
                 prefs.removeObject(forKey: mPin)
                 prefs.removeObject(forKey: "imageProfil")
+                prefs.removeObject(forKey: EULAPBQR)
                 
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")

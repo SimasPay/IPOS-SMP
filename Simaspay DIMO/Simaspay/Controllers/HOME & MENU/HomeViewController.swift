@@ -270,6 +270,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
         prefs.removeObject(forKey: GET_USER_API_KEY)
         prefs.removeObject(forKey: mPin)
         prefs.removeObject(forKey: "imageProfil")
+        prefs.removeObject(forKey: EULAPBQR)
         
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
         for vc in viewControllers {
@@ -712,7 +713,12 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
     func initSDKPayQR() {
         DIMOPay.setServerURL(ServerURLDev)
         DIMOPay.setMinimumTransaction(1000)
-        DIMOPay.setEULAState(false)
+        if (UserDefault.objectFromUserDefaults(forKey: EULAPBQR) == nil) {
+            DIMOPay.setEULAState(false)
+        } else {
+           DIMOPay.setEULAState(true)
+        }
+        
     }
     
     func promoBYQRBtnClicked() {
@@ -780,7 +786,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
     
     /// This function will be called when the EULA state changed
     func callbackEULAStateChanged(_ state: Bool) {
-        
+        if (!state) {
+            UserDefault.setObject(false, forKey: EULAPBQR)
+        }
     }
     
     /// This function will be called when EULA state is false
@@ -788,6 +796,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
     /// example : [DIMOPay EULAWithStringHTML:@"test<br>Test2"];
     @available(iOS 2.0, *)
     func callbackShowEULA() -> UIViewController! {
+        UserDefault.setObject(false, forKey: EULAPBQR)
         return DIMOPay.eula(withStringHTML: EulaTermsText)
     }
     
