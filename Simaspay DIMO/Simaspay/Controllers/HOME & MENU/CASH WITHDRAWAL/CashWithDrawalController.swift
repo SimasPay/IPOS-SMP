@@ -100,7 +100,12 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
             } else {
                 return true
             }
-         
+        } else if textField.tag == 2 {
+            let maxLength = 17
+            let currentString: NSString = textField.text! as NSString
+            let newString: NSString =
+                currentString.replacingCharacters(in: range, with: string) as NSString
+            return newString.length <= maxLength
         } else {
             return true
         }
@@ -112,11 +117,11 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
     }
     
     func actionNext() {
-        var intValue : Int?
+        var intValue : IntMax?
         if (tfAmountTransfer.isValid()) {
             var anOptionalString : String?
             anOptionalString = tfAmountTransfer.text
-            intValue = Int(anOptionalString!)
+            intValue = IntMax(anOptionalString!)
         } else {
             intValue = 0
         }
@@ -133,7 +138,7 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate {
         } else if (tfAmountTransfer.isValid() && intValue! % 50000 != 0) {
              message = "Jumlah transaksi tarik tunai minimal Rp 100.000 dan harus kelipatan Rp. 50.000"
         } else if (!textFieldmPin.isValid()){
-            message = "Silakan Masukkan " + getString("TransferLebelMPIN") + " Anda"
+            message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
         } else if (textFieldmPin.length() < 6) {
             message = "PIN harus 6 digit "
         } else if (!SimasAPIManager.isInternetConnectionExist()) {

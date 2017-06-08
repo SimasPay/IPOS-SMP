@@ -119,6 +119,8 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
             self.tfNomPayment.isUserInteractionEnabled = false
             let denomString = (self.dictOfData.value(forKey: "Denom") as! String)
             self.pickOption = denomString.components(separatedBy: "|")
+            self.tfNomTransaction.text = self.pickOption[0]
+            self.tfDisplayNom.text = self.pickOption[0]
         }
         //Picker view delegate
         let pickerView = UIPickerView()
@@ -420,7 +422,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         } else if (tfNoAccount.length() < minlength){
             message = errorMsg1
         } else if (!tfMpin.isValid()){
-            message = "Silakan Masukkan " + getString("TransferLebelMPIN")
+            message = "Harap Masukkan " + getString("TransferLebelMPIN")
         } else if (tfMpin.length() < 6) {
             message = "PIN harus 6 digit"
         } else if (!SimasAPIManager.isInternetConnectionExist()) {
@@ -444,7 +446,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
             } else if (tfNoAccount.length() < minlength){
                 message = errorMsg1
             } else if (!tfMpin.isValid()){
-                message = "Silakan Masukkan " + getString("TransferLebelMPIN")
+                message = "Harap Masukkan " + getString("TransferLebelMPIN")
             } else if (tfMpin.length() < 6) {
                 message = "PIN harus 6 digit"
             } else if (!SimasAPIManager.isInternetConnectionExist()) {
@@ -458,7 +460,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
             } else  if (!self.tfNomPayment.isValid()){
                 message = "Masukkan nominal"
             } else if (!tfMpin.isValid()){
-                message = "Silakan Masukkan " + getString("TransferLebelMPIN")
+                message = "Harap Masukkan " + getString("TransferLebelMPIN")
             } else if (tfMpin.length() < 6) {
                 message = "PIN harus 6 digit"
             } else if (!SimasAPIManager.isInternetConnectionExist()) {

@@ -31,7 +31,7 @@ class ActivationPinViewController: BaseViewController, UITextFieldDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         let name = ("\(activationDict.value(forKeyPath:"name.text") as! String)!")
-        let infoString = String(format: String("ActivationLabelInfoInputMpin"), name)
+        let infoString = String(format: getString("ActivationLabelInfoInputMpin"), name)
         lblInfoUser.text = infoString as String
         lblInfoUser.textAlignment = .center
         lblInfoUser.numberOfLines = 3

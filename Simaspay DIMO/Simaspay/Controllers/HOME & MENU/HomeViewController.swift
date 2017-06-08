@@ -132,7 +132,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
             [
                 "title" : "Daftar Transaksi",
                 "icon" : "icon_Transaction",
-                "action" :self.accountType == AccountType.accountTypeEMoneyKYC ? TransactionPeriodViewController.initWithOwnNib() : self.accountType == AccountType.accountTypeEMoneyNonKYC ? TransactionPeriodViewController.initWithOwnNib() : self.accountType == AccountType.accountTypeRegular ? TransactionHistoryViewController.initWithOwnNib() :TransactionHistoryViewController.initWithOwnNib(),
+                "action" : "",
                 "disable" : false,
                 "isHidden": false
             ],
@@ -205,8 +205,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
                 return
             }
         }
-        
-        self.initSDKPayQR()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -389,6 +387,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
         self.indicatorView.isHidden = false
         self.indicatorView.startAnimating()
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DLog("\(dict)")
         SimasAPIManager.callAPI(withParameters: param) { (dict, err) in
             
             if (err != nil) {
@@ -489,6 +488,16 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
                 self.promoBYQRBtnClicked()
             } else if ((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey: "title") as! String == "Daftar E-money") {
                 self.registerEmoney()
+            } else if ((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey: "title") as! String == "Daftar Transaksi") {
+                
+                if (self.accountType == AccountType.accountTypeEMoneyKYC || self.accountType == AccountType.accountTypeEMoneyNonKYC) {
+                    UserDefault.setObject(true, forKey: "firstCall")
+                    let vc = TransactionPeriodViewController.initWithOwnNib()
+                    self.navigationController?.pushViewController(vc as UIViewController, animated: true)
+                } else{
+                    let vc = TransactionHistoryViewController.initWithOwnNib()
+                    self.navigationController?.pushViewController(vc as UIViewController, animated: true)
+                }
             } else {
                 DLog("\(((self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"title") as! NSString) as String)")
                 let vc = (self.arrayMenu[indexPath.row] as! NSDictionary).value(forKey:"action")
@@ -634,6 +643,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
         qrInqueryDict["pointsRedeemed"] = pointsRedeemed
         qrInqueryDict["amountRedeemed"] = amountRedeemed
         
+        DLog("\(qrInqueryDict)")
+        
         let window = UIApplication.shared.keyWindow!
         viewMpin = UIView()
         viewMpin.frame = CGRect(x: 0, y: 0, width: window.frame.width, height: window.frame.height)
@@ -688,11 +699,13 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
     
     func actionBack() {
         DIMOPay.closeSDK()
+        self.initSDKPayQR()
         DIMOPay.startSDK(self, with: self)
         self.viewMpin.removeFromSuperview()
     }
     
     func payBYQRBtnClicked() {
+        self.initSDKPayQR()
         DIMOPay.startSDK(self, with: self)
     }
     
@@ -703,6 +716,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
     }
     
     func promoBYQRBtnClicked() {
+        self.initSDKPayQR()
         DIMOPay.startLoyalty(self, with: self)
     }
     
@@ -778,6 +792,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
     }
     
     func nextProses() {
+        self.tfMpin.resignFirstResponder()
         let dict = NSMutableDictionary()
         dict[SERVICE] = SERVICE_PAYMENT
         dict[TXNNAME] = TXN_QR_PAYMENT_INQUIRY
@@ -801,7 +816,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
         dict[TIPPING_AMOUNT] = self.qrInqueryDict.object(forKey: "tippingAmount")
         DMBProgressHUD.showAdded(to: self.viewMpin, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DLog("\(param)")
+        DLog("\(dict)")
         SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD.hide(for: self.viewMpin, animated: true)
             // DMBProgressHUD .hideAllHUDs(for: self.viewMpin, animated: true)
@@ -882,7 +897,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
     func actionNext() {
         var message = "";
         if (!tfMpin.isValid()){
-            message = "Silakan Masukkan " + getString("TransferLebelMPIN") + " Anda"
+            message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
         } else if (tfMpin.length() < 6) {
             message = "PIN harus 6 digit "
         } else if (!SimasAPIManager.isInternetConnectionExist()) {
@@ -922,7 +937,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
         viewOtp.frame = CGRect(x: 0, y: 0, width: window.frame.width, height: window.frame.height)
         viewOtp.backgroundColor = UIColor(white: 0, alpha: 0.5)
         
-        let viewContent = UIView(frame: CGRect(x: 28, y: 65, width: window.frame.width - 56, height: 210))
+        let viewContent = UIView(frame: CGRect(x: 28, y: 100, width: window.frame.width - 56, height: 210))
         viewContent.backgroundColor = UIColor.init(hexString: "F3F3F3")
         viewContent.layer.cornerRadius = 15.0
         
@@ -994,7 +1009,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
         
         viewOtp.addSubview(viewContent)
         window.addSubview(viewOtp)
-
+        
+//        let when = DispatchTime.now() + 0.25 // change 2 to desired number of seconds
+//        DispatchQueue.main.asyncAfter(deadline: when) {
+           self.tfOtp.becomeFirstResponder()
+       // }
     }
     
     //MARK: Request OTP
@@ -1021,8 +1040,12 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
             } else {
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")
+                let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
+                let messageText  = responseDict.value(forKeyPath: "message.text") as! String
                 
-                
+                if messagecode != "2171" {
+                    SimasAlertView.showAlert(withTitle: nil, message:messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                }
             }
         }
     }

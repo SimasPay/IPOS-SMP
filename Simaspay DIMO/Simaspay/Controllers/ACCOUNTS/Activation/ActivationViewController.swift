@@ -11,20 +11,18 @@ import UIKit
 class ActivationViewController: BaseViewController, UIAlertViewDelegate, UITextFieldDelegate {
     @IBOutlet var lblInfoActivation: BaseLabel!
     @IBOutlet var viewTextField: UIView!
-    
-    @IBOutlet var lblQuestionNoOTP: BaseLabel!
+ 
     @IBOutlet var lblQuestionLogin: BaseLabel!
     @IBOutlet var tfActivationCode: BaseTextField!
     @IBOutlet var tfHpNumber: BaseTextField!
     
     @IBOutlet var btnNext: BaseButton!
-    @IBOutlet var btnResendOTP: UIButton!
     @IBOutlet var btnLogin: UIButton!
     
     var tfOTP: BaseTextField!
     
     //Timer for OTP resend button
-    var timerCount = 60
+    var timerCount = 120
     var clock:Timer!
     var lblTimer: BaseLabel!
     var alertController = UIAlertController()
@@ -55,18 +53,10 @@ class ActivationViewController: BaseViewController, UIAlertViewDelegate, UITextF
         tfHpNumber.autocorrectionType = .no
         tfActivationCode.autocorrectionType = .no
         
-        lblQuestionNoOTP.text = getString("ActivationQuestionNoOTP")
-        lblQuestionNoOTP.font = UIFont.systemFont(ofSize: 14)
-        lblQuestionNoOTP.textAlignment = .right
-        
         lblQuestionLogin.text = getString("ActivationQuestionForLogin")
         lblQuestionLogin.font = UIFont.systemFont(ofSize: 16)
         lblQuestionLogin.textAlignment = .right
         
-//        btnResendOTP.setTitle(getString("ActivationButtonResend"), for: UIControlState())
-//        btnResendOTP.setTitleColor(UIColor.init(hexString: color_text_default), for: UIControlState())
-//        btnResendOTP.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-//        
         btnLogin.setTitle(getString("LoginButtonLogin"), for: UIControlState())
         btnLogin.setTitleColor(UIColor.init(hexString: color_text_default), for: UIControlState())
         btnLogin.titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -84,7 +74,6 @@ class ActivationViewController: BaseViewController, UIAlertViewDelegate, UITextF
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tfHpNumber.addUnderline()
-        // btnResendOTP.addUnderline()
         let line = CALayer()
         line.frame = CGRect(x: 0, y: self.btnLogin.bounds.size.height - 10 , width: self.btnLogin.frame.size.width, height: 1)
         line.backgroundColor = UIColor.init(hexString: color_line_gray).cgColor
@@ -118,9 +107,6 @@ class ActivationViewController: BaseViewController, UIAlertViewDelegate, UITextF
     
     //MARK: action action Next button
     @IBAction func actionNextButton(_ sender: AnyObject) {
-        //        let vc = ActivationPinViewController.initWithOwnNib()
-        //        self.animatedFadeIn()
-        //        self.navigationController?.pushViewController(vc, animated: false)
         self.activation()
     }
     
@@ -282,7 +268,15 @@ class ActivationViewController: BaseViewController, UIAlertViewDelegate, UITextF
     func countDown(){
         if (timerCount > 0) {
             timerCount -= 1
-            lblTimer.text = "00:\(timerCount)"
+            if (timerCount == 60) {
+                lblTimer.text = "01:00"
+            } else if (timerCount < 60) {
+                lblTimer.text = "00:\(timerCount)"
+            } else if (timerCount > 60) {
+                var temp = timerCount
+                temp = temp - 60
+                lblTimer.text = "01:\(temp)"
+            }
         } else {
             self.alertController.dismiss(animated: true, completion: {
                 SimasAlertView.showAlert(withTitle: getString("titleEndOtp"), message: getString("messageEndOtp"), cancelButtonTitle: getString("AlertCloseButtonText"))
@@ -304,7 +298,7 @@ class ActivationViewController: BaseViewController, UIAlertViewDelegate, UITextF
     
     //MARK: Show OTP Alert
     func showOTP()  {
-        timerCount = 60
+        timerCount = 120
         alertController = UIAlertController(title: getString("ConfirmationOTPMessageTitle") + "\n\n\n\n", message: nil, preferredStyle: UIAlertControllerStyle.alert)
         
         let temp = UIView(frame: CGRect(x: 0, y: 40, width: 270, height: 100))
@@ -320,7 +314,7 @@ class ActivationViewController: BaseViewController, UIAlertViewDelegate, UITextF
         lblTimer = BaseLabel(frame: CGRect(x: 0, y: messageAlert.bounds.origin.y + messageAlert.bounds.size.height + 10, width: temp.frame.size.width, height: 15))
         lblTimer.textAlignment = .center
         lblTimer.font = UIFont.systemFont(ofSize: 12)
-        lblTimer.text = "01:00"
+        lblTimer.text = "02:00"
         
         temp.addSubview(lblTimer)
         temp.addSubview(messageAlert)

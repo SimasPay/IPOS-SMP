@@ -1,4 +1,4 @@
-//
+    //
 //  ConfirmationViewController.swift
 //  Simaspay
 //
@@ -257,7 +257,6 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
     //function true button
     func buttonStatus()  {
         self.requestOTP()
-        self.showOTP()
     }
     
     func resendTheOTP() {
@@ -289,12 +288,14 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
             timerCount -= 1
             lblTimer.text = "00:\(timerCount)"
         } else {
+//            let textFields = self.alertController.textFields
+//            for dt in textFields!{
+//               dt.resignFirstResponder()
+//            }
             self.alertController.dismiss(animated: true, completion: {
                 SimasAlertView.showAlert(withTitle: getString("titleEndOtp"), message: getString("messageEndOtp"), cancelButtonTitle: getString("AlertCloseButtonText"))
             })
             clock.invalidate()
-//            lblTimer.isHidden = true
-//            btnResandOTP.isHidden = false
         }
     }
     
@@ -404,8 +405,6 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
         SimasAPIManager .callAPI(withParameters: (dictForRequestOTP ) as! [AnyHashable : Any]!) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             let dictionary = NSDictionary(dictionary: dict!)
-            
-            
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
@@ -421,8 +420,15 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
             } else {
                 let responseDict = dictionary as NSDictionary
                 DLog("\(responseDict)")
-                
-                
+                let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
+                let messageText  = responseDict.value(forKeyPath: "message.text") as! String
+                if (messagecode == "2171"){
+                    self.showOTP()
+                    // 2171 sukses
+                } else {
+                    // 2173 gagal
+                    SimasAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                }
             }
         }
     }
@@ -515,7 +521,11 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
                 } else if (messagecode == SIMASPAY_PAYMENT_SUCCESSCODE) {
                     let vc = SuccesConfirmationController.initWithOwnNib()
                     vc.isAditional = self.isAditional
-                    vc.dataAditional = self.dataAditional
+                    if self.isAditional {
+                        vc.dataAditional = self.dataAditional
+                    } else {
+                        vc.data = self.data
+                    }
                     vc.lblSuccesTransaction = self.lblSuccesTransaction
                     vc.idTran = responseDict.value(forKeyPath: "sctlID.text") as! String
                     self.navigationController?.pushViewController(vc, animated: true)
@@ -538,8 +548,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
                             }
                         }
                     }, cancelButtonTitle: "OK")
-                    // self.navigationController!.popToRootViewController(animated: true)
-                    // return
+                   
                 }
                 
                 

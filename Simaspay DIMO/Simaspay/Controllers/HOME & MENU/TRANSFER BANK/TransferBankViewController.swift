@@ -132,7 +132,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate {
         } else if (!tfAmountTransfer.isValid()){
             message = getString("TransferEmptyNominal")
         } else if (!tfMpin.isValid()){
-            message = "Silakan Masukkan " + getString("TransferLebelMPIN") + " Anda"
+            message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
         } else if (tfMpin.length() < 6) {
             message = "PIN harus 6 digit "
         } else if (!SimasAPIManager.isInternetConnectionExist()) {

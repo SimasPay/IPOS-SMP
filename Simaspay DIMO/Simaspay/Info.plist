@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Can simapay access your gallery</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -32,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>15</string>
+	<string>19</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -42,6 +40,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Used to scan QR code</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Can simapay access your gallery</string>
 	<key>UILaunchStoryboardName</key>
 	<string>SplashScreenViewController</string>
 	<key>UIRequiredDeviceCapabilities</key>

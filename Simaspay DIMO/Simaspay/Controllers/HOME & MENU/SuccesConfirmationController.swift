@@ -78,7 +78,6 @@ class SuccesConfirmationController: BaseViewController {
         var y:CGFloat = 16
         
         if isAditional {
-            
             var i: Int = 1
             for newData in dataAditional {
                 if i == dataAditional.count {

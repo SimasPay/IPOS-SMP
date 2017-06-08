@@ -209,7 +209,7 @@ class TansferToUangkuController: BaseViewController, UITextFieldDelegate {
         } else if (!inputAmount.isValid()){
             message = getString("TransferEmptyNominal")
         } else if (!inputmPin.isValid()){
-            message = "Silakan Masukkan " + getString("TransferLebelMPIN")  + " Anda"
+            message = "Harap Masukkan " + getString("TransferLebelMPIN")  + " Anda"
         } else if (inputmPin.length() < 6) {
             message = "PIN harus 6 digit "
         } else if (!SimasAPIManager.isInternetConnectionExist()) {

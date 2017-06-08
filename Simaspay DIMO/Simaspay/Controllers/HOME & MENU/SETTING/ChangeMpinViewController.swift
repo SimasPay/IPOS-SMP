@@ -120,7 +120,7 @@ class ChangeMpinViewController: BaseViewController, UITextFieldDelegate {
                     dictOtp[TXNNAME] = TXN_RESEND_MFAOTP
                     dictOtp[SERVICE] = SERVICE_WALLET
                     dictOtp[INSTITUTION_ID] = SIMASPAY
-                    dictOtp[SOURCEMDN] =  getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+                    dictOtp[SOURCEMDN] =  mdn
                     dictOtp[SOURCEPIN] = simasPayRSAencryption(self.tfOldMpin.text!)
                     dictOtp[SCTL_ID] = responseDict.value(forKeyPath: "sctlID.text") as! String
                     dictOtp[CHANNEL_ID] = CHANNEL_ID_VALUE
@@ -129,14 +129,14 @@ class ChangeMpinViewController: BaseViewController, UITextFieldDelegate {
 
                     vc.ismPinChange = true
                     
-                    vc.MDNString = UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! String
+                    vc.MDNString = mdn
                     
                     let dictSendOtp = NSMutableDictionary()
                     dictSendOtp[CHANNEL_ID] = CHANNEL_ID_VALUE
                     dictSendOtp[TXNNAME] = TXN_INQUIRY_CHANGEMPIN
                     dictSendOtp[SERVICE] = SERVICE_ACCOUNT
                     dictSendOtp[SOURCEPIN] = simasPayRSAencryption(self.tfOldMpin.text!)
-                    dictSendOtp[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+                    dictSendOtp[SOURCEMDN] = mdn
                     dictSendOtp[CHANGEPIN_NEWPIN] = simasPayRSAencryption(self.tfNewMpin.text!)
                     dictSendOtp[MFATRANSACTION] = "Confirm"
                     dictSendOtp[CHANGEPIN_CONFIRMPIN] = simasPayRSAencryption(self.tfConfirmMpin.text!)
@@ -166,17 +166,17 @@ class ChangeMpinViewController: BaseViewController, UITextFieldDelegate {
         
         var message = "";
         if (!tfOldMpin.isValid()) {
-            message = "Silakan masukkan mPIN lama Anda."
+            message = "Harap masukkan mPIN lama Anda."
         } else if (tfOldMpin.length() < 6) {
             message = "mPIN lama harus 6 digit."
         } else if(!tfNewMpin.isValid()){
-            message = "Silakan masukkan mPIN baru Anda."
+            message = "Harap masukkan mPIN baru Anda."
         } else if (tfNewMpin.length() < 6) {
             message = "mPIN baru harus 6 digit."
         } else if (tfNewMpin.text == tfOldMpin.text){
             message = "mPIN lama dan PIN baru tidak boleh sama."
         } else if (!tfConfirmMpin.isValid()){
-            message = "Silakan masukkan konfirmasi mPIN baru Anda."
+            message = "Harap masukkan konfirmasi mPIN baru Anda."
         } else if (tfOldMpin.length() < 6) {
             message = "Konfirmasi mPIN harus 6 digit."
         } else if (tfNewMpin.text != tfConfirmMpin.text){

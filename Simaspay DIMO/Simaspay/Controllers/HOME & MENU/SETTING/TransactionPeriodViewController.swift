@@ -54,7 +54,6 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
         radioBtnLastMonth.updateToRadioButtonWith(_titleButton: "Bulan lalu")
         radioBtnTwoMonthAgo.updateToRadioButtonWith(_titleButton: "2 bulan lalu")
         radioBtnCustomPeriod.updateToRadioButtonWith(_titleButton: "Periode dari")
-        radioBtnThisMonth.isSelected = true
         
         btnNext.updateButtonType1()
         btnNext.setTitle("Lanjut", for: .normal)
@@ -89,10 +88,19 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
         self.tfSecondDate.inputView = datePicker2
         datePicker2.addTarget(self, action: #selector(datePickerChanged(sender:)), for: .valueChanged)
         
-        //Defult selection previous month
-        self.getDateWithPreviousMonth(numberOfMonth: 0)
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let val = UserDefault.objectFromUserDefaults(forKey: "firstCall") as! Bool
+        if val {
+            //Defult selection previous month
+            radioBtnThisMonth.isSelected = true
+            self.getDateWithPreviousMonth(numberOfMonth: 0)
+            tfFirstDate.text = ""
+            tfSecondDate.text = ""
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -138,7 +146,6 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
             self.getDateWithPreviousMonth(numberOfMonth: 2)
             
         } else if radioBtnCustomPeriod.isSelected {
-            
             tfFirstDate.isUserInteractionEnabled = true
             tfSecondDate.isUserInteractionEnabled = true
             startDate = tfFirstDate.text as NSString!
@@ -178,9 +185,19 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
         var endDate = ""
         var fromDate = ""
         if numberOfMonth == 0 {
-            endDate = String(format: "%@%@%@%@", String(day), String(month < 10 ? "0" : ""),String(month),String(year))
+            if day < 10 && month < 10 {
+                endDate = String(format: "0%@0%@%@", String(day),String(month),String(year))
+            } else if day > 10 && month < 10 {
+                endDate = String(format: "%@0%@%@", String(day),String(month),String(year))
+            } else if day > 10 && month > 10 {
+                endDate = String(format: "%@%@%@", String(day),String(month),String(year))
+            } else if day < 10 && month > 10 {
+                endDate = String(format: "0%@%@%@", String(day),String(month),String(year))
+            }
+            
             fromDate = endDate
-           fromDate = String(format: "01%@", endDate.substring(from: endDate.index(endDate.startIndex, offsetBy: 2)))
+            fromDate = String(format: "01%@", endDate.substring(from: endDate.index(endDate.startIndex, offsetBy: 2)))
+            
         } else {
             // month
             month -= numberOfMonth
@@ -217,13 +234,13 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
         }
         startDate = fromDate as NSString!
         toDate = endDate as NSString!
-       
         DLog("\(fromDate) & \(endDate)")
-      
     }
     
     //MARK: Action buttpn next
     @IBAction func actionBtnNext(_ sender: Any) {
+        UserDefault.setObject(false, forKey: "firstCall")
+        let vc = TransactionHistoryViewController.initWithOwnNib()
         if radioBtnCustomPeriod.isSelected {
             var message = "";
             if (!tfFirstDate.isValid()) {
@@ -236,16 +253,14 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
                 SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
                 return
             }
-
+            
+            self.startDate = tfFirstDate.text! as NSString
+            self.toDate = tfSecondDate.text! as NSString
         }
-        let vc = TransactionHistoryViewController.initWithOwnNib()
+        
         vc.startDate = startDate
         vc.toDate = toDate
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
-    
-       
 
 }

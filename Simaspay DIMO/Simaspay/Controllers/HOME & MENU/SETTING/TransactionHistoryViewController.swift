@@ -169,6 +169,7 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+         DLog("\(dict)")
         SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {

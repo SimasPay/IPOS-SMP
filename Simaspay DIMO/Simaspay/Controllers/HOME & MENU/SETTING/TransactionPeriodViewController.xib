@@ -64,7 +64,6 @@
                             <state key="normal" title="Button" image="radiobutton_off"/>
                             <connections>
                                 <action selector="actionRadioPeriod:" destination="-1" eventType="touchUpInside" id="oQb-Od-KlK"/>
-                                <action selector="actionRadioPeriod:" destination="-2" eventType="touchUpInside" id="pQO-wa-U3g"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jtJ-WB-XHP" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">

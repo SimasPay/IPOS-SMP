@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import ContactsUI
 
-class TransferToEMoney: BaseViewController, UITextFieldDelegate {
+class TransferToEMoney: BaseViewController, UITextFieldDelegate, CNContactPickerDelegate {
 
     @IBOutlet weak var viewBackground: UIView!
     @IBOutlet weak var labelMdn: BaseLabel!
@@ -222,28 +223,43 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate {
     
     //MARK: action next
     @IBAction func actionProses(_ sender: Any) {
-        var message = "";
-        if (!inputMdn.isValid()) {
-            message = "Silakan Masukkan " + getString("TransferLebelMdn") + " Anda"
-        }else if(inputMdn.length() < 10){
-            message = "Nomor Handphone yang Anda masukkan harus 10-14 angka"
-        } else if (!inputAmount.isValid()){
-            message = getString("TransferEmptyNominal")
-        } else if (!inputmPin.isValid()){
-            message = "Silakan Masukkan " + getString("TransferLebelMPIN") + " Anda"
-        } else if (inputmPin.length() < 6) {
-            message = "PIN harus 6 digit "
-        } else if (!SimasAPIManager.isInternetConnectionExist()) {
-            message = getString("LoginMessageNotConnectServer")
+        
+        if #available(iOS 9.0, *) {
+            let peoplePicker = CNContactPickerViewController()
+           
+            peoplePicker.delegate = self
+            self.present(peoplePicker, animated: true, completion: nil)
+        } else {
+            // Fallback on earlier versions
         }
         
-        if (message.characters.count > 0) {
-            SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
-            return
-        }
+//        var message = "";
+//        if (!inputMdn.isValid()) {
+//            message = "Silakan Masukkan " + getString("TransferLebelMdn") + " Anda"
+//        }else if(inputMdn.length() < 10){
+//            message = "Nomor Handphone yang Anda masukkan harus 10-14 angka"
+//        } else if (!inputAmount.isValid()){
+//            message = getString("TransferEmptyNominal")
+//        } else if (!inputmPin.isValid()){
+//            message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
+//        } else if (inputmPin.length() < 6) {
+//            message = "PIN harus 6 digit "
+//        } else if (!SimasAPIManager.isInternetConnectionExist()) {
+//            message = getString("LoginMessageNotConnectServer")
+//        }
+//        
+//        if (message.characters.count > 0) {
+//            SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
+//            return
+//        }
+//        
+//        self.nextProses()
         
-        self.nextProses()
-        
+    }
+    
+    @available(iOS 9.0, *)
+    func contactPicker(picker: CNContactPickerViewController, didSelectContact contact: CNContact) {
+//        NSNotificationCenter.defaultCenter().postNotificationName("addNewContact", object: nil, userInfo: ["contactToAdd": contact])
     }
 
 

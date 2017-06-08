@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		351BC2FD1EB1995B0049849B /* TansferToUangkuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 351BC2FC1EB1995B0049849B /* TansferToUangkuController.xib */; };
 		351BC2FF1EB19FA50049849B /* TansferToUangkuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351BC2FE1EB19FA50049849B /* TansferToUangkuController.swift */; };
+		352898701EE856D60049DD28 /* ShowContactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3528986F1EE856D60049DD28 /* ShowContactController.swift */; };
+		352898721EE856E40049DD28 /* ShowContactController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 352898711EE856E40049DD28 /* ShowContactController.xib */; };
+		352898751EE8FF2D0049DD28 /* DIMOPayiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 352898731EE8FF2D0049DD28 /* DIMOPayiOS.framework */; };
+		352898761EE8FF2D0049DD28 /* DIMOPayiOSResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 352898741EE8FF2D0049DD28 /* DIMOPayiOSResources.bundle */; };
 		3535ED961E9DE5BE007D7942 /* TransferToEMoney.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535ED951E9DE5BE007D7942 /* TransferToEMoney.swift */; };
 		3535ED981E9DE616007D7942 /* TransferToEMoney.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3535ED971E9DE616007D7942 /* TransferToEMoney.xib */; };
 		353C2BA51E9224030082C250 /* libTestFairy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BA21E9224030082C250 /* libTestFairy.a */; };
@@ -73,8 +77,6 @@
 		35995ACF1E262B14007EB516 /* LandingScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995A9F1E262B14007EB516 /* LandingScreenViewController.xib */; };
 		35995AD01E262B14007EB516 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35995AA01E262B14007EB516 /* SplashScreenViewController.swift */; };
 		35995AD11E262B14007EB516 /* SplashScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35995AA11E262B14007EB516 /* SplashScreenViewController.xib */; };
-		35AF51E61ECC3DA4009F5F4F /* DIMOPayiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35AF51E41ECC3DA4009F5F4F /* DIMOPayiOS.framework */; };
-		35AF51E71ECC3DA4009F5F4F /* DIMOPayiOSResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 35AF51E51ECC3DA4009F5F4F /* DIMOPayiOSResources.bundle */; };
 		35BFA0611ECC404800146FFF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35AF51E81ECC3F0E009F5F4F /* MobileCoreServices.framework */; };
 		35BFA0631ECD4E7D00146FFF /* SuccesRegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BFA0621ECD4E7D00146FFF /* SuccesRegisterController.swift */; };
 		35BFA0651ECD4E8900146FFF /* SuccesRegisterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35BFA0641ECD4E8900146FFF /* SuccesRegisterController.xib */; };
@@ -118,6 +120,10 @@
 /* Begin PBXFileReference section */
 		351BC2FC1EB1995B0049849B /* TansferToUangkuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TansferToUangkuController.xib; sourceTree = "<group>"; };
 		351BC2FE1EB19FA50049849B /* TansferToUangkuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TansferToUangkuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		3528986F1EE856D60049DD28 /* ShowContactController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowContactController.swift; sourceTree = "<group>"; };
+		352898711EE856E40049DD28 /* ShowContactController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowContactController.xib; sourceTree = "<group>"; };
+		352898731EE8FF2D0049DD28 /* DIMOPayiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DIMOPayiOS.framework; sourceTree = "<group>"; };
+		352898741EE8FF2D0049DD28 /* DIMOPayiOSResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DIMOPayiOSResources.bundle; sourceTree = "<group>"; };
 		3535ED951E9DE5BE007D7942 /* TransferToEMoney.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TransferToEMoney.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3535ED971E9DE616007D7942 /* TransferToEMoney.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransferToEMoney.xib; sourceTree = "<group>"; };
 		353C2BA21E9224030082C250 /* libTestFairy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFairy.a; sourceTree = "<group>"; };
@@ -183,8 +189,6 @@
 		35995A9F1E262B14007EB516 /* LandingScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LandingScreenViewController.xib; sourceTree = "<group>"; };
 		35995AA01E262B14007EB516 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		35995AA11E262B14007EB516 /* SplashScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashScreenViewController.xib; sourceTree = "<group>"; };
-		35AF51E41ECC3DA4009F5F4F /* DIMOPayiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DIMOPayiOS.framework; sourceTree = "<group>"; };
-		35AF51E51ECC3DA4009F5F4F /* DIMOPayiOSResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DIMOPayiOSResources.bundle; sourceTree = "<group>"; };
 		35AF51E81ECC3F0E009F5F4F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		35BFA0621ECD4E7D00146FFF /* SuccesRegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccesRegisterController.swift; sourceTree = "<group>"; };
 		35BFA0641ECD4E8900146FFF /* SuccesRegisterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccesRegisterController.xib; sourceTree = "<group>"; };
@@ -254,12 +258,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				35BFA0611ECC404800146FFF /* MobileCoreServices.framework in Frameworks */,
-				35AF51E61ECC3DA4009F5F4F /* DIMOPayiOS.framework in Frameworks */,
 				353C2BAD1E9226E60082C250 /* AVFoundation.framework in Frameworks */,
 				353C2BAE1E9226E60082C250 /* CoreMedia.framework in Frameworks */,
 				353C2BAF1E9226E60082C250 /* CoreMotion.framework in Frameworks */,
 				353C2BB01E9226E60082C250 /* OpenGLES.framework in Frameworks */,
 				353C2BB11E9226E60082C250 /* SystemConfiguration.framework in Frameworks */,
+				352898751EE8FF2D0049DD28 /* DIMOPayiOS.framework in Frameworks */,
 				353C2BA51E9224030082C250 /* libTestFairy.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,6 +392,8 @@
 				35995A961E262B14007EB516 /* SuccesChangemPinController.xib */,
 				354F48A01EA4AAB400263340 /* SuccesConfirmationController.swift */,
 				354F48A21EA4AAC000263340 /* SuccesConfirmationController.xib */,
+				3528986F1EE856D60049DD28 /* ShowContactController.swift */,
+				352898711EE856E40049DD28 /* ShowContactController.xib */,
 			);
 			path = "HOME & MENU";
 			sourceTree = "<group>";
@@ -438,8 +444,8 @@
 		35AF51E31ECC3DA4009F5F4F /* PaybyQr */ = {
 			isa = PBXGroup;
 			children = (
-				35AF51E41ECC3DA4009F5F4F /* DIMOPayiOS.framework */,
-				35AF51E51ECC3DA4009F5F4F /* DIMOPayiOSResources.bundle */,
+				352898731EE8FF2D0049DD28 /* DIMOPayiOS.framework */,
+				352898741EE8FF2D0049DD28 /* DIMOPayiOSResources.bundle */,
 			);
 			path = PaybyQr;
 			sourceTree = "<group>";
@@ -665,12 +671,14 @@
 				357E1B471ED4253600E4E8CB /* SecurityQuestionResetController.xib in Resources */,
 				35995AAB1E262B14007EB516 /* EULAViewController.xib in Resources */,
 				35995AA71E262B14007EB516 /* ActivationViewController.xib in Resources */,
+				352898761EE8FF2D0049DD28 /* DIMOPayiOSResources.bundle in Resources */,
 				35995AB91E262B14007EB516 /* ConfirmationViewController.xib in Resources */,
 				35995AD11E262B14007EB516 /* SplashScreenViewController.xib in Resources */,
 				354F48A31EA4AAC000263340 /* SuccesConfirmationController.xib in Resources */,
 				3535ED981E9DE616007D7942 /* TransferToEMoney.xib in Resources */,
 				35995AA31E262B14007EB516 /* ActivationPinViewController.xib in Resources */,
 				351BC2FD1EB1995B0049849B /* TansferToUangkuController.xib in Resources */,
+				352898721EE856E40049DD28 /* ShowContactController.xib in Resources */,
 				356CC84B1E288DCE00E25355 /* TransactionPeriodViewController.xib in Resources */,
 				BE1772921D92859B00A27E06 /* LaunchScreen.storyboard in Resources */,
 				35995AC11E262B14007EB516 /* BalanceInfoViewController.xib in Resources */,
@@ -688,7 +696,6 @@
 				35CDC62B1EB78D6E00E5296A /* CashWithDrawalController.xib in Resources */,
 				35995AB51E262B14007EB516 /* RegisterEMoneyViewController.xib in Resources */,
 				35995AA91E262B14007EB516 /* ContactUSViewController.xib in Resources */,
-				35AF51E71ECC3DA4009F5F4F /* DIMOPayiOSResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -754,6 +761,7 @@
 				35995ABA1E262B14007EB516 /* HomeViewController.swift in Sources */,
 				35995AC01E262B14007EB516 /* BalanceInfoViewController.swift in Sources */,
 				BE9D03031D94DA7F0070894E /* NSData+Base64Extention.m in Sources */,
+				352898701EE856D60049DD28 /* ShowContactController.swift in Sources */,
 				BE204A891D94C9CD0013A483 /* XMLReader.m in Sources */,
 				35995AB61E262B14007EB516 /* SecurityQuestionViewController.swift in Sources */,
 				35995AC21E262B14007EB516 /* ChangeMpinViewController.swift in Sources */,
