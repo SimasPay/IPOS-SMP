@@ -13,6 +13,12 @@
 		352898721EE856E40049DD28 /* ShowContactController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 352898711EE856E40049DD28 /* ShowContactController.xib */; };
 		352898751EE8FF2D0049DD28 /* DIMOPayiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 352898731EE8FF2D0049DD28 /* DIMOPayiOS.framework */; };
 		352898761EE8FF2D0049DD28 /* DIMOPayiOSResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 352898741EE8FF2D0049DD28 /* DIMOPayiOSResources.bundle */; };
+		3528988C1EE916F10049DD28 /* EPConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352898861EE916F10049DD28 /* EPConstants.swift */; };
+		3528988D1EE916F10049DD28 /* EPContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352898871EE916F10049DD28 /* EPContact.swift */; };
+		3528988E1EE916F10049DD28 /* EPContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352898881EE916F10049DD28 /* EPContactCell.swift */; };
+		3528988F1EE916F10049DD28 /* EPContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 352898891EE916F10049DD28 /* EPContactCell.xib */; };
+		352898901EE916F10049DD28 /* EPContactsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3528988A1EE916F10049DD28 /* EPContactsPicker.swift */; };
+		352898911EE916F10049DD28 /* EPExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3528988B1EE916F10049DD28 /* EPExtensions.swift */; };
 		3535ED961E9DE5BE007D7942 /* TransferToEMoney.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3535ED951E9DE5BE007D7942 /* TransferToEMoney.swift */; };
 		3535ED981E9DE616007D7942 /* TransferToEMoney.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3535ED971E9DE616007D7942 /* TransferToEMoney.xib */; };
 		353C2BA51E9224030082C250 /* libTestFairy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 353C2BA21E9224030082C250 /* libTestFairy.a */; };
@@ -124,6 +130,12 @@
 		352898711EE856E40049DD28 /* ShowContactController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowContactController.xib; sourceTree = "<group>"; };
 		352898731EE8FF2D0049DD28 /* DIMOPayiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DIMOPayiOS.framework; sourceTree = "<group>"; };
 		352898741EE8FF2D0049DD28 /* DIMOPayiOSResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DIMOPayiOSResources.bundle; sourceTree = "<group>"; };
+		352898861EE916F10049DD28 /* EPConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPConstants.swift; sourceTree = "<group>"; };
+		352898871EE916F10049DD28 /* EPContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPContact.swift; sourceTree = "<group>"; };
+		352898881EE916F10049DD28 /* EPContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPContactCell.swift; sourceTree = "<group>"; };
+		352898891EE916F10049DD28 /* EPContactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPContactCell.xib; sourceTree = "<group>"; };
+		3528988A1EE916F10049DD28 /* EPContactsPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPContactsPicker.swift; sourceTree = "<group>"; };
+		3528988B1EE916F10049DD28 /* EPExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPExtensions.swift; sourceTree = "<group>"; };
 		3535ED951E9DE5BE007D7942 /* TransferToEMoney.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TransferToEMoney.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3535ED971E9DE616007D7942 /* TransferToEMoney.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransferToEMoney.xib; sourceTree = "<group>"; };
 		353C2BA21E9224030082C250 /* libTestFairy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFairy.a; sourceTree = "<group>"; };
@@ -271,6 +283,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		352898851EE916F10049DD28 /* ContactPicker */ = {
+			isa = PBXGroup;
+			children = (
+				352898861EE916F10049DD28 /* EPConstants.swift */,
+				352898871EE916F10049DD28 /* EPContact.swift */,
+				352898881EE916F10049DD28 /* EPContactCell.swift */,
+				352898891EE916F10049DD28 /* EPContactCell.xib */,
+				3528988A1EE916F10049DD28 /* EPContactsPicker.swift */,
+				3528988B1EE916F10049DD28 /* EPExtensions.swift */,
+			);
+			path = ContactPicker;
+			sourceTree = "<group>";
+		};
 		353C2BA11E9224030082C250 /* TestFairySDK-1.8.5 */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,6 +523,7 @@
 		BE1772BF1D9285DE00A27E06 /* Thirdparties */ = {
 			isa = PBXGroup;
 			children = (
+				352898851EE916F10049DD28 /* ContactPicker */,
 				35AF51E31ECC3DA4009F5F4F /* PaybyQr */,
 				353C2BA11E9224030082C250 /* TestFairySDK-1.8.5 */,
 				BE1772C01D9285DE00A27E06 /* AFNetworking */,
@@ -668,6 +694,7 @@
 				35995AAF1E262B14007EB516 /* LoginPinViewController.xib in Resources */,
 				35995AC51E262B14007EB516 /* TransactionHistoryViewController.xib in Resources */,
 				35995AC91E262B14007EB516 /* ListTransferViewController.xib in Resources */,
+				3528988F1EE916F10049DD28 /* EPContactCell.xib in Resources */,
 				357E1B471ED4253600E4E8CB /* SecurityQuestionResetController.xib in Resources */,
 				35995AAB1E262B14007EB516 /* EULAViewController.xib in Resources */,
 				35995AA71E262B14007EB516 /* ActivationViewController.xib in Resources */,
@@ -721,9 +748,11 @@
 				BEC415E71D929544000C3CF4 /* BaseButton.swift in Sources */,
 				BE1773021D9285DE00A27E06 /* DAFHTTPSessionManager.m in Sources */,
 				35995AA41E262B14007EB516 /* ActivationSuccessViewController.swift in Sources */,
+				3528988E1EE916F10049DD28 /* EPContactCell.swift in Sources */,
 				35995AA81E262B14007EB516 /* ContactUSViewController.swift in Sources */,
 				BE1772881D92859B00A27E06 /* AppDelegate.swift in Sources */,
 				35995AB81E262B14007EB516 /* ConfirmationViewController.swift in Sources */,
+				352898901EE916F10049DD28 /* EPContactsPicker.swift in Sources */,
 				BE1773001D9285DE00A27E06 /* DAFHTTPRequestOperation.m in Sources */,
 				35995ACE1E262B14007EB516 /* LandingScreenViewController.swift in Sources */,
 				357E1B4B1ED4976300E4E8CB /* NewPinController.swift in Sources */,
@@ -732,6 +761,7 @@
 				BEC4160A1D9385D2000C3CF4 /* CategoriesManager.swift in Sources */,
 				357E1B451ED4252600E4E8CB /* SecurityQuestionResetController.swift in Sources */,
 				BEC416051D9385B9000C3CF4 /* DIMOUtility.m in Sources */,
+				352898911EE916F10049DD28 /* EPExtensions.swift in Sources */,
 				BEC416081D9385B9000C3CF4 /* UserDefault.m in Sources */,
 				35995AC81E262B14007EB516 /* ListTransferViewController.swift in Sources */,
 				BEC415EB1D938201000C3CF4 /* ColorManager.swift in Sources */,
@@ -739,7 +769,9 @@
 				BE1773071D9285DE00A27E06 /* DAFURLResponseSerialization.m in Sources */,
 				35995AA21E262B14007EB516 /* ActivationPinViewController.swift in Sources */,
 				BEC416011D9385B9000C3CF4 /* DIMOAlertView.m in Sources */,
+				3528988D1EE916F10049DD28 /* EPContact.swift in Sources */,
 				35BFA0631ECD4E7D00146FFF /* SuccesRegisterController.swift in Sources */,
+				3528988C1EE916F10049DD28 /* EPConstants.swift in Sources */,
 				BE1773051D9285DE00A27E06 /* DAFURLConnectionOperation.m in Sources */,
 				35995ACC1E262B14007EB516 /* TransferOtherBankListViewController.swift in Sources */,
 				BE204A781D93CBFB0013A483 /* BaseTextField.swift in Sources */,

@@ -422,7 +422,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         } else if (tfNoAccount.length() < minlength){
             message = errorMsg1
         } else if (!tfMpin.isValid()){
-            message = "Harap Masukkan " + getString("TransferLebelMPIN")
+            message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
         } else if (tfMpin.length() < 6) {
             message = "PIN harus 6 digit"
         } else if (!SimasAPIManager.isInternetConnectionExist()) {
@@ -446,7 +446,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
             } else if (tfNoAccount.length() < minlength){
                 message = errorMsg1
             } else if (!tfMpin.isValid()){
-                message = "Harap Masukkan " + getString("TransferLebelMPIN")
+                message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
             } else if (tfMpin.length() < 6) {
                 message = "PIN harus 6 digit"
             } else if (!SimasAPIManager.isInternetConnectionExist()) {
@@ -460,7 +460,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
             } else  if (!self.tfNomPayment.isValid()){
                 message = "Masukkan nominal"
             } else if (!tfMpin.isValid()){
-                message = "Harap Masukkan " + getString("TransferLebelMPIN")
+                message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
             } else if (tfMpin.length() < 6) {
                 message = "PIN harus 6 digit"
             } else if (!SimasAPIManager.isInternetConnectionExist()) {
