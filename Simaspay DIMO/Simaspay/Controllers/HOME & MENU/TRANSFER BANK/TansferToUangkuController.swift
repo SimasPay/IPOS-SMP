@@ -8,8 +8,9 @@
 
 
 import UIKit
+import AddressBookUI
 
-class TansferToUangkuController: BaseViewController, UITextFieldDelegate {
+class TansferToUangkuController: BaseViewController, UITextFieldDelegate, EPPickerDelegate, ABPeoplePickerNavigationControllerDelegate {
     
     @IBOutlet weak var viewBackground: UIView!
     @IBOutlet weak var labelMdn: BaseLabel!
@@ -47,6 +48,8 @@ class TansferToUangkuController: BaseViewController, UITextFieldDelegate {
         self.inputMdn.font = UIFont.systemFont(ofSize: 14)
         self.inputMdn.addInset()
         self.inputMdn.delegate = self
+        self.inputMdn.rightViewMode =  UITextFieldViewMode.always
+        self.inputMdn.updateTextFieldWithRightImageNamed("ic_contact_phone_black")
         
         self.inputAmount.font = UIFont.systemFont(ofSize: 14)
         self.inputAmount.updateTextFieldWithLabelText("Rp.")
@@ -225,6 +228,71 @@ class TansferToUangkuController: BaseViewController, UITextFieldDelegate {
         
     }
     
+    
+    //MARK: actionPickerContact
+    @IBAction func actionPickerContact(_ sender: Any) {
+        
+        if #available(iOS 9.0, *) {
+            let contactPickerScene = EPContactsPicker(delegate: self, multiSelection:false, subtitleCellType: SubtitleCellValue.phoneNumber)
+            let navigationController = UINavigationController(rootViewController: contactPickerScene)
+            self.present(navigationController, animated: true, completion: nil)
+        } else {
+            let contactPicker = ABPeoplePickerNavigationController()
+            contactPicker.peoplePickerDelegate = self
+            contactPicker.displayedProperties = [NSNumber(value: kABPersonEmailProperty)]
+            contactPicker.displayedProperties = [NSNumber(value: kABPersonPhoneProperty)]
+            present(contactPicker, animated: true, completion: nil)
+        }
+    }
+    
+    //MARK: EPContactsPicker delegates
+    @available(iOS 9.0, *)
+    func epContactPicker(_: EPContactsPicker, didContactFetchFailed error : NSError){
+        print("Failed with error \(error.description)")
+    }
+    
+    @available(iOS 9.0, *)
+    func epContactPicker(_: EPContactsPicker, didSelectContact contact : EPContact) {
+        let phoneNumbers = contact.phoneNumbers
+        var phoneNUmber = ""
+        
+        if phoneNumbers.count > 0 {
+            phoneNUmber = phoneNumbers[0].phoneNumber
+        }
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "(", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: ")", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "-", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "+", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: " ", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "  ", with: "")
+        self.inputMdn.text = phoneNUmber
+    }
+    
+    @available(iOS 9.0, *)
+    func epContactPicker(_: EPContactsPicker, didCancel error : NSError) {
+        print("User canceled the selection");
+    }
+    
+    func peoplePickerNavigationController(_ peoplePicker: ABPeoplePickerNavigationController, didSelectPerson person: ABRecord) {
+        
+        let phones: ABMultiValue = ABRecordCopyValue(person, kABPersonPhoneProperty).takeUnretainedValue() as ABMultiValue
+        var phoneNUmber = ""
+        for index in 0 ..< ABMultiValueGetCount(phones){
+            let currentPhoneValue = ABMultiValueCopyValueAtIndex(phones, index).takeUnretainedValue() as! CFString as String
+            if index == 0 {
+                phoneNUmber = currentPhoneValue
+            }
+        }
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "(", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: ")", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "-", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "+", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: " ", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "  ", with: "")
+        self.inputMdn.text = phoneNUmber
+        peoplePicker.dismiss(animated: true, completion: nil)
+        
+    }
     
 }
 

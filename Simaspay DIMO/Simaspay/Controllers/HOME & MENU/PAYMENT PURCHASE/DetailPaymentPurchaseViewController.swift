@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import AddressBookUI
 
-class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, EPPickerDelegate, ABPeoplePickerNavigationControllerDelegate  {
     
     var isPurchase = false
     @IBOutlet var constraintHightNoTransaction: NSLayoutConstraint!
     @IBOutlet var constraintHeightNomPayment: NSLayoutConstraint!
+    @IBOutlet var constraintHeightContactPicker: NSLayoutConstraint!
 
     @IBOutlet var btnNext: BaseButton!
     @IBOutlet var lblNomTransaction: BaseLabel!
@@ -94,6 +96,15 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         
         tfNomTransaction.rightViewMode =  UITextFieldViewMode.always
         tfNomTransaction.updateTextFieldWithRightImageNamed("icon_arrow_down")
+        
+        // alternative: not case sensitive
+        if (invoiceTypeString.lowercased().range(of:"phone") != nil ||
+            invoiceTypeString.lowercased().range(of:"phone") != nil ||
+            invoiceTypeString.lowercased().range(of:"telepon") != nil) {
+            constraintHeightContactPicker.constant = 0
+            self.tfNoAccount.rightViewMode =  UITextFieldViewMode.always
+            self.tfNoAccount.updateTextFieldWithRightImageNamed("ic_contact_phone_black")
+        }
         
         
         btnNext.updateButtonType1()
@@ -488,6 +499,71 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         } else {
             self.nextPurchase()
         }
+        
+    }
+    
+    //MARK: actionPickerContact
+    @IBAction func actionPickerContact(_ sender: Any) {
+        
+        if #available(iOS 9.0, *) {
+            let contactPickerScene = EPContactsPicker(delegate: self, multiSelection:false, subtitleCellType: SubtitleCellValue.phoneNumber)
+            let navigationController = UINavigationController(rootViewController: contactPickerScene)
+            self.present(navigationController, animated: true, completion: nil)
+        } else {
+            let contactPicker = ABPeoplePickerNavigationController()
+            contactPicker.peoplePickerDelegate = self
+            contactPicker.displayedProperties = [NSNumber(value: kABPersonEmailProperty)]
+            contactPicker.displayedProperties = [NSNumber(value: kABPersonPhoneProperty)]
+            present(contactPicker, animated: true, completion: nil)
+        }
+    }
+    
+    //MARK: EPContactsPicker delegates
+    @available(iOS 9.0, *)
+    func epContactPicker(_: EPContactsPicker, didContactFetchFailed error : NSError){
+        print("Failed with error \(error.description)")
+    }
+    
+    @available(iOS 9.0, *)
+    func epContactPicker(_: EPContactsPicker, didSelectContact contact : EPContact) {
+        let phoneNumbers = contact.phoneNumbers
+        var phoneNUmber = ""
+        
+        if phoneNumbers.count > 0 {
+            phoneNUmber = phoneNumbers[0].phoneNumber
+        }
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "(", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: ")", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "-", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "+", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: " ", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "  ", with: "")
+        self.tfNoAccount.text = phoneNUmber
+    }
+    
+    @available(iOS 9.0, *)
+    func epContactPicker(_: EPContactsPicker, didCancel error : NSError) {
+        print("User canceled the selection");
+    }
+    
+    func peoplePickerNavigationController(_ peoplePicker: ABPeoplePickerNavigationController, didSelectPerson person: ABRecord) {
+        
+        let phones: ABMultiValue = ABRecordCopyValue(person, kABPersonPhoneProperty).takeUnretainedValue() as ABMultiValue
+        var phoneNUmber = ""
+        for index in 0 ..< ABMultiValueGetCount(phones){
+            let currentPhoneValue = ABMultiValueCopyValueAtIndex(phones, index).takeUnretainedValue() as! CFString as String
+            if index == 0 {
+                phoneNUmber = currentPhoneValue
+            }
+        }
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "(", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: ")", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "-", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "+", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: " ", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "  ", with: "")
+        self.tfNoAccount.text = phoneNUmber
+        peoplePicker.dismiss(animated: true, completion: nil)
         
     }
     

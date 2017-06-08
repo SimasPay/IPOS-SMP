@@ -189,14 +189,18 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
             } else {
                 let responseDict = dictionary as NSDictionary
                 if (messageCode == "39"){
-                    if let result = responseDict.value(forKeyPath: "transactionDetails.transactionDetail") as! [[String : Any]]? {
-                        self.arrayData = result
+                    let result = responseDict.value(forKeyPath: "transactionDetails.transactionDetail")
+                    
+                    if result is Array<AnyObject> {
+                        self.arrayData = result as! [[String : Any]]
                     } else {
                         self.arrayData = [responseDict.value(forKeyPath: "transactionDetails.transactionDetail") as! Dictionary<String, Any>]
                     }
                 } else if (messageCode == "67"){
-                    if let result = responseDict.value(forKeyPath: "transactionDetails.transactionDetail") as! [[String : Any]]? {
-                        self.arrayData = result
+                    let result = responseDict.value(forKeyPath: "transactionDetails.transactionDetail")
+                    
+                    if result is Array<AnyObject> {
+                        self.arrayData = result as! [[String : Any]]
                     } else {
                         self.arrayData = [responseDict.value(forKeyPath: "transactionDetails.transactionDetail") as! Dictionary<String, Any>]
                     }

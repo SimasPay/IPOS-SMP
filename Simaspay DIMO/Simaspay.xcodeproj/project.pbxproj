@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		351BC2FD1EB1995B0049849B /* TansferToUangkuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 351BC2FC1EB1995B0049849B /* TansferToUangkuController.xib */; };
 		351BC2FF1EB19FA50049849B /* TansferToUangkuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351BC2FE1EB19FA50049849B /* TansferToUangkuController.swift */; };
-		352898701EE856D60049DD28 /* ShowContactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3528986F1EE856D60049DD28 /* ShowContactController.swift */; };
-		352898721EE856E40049DD28 /* ShowContactController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 352898711EE856E40049DD28 /* ShowContactController.xib */; };
 		352898751EE8FF2D0049DD28 /* DIMOPayiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 352898731EE8FF2D0049DD28 /* DIMOPayiOS.framework */; };
 		352898761EE8FF2D0049DD28 /* DIMOPayiOSResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 352898741EE8FF2D0049DD28 /* DIMOPayiOSResources.bundle */; };
 		3528988C1EE916F10049DD28 /* EPConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352898861EE916F10049DD28 /* EPConstants.swift */; };
@@ -126,8 +124,6 @@
 /* Begin PBXFileReference section */
 		351BC2FC1EB1995B0049849B /* TansferToUangkuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TansferToUangkuController.xib; sourceTree = "<group>"; };
 		351BC2FE1EB19FA50049849B /* TansferToUangkuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TansferToUangkuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		3528986F1EE856D60049DD28 /* ShowContactController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowContactController.swift; sourceTree = "<group>"; };
-		352898711EE856E40049DD28 /* ShowContactController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowContactController.xib; sourceTree = "<group>"; };
 		352898731EE8FF2D0049DD28 /* DIMOPayiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DIMOPayiOS.framework; sourceTree = "<group>"; };
 		352898741EE8FF2D0049DD28 /* DIMOPayiOSResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DIMOPayiOSResources.bundle; sourceTree = "<group>"; };
 		352898861EE916F10049DD28 /* EPConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPConstants.swift; sourceTree = "<group>"; };
@@ -417,8 +413,6 @@
 				35995A961E262B14007EB516 /* SuccesChangemPinController.xib */,
 				354F48A01EA4AAB400263340 /* SuccesConfirmationController.swift */,
 				354F48A21EA4AAC000263340 /* SuccesConfirmationController.xib */,
-				3528986F1EE856D60049DD28 /* ShowContactController.swift */,
-				352898711EE856E40049DD28 /* ShowContactController.xib */,
 			);
 			path = "HOME & MENU";
 			sourceTree = "<group>";
@@ -705,7 +699,6 @@
 				3535ED981E9DE616007D7942 /* TransferToEMoney.xib in Resources */,
 				35995AA31E262B14007EB516 /* ActivationPinViewController.xib in Resources */,
 				351BC2FD1EB1995B0049849B /* TansferToUangkuController.xib in Resources */,
-				352898721EE856E40049DD28 /* ShowContactController.xib in Resources */,
 				356CC84B1E288DCE00E25355 /* TransactionPeriodViewController.xib in Resources */,
 				BE1772921D92859B00A27E06 /* LaunchScreen.storyboard in Resources */,
 				35995AC11E262B14007EB516 /* BalanceInfoViewController.xib in Resources */,
@@ -793,7 +786,6 @@
 				35995ABA1E262B14007EB516 /* HomeViewController.swift in Sources */,
 				35995AC01E262B14007EB516 /* BalanceInfoViewController.swift in Sources */,
 				BE9D03031D94DA7F0070894E /* NSData+Base64Extention.m in Sources */,
-				352898701EE856D60049DD28 /* ShowContactController.swift in Sources */,
 				BE204A891D94C9CD0013A483 /* XMLReader.m in Sources */,
 				35995AB61E262B14007EB516 /* SecurityQuestionViewController.swift in Sources */,
 				35995AC21E262B14007EB516 /* ChangeMpinViewController.swift in Sources */,

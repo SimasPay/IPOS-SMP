@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSContactsUsageDescription</key>
-	<string>Simaspay application need access to contacts to work</string>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -34,7 +30,9 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>19</string>
+	<string>20</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -44,6 +42,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Used to scan QR code</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Simaspay application need access to contacts to work</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Simaspay application need access to your gallery</string>
 	<key>UILaunchStoryboardName</key>

@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailPaymentPurchaseViewController" customModule="Simaspay" customModuleProvider="target">
             <connections>
                 <outlet property="btnNext" destination="kIN-Ry-1Jr" id="DkQ-7U-0gh"/>
+                <outlet property="constraintHeightContactPicker" destination="Mij-RY-voz" id="pPP-Nr-QIR"/>
                 <outlet property="constraintHeightNomPayment" destination="eff-8h-4X8" id="51N-rQ-wxZ"/>
                 <outlet property="constraintHightNoTransaction" destination="3fX-PJ-a1Z" id="tXg-e1-rsE"/>
                 <outlet property="constraintScrollViewHeight" destination="q6a-7B-SaG" id="5PV-vr-6K2"/>
@@ -192,6 +193,16 @@
                                         <action selector="actionConfirmation:" destination="-1" eventType="touchUpInside" id="9SI-nD-Sfe"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7e-CY-blG">
+                                    <rect key="frame" x="310" y="223" width="40" height="0.0"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="SN9-4t-kZB"/>
+                                    </constraints>
+                                    <connections>
+                                        <action selector="actionPickerContact:" destination="-1" eventType="touchUpInside" id="oTF-mN-UiG"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -203,14 +214,17 @@
                                 <constraint firstItem="as3-ed-yWb" firstAttribute="top" secondItem="hy5-mA-E8w" secondAttribute="bottom" id="KAL-OL-7gb"/>
                                 <constraint firstAttribute="trailing" secondItem="vkd-sP-w1N" secondAttribute="trailing" constant="25" id="Lfv-1q-4dx"/>
                                 <constraint firstItem="hy5-mA-E8w" firstAttribute="leading" secondItem="vkd-sP-w1N" secondAttribute="leading" id="M0g-Yw-ZUU"/>
+                                <constraint firstItem="i7e-CY-blG" firstAttribute="height" secondItem="kYI-IE-Jha" secondAttribute="height" constant="-40" id="Mij-RY-voz"/>
                                 <constraint firstItem="Gef-rF-Z2j" firstAttribute="height" secondItem="vkd-sP-w1N" secondAttribute="height" id="NFk-U6-mfI"/>
                                 <constraint firstItem="vmK-kB-OrE" firstAttribute="top" secondItem="kYI-IE-Jha" secondAttribute="bottom" id="OcC-ok-muT"/>
                                 <constraint firstItem="Gef-rF-Z2j" firstAttribute="width" secondItem="vkd-sP-w1N" secondAttribute="width" id="PHI-mx-fJA"/>
+                                <constraint firstItem="i7e-CY-blG" firstAttribute="trailing" secondItem="kYI-IE-Jha" secondAttribute="trailing" id="RG8-xZ-9Qd"/>
                                 <constraint firstItem="vmK-kB-OrE" firstAttribute="leading" secondItem="vkd-sP-w1N" secondAttribute="leading" id="TqQ-IR-PUJ"/>
                                 <constraint firstItem="kYI-IE-Jha" firstAttribute="width" secondItem="hy5-mA-E8w" secondAttribute="width" id="VUG-Zo-pju"/>
                                 <constraint firstItem="kYI-IE-Jha" firstAttribute="height" secondItem="hy5-mA-E8w" secondAttribute="height" id="Ver-6T-MWF"/>
                                 <constraint firstItem="fzd-S7-BQK" firstAttribute="leading" secondItem="vkd-sP-w1N" secondAttribute="leading" id="VnT-4M-fZI"/>
                                 <constraint firstItem="vmK-kB-OrE" firstAttribute="trailing" secondItem="vkd-sP-w1N" secondAttribute="trailing" id="W50-E4-VZo"/>
+                                <constraint firstItem="i7e-CY-blG" firstAttribute="top" secondItem="kYI-IE-Jha" secondAttribute="bottom" constant="-40" id="Wil-gO-4HG"/>
                                 <constraint firstItem="as3-ed-yWb" firstAttribute="leading" secondItem="vkd-sP-w1N" secondAttribute="leading" id="eWo-DP-5Ok"/>
                                 <constraint firstItem="hy5-mA-E8w" firstAttribute="top" secondItem="vkd-sP-w1N" secondAttribute="bottom" constant="10" id="fUc-DM-j9S"/>
                                 <constraint firstItem="kYI-IE-Jha" firstAttribute="leading" secondItem="hy5-mA-E8w" secondAttribute="leading" id="iBh-So-mdW"/>

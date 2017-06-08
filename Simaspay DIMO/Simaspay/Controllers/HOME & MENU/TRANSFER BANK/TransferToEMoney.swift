@@ -9,7 +9,6 @@
 import UIKit
 import AddressBookUI
 
-
 class TransferToEMoney: BaseViewController, UITextFieldDelegate, EPPickerDelegate, ABPeoplePickerNavigationControllerDelegate {
 
     @IBOutlet weak var viewBackground: UIView!
@@ -48,6 +47,8 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate, EPPickerDelegat
         self.inputMdn.font = UIFont.systemFont(ofSize: 14)
         self.inputMdn.addInset()
         self.inputMdn.delegate = self
+        self.inputMdn.rightViewMode =  UITextFieldViewMode.always
+        self.inputMdn.updateTextFieldWithRightImageNamed("ic_contact_phone_black")
         
         self.inputAmount.font = UIFont.systemFont(ofSize: 14)
         self.inputAmount.updateTextFieldWithLabelText("Rp.")
@@ -224,6 +225,33 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate, EPPickerDelegat
     
     //MARK: action next
     @IBAction func actionProses(_ sender: Any) {
+    
+        var message = "";
+        if (!inputMdn.isValid()) {
+            message = "Silakan Masukkan " + getString("TransferLebelMdn") + " Anda"
+        }else if(inputMdn.length() < 10){
+            message = "Nomor Handphone yang Anda masukkan harus 10-14 angka"
+        } else if (!inputAmount.isValid()){
+            message = getString("TransferEmptyNominal")
+        } else if (!inputmPin.isValid()){
+            message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
+        } else if (inputmPin.length() < 6) {
+            message = "PIN harus 6 digit "
+        } else if (!SimasAPIManager.isInternetConnectionExist()) {
+            message = getString("LoginMessageNotConnectServer")
+        }
+        
+        if (message.characters.count > 0) {
+            SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
+            return
+        }
+        
+        self.nextProses()
+        
+    }
+    
+    //MARK: actionPickerContact
+    @IBAction func actionPickerContact(_ sender: Any) {
         
         if #available(iOS 9.0, *) {
             let contactPickerScene = EPContactsPicker(delegate: self, multiSelection:false, subtitleCellType: SubtitleCellValue.phoneNumber)
@@ -236,29 +264,6 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate, EPPickerDelegat
             contactPicker.displayedProperties = [NSNumber(value: kABPersonPhoneProperty)]
             present(contactPicker, animated: true, completion: nil)
         }
-        
-//        var message = "";
-//        if (!inputMdn.isValid()) {
-//            message = "Silakan Masukkan " + getString("TransferLebelMdn") + " Anda"
-//        }else if(inputMdn.length() < 10){
-//            message = "Nomor Handphone yang Anda masukkan harus 10-14 angka"
-//        } else if (!inputAmount.isValid()){
-//            message = getString("TransferEmptyNominal")
-//        } else if (!inputmPin.isValid()){
-//            message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
-//        } else if (inputmPin.length() < 6) {
-//            message = "PIN harus 6 digit "
-//        } else if (!SimasAPIManager.isInternetConnectionExist()) {
-//            message = getString("LoginMessageNotConnectServer")
-//        }
-//        
-//        if (message.characters.count > 0) {
-//            SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
-//            return
-//        }
-//        
-//        self.nextProses()
-        
     }
     
     //MARK: EPContactsPicker delegates
@@ -275,12 +280,13 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate, EPPickerDelegat
         if phoneNumbers.count > 0 {
             phoneNUmber = phoneNumbers[0].phoneNumber
         }
-        
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "(", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: ")", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "-", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "+", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: " ", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "  ", with: "")
         self.inputMdn.text = phoneNUmber
-//        for phone in phoneNumber {
-//            print(phone.phoneNumber)
-//        }
-        // print("Contact \(contact.displayName()) has been selected")
     }
     
     @available(iOS 9.0, *)
@@ -298,6 +304,12 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate, EPPickerDelegat
                 phoneNUmber = currentPhoneValue
             }
         }
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "(", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: ")", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "-", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "+", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: " ", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "  ", with: "")
         self.inputMdn.text = phoneNUmber
         peoplePicker.dismiss(animated: true, completion: nil)
 
