@@ -313,8 +313,6 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
         self.title = ""
         self.navigationController!.present(previewController, animated: true, completion: {
         })
-        
-        
     }
     
     @available(iOS 4.0, *)

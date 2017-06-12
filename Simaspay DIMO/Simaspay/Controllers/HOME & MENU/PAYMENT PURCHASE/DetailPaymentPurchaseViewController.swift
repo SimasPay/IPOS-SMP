@@ -205,7 +205,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DLog("\(param)")
+        DLog("\(dict)")
         SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {
@@ -279,6 +279,17 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
                     dictSendOtp[MFAOTP] = true
                     vc.dictForAcceptedOTP = dictSendOtp
                     vc.lblSuccesTransaction = getString("SuccesPurchase")
+                    if (SimasAPIManager.sharedInstance().sourcePocketCode as String == "1") {
+                        vc.value = self.tfNoAccount.text
+                        vc.favoriteCategoryID = "8"
+                        vc.mPin = self.tfMpin.text
+                        vc.favoriteCode = self.dictOfData.value(forKey: "productCode") as? String
+                    } else {
+                        vc.value = self.tfNoAccount.text
+                        vc.favoriteCategoryID = "2"
+                        vc.mPin = self.tfMpin.text
+                        vc.favoriteCode = self.dictOfData.value(forKey: "productCode") as? String
+                    }
                     self.navigationController?.pushViewController(vc, animated: false)
                 } else if (messagecode == "631") {
                     SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
@@ -317,7 +328,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DLog("\(param)")
+        DLog("\(dict)")
         SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {
@@ -409,6 +420,17 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
                     dictSendOtp[MFAOTP] = true
                     vc.dictForAcceptedOTP = dictSendOtp
                     vc.lblSuccesTransaction = getString("SuccesPayment")
+                    if (SimasAPIManager.sharedInstance().sourcePocketCode as String == "1") {
+                        vc.value = self.tfNoAccount.text
+                        vc.favoriteCategoryID = "9"
+                        vc.mPin = self.tfMpin.text
+                        vc.favoriteCode = self.dictOfData.value(forKey: "productCode") as? String
+                    } else {
+                        vc.value = self.tfNoAccount.text
+                        vc.favoriteCategoryID = "3"
+                        vc.mPin = self.tfMpin.text
+                        vc.favoriteCode = self.dictOfData.value(forKey: "productCode") as? String
+                    }
                     self.navigationController?.pushViewController(vc, animated: false)
                 } else if (messagecode == "631") {
                     SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in

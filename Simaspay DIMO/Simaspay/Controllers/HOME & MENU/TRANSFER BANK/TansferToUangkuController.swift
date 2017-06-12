@@ -113,7 +113,7 @@ class TansferToUangkuController: BaseViewController, UITextFieldDelegate, EPPick
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DLog("\(param)")
+        DLog("\(dict)")
         SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {
@@ -164,8 +164,14 @@ class TansferToUangkuController: BaseViewController, UITextFieldDelegate, EPPick
                 
                     let dictSendOtp = NSMutableDictionary()
                     if (SimasAPIManager.sharedInstance().sourcePocketCode as String == "1") {
+                        vc.value = self.inputMdn.text
+                        vc.favoriteCategoryID = "12"
+                        vc.mPin = self.inputmPin.text
                         dictSendOtp[SERVICE] = SERVICE_WALLET
                     } else {
+                        vc.value = self.inputMdn.text
+                        vc.favoriteCategoryID = "6"
+                        vc.mPin = self.inputmPin.text
                         dictSendOtp[SERVICE] = SERVICE_BANK
                     }
                     dictSendOtp[TXNNAME] = TXN_TRANSFER_UANGKU

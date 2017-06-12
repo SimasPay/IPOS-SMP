@@ -172,7 +172,7 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate, EPPicke
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DLog("\(param)")
+        DLog("\(dict)")
         SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {
@@ -242,6 +242,14 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate, EPPicke
                     
                     vc.lblSuccesTransaction = getString("SuccesWithDrawal")
                     vc.dictForAcceptedOTP = dictSendOtp
+                    vc.mPin = self.textFieldmPin.text
+                    vc.favoriteCategoryID = "13"
+                    if (self.withDrawalType == WithDrawalType.WithDrawalTypeOther) {
+                        vc.value = self.tfNoAccount.text
+                    } else {
+                        vc.isFavList = false
+                    }
+                
                     self.navigationController?.pushViewController(vc, animated: false)
                 } else if (messagecode == "631") {
                     SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in

@@ -48,8 +48,13 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
     
     //Dictionary for show data registration
     var dataAditional: Array<String>!
-    
     var lblSuccesTransaction: String = ""
+    
+    var value: String! = ""
+    var mPin: String!  = ""
+    var favoriteCategoryID: String!  = ""
+    var favoriteCode: String! = ""
+    var isFavList: Bool! = true
     
     var alertController = UIAlertController()
     
@@ -511,6 +516,11 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
                     messagecode == SIMASPAY_CASH_WITH_DRAWAL_SUCCESSCODE ||
                     messagecode == SIMASPAY_PURCHASE_SUCCESCODE) {
                     let vc = SuccesConfirmationController.initWithOwnNib()
+                    vc.value = self.value
+                    vc.favoriteCategoryID = self.favoriteCategoryID
+                    vc.favoriteCode = self.favoriteCode
+                    vc.mPin = self.mPin
+                    vc.isFavList = self.isFavList
                     vc.data = self.data
                     vc.lblSuccesTransaction = self.lblSuccesTransaction
                     vc.idTran =  responseDict.value(forKeyPath: "sctlID.text") as! String
@@ -526,6 +536,11 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
                     } else {
                         vc.data = self.data
                     }
+                    vc.value = self.value
+                    vc.favoriteCategoryID = self.favoriteCategoryID
+                    vc.favoriteCode = self.favoriteCode
+                    vc.mPin = self.mPin
+                    vc.isFavList = self.isFavList
                     vc.lblSuccesTransaction = self.lblSuccesTransaction
                     vc.idTran = responseDict.value(forKeyPath: "sctlID.text") as! String
                     self.navigationController?.pushViewController(vc, animated: true)

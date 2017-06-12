@@ -57,6 +57,10 @@ let CHANGEPIN_NEWPIN_TEXT = "newPINText"
 let CHANGEPIN_CONFIRMPIN = "confirmPIN"
 let CHANGEPIN_CONFIRMPIN_Text = "confirmPINText"
 let PROFIL_IMAGE_STRING = "profileImageString"
+let FAVORITE_CATEGORY_ID = "favoriteCategoryID"
+let FAVORITE_CODE = "favoriteCode"
+let FAVORITE_LABEL = "favoriteLabel"
+let FAVORITE_VALUE = "favoriteValue"
 
 // MARK: VALUE for keys start here
 // MARK: =========================
@@ -104,6 +108,8 @@ let TXN_MDN_VALIDATION_FORGOT_PIN = "MDNvalidationforForgotPIN"
 let TXN_FORGOT_PIN_INQUIRY = "ForgotPinInquiry"
 let TXN_FORGOT_PIN = "ForgotPin"
 let TXN_UPDATE_PROFILE = "UpdateProfile"
+let TXN_ADD_FAVORITE = "AddFavorite"
+let TXN_FAVORITE_JSON = "GenerateFavoriteJSON"
 
 // MARK: Service
 let SERVICE_ACCOUNT = "Account"

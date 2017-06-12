@@ -37,6 +37,7 @@ typedef enum {
 + (void)callAPIWithParameters:(NSDictionary *)dict
              withSessionCheck:(Boolean)isCheck
                   andComplete:(void(^)(NSDictionary *response, NSError *err))completion;
++ (NSDictionary *)indexKeyedDictionaryFromArray:(NSArray *)array;
 //
 //+ (void)callAPIPOSTWithParameters:(NSDictionary *)dict
 //                      andComplete:(void(^)(NSDictionary *response, NSError *err))completion;
@@ -44,5 +45,4 @@ typedef enum {
 
 @interface NSURLRequest (SSLValidation)
 + (BOOL)allowsAnyHTTPSCertificateForHost:(NSString *)host;
-
 @end

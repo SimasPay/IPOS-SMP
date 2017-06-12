@@ -11,13 +11,14 @@ import UIKit
 class SuccesConfirmationController: BaseViewController {
 
     @IBOutlet weak var viewNavigation: UIView!
-    
+    @IBOutlet weak var radioFavList: BaseButton!
     @IBOutlet weak var succesTransaction: BaseLabel!
     @IBOutlet weak var scrollViewArea: UIScrollView!
     @IBOutlet weak var transactionId: BaseLabel!
     @IBOutlet var btnOk: BaseButton!
     @IBOutlet var viewContentConfirmation: UIView!
     @IBOutlet var constraintViewContent: NSLayoutConstraint!
+    @IBOutlet var constraintHeightFavList: NSLayoutConstraint!
     
     //Dictionary for show data registration
     var data: NSDictionary!
@@ -29,7 +30,13 @@ class SuccesConfirmationController: BaseViewController {
     var isAditional: Bool = false
     //Dictionary for show data registration
     var dataAditional: Array<String>!
+    var favList: Bool = false
     
+    var value: String!
+    var mPin: String!
+    var favoriteCategoryID: String!
+    var favoriteCode: String!
+    var isFavList: Bool!
     
     static func initWithOwnNib() -> SuccesConfirmationController {
         let obj:SuccesConfirmationController = SuccesConfirmationController.init(nibName: String(describing: self), bundle: nil)
@@ -64,6 +71,14 @@ class SuccesConfirmationController: BaseViewController {
         
         self.btnOk.updateButtonType1()
         self.btnOk.setTitle("OK", for: .normal)
+        
+        if isFavList {
+            radioFavList.updateToRadioButtonWith(_titleButton: "Simpan ke Favorit")
+            radioFavList.isSelected = false
+            constraintHeightFavList.constant = 40
+        }
+        
+        
     }
     
     //MARK: Programmatically UI
@@ -162,21 +177,41 @@ class SuccesConfirmationController: BaseViewController {
         self.constraintViewContent.constant = height
     }
     
+    @IBAction func actionFavList(_ sender: Any) {
+        let currentBtn = sender as! UIButton
+        if currentBtn.isSelected {
+            currentBtn.isSelected = false
+            self.favList = false
+        } else {
+            currentBtn.isSelected = true
+            self.favList = true
+        }
+    }
+    
     
     @IBAction func actionOk(_ sender: Any) {
-        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
-        for vc in viewControllers {
-            if(vc.isKind(of: HomeViewController.self)) {
-                self.navigationController!.popToViewController(vc, animated: true);
-                return
-            } else if (vc.isKind(of: RegisterEMoneyViewController.self)) {
-                self.navigationController!.popToViewController(vc, animated: true);
-                return
+        if favList {
+            let vc = AddFavoritListController.initWithOwnNib()
+            vc.value = self.value
+            vc.favoriteCategoryID = self.favoriteCategoryID
+            vc.favoriteCode = self.favoriteCode
+            vc.mPin = self.mPin
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
+            for vc in viewControllers {
+                if(vc.isKind(of: HomeViewController.self)) {
+                    self.navigationController!.popToViewController(vc, animated: true);
+                    return
+                } else if (vc.isKind(of: RegisterEMoneyViewController.self)) {
+                    self.navigationController!.popToViewController(vc, animated: true);
+                    return
+                }
             }
+            self.navigationController?.popToRootViewController(animated: true)
+            return
         }
-//            self.navigationController?.popToRootViewController(animated: true)
-//            return
-
+        
     }
     
 }

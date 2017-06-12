@@ -116,7 +116,7 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate, EPPickerDelegat
     
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
-        DLog("\(param)")
+        DLog("\(dict)")
         SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
             if (err != nil) {
@@ -181,8 +181,14 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate, EPPickerDelegat
                     
                     let dictSendOtp = NSMutableDictionary()
                     if (SimasAPIManager.sharedInstance().sourcePocketCode as String == "1") {
+                        vc.value = self.inputMdn.text
+                        vc.favoriteCategoryID = "7"
+                        vc.mPin = self.inputmPin.text
                         dictSendOtp[SERVICE] = SERVICE_WALLET
                     } else {
+                        vc.value = self.inputMdn.text
+                        vc.favoriteCategoryID = "5"
+                        vc.mPin = self.inputmPin.text
                         dictSendOtp[SERVICE] = SERVICE_BANK
                     }
                     dictSendOtp[TXNNAME] = TRANSFER
@@ -225,28 +231,43 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate, EPPickerDelegat
     
     //MARK: action next
     @IBAction func actionProses(_ sender: Any) {
+        let data = [
+            "title" : "Pastikan data berikut sudah benar",
+            "content" : [
+                [getString("ConfirmationOwnMdn") : "sd js js js"],
+                [getString("TransferLebelMdn") : "sd js js js"],
+                [getString("TransferLebelAmount") : "sd js js js"],
+            ]
+        ] as [String : Any]
+        
+        let vc = SuccesConfirmationController.initWithOwnNib()
+        vc.data = data as NSDictionary
+        vc.lblSuccesTransaction = "Oke"
+        vc.idTran =  "oke"
+        self.navigationController?.pushViewController(vc, animated: true)
+
     
-        var message = "";
-        if (!inputMdn.isValid()) {
-            message = "Silakan Masukkan " + getString("TransferLebelMdn") + " Anda"
-        }else if(inputMdn.length() < 10){
-            message = "Nomor Handphone yang Anda masukkan harus 10-14 angka"
-        } else if (!inputAmount.isValid()){
-            message = getString("TransferEmptyNominal")
-        } else if (!inputmPin.isValid()){
-            message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
-        } else if (inputmPin.length() < 6) {
-            message = "PIN harus 6 digit "
-        } else if (!SimasAPIManager.isInternetConnectionExist()) {
-            message = getString("LoginMessageNotConnectServer")
-        }
-        
-        if (message.characters.count > 0) {
-            SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
-            return
-        }
-        
-        self.nextProses()
+//        var message = "";
+//        if (!inputMdn.isValid()) {
+//            message = "Silakan Masukkan " + getString("TransferLebelMdn") + " Anda"
+//        }else if(inputMdn.length() < 10){
+//            message = "Nomor Handphone yang Anda masukkan harus 10-14 angka"
+//        } else if (!inputAmount.isValid()){
+//            message = getString("TransferEmptyNominal")
+//        } else if (!inputmPin.isValid()){
+//            message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
+//        } else if (inputmPin.length() < 6) {
+//            message = "PIN harus 6 digit "
+//        } else if (!SimasAPIManager.isInternetConnectionExist()) {
+//            message = getString("LoginMessageNotConnectServer")
+//        }
+//        
+//        if (message.characters.count > 0) {
+//            SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
+//            return
+//        }
+//        
+//        self.nextProses()
         
     }
     

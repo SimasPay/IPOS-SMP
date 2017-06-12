@@ -211,7 +211,6 @@ NSTimer *timer;
     }
 }
 
-
 + (void)handleSuccessForOperation:(DAFHTTPRequestOperation *)operation
                    responseObject:(id)responseObject
                        completion:(void(^)(DAFHTTPRequestOperation *operation, id responseObject, NSError *err))completion
@@ -236,10 +235,10 @@ NSTimer *timer;
         if (operation.response.statusCode == successCode) {
             if ([result isKindOfClass:[NSArray class]]) {
                 // means success with array
-                completion(operation, result, nil);
+                NSDictionary *dictionary = [self indexKeyedDictionaryFromArray:result];
+                completion(operation, dictionary, nil);
                 return;
             }
-            
             if (result[kDIMO_RESULT_SUCCESS] != nil) {
                 if ([result[kDIMO_RESULT_SUCCESS][@"text"] isEqualToString:@"true"]) {
                     completion(operation, result, nil);
@@ -348,6 +347,18 @@ NSTimer *timer;
                                          completion:completion];
         }];
     }
+}
+
++ (NSDictionary *)indexKeyedDictionaryFromArray:(NSArray *)array
+{
+    id objectInstance;
+    NSUInteger indexKey = 0U;
+    
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] init];
+    for (objectInstance in array)
+        [mutableDictionary setObject:objectInstance forKey:[NSNumber numberWithUnsignedInt:indexKey++]];
+    
+    return [NSDictionary dictionaryWithDictionary:mutableDictionary];
 }
 
 @end
