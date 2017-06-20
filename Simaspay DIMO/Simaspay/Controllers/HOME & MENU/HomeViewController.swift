@@ -700,9 +700,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
     
     func actionBack() {
         DIMOPay.closeSDK()
-        self.initSDKPayQR()
-        DIMOPay.startSDK(self, with: self)
-        self.viewMpin.removeFromSuperview()
+        let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+             self.viewMpin.removeFromSuperview()
+        }
+       
     }
     
     func payBYQRBtnClicked() {
@@ -883,7 +885,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
                     self.dictConfirmation[CONFIRMED] = "true"
                     
                     self.requestOTP()
-                    self.showOTP()
+                   
                     
                 } else if (messagecode == "631") {
                     DIMOPay.closeSDK()
@@ -1031,9 +1033,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
         DMBProgressHUD.showAdded(to: self.viewMpin, animated: true)
         SimasAPIManager .callAPI(withParameters: self.dictForRequestOTP as! [AnyHashable : Any] ) { (dict, err) in
             DMBProgressHUD.hideAllHUDs(for: self.viewMpin, animated: true)
-            let dictionary = NSDictionary(dictionary: dict!)
-            
-            
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
@@ -1044,6 +1043,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
                 return
             }
             
+            let dictionary = NSDictionary(dictionary: dict!)
             if (dictionary.allKeys.count == 0) {
                 SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
@@ -1052,7 +1052,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
                 let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
                 let messageText  = responseDict.value(forKeyPath: "message.text") as! String
                 
-                if messagecode != "2171" {
+                if messagecode == "2171" {
+                    self.showOTP()
+                } else {
                     SimasAlertView.showAlert(withTitle: nil, message:messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
                 }
             }
@@ -1071,8 +1073,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
             SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))
             return
         }
-        
-        DLog(self.tfOtp.text)
         self.dictConfirmation[MFAOTP] = simasPayRSAencryption(self.tfOtp.text!)
         DMBProgressHUD.showAdded(to: self.viewMpin, animated: true)
         
@@ -1084,13 +1084,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
                 
             }
         }
-        
+        DLog("\(self.dictConfirmation)")
         
         SimasAPIManager .callAPI(withParameters: self.dictConfirmation as! [AnyHashable : Any], withSessionCheck:sessionCheck) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.viewMpin, animated: true)
-            let dictionary = NSDictionary(dictionary: dict!)
-            
-            
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
@@ -1101,6 +1098,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
                 return
             }
             
+            let dictionary = NSDictionary(dictionary: dict!)
             if (dictionary.allKeys.count == 0) {
                 SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
                 

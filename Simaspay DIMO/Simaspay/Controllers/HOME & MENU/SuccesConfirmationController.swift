@@ -111,11 +111,16 @@ class SuccesConfirmationController: BaseViewController {
                 lblKey.text = key.capitalized
                 viewContentConfirmation.addSubview(lblKey)
                 y += heightContent
-                let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
-                lblValue.font = UIFont.systemFont(ofSize: 13)
+                let fontValue = UIFont.systemFont(ofSize: 13)
+                let heigtVal = self.heightForView(text: value.capitalized, font: fontValue, width: width - 2 * padding)
+                
+                let lblValue = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heigtVal))
+                lblValue.font = fontValue
                 lblValue.text = value.capitalized
+                lblValue.numberOfLines = 0
+                lblValue.lineBreakMode = NSLineBreakMode.byWordWrapping
                 viewContentConfirmation.addSubview(lblValue)
-                y += heightContent + margin
+                y += heigtVal + margin
                 i += 1
             }
             
@@ -212,6 +217,16 @@ class SuccesConfirmationController: BaseViewController {
             return
         }
         
+    }
+    
+    func heightForView(text:String, font:UIFont, width:CGFloat) -> CGFloat{
+        let label:BaseLabel = BaseLabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = font
+        label.text = text
+        label.sizeToFit()
+        return label.frame.height
     }
     
 }

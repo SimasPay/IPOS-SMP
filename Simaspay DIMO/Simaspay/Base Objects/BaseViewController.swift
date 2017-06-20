@@ -113,6 +113,9 @@ class BaseViewController: UIViewController {
             if !(item as! UITextField).isEnabled && !(item as! UITextField).isUserInteractionEnabled {
                 continue
             }
+            if !(item as! UITextField).isUserInteractionEnabled {
+                continue
+            }
             if (item as! UITextField).isFirstResponder && last != nil {
                 (last as UITextField).becomeFirstResponder()
                 break
@@ -125,6 +128,10 @@ class BaseViewController: UIViewController {
         var isFirstResponder = false
         for item in arrayTextFields {
             if !(item as! UITextField).isEnabled && !(item as! UITextField).isUserInteractionEnabled {
+                continue
+            }
+            
+            if !(item as! UITextField).isUserInteractionEnabled {
                 continue
             }
             if isFirstResponder {

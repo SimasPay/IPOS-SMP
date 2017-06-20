@@ -52,7 +52,6 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLayoutSubviews()
         viewTextField.updateViewRoundedWithShadow()
         btnActivationAccount.addUnderline()
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -110,9 +109,6 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
        //SimasAPIManager without Session check
         SimasAPIManager .callAPI(withParameters: param, withSessionCheck: false) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
-            let dictionary = NSDictionary(dictionary: dict!)
-            
-            
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
@@ -123,6 +119,7 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
                 return
             }
             
+            let dictionary = NSDictionary(dictionary: dict!)
             if (dictionary.allKeys.count == 0) {
                 
                 SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))

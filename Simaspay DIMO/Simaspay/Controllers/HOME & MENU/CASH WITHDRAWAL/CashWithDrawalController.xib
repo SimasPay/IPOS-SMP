@@ -13,14 +13,19 @@
             <connections>
                 <outlet property="btnNext" destination="vb5-0u-3QP" id="eiA-5g-XCB"/>
                 <outlet property="constraintBottomScroll" destination="Dgr-zq-qHz" id="PGs-7P-M6i"/>
+                <outlet property="constraintHeightFavlist" destination="nsl-BE-CIB" id="8nF-eB-IRV"/>
+                <outlet property="constraintHeightManual" destination="Zne-A6-zWU" id="Ff5-PF-Hqf"/>
                 <outlet property="constraintViewAcount" destination="lpI-fe-94L" id="LDo-v5-EKc"/>
                 <outlet property="lblFirstTitleTf" destination="HDU-T2-NxF" id="zkp-U6-Z3h"/>
                 <outlet property="lblMPin" destination="1jP-fN-afF" id="Txk-Hd-XcW"/>
                 <outlet property="lblMinimumAmount" destination="GFP-Oh-jWi" id="exD-1b-zR7"/>
                 <outlet property="lblSecondTitleTf" destination="vzQ-Xh-0re" id="6sK-Xe-Heb"/>
+                <outlet property="radioBtnFav" destination="iGY-lc-uHE" id="HUx-aa-8zg"/>
+                <outlet property="radioBtnManual" destination="Vcn-qF-HEu" id="elu-4C-nzO"/>
                 <outlet property="scrollView" destination="Vhr-nN-g73" id="JcD-p6-uHN"/>
                 <outlet property="textFieldmPin" destination="WfP-qm-EZs" id="4dl-7g-1X5"/>
                 <outlet property="tfAmountTransfer" destination="rba-rN-RPk" id="o66-Z2-epe"/>
+                <outlet property="tfFavList" destination="1P8-Sz-ZVY" id="V6D-AU-PR9"/>
                 <outlet property="tfNoAccount" destination="7w5-Nc-eu8" id="7GB-iG-U9H"/>
                 <outlet property="view" destination="dJ4-Bv-a0F" id="dXM-xw-Ae5"/>
             </connections>
@@ -44,8 +49,18 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="594"/>
                             <subviews>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJl-cS-BZk">
-                                    <rect key="frame" x="28" y="25" width="319" height="85"/>
+                                    <rect key="frame" x="28" y="25" width="319" height="191"/>
                                     <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1P8-Sz-ZVY" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="91" width="319" height="40"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="nsl-BE-CIB"/>
+                                            </constraints>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDU-T2-NxF" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="319" height="17"/>
                                             <constraints>
@@ -56,7 +71,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7w5-Nc-eu8" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="25" width="319" height="40"/>
+                                            <rect key="frame" x="0.0" y="131" width="319" height="40"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="Zne-A6-zWU"/>
@@ -66,7 +81,7 @@
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lXp-tk-4m3">
-                                            <rect key="frame" x="279" y="25" width="40" height="40"/>
+                                            <rect key="frame" x="279" y="131" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="qdb-CK-uQQ"/>
                                             </constraints>
@@ -74,24 +89,65 @@
                                                 <action selector="actionPickerContact:" destination="-1" eventType="touchUpInside" id="lPp-0d-eTW"/>
                                             </connections>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iGY-lc-uHE" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="25" width="319" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="pCz-Fj-aHK"/>
+                                            </constraints>
+                                            <state key="normal" title="Button" image="radiobutton_off"/>
+                                            <connections>
+                                                <action selector="actionRadio:" destination="-1" eventType="touchUpInside" id="avk-vs-FH3"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vcn-qF-HEu" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="58" width="319" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="wBJ-4n-yzU"/>
+                                            </constraints>
+                                            <state key="normal" title="Button" image="radiobutton_off"/>
+                                            <connections>
+                                                <action selector="actionRadio:" destination="-1" eventType="touchUpInside" id="SjQ-ZC-4u0"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6l-2g-ros">
+                                            <rect key="frame" x="0.0" y="91" width="319" height="40"/>
+                                            <connections>
+                                                <action selector="actionPicker:" destination="-1" eventType="touchUpInside" id="FJD-Xl-uuE"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
+                                        <constraint firstItem="1P8-Sz-ZVY" firstAttribute="top" secondItem="Vcn-qF-HEu" secondAttribute="bottom" constant="8" id="3o3-eC-kO3"/>
+                                        <constraint firstAttribute="trailing" secondItem="1P8-Sz-ZVY" secondAttribute="trailing" id="4ab-96-VS2"/>
                                         <constraint firstItem="lXp-tk-4m3" firstAttribute="top" secondItem="7w5-Nc-eu8" secondAttribute="bottom" constant="-40" id="5L5-L1-Vcb"/>
                                         <constraint firstAttribute="bottom" secondItem="7w5-Nc-eu8" secondAttribute="bottom" constant="20" id="7AL-jO-2sw"/>
+                                        <constraint firstItem="Vcn-qF-HEu" firstAttribute="trailing" secondItem="iGY-lc-uHE" secondAttribute="trailing" id="Hy6-my-MKt"/>
+                                        <constraint firstAttribute="trailing" secondItem="Vcn-qF-HEu" secondAttribute="trailing" id="IAA-Mw-zui"/>
+                                        <constraint firstItem="lXp-tk-4m3" firstAttribute="height" secondItem="7w5-Nc-eu8" secondAttribute="height" id="NFK-DT-uyZ"/>
+                                        <constraint firstItem="1P8-Sz-ZVY" firstAttribute="leading" secondItem="YJl-cS-BZk" secondAttribute="leading" id="O9z-7v-ndh"/>
                                         <constraint firstItem="HDU-T2-NxF" firstAttribute="top" secondItem="YJl-cS-BZk" secondAttribute="top" id="Pm4-qt-rqG"/>
                                         <constraint firstItem="7w5-Nc-eu8" firstAttribute="leading" secondItem="YJl-cS-BZk" secondAttribute="leading" id="QfP-o0-ka2"/>
-                                        <constraint firstItem="7w5-Nc-eu8" firstAttribute="top" secondItem="HDU-T2-NxF" secondAttribute="bottom" constant="8" id="Rue-JZ-gld"/>
                                         <constraint firstAttribute="trailing" secondItem="7w5-Nc-eu8" secondAttribute="trailing" id="ZgI-f1-aKJ"/>
+                                        <constraint firstItem="Vcn-qF-HEu" firstAttribute="leading" secondItem="YJl-cS-BZk" secondAttribute="leading" id="aLG-bt-Kb4"/>
                                         <constraint firstAttribute="trailing" secondItem="HDU-T2-NxF" secondAttribute="trailing" id="cRU-r1-tNf"/>
                                         <constraint firstItem="HDU-T2-NxF" firstAttribute="leading" secondItem="YJl-cS-BZk" secondAttribute="leading" id="cfO-1L-RES"/>
-                                        <constraint firstItem="lXp-tk-4m3" firstAttribute="height" secondItem="7w5-Nc-eu8" secondAttribute="height" id="hp4-Zf-5cm"/>
-                                        <constraint firstAttribute="height" constant="85" id="lpI-fe-94L"/>
+                                        <constraint firstItem="7w5-Nc-eu8" firstAttribute="top" secondItem="1P8-Sz-ZVY" secondAttribute="bottom" id="coD-hD-hs4"/>
+                                        <constraint firstItem="b6l-2g-ros" firstAttribute="bottom" secondItem="1P8-Sz-ZVY" secondAttribute="bottom" id="hHg-wJ-kki"/>
+                                        <constraint firstAttribute="trailing" secondItem="iGY-lc-uHE" secondAttribute="trailing" id="hdH-Jz-90j"/>
+                                        <constraint firstItem="Vcn-qF-HEu" firstAttribute="top" secondItem="iGY-lc-uHE" secondAttribute="bottom" constant="8" id="hsk-cz-ihN"/>
+                                        <constraint firstItem="Vcn-qF-HEu" firstAttribute="leading" secondItem="iGY-lc-uHE" secondAttribute="leading" id="iDt-M8-lUU"/>
+                                        <constraint firstItem="iGY-lc-uHE" firstAttribute="top" secondItem="HDU-T2-NxF" secondAttribute="bottom" constant="8" id="jab-qG-Lnk"/>
+                                        <constraint firstItem="b6l-2g-ros" firstAttribute="top" secondItem="1P8-Sz-ZVY" secondAttribute="top" id="kFi-8v-nCB"/>
+                                        <constraint firstAttribute="height" constant="191" id="lpI-fe-94L"/>
+                                        <constraint firstItem="b6l-2g-ros" firstAttribute="trailing" secondItem="1P8-Sz-ZVY" secondAttribute="trailing" id="sdy-9D-zH7"/>
+                                        <constraint firstItem="iGY-lc-uHE" firstAttribute="leading" secondItem="YJl-cS-BZk" secondAttribute="leading" id="t8I-yy-zfA"/>
                                         <constraint firstItem="lXp-tk-4m3" firstAttribute="trailing" secondItem="7w5-Nc-eu8" secondAttribute="trailing" id="wDk-0x-F6V"/>
+                                        <constraint firstItem="b6l-2g-ros" firstAttribute="leading" secondItem="1P8-Sz-ZVY" secondAttribute="leading" id="zWX-Um-FbO"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzQ-Xh-0re" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="28" y="110" width="319" height="17"/>
+                                    <rect key="frame" x="28" y="216" width="319" height="17"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="17" id="qnV-Nn-hp5"/>
                                     </constraints>
@@ -100,7 +156,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rba-rN-RPk" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="28" y="135" width="319" height="40"/>
+                                    <rect key="frame" x="28" y="241" width="319" height="40"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="N3F-CY-SYt"/>
@@ -110,27 +166,27 @@
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1jP-fN-afF" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="28" y="239" width="319" height="20.5"/>
+                                    <rect key="frame" x="28" y="345" width="319" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WfP-qm-EZs" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="28" y="267.5" width="319" height="40"/>
+                                    <rect key="frame" x="28" y="373.5" width="319" height="40"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vb5-0u-3QP" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="88" y="336.5" width="200" height="48"/>
+                                    <rect key="frame" x="88" y="442.5" width="200" height="48"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="48" id="eFc-SP-YM7"/>
                                         <constraint firstAttribute="width" constant="200" id="yHm-qJ-Y97"/>
                                     </constraints>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GFP-Oh-jWi" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="28" y="185" width="319" height="34"/>
+                                    <rect key="frame" x="28" y="291" width="319" height="34"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="34" id="ZmS-mI-Iwv"/>
                                     </constraints>
@@ -190,4 +246,7 @@
             <point key="canvasLocation" x="70.5" y="59.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="radiobutton_off" width="26" height="25"/>
+    </resources>
 </document>

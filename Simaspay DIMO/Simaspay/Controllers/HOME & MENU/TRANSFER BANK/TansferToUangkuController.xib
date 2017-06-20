@@ -14,11 +14,16 @@
                 <outlet property="LabelAmount" destination="0h2-xC-n0V" id="kTx-vc-UQp"/>
                 <outlet property="btnNext" destination="WHG-Vu-tRh" id="khY-Pw-5DV"/>
                 <outlet property="constraintBottomScroll" destination="0cT-bx-mdm" id="gm0-8w-WNZ"/>
+                <outlet property="constraintHeightFavlist" destination="10c-hU-GNG" id="eQx-2Z-l7X"/>
+                <outlet property="constraintHeightManual" destination="AGW-zM-Zdj" id="d1a-iv-bzb"/>
                 <outlet property="inputAmount" destination="J1s-XM-Moy" id="6hM-fU-ocY"/>
                 <outlet property="inputMdn" destination="hTo-wd-ylC" id="N3S-JB-CPC"/>
                 <outlet property="inputmPin" destination="ZTr-YN-sd1" id="K0B-iw-8Df"/>
                 <outlet property="labelMdn" destination="ldc-QG-vrx" id="iS0-lG-Dqx"/>
                 <outlet property="labelmPin" destination="J8A-Ie-Fzb" id="lhv-V7-b6z"/>
+                <outlet property="radioBtnFav" destination="8Jn-xD-tNm" id="1U1-Qj-ZaZ"/>
+                <outlet property="radioBtnManual" destination="zZ2-AA-U9Q" id="heA-Om-YtF"/>
+                <outlet property="tfFavList" destination="fsE-07-E86" id="Vwn-48-NZk"/>
                 <outlet property="view" destination="pSa-oz-55C" id="sre-uc-68k"/>
                 <outlet property="viewBackground" destination="KCc-9G-HXv" id="nD5-jc-fuZ"/>
             </connections>
@@ -50,8 +55,18 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fsE-07-E86" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="28" y="119" width="319" height="40"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="10c-hU-GNG"/>
+                                    </constraints>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
                                 <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hTo-wd-ylC" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="28" y="51" width="319" height="40"/>
+                                    <rect key="frame" x="28" y="159" width="319" height="40"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="AGW-zM-Zdj"/>
@@ -61,33 +76,39 @@
                                     <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0h2-xC-n0V" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="28" y="111" width="319" height="16"/>
+                                    <rect key="frame" x="28" y="219" width="319" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J1s-XM-Moy" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="28" y="135" width="319" height="40"/>
+                                    <rect key="frame" x="28" y="243" width="319" height="40"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="KfJ-KT-Q6l"/>
+                                    </constraints>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J8A-Ie-Fzb" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="28" y="195" width="319" height="16"/>
+                                    <rect key="frame" x="28" y="303" width="319" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZTr-YN-sd1" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="28" y="221" width="319" height="40"/>
+                                    <rect key="frame" x="28" y="329" width="319" height="40"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="FFM-kk-g7l"/>
+                                    </constraints>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHG-Vu-tRh" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="88" y="286" width="200" height="48"/>
+                                    <rect key="frame" x="88" y="394" width="200" height="48"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="48" id="48g-EA-Kkz"/>
                                         <constraint firstAttribute="width" constant="200" id="Vc2-Rw-3Kz"/>
@@ -97,7 +118,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aOg-Br-cDD">
-                                    <rect key="frame" x="307" y="51" width="40" height="40"/>
+                                    <rect key="frame" x="307" y="159" width="40" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="40" id="krX-ct-GFo"/>
                                     </constraints>
@@ -105,37 +126,75 @@
                                         <action selector="actionPickerContact:" destination="-1" eventType="touchUpInside" id="FUT-8A-Orl"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Jn-xD-tNm" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="28" y="51" width="319" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="SCm-1b-N3q"/>
+                                    </constraints>
+                                    <state key="normal" title="Button" image="radiobutton_off"/>
+                                    <connections>
+                                        <action selector="actionRadio:" destination="-1" eventType="touchUpInside" id="sdX-wF-hst"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zZ2-AA-U9Q" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="28" y="84" width="319" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="J1W-hb-A0j"/>
+                                    </constraints>
+                                    <state key="normal" title="Button" image="radiobutton_off"/>
+                                    <connections>
+                                        <action selector="actionRadio:" destination="-1" eventType="touchUpInside" id="AIK-f2-qfa"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XTx-dg-Ren">
+                                    <rect key="frame" x="28" y="119" width="319" height="40"/>
+                                    <connections>
+                                        <action selector="actionPicker:" destination="-1" eventType="touchUpInside" id="IZ8-kk-9QY"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
+                                <constraint firstItem="XTx-dg-Ren" firstAttribute="height" secondItem="fsE-07-E86" secondAttribute="height" id="1aG-iZ-2eQ"/>
+                                <constraint firstItem="fsE-07-E86" firstAttribute="trailing" secondItem="ldc-QG-vrx" secondAttribute="trailing" id="4Q0-lE-QPB"/>
                                 <constraint firstItem="J1s-XM-Moy" firstAttribute="top" secondItem="0h2-xC-n0V" secondAttribute="bottom" constant="8" id="8MZ-4c-2HD"/>
                                 <constraint firstAttribute="height" priority="250" constant="594" placeholder="YES" id="9Zz-Bn-KwO"/>
                                 <constraint firstItem="J1s-XM-Moy" firstAttribute="trailing" secondItem="0h2-xC-n0V" secondAttribute="trailing" id="9hj-EZ-dII"/>
                                 <constraint firstItem="0h2-xC-n0V" firstAttribute="leading" secondItem="hTo-wd-ylC" secondAttribute="leading" id="Ail-S9-C7P"/>
-                                <constraint firstItem="ZTr-YN-sd1" firstAttribute="height" secondItem="J1s-XM-Moy" secondAttribute="height" id="CHc-2S-NIb"/>
+                                <constraint firstItem="8Jn-xD-tNm" firstAttribute="trailing" secondItem="ldc-QG-vrx" secondAttribute="trailing" id="BNT-ee-T1N"/>
                                 <constraint firstAttribute="trailing" secondItem="ldc-QG-vrx" secondAttribute="trailing" constant="28" id="CXR-mx-6d4"/>
                                 <constraint firstItem="ZTr-YN-sd1" firstAttribute="leading" secondItem="J8A-Ie-Fzb" secondAttribute="leading" id="CuY-Sk-1zT"/>
                                 <constraint firstItem="0h2-xC-n0V" firstAttribute="top" secondItem="hTo-wd-ylC" secondAttribute="bottom" constant="20" id="F5T-MU-7yP"/>
+                                <constraint firstItem="XTx-dg-Ren" firstAttribute="leading" secondItem="fsE-07-E86" secondAttribute="leading" id="GYr-gU-f57"/>
                                 <constraint firstItem="hTo-wd-ylC" firstAttribute="trailing" secondItem="ldc-QG-vrx" secondAttribute="trailing" id="H4x-Eh-3N6"/>
                                 <constraint firstItem="J1s-XM-Moy" firstAttribute="leading" secondItem="0h2-xC-n0V" secondAttribute="leading" id="HHb-ht-Ioc"/>
+                                <constraint firstItem="XTx-dg-Ren" firstAttribute="trailing" secondItem="fsE-07-E86" secondAttribute="trailing" id="Iyn-vw-lbb"/>
                                 <constraint firstItem="ZTr-YN-sd1" firstAttribute="trailing" secondItem="J8A-Ie-Fzb" secondAttribute="trailing" id="K0t-iI-cCn"/>
                                 <constraint firstItem="0h2-xC-n0V" firstAttribute="height" secondItem="ldc-QG-vrx" secondAttribute="height" id="KSu-Gw-dl7"/>
+                                <constraint firstItem="XTx-dg-Ren" firstAttribute="top" secondItem="fsE-07-E86" secondAttribute="top" id="KnU-Ax-QJK"/>
                                 <constraint firstItem="WHG-Vu-tRh" firstAttribute="top" secondItem="ZTr-YN-sd1" secondAttribute="bottom" constant="25" id="NUp-Ff-1Wo"/>
                                 <constraint firstItem="ZTr-YN-sd1" firstAttribute="top" secondItem="J8A-Ie-Fzb" secondAttribute="bottom" constant="10" id="OWO-FV-0jF"/>
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="WHG-Vu-tRh" secondAttribute="bottom" constant="20" id="QjN-aF-S4P"/>
+                                <constraint firstItem="8Jn-xD-tNm" firstAttribute="top" secondItem="ldc-QG-vrx" secondAttribute="bottom" constant="10" id="UJa-ni-VWq"/>
                                 <constraint firstItem="aOg-Br-cDD" firstAttribute="trailing" secondItem="hTo-wd-ylC" secondAttribute="trailing" id="Uda-Cn-dZ5"/>
+                                <constraint firstItem="zZ2-AA-U9Q" firstAttribute="top" secondItem="8Jn-xD-tNm" secondAttribute="bottom" constant="8" id="VmK-OT-EtC"/>
                                 <constraint firstItem="J8A-Ie-Fzb" firstAttribute="top" secondItem="J1s-XM-Moy" secondAttribute="bottom" constant="20" id="awA-Ze-Was"/>
+                                <constraint firstItem="XTx-dg-Ren" firstAttribute="bottom" secondItem="fsE-07-E86" secondAttribute="bottom" id="bD5-dk-xaG"/>
                                 <constraint firstItem="J8A-Ie-Fzb" firstAttribute="height" secondItem="0h2-xC-n0V" secondAttribute="height" id="bWs-P3-kpy"/>
                                 <constraint firstItem="ldc-QG-vrx" firstAttribute="top" secondItem="KCc-9G-HXv" secondAttribute="top" constant="25" id="bbA-Ho-35J"/>
+                                <constraint firstItem="fsE-07-E86" firstAttribute="leading" secondItem="ldc-QG-vrx" secondAttribute="leading" id="c80-oV-X69"/>
                                 <constraint firstItem="WHG-Vu-tRh" firstAttribute="centerX" secondItem="KCc-9G-HXv" secondAttribute="centerX" id="cPV-Wr-sqf"/>
+                                <constraint firstItem="fsE-07-E86" firstAttribute="top" secondItem="zZ2-AA-U9Q" secondAttribute="bottom" constant="10" id="coO-F8-ZzC"/>
+                                <constraint firstItem="hTo-wd-ylC" firstAttribute="top" secondItem="fsE-07-E86" secondAttribute="bottom" id="dMg-Yi-BF0"/>
                                 <constraint firstItem="J8A-Ie-Fzb" firstAttribute="leading" secondItem="J1s-XM-Moy" secondAttribute="leading" id="djk-89-aJO"/>
+                                <constraint firstItem="8Jn-xD-tNm" firstAttribute="leading" secondItem="ldc-QG-vrx" secondAttribute="leading" id="e6e-KN-cdZ"/>
                                 <constraint firstItem="J8A-Ie-Fzb" firstAttribute="trailing" secondItem="J1s-XM-Moy" secondAttribute="trailing" id="h1U-m4-pbb"/>
-                                <constraint firstItem="J1s-XM-Moy" firstAttribute="height" secondItem="hTo-wd-ylC" secondAttribute="height" id="hws-if-G9v"/>
                                 <constraint firstItem="aOg-Br-cDD" firstAttribute="height" secondItem="hTo-wd-ylC" secondAttribute="height" id="kCF-YW-Jz1"/>
                                 <constraint firstItem="aOg-Br-cDD" firstAttribute="top" secondItem="hTo-wd-ylC" secondAttribute="bottom" constant="-40" id="l5z-Ru-lew"/>
                                 <constraint firstItem="0h2-xC-n0V" firstAttribute="trailing" secondItem="hTo-wd-ylC" secondAttribute="trailing" id="nVY-U0-AR3"/>
                                 <constraint firstItem="hTo-wd-ylC" firstAttribute="leading" secondItem="ldc-QG-vrx" secondAttribute="leading" id="oNE-9f-1RN"/>
-                                <constraint firstItem="hTo-wd-ylC" firstAttribute="top" secondItem="ldc-QG-vrx" secondAttribute="bottom" constant="10" id="qek-JG-d0D"/>
+                                <constraint firstItem="zZ2-AA-U9Q" firstAttribute="trailing" secondItem="8Jn-xD-tNm" secondAttribute="trailing" id="rrC-So-qN5"/>
+                                <constraint firstItem="zZ2-AA-U9Q" firstAttribute="leading" secondItem="8Jn-xD-tNm" secondAttribute="leading" id="sf6-Xc-ber"/>
                                 <constraint firstItem="ldc-QG-vrx" firstAttribute="leading" secondItem="KCc-9G-HXv" secondAttribute="leading" constant="28" id="voJ-Ug-9HN"/>
                             </constraints>
                         </view>
@@ -163,4 +222,7 @@
             <point key="canvasLocation" x="57.5" y="136.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="radiobutton_off" width="26" height="25"/>
+    </resources>
 </document>

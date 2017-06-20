@@ -173,8 +173,8 @@ class SecurityQuestionViewController: BaseViewController, UITextFieldDelegate, U
         dict[SOURCE_APP_TYPE_KEY] = SOURCE_APP_TYPE_VALUE
         dict[SOURCE_APP_VERSION_KEY] = version
         dict[SOURCE_APP_OSVERSION_KEY] = "\(UIDevice.current.modelName)  \(UIDevice.current.systemVersion)"
-        vc.dictForRequestOTP = dict as NSDictionary
         
+        vc.dictForRequestOTP = dict as NSDictionary
         vc.data = self.data
         vc.MDNString = self.MDNString
 

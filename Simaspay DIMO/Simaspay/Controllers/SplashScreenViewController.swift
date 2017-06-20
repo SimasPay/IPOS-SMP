@@ -75,12 +75,10 @@ class SplashScreenViewController: BaseViewController {
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
-//                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
                     SimasAlertView.showNormalTitle("Error", message: error.userInfo["error"] as! String, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                         exit(1)
                     }, cancelButtonTitle: getString("AlertCloseButtonText"))
                 } else {
-//                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
                     SimasAlertView.showNormalTitle("Error", message: error.localizedDescription, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                         exit(1)
                     }, cancelButtonTitle: getString("AlertCloseButtonText"))

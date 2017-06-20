@@ -34,10 +34,10 @@ class AddFavoritListController: BaseViewController, UITextFieldDelegate {
         self.viewBackground.backgroundColor = UIColor.init(hexString: color_background)
         
         self.labelMdn.font = UIFont .boldSystemFont(ofSize: 13)
-        self.labelMdn.text = "Mdn"
+        self.labelMdn.text = "Nomor Tujuan"
         
         self.LabelDes.font = self.labelMdn.font
-        self.LabelDes.text = "Desc"
+        self.LabelDes.text = "Desrikpsi"
 
         btnNext.updateButtonType1()
         btnNext.setTitle(getString("TransferButtonNext"), for: .normal)
@@ -48,7 +48,8 @@ class AddFavoritListController: BaseViewController, UITextFieldDelegate {
         
         self.inputDes.font = UIFont.systemFont(ofSize: 14)
         self.inputDes.addInset()
-        
+        self.inputDes.delegate=self
+        self.inputDes.tag = 2
     }
     
     override func keyboardWillShow(notification: NSNotification) {
@@ -66,6 +67,13 @@ class AddFavoritListController: BaseViewController, UITextFieldDelegate {
     //MARK: Maximum Textfield length
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
+        if textField.tag == 2 {
+            let maxLength = 10
+            let currentString: NSString = textField.text! as NSString
+            let newString: NSString =
+                currentString.replacingCharacters(in: range, with: string) as NSString
+            return newString.length <= maxLength
+        }
         return true
     }
     
@@ -142,7 +150,9 @@ class AddFavoritListController: BaseViewController, UITextFieldDelegate {
     @IBAction func actionProses(_ sender: Any) {
         var message = "";
         if (!inputDes.isValid()) {
-            message = "Silakan Masukkan desc"
+            message = "Silakan Masukkan Desrikpsi"
+        } else if(inputDes.isValid() && inputDes.length() < 3){
+            message = "Deskripsi hanya boleh berisi 3 sampai 10 karakter"
         }
         if (message.characters.count > 0) {
             SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))

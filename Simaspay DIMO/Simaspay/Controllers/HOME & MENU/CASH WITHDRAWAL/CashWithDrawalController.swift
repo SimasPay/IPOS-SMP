@@ -15,7 +15,7 @@ enum WithDrawalType : Int {
     case WithDrawalTypeOther
 }
 
-class CashWithDrawalController: BaseViewController, UITextFieldDelegate, EPPickerDelegate, ABPeoplePickerNavigationControllerDelegate {
+class CashWithDrawalController: BaseViewController, UITextFieldDelegate, EPPickerDelegate, ABPeoplePickerNavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet var lblFirstTitleTf: BaseLabel!
     @IBOutlet var lblSecondTitleTf: BaseLabel!
@@ -33,6 +33,17 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate, EPPicke
     @IBOutlet var constraintViewAcount: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var constraintBottomScroll: NSLayoutConstraint!
+    
+    var arrayFavlist = [String]()
+    var arrayValue = [String]()
+    
+    @IBOutlet weak var radioBtnFav: BaseButton!
+    @IBOutlet weak var radioBtnManual: BaseButton!
+    @IBOutlet var tfFavList: BaseTextField!
+    @IBOutlet weak var constraintHeightManual: NSLayoutConstraint!
+    @IBOutlet weak var constraintHeightFavlist: NSLayoutConstraint!
+    let pickerView = UIPickerView()
+    var firstCall: Bool = true
     
     static func initWithOwnNib(type : WithDrawalType) -> CashWithDrawalController {
         let obj:CashWithDrawalController = CashWithDrawalController.init(nibName: String(describing: self), bundle: nil)
@@ -79,8 +90,33 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate, EPPicke
         if (self.withDrawalType == WithDrawalType.WithDrawalTypeMe) {
             constraintViewAcount.constant = 0
             self.showTitle(getString("WithDrawalMe"))
+            self.tfNoAccount.isUserInteractionEnabled = false
+            self.tfFavList.isUserInteractionEnabled = false
         } else {
+            constraintViewAcount.constant = 151
+            self.constraintHeightFavlist.constant = 0
+            self.constraintHeightManual.constant = 40
             self.showTitle(getString("WithDrawalOther"))
+            self.radioBtnFav.updateToRadioButtonWith(_titleButton: "Dari Daftar Favorit")
+            self.radioBtnManual.updateToRadioButtonWith(_titleButton: "Ketik Manual")
+            self.radioBtnManual.isSelected = true
+            self.radioBtnFav.isSelected = false
+            self.tfFavList.addInset()
+            self.tfFavList.rightViewMode =  UITextFieldViewMode.always
+            self.tfFavList.updateTextFieldWithRightImageNamed("icon_arrow_down")
+            self.tfFavList.forPicker()
+            self.tfNoAccount.isUserInteractionEnabled = true
+            self.tfFavList.isUserInteractionEnabled = false
+            pickerView.delegate = self
+            self.tfFavList.inputView = pickerView
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if (self.withDrawalType == WithDrawalType.WithDrawalTypeOther) {
+            if firstCall {
+                self.getFavList()
+            }
         }
     }
     
@@ -111,6 +147,14 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate, EPPicke
             return newString.length <= maxLength
         } else {
             return true
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.tag == 1 && self.arrayValue.count > 0 {
+            if self.arrayValue.contains(textField.text!) {
+                SimasAlertView.showAlert(withTitle: "", message: "Nomor sudah ada difavorit list silakan pilih daftar dari difavorit list", cancelButtonTitle: getString("AlertCloseButtonText"))
+            }
         }
     }
     
@@ -268,7 +312,7 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate, EPPicke
     
     //MARK: actionPickerContact
     @IBAction func actionPickerContact(_ sender: Any) {
-        
+        self.firstCall = false
         if #available(iOS 9.0, *) {
             let contactPickerScene = EPContactsPicker(delegate: self, multiSelection:false, subtitleCellType: SubtitleCellValue.phoneNumber)
             let navigationController = UINavigationController(rootViewController: contactPickerScene)
@@ -292,7 +336,7 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate, EPPicke
     func epContactPicker(_: EPContactsPicker, didSelectContact contact : EPContact) {
         let phoneNumbers = contact.phoneNumbers
         var phoneNUmber = ""
-        
+        self.firstCall = false
         if phoneNumbers.count > 0 {
             phoneNUmber = phoneNumbers[0].phoneNumber
         }
@@ -311,7 +355,7 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate, EPPicke
     }
     
     func peoplePickerNavigationController(_ peoplePicker: ABPeoplePickerNavigationController, didSelectPerson person: ABRecord) {
-        
+        self.firstCall = false
         let phones: ABMultiValue = ABRecordCopyValue(person, kABPersonPhoneProperty).takeUnretainedValue() as ABMultiValue
         var phoneNUmber = ""
         for index in 0 ..< ABMultiValueGetCount(phones){
@@ -343,5 +387,124 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate, EPPicke
         self.view.layoutIfNeeded()
     }
     
+    
+    func getFavList() {
+        let dict = NSMutableDictionary()
+        dict[SERVICE] = SERVICE_ACCOUNT
+        dict[TXNNAME] = TXN_FAVORITE_JSON
+        dict[INSTITUTION_ID] = SIMASPAY
+        dict[AUTH_KEY] = ""
+        dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+        dict[SOURCEPIN] = simasPayRSAencryption(UserDefault.objectFromUserDefaults(forKey: mPin) as! String)
+        dict[FAVORITE_CATEGORY_ID] = "13"
+        
+        
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DLog("\(dict)")
+        SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
+            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+            if (err != nil) {
+                let error = err! as NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                } else {
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                }
+                return
+            }
+            let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
+            //            DLog("\(responseDict)")
+            if (responseDict.allKeys.count == 0) {
+                //                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+            } else {
+                // success
+                
+                if (responseDict.value(forKeyPath: "message.code") != nil){
+                    let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
+                    let messageText  = responseDict.value(forKeyPath: "message.text") as! String
+                    if (messagecode == "631") {
+                        SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                            if index == 0 {
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
+                            }
+                        }, cancelButtonTitle: "OK")
+                    } else {
+                        SimasAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    }
+                    
+                } else {
+                    // DLog("\(responseDict)")
+                    for dataDict in responseDict.allValues {
+                        let data = dataDict as! NSDictionary
+                        let val = data.value(forKey: "favoriteValue") as! String
+                        let favoriteLabel = data.value(forKey: "favoriteLabel") as! String
+                        self.arrayValue.append(val)
+                        self.arrayFavlist.append(favoriteLabel + " - " + val)
+                    }
+                }
+            }
+        }
+    }
+    
+    //MARK: PickerView
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let pickerLabel = UILabel()
+        pickerLabel.textColor = UIColor.black
+        pickerLabel.text = self.arrayFavlist[row]
+        pickerLabel.font = UIFont(name: pickerLabel.font.fontName, size: 15)
+        pickerLabel.textAlignment = NSTextAlignment.center
+        return pickerLabel
+    }
+    
+    @available(iOS 2.0, *)
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    @available(iOS 2.0, *)
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+        return self.arrayFavlist.count
+    }
+    
+    @available(iOS 2.0, *)
+    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?{
+        return self.arrayFavlist[row]
+    }
+    @available(iOS 2.0, *)
+    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
+        if self.arrayFavlist.count > 0 {
+            self.tfFavList.text = self.arrayFavlist[row]
+            self.tfNoAccount.text = self.arrayValue[row]
+        }
+    }
+    
+    @IBAction func actionRadio(_ sender: Any) {
+        self.tfFavList.text=""
+        self.tfNoAccount.text=""
+        if self.radioBtnFav.isSelected {
+            self.radioBtnManual.isSelected = true
+            self.radioBtnFav.isSelected = false
+            self.constraintHeightFavlist.constant = 0
+            self.constraintHeightManual.constant = 40
+            self.tfNoAccount.isUserInteractionEnabled = true
+            self.tfFavList.isUserInteractionEnabled = false
+        } else {
+            self.radioBtnManual.isSelected = false
+            self.radioBtnFav.isSelected = true
+            self.constraintHeightFavlist.constant = 40
+            self.constraintHeightManual.constant = 0
+            self.tfNoAccount.isUserInteractionEnabled = false
+            self.tfFavList.isUserInteractionEnabled = true
+        }
+    }
+
+    @IBAction func actionPicker(_ sender: Any) {
+        self.dismissKeyboard()
+        self.tfFavList.becomeFirstResponder()
+        if self.arrayFavlist.count > 0 {
+            self.tfFavList.text = self.arrayFavlist[0]
+            self.tfNoAccount.text = self.arrayValue[0]
+        }
+    }
     
 }

@@ -273,9 +273,6 @@ class NewPinController: BaseViewController, UIAlertViewDelegate, UITextFieldDele
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         SimasAPIManager .callAPI(withParameters: dictOtp as! [AnyHashable : Any]) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
-            let dictionary = NSDictionary(dictionary: dict!)
-
-
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
@@ -285,7 +282,7 @@ class NewPinController: BaseViewController, UIAlertViewDelegate, UITextFieldDele
                 }
                 return
             }
-
+            let dictionary = NSDictionary(dictionary: dict!)
             if (dictionary.allKeys.count == 0) {
                 SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
@@ -335,9 +332,6 @@ class NewPinController: BaseViewController, UIAlertViewDelegate, UITextFieldDele
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         SimasAPIManager .callAPI(withParameters: dictForAcceptedOTP as! [AnyHashable : Any], withSessionCheck:sessionCheck) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
-            let dictionary = NSDictionary(dictionary: dict!)
-            
-            
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
@@ -347,7 +341,7 @@ class NewPinController: BaseViewController, UIAlertViewDelegate, UITextFieldDele
                 }
                 return
             }
-            
+            let dictionary = NSDictionary(dictionary: dict!)
             if (dictionary.allKeys.count == 0) {
                 SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {

@@ -70,4 +70,9 @@ class BaseTextField: UITextField {
         self.leftView = container
     }
     
+    func forPicker() {
+        self.tintColor = .clear
+        self.backgroundColor = UIColor.white
+    }
+    
 }

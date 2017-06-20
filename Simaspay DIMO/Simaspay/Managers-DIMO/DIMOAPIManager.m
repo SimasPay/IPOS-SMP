@@ -194,8 +194,22 @@ NSTimer *timer;
                                        responseObject:responseObject
                                            completion:completion];
         } failure:^(DAFHTTPRequestOperation *operation, NSError *error) {
+            
+//            if (error.localizedDescription == "The request timed out.") {
+//                NSError *err = [NSError errorWithDomain:@"Simaspay"
+//                                   code:0
+//                               userInfo:@{@"error" : @"Tidak dapat terhubung dengan server SimasPay. Silakan periksa koneksi internet Anda dan coba kembali setelah beberapa saat."}];
+//                [SimasAPIManager handleErrorForOperation:operation
+//                                   error:err
+//                              completion:completion];
+//                }];
+//            }
+            
+            NSError *err = [NSError errorWithDomain:@"Simaspay"
+                                               code:0
+                                           userInfo:@{@"error" : @"Tidak dapat terhubung dengan server SimasPay. Silakan periksa koneksi internet Anda dan coba kembali setelah beberapa saat."}];
             [SimasAPIManager handleErrorForOperation:operation
-                                              error:error
+                                              error:err
                                          completion:completion];
         }];        
     } else {

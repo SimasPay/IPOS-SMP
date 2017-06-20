@@ -37,6 +37,17 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
     var minlength : Int! = 0
     var invoiceTypeString: String!
     
+    var arrayFavlist = [String]()
+    var arrayValue = [String]()
+    
+    @IBOutlet weak var radioBtnFav: BaseButton!
+    @IBOutlet weak var radioBtnManual: BaseButton!
+    @IBOutlet var tfFavList: BaseTextField!
+    @IBOutlet weak var constraintHeightManual: NSLayoutConstraint!
+    @IBOutlet weak var constraintHeightFavlist: NSLayoutConstraint!
+    let pickerViewFav = UIPickerView()
+    var firstCall: Bool = true
+    
     static func initWithOwnNib(isPurchased : Bool) -> DetailPaymentPurchaseViewController {
         
         let obj:DetailPaymentPurchaseViewController = DetailPaymentPurchaseViewController.init(nibName: String(describing: self), bundle: nil)
@@ -97,15 +108,31 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         tfNomTransaction.rightViewMode =  UITextFieldViewMode.always
         tfNomTransaction.updateTextFieldWithRightImageNamed("icon_arrow_down")
         
-        // alternative: not case sensitive
-        if (invoiceTypeString.lowercased().range(of:"phone") != nil ||
-            invoiceTypeString.lowercased().range(of:"phone") != nil ||
-            invoiceTypeString.lowercased().range(of:"telepon") != nil) {
+        if(dictOfData.value(forKey: "isMDN") != nil) {
+            let isMDN = dictOfData.value(forKey: "isMDN") as! Bool
+            if isMDN {
+                constraintHeightContactPicker.constant = 40
+                self.tfNoAccount.rightViewMode =  UITextFieldViewMode.always
+                self.tfNoAccount.updateTextFieldWithRightImageNamed("ic_contact_phone_black")
+            } else {
+                constraintHeightContactPicker.constant = 0
+            }
+        } else {
             constraintHeightContactPicker.constant = 0
-            self.tfNoAccount.rightViewMode =  UITextFieldViewMode.always
-            self.tfNoAccount.updateTextFieldWithRightImageNamed("ic_contact_phone_black")
         }
+            
         
+//        // alternative: not case sensitive
+//        if (invoiceTypeString.lowercased().range(of:"phone") != nil ||
+//            invoiceTypeString.lowercased().range(of:"phone") != nil ||
+//            invoiceTypeString.lowercased().range(of:"telepon") != nil) {
+//            constraintHeightContactPicker.constant = 40
+//            self.tfNoAccount.rightViewMode =  UITextFieldViewMode.always
+//            self.tfNoAccount.updateTextFieldWithRightImageNamed("ic_contact_phone_black")
+//        } else {
+//            constraintHeightContactPicker.constant = 0
+//        }
+//        
         
         btnNext.updateButtonType1()
         btnNext.setTitle("Lanjut", for: .normal)
@@ -136,12 +163,39 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         //Picker view delegate
         let pickerView = UIPickerView()
         pickerView.delegate = self
+        pickerView.tag = 1
         self.tfNomTransaction.inputView = pickerView
+        
+        self.constraintHeightFavlist.constant = 0
+        self.constraintHeightManual.constant = 40
+        self.radioBtnFav.updateToRadioButtonWith(_titleButton: "Dari Daftar Favorit")
+        self.radioBtnManual.updateToRadioButtonWith(_titleButton: "Ketik Manual")
+        self.radioBtnManual.isSelected = true
+        self.radioBtnFav.isSelected = false
+        self.tfFavList.addInset()
+        self.tfFavList.rightViewMode =  UITextFieldViewMode.always
+        self.tfFavList.updateTextFieldWithRightImageNamed("icon_arrow_down")
+        self.tfFavList.forPicker()
+        self.tfNoAccount.isUserInteractionEnabled = true
+        self.tfFavList.isUserInteractionEnabled = false
+        self.pickerViewFav.delegate = self
+        self.pickerViewFav.tag = 2
+        self.tfFavList.inputView = pickerViewFav
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if firstCall {
+            if self.isPurchase {
+                self.getFavListPurchase()
+            } else {
+                self.getFavListPayment()
+            }
+        }
     }
     
     //MARK: Picker view
@@ -152,20 +206,53 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
     
     @available(iOS 2.0, *)
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return pickOption.count
+        if pickerView.tag == 1 {
+            return pickOption.count
+        } else {
+            return self.arrayFavlist.count
+        }
     }
     
     @available(iOS 2.0, *)
     public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?{
-        return pickOption[row]
+        if pickerView.tag == 1 {
+            return pickOption[row]
+        } else {
+            return self.arrayFavlist[row]
+        }
     }
     
     @available(iOS 2.0, *)
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
-        self.tfNomTransaction.text = pickOption[row]
-        self.tfDisplayNom.text = pickOption[row]
+        if pickerView.tag == 1 {
+            self.tfNomTransaction.text = pickOption[row]
+            self.tfDisplayNom.text = pickOption[row]
+        } else {
+            if self.arrayFavlist.count > 0 {
+                self.tfFavList.text = self.arrayFavlist[row]
+                self.tfNoAccount.text = self.arrayValue[row]
+            }
+        }
     }
     
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        if pickerView.tag == 2 {
+            let pickerLabel = UILabel()
+            pickerLabel.textColor = UIColor.black
+            pickerLabel.text = self.arrayFavlist[row]
+            pickerLabel.font = UIFont(name: pickerLabel.font.fontName, size: 15)
+            pickerLabel.textAlignment = NSTextAlignment.center
+            return pickerLabel
+        } else {
+            let pickerLabel = UILabel()
+            pickerLabel.textColor = UIColor.black
+            pickerLabel.text = self.pickOption[row]
+            pickerLabel.font = UIFont(name: pickerLabel.font.fontName, size: 19)
+            pickerLabel.textAlignment = NSTextAlignment.center
+            return pickerLabel
+        }
+    }
+//
     //MARK: Maximum Textfield length
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
@@ -182,6 +269,14 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
             return newString.length <= self.maxlength
         } else {
             return true
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.tag == 1 && self.arrayValue.count > 0 {
+            if self.arrayValue.contains(textField.text!) {
+                SimasAlertView.showAlert(withTitle: "", message: "Nomor sudah ada difavorit list silakan pilih daftar dari difavorit list", cancelButtonTitle: getString("AlertCloseButtonText"))
+            }
         }
     }
     
@@ -515,7 +610,6 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
     
     //MARK: Action Confirm button
     @IBAction func actionConfirmation(_ sender: AnyObject) {
-        
         if !self.isPurchase {
             self.nextPayment()
         } else {
@@ -526,7 +620,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
     
     //MARK: actionPickerContact
     @IBAction func actionPickerContact(_ sender: Any) {
-        
+        self.firstCall = false
         if #available(iOS 9.0, *) {
             let contactPickerScene = EPContactsPicker(delegate: self, multiSelection:false, subtitleCellType: SubtitleCellValue.phoneNumber)
             let navigationController = UINavigationController(rootViewController: contactPickerScene)
@@ -549,7 +643,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
     @available(iOS 9.0, *)
     func epContactPicker(_: EPContactsPicker, didSelectContact contact : EPContact) {
         let phoneNumbers = contact.phoneNumbers
-        var phoneNUmber = ""
+        var phoneNUmber:String = ""
         
         if phoneNumbers.count > 0 {
             phoneNUmber = phoneNumbers[0].phoneNumber
@@ -558,8 +652,8 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         phoneNUmber = phoneNUmber.replacingOccurrences(of: ")", with: "")
         phoneNUmber = phoneNUmber.replacingOccurrences(of: "-", with: "")
         phoneNUmber = phoneNUmber.replacingOccurrences(of: "+", with: "")
-        phoneNUmber = phoneNUmber.replacingOccurrences(of: " ", with: "")
-        phoneNUmber = phoneNUmber.replacingOccurrences(of: "  ", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: " ", with: "~")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "~", with: "")
         self.tfNoAccount.text = phoneNUmber
     }
     
@@ -582,8 +676,8 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         phoneNUmber = phoneNUmber.replacingOccurrences(of: ")", with: "")
         phoneNUmber = phoneNUmber.replacingOccurrences(of: "-", with: "")
         phoneNUmber = phoneNUmber.replacingOccurrences(of: "+", with: "")
-        phoneNUmber = phoneNUmber.replacingOccurrences(of: " ", with: "")
-        phoneNUmber = phoneNUmber.replacingOccurrences(of: "  ", with: "")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: " ", with: "~")
+        phoneNUmber = phoneNUmber.replacingOccurrences(of: "~", with: "")
         self.tfNoAccount.text = phoneNUmber
         peoplePicker.dismiss(animated: true, completion: nil)
         
@@ -604,6 +698,182 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         constraintScrollViewHeight.constant = DetailPaymentPurchaseViewController.scrollViewHeight
         DetailPaymentPurchaseViewController.scrollViewHeight = 0
         self.view.layoutIfNeeded()
+    }
+    
+    func getFavListPurchase() {
+        let dict = NSMutableDictionary()
+        dict[SERVICE] = SERVICE_ACCOUNT
+        dict[TXNNAME] = TXN_FAVORITE_JSON
+        dict[INSTITUTION_ID] = SIMASPAY
+        dict[AUTH_KEY] = ""
+        dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+        dict[SOURCEPIN] = simasPayRSAencryption(UserDefault.objectFromUserDefaults(forKey: mPin) as! String)
+        if (SimasAPIManager.sharedInstance().sourcePocketCode as String == "1") {
+            dict[FAVORITE_CATEGORY_ID] = "8"
+        } else {
+            dict[FAVORITE_CATEGORY_ID] = "2"
+        }
+        
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DLog("\(dict)")
+        SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
+            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+            if (err != nil) {
+                let error = err! as NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                } else {
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                }
+                return
+            }
+            let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
+            //            DLog("\(responseDict)")
+            if (responseDict.allKeys.count == 0) {
+                //                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+            } else {
+                // success
+                
+                if (responseDict.value(forKeyPath: "message.code") != nil){
+                    let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
+                    let messageText  = responseDict.value(forKeyPath: "message.text") as! String
+                    if (messagecode == "631") {
+                        SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                            if index == 0 {
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
+                            }
+                        }, cancelButtonTitle: "OK")
+                    } else {
+                        SimasAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    }
+                    
+                } else {
+//                    DLog("\(responseDict)")
+//                    DLog("\(self.dictOfData)")
+                    for dataDict in responseDict.allValues {
+                        let data = dataDict as! NSDictionary
+                        if  data.value(forKey: "favoriteCode") as? String == self.dictOfData.value(forKey: "productCode") as? String {
+                            let val = data.value(forKey: "favoriteValue") as! String
+                            let favoriteLabel = data.value(forKey: "favoriteLabel") as! String
+                            self.arrayValue.append(val)
+                            self.arrayFavlist.append(favoriteLabel + " - " + val)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func getFavListPayment() {
+        let dict = NSMutableDictionary()
+        dict[SERVICE] = SERVICE_ACCOUNT
+        dict[TXNNAME] = TXN_FAVORITE_JSON
+        dict[INSTITUTION_ID] = SIMASPAY
+        dict[AUTH_KEY] = ""
+        dict[SOURCEMDN] = getNormalisedMDN(UserDefault.objectFromUserDefaults(forKey: SOURCEMDN) as! NSString)
+        dict[SOURCEPIN] = simasPayRSAencryption(UserDefault.objectFromUserDefaults(forKey: mPin) as! String)
+        if (SimasAPIManager.sharedInstance().sourcePocketCode as String == "1") {
+            dict[FAVORITE_CATEGORY_ID] = "9"
+        } else {
+            dict[FAVORITE_CATEGORY_ID] = "3"
+        }
+        
+        DMBProgressHUD.showAdded(to: self.view, animated: true)
+        let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DLog("\(dict)")
+        SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
+            DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
+            if (err != nil) {
+                let error = err! as NSError
+                if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
+                    SimasAlertView.showAlert(withTitle: "", message: error.userInfo["error"] as! String, cancelButtonTitle: getString("AlertCloseButtonText"))
+                } else {
+                    SimasAlertView.showAlert(withTitle: "", message: error.localizedDescription, cancelButtonTitle: getString("AlertCloseButtonText"))
+                }
+                return
+            }
+            let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
+            //            DLog("\(responseDict)")
+            if (responseDict.allKeys.count == 0) {
+                //                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
+            } else {
+                // success
+                
+                if (responseDict.value(forKeyPath: "message.code") != nil){
+                    let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
+                    let messageText  = responseDict.value(forKeyPath: "message.text") as! String
+                    if (messagecode == "631") {
+                        SimasAlertView.showNormalTitle(nil, message: messageText, alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                            if index == 0 {
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
+                            }
+                        }, cancelButtonTitle: "OK")
+                    } else {
+                        SimasAlertView.showAlert(withTitle: nil, message: messageText, cancelButtonTitle: getString("AlertCloseButtonText"))
+                    }
+                    
+                } else {
+                    // DLog("\(responseDict)")
+                    for dataDict in responseDict.allValues {
+                        let data = dataDict as! NSDictionary
+                        let val = data.value(forKey: "favoriteValue") as! String
+                        let favoriteLabel = data.value(forKey: "favoriteLabel") as! String
+                        self.arrayValue.append(val)
+                        self.arrayFavlist.append(favoriteLabel + " - " + val)
+                    }
+                }
+            }
+        }
+    }
+    
+    @IBAction func actionRadio(_ sender: Any) {
+        self.tfFavList.text=""
+        self.tfNoAccount.text=""
+        if self.radioBtnFav.isSelected {
+            self.radioBtnManual.isSelected = true
+            self.radioBtnFav.isSelected = false
+            self.tfNoAccount.isUserInteractionEnabled = true
+            self.tfFavList.isUserInteractionEnabled = false
+            self.constraintHeightFavlist.constant = 0
+            self.constraintHeightManual.constant = 40
+            // alternative: not case sensitive
+//            if (self.invoiceTypeString.lowercased().range(of:"phone") != nil ||
+//                self.invoiceTypeString.lowercased().range(of:"phone") != nil ||
+//                self.invoiceTypeString.lowercased().range(of:"telepon") != nil) {
+//                self.constraintHeightContactPicker.constant = 40
+//            } else {
+//                self.constraintHeightContactPicker.constant = 0
+//            }
+            if(dictOfData.value(forKey: "isMDN") != nil) {
+                let isMDN = dictOfData.value(forKey: "isMDN") as! Bool
+                if isMDN {
+                    self.constraintHeightContactPicker.constant = 40
+                } else {
+                   self.constraintHeightContactPicker.constant = 0
+                }
+            } else {
+                self.constraintHeightContactPicker.constant = 0
+            }
+            
+        } else {
+            self.radioBtnManual.isSelected = false
+            self.radioBtnFav.isSelected = true
+            self.tfNoAccount.isUserInteractionEnabled = false
+            self.tfFavList.isUserInteractionEnabled = true
+            self.constraintHeightFavlist.constant = 40
+            self.constraintHeightManual.constant = 0
+            self.constraintHeightContactPicker.constant = 0
+        }
+    }
+    
+    @IBAction func actionPicker(_ sender: Any) {
+        self.dismissKeyboard()
+        self.tfFavList.becomeFirstResponder()
+        if self.arrayFavlist.count > 0 {
+            self.tfFavList.text = self.arrayFavlist[0]
+            self.tfNoAccount.text = self.arrayValue[0]
+        }
     }
 }
 

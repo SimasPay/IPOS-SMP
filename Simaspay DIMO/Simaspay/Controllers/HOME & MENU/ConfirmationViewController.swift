@@ -427,7 +427,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
                 DLog("\(responseDict)")
                 let messagecode  = responseDict.value(forKeyPath: "message.code") as! String
                 let messageText  = responseDict.value(forKeyPath: "message.text") as! String
-                if (messagecode == "2171"){
+                if (messagecode == "2171" || messagecode == "655"){
                     self.showOTP()
                     // 2171 sukses
                 } else {
@@ -475,9 +475,6 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
         DLog("\(dictForAcceptedOTP)")
         SimasAPIManager .callAPI(withParameters: dictForAcceptedOTP as! [AnyHashable : Any]!, withSessionCheck:sessionCheck) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
-            let dictionary = NSDictionary(dictionary: dict!)
-            
-            
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
@@ -488,6 +485,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
                 return
             }
             
+            let dictionary = NSDictionary(dictionary: dict!)
             if (dictionary.allKeys.count == 0) {
                 SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
@@ -513,8 +511,7 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
                     messagecode == SIMASPAY_EMONEY_TO_BSIM ||
                     messagecode == SIMASPAY_EMONEY_TO_UNSUBCRIBER ||
                     messagecode == SIMASPAY_TRANSFER_UANGKU_CONFIRM_SUCCESSCODE ||
-                    messagecode == SIMASPAY_CASH_WITH_DRAWAL_SUCCESSCODE ||
-                    messagecode == SIMASPAY_PURCHASE_SUCCESCODE) {
+                    messagecode == SIMASPAY_CASH_WITH_DRAWAL_SUCCESSCODE ) {
                     let vc = SuccesConfirmationController.initWithOwnNib()
                     vc.value = self.value
                     vc.favoriteCategoryID = self.favoriteCategoryID
@@ -527,6 +524,61 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
                     self.navigationController?.pushViewController(vc, animated: true)
                 } else if (messagecode == SIMASPAY_EMONEY_POKET_SUCCES) {
                     let vc = SuccesRegisterController.initWithOwnNib()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else if (messagecode == SIMASPAY_PURCHASE_SUCCESCODE){
+                    let vc = SuccesConfirmationController.initWithOwnNib()
+                    if responseDict.value(forKeyPath: "AdditionalInfo.text") == nil {
+                        vc.isAditional = false
+                        vc.data = self.data
+                    } else {
+                        let strAditional = responseDict.value(forKeyPath: "AdditionalInfo.text") as! String
+                        let arrAditional = strAditional.characters.split{$0 == "|"}.map(String.init)
+                        var newArrAditional = [String]()
+                        var strJoin: String = ""
+                        var isKeyValue: Bool = true
+                        var i = 1
+                        for data in arrAditional {
+                            let strConvert = data.replacingOccurrences(of: "  ", with: "~")
+                            let strRemoveStart = strConvert.replacingOccurrences(of: " ~", with: "")
+                            let strRemoveEnd = strRemoveStart.replacingOccurrences(of: "~ ", with: "")
+                            let strNew = strRemoveEnd.replacingOccurrences(of: "~", with: "")
+                            
+                            if strNew != "" {
+                                let arrInfo = strNew.characters.split{$0 == ":"}.map(String.init)
+                                
+                                if isKeyValue {
+                                    if arrInfo.count > 1 {
+                                        newArrAditional.append(strNew)
+                                    } else {
+                                        isKeyValue = false
+                                        strJoin += strNew + " "
+                                    }
+                                } else {
+                                    strJoin += strNew + " "
+                                }
+                                
+                                if i == arrAditional.count && strJoin != ""{
+                                    let clearStr = strJoin.replacingOccurrences(of: ":", with: "=")
+                                    let newStr = " : " + clearStr
+                                    newArrAditional.append(newStr)
+                                }
+                            }
+                            
+                            i+=1
+                        }
+                        let footer = self.data.value(forKey: "footer") as! NSDictionary
+                        let val = footer.value(forKey: getString("TotalDebit")) as! String
+                        newArrAditional.append(getString("TotalDebit") + " : " + val)
+                        vc.isAditional = true
+                        vc.dataAditional = newArrAditional
+                    }
+                    vc.value = self.value
+                    vc.favoriteCategoryID = self.favoriteCategoryID
+                    vc.favoriteCode = self.favoriteCode
+                    vc.mPin = self.mPin
+                    vc.isFavList = self.isFavList
+                    vc.lblSuccesTransaction = self.lblSuccesTransaction
+                    vc.idTran = responseDict.value(forKeyPath: "sctlID.text") as! String
                     self.navigationController?.pushViewController(vc, animated: true)
                 } else if (messagecode == SIMASPAY_PAYMENT_SUCCESSCODE) {
                     let vc = SuccesConfirmationController.initWithOwnNib()

@@ -171,11 +171,9 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
         
         DMBProgressHUD.showAdded(to: self.view, animated: true)
         let param = dict as NSDictionary? as? [AnyHashable: Any] ?? [:]
+        DLog("\(dict)")
         SimasAPIManager .callAPI(withParameters: param) { (dict, err) in
             DMBProgressHUD .hideAllHUDs(for: self.view, animated: true)
-            let dictionary = NSDictionary(dictionary: dict!)
-            
-            
             if (err != nil) {
                 let error = err! as NSError
                 if (error.userInfo.count != 0 && error.userInfo["error"] != nil) {
@@ -185,7 +183,7 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
                 }
                 return
             }
-            
+            let dictionary = NSDictionary(dictionary: dict!)
             if (dictionary.allKeys.count == 0) {
                 SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
             } else {
@@ -207,6 +205,7 @@ class RegisterEMoneyViewController: BaseViewController, UITextFieldDelegate {
                     SOURCEMDN:getNormalisedMDN(self.tfHPNumber.text! as NSString),
                     ACTIVATION_NEWPIN:simasPayRSAencryption(self.tfMpin.text!),
                     ACTIVATION_CONFORMPIN:simasPayRSAencryption(self.tfConfirmMpin.text!),
+                    "SCTLID":"SCT",
                 ]
                 
                 let vc = SecurityQuestionViewController.initWithOwnNib()

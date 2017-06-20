@@ -14,11 +14,16 @@
                 <outlet property="LabelAmount" destination="VO6-GB-m5t" id="b4r-KI-a0A"/>
                 <outlet property="btnNext" destination="XSW-OK-mnx" id="3ea-0J-uOf"/>
                 <outlet property="constraintBottomScroll" destination="HXw-20-FmP" id="st1-I3-xOy"/>
+                <outlet property="constraintHeightFavlist" destination="EYs-th-sTm" id="EAe-fl-Uou"/>
+                <outlet property="constraintHeightManual" destination="IMv-3j-te3" id="Vbr-Rc-yb9"/>
                 <outlet property="inputAmount" destination="agR-1N-7hY" id="CTE-zN-U0v"/>
                 <outlet property="inputMdn" destination="btd-3W-dfq" id="IaP-MB-Yg4"/>
                 <outlet property="inputmPin" destination="Tgs-eb-XKH" id="ayc-BL-oFl"/>
                 <outlet property="labelMdn" destination="seZ-tN-R8p" id="bPl-gL-Ubf"/>
                 <outlet property="labelmPin" destination="mf7-xe-jQ7" id="Qzh-Z9-eei"/>
+                <outlet property="radioBtnFav" destination="2WF-G1-IL8" id="2HZ-Vb-MXY"/>
+                <outlet property="radioBtnManual" destination="1KG-pv-d5o" id="tMJ-Rr-8rs"/>
+                <outlet property="tfFavList" destination="Lnf-QA-m6m" id="A4c-ZU-Clb"/>
                 <outlet property="view" destination="iN0-l3-epB" id="bsP-qy-wjO"/>
                 <outlet property="viewBackground" destination="Qwt-h4-Wrg" id="m3e-nY-f94"/>
             </connections>
@@ -50,8 +55,18 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lnf-QA-m6m" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="28" y="117" width="319" height="40"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="EYs-th-sTm"/>
+                                    </constraints>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
                                 <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="btd-3W-dfq" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="28" y="51" width="319" height="40"/>
+                                    <rect key="frame" x="28" y="157" width="319" height="40"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="IMv-3j-te3"/>
@@ -61,33 +76,39 @@
                                     <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VO6-GB-m5t" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="28" y="111" width="319" height="16"/>
+                                    <rect key="frame" x="28" y="217" width="319" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="agR-1N-7hY" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="28" y="135" width="319" height="40"/>
+                                    <rect key="frame" x="28" y="241" width="319" height="40"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="bGQ-en-8ea"/>
+                                    </constraints>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mf7-xe-jQ7" customClass="BaseLabel" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="28" y="195" width="319" height="16"/>
+                                    <rect key="frame" x="28" y="301" width="319" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tgs-eb-XKH" customClass="BaseTextField" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="28" y="221" width="319" height="40"/>
+                                    <rect key="frame" x="28" y="327" width="319" height="40"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="7zQ-Tr-j0A"/>
+                                    </constraints>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSW-OK-mnx" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
-                                    <rect key="frame" x="88" y="290" width="200" height="48"/>
+                                    <rect key="frame" x="88" y="396" width="200" height="48"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="48" id="bis-fh-sxY"/>
                                         <constraint firstAttribute="width" constant="200" id="nX2-7l-P0p"/>
@@ -97,7 +118,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2R6-dc-TwT">
-                                    <rect key="frame" x="307" y="51" width="40" height="40"/>
+                                    <rect key="frame" x="307" y="157" width="40" height="40"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="40" id="nIJ-SL-bQe"/>
@@ -106,25 +127,59 @@
                                         <action selector="actionPickerContact:" destination="-1" eventType="touchUpInside" id="h4I-CZ-Zqx"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2WF-G1-IL8" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="28" y="49" width="319" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="d0B-oR-1tS"/>
+                                    </constraints>
+                                    <state key="normal" title="Button" image="radiobutton_off"/>
+                                    <connections>
+                                        <action selector="actionRadio:" destination="-1" eventType="touchUpInside" id="EA1-BH-PkS"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1KG-pv-d5o" customClass="BaseButton" customModule="Simaspay" customModuleProvider="target">
+                                    <rect key="frame" x="28" y="82" width="319" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="BRI-Yg-voR"/>
+                                    </constraints>
+                                    <state key="normal" title="Button" image="radiobutton_off"/>
+                                    <connections>
+                                        <action selector="actionRadio:" destination="-1" eventType="touchUpInside" id="wEy-aP-Akg"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1I-qa-JW6">
+                                    <rect key="frame" x="28" y="117" width="319" height="40"/>
+                                    <connections>
+                                        <action selector="actionPicker:" destination="-1" eventType="touchUpInside" id="HRC-bZ-nbl"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="XSW-OK-mnx" secondAttribute="bottom" constant="20" id="0Mv-tP-twz"/>
                                 <constraint firstItem="btd-3W-dfq" firstAttribute="leading" secondItem="seZ-tN-R8p" secondAttribute="leading" id="1Y2-n2-E0b"/>
-                                <constraint firstItem="agR-1N-7hY" firstAttribute="height" secondItem="btd-3W-dfq" secondAttribute="height" id="2qx-yZ-f3H"/>
                                 <constraint firstItem="Tgs-eb-XKH" firstAttribute="top" secondItem="mf7-xe-jQ7" secondAttribute="bottom" constant="10" id="56V-xa-pGv"/>
+                                <constraint firstItem="f1I-qa-JW6" firstAttribute="bottom" secondItem="Lnf-QA-m6m" secondAttribute="bottom" id="7if-B9-hgV"/>
+                                <constraint firstItem="Lnf-QA-m6m" firstAttribute="leading" secondItem="seZ-tN-R8p" secondAttribute="leading" id="8VL-XR-SXm"/>
+                                <constraint firstItem="2WF-G1-IL8" firstAttribute="leading" secondItem="seZ-tN-R8p" secondAttribute="leading" id="8ZJ-UR-mH4"/>
+                                <constraint firstItem="1KG-pv-d5o" firstAttribute="trailing" secondItem="2WF-G1-IL8" secondAttribute="trailing" id="BF2-ru-snf"/>
                                 <constraint firstItem="mf7-xe-jQ7" firstAttribute="top" secondItem="agR-1N-7hY" secondAttribute="bottom" constant="20" id="Bfq-LL-UNW"/>
                                 <constraint firstItem="agR-1N-7hY" firstAttribute="top" secondItem="VO6-GB-m5t" secondAttribute="bottom" constant="8" id="Cx9-lb-eVv"/>
+                                <constraint firstItem="Lnf-QA-m6m" firstAttribute="trailing" secondItem="seZ-tN-R8p" secondAttribute="trailing" id="Ege-dZ-mIU"/>
                                 <constraint firstItem="VO6-GB-m5t" firstAttribute="height" secondItem="seZ-tN-R8p" secondAttribute="height" id="Huo-Uc-LWL"/>
                                 <constraint firstItem="agR-1N-7hY" firstAttribute="trailing" secondItem="VO6-GB-m5t" secondAttribute="trailing" id="IfU-8V-e1f"/>
-                                <constraint firstItem="btd-3W-dfq" firstAttribute="top" secondItem="seZ-tN-R8p" secondAttribute="bottom" constant="10" id="JtZ-jz-aYW"/>
+                                <constraint firstItem="f1I-qa-JW6" firstAttribute="trailing" secondItem="Lnf-QA-m6m" secondAttribute="trailing" id="OxX-CA-O5z"/>
                                 <constraint firstItem="mf7-xe-jQ7" firstAttribute="trailing" secondItem="agR-1N-7hY" secondAttribute="trailing" id="Oxx-ld-e5J"/>
                                 <constraint firstItem="VO6-GB-m5t" firstAttribute="trailing" secondItem="btd-3W-dfq" secondAttribute="trailing" id="PCc-ht-XBi"/>
                                 <constraint firstItem="mf7-xe-jQ7" firstAttribute="height" secondItem="VO6-GB-m5t" secondAttribute="height" id="Peb-aB-8Yt"/>
+                                <constraint firstItem="btd-3W-dfq" firstAttribute="top" secondItem="Lnf-QA-m6m" secondAttribute="bottom" id="Pgq-rf-Hwr"/>
+                                <constraint firstItem="2WF-G1-IL8" firstAttribute="top" secondItem="seZ-tN-R8p" secondAttribute="bottom" constant="8" id="UJD-uM-JAY"/>
                                 <constraint firstItem="Tgs-eb-XKH" firstAttribute="leading" secondItem="mf7-xe-jQ7" secondAttribute="leading" id="VpL-dD-cKb"/>
+                                <constraint firstItem="2WF-G1-IL8" firstAttribute="trailing" secondItem="seZ-tN-R8p" secondAttribute="trailing" id="ZTI-oc-pGd"/>
                                 <constraint firstItem="agR-1N-7hY" firstAttribute="leading" secondItem="VO6-GB-m5t" secondAttribute="leading" id="aWa-CG-RGp"/>
                                 <constraint firstItem="2R6-dc-TwT" firstAttribute="height" secondItem="btd-3W-dfq" secondAttribute="height" id="aeq-iP-Nwe"/>
                                 <constraint firstItem="seZ-tN-R8p" firstAttribute="top" secondItem="Qwt-h4-Wrg" secondAttribute="top" constant="25" id="b9X-cm-5ct"/>
+                                <constraint firstItem="1KG-pv-d5o" firstAttribute="top" secondItem="2WF-G1-IL8" secondAttribute="bottom" constant="8" id="bZ2-OS-MaC"/>
                                 <constraint firstItem="VO6-GB-m5t" firstAttribute="leading" secondItem="btd-3W-dfq" secondAttribute="leading" id="cGF-Yp-zkG"/>
                                 <constraint firstAttribute="trailing" secondItem="seZ-tN-R8p" secondAttribute="trailing" constant="28" id="cUq-Mz-zqE"/>
                                 <constraint firstItem="XSW-OK-mnx" firstAttribute="centerX" secondItem="Qwt-h4-Wrg" secondAttribute="centerX" id="dHY-bT-TN7"/>
@@ -133,11 +188,15 @@
                                 <constraint firstItem="Tgs-eb-XKH" firstAttribute="trailing" secondItem="mf7-xe-jQ7" secondAttribute="trailing" id="hnl-Zx-a7l"/>
                                 <constraint firstItem="seZ-tN-R8p" firstAttribute="leading" secondItem="Qwt-h4-Wrg" secondAttribute="leading" constant="28" id="jw3-BD-gWE"/>
                                 <constraint firstAttribute="height" priority="250" constant="594" placeholder="YES" id="kWj-Qe-Lfd"/>
-                                <constraint firstItem="Tgs-eb-XKH" firstAttribute="height" secondItem="agR-1N-7hY" secondAttribute="height" id="kzK-78-DGu"/>
                                 <constraint firstItem="VO6-GB-m5t" firstAttribute="top" secondItem="btd-3W-dfq" secondAttribute="bottom" constant="20" id="mGl-pW-WGK"/>
                                 <constraint firstItem="btd-3W-dfq" firstAttribute="trailing" secondItem="seZ-tN-R8p" secondAttribute="trailing" id="muO-S6-DK4"/>
+                                <constraint firstItem="f1I-qa-JW6" firstAttribute="leading" secondItem="Lnf-QA-m6m" secondAttribute="leading" id="sf9-7B-0qh"/>
                                 <constraint firstItem="2R6-dc-TwT" firstAttribute="top" secondItem="btd-3W-dfq" secondAttribute="bottom" constant="-40" id="tPH-NO-UxD"/>
+                                <constraint firstItem="Lnf-QA-m6m" firstAttribute="top" secondItem="1KG-pv-d5o" secondAttribute="bottom" constant="10" id="ysD-gz-pzi"/>
                                 <constraint firstItem="mf7-xe-jQ7" firstAttribute="leading" secondItem="agR-1N-7hY" secondAttribute="leading" id="ytR-Xy-a6g"/>
+                                <constraint firstItem="f1I-qa-JW6" firstAttribute="top" secondItem="Lnf-QA-m6m" secondAttribute="top" id="z82-8I-hHI"/>
+                                <constraint firstItem="f1I-qa-JW6" firstAttribute="height" secondItem="Lnf-QA-m6m" secondAttribute="height" id="z8R-pj-LgR"/>
+                                <constraint firstItem="1KG-pv-d5o" firstAttribute="leading" secondItem="2WF-G1-IL8" secondAttribute="leading" id="zKo-Pd-0Jz"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -164,4 +223,7 @@
             <point key="canvasLocation" x="57.5" y="136.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="radiobutton_off" width="26" height="25"/>
+    </resources>
 </document>
