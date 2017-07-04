@@ -40,6 +40,7 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate, UIPic
     
     var arrayFavlist = [String]()
     var arrayValue = [String]()
+    var isAviableFavList: Bool = false
     
     @IBOutlet weak var radioBtnFav: BaseButton!
     @IBOutlet weak var radioBtnManual: BaseButton!
@@ -156,7 +157,8 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate, UIPic
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.tag == 1 && self.arrayValue.count > 0 {
             if self.arrayValue.contains(textField.text!) {
-                SimasAlertView.showAlert(withTitle: "", message: "Nomor sudah ada difavorit list silakan pilih daftar dari difavorit list", cancelButtonTitle: getString("AlertCloseButtonText"))
+                isAviableFavList = true
+                SimasAlertView.showAlert(withTitle: "", message: "Nomor sudah terdaftar di favorit list", cancelButtonTitle: getString("AlertCloseButtonText"))
             }
         }
     }
@@ -174,6 +176,8 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate, UIPic
             message = "Silakan Masukkan " + getString("TransferLebelAccountNumber") + " Anda"
         } else if (tfNoAccount.length() < 8) {
             message = "Nomor rekening Bank Tujuan yang Anda masukkan harus 8-25 angka."
+        } else if (self.radioBtnManual.isSelected && self.isAviableFavList){
+            message = "Nomor sudah terdaftar di favorit list"
         } else if (!tfAmountTransfer.isValid()){
             message = getString("TransferEmptyNominal")
         } else if (!tfMpin.isValid()){
@@ -298,10 +302,16 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate, UIPic
                         vc.value = self.tfNoAccount.text
                         vc.favoriteCategoryID = "11"
                         vc.mPin = self.tfMpin.text
+                        if (self.radioBtnFav.isSelected){
+                            vc.isFavList = false
+                        }
                     } else {
                         vc.value = self.tfNoAccount.text
                         vc.favoriteCategoryID = "1"
                         vc.mPin = self.tfMpin.text
+                        if (self.radioBtnFav.isSelected){
+                            vc.isFavList = false
+                        }
                     }
                     self.navigationController?.pushViewController(vc, animated: false)
                 } else if (messagecode == "631") {
@@ -431,10 +441,16 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate, UIPic
                         vc.value = self.tfNoAccount.text
                         vc.favoriteCategoryID = "10"
                         vc.mPin = self.tfMpin.text
+                        if (self.radioBtnFav.isSelected){
+                            vc.isFavList = false
+                        }
                     } else {
                         vc.value = self.tfNoAccount.text
                         vc.favoriteCategoryID = "4"
                         vc.mPin = self.tfMpin.text
+                        if (self.radioBtnFav.isSelected){
+                            vc.isFavList = false
+                        }
                     }
 
                     vc.dictForAcceptedOTP = dictSendOtp
@@ -635,6 +651,10 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate, UIPic
             self.tfNoAccount.isUserInteractionEnabled = true
             self.tfFavList.isUserInteractionEnabled = false
         } else {
+            if (self.arrayFavlist.count == 0) {
+                SimasAlertView.showAlert(withTitle: "", message: "Daftar Favorit tidak tersedia", cancelButtonTitle: getString("AlertCloseButtonText"))
+                return
+            }
             self.radioBtnManual.isSelected = false
             self.radioBtnFav.isSelected = true
             self.constraintHeightBtnFavList.constant = 40

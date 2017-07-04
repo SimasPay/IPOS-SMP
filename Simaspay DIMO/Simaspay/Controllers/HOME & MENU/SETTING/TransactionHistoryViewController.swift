@@ -308,10 +308,11 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
         previewController.currentPreviewItemIndex = 0
         previewController.dataSource = self
         previewController.delegate = self
-        
+    
         self.navigationController?.navigationBar.tintColor = UIColor.black
         self.title = ""
         self.navigationController!.present(previewController, animated: true, completion: {
+            
         })
     }
     
@@ -324,4 +325,5 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
     {
         return NSURL.fileURL(withPath: TransactionHistoryViewController.currentPath) as QLPreviewItem
     }
+    
 }

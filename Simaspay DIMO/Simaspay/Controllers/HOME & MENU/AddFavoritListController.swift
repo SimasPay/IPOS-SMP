@@ -68,7 +68,7 @@ class AddFavoritListController: BaseViewController, UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
         if textField.tag == 2 {
-            let maxLength = 10
+            let maxLength = 25
             let currentString: NSString = textField.text! as NSString
             let newString: NSString =
                 currentString.replacingCharacters(in: range, with: string) as NSString
@@ -152,7 +152,7 @@ class AddFavoritListController: BaseViewController, UITextFieldDelegate {
         if (!inputDes.isValid()) {
             message = "Silakan Masukkan Desrikpsi"
         } else if(inputDes.isValid() && inputDes.length() < 3){
-            message = "Deskripsi hanya boleh berisi 3 sampai 10 karakter"
+            message = "Deskripsi hanya boleh berisi 3 sampai 25 karakter"
         }
         if (message.characters.count > 0) {
             SimasAlertView.showAlert(withTitle: "", message: message, cancelButtonTitle: getString("AlertCloseButtonText"))

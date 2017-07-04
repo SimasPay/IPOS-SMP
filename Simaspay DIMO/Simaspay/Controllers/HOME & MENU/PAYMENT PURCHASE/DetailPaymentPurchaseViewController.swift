@@ -39,7 +39,7 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
     
     var arrayFavlist = [String]()
     var arrayValue = [String]()
-    
+    var isAviableFavList: Bool = false
     @IBOutlet weak var radioBtnFav: BaseButton!
     @IBOutlet weak var radioBtnManual: BaseButton!
     @IBOutlet var tfFavList: BaseTextField!
@@ -275,7 +275,8 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.tag == 1 && self.arrayValue.count > 0 {
             if self.arrayValue.contains(textField.text!) {
-                SimasAlertView.showAlert(withTitle: "", message: "Nomor sudah ada difavorit list silakan pilih daftar dari difavorit list", cancelButtonTitle: getString("AlertCloseButtonText"))
+                isAviableFavList = true
+                SimasAlertView.showAlert(withTitle: "", message: "Nomor sudah terdaftar di favorit list", cancelButtonTitle: getString("AlertCloseButtonText"))
             }
         }
     }
@@ -379,11 +380,17 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
                         vc.favoriteCategoryID = "8"
                         vc.mPin = self.tfMpin.text
                         vc.favoriteCode = self.dictOfData.value(forKey: "productCode") as? String
+                        if (self.radioBtnFav.isSelected){
+                            vc.isFavList = false
+                        }
                     } else {
                         vc.value = self.tfNoAccount.text
                         vc.favoriteCategoryID = "2"
                         vc.mPin = self.tfMpin.text
                         vc.favoriteCode = self.dictOfData.value(forKey: "productCode") as? String
+                        if (self.radioBtnFav.isSelected){
+                            vc.isFavList = false
+                        }
                     }
                     self.navigationController?.pushViewController(vc, animated: false)
                 } else if (messagecode == "631") {
@@ -520,11 +527,17 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
                         vc.favoriteCategoryID = "9"
                         vc.mPin = self.tfMpin.text
                         vc.favoriteCode = self.dictOfData.value(forKey: "productCode") as? String
+                        if (self.radioBtnFav.isSelected){
+                            vc.isFavList = false
+                        }
                     } else {
                         vc.value = self.tfNoAccount.text
                         vc.favoriteCategoryID = "3"
                         vc.mPin = self.tfMpin.text
                         vc.favoriteCode = self.dictOfData.value(forKey: "productCode") as? String
+                        if (self.radioBtnFav.isSelected){
+                            vc.isFavList = false
+                        }
                     }
                     self.navigationController?.pushViewController(vc, animated: false)
                 } else if (messagecode == "631") {
@@ -549,6 +562,8 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
             message = errorMsg
         } else if (tfNoAccount.length() < minlength){
             message = errorMsg1
+        } else if (self.radioBtnManual.isSelected && self.isAviableFavList){
+            message = "Nomor sudah terdaftar di favorit list"
         } else if (!tfMpin.isValid()){
             message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
         } else if (tfMpin.length() < 6) {
@@ -573,6 +588,8 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
                 message = errorMsg
             } else if (tfNoAccount.length() < minlength){
                 message = errorMsg1
+            } else if (self.radioBtnManual.isSelected && self.isAviableFavList){
+                message = "Nomor sudah terdaftar di favorit list"
             } else if (!tfMpin.isValid()){
                 message = "Harap Masukkan " + getString("TransferLebelMPIN") + " Anda"
             } else if (tfMpin.length() < 6) {
@@ -585,6 +602,8 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
                 message = errorMsg
             } else if (tfNoAccount.length() < minlength){
                 message = errorMsg1
+            } else if (self.radioBtnManual.isSelected && self.isAviableFavList){
+                message = "Nomor sudah terdaftar di favorit list"
             } else  if (!self.tfNomPayment.isValid()){
                 message = "Masukkan nominal"
             } else if (!tfMpin.isValid()){
@@ -814,13 +833,16 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
                     }
                     
                 } else {
-                    // DLog("\(responseDict)")
+                    DLog("\(responseDict)")
                     for dataDict in responseDict.allValues {
                         let data = dataDict as! NSDictionary
-                        let val = data.value(forKey: "favoriteValue") as! String
-                        let favoriteLabel = data.value(forKey: "favoriteLabel") as! String
-                        self.arrayValue.append(val)
-                        self.arrayFavlist.append(favoriteLabel + " - " + val)
+                        if  data.value(forKey: "favoriteCode") as? String == self.dictOfData.value(forKey: "productCode") as? String {
+                            let data = dataDict as! NSDictionary
+                            let val = data.value(forKey: "favoriteValue") as! String
+                            let favoriteLabel = data.value(forKey: "favoriteLabel") as! String
+                            self.arrayValue.append(val)
+                            self.arrayFavlist.append(favoriteLabel + " - " + val)
+                        }
                     }
                 }
             }
@@ -857,6 +879,10 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
             }
             
         } else {
+            if (self.arrayFavlist.count == 0) {
+                SimasAlertView.showAlert(withTitle: "", message: "Daftar Favorit tidak tersedia", cancelButtonTitle: getString("AlertCloseButtonText"))
+                return
+            }
             self.radioBtnManual.isSelected = false
             self.radioBtnFav.isSelected = true
             self.tfNoAccount.isUserInteractionEnabled = false

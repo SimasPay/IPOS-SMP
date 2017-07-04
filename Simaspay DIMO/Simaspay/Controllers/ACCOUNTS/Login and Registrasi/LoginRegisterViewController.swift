@@ -40,7 +40,7 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+        super.viewDidAppear(true)   
         tfHPNumber.becomeFirstResponder()
     }
     

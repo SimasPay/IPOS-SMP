@@ -24,6 +24,7 @@ class TansferToUangkuController: BaseViewController, UITextFieldDelegate, EPPick
     
     var arrayFavlist = [String]()
     var arrayValue = [String]()
+    var isAviableFavList: Bool = false
     
     @IBOutlet weak var radioBtnFav: BaseButton!
     @IBOutlet weak var radioBtnManual: BaseButton!
@@ -126,11 +127,14 @@ class TansferToUangkuController: BaseViewController, UITextFieldDelegate, EPPick
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.tag == 1 && self.arrayValue.count > 0 {
             if self.arrayValue.contains(textField.text!) {
-                SimasAlertView.showAlert(withTitle: "", message: "Nomor sudah ada difavorit list silakan pilih daftar dari difavorit list", cancelButtonTitle: getString("AlertCloseButtonText"))
+                isAviableFavList = true
+                SimasAlertView.showAlert(withTitle: "", message: "Nomor sudah terdaftar di favorit list", cancelButtonTitle: getString("AlertCloseButtonText"))
+                
             }
         }
     }
     
+
     func nextProses() {
         
         let dict = NSMutableDictionary()
@@ -206,11 +210,17 @@ class TansferToUangkuController: BaseViewController, UITextFieldDelegate, EPPick
                         vc.favoriteCategoryID = "12"
                         vc.mPin = self.inputmPin.text
                         dictSendOtp[SERVICE] = SERVICE_WALLET
+                        if (self.radioBtnFav.isSelected){
+                            vc.isFavList = false
+                        }
                     } else {
                         vc.value = self.inputMdn.text
                         vc.favoriteCategoryID = "6"
                         vc.mPin = self.inputmPin.text
                         dictSendOtp[SERVICE] = SERVICE_BANK
+                        if (self.radioBtnFav.isSelected){
+                            vc.isFavList = false
+                        }
                     }
                     dictSendOtp[TXNNAME] = TXN_TRANSFER_UANGKU
                     dictSendOtp[INSTITUTION_ID] = SIMASPAY
@@ -249,10 +259,13 @@ class TansferToUangkuController: BaseViewController, UITextFieldDelegate, EPPick
     //MARK: action next
     @IBAction func actionProses(_ sender: Any) {
         var message = "";
+        
         if (!inputMdn.isValid()) {
             message = "Silakan Masukkan " + getString("TransferLebelMdn")  + " Anda"
-        }else if(inputMdn.length() < 10){
+        } else if(inputMdn.length() < 10){
             message = "Nomor Handphone yang Anda masukkan harus 10-14 angka"
+        } else if (self.radioBtnManual.isSelected && self.isAviableFavList){
+            message = "Nomor sudah terdaftar di favorit list"
         } else if (!inputAmount.isValid()){
             message = getString("TransferEmptyNominal")
         } else if (!inputmPin.isValid()){
@@ -428,6 +441,7 @@ class TansferToUangkuController: BaseViewController, UITextFieldDelegate, EPPick
         if self.arrayFavlist.count > 0 {
             self.tfFavList.text = self.arrayFavlist[row]
             self.inputMdn.text = self.arrayValue[row]
+            self.isAviableFavList = false
         }
     }
     
@@ -442,6 +456,10 @@ class TansferToUangkuController: BaseViewController, UITextFieldDelegate, EPPick
             self.inputMdn.isUserInteractionEnabled = true
             self.tfFavList.isUserInteractionEnabled = false
         } else {
+            if (self.arrayFavlist.count == 0) {
+                SimasAlertView.showAlert(withTitle: "", message: "Daftar Favorit tidak tersedia", cancelButtonTitle: getString("AlertCloseButtonText"))
+                return
+            }
             self.radioBtnManual.isSelected = false
             self.radioBtnFav.isSelected = true
             self.constraintHeightFavlist.constant = 40

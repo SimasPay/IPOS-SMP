@@ -36,7 +36,7 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate, EPPicke
     
     var arrayFavlist = [String]()
     var arrayValue = [String]()
-    
+    var isAviableFavList: Bool = false
     @IBOutlet weak var radioBtnFav: BaseButton!
     @IBOutlet weak var radioBtnManual: BaseButton!
     @IBOutlet var tfFavList: BaseTextField!
@@ -153,7 +153,8 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate, EPPicke
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.tag == 1 && self.arrayValue.count > 0 {
             if self.arrayValue.contains(textField.text!) {
-                SimasAlertView.showAlert(withTitle: "", message: "Nomor sudah ada difavorit list silakan pilih daftar dari difavorit list", cancelButtonTitle: getString("AlertCloseButtonText"))
+                isAviableFavList = true
+                SimasAlertView.showAlert(withTitle: "", message: "Nomor sudah terdaftar di favorit list", cancelButtonTitle: getString("AlertCloseButtonText"))
             }
         }
     }
@@ -177,7 +178,9 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate, EPPicke
         if (self.withDrawalType != WithDrawalType.WithDrawalTypeMe && !tfNoAccount.isValid()) {
             message = "Silakan Masukkan " + getString("TransferLebelMdn") + " Anda"
         } else if(self.withDrawalType != WithDrawalType.WithDrawalTypeMe && tfNoAccount.length() < 10){
-                message = "Nomor Handphone yang Anda masukkan harus 10-14 angka"
+            message = "Nomor Handphone yang Anda masukkan harus 10-14 angka"
+        } else if (self.radioBtnManual.isSelected && self.isAviableFavList){
+            message = "Nomor sudah terdaftar di favorit list"
         } else if (!tfAmountTransfer.isValid()){
             message = "Silakan Masukkan " + getString("TransferLebelAmount") + " yang ingin Anda Cashout"
         } else if (tfAmountTransfer.isValid() && intValue! < 100000) {
@@ -290,6 +293,9 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate, EPPicke
                     vc.favoriteCategoryID = "13"
                     if (self.withDrawalType == WithDrawalType.WithDrawalTypeOther) {
                         vc.value = self.tfNoAccount.text
+                        if (self.radioBtnFav.isSelected){
+                            vc.isFavList = false
+                        }
                     } else {
                         vc.isFavList = false
                     }
@@ -489,6 +495,10 @@ class CashWithDrawalController: BaseViewController, UITextFieldDelegate, EPPicke
             self.tfNoAccount.isUserInteractionEnabled = true
             self.tfFavList.isUserInteractionEnabled = false
         } else {
+            if (self.arrayFavlist.count == 0) {
+                SimasAlertView.showAlert(withTitle: "", message: "Daftar Favorit tidak tersedia", cancelButtonTitle: getString("AlertCloseButtonText"))
+                return
+            }
             self.radioBtnManual.isSelected = false
             self.radioBtnFav.isSelected = true
             self.constraintHeightFavlist.constant = 40

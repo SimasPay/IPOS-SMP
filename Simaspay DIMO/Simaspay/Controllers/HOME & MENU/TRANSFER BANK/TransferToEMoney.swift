@@ -23,6 +23,7 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate, EPPickerDelegat
     
     var arrayFavlist = [String]()
     var arrayValue = [String]()
+    var isAviableFavList: Bool = false
     
     @IBOutlet weak var radioBtnFav: BaseButton!
     @IBOutlet weak var radioBtnManual: BaseButton!
@@ -125,7 +126,8 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate, EPPickerDelegat
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.tag == 1 && self.arrayValue.count > 0 {
             if self.arrayValue.contains(textField.text!) {
-                SimasAlertView.showAlert(withTitle: "", message: "Nomor sudah ada difavorit list silakan pilih daftar dari difavorit list", cancelButtonTitle: getString("AlertCloseButtonText"))
+                isAviableFavList = true
+                SimasAlertView.showAlert(withTitle: "", message: "Nomor sudah terdaftar di favorit list", cancelButtonTitle: getString("AlertCloseButtonText"))
             }
         }
     }
@@ -223,11 +225,17 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate, EPPickerDelegat
                         vc.value = self.inputMdn.text
                         vc.favoriteCategoryID = "7"
                         vc.mPin = self.inputmPin.text
+                        if (self.radioBtnFav.isSelected){
+                            vc.isFavList = false
+                        }
                         dictSendOtp[SERVICE] = SERVICE_WALLET
                     } else {
                         vc.value = self.inputMdn.text
                         vc.favoriteCategoryID = "5"
                         vc.mPin = self.inputmPin.text
+                        if (self.radioBtnFav.isSelected){
+                            vc.isFavList = false
+                        }
                         dictSendOtp[SERVICE] = SERVICE_BANK
                     }
                     dictSendOtp[TXNNAME] = TRANSFER
@@ -275,6 +283,8 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate, EPPickerDelegat
             message = "Silakan Masukkan " + getString("TransferLebelMdn") + " Anda"
         }else if(inputMdn.length() < 10){
             message = "Nomor Handphone yang Anda masukkan harus 10-14 angka"
+        } else if (self.radioBtnManual.isSelected && self.isAviableFavList){
+            message = "Nomor sudah terdaftar di favorit list"
         } else if (!inputAmount.isValid()){
             message = getString("TransferEmptyNominal")
         } else if (!inputmPin.isValid()){
@@ -463,6 +473,10 @@ class TransferToEMoney: BaseViewController, UITextFieldDelegate, EPPickerDelegat
             self.inputMdn.isUserInteractionEnabled = true
             self.tfFavList.isUserInteractionEnabled = false
         } else {
+            if (self.arrayFavlist.count == 0) {
+                SimasAlertView.showAlert(withTitle: "", message: "Daftar Favorit tidak tersedia", cancelButtonTitle: getString("AlertCloseButtonText"))
+                return
+            }
             self.radioBtnManual.isSelected = false
             self.radioBtnFav.isSelected = true
             self.constraintHeightFavlist.constant = 40
