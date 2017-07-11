@@ -9,10 +9,12 @@
 import UIKit
 import QuickLook
 
-class TransactionHistoryViewController: BaseViewController, QLPreviewControllerDataSource, QLPreviewControllerDelegate {
+class TransactionHistoryViewController: BaseViewController {
     
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet weak var btnDownload: UIButton!
+    
+    var viewPdf: UIView!
     
     //Array of data transaction
     var arrayData: [[String:Any]] = []
@@ -20,6 +22,7 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
     //date
     var startDate: NSString! = ""
     var toDate: NSString! = ""
+    var firstCall: Bool! = true
     
     static func initWithOwnNib() -> TransactionHistoryViewController {
         let obj:TransactionHistoryViewController = TransactionHistoryViewController.init(nibName: String(describing: self), bundle: nil)
@@ -31,12 +34,16 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
         arrayData = []
         self.showTitle(getString("TransactionHistoryTitle"))
         self.showBackButton()
+//        DLog("###################################")
+//        DLog("\(self.startDate) & \(self.toDate)")
+//        DLog("###################################")
 //        self.checkTransactionHistory()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if arrayData.count == 0 {
-           self.checkTransactionHistory()
+        if firstCall {
+            self.checkTransactionHistory()
+            firstCall = false
         }
     }
     
@@ -69,6 +76,11 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
             yPadding += 30
             scrollView.addSubview(periode)
         }
+        
+//        DLog("------------------------------------")
+//        DLog("\(self.startDate) & \(self.toDate)")
+//        DLog("------------------------------------")
+        
         let viewContent = UIView()
         viewContent.backgroundColor = UIColor.white
         viewContent.layer.borderColor = UIColor.init(hexString: color_border).cgColor
@@ -289,6 +301,7 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
                         let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
                         let fileURL = documentsURL.appendingPathComponent("Mutasi.pdf")
                         let path = fileURL.path
+                        
                         //fileManager.removeItemAtPath(path)
                         DispatchQueue.main.async {
                             fileManager.createFile(atPath: path, contents: data as Data,attributes: nil)
@@ -300,30 +313,88 @@ class TransactionHistoryViewController: BaseViewController, QLPreviewControllerD
         }
     }
     
+
+
+    
     //MARK: Preview PDF with QLPreviewController
     static var currentPath : String = ""
     func previewPDFDownloaded(path : String){
         TransactionHistoryViewController.currentPath = path
-        let previewController:QLPreviewController = QLPreviewController()
-        previewController.currentPreviewItemIndex = 0
-        previewController.dataSource = self
-        previewController.delegate = self
-    
-        self.navigationController?.navigationBar.tintColor = UIColor.black
-        self.title = ""
-        self.navigationController!.present(previewController, animated: true, completion: {
-            
-        })
+//        let previewController:QLPreviewController = QLPreviewController()
+//        previewController.currentPreviewItemIndex = 0
+//        previewController.dataSource = self
+//        previewController.delegate = self
+        
+        viewPdf = UIView(frame: self.view.frame)
+        viewPdf.backgroundColor = UIColor.init(hexString: "F3F3F3")
+        
+        let navigation = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 65))
+        navigation.backgroundColor = UIColor.init(hexString: "555555")
+        var lblTitle: BaseLabel!
+        lblTitle = BaseLabel()
+        lblTitle.textColor = UIColor.white
+        lblTitle.frame = CGRect(x: 0, y: 20, width:SimasUtility.screenSize().width, height: 44)
+        lblTitle.textAlignment = .center
+        lblTitle.text = "Mutasi"
+        
+        let done = BaseButton(frame: CGRect(x: 0, y: 20, width: 55, height: 44))
+        done.setTitle("Done", for: .normal)
+        done.titleEdgeInsets =  UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        done.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        done.contentVerticalAlignment = UIControlContentVerticalAlignment.center
+        done.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
+        done.addTarget(self, action: #selector(self.doneAction), for: UIControlEvents.touchUpInside)
+        let share = BaseButton(frame: CGRect(x: self.view.frame.width - 44, y: 20, width: 44, height: 45))
+        share.setImage(UIImage(named: "icon_Download"), for: UIControlState())
+        share.imageEdgeInsets = UIEdgeInsetsMake(10,12,10,12)
+        share.addTarget(self, action: #selector(self.actionShare), for: UIControlEvents.touchUpInside)
+        navigation.addSubview(done)
+        navigation.addSubview(lblTitle)
+        navigation.addSubview(share)
+
+        viewPdf.addSubview(navigation)
+
+        let webView = UIWebView(frame: CGRect(x: 0, y: 65, width: self.view.frame.width, height: self.view.frame.height - 65))
+        let fileUrl = NSURL(string: path)
+        let urlRequest = NSURLRequest.init(url: fileUrl! as URL)
+        webView.loadRequest(urlRequest as URLRequest)
+        viewPdf.addSubview(webView)
+        
+        self.view.addSubview(viewPdf)
+        
+//        self.navigationController?.navigationBar.tintColor = UIColor.black
+//        self.title = ""
+//        self.navigationController!.present(previewController, animated: true, completion: {
+//        })
     }
     
-    @available(iOS 4.0, *)
-    public func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
-        return 1
+    func doneAction() {
+        viewPdf.removeFromSuperview()
     }
     
-    internal func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem
-    {
-        return NSURL.fileURL(withPath: TransactionHistoryViewController.currentPath) as QLPreviewItem
+    func actionShare() {
+        let fileManager = FileManager.default
+        let documentoPath = TransactionHistoryViewController.currentPath
+        
+        if fileManager.fileExists(atPath: documentoPath){
+            let documento = NSData(contentsOfFile: documentoPath)
+            let activityViewController: UIActivityViewController = UIActivityViewController(activityItems: [documento!], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView=self.view
+            present(activityViewController, animated: true, completion: nil)
+        }
+        else {
+            print("document was not found")
+        }
     }
+    
+//    @available(iOS 4.0, *)
+//    public func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+//        return 1
+//    }
+//    
+//    internal func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem
+//    {
+//        return NSURL.fileURL(withPath: TransactionHistoryViewController.currentPath) as QLPreviewItem
+//    }
     
 }

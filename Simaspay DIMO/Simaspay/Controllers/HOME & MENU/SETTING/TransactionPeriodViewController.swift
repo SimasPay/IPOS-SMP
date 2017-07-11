@@ -185,15 +185,21 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
         var endDate = ""
         var fromDate = ""
         if numberOfMonth == 0 {
-            if day < 10 && month < 10 {
-                endDate = String(format: "0%@0%@%@", String(day),String(month),String(year))
-            } else if day > 10 && month < 10 {
-                endDate = String(format: "%@0%@%@", String(day),String(month),String(year))
-            } else if day > 10 && month > 10 {
-                endDate = String(format: "%@%@%@", String(day),String(month),String(year))
-            } else if day < 10 && month > 10 {
-                endDate = String(format: "0%@%@%@", String(day),String(month),String(year))
+            if day < 10 {
+                if month < 10 {
+                    endDate = String(format: "0%@0%@%@", String(day),String(month),String(year))
+                } else {
+                    endDate = String(format: "0%@%@%@", String(day),String(month),String(year))
+                }
+            } else {
+                if month < 10 {
+                    endDate = String(format: "%@0%@%@", String(day),String(month),String(year))
+                } else {
+                   endDate = String(format: "%@%@%@", String(day),String(month),String(year))
+                }
             }
+                
+            
             
             fromDate = endDate
             fromDate = String(format: "01%@", endDate.substring(from: endDate.index(endDate.startIndex, offsetBy: 2)))
@@ -207,12 +213,18 @@ class TransactionPeriodViewController: BaseViewController, UITextFieldDelegate {
             }
             
             // to month
-            var toMonth = month + 1
+            var toMonth = 0
+            if numberOfMonth == 2 {
+                toMonth = month + 2
+            } else {
+                toMonth = month + 1
+            }
             var toYear = year
             if (toMonth > 12) {
                 toMonth = 1
                 toYear += 1
             }
+            
             
             //currentDate = String(format: "30%@%@",String(month),String(year))
             let additionalFromDate =  month < 10 ? "0" : ""

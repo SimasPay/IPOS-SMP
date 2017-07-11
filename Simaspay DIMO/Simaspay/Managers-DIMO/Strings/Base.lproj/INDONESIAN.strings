@@ -76,7 +76,7 @@
 "TransferEMoneyTitle" = "Transfer - E-money";
 "TransferLebelMdn" = "Nomor Handphone Tujuan";
 "TransferFee" = "Biaya Transfer";
-"TotalDebit" = "Total Pendebetan";
+"TotalDebit" = "Total Pendebitan";
 "NotSubscriberMDN" = "*Nomor ini belum terdaftar sebagai e-money user. Kami akan mengirimkan SMS panduan download Simaspay E-money ke nomor tujuan.";
 "NotRegisterMDN" = "(belum terdaftar)";
 "TransferUangkuTitle" = "Transfer - Uangku";
