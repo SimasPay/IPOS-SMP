@@ -22,7 +22,7 @@ let color_text_default:String = "5b5b5b"
 
 //Transaction History
 let color_cradit = "14BC28"
-let color_debit = "5B9FFF"
+let color_debit = "67a6ff"
 
 //Base Color
 let color_base_white = "FFFFFF"

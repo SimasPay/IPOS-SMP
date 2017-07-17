@@ -102,10 +102,18 @@ class SuccesConfirmationController: BaseViewController {
                     viewContentConfirmation.layer.addSublayer(line)
                     y += margin
                 }
-                let arrVal = newData.characters.split{$0 == ":"}.map(String.init)
-                let key = arrVal[0]
-                let value = arrVal[1].trimmingCharacters(in: .whitespacesAndNewlines)
-                
+                // let arrVal = newData.characters.split{$0 == ":"}.map(String.init)
+                let arrVal = newData.components(separatedBy: ":")
+                var key = ""
+                var value = ""
+                if arrVal.count > 1 {
+                    key = arrVal[0]
+                    value = arrVal[1].trimmingCharacters(in: .whitespacesAndNewlines)
+                } else {
+                    key = ""
+                    value = arrVal[0].trimmingCharacters(in: .whitespacesAndNewlines)
+                }
+
                 let lblKey = BaseLabel.init(frame: CGRect(x: padding, y: y, width: width - 2 * padding, height: heightContent))
                 lblKey.font = UIFont.boldSystemFont(ofSize: 13)
                 lblKey.text = key.capitalized

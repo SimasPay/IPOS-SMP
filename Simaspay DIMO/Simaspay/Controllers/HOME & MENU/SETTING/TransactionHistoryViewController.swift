@@ -57,18 +57,17 @@ class TransactionHistoryViewController: BaseViewController {
         super.viewDidLayoutSubviews()
         
         if (startDate.length == 0) {
-            
             self.btnDownload.isHidden = true
         }
-        let padding:CGFloat = 25
-        var yPadding:CGFloat = 25
+        let padding:CGFloat = 18
+        var yPadding:CGFloat = 18
         let sizeRect = UIScreen.main.applicationFrame
         let width    = sizeRect.size.width
         var height:CGFloat = 0
-        let paddingContent: CGFloat = 16
+        let paddingContent: CGFloat = 10
         var y: CGFloat  = 0
         let widthContent = width - (2 * paddingContent) - (2 * padding)
-        let heightContent: CGFloat = 70
+        let heightContent: CGFloat = 83
         
         if startDate.length != 0 {
             let periode = BaseLabel(frame: CGRect(x: padding, y: yPadding, width: width - 2 * padding, height: 20))
@@ -76,10 +75,6 @@ class TransactionHistoryViewController: BaseViewController {
             yPadding += 30
             scrollView.addSubview(periode)
         }
-        
-//        DLog("------------------------------------")
-//        DLog("\(self.startDate) & \(self.toDate)")
-//        DLog("------------------------------------")
         
         let viewContent = UIView()
         viewContent.backgroundColor = UIColor.white
@@ -104,11 +99,10 @@ class TransactionHistoryViewController: BaseViewController {
             lblType.clipsToBounds = true
             let type = (list["isCredit"] as! NSDictionary).object(forKey: "text") as? String
             
-            let lblTotal = UILabel(frame: CGRect(x: viewList.bounds.size.width - 100, y: 40, width: 100, height: 20))
+            let lblTotal = UILabel(frame: CGRect(x: viewList.bounds.size.width - 120, y: 40, width: 120, height: 20))
             lblTotal.font = UIFont.systemFont(ofSize: 13)
             lblTotal.textAlignment = .right
             let Total = (list["amount"] as! NSDictionary).object(forKey: "text") as? String
-            
             
             if (type == "true") {
                 lblType.text = "credit"
@@ -120,10 +114,18 @@ class TransactionHistoryViewController: BaseViewController {
                 lblTotal.text = String(format: "-IDR %@", Total!)
             }
             
-            let lblNameTransaction = UILabel(frame: CGRect(x: 0, y: 40, width: 200, height: 20))
+            let lblNameTransaction = UILabel(frame: CGRect(x: 0, y: 40, width: (widthContent/2) + 30, height: 35))
             lblNameTransaction.font = UIFont.systemFont(ofSize: 13)
-            lblNameTransaction.text = (list["transactionType"] as! NSDictionary).object(forKey: "text") as? String
             
+            if (list["transactionDescription"] != nil) {
+                lblNameTransaction.text = (list["transactionDescription"] as! NSDictionary).object(forKey: "text") as? String
+            } else if (list["transactionType"] != nil) {
+                lblNameTransaction.text = (list["transactionType"] as! NSDictionary).object(forKey: "text") as? String
+            }
+            
+            lblNameTransaction.numberOfLines = 0
+            lblNameTransaction.textAlignment = .justified
+            lblNameTransaction.sizeToFit()
             
             let line = CALayer()
             line.frame = CGRect(x: 0, y:heightContent - 1 , width: widthContent, height: 1)
@@ -134,7 +136,7 @@ class TransactionHistoryViewController: BaseViewController {
             viewList.addSubview(lblTotal)
             viewList.layer.addSublayer(line)
             viewContent.addSubview(viewList)
-            y += 70
+            y += heightContent
             height += heightContent
         }
         viewContent.frame = CGRect(x: padding, y: yPadding, width: width - 2 * padding, height: height)
