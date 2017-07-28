@@ -42,7 +42,7 @@ class LoginPinViewController: BaseViewController, UITextFieldDelegate {
         tfMpin.placeholder = "Pin"
         
         btnLostPassword.setTitle(getString("LoginButtonLostmPin"), for: UIControlState())
-         btnLostPassword.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        btnLostPassword.titleLabel?.font = UIFont.systemFont(ofSize: 15)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)

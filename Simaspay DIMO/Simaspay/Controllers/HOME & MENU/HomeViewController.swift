@@ -263,27 +263,31 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
     }
     // MARK: Button logout account
     @IBAction func actionLogout(_ sender: Any) {
-        let prefs = UserDefaults.standard
-        prefs.removeObject(forKey: SOURCEMDN)
-        prefs.removeObject(forKey: ACCOUNT_NUMBER)
-        prefs.removeObject(forKey: USERNAME)
-        prefs.removeObject(forKey: GET_USER_API_KEY)
-        prefs.removeObject(forKey: mPin)
-        prefs.removeObject(forKey: "imageProfil")
-        prefs.removeObject(forKey: EULAPBQR)
+//        let prefs = UserDefaults.standard
+//        prefs.removeObject(forKey: SOURCEMDN)
+//        prefs.removeObject(forKey: ACCOUNT_NUMBER)
+//        prefs.removeObject(forKey: USERNAME)
+//        prefs.removeObject(forKey: GET_USER_API_KEY)
+//        prefs.removeObject(forKey: mPin)
+//        prefs.removeObject(forKey: "imageProfil")
+//        prefs.removeObject(forKey: EULAPBQR)
         
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController];
         for vc in viewControllers {
             print(vc)
-            if (vc.isKind(of: LoginRegisterViewController.self)) {
+            if (vc.isKind(of: LoginPinViewController.self)) {
                 self.navigationController!.popToViewController(vc, animated: true);
                 return
-            } else if (vc.isKind(of: LandingScreenViewController.self)) {
-                 self.navigationController!.popToViewController(vc, animated: true);
-                return
             }
+//            if (vc.isKind(of: LoginPinViewController.self)) {
+//                self.navigationController!.popToViewController(vc, animated: true);
+//                return
+//            } else if (vc.isKind(of: LandingScreenViewController.self)) {
+//                 self.navigationController!.popToViewController(vc, animated: true);
+//                return
+//            }
         }
-        let vc = LoginRegisterViewController(nibName: "LoginRegisterViewController", bundle: nil)
+        let vc = LandingScreenViewController(nibName: "LandingScreenViewController", bundle: nil)
         self.navigationController?.popToViewController(vc, animated: true)
     }
     
@@ -799,7 +803,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UINaviga
     @available(iOS 2.0, *)
     func callbackShowEULA() -> UIViewController! {
         UserDefault.setObject(false, forKey: EULAPBQR)
-        return DIMOPay.eula(withStringHTML: EulaTermsText)
+        return DIMOPay.eula(withURL: "")
+        // return DIMOPay.eula(withStringHTML: EulaTermsText)
     }
     
     func nextProses() {

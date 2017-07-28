@@ -583,8 +583,25 @@ class ConfirmationViewController: BaseViewController, UIAlertViewDelegate, UITex
                 } else if (messagecode == SIMASPAY_PAYMENT_SUCCESSCODE) {
                     let vc = SuccesConfirmationController.initWithOwnNib()
                     if self.isAditional {
-                        vc.isAditional = self.isAditional
-                        vc.dataAditional = self.dataAditional
+                        if responseDict.value(forKeyPath: "AdditionalInfo.text") != nil {
+                            let strAditional = responseDict.value(forKeyPath: "AdditionalInfo.text") as! String
+                            let arrAditional = strAditional.characters.split{$0 == "|"}.map(String.init)
+                            var newArrAditional = [String]()
+                            for data in arrAditional {
+                                let strConvert = data.replacingOccurrences(of: "  ", with: "~")
+                                let strRemoveStart = strConvert.replacingOccurrences(of: " ~", with: "")
+                                let strRemoveEnd = strRemoveStart.replacingOccurrences(of: "~ ", with: "")
+                                let strNew = strRemoveEnd.replacingOccurrences(of: "~", with: "")
+                                if strNew != "" {
+                                    newArrAditional.append(strNew)
+                                }
+                            }
+                            vc.isAditional = true
+                            vc.dataAditional = newArrAditional
+                        } else {
+                            vc.isAditional = self.isAditional
+                            vc.dataAditional = self.dataAditional
+                        }
                     } else {
                         if responseDict.value(forKeyPath: "AdditionalInfo.text") != nil {
                             let strAditional = responseDict.value(forKeyPath: "AdditionalInfo.text") as! String
