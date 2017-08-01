@@ -13,7 +13,7 @@ class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
     var contactUsInfo = NSDictionary()
-    var heightForCell = 45 as CGFloat
+    var heightForCell = 40 as CGFloat
     let padding : CGFloat = 20
     
     static func initWithOwnNib() -> ContactUSViewController {
@@ -24,12 +24,12 @@ class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.showTitle(getString("ContactUsTitle"))
+        self.showTitle(getString("ContactUsTitle"), subMenu: false)
         self.showBackButton(subMenu: false)
         
         tableView.backgroundColor = UIColor.white
         tableView.layer.cornerRadius = 5
-        tableView.layer.borderWidth = 1
+        // tableView.layer.borderWidth = 1
         tableView.layer.borderColor = UIColor.init(hexString: color_border).cgColor
         tableView.clipsToBounds = true;
         tableView.isScrollEnabled = false;
@@ -57,7 +57,7 @@ class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableV
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
-       return heightForCell
+       return heightForCell - 10
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -68,28 +68,37 @@ class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableV
         let temp = ContactUsCell(style: .default, reuseIdentifier: "contactus")
         temp.selectionStyle = .gray
         
-        let lblcontent = UILabel(frame: CGRect(x: padding, y: 0, width: tableView.frame.size.width - padding * 2, height: heightForCell))
+        let lblcontent = UILabel(frame: CGRect(x: padding + 5, y: 5, width: tableView.frame.size.width - (padding * 2), height: heightForCell))
         lblcontent.font = UIFont.boldSystemFont(ofSize: 16)
-        let contactInfoSting = contactUsInfo.value(forKey: "contactus") as! NSDictionary
+        // let contactInfoSting = contactUsInfo.value(forKey: "contactus") as! NSDictionary
+        let size = 20 as CGFloat
+        let imgIcon = UIImageView(frame: CGRect(x: lblcontent.frame.size.width , y: ((heightForCell - size) / 2) + 5 , width: size, height: size))
         if indexPath.section == 0 {
-            let size = 22 as CGFloat
-            let imgPhone = UIImageView(frame: CGRect(x: lblcontent.frame.size.width , y: (heightForCell - size) / 2 , width: size, height: size))
+            
             if indexPath.row == 0 {
-                lblcontent.text = contactInfoSting.value(forKey: "mobilenumber_1") as! String?
+                lblcontent.text = contactUsInfo.value(forKey: "mobilenumber_1") as! String?
             } else {
-                lblcontent.text = contactInfoSting.value(forKey: "mobilenumber_2") as! String?
+                lblcontent.text = contactUsInfo.value(forKey: "mobilenumber_2") as! String?
             }
-            imgPhone.image = UIImage.init(named: "icon_Phone")
-            temp.addSubview(imgPhone)
+            imgIcon.image = UIImage.init(named: "ic_phone")
+            temp.addSubview(imgIcon)
             temp.urlAction = "tel://\(NSString(string: (lblcontent.text?.replacingOccurrences(of: " ", with: ""))!))"
         } else if indexPath.section == 1 {
-            lblcontent.text = contactInfoSting.value(forKey: "emailid") as! String?
-            temp.urlAction = "message://\(NSString(string: lblcontent.text!))"
+            let imgIconMail = UIImageView(frame: CGRect(x: lblcontent.frame.size.width , y: ((heightForCell - size) / 2) + 5 , width: size, height: size - 3))
+            imgIconMail.image = UIImage.init(named: "ic_mail")
+            temp.addSubview(imgIconMail)
+            lblcontent.text = contactUsInfo.value(forKey: "emailid") as! String?
+            temp.urlAction = "mailto://\(NSString(string: lblcontent.text!))"
         } else {
-            lblcontent.text = contactInfoSting.value(forKey: "website") as! String?
-            temp.urlAction = "\(NSString(string: lblcontent.text!))"
+            imgIcon.image = UIImage.init(named: "ic_web")
+            temp.addSubview(imgIcon)
+            lblcontent.text = contactUsInfo.value(forKey: "website") as! String?
+            temp.urlAction = "http://\(NSString(string: lblcontent.text!))"
         }
-        temp.addUnderline(color: UIColor.init(hexString: color_border), coordinateX: padding)
+        
+        if indexPath.section < 2 {
+            temp.addUnderline(color: UIColor.init(hexString: color_border), coordinateX: padding)
+        }
         
         temp.contentView.insertSubview(lblcontent, at: 0)
         
@@ -97,8 +106,8 @@ class ContactUSViewController: BaseViewController, UITableViewDelegate, UITableV
     }
 
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
-        let headerLabel = UILabel(frame: CGRect(x: padding, y: 0, width: tableView.frame.size.width, height: heightForCell))
-       headerLabel.font = UIFont.boldSystemFont(ofSize: 13)
+        let headerLabel = UILabel(frame: CGRect(x: padding, y: 15, width: tableView.frame.size.width, height: heightForCell - 10))
+       headerLabel.font = UIFont.systemFont(ofSize: 16)
         if section == 0 {
             headerLabel.text = "Bank Sinarmas Care"
         } else if section == 1{
@@ -135,6 +144,7 @@ class ContactUsCell: UITableViewCell {
                     }
                 })
             }
+            
         }
     }
 }

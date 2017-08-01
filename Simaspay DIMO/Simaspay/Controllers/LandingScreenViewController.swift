@@ -58,11 +58,20 @@ class LandingScreenViewController: BaseViewController {
     }
 
     @IBAction func actionActivation(_ sender: AnyObject) {
-
         let vc = ActivationViewController.initWithOwnNib()
         self.navigationController?.pushViewController(vc, animated: true)
-
-        
+    }
+    
+    
+    @IBAction func actionContactUS(_ sender: Any) {
+        var data = [String: String]()
+        data["mobilenumber_1"] = "1500153"
+        data["mobilenumber_2"] = "(021)50188888"
+        data["emailid"] = "care@banksinarmas.com"
+        data["website"] = "www.banksinarmas.com"
+        let vc = ContactUSViewController.initWithOwnNib()
+        vc.contactUsInfo = data as NSDictionary
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

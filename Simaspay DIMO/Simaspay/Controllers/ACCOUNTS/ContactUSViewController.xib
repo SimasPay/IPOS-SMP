@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -31,11 +31,11 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7eM-h2-00T">
                     <rect key="frame" x="0.0" y="180" width="375" height="487"/>
                     <subviews>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DW7-Rt-7Yl">
-                            <rect key="frame" x="25" y="25" width="325" height="330"/>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DW7-Rt-7Yl">
+                            <rect key="frame" x="20" y="25" width="335" height="260"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="330" id="aBJ-BX-vfI"/>
+                                <constraint firstAttribute="height" constant="260" id="Nl2-Uc-bmU"/>
                             </constraints>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="M59-Eq-g0o"/>
@@ -44,11 +44,11 @@
                         </tableView>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="DW7-Rt-7Yl" secondAttribute="trailing" constant="25" id="716-pl-fJI"/>
-                        <constraint firstItem="DW7-Rt-7Yl" firstAttribute="top" secondItem="7eM-h2-00T" secondAttribute="top" constant="25" id="QNd-na-1Ub"/>
-                        <constraint firstAttribute="bottom" secondItem="DW7-Rt-7Yl" secondAttribute="bottom" constant="25" id="RjV-gk-l2y"/>
-                        <constraint firstItem="DW7-Rt-7Yl" firstAttribute="centerX" secondItem="7eM-h2-00T" secondAttribute="centerX" id="UgI-0E-T8m"/>
-                        <constraint firstItem="DW7-Rt-7Yl" firstAttribute="leading" secondItem="7eM-h2-00T" secondAttribute="leading" constant="25" id="g0g-bG-fgP"/>
+                        <constraint firstAttribute="bottom" secondItem="DW7-Rt-7Yl" secondAttribute="bottom" priority="250" constant="25" id="95D-sK-gZo"/>
+                        <constraint firstItem="DW7-Rt-7Yl" firstAttribute="centerX" secondItem="7eM-h2-00T" secondAttribute="centerX" id="Ei8-HE-8MM"/>
+                        <constraint firstItem="DW7-Rt-7Yl" firstAttribute="top" secondItem="7eM-h2-00T" secondAttribute="top" constant="25" id="jzM-M7-1o8"/>
+                        <constraint firstItem="DW7-Rt-7Yl" firstAttribute="leading" secondItem="7eM-h2-00T" secondAttribute="leading" constant="20" id="vfU-y9-6P7"/>
+                        <constraint firstAttribute="trailing" secondItem="DW7-Rt-7Yl" secondAttribute="trailing" constant="20" id="xhh-ji-nMV"/>
                     </constraints>
                 </scrollView>
             </subviews>
