@@ -89,7 +89,6 @@ class SplashScreenViewController: BaseViewController {
             let responseDict = dict != nil ? NSDictionary(dictionary: dict!) : [:]
             DLog("\(responseDict)")
             if (responseDict.allKeys.count == 0) {
-//                SimasAlertView.showAlert(withTitle: nil, message: String("ErrorMessageRequestFailed"), cancelButtonTitle: getString("AlertCloseButtonText"))
                 SimasAlertView.showNormalTitle("Error", message: String("ErrorMessageRequestFailed"), alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
                     exit(1)
                 }, cancelButtonTitle: "OK")

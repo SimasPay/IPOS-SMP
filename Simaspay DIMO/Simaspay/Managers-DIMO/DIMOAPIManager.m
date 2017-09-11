@@ -14,11 +14,18 @@
 @implementation SimasAPIManager
 static int const errorCode401 = 401;
 NSTimer *timer;
-// STAGING
 
-#define DOWNLOAD_PDF_URL @"https://13.124.89.175:8443/webapi/"
+// DEV
+//#define DOWNLOAD_PDF_URL @"https://13.124.89.175:8443/webapi/"
+//#define BASE_URL DOWNLOAD_PDF_URL@"sdynamic?channelID=7&mspID="
+
+// UAT
+#define DOWNLOAD_PDF_URL @"https://www.banksinarmas.com/webapidev/"
 #define BASE_URL DOWNLOAD_PDF_URL@"sdynamic?channelID=7&mspID="
-//#define SIMOBI_URL @"https://staging.dimo.co.id:8470/webapi/sdynamic?channelID=7&"
+
+//// SIT
+//#define DOWNLOAD_PDF_URL @"https://simaspaydev.banksinarmas.com:8443/webapi/"
+//#define BASE_URL DOWNLOAD_PDF_URL@"sdynamic?channelID=7&mspID="
 
 
 // Production
@@ -87,6 +94,7 @@ NSTimer *timer;
 //    }
 //    newDict[@""] =
 //    new
+    DLog(BASE_URL);
     NSLog(BASE_URL);
     [self startHTTPRequestWithMethod:ConnectionManagerHTTPMethodPOST
                            urlString:BASE_URL
@@ -99,6 +107,7 @@ NSTimer *timer;
 + (void)callAPIPOSTWithParameters:(NSDictionary *)dict
                       andComplete:(void(^)(NSDictionary *response, NSError *err))completion {
     [self startTimer];
+    DLog(BASE_URL);
     NSLog(BASE_URL);
     [self startHTTPRequestWithMethod:ConnectionManagerHTTPMethodPOST
                            urlString:BASE_URL
@@ -155,10 +164,15 @@ NSTimer *timer;
     manager.responseSerializer = [DAFHTTPResponseSerializer serializer];
     manager.requestSerializer = [DAFHTTPRequestSerializer serializer];
     
-    DAFSecurityPolicy* policy = [DAFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
-    [policy setValidatesDomainName:NO];
-    manager.securityPolicy.validatesDomainName = NO;
-    manager.securityPolicy.allowInvalidCertificates = YES;
+    // DAFSecurityPolicy* policy = [DAFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
+//    NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"wwwbanksinarmascom" ofType:@"crt"];
+//    NSData *certData = [NSData dataWithContentsOfFile:cerPath];
+    
+    // manager.securityPolicy.pinnedCertificates = @[certData];
+    // manager.securityPolicy = [DAFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
+    manager.securityPolicy.validatesDomainName = YES;
+    manager.securityPolicy.allowInvalidCertificates = NO;
+   
     return manager;
 }
 
@@ -205,12 +219,32 @@ NSTimer *timer;
 //                }];
 //            }
             
-            NSError *err = [NSError errorWithDomain:@"Simaspay"
-                                               code:0
-                                           userInfo:@{@"error" : @"Tidak dapat terhubung dengan server SimasPay. Silakan periksa koneksi internet Anda dan coba kembali setelah beberapa saat."}];
-            [SimasAPIManager handleErrorForOperation:operation
-                                              error:err
-                                         completion:completion];
+            
+//            if ([operation.response statusCode]) {
+//                long *code = (long)[operation.response statusCode];
+//                
+//                if (code == 0) {
+//                    
+//                }
+//
+//            }
+            
+            NSInteger operationStatusCode = [operation.error code];
+            if (operationStatusCode == -1012) {
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"proxyMirror"
+                 object:self];
+                
+            } else {
+                NSError *err = [NSError errorWithDomain:@"Simaspay"
+                                                   code:0
+                                               userInfo:@{@"error" : @"Tidak dapat terhubung dengan server SimasPay. Silakan periksa koneksi internet Anda dan coba kembali setelah beberapa saat."}];
+                [SimasAPIManager handleErrorForOperation:operation
+                                                   error:err
+                                              completion:completion];
+            }
+            
+          
         }];        
     } else {
         [manager GET:urlString parameters:params success:^(DAFHTTPRequestOperation *operation, id responseObject) {

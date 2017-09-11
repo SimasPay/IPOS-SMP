@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.backToRoot), name: NSNotification.Name(rawValue: "forceLogout"), object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.proxyMiror), name: NSNotification.Name(rawValue: "proxyMirror"), object: nil)
+        
         // Override point for customization after application launch.
         UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: false)
         window = UIWindow(frame: UIScreen.main.bounds);
@@ -30,6 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.makeKeyAndVisible()
         self.navigation = navController
         return true
+    }
+    
+    func proxyMiror() {
+        SimasAlertView.showNormalTitle("Error", message: "This connection is untrusted. You should update your application from Apps Store.", alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alert) in
+            exit(1)
+        }, cancelButtonTitle: "OK")
     }
     
     func backToRoot() {

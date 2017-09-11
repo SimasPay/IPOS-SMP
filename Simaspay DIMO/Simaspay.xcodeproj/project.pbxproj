@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		351BC2FD1EB1995B0049849B /* TansferToUangkuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 351BC2FC1EB1995B0049849B /* TansferToUangkuController.xib */; };
 		351BC2FF1EB19FA50049849B /* TansferToUangkuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351BC2FE1EB19FA50049849B /* TansferToUangkuController.swift */; };
+		352128101F5EEFBB00EBDBBC /* wwwbanksinarmascom.crt in Resources */ = {isa = PBXBuildFile; fileRef = 3521280F1F5EEFBB00EBDBBC /* wwwbanksinarmascom.crt */; };
 		352898751EE8FF2D0049DD28 /* DIMOPayiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 352898731EE8FF2D0049DD28 /* DIMOPayiOS.framework */; };
 		352898761EE8FF2D0049DD28 /* DIMOPayiOSResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 352898741EE8FF2D0049DD28 /* DIMOPayiOSResources.bundle */; };
 		3528988C1EE916F10049DD28 /* EPConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352898861EE916F10049DD28 /* EPConstants.swift */; };
@@ -126,6 +127,8 @@
 /* Begin PBXFileReference section */
 		351BC2FC1EB1995B0049849B /* TansferToUangkuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TansferToUangkuController.xib; sourceTree = "<group>"; };
 		351BC2FE1EB19FA50049849B /* TansferToUangkuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TansferToUangkuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		3521280F1F5EEFBB00EBDBBC /* wwwbanksinarmascom.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wwwbanksinarmascom.crt; sourceTree = "<group>"; };
+		352128111F5F029300EBDBBC /* wwwbanksinarmascom.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = wwwbanksinarmascom.cer; sourceTree = "<group>"; };
 		352898731EE8FF2D0049DD28 /* DIMOPayiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DIMOPayiOS.framework; sourceTree = "<group>"; };
 		352898741EE8FF2D0049DD28 /* DIMOPayiOSResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DIMOPayiOSResources.bundle; sourceTree = "<group>"; };
 		352898861EE916F10049DD28 /* EPConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPConstants.swift; sourceTree = "<group>"; };
@@ -510,6 +513,8 @@
 		BE1772861D92859B00A27E06 /* Simaspay */ = {
 			isa = PBXGroup;
 			children = (
+				352128111F5F029300EBDBBC /* wwwbanksinarmascom.cer */,
+				3521280F1F5EEFBB00EBDBBC /* wwwbanksinarmascom.crt */,
 				35995A6A1E262B14007EB516 /* Controllers */,
 				BEC415E81D938173000C3CF4 /* Manager */,
 				BEC415D71D928D72000C3CF4 /* Base Objects */,
@@ -702,6 +707,7 @@
 				352898761EE8FF2D0049DD28 /* DIMOPayiOSResources.bundle in Resources */,
 				35995AB91E262B14007EB516 /* ConfirmationViewController.xib in Resources */,
 				35995AD11E262B14007EB516 /* SplashScreenViewController.xib in Resources */,
+				352128101F5EEFBB00EBDBBC /* wwwbanksinarmascom.crt in Resources */,
 				354F48A31EA4AAC000263340 /* SuccesConfirmationController.xib in Resources */,
 				3535ED981E9DE616007D7942 /* TransferToEMoney.xib in Resources */,
 				35995AA31E262B14007EB516 /* ActivationPinViewController.xib in Resources */,

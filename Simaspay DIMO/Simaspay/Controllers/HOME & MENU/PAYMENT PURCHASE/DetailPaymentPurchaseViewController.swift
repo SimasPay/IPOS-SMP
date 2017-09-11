@@ -72,9 +72,13 @@ class DetailPaymentPurchaseViewController: BaseViewController, UITextFieldDelega
         } else if dictOfData.value(forKey: "maxlenght") != nil {
             maxlength = dictOfData.value(forKey: "maxlenght") as! Int
         }
-       
-        minlength = dictOfData.value(forKey: "minlength") as! Int
         
+        if  dictOfData.value(forKey: "minlength") != nil {
+            minlength = dictOfData.value(forKey: "minlength") as! Int
+        } else {
+            minlength = 10
+        }
+       
         invoiceTypeString = dictOfData.value(forKey: "invoiceType") as? String
         let invoiceTypeArr = invoiceTypeString?.characters.split{$0 == "|"}.map(String.init)
         lblTitleNameProduct.text = "Nama Produk"
