@@ -144,11 +144,20 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate, UIPic
                 currentString.replacingCharacters(in: range, with: string) as NSString
             return newString.length <= maxLength
         } else if textField.tag == 1 {
-            let maxLength = 25
-            let currentString: NSString = textField.text! as NSString
-            let newString: NSString =
-                currentString.replacingCharacters(in: range, with: string) as NSString
-            return newString.length <= maxLength
+            if self.transferType == TransferType.TransferTypeSinarmas {
+                let maxLength = 16
+                let currentString: NSString = textField.text! as NSString
+                let newString: NSString =
+                    currentString.replacingCharacters(in: range, with: string) as NSString
+                return newString.length <= maxLength
+            } else {
+                let maxLength = 25
+                let currentString: NSString = textField.text! as NSString
+                let newString: NSString =
+                    currentString.replacingCharacters(in: range, with: string) as NSString
+                return newString.length <= maxLength
+            }
+           
         } else {
             return true
         }
@@ -174,6 +183,8 @@ class TransferBankViewController: BaseViewController, UITextFieldDelegate, UIPic
         var message = "";
         if (!tfNoAccount.isValid()) {
             message = "Silakan Masukkan " + getString("TransferLebelAccountNumber") + " Anda"
+        } else if (self.transferType == TransferType.TransferTypeSinarmas && tfNoAccount.length() < 10) {
+            message = "Nomor rekening Bank Tujuan yang Anda masukkan harus 10-16 angka."
         } else if (tfNoAccount.length() < 8) {
             message = "Nomor rekening Bank Tujuan yang Anda masukkan harus 8-25 angka."
         } else if (self.radioBtnManual.isSelected && self.isAviableFavList){

@@ -68,9 +68,14 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
     
     //MARK: keyboard Show set last object above keyboard
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        BaseViewController.lastObjectForKeyboardDetector = self.btnActivationAccount
-        updateUIWhenKeyboardShow()
+//        BaseViewController.lastObjectForKeyboardDetector = self.btnActivationAccount
+//        updateUIWhenKeyboardShow()
         return true
+    }
+   
+    @IBAction func actionActivation(_ sender: Any) {
+        let vc = ActivationViewController.initWithOwnNib()
+         self.navigationController?.pushViewController(vc, animated: false)
     }
     
     //MARK: MDN Validation Process
@@ -144,6 +149,13 @@ class LoginRegisterViewController: BaseViewController, UITextFieldDelegate {
                     let vc = LoginPinViewController.initWithOwnNib()
                     vc.MDNString = self.tfHPNumber.text!
                     self.navigationController?.pushViewController(vc, animated: false)
+                } else if messageText == SIMASPAY_SUCCESS_ACTIVATION {
+                    SimasAlertView.showNormalTitle(nil, message: "Nomor Handphone Anda sudah terdaftar. Segera lakukan aktivasi melalui menu Aktivasi Akun pada saat Login. Untuk informasi lebih lanjut, hubungi 1500153.", alert: UIAlertViewStyle.default, clickedButtonAtIndexCallback: { (index, alertview) in
+                        if index == 0 {
+                            let vc = ActivationViewController.initWithOwnNib()
+                            self.navigationController?.pushViewController(vc, animated: false)
+                        }
+                    }, cancelButtonTitle: "OK")
                 } else {
                     //if new MDN for registration
                     let vc = RegisterEMoneyViewController.initWithOwnNib()
