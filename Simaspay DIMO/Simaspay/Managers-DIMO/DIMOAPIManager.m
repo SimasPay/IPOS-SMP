@@ -170,8 +170,8 @@ NSTimer *timer;
     
     // manager.securityPolicy.pinnedCertificates = @[certData];
     // manager.securityPolicy = [DAFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
-    manager.securityPolicy.validatesDomainName = YES;
-    manager.securityPolicy.allowInvalidCertificates = NO;
+    manager.securityPolicy.validatesDomainName = NO;
+    manager.securityPolicy.allowInvalidCertificates = YES;
    
     return manager;
 }
